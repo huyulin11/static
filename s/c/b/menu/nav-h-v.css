@@ -1,0 +1,77 @@
+	ul.nav-h-v, ul.nav-h-v ul 
+	{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		/* position: absolute; */
+		z-index: 1;
+	}
+	
+
+	ul.nav-h-v>li 
+	{
+		float: left; <!-- first class menu: horizontal -->
+	}
+   
+	ul.nav-h-v a 
+	{
+		display: block;
+		width: 107px;
+		height: 40px;
+		line-height: 40px;
+		text-decoration: none;
+		text-align: center;
+		background-color: #eee;
+		color: black;
+		outline: solid #ccc 1px;
+		cursor: pointer;
+		overflow: hidden;
+	}
+
+	ul.nav-h-v a:hover 
+	{
+		background: #ccc;
+	}
+
+	ul.nav-h-v li ul 
+	{
+		display : none
+	}
+	ul.nav-h-v li:hover ul
+	{
+		display : block;
+		float: left;
+		position: relative;
+	}
+
+	ul.nav-h-v
+	{
+    	z-index: 100;
+    	position: absolute;
+	}
+	/*向下图标*/
+    .bottomArrow
+	{ 
+	border-top:10px solid #EAEAEA;
+	border-left:10px solid transparent;
+	border-right:10px solid transparent;
+	width:0;
+	height:0px;
+    float:right;
+    margin-top:15px;
+	margin-right:5px;
+	}
+	/*给信息表格一个定位*/
+    .singleDataTable
+    {
+	background-color: #e5e5e5;
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	opacity:1;
+	transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}

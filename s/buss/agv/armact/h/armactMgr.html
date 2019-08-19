@@ -1,0 +1,41 @@
+<script type="text/javascript" src="/s/buss/agv/armact/j/list.js"></script>
+<div class="m-b-md">
+    <form class="form-inline" role="form" id="searchForm" name="searchForm">
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">动作名称:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input class="input-medium ui-autocomplete-input" id="occurdate" name="armactFormMap.armactname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">动作编码:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input class="input-medium ui-autocomplete-input" id="species" name="armactFormMap.armactcode">
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<header class="panel-heading">
+    <div class="doc-buttons">
+        <button type="button" id="add" class="btn btn-primary marR10">新增</button>
+        <button type="button" id="del" class="btn btn-danger marR10">删除</button>
+    </div>
+</header>
+<div class="table-responsive">
+    <div id="paging" class="pagclass"></div>
+</div>

@@ -1,0 +1,130 @@
+#body {
+    margin: 0 auto;
+    width: 80%;
+}
+
+#body {
+	padding: 0 20px 45px 20px;
+	background: #fff;
+	color: #000;
+}
+
+table {
+    text-align: center;
+    border-collapse: collapse;
+}
+
+h1.report {
+	
+}
+
+div#query {
+    position: fixed;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: rgb(0, 153, 255);
+    cursor: pointer;
+    top: 0;
+    box-shadow: 0px 1px 29px 0px gainsboro;
+}
+
+div#queryDiv {
+    position: fixed;
+    top: 0;
+    box-shadow: 0px 1px 29px 0px gainsboro;
+}
+
+table#queryTable {
+    background-color: white;
+    width: 100%;
+}
+
+table#queryTable caption {
+	margin-bottom: 0em;
+	background-color: white;
+	text-align: center;
+	font-weight: 900;
+	font-size: 40px;
+}
+
+table tr {
+	height: 37px;
+}
+
+th.备注 {
+	width: 10%;
+}
+
+table tr td {
+	font-size: 12px;
+    padding: 10px;
+}
+
+table#dataTable tr td {
+    border: 1px solid #e2e2e2;
+}
+
+table tr th {
+	font-size: 12px;
+	border: 1px solid #e2e2e2;
+	text-align: center;
+}
+
+.tr_head {
+	background-color: #E8E8E8;
+}
+
+table form {
+	text-align: center;
+}
+
+.searchBtnDiv {
+	position: fixed;
+	z-index: 100;
+	margin-top: 15px;
+}
+
+table#dataTable { 
+	width: 100%;
+}
+
+div#loadhtml {
+	width: 100%;
+}
+
+@media screen and (max-width:1024px ) {
+    div#queryDiv {
+        width: 94%;
+    }
+    #body {
+        width: 96%;
+    }
+    table tr td,table tr th,input[type=text],input[type=button],button,
+    button:hover,input[type=button]:hover,button:focus,input[type=button]:focus{
+        font-size: 34px;
+    }
+    div#query {
+        font-size: 34px;
+    }
+    input[type=text]{
+        width: 70%;
+    }
+}
+
+@media screen and (min-width:1024px ) {
+    div#queryDiv {
+        width: 1005px;
+    }
+    #body {
+        width: 1005px;
+    }
+    table tr td,table tr th,input[type=text],input[type=button], button,
+    button:hover,input[type=button]:hover,button:focus,input[type=button]:focus{
+        font-size: 14px;
+    }
+    div#query {
+        font-size: 14px;
+    }
+}

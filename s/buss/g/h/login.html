@@ -1,0 +1,125 @@
+<html lang="en"
+    class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>AGV控制及WMS仓库管理综合系统-云试用平台-合肥凯钒信息科技有限公司</title>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/s/c/min.css">
+    <link rel="stylesheet" href="/s/c/login.css">
+    <link rel="stylesheet" href="/s/c/login2.css">
+    <link href="/s/c/css.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .small {
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loginbox">
+        <div class="control-group normal_text">
+            <table style="width:100%;">
+                <tr>
+                    <td colspan="2">
+                        <div id="message"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">统一认证</td>
+                    <td class="" style="text-align:right;text-decoration:underline;">
+                        <!-- <a href="/">官网首页</a> -->
+                    </td>
+                </tr>
+                <tr class="small">
+                    <td colspan="2">请使用推荐浏览器（chrome）</td>
+                </tr>
+                <tr class="small">
+                    <td colspan="2">power by
+                        <span class="autofill" data-autokey='client.shortname'></span>
+                    </td>
+                </tr>
+                <tr class="small">
+                    <td colspan="2">
+                        <span v-html="expireTime"></span>
+                    </td>
+                </tr>
+                <tr class="small hidden">
+                    <td>可向管理员申请在线平台测试账号密码</td>
+                </tr>
+                <tr class="small hidden">
+                    <td>或者使用账号密码：15077923697/888888</td>
+                </tr>
+            </table>
+            <table align="" class="hidden">
+                <tr>
+                    <td>档案局AGV调度及档案管理系统</td>
+                    <td class="hidden">统一认证</td>
+                    <!-- <td class="hidden" style="text-align:right;text-decoration:underline;">
+                        <a href="/">官网首页</a>
+                    </td> -->
+                </tr>
+                <tr class="small">
+                    <td>请使用推荐浏览器，如：</td>
+                </tr>
+                <tr class="small">
+                    <td>chrome、Firefox、UC、Safari</td>
+                </tr>
+                <tr class="small">
+                    <td>power by
+                        <span class="autofill" data-autokey='client.shortname'></span>
+                    </td>
+                </tr>
+                <tr class="small hidden">
+                    <td>可向管理员申请在线平台测试账号密码</td>
+                </tr>
+                <tr class="small hidden">
+                    <td>或者使用账号密码：15077923697/888888</td>
+                </tr>
+            </table>
+        </div>
+        <form id="loginform" name="loginform" class="form-vertical" action="/asyncLogin.shtml" method="post">
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <input type="text" placeholder="用户名-可以联系客服人员提供试用账号密码" name="username" id="username"
+                            autocomplete="off" @keyup.enter="doLogin" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <input type="password" placeholder="密码" name="password" id="password" autocomplete="off"
+                            @keyup.enter="doLogin" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="controls">
+                    <a type="submit" @click="checkUserForm()" class="btn btn-success" id="loginBtn"
+                        style="width: 100%;padding: 8px 0;border-radius: 9px;">登&nbsp;&nbsp;录</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="dynbg">
+        <div class="dynbg__bg dynbg__bg0"></div>
+        <div class="dynbg__bg dynbg__bg1"></div>
+        <div class="dynbg__bg dynbg__bg2"></div>
+        <div class="dynbg__bg dynbg__bg3"></div>
+        <div class="dynbg__bg dynbg__bg4"></div>
+    </div>
+</body>
+
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/jquery/jquery.form.js"></script>
+<script type="module">
+    import "/s/buss/g/j/jquery/jquery.autofill.js";
+    import "/s/buss/g/j/login.js";
+</script>
+
+</html>

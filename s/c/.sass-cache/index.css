@@ -1,0 +1,43 @@
+@charset "utf-8";
+.new {
+  min-height: 150px;
+  max-height: 250px;
+  overflow: hidden; }
+
+.new .news_1 {
+  position: absolute;
+  width: 320px;
+  height: 315px;
+  left: 10%; }
+
+.new .news_2 {
+  position: absolute;
+  width: 320px;
+  height: 315px;
+  left: 40%; }
+
+.new .news_3 {
+  position: absolute;
+  width: 320px;
+  height: 315px;
+  left: 70%; }
+
+.list-1 {
+  margin-left: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 270px;
+  width: 300px;
+  margin: 0px;
+  padding: 0px; }
+
+.list-1 li {
+  height: 29px; }
+
+.list-1 li a {
+  margin-left: 30px;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px; }
+

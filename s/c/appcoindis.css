@@ -1,0 +1,203 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.hiddenThis {
+	display: none;
+}
+
+body {
+	font-size: 18px;
+	font-family: Arial, "microsoft yahei";
+	color: #fff;
+	background: #000;
+	width: 100%;
+	height: 100%;
+}
+
+ul,li {
+	list-style-type: none
+}
+
+a,a:hover {
+	text-decoration: none;
+	color: #333
+}
+
+img {
+	border: none;
+}
+
+header,section,footer,div {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+/*banner*/
+.focus {
+	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	bottom: 50px;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.focus .hd {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+	bottom: 25px;
+	text-align: center;
+	z-index: 1;
+}
+
+.focus .hd ul {
+	width: 20px;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	margin-left: -17px;
+}
+
+.focus .hd ul li {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+
+.focus .hd ul li.on {
+	display: block;
+}
+
+.focus .hd p {
+	margin-right: -15px;
+}
+
+.focus .bd {
+	width: 100%;
+	z-index: 0;
+	position: absolute;
+	bottom: 50px;
+	top: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+}
+
+.tempWrap {
+	height: 100%;
+}
+
+.focus .bd ul {
+	height: 100%;
+}
+
+.focus .bd li {
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-align: center;
+}
+
+.focus .bd li a {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* 取消链接高亮 */
+}
+
+.focus .bd li img {
+	max-height: 100%;
+	vertical-align: middle;
+}
+
+@
+-moz-document url-prefix () { .focus .bd li img {
+	height: 100%;
+}
+
+}
+.hook {
+	display: inline-block;
+	width: 0;
+	height: 100%;
+	overflow: hidden;
+	margin-left: -1px;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: middle;
+}
+
+#text {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: #fff solid 1px;
+	height: 80px;
+	overflow: hidden;
+	background: #383838;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#index {
+	margin: 20px;
+	text-align: center;
+	font-size: 25px;
+	position: relative;
+	height: 45px;
+}
+
+#content {
+	margin: 20px;
+	margin: 0 auto;
+	width: 90%;
+	border: 1px solid #222222;
+	overflow: hidden;
+}
+
+#content table {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+}
+
+#content table {
+	margin: 15px 15px;
+}
+
+#content table td,#content table th {
+	padding: 5px;
+	font-size: 28px;
+	border: 1px solid rgb(34, 34, 34);
+}
+
+#content table th {
+	height: 29px;
+	color: #fff;
+	width: 30%;
+	text-align: left;
+}
+
+#content table td {
+	text-align: left;
+	word-break: break-all;
+}
+
+#content table caption {
+	text-align: left;
+	font-size: 30px;
+	font-weight: bold;
+	border: 1px solid rgb(34, 34, 34);
+	padding: 10px 10px 10px 10px;
+}
+
+#content table {
+	height: 90%;
+}

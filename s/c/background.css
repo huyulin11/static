@@ -1,0 +1,63 @@
+.redbackground,.redbackground td,.redbackground td input,.redbackground td select,.redbackground input[type=text][readonly=readonly],.redbackground input[type=text][readonly],.redbackground input[type=text][disabled=disabled],.redbackground input[type=text][disabled]
+	{
+	background: #A92F08;
+	color: #fff;
+}
+
+.bluebackground,.bluebackground td,.bluebackground td input,.bluebackground input[type=text][readonly=readonly],.bluebackground input[type=text][readonly],.bluebackground input[type=text][disabled=disabled],.bluebackground input[type=text][disabled],.bluebackground td textarea
+	{
+	background: #1383AD;
+	color: #fff;
+}
+
+.bluebackground td select {
+	background: #1383AD;
+	color: #fff;
+}
+
+.bluebackground select[multiple=multiple] {
+	background: #f3f3f3;
+	color: #000000;
+}
+
+select option {
+	background-color: #fff;
+	color: #000;
+}
+
+.bluebackground select[multiple=multiple]  option:checked {
+	background-color: #1383AD;
+	color: #fff;
+}
+
+.bluebackground select[multiple=multiple]  option:selected {
+	background-color: #1383AD;
+	color: #fff;
+}
+
+.graybackground,.graybackground td,.graybackground td input,.graybackground td select,.graybackground input[type=text][readonly=readonly],.graybackground input[type=text][readonly],.graybackground input[type=text][disabled=disabled],.graybackground input[type=text][disabled]
+	{
+	background: #f3f3f3;
+	color: #000;
+}
+
+.black_overlay {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #f5f5f5;
+	z-index: 100;
+	-moz-opacity: 0.8;
+	opacity: .20;
+	background: #1383AD;
+	filter: alpha(opacity = 80);
+}
+
+.black_overlay img {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+}

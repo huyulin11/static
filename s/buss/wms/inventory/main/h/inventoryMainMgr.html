@@ -1,0 +1,44 @@
+<div class="m-b-md">
+    <form class="form-inline" role="form" id="searchForm" name="searchForm">
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">盘点单号:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input class="input-medium ui-autocomplete-input" id="paperid" name="inventoryMainFormMap.paperid">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">状态:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status" name="inventoryMainFormMap.status"></select>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<header class="panel-heading">
+    <div class="doc-buttons">
+        <button type="button" id="add" class="btn btn-primary marR10">增加</button>
+        <button type="button" id="del" class="btn btn-danger marR10">删除</button>
+    </div>
+</header>
+<div class="table-responsive" id="info">
+</div>
+<script>
+    $("#info").html(CommnUtil.loadingImg()).load(
+        "/s/buss/wms/inventory/main/h/inventoryMainInfo.html?inventoryMainFormMap.paperid=" + 1);
+</script>
+<script type="text/javascript" src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>

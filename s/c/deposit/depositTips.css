@@ -1,0 +1,64 @@
+.detailStampInfoTab {
+	display: block;
+	display: none;
+	position: fixed;
+	width: 810px;
+	height: 400px;
+	background: #fff;
+	padding: 15px 10px;
+	border: 1px solid #5fafff;
+	border-radius: 10px;
+	color: #333;
+	font-size: 14px;
+	z-index: 1001;
+}
+
+#detailInfo {
+	display: block;
+	width: 810px;
+	height: 340px;
+	color: #333;
+	font-size: 14px;
+	z-index: 100;
+	overflow: auto;
+}
+
+#detailInfo table {
+	width: 793px;
+}
+
+#detailInfo textarea {
+	width: 110px;
+	height: 64px;
+}
+
+.coinmottolist {
+	display: block;
+	display: none;
+	position: fixed;
+	width: 110px;
+	height: 200px;
+	background: #fff;
+	padding: 15px 10px;
+	border: 1px solid #5fafff;
+	border-radius: 10px;
+	color: #333;
+	font-size: 13px;
+	z-index: 1002;
+}
+
+.coinmottolist select[multiple=multiple] {
+	width: 100px;
+	height: 190px;
+}
+
+#stampjointypeN {
+	display: block;
+	display: none;
+	position: absolute;
+	width: 45px;
+	height: 10px;
+	background: #fff;
+	color: #333;
+	z-index: 1001;
+}

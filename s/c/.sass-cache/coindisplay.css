@@ -1,0 +1,201 @@
+/* 
+	Resets defualt browser settings
+	reset.css
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: "楠炵厧娓�"; }
+
+:focus {
+  outline: 0; }
+
+a:active {
+  outline: none; }
+
+body {
+  line-height: 1;
+  color: black;
+  background: white; }
+
+ol, ul {
+  list-style: none; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: ""; }
+
+blockquote, q {
+  quotes: "" ""; }
+
+/*娴犮儰绗傞弽宄扮础娴兼艾濂栭崫宥嗭拷娴ｆ挾娈戦弽宄扮础閿涘矂娓剁憰浣界箻鐞涘矁鐨熼弫杈剧礉閹存牞锟介柈銊ュ瀻閸掔娀娅�*/
+table {
+  border-collapse: separate;
+  border-spacing: 0; }
+
+/*
+	Page style
+*/
+#bodydiv {
+  font: normal 62.5%/1.5 Helvetica, Arial, sans-serif;
+  letter-spacing: 0;
+  color: #434343;
+  /* background:#efefef url(/coin-portlet/images/coindisplay/background.png) repeat top center; */
+  padding: 20px 0;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-font-smoothing: subpixel-antialiased; }
+
+#container {
+  width: 671px;
+  height: 525px;
+  padding: 0px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 0;
+  float: left;
+  margin-left: 5px; }
+
+#products_example {
+  width: 670px;
+  height: 490px;
+  position: relative;
+  float: left;
+  border: 1px solid #CCCCCC;
+  padding-top: 35px; }
+
+/*
+	Slideshow
+*/
+#products {
+  margin-left: 26px; }
+
+/*
+	Slides container
+	Important:
+	Set the width of your slides container
+	Set to display none, prevents content flash
+*/
+#products .slides_container {
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  float: left;
+  position: relative;
+  border: 1px solid #dfdfdf;
+  display: none; }
+
+/*
+	Each slide
+	Important:
+	Set the width of your slides
+	If height not specified height will be set by the slide content
+	Set to display block
+*/
+.slides_container a {
+  width: 366px;
+  height: 274px;
+  display: block; }
+
+/*
+	Next/prev buttons
+*/
+#products .next, #products .prev {
+  position: absolute;
+  top: 127px;
+  left: 0;
+  width: 21px;
+  height: 0;
+  padding-top: 21px;
+  overflow: hidden;
+  display: block;
+  z-index: 101; }
+
+#products .prev {
+  top: 230px;
+  background: url(/coin-portlet/images/coindisplay/arrow-prev.png); }
+
+#products .next {
+  left: 485px;
+  margin-top: 100px;
+  background: url(/coin-portlet/images/coindisplay/arrow-next.png); }
+
+/*
+	pagination
+*/
+#products .pagination {
+  background: #dfdfdf;
+  width: 130px;
+  padding: 5px 5px;
+  float: left;
+  margin-left: 30px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px; }
+
+#products .pagination li {
+  float: left;
+  margin: 2px 4px;
+  list-style: none; }
+
+#products .pagination li a {
+  display: block;
+  width: 55px;
+  height: 55px;
+  margin: 1px;
+  float: left;
+  background: #f9f9f9; }
+
+#products .pagination li.current a {
+  border: 1px solid #7f7f7f;
+  margin: 0; }
+
+/*
+	閸掑棝銆�
+*/
+#pagingdiv {
+  clear: both;
+  text-align: center;
+  width: 580px;
+  margin-top: 9px;
+  padding: 4.5px 0 18px;
+  border-top: 1px solid #dfdfdf; }
+
+#pagingdiv p {
+  margin: 4.5px 0;
+  font-size: 1.0em; }
+
+/*
+	Anchors
+*/
+.slides_container a:link, .slides_container a:visited {
+  color: #599100;
+  text-decoration: none; }
+
+.slides_container a:hover, .slides_container a:active {
+  color: #599100;
+  text-decoration: underline; }
+
+.coinlist_li a {
+  text-decoration: none;
+  font-family: "楠炵厧娓�";
+  font-size: 12px;
+  color: #3366CC; }
+
+.coinlist_li a:hover {
+  color: #FF6600;
+  text-decoration: underline; }
+
+#coinlisttab td {
+  vertical-align: middle;
+  padding: 2px;
+  border-bottom: 1px solid #E6E6E6; }
+

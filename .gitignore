@@ -1,6 +1,5 @@
 /.*/
 
-/s/
 /Servers/
 
 **/classes/
@@ -8,4 +7,4 @@
 *.log
 .metadata*.zip
 *.DS_Store
-/static/s/jsons
+/s/jsons

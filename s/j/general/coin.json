@@ -1,0 +1,28 @@
+{
+    "keyword": "coin",
+    "kename": "金银币",
+    "columnList": [
+        {
+            "chncolname": "中文名称",
+            "columnname": "chnname",
+            "inputtype": "TEXT",
+            "isNum": false,
+            "isaddcol": true,
+            "isaddmust": true,
+            "isquerycol": true,
+            "isquerymust": true,
+            "ordercol": 1
+        },
+        {
+            "chncolname": "英文名称",
+            "columnname": "usaname",
+            "inputtype": "TEXT",
+            "isNum": false,
+            "isaddcol": true,
+            "isaddmust": true,
+            "isquerycol": true,
+            "isquerymust": true,
+            "ordercol": 3
+        }
+    ]
+}

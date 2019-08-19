@@ -1,0 +1,132 @@
+.div_print_contest {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	border: solid 1px black;
+	float: left;
+}
+
+/*表格中序号*/
+.td_none_bkg_index {
+	width: 4%;
+	text-align: center;
+	font-size: 12px;
+	color: black;
+}
+
+/*表格中抬头*/
+.td_none_bkg_head {
+	width: 24%;
+	font-size: 12px;
+	color: black;
+	text-align: center;
+}
+
+/*表格中标签为空时显示样式*/
+.td_none_bkg_tag {
+	text-align: center;
+}
+
+/*表格中标签为空打印时去掉此样式*/
+.td_none_bkg_tag_no_print {
+	color: rgb(221, 221, 221);
+}
+
+/*表格中标签为空打印时样式*/
+.td_none_bkg_tag_print {
+	color: rgb(255, 255, 255);
+}
+
+.table_gray_border {
+	border: #CCC solid 1px;
+}
+
+.table_white_border {
+	border: #FFF solid 1px;
+}
+
+.a_symbol {
+	text-decoration: none;
+	font-size: 24px;
+	margin: 0 5px;
+}
+
+.div_tipcontext {
+	width: 80%;
+	background: #F3F3F3;
+	padding: 10px;
+	padding-top: 0;
+}
+
+.div_tipcontext p {
+	margin: 5px 0;
+}
+
+#div_cointag {
+	float: left;
+	width: 65%;
+	border: solid 1px black;
+}
+
+#tab_printlist {
+	width: 88.65%;
+	height: 88%;
+	margin: 2.3% auto;
+	margin-left: 8%;
+	color: #DDDDDD;
+	font-size: 32px;
+}
+
+#tab_printlist {
+	text-align: center;
+	color: black;
+	height: 30px;
+}
+
+.tr_head {
+	text-align: center;
+	font-size: 12px;
+	color: black;
+	height: 30px;
+}
+
+.tr_tag_as_atom {
+	height: 82.5px;
+}
+
+.td_bkg_letter {
+	width: 23%;
+	text-align: center;
+}
+
+.td_with_tag {
+	width: 23%;
+	text-align: center;
+}
+
+.table_with_tag {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0px auto;
+	margin-left: -2px;
+	margin-top: 1px;
+}
+
+.span_coincode {
+	color: black;
+	font-family: 'Times New Roman';
+	font-weight: bold;
+}
+
+.span_rating_reason {
+	color: black;
+	font-family: 'Times New Roman';
+	font-weight: bold;
+	margin-left: -2px;
+}
+
+.div_tag_line {
+	width: 99%;
+	border-bottom: 1px solid black;
+}

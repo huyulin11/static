@@ -1,0 +1,581 @@
+@font-face {
+	/* font-properties */
+	font-family: eudc;
+	src: url('/s/f/EUDC.EUF'), url('/s/f/EUDC.TTE');
+}
+
+input[type=text], select, textarea {
+	background: #f3f3f3;
+}
+
+#body {
+	width: 810px;
+	height: auto;
+	padding: 0 20px 45px 20px;
+	background: #fff;
+	color: #000;
+	margin-bottom: 0;
+	margin: 0 auto;
+}
+
+.div-hear-pritbtns {
+	margin-top: 10px;
+}
+
+#basic {
+	width: 810px;
+}
+
+#ser {
+	height: 105px;
+	width: 810px;
+}
+
+#pay {
+	height: 380px;
+	width: 810px;
+}
+
+h2 {
+	color: #98bf21;
+	margin-top: 0px;
+	height: 10px;
+}
+
+#tab {
+	margin: 20px 0 10px 0;
+}
+
+#tab td, #tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 12px;
+}
+
+#tab .input {
+	/* height: 15px;*/
+	width: 220px;
+	margin-right: 10px;
+}
+
+#tab .basicInput {
+	/* height: 15px;*/
+	width: 160px;
+	margin-right: 10px;
+}
+
+#tab2 td, #tab2 th {
+	padding: 5px 10px 10px 10px;
+	font-size: 12px;
+}
+
+#tab2 {
+	margin-top: 20px;
+}
+
+#tab3 td, #tab3 th {
+	padding: 5px;
+	font-size: 12px;
+}
+
+#tab3 {
+	margin-top: 20px;
+	width: 100%;
+}
+
+#tab3 .cel {
+	margin-left: 60px;
+}
+
+#tab3 .pay {
+	margin-left: 20px;
+}
+
+#tab3 .wangluo {
+	margin-top: 0px;
+	margin-left: 15px;
+}
+
+#tab3 .tiqu {
+	margin-left: 10px;
+	margin-right: 122px;
+}
+
+#tab3 .st {
+	width: 85px;
+	height: 25px;
+	font-size: 12px;
+}
+
+.tongyong {
+	width: 94px;
+	height: 25px;
+}
+
+select#year {
+	width: 90px;
+	height: 25px;
+	font-size: 12px;
+}
+
+#CoinDiv {
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#CoinDiv .span1 {
+	font-size: 12px;
+	margin-right: 25px;
+}
+
+#CoinDiv div {
+	
+}
+
+#CoinSearchTable {
+	margin-left: 60px;
+	margin-top: 20px;
+	width: 100;
+}
+
+#CoinSearchTable td {
+	font-size: 12px;
+	padding: 3px;
+}
+
+#CoinSearchTable th {
+	width: 80px;
+	text-align: center;
+	font-size: 12px;
+	padding: 3px;
+}
+
+#CoinSearchTable table {
+	margin: 20px 0px;
+	padding: 10%;
+	border: 2px solid;
+	width: 85%;
+}
+
+#CoinSearchTable table td {
+	padding: 10px 20px;
+	vertical-align: center;
+}
+
+#CoinSearchTable table td:last-of-type {
+	float: right;
+	position: absolute;
+}
+
+input#confirmBtn, input#btn_reset {
+	/* float: right; */
+	margin-left: 60px;
+	/* margin-top:10px; */
+	/* position: absolute; */
+	/* float: right; */
+	/* position: relative; */
+}
+
+.danxuan {
+	margin-left: 20px;
+	font-size: 12px;
+}
+
+.ticai {
+	width: 354px;
+}
+
+#list {
+	font-size: 12px;
+	margin-top: 10px;
+	margin-bottom: -10px;
+	width: 100%;
+	overflow: auto;
+}
+
+#list #amount {
+	
+}
+
+.btn {
+	font-size: 13px;
+	margin-top: 10px;
+	margin-right: 20px;
+}
+
+#confirmBtn {
+	width: 50px;
+	height: 24px;
+	background: url(/s/i/button/red/btn_search.jpg) no-repeat;
+}
+
+#btn_reset {
+	width: 50px;
+	height: 24px;
+	background: url(/s/i/button/red/btn_reset.jpg) no-repeat;
+}
+
+#tab4 tr {
+	height: 30px;
+}
+
+#tab4 td, #tab4 th {
+	font-size: 12px;
+	border: 1px solid #CCC;
+	text-align: center;
+	height: 25px;
+}
+
+#tab4 th {
+	font-size: 12px;
+	background-color: #AAAAAA;
+	color: #fff;
+}
+
+#tab4 {
+	margin-top: 10px;
+	width: 810px;
+}
+
+table.tabDetail tr {
+	background: #f3f3f3;
+	height: 30px;
+}
+
+table.tabDetail td, table.tabDetail th {
+	font-size: 12px;
+	border: 1px solid #CCC;
+	text-align: center;
+	height: 25px;
+}
+
+table.tabDetail th {
+	font-size: 12px;
+	background-color: #1383AD;
+	color: #fff;
+}
+
+table.tabDetail {
+	margin-top: 10px;
+	width: 810px;
+}
+
+.graytab td, .graytab th {
+	font-size: 12px;
+	border: 1px solid #CCC;
+	background-color: #f3f3f3;
+	text-align: center;
+	height: 35px;
+}
+
+.graytab th {
+	font-size: 12px;
+	background-color: #AAAAAA;
+	color: #fff;
+}
+
+.graytab {
+	margin-top: 10px;
+	width: 100%;
+}
+
+.div_review_block {
+	width: 810px;
+	height: auto;
+	background: #fff;
+	margin-top: 5px;
+}
+
+#tab5 td, #tab5 th {
+	font-size: 12px;
+	border: 1px solid #ccc;
+	height: 29px;
+	text-align: center;
+}
+
+#tab5 th {
+	background-color: #AAA;
+	height: 29px;
+	color: #fff;
+}
+
+#tab5 {
+	width: 100%;
+}
+
+.ipc input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 40px;
+}
+
+.ipc2 input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 130px;
+}
+
+.opc input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 250px;
+}
+
+.tabTitle {
+	padding: 2px 8px;
+	margin: 10px 0 1px 0;
+	background: #B79E67;
+	display: inline-block;
+	color: #fff;
+	font-size: 12px;
+}
+
+.tabSecondTitle {
+	padding: 2px 2px;
+	margin: 1px 0 1px 0;
+	background: #807765;
+	display: inline-block;
+	color: #fff;
+}
+
+.dialogTitle {
+	padding: 2px 8px;
+	margin: 0px 0 1px 0;
+	font-szie: 12px;
+	background: #B79E67;
+	display: inline-block;
+	color: #fff;
+}
+
+.standard {
+	float: right;
+	display: inline-block;
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-right: 5px;
+}
+
+.stockStandard {
+	float: right;
+	display: inline-block;
+	margin-right: 5px;
+	color: black;
+	height: 26px;
+}
+
+.standard a {
+	cursor: pointer;
+	color: #000;
+	font-size: 12px;
+}
+
+.standard a:hover {
+	color: #BB2F00;
+}
+
+.calTag {
+	padding-right: 5px;
+	color: #999;
+}
+
+.sdgshang {
+	background-color: #FFF;
+	border-bottom: 2px solid #ccc;
+	height: 27px;
+	padding-top: 7px;
+}
+
+.baoshang {
+	background-color: #FFF;
+	height: 50px;
+}
+
+.sdgshang .span:first-of-type {
+	height: 26px;
+	color: #000;
+	margin-right: 20px;
+	float: left;
+	text-align: center;
+	border-bottom: solid #B79E67 3px;
+}
+
+.total {
+	width: 100px;
+	text-align: right;
+}
+
+#calculateTab {
+	margin-top: 10px;
+	width: 100%;
+}
+
+#calculateTab tr td {
+	padding: 10px 5px;
+	font-size: 12px;
+	text-align: center;
+}
+
+#calculateTab td>span {
+	padding-right: 5px;
+	color: #999;
+}
+
+#calculateTab tr td input[type=text] {
+	height: 15px;
+	font-size: 12px;
+}
+
+#tab6 td, #tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 12px;
+	border: 1px solid #98bf21;
+	text-align: center;
+}
+
+#tab6 {
+	margin-left: 20px;
+}
+
+#tab7 td, #tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 12px;
+	border: 1px solid #98bf21;
+}
+
+#tab7 {
+	margin-left: 20px;
+}
+
+.defaultClass {
+	display: none;
+}
+
+input.guestappraisalClass {
+	width: 60px;
+	ime-mode: disabled;
+}
+
+input.tab_input {
+	text-align: right;
+	color: #000;
+	height: 12px;
+	background: #fff;
+	border: #bfbfbf 1px solid;
+}
+
+select.tab_input {
+	background: #fff;
+	border: #bfbfbf 1px solid;
+}
+
+input.amountClass {
+	width: 30px;
+	ime-mode: disabled;
+}
+
+.defaultClass input {
+	width: 90px;
+}
+
+html, body, hr {
+	margin: 0;
+	padding: 0;
+}
+
+div#div_save_btn {
+	text-align: center;
+	width: 810px;
+	height: 50px;
+}
+
+#div_save_btn .savereq {
+	width: 116px;
+	height: 36px;
+	background: url(/s/i/button/red/btn_savedraft.jpg) no-repeat;
+}
+
+#div_save_btn .btn_submit_req {
+	width: 116px;
+	height: 36px;
+	background: url(/s/i/button/red/btn_submit.jpg) no-repeat;
+}
+
+#div_save_btn .btn_submit_req_disabled {
+	width: 116px;
+	height: 36px;
+	background: url(/s/i/button/red/btn_submit_disabled.jpg) no-repeat;
+}
+
+#recover {
+	width: 116px;
+	height: 36px;
+	background: url(/s/i/button/red/btn_getaddress.jpg) no-repeat;
+}
+
+#btn_determine {
+	width: 50px;
+	height: 24px;
+	margin-right: 25px;
+	background: url(/s/i/button/red/btn_determine.jpg) no-repeat;
+}
+
+#btn_cancel {
+	width: 50px;
+	height: 24px;
+	margin-right: 80px;
+	background: url(/s/i/button/red/btn_cancel.jpg) no-repeat;
+}
+
+#result {
+	display: block;
+	margin: 20px 60px;
+	border: 1px solid #ccc;
+	padding: 15px 10px;
+	background: #f3f3f3;
+}
+
+#addedcoinremark {
+	width: 805px;
+	height: 50px;
+}
+
+#reqaddedcoinPrint {
+	text-shadow: none;
+	float: right;
+}
+
+.searchingFlag {
+	/* display: block; */ /* hide it at first time */
+	text-align: center;
+	color: blue;
+	margin-top: -10px;
+}
+
+input[type=button].delete, input[type=button].delete:link, input[type=button].delete:hover,
+	input[type=button].delete:active {
+	width: 13px;
+	height: 13px;
+	background-image: url(/s/i/deltr.png);
+}
+
+input[type=button].upRow, input[type=button].upRow:link, input[type=button].upRow:hover,
+	input[type=button].upRow:active {
+	width: 13px;
+	height: 13px;
+	background-image: url(/s/i/upRow.png);
+}
+
+input[type=button].downRow, input[type=button].downRow:link, input[type=button].downRow:hover,
+	input[type=button].downRow:active {
+	width: 13px;
+	height: 13px;
+	background-image: url(/s/i/downRow.png);
+}
+
+a.coinDetail, a.coinDetail:link, a.coinDetail:hover, a.coinDetail:active
+	{
+	color: rgb(183, 158, 103);
+	cursor: pointer;
+}

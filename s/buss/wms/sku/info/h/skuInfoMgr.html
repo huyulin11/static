@@ -1,0 +1,34 @@
+<div class="m-b-md">
+    <form class="form-inline" role="form" id="searchForm" name="searchForm">
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">SKU名称:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input class="input-medium ui-autocomplete-input" id="occurdate" name="skuInfoFormMap.name">
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<header class="panel-heading">
+    <div class="doc-buttons">
+        <button type="button" id="add" class="btn btn-primary marR10">新增</button>
+        <button type="button" id="del" class="btn btn-danger marR10">删除</button>
+    </div>
+</header>
+<div class="table-responsive">
+    <div id="paging" class="pagclass"></div>
+</div>
+<script src="/s/buss/wms/sku/info/j/list.js"></script>
+<script src="/s/buss/wms/sku/info/j/eidtSkuNameInList.js"></script>
+<script src="/s/buss/wms/sku/info/j/eidtSkuTypeInList.js"></script>
+<script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>

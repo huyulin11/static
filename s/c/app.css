@@ -1,0 +1,297 @@
+.hiddenThis {
+	display: none;
+}
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: "microsoft yahei";
+}
+
+@font-face {
+	font-family: Jenna Sue;
+	src: url('../fonts/JennaSue-webfont.eot');
+	src: local("Jenna Sue"), url('../fonts/JennaSue-webfont.ttf');
+}
+
+@font-face {
+	font-family: News Cycle;
+	src: url('../fonts/NewsCycle-Regular.eot');
+	src: local("News Cycle"), url('../fonts/NewsCycle-Regular.ttf');
+}
+
+table caption {
+	color: black;
+	background-color: rgb(234, 234, 234);
+	text-align: left;
+	font-size: 15px;
+	font-weight: bold;
+	border: 1px solid rgb(34, 34, 34);
+	padding: 10px 10px 10px 10px;
+}
+
+.leftFrame {
+	width: 300px;
+	border: #CCC solid 1px;
+}
+
+@font-face {
+	font-family: eudc;
+	src: url('/coin-portlet/images/fonts/EUDC.EUF'),
+		url('/coin-portlet/images/fonts/EUDC.TTE');
+}
+
+.boldfont {
+	font-weight: bold;
+}
+
+input[type=button],button {
+	font-family: "Hiragino Sans GB";
+	background: rgb(167, 47, 10);
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(201, 49, 0)),
+		to(rgb(135, 53, 31)));
+	color: white;
+	text-shadow: none;
+	font-size: 12px;
+	font-weight: lighter;
+}
+
+button:hover,input[type=button]:hover {
+	font-family: "Hiragino Sans GB";
+	background: rgb(210, 210, 210);
+	color: black;
+	text-shadow: none;
+	font-size: 12px;
+	font-weight: lighter;
+}
+
+button:focus,input[type=button]:focus {
+	font-family: "Hiragino Sans GB";
+	background: rgb(82, 136, 186);
+	color: white;
+	text-shadow: none;
+	font-size: 12px;
+	font-weight: lighter;
+}
+
+input[type=text] {
+	background: #FFFFFF;
+	background-image: url(../images/forms/input_shadow.png);
+	background: -webkit-gradient(linear, left top, right bottom, from(rgb(246, 250, 250)),
+		to(rgb(255, 255, 255)));
+	color: #000000;
+}
+
+input[type=text][readonly=readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=text][readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=text][disabled=disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=text][disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=text]:FOCUS {
+	background: rgb(255, 255, 204);
+	color: #444444;
+}
+
+input[type=textarea]:FOCUS {
+	background: rgb(255, 255, 204);
+	color: #444444;
+}
+
+select:FOCUS {
+	background: rgb(255, 255, 204);
+	color: #444444;
+}
+
+input[type=textarea] {
+	background: #FFFFFF;
+	background-image: url(../images/forms/input_shadow.png);
+	background: -webkit-gradient(linear, left top, right bottom, from(rgb(246, 250, 250)),
+		to(rgb(255, 255, 255)));
+	color: #000000;
+}
+
+input[type=textarea][readonly=readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=textarea][readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=textarea][disabled=disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=textarea][disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+textarea {
+	background: #FFFFFF;
+	background-image: url(../images/forms/input_shadow.png);
+	background: -webkit-gradient(linear, left top, right bottom, from(rgb(246, 250, 250)),
+		to(rgb(255, 255, 255)));
+	color: #000000;
+}
+
+textarea[readonly=readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+textarea[readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+textarea[disabled=disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+textarea[disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+select {
+	background: #FFFFFF;
+	background-image: url(../images/forms/input_shadow.png);
+	background: -webkit-gradient(linear, left top, right bottom, from(rgb(246, 250, 250)),
+		to(rgb(255, 255, 255)));
+	color: #000000;
+}
+
+select[readonly=readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+select[readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+select[disabled=disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+select[disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+select[multiple=multiple] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=checkbox] {
+	background: #FFFFFF;
+	background-image: url(../images/forms/input_shadow.png);
+	background: -webkit-gradient(linear, left top, right bottom, from(rgb(246, 250, 250)),
+		to(rgb(255, 255, 255)));
+	color: #000000;
+}
+
+input[type=checkbox][readonly=readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=checkbox][readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=checkbox][disabled=disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=checkbox][disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=radio] {
+	background: #FFFFFF;
+	background-image: url(../images/forms/input_shadow.png);
+	background: -webkit-gradient(linear, left top, right bottom, from(rgb(246, 250, 250)),
+		to(rgb(255, 255, 255)));
+	color: #000000;
+}
+
+input[type=radio][readonly=readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=radio][readonly] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=radio][disabled=disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+input[type=radio][disabled] {
+	background: #F3F3F3;
+	color: #444444;
+}
+
+.red {
+	color: red;
+}
+
+.singleDataTable {
+	margin: 15px 15px;
+	width: 800px;
+}
+
+.singleDataTable td,.singleDataTable th {
+	padding: 5px;
+	font-size: 13px;
+	border: 1px solid #ccc;
+}
+
+.singleDataTable th {
+	background-color: #EAEAEA;
+	height: 29px;
+	color: #000;
+	width: 30%;
+	text-align: left;
+}
+
+.singleDataTable td {
+	text-align: left;
+	word-break: break-all;
+}

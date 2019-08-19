@@ -1,0 +1,158 @@
+.div-assist-dailyCash {
+	margin: 40px 0 0 20px;
+	font-size: 12px;
+}
+
+.div-walletInfo {
+	width: 400px;
+	background: #ccc;
+	font-size: 14px;
+	border: 1px solid #ccc;
+}
+
+.div-walletInfo table {
+	width: 100%;
+	height: 70px;
+	margin: 10px auto;
+}
+
+.div-walletInfo table .odd {
+	background: #BBB;
+}
+
+.div-walletInfo table .even {
+	background: #ccc;
+}
+
+.div-query-builder {
+	margin: 20px auto;
+}
+
+.div-query-builder table {
+	width: 100%;
+}
+
+.div-query-builder table tr {
+	height: 40px;
+}
+
+.div-query-builder table .input-date {
+	background: #eee;
+	width: 70px;
+}
+
+.div-query-builder table .input-button {
+	width: 70px;
+}
+
+.div-query-builder table tr .td-title {
+	width: 10%;
+	text-align: right;
+}
+
+#tabbed_box_1 {
+	margin: 0px auto 0px auto;
+	width: 800px;
+}
+
+.tabbed_box h4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 23px;
+	color: #ffffff;
+	letter-spacing: -1px;
+	margin-bottom: 10px;
+}
+
+.tabbed_box h4 small {
+	color: #e3e9ec;
+	font-weight: normal;
+	font-size: 9px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	position: relative;
+	top: -4px;
+	left: 6px;
+	letter-spacing: 0px;
+}
+
+.tabbed_area {
+	
+}
+
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 6px;
+}
+
+ul.tabs li {
+	list-style: none;
+	display: inline;
+}
+
+ul.tabs li a {
+	background-color: #464c54;
+	color: #ffebb5;
+	padding: 8px 14px 8px 14px;
+	text-decoration: none;
+	font-size: 9px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	border: 1px solid #464c54;
+	background-image: url(images/tab_off.jpg);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+ul.tabs li a:hover {
+	background-color: #2f343a;
+	border-color: #2f343a;
+}
+
+ul.tabs li a.active {
+	background-color: #ffffff;
+	color: #282e32;
+	border: 1px solid #464c54;
+	border-bottom: 1px solid #ffffff;
+	background-image: url(images/tab_on.jpg);
+	background-repeat: repeat-x;
+	background-position: top;
+}
+
+.content {
+	background-color: #ffffff;
+	padding: 10px;
+	border: 1px solid #464c54;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url(images/content_bottom.jpg);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+#content_2,#content_3,#content_4 {
+	display: none;
+}
+
+.tabbed_box {
+	font-size: 14px;
+}
+
+.content table {
+	width: 100%;
+}
+
+.content table tr {
+	height: 30px;
+}
+
+.content table tr td,th {
+	border: 1px #ccc solid;
+}
+
+.content table th {
+	background: #ccc;
+	text-align: center;
+	border: solid #bbb 1px;
+}

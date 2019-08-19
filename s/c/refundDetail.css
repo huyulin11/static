@@ -1,0 +1,81 @@
+.tab5 td,.tab5 th {
+	font-size: 13px;
+	border: 1px solid #ccc;
+}
+
+.tab5 th {
+	background-color: #aaa;
+	height: 29px;
+	color: #fff;
+	width: 20%;
+	text-align: center;
+}
+
+.tab5 td {
+	padding: 5px;
+	text-align: left;
+	word-break: break-all;
+}
+
+.tab5 {
+	margin-top: 0px;
+	width: 660px;
+}
+
+#btnDeal {
+	
+}
+
+#btnDeal input {
+	
+}
+
+.ui-button-text {
+	width: 30px;
+	height: 18px;
+	font-size: 13px;
+	background: rgb(162, 43, 3);
+	color: white;
+	font-weight: normal;
+	font-family: "ËÎÌו";
+}
+
+.ui-button-text-disabled {
+	background: rgb(122, 122, 122);
+}
+
+span[aria-disabled='true'] .ui-button-text {
+	background: rgb(0, 0, 0);
+}
+
+#detailDispose {
+	
+}
+
+#detailConfirm {
+	
+}
+
+#detailCancel {
+	
+}
+
+#detailCloseDialog {
+	
+}
+
+.bold{
+	font-weight: bold;
+}
+
+#amountAfterRefund{
+	color:blue;
+}
+
+#amountRefund{
+	color:red;
+}
+
+#amountBeforeRefund{
+	color:green;
+}

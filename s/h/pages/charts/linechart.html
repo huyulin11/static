@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ECharts">
+    <title>ECharts · Example</title>
+ 
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="../../echarts-2.2.7/build/dist/echarts.js"></script>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+   <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="../../dist/css/skins/skin-blue.min.css">
+    <style type="text/css">
+        .chart {
+            height: 300px;
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>报表</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>数据中心</b></span>
+    </a>
+     <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../dist/img/report.jpg" class="img-circle" alt="报表">
+        </div>
+        <div class="pull-left info">
+          <p>东航报表</p>
+          
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="../home/home.html"><i class="glyphicon glyphicon-home"></i> <span>首页</span></a></li>
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>图表</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="linechart.html"><i class="fa fa-line-chart"></i> 折线图</a></li>
+            <li><a href="barchart.html"><i class="fa fa-bar-chart"></i> 柱状图</a></li>
+            <li><a href="piechart.html"><i class="fa fa-pie-chart"></i> 饼图</a></li>
+          </ul>
+        </li>
+       
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>表格</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i>指标完成情况</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        
+        <small>折线图</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">图表</a></li>
+        <li class="active">折线图</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- 2016有效客户家数 -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">2016年1-9月运输收入(万)</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart" id="contentline" >
+              	 
+              </div>
+             
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+         
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">折线图</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="chart" id="contentline2">
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+        </div>
+       
+        <div class="col-md-6">
+          <!-- LINE CHART -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">折线图</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart" id="contentline3">
+                
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+         
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">折线图</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart" id="contentline4">
+                
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        <!-- /.col (RIGHT) -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+ <footer class="main-footer">
+    <!-- Default to the left -->
+    <strong>数据中心</strong>
+  </footer>
+
+
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="../../dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    require.config({
+            paths: {
+                echarts: '../../echarts-2.2.7/build/dist'
+            }
+        });
+        
+        require(
+            [
+                'echarts',
+                'echarts/chart/pie',
+                'echarts/chart/bar',
+                'echarts/chart/line'
+                
+            ],
+function (ec) {
+	
+  
+ 
+ 
+	
+                 
+   
+ 
+        	 var myChartline = ec.init(document.getElementById('contentline'));  
+
+var optionline = {
+    title : {
+        text: '',
+        subtext: ''
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+   legend: {
+        data : ['续签','16年新签','汇总'],
+    },
+    
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : ['千万级','五百万级','两百万级','普通级','汇总'],
+            axisLine:{
+                        lineStyle:{
+                            color:'#FFFFFF',
+                            width:8,//这里是为了突出显示加上的
+                        }
+                    } ,
+            axisLabel:{
+              textStyle:{
+                 color:"black", //刻度颜色
+                 fontSize:16  //刻度大小
+            }
+        }
+        
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            axisLabel : {
+                formatter: '{value} %',
+                textStyle:{
+                 color:"black", //刻度颜色
+                 fontSize:16  //刻度大小
+            }
+            },
+            axisLine:{
+                        lineStyle:{
+                            color:'#FFFFFF',
+                            width:8,//这里是为了突出显示加上的
+                        }
+                    } 
+        }
+    ],
+    series : [
+        {
+            name:'续签',
+            type:'line',
+            data:[10.28, 6.43, 12.24, 3.92, 8.87],
+        },
+        {
+            name:'16年新签',
+            type:'line',
+            data:[0, 26.03, -28.43, 4.12, 14.16],
+            
+        },
+        {
+            name:'汇总',
+            type:'line',
+            data:[10.28, 7.73, 15.97, 4.00, 12.54],
+            
+        }
+    ]
+};
+
+
+
+
+ myChartline.setOption(optionline);   
+
+
+var myChartline2 = ec.init(document.getElementById('contentline2')); 
+var myChartline3 = ec.init(document.getElementById('contentline3')); 
+var myChartline4 = ec.init(document.getElementById('contentline4'));
+myChartline2.setOption(optionline);  
+myChartline3.setOption(optionline); 
+myChartline4.setOption(optionline); 
+                 
+                 
+                    
+ 
+     }
+        );
+  });
+</script>
+</body>
+</html>

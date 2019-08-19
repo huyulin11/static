@@ -1,0 +1,87 @@
+#body {
+	width: 800px;
+	min-height: 480px;
+}
+
+#tab2 {
+	margin-top: 20px;
+}
+
+.input {
+	background: #66b007;
+	color: white;
+	margin-top: 10px;
+	margin-left: 10px;
+	text-shadow: none;
+}
+
+#list {
+	width: 800px;
+	min-height: 380px;
+}
+
+#tab4 td,#tab4 th {
+	font-size: 13px;
+	border: 1px solid #98bf21;
+	text-align: center;
+	height: 30px;
+}
+
+#tab4 tr.over_coin_tab td {
+	background: #FF9;
+}
+
+#tab4 th {
+	background-color: #E0FFCC;
+}
+
+#tab4 tr.over_tasklist_tab td {
+	background: #FF9;
+}
+
+#tab4 {
+	width: 800px;
+}
+
+#chooseType {
+	width: 200px;
+	float: left;
+	margin: 10px 0px;
+}
+
+#chooseType option {
+	width: 200px;
+	float: left;
+	text-align: center;
+	margin: 10px 0px;
+}
+
+#searchRequest {
+	width: 200px;
+	float: right;
+	margin: 10px 0px;
+}
+
+#requestMsg {
+	display: block;
+	display: none;
+	position: fixed;
+	width: 210px;
+	background: #fff;
+	padding: 15px 10px;
+	border: 1px solid #5fafff;
+	border-radius: 10px;
+	color: #333;
+	font-size: 14px;
+	z-index: 100;
+	box-shadow: 4px 4px rgba(0, 0, 0, .5);
+	z-index: 100;
+}
+
+.requestMsgTitle {
+	font-weight: bold;
+}
+
+.requestcodeitem {
+	text-decoration: underline;
+}

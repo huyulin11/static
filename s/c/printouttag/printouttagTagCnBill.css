@@ -1,0 +1,201 @@
+.td_tag_1 {
+	width: 180px;
+}
+
+.td_tag_2 {
+	width: 345px;
+}
+
+.td_tag_3 {
+	width: 90px;
+	padding-bottom: 8px;
+}
+
+.td_tag_4 {
+	width: 30px;
+}
+
+.td_tag_5 {
+	width: 120px;
+	padding-bottom: 10px;
+}
+
+.td_tag_6 {
+	width: auto;
+}
+
+.td_tag_3 img {
+	width: 40px;
+	height: 40px;
+}
+
+.td_tag_score_lt0_true {
+	color: rgb(0, 0, 0);
+	font-family: 'Hiragino Sans GB';
+	font-weight: bold;
+	font-size: 21px;
+	margin-top: -17px;
+	height: 30px;
+}
+
+.td_tag_score_gt0_score {
+	color: rgb(0, 0, 0);
+	height: 30px;
+	font-family: 'Times New Roman';
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.span_coincode_reason_font {
+	font-size: 17px;
+}
+
+.td_tag_year_country_mquality {
+	color: rgb(0, 0, 0);
+	line-height: 17px;
+	height: 17px;
+	font-size: 14px;
+	font-family: 'Hiragino Sans GB';
+}
+
+.td_tag_subject {
+	color: rgb(0, 0, 0);
+	font-size: 19px;
+	letter-spacing: -2px;
+	font-family: 'Hiragino Sans GB';
+	font-weight: bold;
+	line-height: 16px;
+	height: 21px;
+}
+
+.td_tag_coincode_reason {
+	font-size: 17px;
+	color: rgb(0, 0, 0);
+	line-height: 19px;
+	height: 14px;
+}
+
+.td_tag_facevalue {
+	color: rgb(0, 0, 0);
+	font-size: 14px;
+	font-family: 'Hiragino Sans GB';
+	letter-spacing: -2px;
+	line-height: 19px;
+	height: 19px;
+}
+
+.td_tag_diversion_type {
+	color: rgb(0, 0, 0);
+	font-size: 14px;
+	line-height: 19px;
+	height: 19px;
+	font-family: 'Hiragino Sans GB';
+}
+
+.span_coincode {
+	color: rgb(0, 0, 0);
+	font-family: 'Hiragino Sans GB';
+	font-weight: bold;
+}
+
+.span_rating_reason {
+	color: black;
+	font-family: 'Hiragino Sans GB';
+	font-weight: bold;
+	margin-left: -2px;
+}
+
+.div_logo {
+	width: 132px;
+	height: 32px;
+	border: 1px solid rgb(211, 211, 211);
+	font-family: 'Hiragino Sans GB';
+	color: rgb(211, 211, 211);
+	font-size: 16px;
+	width: 132px;
+}
+
+.div_leishe {
+	width: 168px;
+	height: 78px;
+	border: 1px solid rgb(211, 211, 211);
+	font-family: 'Hiragino Sans GB';
+	color: rgb(211, 211, 211);
+	font-size: 16px;
+}
+
+.div_tag_coincode {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	color: rgb(0, 0, 0);
+	font-size: 12px;
+	font-family: 'Hiragino Sans GB';
+}
+
+.table_tag_content {
+	width: 100%;
+}
+
+.table_tag_content tr td {
+	font-family: 'Hiragino Sans GB';
+	color: rgb(0, 0, 0);
+	font-size: 14px;
+}
+
+.table_tag_content tr {
+	height: 26px;
+}
+
+.tr_tag_head_cn td span {
+	font-weight: bold;
+}
+
+.tr_tag_head_cn {
+	
+}
+
+.tr_tag_middle {
+	
+}
+
+.tr_tag_bottom {
+	
+}
+
+.span_rating_reason_code {
+	margin-left: -5px;
+	color: rgb(0, 0, 0);
+	font-size: 12px;
+	font-family: 'Hiragino Sans GB';
+}
+
+.net_flag {
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-bottom: 14px;
+	color: rgb(0, 0, 0);
+	font-size: 9px;
+	line-height: 15px;
+	border: 1px solid rgb(137, 137, 137);
+	font-weight: bold;
+	color: rgb(0, 0, 0);
+	width: 18px;
+}
+
+.net_flag div {
+	color: rgb(0, 0, 0);
+	font-size: 9px;
+	line-height: 15px;
+	font-family: 'Hiragino Sans GB';
+	font-weight: bold;
+}
+
+.net_content {
+	padding: 1px 4px 1px 4px;
+	font-size: 11px;
+	line-height: 18px;
+	font-family: 'Hiragino Sans GB';
+	border: 1px solid rgb(137, 137, 137);
+	color: rgb(0, 0, 0);
+	height: 18px;
+}

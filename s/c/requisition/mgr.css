@@ -1,0 +1,58 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+a {
+	color: #555;
+	text-decoration: none;
+	outline: none;
+}
+
+table th div {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	font-size: 12px;
+}
+
+table td div a {
+	font-family: "微软雅黑";
+	font-size: 12px;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+input[type=text],input[type=submit],input[type=reset],textarea,button {
+	font-family: "微软雅黑";
+}
+
+#sform input[type=text],select {
+	background: #f3f3f3;
+}
+
+.sdgshang {
+	background-color: #FFF;
+	border-bottom: 2px solid #ccc;
+	height: 27px;
+	padding-top: 7px;
+}
+
+.baoshang {
+	background-color: #FFF;
+	height: 50px;
+}
+
+.sdgshang .span {
+	height: 26px;
+	color: #000;
+	margin-right: 20px;
+	float: left;
+	width: 75px;
+	text-align: center;
+}
+.cDrag{
+	display : none
+}

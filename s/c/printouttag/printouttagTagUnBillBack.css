@@ -1,0 +1,66 @@
+.td_tag_reason_score_jpg {
+	width: 17%;
+	padding-top: 9px;
+}
+
+.td_tag_score_lt0_true {
+	color: black;
+	height: 16px;
+	font-family: 'Hiragino Sans GB W6';
+	font-size: 11px;
+	margin-top: -9px;
+}
+
+.td_tag_score_lt0_else {
+	height: 7px;
+}
+
+.td_tag_score_gt0_score {
+	color: black;
+	height: 18px;
+	font-family: 'Times New Roman';
+	font-size: 16px;
+	margin-top: -11px;
+	font-weight: bold;
+}
+
+.table_tag_content {
+	width: 87%;
+	margin-top: 1px;
+}
+
+.span_coincode_reason_font {
+	font-size: 8pt;
+}
+
+.td_tag_year_country_mquality {
+	color: black;
+	line-height: 10px;
+	height: 10px;
+	font-size: 7pt;
+	font-family: 'Arial';
+}
+
+.td_tag_subject_cn {
+	color: black;
+	font-size: 8pt;
+	font-family: 'Hiragino Sans GB W6';
+	line-height: 11px;
+	height: 14px;
+}
+
+.td_tag_subject_un {
+	color: black;
+	font-size: 6.5pt;
+	font-family: 'Arial';
+	line-height: 9px;
+	height: 10px;
+}
+
+.td_tag_coincode_reason {
+	font-size: 8pt;
+	color: black;
+	line-height: 8px;
+	height: 0px;
+	font-weight: bold;
+}

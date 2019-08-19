@@ -1,0 +1,147 @@
+﻿.tl1{
+	background-color: Lavender;
+}
+.tl2{
+	background-color: #CCC;
+}
+table.tb1{
+	width: 730px;
+	height: 30px;
+	display: none;
+}
+table.tb1 td{
+	height: 25px;
+}
+table.tb2 tr{
+	height: 40px;
+}
+table.tb2{
+	display: none;
+	width: 730px;
+	height: 30px;
+}
+table.tb3{
+	display: none;
+	width: 730px;
+	height: 30px;
+}
+table.tb3 td{
+	background-color: #CCC;
+	font-size: 12px;
+	border: 1px solid Lavender;
+	height: 25px;
+	text-align: center;
+}
+table.tb4{
+	display: none;
+	width: 730px;
+	height: 30px;
+}
+table.tb4 tr{
+	height: 40px;
+}
+table.tb4 td{
+	background-color: Lavender;
+	font-size: 12px;
+	border: 1px solid #CCC;
+	height: 30px;
+	text-align: left;
+}
+
+table.tb5{
+	display: none;
+	width: 730px;
+	height: 50px;
+}
+table.tb5 tr{
+	height: 50px;
+}
+table.tabDetail tr {
+	background: #f3f3f3;
+	height: 30px;
+}
+table.tb6{
+	display: none;
+	width: 730px;
+	height: 50px;
+}
+table.tb6 tr{
+	height: 50px;
+}
+table.tb6 td{
+	background-color: #CCC;
+	font-size: 12px;
+	border: 1px solid Lavender;
+	height: 30px;
+	text-align: center;
+}
+table.tb7{
+	display: none;
+	width: 730px;
+	height: 50px;
+}
+table.tb7 td{
+	background-color: #CCC;
+	font-size: 12px;
+	border: 1px solid Lavender;
+	height: 30px;
+	text-align: center;
+}
+table.tb8{
+	display: none;
+	width: 730px;
+	height: 50px;
+}
+table.tb8 tr{
+	height: 237px;
+}
+table.tb8 td{
+	width:152px;
+}
+table.tb9{
+	display: none;
+	width: 730px;
+	height: 50px;
+}
+table.tb9 td{
+	width:152px;
+}
+table.tl5 {
+	width: 730px;
+	height: 30px;
+	display:none;
+}
+table#tl6{
+	display: none;
+}
+table.tl7{
+	display: none;
+}
+.coinmottolist{
+	display: block;
+	display: none;
+	position: fixed;
+	width: 150px;
+	height: 200px;
+	background: #fff;
+	padding: 15px 10px;
+	border: 1px solid #5fafff;
+	border-radius: 10px;
+	color: #333;
+	font-size: 13px;
+	z-index: 1002;
+}
+.coinmottolist select[multiple=multiple] {
+	width: 100px;
+	height: 190px;
+}
+#stampjointypeN {
+	display: block;
+	display: none;
+	position: absolute;
+	width: 180px;
+	height: 30px;
+	background: #fff;
+	color: #333;
+	z-index: 1001;
+}

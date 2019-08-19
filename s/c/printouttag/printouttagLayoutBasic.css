@@ -1,0 +1,82 @@
+#div_friendlytip {
+	width: 80%;
+	text-align: left;
+	height: 10px;
+	margin: 0 0 0 20px;
+}
+
+#a_friendlytip {
+	cursor: pointer;
+	color: #A92F08;
+	text-decoration: underline;
+	font-family: '宋体';
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#div_tipcontext {
+	display: none;
+	font-family: '宋体';
+	font-size: 12px;
+	margin-left: 10px;
+	padding-top: 20px;
+	font-family: '宋体';
+}
+
+#closeTips {
+	float: left;
+	margin-top: -30px;
+	margin-left: 95%;
+}
+
+#span_close {
+	cursor: pointer;
+	font-size: 25px;
+	color: #ccc;
+}
+
+#span_startCoincode {
+	color: #C63302;
+	margin-left: 10px;
+}
+
+#span_endCoincode {
+	color: #C63302;
+	margin-left: 10px;
+}
+
+#span_nowprintnum {
+	color: red;
+}
+
+#span_startposition {
+	color: #C63302;
+	margin-left: 10px;
+}
+
+.span_none_bkg_tag {
+	color: rgb(221, 221, 221);
+	font-size: 32px;
+}
+
+.div_setparameter {
+	float: left;
+	width: 33%;
+}
+
+.div_setparameter table {
+	border: solid 1px rgb(254, 253, 253);
+}
+
+.div_setparameter input {
+	width: 40px;
+}
+
+.div_setparameter tr td {
+	height: 35px;
+	border: solid 1px rgb(254, 253, 253);
+}
+
+.div_setparameter fieldset {
+	width: 300px;
+}

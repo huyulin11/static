@@ -1,0 +1,2 @@
+复制来源：原项目路径\maincoin-theme\docroot\images
+应用于/s/c/b/*.css文件中，即原项目\maincoin-theme\docroot\css

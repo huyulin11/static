@@ -1,0 +1,61 @@
+.ui-list-icons {padding-top: 20px;}
+.ui-list-icons li{float:left;width:160px;margin-bottom:8px;margin-right:10px; list-style-type:none}
+.long-logo {width:580px;text-align: center;margin-top: 20px;margin-left: 32px;}
+
+.long-logo .icon-box,.long-logo .icon-box-commend,.long-logo .icon-box-kj{width:130px;background-color:#fff!important;line-height:30px}
+.long-logo .bank-num{float:right;padding-top:8px}
+
+.long-logo .icon-box .icon,.long-logo .icon-box-commend .icon,.long-logo .icon-box-kj .icon{float:left;width:116px;padding:0}
+
+
+.long-logo .xbox .ui-list-icons{_margin-left:-10px; *margin-left:-10px;*margin-top:5px;}
+.icon-box{ width:126px;border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color:#eee}  
+
+.icon-box1{ background: url(/s/i/bank_images/ICBC.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box2{ background: url(/s/i/bank_images/ABC.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box3{ background: url(/s/i/bank_images/BOC.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box4{ background: url(/s/i/bank_images/CCB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF}  
+
+.icon-box5{ background: url(/s/i/bank_images/POSTGC.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF}  
+
+.icon-box6{ background: url(/s/i/bank_images/COMM.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF}  
+
+.icon-box7{ background: url(/s/i/bank_images/CMB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF}  
+
+.icon-box8{ background: url(/s/i/bank_images/SPDB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box9{ background: url(/s/i/bank_images/CIB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box10{ background: url(/s/i/bank_images/GDB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box11{ background: url(/s/i/bank_images/SDB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box12{ background: url(/s/i/bank_images/CMBC.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box13{ background: url(/s/i/bank_images/CITIC.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box14{ background: url(/s/i/bank_images/CEB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box15{ background: url(/s/i/bank_images/PAB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box16{ background: url(/s/i/bank_images/BEA.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box17{ background: url(/s/i/bank_images/SRCB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box18{ background: url(/s/i/bank_images/BOB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box19{ background: url(/s/i/bank_images/NJCB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box20{ background: url(/s/i/bank_images/NBCB.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box21{ background: url(/s/i/bank_images/0.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+
+.icon-box021{ background: url(/s/i/bank_images/zfb/hzbank.jpg) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+.icon-box022{ background: url(/s/i/bank_images/zfb/shanghaibank.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+.icon-box023{ background: url(/s/i/bank_images/zfb/bjncshybank.jpg) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+.icon-box024{ background: url(/s/i/bank_images/zfb/fudianbank.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+.icon-box025{ background: url(/s/i/bank_images/zfb/wenzhoubank.gif) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 
+.icon-box026{ background: url(/s/i/bank_images/zfb/zhifubao.jpg) no-repeat 6px; width:135px;  height: 32px; border:1px solid #ddd;vertical-align:middle;position:relative;display:inline-block;background-color: #FFF} 

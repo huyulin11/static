@@ -1,0 +1,41 @@
+<script type="text/javascript" src="/s/buss/agv/site/logic/j/list.js"></script>
+<div class="m-b-md">
+    <form class="form-inline" role="form" id="searchForm" name="searchForm">
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">前序站点编号:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input class="input-medium ui-autocomplete-input" id="siteid" name="taskSiteLogicFormMap.siteid">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">后序站点编号:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input class="input-medium ui-autocomplete-input" id="nextid" name="taskSiteLogicFormMap.nextid">
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<header class="panel-heading">
+    <div class="doc-buttons">
+        <!-- <button type="button" id="add" class="btn btn-primary marR10">新增</button>
+        <button type="button" id="del" class="btn btn-danger marR10">删除</button> -->
+    </div>
+</header>
+<div class="table-responsive">
+    <div id="paging" class="pagclass"></div>
+</div>

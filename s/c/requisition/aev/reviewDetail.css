@@ -1,0 +1,478 @@
+input[type=text],input[type=button],input[type=reset],textarea,button,a,ul,li,span,td,th,select
+	{
+	font-family: "SimSun";
+}
+
+html,body,hr {
+	margin: 0;
+	padding: 0;
+}
+
+.reqstatus_1 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_1.jpg) 0 0;
+}
+
+.reqstatus_2 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_2.jpg) 0 0;
+}
+
+.reqstatus_3 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_3.jpg) 0 0;
+}
+
+.reqstatus_4 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_4.jpg) 0 0;
+}
+
+.reqstatus_5 {
+	width: 675px;
+	height: 53px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_5.jpg) 0 0;
+}
+
+.reqstatus_6 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_6.jpg) 0 0;
+}
+
+.reqstatus_7 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_7.jpg) 0 0;
+}
+
+.reqstatus_8 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_8.jpg) 0 0;
+}
+
+.reqstatus_9 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_9.jpg) 0 0;
+}
+
+.reqstatus_10 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_10.jpg) 0 0;
+}
+
+.reqstatus_11 {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/schedules_11.jpg) 0 0;
+}
+
+.reqInvalid_slip {
+	width: 675px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(/s/i/reqdetail/reqInvalid_slip.jpg) 0 0;
+}
+
+#body {
+	width: 1000px;
+	height: 100%;
+	padding: 0px auto;
+	background: #fff;
+	color: #000;
+	font-size: 14px;
+	margin: 0px auto;
+}
+
+.topinfo {
+	width: 940px;
+	height: 30px;
+	margin: 10px auto 30px auto;
+	text-align: right;
+	padding: 15px 30px;
+	border-bottom: 2px solid #DDDDDD;
+}
+
+.schedule {
+	width: 1000px;
+	height: 80px;
+	margin: 0 auto;
+}
+
+.outline {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 0;
+	border: 5px solid #DDDDDD;
+	border-radius: 8px;
+}
+
+.mainArea {
+	width: 1000px;
+	height: auto;
+	padding: 0 10px;
+}
+
+#basic {
+	border: solid #CCC 2px;
+	width: 970px;
+}
+
+.tabTitle {
+	padding: 2px 8px;
+	margin: 0px 0 1px 0;
+	background: #B79E67;
+	display: inline-block;
+	color: #fff;
+	font-size: 14px;
+}
+
+.tabSecondTitle {
+	padding: 2px 2px;
+	margin: 1px 0 1px 0;
+	background: #807765;
+	display: inline-block;
+	color: #fff;
+}
+
+#ser {
+	width: 970px;
+}
+
+.ser_left {
+	width: 470px;
+	float: left;
+	padding-right: 20px;
+}
+
+#pay {
+	height: auto;
+	width: 970px;
+	margin: 0 auto;
+}
+
+h2 {
+	color: #98bf21;
+	margin-top: 0px;
+	height: 10px;
+}
+
+#tab {
+	margin: 10px 0 10px 0;
+}
+
+#tab td,#tab th {
+	padding: 15px 10px;
+	font-size: 14px;
+}
+
+#tab .input {
+	height: 15px;
+	width: 220px;
+	margin-right: 10px;
+	border: 0;
+	background: transparent;
+}
+
+#tab3 input {
+	border: 0;
+	background: transparent;
+}
+
+#tab2 td,#tab2 th {
+	padding: 5px 5px 5px 10px;
+	font-size: 14px;
+}
+
+#tab2 {
+	margin-top: 20px;
+}
+
+#tab3 td,#tab3 th {
+	padding: 5px 10px 10px 10px;
+	font-size: 14px;
+}
+
+#tab3 {
+	margin-top: 20px;
+}
+
+#tab3 .cel {
+	margin-left: 50px;
+}
+
+#tab3 .pay {
+	margin-left: 20px;
+}
+
+#tab3 .wangluo {
+	margin-top: 0px;
+	margin-left: 15px;
+}
+
+#tab3 .tiqu {
+	margin-left: 10px;
+	margin-right: 114px;
+}
+
+#tab3 .st {
+	width: 85px;
+}
+
+.tongyong {
+	font-size: 14px;
+	width: 90px;
+	margin-right: 40px;
+}
+
+#year {
+	width: 90px;
+	margin-left: 27px;
+	margin-bottom: 20px;
+	margin-right: 40px;
+	font-size: 14px;
+}
+
+#CoinDiv .span1 {
+	font-size: 14px;
+	margin-right: 25px;
+}
+
+.danxuan {
+	margin-left: 30px;
+	font-size: 14px;
+}
+
+.ticai {
+	margin-left: 27px;
+	margin-bottom: 20px;
+	width: 290px;
+	margin-right: 40px;
+}
+
+.standardShow {
+	width: 430px;
+	float: left;
+	padding-left: 20px;
+}
+
+#list {
+	width: 970px;
+	overflow: auto;
+	padding-top: 20px;
+}
+
+#list #input {
+	width: 90px;
+	text-align: center;
+}
+
+#list #amount {
+	width: 30px;
+	text-align: center;
+}
+
+.tab4 td,.tab4 th {
+	font-size: 14px;
+	border: 1px solid #ccc;
+	text-align: center;
+	height: 25px;
+}
+
+.tab4 th {
+	font-size: 13px;
+	background-color: #aaa;
+	color: #fff;
+}
+
+.tab4 td {
+	background: #f3f3f3;
+}
+
+.tab4 {
+	margin-top: 20px;
+	width: 970px;
+}
+
+.bg {
+	background-color: #f3f3f3;
+}
+
+#tab5 td,#tab5 th {
+	font-size: 14px;
+	border: 1px solid #98bf21;
+	text-align: center;
+}
+
+#tab5 th {
+	background-color: #E0FFCC;
+	height: 29px;
+}
+
+#tab5 {
+	margin-top: 20px;
+	width: 1024px;
+}
+
+.ipc input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 40px;
+}
+
+.ipc2 input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 150px;
+}
+
+.ipc3 input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 60px;
+}
+
+.ipc4 input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 80px;
+}
+
+.opc input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 250px;
+}
+
+.container {
+	width: 970px;
+	height: 85px;
+}
+
+.defaultClass {
+	display: none;
+}
+
+.editClass {
+	display: block;
+}
+
+.editClass input {
+	width: 60px;
+}
+
+.defaultClass input {
+	width: 90px;
+}
+
+#transport {
+	border: 1px;
+	border-style: solid;
+	border-color: #98bf21;
+	height: 300px;
+	width: 1024px;
+	margin: 20px auto;
+}
+
+#tab6 td,#tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 14px;
+	border: 1px solid #98bf21;
+	text-align: center;
+}
+
+#tab6 {
+	margin-left: 20px;
+}
+
+#tab7 td,#tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 14px;
+	border: 1px solid #98bf21;
+}
+
+#tab7 {
+	margin-left: 20px;
+}
+
+.total {
+	/* 	margin-top: 20px; */
+	/* 	margin-right: 30px; */
+	text-align: right;
+}
+
+#detail_calculateTab {
+	margin: 10px 0;
+}
+
+#detail_calculateTab tr td {
+	padding: 10px 20px;
+}
+
+#detail_calculateTab tr td input[type=text] {
+	background: #F3F3F3;
+	height: 15px;
+	font-size: 14px;
+	font-family: "SimSun";
+}
+
+.calTag {
+	padding-right: 5px;
+	color: #999;
+}
+
+.tipsclose {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.feeDiv {
+	margin-top: 20px;
+}
+
+.feeDiv img {
+	width: 450px;
+	height: 220px;
+}
+
+.graytab td,.graytab th {
+	font-size: 12px;
+	border: 1px solid #CCC;
+	background-color: #f3f3f3;
+	text-align: center;
+	height: 35px;
+}
+
+.graytab th {
+	font-size: 12px;
+	background-color: #AAAAAA;
+	color: #fff;
+}
+
+.graytab {
+	margin-top: 10px;
+	width: 970px;
+}

@@ -1,0 +1,243 @@
+* {
+	margin: 0;
+	font-family: "Hiragino Sans GB";
+	font-size: 14px;
+}
+
+td.saveRow {
+	text-align: center;
+}
+
+textarea {
+	width: 360px;
+	height: 100px;
+}
+
+input[type=text],input[type=submit],input[type=reset],textarea,button,select
+	{
+	font-family: "Hiragino Sans GB";
+}
+
+.select {
+	width: 100px;
+	height: 25px;
+	font-family: 'Hiragino Sans GB';
+}
+
+#max {
+	width: 600px;
+	height: 500px;
+	margin: 10px;
+}
+
+.personinfo_td_al {
+	text-align: right;
+	position: relative;
+}
+
+#info_people {
+	border-bottom: 3px solid #BA5A3B;
+}
+
+#number {
+	color: red;
+}
+
+.rectangle {
+	height: 12px;
+	line-height: 12px;
+	background: #CCC;
+	float: left;
+	color: #FFF;
+	font-size: 12px;
+}
+
+.triangle-left {
+	margin-top: 6px;
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-right: 10px solid #CCC;
+	border-bottom: 5px solid transparent;
+	float: left
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid #CCC;
+	margin-left: 7px;
+}
+
+#savebtn {
+	position: relative;
+}
+
+input[type=text],select,textarea {
+	background: #f3f3f3;
+}
+
+.sdgshang {
+	background-color: #FFF;
+	border-bottom: 2px solid #ccc;
+	height: 27px;
+}
+
+.baoshang {
+	background-color: #FFF;
+	height: 50px;
+}
+
+.sdgshang .span {
+	height: 26px;
+	color: #000;
+	margin-right: 20px;
+	float: left;
+	width: 75px;
+	text-align: center;
+}
+
+body,div,td,table,th,tr,span,a,button,input[type=text],input[type=button],input[type=submit],select
+	{
+	font-family: "Hiragino Sans GB";
+}
+
+#reqlogisticsDiv {
+	width: 1200px;
+	padding: 0;
+	margin-left: -100px;
+}
+
+#reqlogisticstab {
+	width: 1200px;
+}
+
+#reqlogisticstab th {
+	font-size: 14px;
+	border: 1px solid #98bf21;
+	text-align: center;
+	height: 30px;
+	background-color: #E0FFCC;
+}
+
+#reqlogisticstab tr td {
+	height: 30px;
+	border: 1px solid #98bf21;
+}
+
+#reqlogisticstab td {
+	font-size: 13px;
+	text-align: center;
+}
+
+#d4311,#d4312 {
+	height: 13px;
+}
+
+#r2 {
+	padding-top: 10px;
+}
+
+#conTab tr td {
+	padding: 10px 2px;
+}
+
+#requestMsg {
+	display: block;
+	display: none;
+	position: fixed;
+	width: 210px;
+	background: #fff;
+	padding: 15px 10px;
+	border: 1px solid #5fafff;
+	border-radius: 10px;
+	color: #333;
+	font-size: 14px;
+	z-index: 100;
+	box-shadow: 4px 4px rgba(0, 0, 0, .5);
+	z-index: 100;
+}
+
+.requestMsgTitle {
+	font-weight: bold;
+}
+
+.requestcodeitem {
+	text-decoration: underline;
+}
+
+#reqlogisticstab tr td.tdentitytype {
+	font-size: 2px;
+}
+
+table.singleDataTable textarea {
+	width: 100%;
+}
+
+div#viewData table {
+	font-size: 1em;
+	width: 100%;
+	height: 700px;
+	overflow: auto;
+}
+
+div#viewData table thead {
+	color: white;
+	background-color: gray;
+}
+
+div#viewData table tbody tr:hover {
+	background: #A92F08;
+}
+
+div#viewData table tbody tr {
+	font-size: 0.8em;
+	color: black;
+	background-color: #f3f3f3;
+}
+
+div#viewData th,div#viewData td {
+	height: 30px;
+	padding: 1px;
+	border: 1px solid #ccc;
+	text-align: center;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	border-collapse: collapse;
+	overflow: hidden;
+}
+
+div#pageChoose {
+	align: center;
+}
+
+input#toMax {
+	position: absolute;
+	right: 0px;
+}
+
+div#searchDiv {
+	margin: 30px 0px;
+}
+
+div#searchDiv ul {
+	list-style-type: none;
+	clear: both;
+	padding: 10px;
+}
+
+div#searchDiv li {
+	float: left;
+}
+
+div#searchDiv li.label {
+	text-align: right;
+	width: 14%;
+	margin-right: 1%;
+}
+
+div#searchDiv li.input {
+	width: 35%;
+}

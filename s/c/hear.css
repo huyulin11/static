@@ -1,0 +1,334 @@
+#body {
+	padding-bottom: 50px;
+}
+
+#basic {
+	border: 1px;
+	border-style: solid;
+	border-color: #98bf21;
+	height: 155px;
+	width: 1024px;
+	margin: 0 auto;
+}
+
+#ser {
+	border: 1px;
+	border-style: solid;
+	border-color: #98bf21;
+	height: 145px;
+	width: 1024px;
+	margin: 5px auto;
+}
+
+#CoinSearchTable {
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#CoinSearchTable td {
+	font-size: 12px;
+	font-family: '微软雅黑';
+	padding: 3px;
+}
+
+#CoinSearchTable th {
+	width: 80px;
+	text-align: right;
+	font-size: 12px;
+	font-family: '微软雅黑';
+	padding: 3px;
+}
+
+#confirmBtn {
+	width: 50px;
+	height: 24px;
+	value: url(/s/j/review/images/btn_find.jpg) no-repeat;
+}
+
+#btn_reset {
+	width: 50px;
+	height: 24px;
+	background: url(/s/j/review/images/btn_reset.jpg) no-repeat;
+}
+
+#btn_determine {
+	width: 50px;
+	height: 24px;
+	margin-right: 25px;
+	background: url(/s/j/review/images/btn_determine.jpg)
+		no-repeat;
+}
+
+#btn_cancel {
+	width: 50px;
+	height: 24px;
+	margin-right: 80px;
+	background: url(/s/j/review/images/btn_cancel.jpg) no-repeat;
+}
+#pay {
+	border: 1px;
+	border-style: solid;
+	border-color: #98bf21;
+	height: auto;
+	width: 1024px;
+	margin: 0 auto;
+}
+
+h2 {
+	color: #98bf21;
+	margin-top: 0px;
+	height: 10px;
+}
+
+#tab td,#tab th {
+	padding: 5px 10px 10px 10px;
+	font-size: 14px;
+}
+
+.disabled {disabled =true;
+	
+}
+
+#tab .input {
+	height: 15px;
+	width: 200px;
+	margin-right: 10px;
+	border: 0;
+	background: transparent;
+}
+
+#tab2 td,#tab2 th {
+	padding: 5px 5px 5px 10px;
+	font-size: 14px;
+}
+
+#tab2 {
+	margin-top: 20px;
+}
+
+#tab3 td,#tab3 th {
+	padding: 5px 10px 10px 10px;
+	font-size: 14px;
+}
+
+#tab3 {
+	margin-top: 20px;
+}
+
+#tab3 .cel {
+	margin-left: 50px;
+}
+
+#tab3 .pay {
+	margin-left: 20px;
+}
+
+#tab3 .wangluo {
+	margin-top: 0px;
+	margin-left: 15px;
+}
+
+#tab3 .tiqu {
+	margin-left: 10px;
+	margin-right: 114px;
+}
+
+#tab3 .st {
+	width: 85px;
+}
+
+.tongyong {
+	width: 94px;
+	margin-right: 38px;
+	margin-top: -3px;
+}
+
+#CoinDiv .span1 {
+	font-size: 14px;
+	margin-right: 25px;
+}
+
+.danxuan {
+	margin-left: 30px;
+	font-size: 14px;
+}
+
+.ticai {
+	width: 290px;
+}
+
+#list {
+	width: 1024px;
+	overflow: auto;
+	margin: 10px auto;
+}
+
+#list #input {
+	width: 90px;
+	text-align: center;
+}
+
+#tab4 td,#tab4 th {
+	font-size: 12px;
+	border: 1px solid #ccc;
+	text-align: center;
+	height: 25px;
+}
+
+#tab4 th {
+	background-color: #aaa;
+	color: #fff;
+}
+
+#tab4 {
+	margin-top: 20px;
+	width: 1024px;
+}
+
+.bg {
+	background-color: #f3f3f3;
+}
+
+#tab5 td,#tab5 th {
+	font-size: 14px;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+#tab5 th {
+	background-color: #AAA;
+	height: 29px;
+	color: #fff;
+}
+
+#tab5 {
+	margin-top: 20px;
+	width: 100%;
+}
+
+.ipc input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 60px;
+	color: black;
+}
+
+.ipc2 {
+	width: 210px;
+}
+
+.ipc2 input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 150px;
+}
+
+.ipc3 {
+	width: 100px;
+}
+
+.ipc3 input {
+	border: 0;
+	background: transparent;
+	text-align: right;
+	width: 100px;
+}
+
+.opc input {
+	border: 0;
+	background: transparent;
+	text-align: center;
+	width: 250px;
+}
+
+.defaultClass {
+	display: none;
+}
+
+.editClass {
+	display: block;
+}
+
+.editClass input {
+	width: 30px;
+}
+
+.defaultClass input {
+	width: 90px;
+}
+
+#transport {
+	border: 1px;
+	border-style: solid;
+	border-color: #98bf21;
+	height: 300px;
+	width: 1024px;
+	margin: 20px auto;
+}
+
+#tab6 td,#tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 14px;
+	border: 1px solid #98bf21;
+	text-align: center;
+}
+
+#tab6 {
+	margin-left: 20px;
+}
+
+#tab7 td,#tab th {
+	padding: 5px 7px 7px 10px;
+	font-size: 14px;
+	border: 1px solid #98bf21;
+}
+
+#tab7 {
+	margin-left: 20px;
+}
+
+.total {
+	margin-right: 30px;
+	text-align: right;
+}
+
+#totalevaluate,#totaltransportation {
+	text-align: right;
+}
+
+#calculateTab {
+	margin-top: 10px;
+	width: 100%;
+}
+
+#calculateTab tr td {
+	padding: 5px 5px;
+	font-size: 14px;
+	text-align: center;
+}
+
+#calculateTab td>span {
+	padding-right: 5px;
+	color: #999;
+}
+
+#calculateTab tr td input[type=text] {
+	background: #F3F3F3;
+	height: 15px;
+	font-size: 12px;
+	color: #999999;
+	font-family: "微软雅黑";
+}
+
+#list #evaluate {
+	width: 80px;
+	text-align: right;
+	background: #fff;
+}
+
+#list #amount {
+	width: 30px;
+	text-align: right;
+}

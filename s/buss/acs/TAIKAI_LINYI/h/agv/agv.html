@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js" lang="zh" style="background-color: azure;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>AGV控制台</title>
+    <link rel="stylesheet" href="/s/buss/acs/g/c/agvmgr.css">
+</head>
+
+<body>
+    <div id="rootContainer">
+        <div id="oneAgvDetail"></div>
+    </div>
+</body>
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/layer/v3.1.3/layer.js"></script>
+
+<script src="/s/buss/g/j/g.f.js"></script>
+<script src="/s/j/common.js"></script>
+
+<script src="/s/buss/acs/g/j/agv.g.js"></script>
+
+<script>
+    quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#oneAgvDetail");
+</script>
+
+<script type="module">
+    import "/s/buss/g/j/jquery/jquery.autofill.js";
+    import "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
+    import "/s/buss/acs/FANCY/j/agv/agv.op.js";
+</script>
+
+</html>

@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
+.suggest-container{border:1px solid #C1C1C1;visibility:hidden; z-index:10;background:#FFF; height:320px; overflow:auto} 
+.suggest-item{padding:3px 2px;} 
+.suggest-active {background:#33CCFF;color:white;padding:3px 2px;}

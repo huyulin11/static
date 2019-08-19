@@ -1,0 +1,18 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "΢���ź�";
+	font-size: 14px;
+}
+input[type=text],input[type=password],select,textarea{background:#f3f3f3;}
+input[type=text],input[type=submit],input[type=reset],textarea,button {
+	font-family: "微软雅黑";
+}
+#nave{background-color: #FFF;width: 850px; margin-top: 30px;margin-bottom: 30px;}
+#mobiletable{margin: 0px; width: 810px; z-index: 1;margin-left: 20px; height: 600px;}
+#mobiletable .sdgshang{background-color: #FFF; border-bottom: 2px solid #ccc; height: 27px; padding-top: 7px;}
+#mobiletable .baoshang{background-color: #FFF;  height: 50px;}
+#mobiletable .sdgshang .span{ height: 26px; color: #000;margin-right: 20px;float:left; width: 75px; text-align:center; }
+#mobiletable #megss{ height: 30px; background-color: #EBEBEB;}
+#mobiletable .shousuo{background-color: #FFF;height: 46px;padding-top: 18px;}
+#mobiletable .shousuo span{color: #000;}

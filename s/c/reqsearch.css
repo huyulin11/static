@@ -1,0 +1,88 @@
+body,div,td,table,th,tr,span,a,button,input[type=text],input[type=button],input[type=submit],select
+	{
+	font-family: "微软雅黑";
+}
+
+#reqlogisticsDiv {
+	width: 1200px;
+	padding: 0;
+	margin-left: -100px;
+}
+
+#reqlogisticstab {
+	width: 1200px;
+}
+
+#reqlogisticstab th {
+	font-size: 14px;
+	border: 1px solid #98bf21;
+	text-align: center;
+	height: 30px;
+	background-color: #E0FFCC;
+}
+
+#reqlogisticstab tr td {
+	height: 30px;
+	border: 1px solid #98bf21;
+}
+
+#reqlogisticstab td {
+	font-size: 13px;
+	text-align: center;
+}
+
+#d4311,#d4312 {
+	height: 13px;
+}
+
+#r2 {
+	padding-top: 10px;
+}
+
+#conTab tr td {
+	padding: 10px 2px;
+}
+
+#requestMsg {
+	display: block;
+	display: none;
+	position: fixed;
+	width: 210px;
+	background: #fff;
+	padding: 15px 10px;
+	border: 1px solid #5fafff;
+	border-radius: 10px;
+	color: #333;
+	font-size: 14px;
+	z-index: 100;
+	box-shadow: 4px 4px rgba(0, 0, 0, .5);
+	z-index: 100;
+}
+
+.requestMsgTitle {
+	font-weight: bold;
+}
+
+.requestcodeitem {
+	text-decoration: underline;
+}
+
+#reqlogisticstab tr td.tdentitytype {
+	font-size: 2px;
+}
+
+.inputValue {
+	width: 132px;
+}
+
+.Wdate {
+	height: 13px;
+}
+
+#reqserch {
+	background-color: rgb(242, 242, 242);
+}
+
+#hideQueryDiv {
+	float: right;
+}

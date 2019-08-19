@@ -1,0 +1,81 @@
+<html class=" js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad" style="">
+
+<head>
+    <link rel="stylesheet" href="/s/notebook/notebook_files/font.css">
+    <link rel="stylesheet" href="/s/notebook/notebook_files/app.v1.css">
+    <link rel="stylesheet" href="/s/buss/acs/g/c/agvmgr.css">
+    <link rel="stylesheet" href="/s/c/calculatedfun.css">
+
+    <link rel="stylesheet" href="/s/j/validform/style.css">
+    <!-- base start 重要部分不可删改-->
+    <link href="/s/i/ico/calculatedfun.ico" type="image/x-icon" rel="icon">
+    <link href="/s/i/ico/calculatedfun.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/s/c/b/forms.css">
+    <link rel="stylesheet" href="/s/c/b/base.css">
+    <link rel="stylesheet" href="/s/c/b/application.css">
+    <link rel="stylesheet" href="/s/c/b/custom.css">
+</head>
+
+<body>
+    <div id="container" v-cloak>
+        <div>
+            <div><span>类型：</span>{{ dictype.remark }}</div>
+            <div><span>编码：</span>{{ dictype.dictype }}</div>
+        </div>
+        <form id="form" name="form" class="form-horizontal" method="post" action="/sys/dic/data/addEntity.shtml">
+            <section class="panel panel-default">
+                <div class="block-tips">
+                    <!-- <div v-for="(dicdata,index) in dicdatas">
+                        <div><span>序号：{{ index }}</span></div>
+                        <table>
+                            <div v-for="items in dicdata">
+                                <div v-for="item in items">
+                                    <span>{{ item.name }}：</span>
+                                    <input type="text" id="item.key+index" class="form-control" :placeholder="item.name"
+                                        :name="item.key+index" :value="item.value" autocomplete="off">
+                                </div>
+                            </div>
+                        </table>
+                        <div class='item-op'>
+                            <div title="删除" class="delOne op"></div>
+                        </div>
+                    </div> -->
+                    <div id="rows"></div>
+                </div>
+            </section>
+        </form>
+    </div>
+    <footer class="panel-footer text-right bg-light lter">
+        <div title="增加字段" class="addOne op "></div>
+        <button id="sub" class="btn btn-success btn-s-xs">提交</button>
+    </footer>
+</body>
+
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/jquery/jquery.form.js"></script>
+
+<script src="/s/j/layer/v3.1.3/layer.js"></script>
+<script src="/s/j/lyGrid.js"></script>
+<script src="/s/j/common.js"></script>
+<script src="/s/j/jquery.toJSON.js"></script>
+<script src="/s/j/globalFunc.js"></script>
+<script src="/s/j/validform/Validform_v5.3.2_ncr_min.js"></script>
+<script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>
+<script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>
+
+<script type="module">
+    import "/s/buss/sys/dic/j/dic.data.render.js";
+</script>
+
+<script>
+    layer.config({
+        extend: ['default/layer.css'], //加载新皮肤
+        fix: false,// 用于设定层是否不随滚动条而滚动，固定在可视区域。
+        skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
+    });
+</script>
+
+<script type="module">
+</script>
+
+</html>

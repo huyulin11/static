@@ -1,0 +1,28 @@
+
+#massage_box
+{
+	width: 280px;
+	height: 300px;
+	background: #efefef;
+	padding: 0px 7px;
+	padding-bottom:10px;
+	padding-top:1px;
+}
+
+#massage_box h2
+{
+	clear: left;
+	font-size: 100%;
+	color: #fff;
+	background: #AAAAAA;
+	margin-top:5px;
+	margin-bottom: 10px;
+	padding:4px 8px 5px 100px;
+}
+p
+{
+	font-size: 93%;
+	margin: 0 0 1em 0;
+}
+
+

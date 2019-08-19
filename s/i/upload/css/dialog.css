@@ -1,0 +1,34 @@
+.dialog-overlay {
+	BACKGROUND: gray; FILTER: alpha(opacity:50); opacity: 0.5
+}
+.dialog {
+	BACKGROUND:#FFF; FILTER: alpha(opacity:70); opacity: 0.9; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px
+}
+.dialog .bar {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; MIN-HEIGHT: 15px; BACKGROUND: #000; PADDING-BOTTOM: 6px; CURSOR: move; COLOR: #fff; PADDING-TOP: 6px
+}
+.dialog .bar .title {
+	FLOAT: left; MARGIN-left: 10px;font-size:14px; font-weight:bold;
+}
+
+.dialog .bar .close_div {
+	FLOAT: right; MARGIN-RIGHT: 10px; CURSOR: pointer; TEXT-DECORATION: underline;font-size:14px; font-weight:bold;
+}
+.dialog .bar .closes_div {
+	FLOAT: right; MARGIN-RIGHT: 10px; CURSOR: pointer; TEXT-DECORATION: underline;font-size:14px; font-weight:bold;
+}
+.dialog .content {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; BACKGROUND: #fff; PADDING-BOTTOM: 10px; PADDING-TOP: 10px;height:450px;width:1000px;
+}
+.btn_close{
+	width:50px; margin:20px 450px;; margin-bottom:20px;
+}	
+.btn_closes{
+	width:50px; margin:20px 450px;; margin-bottom:20px;
+}
+.dialog IFRAME {
+	WIDTH: 100%; HEIGHT: 100%
+}
+.content IMG {
+	MAX-WIDTH: 700px; OVERFLOW: auto; MAX-HEIGHT: 500px
+}

@@ -1,0 +1,37 @@
+<html lang="en" class="">
+
+<head>
+    <script src="/s/j/vue/vue.min.js"></script>
+</head>
+
+<body>
+    <table id="add-table">
+        <tr>
+            <td>发生日期</td>
+            <td> {{ item.occurdate }}</td>
+        </tr>
+        <tr>
+            <td>类别</td>
+            <td> {{ item.species }}</td>
+        </tr>
+        <tr>
+            <td>金额</td>
+            <td> {{ item.amount }}</td>
+        </tr>
+        <tr>
+            <td>说明</td>
+            <td> {{ item.remarks }}</td>
+        </tr>
+        </ul>
+        <script>
+            var example1 = new Vue({
+                el: '#add-table',
+                data: {
+                    item:
+                        { occurdate: '20180320', species: '餐费', amount: '14.55', remarks: '中午叫的外卖，非常难吃' }
+                }
+            })
+        </script>
+</body>
+
+</html>

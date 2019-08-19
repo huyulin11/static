@@ -1,0 +1,44 @@
+#showRequestCode {
+	margin-left: 10px;
+	background: #ECECEC;
+}
+
+#reqCodePrint {
+	background: #66b007;
+	color: white;
+	margin-top: 10px;
+	text-shadow: none;
+}
+
+#coinNoStart {
+	background: #66b007;
+	color: white;
+	margin-top: 10px;
+	text-shadow: none;
+}
+
+#add {
+	background: #66b007;
+	color: white;
+	margin-top: 10px;
+	margin-left: 10px;
+	text-shadow: none;
+}
+
+#checkList {
+	width: 310px;
+	padding: 15px 0 15px 0;
+}
+
+#checkList span {
+	margin-left: 5px;
+}
+
+#checkSendSms {
+	width: 310px;
+	padding: 15px 15px 15px 5px;
+}
+
+#div-billdis table input {
+	border : red 1px solid
+}
