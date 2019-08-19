@@ -1,0 +1,3 @@
+.jqzoom {position: relative;}
+.zoomdiv {border: #e4e4e4 1px solid; display: none; z-index: 100; left: 0px; overflow: hidden; position: absolute; top: 1px;}
+.jqZoomPup {border: #aaa 1px solid; z-index: 10; background: #fede4f no-repeat 50% top; filter: alpha(opacity=50); left: 0px; visibility: hidden;  cursor: move; position: absolute; top: 0px; opacity: 0.5; moz-opacity: 0.5; khtml-opacity: 0.5}

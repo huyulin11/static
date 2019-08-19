@@ -1,0 +1,45 @@
+{
+    "form": {
+        "id": "requestForm",
+        "action": "/helloReact.shtml",
+        "method": "post",
+        "itemlist": [
+            {
+                "id": "input1",
+                "type": "text",
+                "initValue": "15026592502",
+                "text": "手机号码"
+            },
+            {
+                "id": "select1",
+                "type": "select",
+                "initValue": "男",
+                "text": "性别"
+            },
+            {
+                "id": "textarea1",
+                "type": "textarea",
+                "initValue": "这是一大段文字，你需要有很大的耐心才能看完",
+                "text": "文本"
+            },
+            {
+                "id": "checkbox1",
+                "type": "checkbox",
+                "initValue": "true",
+                "text": "选择表示你同意我的意见"
+            },
+            {
+                "id": "radio1",
+                "type": "radio",
+                "initValue": "true",
+                "text": "上门"
+            },
+            {
+                "id": "radio1",
+                "type": "radio",
+                "initValue": "true",
+                "text": "物流"
+            }
+        ]
+    }
+}

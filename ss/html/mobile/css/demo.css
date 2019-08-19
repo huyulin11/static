@@ -1,0 +1,256 @@
+
+/*index页面CSS*/
+.img_gallery
+{   width:100%;
+    position: relative;
+}
+.main_img
+{
+    overflow: hidden;
+    width: 100%;
+}
+.main_img ul li img{
+	width:100%;
+	height:100%;
+}
+.point
+{
+    position: absolute;
+    z-index: 15;
+    width: 60%;
+    left:40%;
+    margin-top:40%;  
+    list-style: none;
+    text-align: center;
+}
+.point a
+{
+    float: left;
+    width: 21px;
+    height: 21px;
+    margin: 0;
+    padding: 0;
+    text-indent: -1000px;
+    background: url('../img/btn_main_img.png') 0 0 no-repeat;
+    display: inline-block;
+    cursor: pointer;
+}
+.point a.on
+{
+    background-position: 0 -21px;
+}
+#btn_prev,
+#btn_next
+{
+    position: absolute;
+    z-index: 11111;
+    top: 50%;
+    display: block;
+    width: 50px;
+    height: 50px;
+    color:#FFF;
+    font-size:36px;
+}
+#btn_prev
+{
+    left: 5%;
+}
+#btn_next
+{
+    left:95%;
+}
+@media screen and (max-width: 500px) {
+#btn_prev,#btn_next{
+display:none;
+}	
+}
+.main{
+	margin-top:55%;
+}
+.classify{
+	 margin-top:20px;
+	 width:100%;
+	 height:30px;
+	 border-bottom:1px solid #999;
+	 }
+.classify span{
+	 float:left;
+	 padding-left:10px;
+	 font-size:15px;
+	 }
+.classify a{
+	 text-decoration:none;
+	 color:#999;
+	 float:right;
+	 padding-right:10px;
+	 font-size:12px;
+	 }
+.show{
+	 width:100%;
+	 min-height:248px; 
+	 }
+.img0,.img2{
+	float:left;
+	margin-left:6%;
+}
+.img1,.img3{
+	float:right;
+	margin-right:6%;
+}
+.show img{
+	 background-color: rgb(238, 238, 238);
+     padding: 10px;
+     width:40%;
+     max-width:120px;
+	 margin-top:20px;
+	 }
+.more{
+	 margin-top:30px;
+	 width:100%;
+	 height:20px;
+	 text-align:center;
+	 margin-bottom:20px;
+	 }
+.more a{
+	 font-size:18px;
+	 color:#CCC;
+	 text-decoration:none;
+	 }
+
+.footer{
+	 width:100%;
+	 height:60px;
+	 text-align:center;
+	 font-size:12px;
+	 background-color:#963;
+	 color:#FFF;
+	 margin-bottom:0px;
+	 padding-top:10px;
+	 line-height:20px;
+	 border-top:1px solid #FFF;
+	 }
+
+.flicker-example{
+	width:100%;
+	height:100px;
+	}
+.flicker-example li{width:100%;
+    height:100px;
+	}
+	
+/*钱币搜索页面CSS*/
+.content-search{
+	background-color:#963;
+}
+.swiper-container{
+	background:black;
+	width:100%;
+	height:340px;
+	}
+.swiper-slide{
+	width:100%;
+	}
+.content-slide{
+	padding:20px;
+	text-align:center; 
+	}
+.content-slide img{
+	width:200px;
+	height:300px;
+	}
+.decoration{
+
+	border-top:#FFF solid 1px;
+	width:100%;
+	height:375px;
+	background:#a87b40;
+	text-align:center;
+	font-size:16px;
+}
+.decoration table{
+	margin:auto;
+	text-align:left;
+	margin-top:15px;
+}
+.decoration table tr{
+	border:2px solid #FFF;
+}
+.decoration table tr td{
+	padding:8px;
+	background-color:#963;
+	color: #ecebe9;
+	border-radius:5px;
+	font-family: "微软雅黑";
+    border: 1px solid #FFF;
+}
+.flypanels-treemenu table{
+	margin:auto;
+	color:#FFF;
+	}
+.btn{display:none;}
+@media screen and (min-width: 900px) {
+.content-slide img{
+	width:300px;
+	height:450px;
+	}
+.swiper-container{
+	height:480px;
+	}
+.tabs{
+	width:100%;
+	height:95px;
+}
+.tabs img{
+	padding:5px 0 0 0;
+	width:70px;
+	height:90px;
+	}
+.tabs a{
+	height:95px;
+	}
+.btn{
+	display:block;
+	margin-top:-20px;}
+a.btnleft {
+	display:block;
+	background: url(../img/right.jpg);
+	left: 18%;
+	overflow: hidden;
+	width: 60px;
+	position: absolute;
+	top: 22%;
+	height: 120px;
+	z-index:999;
+}
+a.btnright {
+	display:block;
+	right: 18%;
+	background: url(../img/left.jpg);
+	overflow: hidden;
+	width: 60px;
+	position: absolute;
+	top: 22%;
+	height: 120px;
+	z-index:999;
+}
+	}
+.pagination {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  bottom:5px;
+  width: 100%;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #999;
+  box-shadow: 0px 1px 2px #555 inset;
+  margin: 0 3px;
+  cursor: pointer;
+}
+.swiper-active-switch {
+  background: #fff;
+}
