@@ -5,6 +5,6 @@
 **/classes/
 *.class
 *.log
-.metadata*.zip
+*.zip
 *.DS_Store
 /s/jsons
