@@ -3,10 +3,10 @@ $("#sub").on("click", function () {
 });
 
 var submitForm = function () {
-    var hasNotNull = false;
+    var hasNull = false;
     $("#form").find("input,select").each(function () {
-        if ($(this).data("notnull") && !$(this).val()) {
-            hasNotNull = true;
+        if ($(this).data("notnull") == '0' && !$(this).val()) {
+            hasNull = true;
             layer.tips('不能为空', this, {
                 tips: [1, '#3595CC'],
                 time: 4000
@@ -15,7 +15,7 @@ var submitForm = function () {
         }
         return true;
     });
-    if (hasNotNull) {
+    if (hasNull) {
         return;
     }
 
