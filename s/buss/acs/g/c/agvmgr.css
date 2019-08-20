@@ -487,3 +487,16 @@ div[id='targets'] button.choosed {
 label[class^="btn btn-default"] {
 	margin-top: -4px;
 }
+
+.delete select,
+.delete input {
+	text-decoration: line-through;
+	color: #d8d2d2;
+}
+
+.delete input::-webkit-input-placeholder,
+.delete input:-moz-placeholder,
+.delete input:-ms-input-placeholder {
+	text-decoration: line-through;
+	color: #d8d2d2;
+}

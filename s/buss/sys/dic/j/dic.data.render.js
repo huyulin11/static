@@ -61,6 +61,7 @@ var vm = new Vue({
                 container: "div#rows",
                 targetClass: "item-group",
                 addBtn: "div.addOne",
+                dellogic: true,
                 serial: 0,
                 max: 20,
                 items: [{

@@ -38,7 +38,7 @@ var checkDel = () => {
 }
 
 var addItem = (data) => {
-    if ($(`div.${_conf.targetClass}`).length >= _conf.max) {
+    if ($(`div.${_conf.targetClass}:not(.delete)`).length >= _conf.max) {
         layer.msg(`最大数量不能多于${_conf.max}个`);
         return;
     }
@@ -67,7 +67,11 @@ export var initRows = (conf, initData) => {
     });
 
     $(_conf.container).on("click", "div.delOne", function () {
-        $(this).parents(`div.${_conf.targetClass}`).remove();
+        if (_conf.dellogic) {
+            $(this).parents(`div.${_conf.targetClass}`).addClass("delete");
+        } else {
+            $(this).parents(`div.${_conf.targetClass}`).remove();
+        }
         checkDel();
     });
 }
