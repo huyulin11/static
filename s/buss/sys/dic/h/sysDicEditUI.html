@@ -19,8 +19,11 @@
 <body>
     <div id="container" v-cloak>
         <div>
-            <div><span>类型：</span>{{ dictype.remark }}</div>
-            <div><span>编码：</span>{{ dictype.dictype }}</div>
+            <div><span>类型：</span>
+                <span>{{ dictype.remark }}</span>
+                <span>编码：</span>
+                <span id="dictype">{{ dictype.dictype }}</span>
+            </div>
         </div>
         <form id="form" name="form" class="form-horizontal" method="post" action="/sys/dic/data/addEntity.shtml">
             <section class="panel panel-default">
@@ -65,6 +68,7 @@
 
 <script type="module">
     import "/s/buss/sys/dic/j/dic.data.render.js";
+    import "/s/buss/sys/dic/j/dic.data.add.js";
 </script>
 
 <script>

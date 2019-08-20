@@ -37,10 +37,6 @@ var vm = new Vue({
 
             let newDatas = [];
             let newData = [{
-                key: "id",
-                name: "ID",
-                notnull: 1
-            }, {
                 key: "dickey",
                 name: "键",
                 notnull: 1
@@ -93,7 +89,8 @@ var vm = new Vue({
                     for (let dicdatainfo of dicdatainfos) {
                         if (dicdatainfo.json) {
                             var json = JSON.parse(dicdatainfo.json);
-                            console.log(json.items);
+                            Object.assign(dicdatainfo, json);
+                            console.log(dicdatainfo);
                         }
                     }
                     initRows(_conf, dicdatainfos);
