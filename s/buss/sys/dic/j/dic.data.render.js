@@ -47,12 +47,14 @@ var vm = new Vue({
             }];
             if (this.dictype.json) {
                 var json = JSON.parse(this.dictype.json);
-                for (let item of json.items) {
-                    newData = newData.concat({
-                        key: item.key,
-                        name: item.name,
-                        notnull: item.notnull
-                    });
+                if (json && json.item) {
+                    for (let item of json.items) {
+                        newData = newData.concat({
+                            key: item.key,
+                            name: item.name,
+                            notnull: item.notnull
+                        });
+                    }
                 }
             }
             this.dicdatas = this.dicdatas.concat({ newData });

@@ -20,12 +20,15 @@ $(function () {
 			}
 		}, {
 			name: "操作",
-			renderData: function (data, rowdata, rowindex, column) {
-				var btns = "<button type='button' class='btn btn-info marR10 detail' data-dictype='"
-					+ rowindex.dictype + "'>明细</button>";
+			renderData: function (rowindex, data, rowdata, column) {
+				if (rowdata.delflag == "1") {
+					return "";
+				}
+				var btns = `<button type='button' class='btn btn-info marR10 detail' 
+					data-dictype='${ rowdata.dictype}'>明细</button>`;
 				btns += "&nbsp;&nbsp;";
-				btns += "<button type='button' class='btn btn-info marR10 mgr' data-dictype='"
-					+ rowindex.dictype + "'>维护</button>";
+				btns += `<button type='button' class='btn btn-info marR10 mgr' 
+					data-dictype='${ rowdata.dictype}'>维护</button>`;
 				return btns;
 			}
 		}],
