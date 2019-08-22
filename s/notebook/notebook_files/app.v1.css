@@ -9488,7 +9488,7 @@ transform
 }
 
 html {
-	background-color: #f9f9f9;
+	/* background-color: #f9f9f9; */
 	overflow-x: hidden;
 }
 
@@ -10154,6 +10154,7 @@ a:hover .caret-white {
 		vertical-align: top;
 		height: 100%;
 		padding: 0;
+		background-color: #e3f9fc;
 		float: none;
 	}
 	.hbox>aside.show,.hbox>aside.hidden-sm,.hbox>section.show,.hbox>section.hidden-sm
