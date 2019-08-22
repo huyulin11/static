@@ -1,4 +1,5 @@
 import { sku } from "/s/buss/acs/g/j/wms.sku.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 
 window.datagrid = lyGrid({
 	pagId: 'paging',
