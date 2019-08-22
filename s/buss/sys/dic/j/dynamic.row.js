@@ -75,6 +75,7 @@ export var initRows = (conf, initData) => {
         let status = target.find("[id^='_status']").data("value");
         if (_conf.dellogic && status != "NEW") {
             target.addClass("delete");
+            target.find("[id^='_status']").val("DELETE");
         } else {
             target.remove();
         }
