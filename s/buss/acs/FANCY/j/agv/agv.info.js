@@ -191,7 +191,7 @@ var init = function () {
 				{ id: 5, name: "14号" }, { id: 6, name: "15号" }, { id: 7, name: "16号" }];
 			}
 		} else if (agvbusstype == 'TON_2') {
-			targets = [60, 61, 62, 65];
+			targets = [62, 61, 60, 65];
 		}
 		var buttons = getButtonsHtml(targets);
 		var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
