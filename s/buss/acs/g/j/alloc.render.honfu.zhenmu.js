@@ -58,7 +58,19 @@ var dealData = function (data) {
     return data;
 }
 
+let flag = false;
+
 export var render = function (data) {
+    if (flag) return;
+    try {
+        flag = true;
+        toRender(data);
+    } finally {
+        flag = false;
+    }
+}
+
+var toRender = function (data) {
     if (!data || data.length == 0) return;
     var filterData = dealData(data);
     doRender(filterData);
