@@ -23,6 +23,10 @@ var getItem = (data) => {
         }
         ss += `<div class="col">${itemDesc}</div>`;
     }
+    let _status = (data) ? "UPDATE" : "NEW";
+    ss += `<div class="col" style="display:none;">
+    <input type="text" id="_status${serial}" name="_status[${serial}]" 
+    value="${_status}" data-value="${_status}" autocomplete="off"></div>`;
     return `
     <div class="${_conf.targetClass} form-group" id="${_conf.targetClass}-${serial}">
     ${ss}<div title="删除" class="delOne op item-op"></div>
@@ -67,10 +71,12 @@ export var initRows = (conf, initData) => {
     });
 
     $(_conf.container).on("click", "div.delOne", function () {
-        if (_conf.dellogic) {
-            $(this).parents(`div.${_conf.targetClass}`).addClass("delete");
+        let target = $(this).parents(`div.${_conf.targetClass}`);
+        let status = target.find("[id^='_status']").data("value");
+        if (_conf.dellogic && status != "NEW") {
+            target.addClass("delete");
         } else {
-            $(this).parents(`div.${_conf.targetClass}`).remove();
+            target.remove();
         }
         checkDel();
     });
