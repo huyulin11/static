@@ -7,13 +7,13 @@ var login = function () {
         dataType: "json",
         timeout: 2000,
         error: function (data) {
-            alert("连接错误！");
+            layer.msg("连接错误！");
         },
         success: function (data) {
             if (data == "SUCCESS") {
                 window.location.href = "/manager.shtml";
             } else {
-                alert(data);
+                layer.msg(data);
                 $("#username").focus();
             }
         }
