@@ -110,4 +110,5 @@ class gv {
 	};
 }
 
+window.gv = gv;
 export { gv };

@@ -10650,10 +10650,12 @@ nav li.current span{
 	}
 	.navbar-fixed-top-xs+* {
 		padding-top: 50px;
+		background-color: #e3f9fc;
 	}
 	html,body {
 		min-height: 100%;
 		overflow-x: hidden;
+		background-color: #e3f9fc;
 	}
 	.open,.open body {
 		height: 100%;
