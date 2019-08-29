@@ -97,15 +97,21 @@
 
             var dealdata = function (datas) {
                 var color = 0;
-                if (!datas || !datas.records) {
+                var targets = null;
+                if (!datas) {
                     return;
                 }
-                console.log(datas.records.length);
-                if (datas.records.length == 0) {
+                if (!datas.records) {
+                    targets = datas;
+                } else {
+                    targets = datas.records;
+                }
+                console.log(targets.length);
+                if (targets.length == 0) {
                     $(_dataarea).html("<div>未找到匹配关键字数据……</div>");
                 }
-                for (var x in datas.records) {
-                    var tpData = datas.records[x];
+                for (var x in targets) {
+                    var tpData = targets[x];
                     if (typeof tpData == "function") { continue; }
                     var showcolList = showcol.split(",");
                     var showInfo = "";

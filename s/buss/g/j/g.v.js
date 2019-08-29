@@ -1,5 +1,5 @@
 class gv {
-	constructor() {
+	static _init() {
 		$.ajax({
 			url: '/bd/info.shtml',
 			async: true,
@@ -110,5 +110,6 @@ class gv {
 	};
 }
 
+gv._init();
 window.gv = gv;
 export { gv };

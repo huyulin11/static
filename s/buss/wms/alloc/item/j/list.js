@@ -27,15 +27,20 @@ $(function () {
 					+ "<a class='editSite'><img src='/s/i/edit.png'/></a>" + "</div>";
 			}
 		}, {
-			colkey: "armactname",
-			name: "对应PLC动作",
+			colkey: "json",
+			name: "仓库",
 			renderData: function (rowindex, data, rowdata, column) {
 				if (rowdata.delflag == "1") {
 					return data;
 				}
-				return "<div class='changable'>" + "<span>" + data
-					+ "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a class='editArmact'><img src='/s/i/edit.png'/></a>" + "</div>";
+				var whId = "";
+				if (data) {
+					var json = JSON.parse(data);
+					whId = json.whId;
+				}
+				whId = (whId ? gv.get("WAREHOUSE", whId) : "");
+				return "<div class='changable'>" + "<span>" + whId + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a class='editWh'><img src='/s/i/edit.png'/></a>" + "</div>";
 			}
 		}, {
 			colkey: "status",
