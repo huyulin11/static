@@ -49,9 +49,9 @@ $(function () {
 				var btns = "<button type='button' class='btn btn-info marR10 detail' data-paperid='"
 					+ rowindex.paperid + "'>明细</button>";
 				if (rowdata.delflag != 1) {
-					if (rowindex.status == 1) {
+					if (rowdata.status == 1) {
 						btns = "<button type='button' class='btn btn-info marR10 execute' data-id='"
-							+ rowindex.id + "'>下达到AGV</button>" + "&nbsp;&nbsp;" + btns;
+							+ rowdata.id + "'>下达到AGV</button>" + "&nbsp;&nbsp;" + btns;
 					}
 				}
 				return btns;
