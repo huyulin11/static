@@ -4972,7 +4972,7 @@ a.thumbnail:hover,a.thumbnail:focus,a.thumbnail.active {
 
 .alert-warning {
 	color: #8a6d3b;
-	border-color: #faebcc;
+	/* border-color: #faebcc; */
 }
 
 .alert-warning hr {
