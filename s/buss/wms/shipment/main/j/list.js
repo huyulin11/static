@@ -45,7 +45,7 @@ $(function () {
 			}
 		}, {
 			name: "操作",
-			renderData: function (data, rowdata, rowindex, column) {
+			renderData: function (rowindex, data, rowdata, column) {
 				var btns = "<button type='button' class='btn btn-info marR10 detail' data-paperid='"
 					+ rowindex.paperid + "'>明细</button>";
 				if (rowdata.delflag != 1) {
