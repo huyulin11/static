@@ -27,19 +27,23 @@ if (localStorage.projectKey == 'CSY_DAJ') {
         serial: 0,
         max: 20,
         items: [{
-            key: "key",
-            name: "键",
+            key: "allocItem",
+            name: "货位名称",
             notnull: true,
+            type: "associating-input",
+            searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
+            containerofinput: "#panelBody",
+            showcol: 'text,getStatus(status)',
         }, {
-            key: "name",
-            name: "名称",
+            key: "itemcount",
+            name: "数量",
             notnull: true,
+            default: 1,
         }, {
-            key: "notnull",
-            name: "不能为空",
-            type: "select",
-            dic: "TRUE_OR_FALSE",
+            key: "item",
+            name: "货物种类",
             notnull: true,
+            default: 1,
         },]
     }
 }

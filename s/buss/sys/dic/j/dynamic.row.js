@@ -7,6 +7,7 @@ var getItem = (data) => {
     let serial = _conf.serial++;
     for (let item of _conf.items) {
         var itemDesc = "";
+        var value = (data && data[item.key]) ? data[item.key] : (item.default ? item.default : "");
         if ("select" == item.type) {
             let dics = gv.getT(item.dic);
             itemDesc += `<option value="">----选择【${item.name}】----</option>`;
@@ -18,14 +19,14 @@ var getItem = (data) => {
         } else if ("associating-input" == item.type) {
             itemDesc = `
             <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
-                class="form-control associating-input" value="${(data && data[item.key]) ? data[item.key] : ""}"
+                class="form-control associating-input" value="${value}"
                 data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
                 data-showcol='${item.showcol}' placeholder="输入:${item.name}" 
                 data-notnull='${item.notnull}' autocomplete="off">`;
         } else {
             itemDesc = `
             <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
-                class="form-control" value="${(data && data[item.key]) ? data[item.key] : ""}"
+                class="form-control" value="${value}"
                 placeholder="输入:${item.name}" data-notnull='${item.notnull}' autocomplete="off">`;
         }
         ss += `<div class="col">${itemDesc}</div>`;
