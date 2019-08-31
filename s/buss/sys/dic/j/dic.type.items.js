@@ -17,9 +17,9 @@ var _conf = {
         notnull: true,
     }, {
         key: "notnull",
-        name: "允许为空",
+        name: "不能为空",
         type: "select",
-        dic: "BOOLEAN",
+        dic: "TRUE_OR_FALSE",
         notnull: true,
     },]
 }

@@ -32,6 +32,5 @@ var demo = $("#form").Validform({
                 offset: 'auto'
             });
         }
-        ;
     }
 });

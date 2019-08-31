@@ -39,11 +39,11 @@ var vm = new Vue({
             let newData = [{
                 key: "dickey",
                 name: "键",
-                notnull: 1
+                notnull: true
             }, {
                 key: "dicvalue",
                 name: "值",
-                notnull: 1
+                notnull: true
             }];
             if (this.dictype.json) {
                 var json = JSON.parse(this.dictype.json);
@@ -76,9 +76,9 @@ var vm = new Vue({
                     notnull: true,
                 }, {
                     key: "notnull",
-                    name: "允许为空",
+                    name: "不能为空",
                     type: "select",
-                    dic: "BOOLEAN",
+                    dic: "TRUE_OR_FALSE",
                     notnull: true,
                 },]
             }

@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="/s/notebook/notebook_files/font.css">
     <link rel="stylesheet" href="/s/notebook/notebook_files/app.v1.css">
+    <link rel="stylesheet" href="/s/buss/acs/g/c/agvmgr.css">
     <link rel="stylesheet" href="/s/c/calculatedfun.css">
 
     <link rel="stylesheet" href="/s/j/validform/style.css">
@@ -13,36 +14,6 @@
     <link rel="stylesheet" href="/s/c/b/base.css">
     <link rel="stylesheet" href="/s/c/b/application.css">
     <link rel="stylesheet" href="/s/c/b/custom.css">
-    <style>
-        .col-sm-1 {
-            width: 10%;
-            float: left;
-            text-align: right;
-        }
-
-        .col-sm-3 {
-            width: 25%;
-            float: left;
-            text-align: right;
-        }
-
-        .col-sm-9 {
-            width: 90%;
-            float: left;
-        }
-
-        label[class^="btn btn-default"] {
-            margin-top: -4px;
-        }
-
-        a {
-            cursor: pointer;
-        }
-
-        a.op {
-            float: left;
-        }
-    </style>
 </head>
 
 <body>
@@ -53,49 +24,34 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <select class="form-control jsSelect" data-patten="ACS_CACHE_CABLE" name="formMap.targetPlace"
-                            datatype="*" errormsg="目标位置不能为空！" autocomplete="off"></select>
+                            datatype="*" errormsg="目标位置不能为空！" autocomplete="off" data-notnull="true"></select>
                     </div>
                 </div>
-                <div class="item-group form-group" id="itemBody">
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control associating-input" placeholder="输入货位名称"
-                            name="formMap.allocItem[0]" datatype="*" errormsg="货位不能为空！" autocomplete="off"
-                            data-nulltips="输入关键字查找货位……"
-                            data-searchurl='/alloc/item/findFirstPage.shtml?allocItemFormMap.text='
-                            data-containerofinput="#panelBody" data-showcol='text,getStatus(status)' id="input0">
-                    </div>
-                    <a title="删除" class="delOne op">
-                        <img src="/s/i/del.png" />
-                    </a>
-                </div>
+                <div id="rows"></div>
             </div>
         </section>
-        <footer class="panel-footer text-right bg-light lter">
-            <a title="增加货位" class="addOne op">
-                <img src="/s/i/addplus.png" />
-            </a>
-            <button type="submit" id="sub" class="btn btn-success btn-s-xs">提交</button>
-        </footer>
     </form>
+    <footer class="panel-footer text-right bg-light lter">
+        <div title="增加字段" class="addOne op"></div>
+        <button id="sub" class="btn btn-success btn-s-xs">提交</button>
+    </footer>
 </body>
 
 <script src="/s/j/jquery-1.12.2.min.js"></script>
-<script src="/s/j/jquery/jquery-validation/jquery.validate.min.js"></script>
-<script src="/s/j/jquery/jquery-validation/messages_cn.js"></script>
 <script src="/s/j/jquery/jquery.form.js"></script>
-
-<script src="/s/notebook/notebook_files/app.v1.js"></script>
-<script src="/s/notebook/notebook_files/app.plugin.js"></script>
-
 <script src="/s/j/layer/v3.1.3/layer.js"></script>
+
 <script src="/s/j/lyGrid.js"></script>
 <script src="/s/j/common.js"></script>
 <script src="/s/j/jquery.toJSON.js"></script>
 <script src="/s/j/globalFunc.js"></script>
-<script src="/s/j/validform/Validform_v5.3.2_ncr_min.js"></script>
-<script src="/s/buss/wms/receipt/detail/j/add.js"></script>
 <script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>
 <script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>
+
+<script type="module">
+    import "/s/buss/wms/base/wms.base.items.js";
+    import "/s/buss/wms/base/wms.base.add.js";
+</script>
 
 <script>
     layer.config({

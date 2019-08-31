@@ -15,6 +15,13 @@ var getItem = (data) => {
             }
             itemDesc = `<select id="${item.key}${serial}" name="${item.key}[${serial}]"
             data-notnull='${item.notnull}'>${itemDesc}</select>`;
+        } else if ("associating-input" == item.type) {
+            itemDesc = `
+            <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
+                class="form-control associating-input" value="${(data && data[item.key]) ? data[item.key] : ""}"
+                data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
+                data-showcol='${item.showcol}' placeholder="输入:${item.name}" 
+                data-notnull='${item.notnull}' autocomplete="off">`;
         } else {
             itemDesc = `
             <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 

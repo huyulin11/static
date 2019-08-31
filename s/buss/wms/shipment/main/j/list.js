@@ -47,12 +47,12 @@ $(function () {
 		}, {
 			name: "操作",
 			renderData: function (rowindex, data, rowdata, column) {
-				var btns = "<button type='button' class='btn btn-info marR10 detail' data-paperid='"
-					+ rowindex.paperid + "'>明细</button>";
+				var btns = `<button type='button' class='btn btn-info marR10 detail' 
+				data-paperid='${rowdata.paperid}'>明细</button>`;
 				if (rowdata.delflag != 1) {
 					if (rowdata.status == 1) {
-						btns = "<button type='button' class='btn btn-info marR10 execute' data-id='"
-							+ rowdata.id + "'>下达到AGV</button>" + "&nbsp;&nbsp;" + btns;
+						btns = `<button type='button' class='btn btn-info marR10 execute' 
+						data-id='${rowdata.id}'>下达到AGV</button>&nbsp;&nbsp;${btns}`;
 					}
 				}
 				return btns;
