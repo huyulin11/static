@@ -455,7 +455,7 @@ div[id='targets'] button.choosed {
 .col {
 	float: left;
 	height: 36px;
-	margin-left: 5px;
+	margin-left: 10px;
 }
 
 .col>input {
