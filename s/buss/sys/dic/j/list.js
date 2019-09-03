@@ -47,11 +47,13 @@ $(function () {
 		add();
 	});
 
+	$("html").undelegate("button.detail", "click");
 	$("html").delegate("button.detail", "click", function () {
 		var dictype = $(this).data("dictype");
 		detail(dictype);
 	});
 
+	$("html").undelegate("button.mgr", "click");
 	$("html").delegate("button.mgr", "click", function () {
 		var dictype = $(this).data("dictype");
 		mgr(dictype);
