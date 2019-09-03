@@ -1,4 +1,4 @@
-var paperid = url.getQueryString("receiptMainFormMap.paperid");
+var paperid = url.param("receiptMainFormMap.paperid");
 $(function () {
 	window.datagrid = lyGrid({
 		pagId: 'paging',

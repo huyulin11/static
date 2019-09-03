@@ -8,26 +8,36 @@ var getItem = (data) => {
     for (let item of _conf.items) {
         var itemDesc = "";
         var value = (data && data[item.key]) ? data[item.key] : (item.default ? item.default : "");
-        if ("select" == item.type) {
-            let dics = gv.getT(item.dic);
-            itemDesc += `<option value="">----选择【${item.name}】----</option>`;
-            for (let dic of dics) {
-                itemDesc += `<option ${(data && dic.key == data[item.key]) ? "selected" : ""} value="${dic.key}">${dic.value}</option>`;
+        if (_conf.model == 'VIEW') {
+            if ("select" == item.type) {
+                let dics = gv.getT(item.dic);
+                for (let dic of dics) {
+                    if (data && dic.key == data[item.key]) { value = dic.value; break; }
+                }
             }
-            itemDesc = `<select id="${item.key}${serial}" name="${item.key}[${serial}]"
+            itemDesc = `${item.name + ':' + value}`;
+        } else {
+            if ("select" == item.type) {
+                let dics = gv.getT(item.dic);
+                itemDesc += `<option value="">----选择【${item.name}】----</option>`;
+                for (let dic of dics) {
+                    itemDesc += `<option ${(data && dic.key == data[item.key]) ? "selected" : ""} value="${dic.key}">${dic.value}</option>`;
+                }
+                itemDesc = `<select id="${item.key}${serial}" name="${item.key}[${serial}]"
             data-notnull='${item.notnull}'>${itemDesc}</select>`;
-        } else if ("associating-input" == item.type) {
-            itemDesc = `
+            } else if ("associating-input" == item.type) {
+                itemDesc = `
             <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
                 class="form-control associating-input" value="${value}"
                 data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
                 data-showcol='${item.showcol}' placeholder="输入:${item.name}" 
                 data-notnull='${item.notnull}' autocomplete="off">`;
-        } else {
-            itemDesc = `
+            } else {
+                itemDesc = `
             <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
                 class="form-control" value="${value}"
                 placeholder="输入:${item.name}" data-notnull='${item.notnull}' autocomplete="off">`;
+            }
         }
         ss += `<div class="col">${itemDesc}</div>`;
     }
@@ -35,9 +45,10 @@ var getItem = (data) => {
     ss += `<div class="col" style="display:none;">
     <input type="text" id="_status${serial}" name="_status[${serial}]" 
     value="${_status}" data-value="${_status}" autocomplete="off"></div>`;
+    let delOp = `<div title="删除" class="delOne op item-op"></div>`;
     return `
     <div class="${_conf.targetClass} form-group" id="${_conf.targetClass}-${serial}">
-    ${ss}<div title="删除" class="delOne op item-op"></div>
+    ${ss}${_conf.model == 'VIEW' ? '' : delOp}
     </div>`;
 }
 

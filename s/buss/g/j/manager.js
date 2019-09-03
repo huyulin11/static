@@ -1,5 +1,6 @@
 import "/s/buss/acs/g/j/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
+import "/s/j/tool/url.js";
 
 window.nv = {};
 window.nv.loadPage = function (url, openType, sn) {

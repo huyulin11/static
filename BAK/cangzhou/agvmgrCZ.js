@@ -359,7 +359,7 @@ var ctrlInfo = [];
 			}
 		});
 		allDisabled();
-		agvId = getQueryString("agvId");
+		agvId = url.param("agvId");
 		if (!agvId) {
 			agvId = 1;
 		}
@@ -367,14 +367,6 @@ var ctrlInfo = [];
 		initAlloc();
 		initGroup();
 		setInterval(pt, 3000);
-	}
-
-	var getQueryString = function (name) {
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-		var r = window.location.search.substr(1).match(reg);
-		if (r != null)
-			return unescape(r[2]);
-		return null;
 	}
 
 	init();

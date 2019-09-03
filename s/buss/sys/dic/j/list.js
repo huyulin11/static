@@ -24,11 +24,15 @@ $(function () {
 				if (rowdata.delflag == "1") {
 					return "";
 				}
-				var btns = `<button type='button' class='btn btn-info marR10 detail' 
-					data-dictype='${ rowdata.dictype}'>明细</button>`;
+				var btns = "";
+				btns += `<button type='button' class='btn btn-info marR10 view' 
+						data-dictype='${ rowdata.dictype}'>查看</button>`;
+				btns += "&nbsp;&nbsp;";
+				btns += `<button type='button' class='btn btn-info marR10 detail' 
+						data-dictype='${ rowdata.dictype}'>维护数据</button>`;
 				btns += "&nbsp;&nbsp;";
 				btns += `<button type='button' class='btn btn-info marR10 mgr' 
-					data-dictype='${ rowdata.dictype}'>维护</button>`;
+						data-dictype='${ rowdata.dictype}'>维护类型</button>`;
 				return btns;
 			}
 		}],
@@ -45,6 +49,12 @@ $(function () {
 	});
 	$("#add").on("click", function () {
 		add();
+	});
+
+	$("html").undelegate("button.view", "click");
+	$("html").delegate("button.view", "click", function () {
+		var dictype = $(this).data("dictype");
+		view(dictype);
 	});
 
 	$("html").undelegate("button.detail", "click");
@@ -68,7 +78,6 @@ $(function () {
 });
 
 function mgr(dictype) {
-	localStorage.setItem("dictype", dictype);
 	window.pageii = layer.open({
 		title: "明细",
 		type: 2,
@@ -78,12 +87,20 @@ function mgr(dictype) {
 }
 
 function detail(dictype) {
-	localStorage.setItem("dictype", dictype);
 	window.pageii = layer.open({
 		title: "明细",
 		type: 2,
 		area: ["600px", "80%"],
 		content: '/s/buss/sys/dic/h/sysDicEditUI.html?dictype=' + dictype
+	});
+}
+
+function view(dictype) {
+	window.pageii = layer.open({
+		title: "明细",
+		type: 2,
+		area: ["600px", "80%"],
+		content: '/s/buss/sys/dic/h/sysDicEditUI.html?dictype=' + dictype + '&model=VIEW'
 	});
 }
 

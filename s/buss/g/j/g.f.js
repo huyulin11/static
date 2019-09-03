@@ -43,7 +43,7 @@ var resizeTable = function () {
     });
 }
 
-var getQueryString = function (name) {
+var param = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null)

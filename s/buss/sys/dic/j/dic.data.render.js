@@ -1,7 +1,7 @@
 import "/s/j/vue/vue.min.js";
 import { initRows } from "/s/buss/sys/dic/j/dynamic.row.js";
-import { dictype } from "/s/buss/sys/dic/j/dic.type.info.js";
 import { dicdata } from "/s/buss/sys/dic/j/dic.data.info.js";
+import { url } from "/s/j/tool/url.js";
 
 var vm = new Vue({
     data: {
@@ -13,7 +13,7 @@ var vm = new Vue({
     },
     mounted: function () {
         $.ajax({
-            url: '/sys/dic/type/findByPage.shtml?sysDicTypeFormMap.dictype=' + localStorage.dictype,
+            url: '/sys/dic/type/findByPage.shtml?sysDicTypeFormMap.dictype=' + url.param("dictype"),
             async: true,
             type: 'GET',
             dataType: 'json',
@@ -66,6 +66,7 @@ var vm = new Vue({
                 dellogic: true,
                 serial: 0,
                 max: 20,
+                model: url.param("model"),
                 items: [{
                     key: "key",
                     name: "键",
@@ -100,8 +101,8 @@ var vm = new Vue({
                 }
             }
 
-            if (localStorage.dictype) {
-                dicdata(localStorage.dictype, doInitRows);
+            if (url.param("dictype")) {
+                dicdata(url.param("dictype"), doInitRows);
             }
         }
     },

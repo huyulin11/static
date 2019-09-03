@@ -1,5 +1,6 @@
 import { initRows } from "/s/buss/sys/dic/j/dynamic.row.js";
 import { dictype } from "/s/buss/sys/dic/j/dic.type.info.js";
+import { url } from "/s/j/tool/url.js";
 
 var _conf = {
     container: "div#rows",
@@ -50,6 +51,6 @@ window.addEventListener('associating_val_changed', function (event) {
     initRows(_conf);
 });
 
-if (localStorage.dictype) {
-    dictype(localStorage.dictype, doInitRows);
+if (url.param("dictype")) {
+    dictype(url.param("dictype"), doInitRows);
 }

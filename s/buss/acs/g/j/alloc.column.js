@@ -38,7 +38,7 @@ var initAllocColumn = function () {
 }
 
 var areaId = 1;
-areaId = url.getQueryString("areaId");
+areaId = url.param("areaId");
 if (!areaId) {
     areaId = 1;
 }
