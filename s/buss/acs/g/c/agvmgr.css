@@ -469,6 +469,10 @@ div[id='targets'] button.choosed {
 	border-radius: 5px;
 }
 
+div.col>::-webkit-input-placeholder {
+	color: #d8d4d4;
+}
+
 .col-sm-1 {
 	width: 10%;
 }
@@ -496,12 +500,17 @@ label[class^="btn btn-default"] {
 .delete select,
 .delete input {
 	text-decoration: line-through;
-	color: #d8d2d2;
+	color: red;
 }
 
 .delete input::-webkit-input-placeholder,
 .delete input:-moz-placeholder,
 .delete input:-ms-input-placeholder {
 	text-decoration: line-through;
-	color: #d8d2d2;
+	color: red;
+}
+
+.delete>::-webkit-input-placeholder {
+	text-decoration: line-through;
+	color: red;
 }
