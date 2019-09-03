@@ -89,4 +89,13 @@ export var initRows = (conf, initData) => {
         }
         checkDel();
     });
+
+    $(_conf.container).on("focus", "input,select", function () {
+        if (layer) {
+            layer.tips($(this).attr("placeholder"), this, {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+        }
+    });
 }
