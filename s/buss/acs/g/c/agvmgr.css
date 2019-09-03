@@ -458,8 +458,10 @@ div[id='targets'] button.choosed {
 	margin-left: 10px;
 }
 
-.col>input {
+.col>input,
+.col>select {
 	width: 100%;
+	height: 30px;
 	border-top: none;
 	border-left: none;
 	border-right: none;

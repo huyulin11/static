@@ -91,8 +91,10 @@ export var initRows = (conf, initData) => {
     });
 
     $(_conf.container).on("focus", "input,select", function () {
-        if (layer) {
-            layer.tips($(this).attr("placeholder"), this, {
+        let tips = $(this).attr("placeholder");
+        if (!tips) { tips = $(this).find("option[value='']").html(); }
+        if (layer && tips) {
+            layer.tips(tips, this, {
                 tips: [1, '#3595CC'],
                 time: 4000
             });
