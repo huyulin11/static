@@ -465,6 +465,7 @@ div[id='targets'] button.choosed {
 	border-top: none;
 	border-left: none;
 	border-right: none;
+	border-radius: 5px;
 }
 
 .col-sm-1 {
