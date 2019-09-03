@@ -7,10 +7,13 @@ $(function () {
 			hide: true,
 		}, {
 			colkey: "paperid",
-			name: "出库单号"
+			name: "单号"
 		}, {
 			colkey: "totallines",
-			name: "出库数量"
+			name: "明细数"
+		}, {
+			colkey: "totalqty",
+			name: "货物数"
 		}, {
 			colkey: "name",
 			name: "出库点",
