@@ -1,6 +1,4 @@
 export var showTaskexe = function (currentTask) {
-	if (!job) job = setInterval(showTaskexe, 500);
-
 	if (!currentTask) { return; }
 	var value = currentTask.object;
 	if (!currentTask.object) {
@@ -68,5 +66,3 @@ export var showTaskexe = function (currentTask) {
 		$("div#path").html("");
 	}
 }
-
-var job;

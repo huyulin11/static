@@ -30,7 +30,7 @@
     gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#oneAgvDetail", function () {
         initInfo(".oneCtrlTr");
         initOp("div#tempAgvMgr");
-        showTaskexe(currentTask);
+        setInterval(function () { showTaskexe(currentTask); }, 500);
     });
 </script>
 

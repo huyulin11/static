@@ -28,7 +28,7 @@
     import { showTaskexe } from "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
     gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#oneAgvDetail", function () {
         initInfo(".oneCtrlTr");
-        showTaskexe(currentTask);
+        setInterval(function () { showTaskexe(currentTask); }, 500);
     });
 </script>
 
