@@ -1,6 +1,7 @@
 import "/s/buss/acs/g/j/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
-import "/s/j/tool/url.js";
+import "/s/buss/g/j/g.f.js";
+import "/s/j/tool/urlSearcher.js";
 
 window.nv = {};
 window.nv.loadPage = function (url, openType, sn) {
@@ -30,10 +31,10 @@ window.nv.loadPage = function (url, openType, sn) {
             url = url.replace("{PROJECT_KEY}", localStorage.projectKey);
         }
         if (openType == "1") {
-            appOpen(url);
+            gf.appOpen(url);
             return;
         } else if (openType == "2") {
-            layerOpen({
+            gf.layerOpen({
                 title: "AGV信息",
                 area: ["70%", "100%"],
                 offset: 'rb',
@@ -42,7 +43,7 @@ window.nv.loadPage = function (url, openType, sn) {
         }
     }
 
-    quote(url, "#loadhtml");
+    gf.quote(url, "#loadhtml");
     $("#nav").removeClass("nav-off-screen");
 }
 

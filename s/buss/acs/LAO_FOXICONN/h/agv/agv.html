@@ -17,19 +17,21 @@
 <script src="/s/j/jquery-1.12.2.min.js"></script>
 <script src="/s/j/layer/v3.1.3/layer.js"></script>
 
-<script src="/s/buss/g/j/g.f.js"></script>
 <script src="/s/j/common.js"></script>
 
-<script src="/s/buss/acs/g/j/agv.g.js"></script>
-
-<script>
-    quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#oneAgvDetail");
-</script>
-
 <script type="module">
+    import "/s/buss/acs/g/j/agv.g.js";
+    import { gf } from "/s/buss/g/j/g.f.js";
     import "/s/buss/g/j/jquery/jquery.autofill.js";
-    import "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
-    import "/s/buss/acs/FANCY/j/agv/agv.op.js";
+
+    import { currentTask, init as initInfo } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
+    import { showTaskexe } from "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
+    import { init as initOp } from "/s/buss/acs/FANCY/j/agv/agv.op.js";
+    gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#oneAgvDetail", function () {
+        initInfo(".oneCtrlTr");
+        initOp("div#tempAgvMgr");
+        showTaskexe(currentTask);
+    });
 </script>
 
 </html>

@@ -1,21 +1,19 @@
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 var agvId = currentAgvId;
 
 var currentTask = new Array();
 
-var repeatFlag = false;
+var _target;
+
 var container = function () {
-	if ($(".oneCtrlTr").length == 0) {
+	if ($(_target).length == 0) {
 		console.log("get oneCtrilTr err");
-		if (!repeatFlag) {
-			repeatFlag = true;
-			setTimeout(init, 1000);
-		}
 	}
-	return $(".oneCtrlTr");
+	return $(_target);
 }
 
 var agvinfo = function () {
@@ -80,7 +78,7 @@ var auth = (agvInfo) => {
 	container().find("button#GOTO_INIT").removeAttr("disabled");
 	container().find("button#RE_PATH").removeAttr("disabled");
 	container().find("button#SHUTDOWN").removeAttr("disabled");
-	$(".oneCtrlTr").find("button:enabled").each(function () {
+	$(_target).find("button:enabled").each(function () {
 		const backcolor = $(this).data("backcolor");
 		if (backcolor) {
 			$(this).css("background-color", backcolor);
@@ -97,14 +95,15 @@ var doTask = (agvId, task, targetSite) => {
 	layer.msg(taskexe.addTaskTo(agvId, task, targetSite));
 }
 
-var init = function () {
-	$(".oneCtrlTr").delegate("button[id!='TRANSPORT'][id!='DELIVER'][id!='FETCH']", "click", function () {
+export var init = function (target) {
+	_target = target;
+	$(_target).delegate("button[id!='TRANSPORT'][id!='DELIVER'][id!='FETCH']", "click", function () {
 		allDisabled();
 		if (!confirm('是否确认执行该操作?')) { return; }
 		layer.msg(taskexe.addCtrlTask(agvId, $(this).attr("id")));
 	});
 
-	$(".oneCtrlTr").delegate("button[id='TRANSPORT']", "click", function () {
+	$(_target).delegate("button[id='TRANSPORT']", "click", function () {
 		allDisabled();
 		if (!confirm('是否确认执行该操作?')) { return; }
 		var targetSite = prompt("请输入有效的目标站点编号！");
@@ -215,7 +214,7 @@ var init = function () {
 		});
 	}
 
-	$(".oneCtrlTr").delegate("button[id='DELIVER']", "click", function () {
+	$(_target).delegate("button[id='DELIVER']", "click", function () {
 		allDisabled();
 		if (localStorage.projectKey == 'TAIKAI_LINYI') {
 			deleverTaskTaikaiLinyi();
@@ -224,7 +223,7 @@ var init = function () {
 		}
 	});
 
-	$(".oneCtrlTr").delegate("button[id='FETCH']", "click", function () {
+	$(_target).delegate("button[id='FETCH']", "click", function () {
 		allDisabled();
 		var agvbusstype = findIotInfo(agvId, "agvbusstype");
 		var targetSite = 0;
@@ -271,9 +270,8 @@ var init = function () {
 	}
 
 	allDisabled();
-	resizeTable();
+	gf.resizeTable();
 	setInterval(agvinfo, 1500);
 }
 
-init();
 export { currentTask };

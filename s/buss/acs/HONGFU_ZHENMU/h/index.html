@@ -29,19 +29,16 @@
 <script src="/s/j/jquery-1.12.2.min.js">
 </script>
 <script src="/s/j/layer/v3.1.3/layer.js"></script>
-<script src="/s/buss/g/j/g.f.js"></script>
 
 <script type="module">
 	import "/s/buss/g/j/g.p.js";
+	import { gf } from "/s/buss/g/j/g.f.js";
+	gf.quote("/s/buss/acs/g/c/agvmgr.css");
+	$('body').fadeIn(3000);
 	import "/s/buss/acs/FANCY/j/acs.control.js";
 	import "/s/buss/acs/FANCY/j/agv.list.js";
 	import "/s/buss/acs/g/j/agv.g.js";
 	import "/s/buss/acs/g/j/agv.msg.js";
-</script>
-
-<script>
-	quote("/s/buss/acs/g/c/agvmgr.css");
-	$('body').fadeIn(3000);
 </script>
 
 </html>

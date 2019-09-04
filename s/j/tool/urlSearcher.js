@@ -7,6 +7,6 @@ class UrlSearcher {
 		return null;
 	}
 }
-var url = new UrlSearcher();
-window.urlSearcher = url;
-export { url };
+var urlSearcher = new UrlSearcher();
+window.urlSearcher = urlSearcher;
+export { urlSearcher };

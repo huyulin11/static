@@ -42,7 +42,7 @@
 	}
 
 	var openAlloc = function (areaId, layerName) {
-		layerOpen({
+		gf.layerOpen({
 			content: '/s/buss/acs/g/h/alloc.html?areaId=' + areaId,
 			title: layerName,
 			area: ['50%', '70%']

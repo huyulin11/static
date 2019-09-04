@@ -1,5 +1,6 @@
 import { render } from "/s/buss/acs/g/j/alloc.render.honfu.zhenmu.js";
 import "/s/buss/acs/g/j/alloc.event.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 export var initAlloc = function () {
     $(".black_overlay").show();
@@ -30,7 +31,7 @@ setTimeout(function () {
 }, 500);
 
 setTimeout(function () {
-    resizeTable();
+    gf.resizeTable();
 }, 1000);
 
 setInterval(function () {

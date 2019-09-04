@@ -1,3 +1,5 @@
+import { gf } from "/s/buss/g/j/g.f.js";
+
 var areaInfoInitOver = 1;//不包含WMS的项目初始值为1,否则为0
 var timeLength = 1200;
 var updateMgrPosition = function () {
@@ -15,7 +17,7 @@ var updateHeight = function () {
 }
 var intervalVal = setInterval(function () {
     if (areaInfoInitOver == 1) {
-        resizeTable();
+        gf.resizeTable();
         areaInfoInitOver = 2;
     } else if (areaInfoInitOver == 2) {
         updateHeight();

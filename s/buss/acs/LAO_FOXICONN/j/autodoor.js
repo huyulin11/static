@@ -18,7 +18,7 @@ $(function () {
                     tables += "<td>" + trs + "</td>";
                 }
                 container().append("<table><tr>" + tables + "</tr></table>");
-                resizeTable();
+                gf.resizeTable();
             }
         });
     }

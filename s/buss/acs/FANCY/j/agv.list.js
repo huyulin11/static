@@ -1,5 +1,6 @@
 import { renderList } from '/s/buss/acs/FANCY/j/agv.list.render.one.js';
 import { overlay } from '/s/buss/g/j/g.overlay.js';
+import { gf } from "/s/buss/g/j/g.f.js";
 
 var reloadFlag = 0;
 var intervalVal;
@@ -41,7 +42,7 @@ var doWhenSuccess = function (data) {
     reloadFlag = 0;
     agvDiv().html("");
     renderList(data, agvDiv());
-    resizeTable();
+    gf.resizeTable();
 }
 
 var openAGVMGR = function (tmpAgvId, layerName) {
@@ -53,9 +54,9 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         return;
     }
     if (tmpAgvId == 1) {
-        layerOpen({ content: '/s/buss/acs/h/agv.one.html?agvId=' + tmpAgvId, title: layerName, offset: 'rb' });
+        gf.layerOpen({ content: '/s/buss/acs/h/agv.one.html?agvId=' + tmpAgvId, title: layerName, offset: 'rb' });
     } else {
-        layerOpen({ content: '/s/buss/acs/h/agv.one.html?agvId=' + tmpAgvId, title: layerName, offset: 'rb' });
+        gf.layerOpen({ content: '/s/buss/acs/h/agv.one.html?agvId=' + tmpAgvId, title: layerName, offset: 'rb' });
     }
 }
 

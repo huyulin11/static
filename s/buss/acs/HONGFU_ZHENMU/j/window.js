@@ -25,7 +25,7 @@ $(function () {
                     tables += trs;
                 }
                 container().append("<table><td>" + tables + "</tr></table>");
-                resizeTable();
+                gf.resizeTable();
             },
             error: function () {
             }

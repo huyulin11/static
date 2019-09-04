@@ -1,4 +1,4 @@
-import { url } from "/s/j/tool/url.js";
+import { urlSearcher } from "/s/j/tool/urlSearcher.js";
 
-export var currentAgvId = url.param("agvId");
+export var currentAgvId = urlSearcher.param("agvId");
 

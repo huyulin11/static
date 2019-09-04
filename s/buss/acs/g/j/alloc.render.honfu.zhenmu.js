@@ -1,4 +1,5 @@
 import { sku } from "/s/buss/acs/g/j/wms.sku.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 var renderOne = function (allocationInfo) {
     var tmpStr = "";
@@ -74,5 +75,5 @@ var toRender = function (data) {
     if (!data || data.length == 0) return;
     var filterData = dealData(data);
     doRender(filterData);
-    resizeTable();
+    gf.resizeTable();
 }

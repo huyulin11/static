@@ -1,5 +1,6 @@
-import { url } from "/s/j/tool/url.js";
-var paperid = url.param("receiptMainFormMap.paperid");
+import { urlSearcher } from "/s/j/tool/urlSearcher.js";
+
+var paperid = urlSearcher.param("receiptMainFormMap.paperid");
 $(function () {
 	window.datagrid = lyGrid({
 		pagId: 'paging',
