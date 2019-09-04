@@ -108,7 +108,7 @@ function edit() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/inventory/main/editUI.html?id=' + cbox
+		content: '/s/buss/editUI.html?id=' + cbox
 	});
 }
 function add() {
@@ -116,7 +116,7 @@ function add() {
 		title: "新增-输入需要取入档案的所在货位名称",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/wms/inventory/main/h/inventoryAddUI.html'
+		content: '/s/buss/wms/h/inventoryAddUI.html'
 	});
 }
 function detail(paperid) {
@@ -124,7 +124,7 @@ function detail(paperid) {
 		title: "盘点单明细",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/wms/inventory/detail/h/inventoryDetailOfOne.html?inventoryMainFormMap.paperid='
+		content: '/s/buss/wms/h/inventoryDetailOfOne.html?inventoryMainFormMap.paperid='
 			+ paperid
 	});
 }

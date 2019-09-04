@@ -5,11 +5,11 @@
                 <tr>
                     <td>
                         <label class="control-label">
-                            <span class="font-thin v-middle">入库单号:</span>
+                            <span class="font-thin v-middle">出库单号:</span>
                         </label>
                     </td>
                     <td>
-                        <input class="input-medium ui-autocomplete-input" id="paperid" name="receiptMainFormMap.paperid">
+                        <input class="input-medium ui-autocomplete-input" id="paperid" name="shipmentMainFormMap.paperid">
                     </td>
                 </tr>
                 <tr>
@@ -19,7 +19,7 @@
                         </label>
                     </td>
                     <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status" name="receiptMainFormMap.status"></select>
+                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status" name="shipmentMainFormMap.status"></select>
                     </td>
                 </tr>
                 <tr>
@@ -29,7 +29,7 @@
                         </label>
                     </td>
                     <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_CACHE_CABLE" id="name" name="receiptMainFormMap.name"></select>
+                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_CACHE_CABLE" id="name" name="shipmentMainFormMap.name"></select>
                     </td>
                     <td>
                         <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
@@ -49,6 +49,6 @@
 </div>
 <script>
     $("#info").html(CommnUtil.loadingImg()).load(
-        "/s/buss/wms/receipt/main/h/receiptMainInfo.html?receiptMainFormMap.paperid=" + 1);
+        "/s/buss/wms/h/shipmentMainInfo.html?shipmentMainFormMap.paperid=" + 1);
 </script>
 <script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>

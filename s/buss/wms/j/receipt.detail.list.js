@@ -63,7 +63,7 @@ function editTask() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/receipt/detail/editUI.html?id=' + cbox
+		content: '/s/buss/editUI.html?id=' + cbox
 	});
 }
 function addTask() {
@@ -71,7 +71,7 @@ function addTask() {
 		title: "新增",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/receipt/detail/h/addDairyTaskUI.html'
+		content: '/s/buss/h/addDairyTaskUI.html'
 	});
 }
 function delTask() {

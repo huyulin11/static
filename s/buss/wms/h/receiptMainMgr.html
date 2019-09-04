@@ -5,11 +5,12 @@
                 <tr>
                     <td>
                         <label class="control-label">
-                            <span class="font-thin v-middle">盘点单号:</span>
+                            <span class="font-thin v-middle">入库单号:</span>
                         </label>
                     </td>
                     <td>
-                        <input class="input-medium ui-autocomplete-input" id="paperid" name="inventoryMainFormMap.paperid">
+                        <input class="input-medium ui-autocomplete-input" id="paperid"
+                            name="receiptMainFormMap.paperid">
                     </td>
                 </tr>
                 <tr>
@@ -19,7 +20,19 @@
                         </label>
                     </td>
                     <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status" name="inventoryMainFormMap.status"></select>
+                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status"
+                            name="receiptMainFormMap.status"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            <span class="font-thin v-middle">缓存柜:</span>
+                        </label>
+                    </td>
+                    <td>
+                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_CACHE_CABLE"
+                            id="name" name="receiptMainFormMap.name"></select>
                     </td>
                     <td>
                         <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
@@ -36,9 +49,7 @@
     </div>
 </header>
 <div class="table-responsive" id="info">
+    <div id="paging" class="pagclass"></div>
 </div>
-<script>
-    $("#info").html(CommnUtil.loadingImg()).load(
-        "/s/buss/wms/inventory/main/h/inventoryMainInfo.html?inventoryMainFormMap.paperid=" + 1);
-</script>
+<script src="/s/buss/wms/j/receipt.main.list.js"></script>
 <script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>

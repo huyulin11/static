@@ -70,7 +70,7 @@ class GF {
     appOpen(file) {
         var timeStamp = this.getTimeStamp();
         window.open(file + (file.endsWith(".html") ? '?' : "&") + timeStamp);
-    }
+    };
     randomString(len) {
         len = len || 32;
         var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';

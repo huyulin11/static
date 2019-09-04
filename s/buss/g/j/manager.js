@@ -1,6 +1,6 @@
 import "/s/buss/acs/g/j/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
-import "/s/buss/g/j/g.f.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 import "/s/j/tool/urlSearcher.js";
 
 window.nv = {};

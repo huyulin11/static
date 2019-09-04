@@ -1,4 +1,6 @@
-var paperid = window.parent.window.urlSearcher.param("inventoryMainFormMap.paperid");
+import { urlSearcher } from "/s/j/tool/urlSearcher.js";
+
+var paperid = urlSearcher.param("inventoryMainFormMap.paperid");
 $(function () {
 	window.datagrid = lyGrid({
 		pagId: 'paging',
@@ -61,7 +63,7 @@ function editTask() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/inventory/detail/editUI.html?id=' + cbox
+		content: '/s/buss/editUI.html?id=' + cbox
 	});
 }
 function addTask() {
@@ -69,7 +71,7 @@ function addTask() {
 		title: "新增",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/inventory/detail/h/addDairyTaskUI.html'
+		content: '/s/buss/h/addDairyTaskUI.html'
 	});
 }
 function delTask() {
