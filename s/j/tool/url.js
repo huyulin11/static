@@ -1,5 +1,5 @@
-class url {
-	static param(name) {
+class UrlSearcher {
+	param(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 		var r = window.location.search.substr(1).match(reg);
 		if (r != null)
@@ -7,5 +7,6 @@ class url {
 		return null;
 	}
 }
+var url = new UrlSearcher();
 window.urlSearcher = url;
 export { url };

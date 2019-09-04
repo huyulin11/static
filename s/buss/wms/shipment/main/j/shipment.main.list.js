@@ -80,10 +80,14 @@ $(function () {
 	$("#del").click("click", function () {
 		del();
 	});
-	$("#info").on("click", "button.detail", function () {
+
+	$("html").undelegate("button.detail", "click");
+	$("html").delegate("button.detail", "click", function () {
 		detail($(this).data("paperid"));
 	});
-	$("#info").on("click", "button.execute", function () {
+
+	$("html").undelegate("button.execute", "click");
+	$("html").delegate("button.execute", "click", function () {
 		execute($(this).data("id"));
 	});
 	$("#permissions").click("click", function () {
