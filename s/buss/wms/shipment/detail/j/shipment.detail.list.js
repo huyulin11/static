@@ -1,3 +1,4 @@
+import { url } from "/s/j/tool/url.js";
 var paperid = url.param("shipmentMainFormMap.paperid");
 $(function () {
 	window.datagrid = lyGrid({

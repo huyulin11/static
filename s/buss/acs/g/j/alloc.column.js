@@ -38,7 +38,7 @@ var initAllocColumn = function () {
 }
 
 var areaId = 1;
-areaId = url.param("areaId");
+areaId = window.urlSearcher.param("areaId");
 if (!areaId) {
     areaId = 1;
 }

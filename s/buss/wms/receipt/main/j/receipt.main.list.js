@@ -7,15 +7,18 @@ $(function () {
 			hide: true,
 		}, {
 			colkey: "paperid",
-			name: "盘点单号"
+			name: "单号"
 		}, {
 			colkey: "totallines",
-			name: "盘点数量"
+			name: "明细数"
 		}, {
-			colkey: "inventorytype",
-			name: "盘点类型",
+			colkey: "totalqty",
+			name: "货物数"
+		}, {
+			colkey: "name",
+			name: "入库点",
 			renderData: function (rowindex, data, rowdata, column) {
-				return gv.get("WMS_INVENTORY_TYPE", data);
+				return gv.get("ACS_CACHE_CABLE", data);
 			}
 		}, {
 			colkey: "status",
@@ -49,8 +52,6 @@ $(function () {
 				var btns = "<button type='button' class='btn btn-info marR10 detail' data-paperid='"
 					+ rowindex.paperid + "'>明细</button>";
 				if (rowdata.delflag != 1) {
-					btns = btns + "&nbsp;&nbsp;" + "<button type='button' class='btn btn-info marR10 whichAgv' data-paperid='"
-						+ rowindex.paperid + "'>执行AGV</button>";
 					if (rowindex.status == 1) {
 						btns = "<button type='button' class='btn btn-info marR10 execute' data-id='"
 							+ rowindex.id + "'>下达到AGV</button>" + "&nbsp;&nbsp;" + btns;
@@ -59,7 +60,7 @@ $(function () {
 				return btns;
 			}
 		}],
-		jsonUrl: '/inventory/main/findByPage.shtml',
+		jsonUrl: '/receipt/main/find.shtml',
 		checkbox: true,
 		serNumber: true
 	});
@@ -81,9 +82,6 @@ $(function () {
 	$("#info").on("click", "button.detail", function () {
 		detail($(this).data("paperid"));
 	});
-	$("#info").on("click", "button.whichAgv", function () {
-		whichAgv($(this).data("paperid"));
-	});
 	$("#info").on("click", "button.execute", function () {
 		execute($(this).data("id"));
 	});
@@ -101,7 +99,7 @@ function edit() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/inventory/main/editUI.html?id=' + cbox
+		content: '/s/buss/receipt/main/editUI.html?id=' + cbox
 	});
 }
 function add() {
@@ -109,30 +107,18 @@ function add() {
 		title: "新增-输入需要取入档案的所在货位名称",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/wms/inventory/main/h/inventoryMainInfoAddUI.html'
+		content: '/s/buss/wms/receipt/main/h/receiptAddUI.html'
 	});
 }
 function detail(paperid) {
 	window.pageii = layer.open({
-		title: "盘点单明细",
+		title: "入库单明细",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/wms/inventory/detail/h/inventoryDetailInfoOfOne.html?inventoryMainFormMap.paperid='
-			+ paperid
+		content: '/s/buss/wms/receipt/detail/h/receiptDetailOfOne.html?receiptMainFormMap.paperid=' + paperid
 	});
 }
-function whichAgv(key) {
-	var url = '/bd/conf.shtml?table=task_agv';
-	var s = CommnUtil.ajax(url, {
-		key: key + "%"
-	}, "json");
-	var info = "";
-	for (var item of s) {
-		info = info + "<br/>" + item.key + ":" + item.value;
-	}
-	if (!info) { info = "未找到执行信息！"; }
-	layer.msg(info);
-}
+
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
@@ -140,7 +126,7 @@ function del() {
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
-		var url = '/inventory/main/deleteEntity.shtml';
+		var url = '/receipt/main/deleteEntity.shtml';
 		var s = CommnUtil.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
@@ -155,7 +141,7 @@ function del() {
 
 function execute(id) {
 	layer.confirm('是否下达此单到AGV执行？（此动作不可撤回）', function (index) {
-		var url = '/inventory/main/execute.shtml';
+		var url = '/receipt/main/execute.shtml';
 		var s = CommnUtil.ajax(url, {
 			id: id
 		}, "json");
@@ -163,7 +149,7 @@ function execute(id) {
 			layer.msg('成功下达到AGV！');
 			window.datagrid.loadData();
 		} else {
-			layer.msg('下达失败！');
+			layer.msg('下达失败！' + s);
 		}
 	});
 }

@@ -1,4 +1,5 @@
-var paperid = url.param("inventoryMainFormMap.paperid");
+import { url } from "/s/j/tool/url.js";
+var paperid = url.param("receiptMainFormMap.paperid");
 $(function () {
 	window.datagrid = lyGrid({
 		pagId: 'paging',
@@ -8,7 +9,7 @@ $(function () {
 			hide: true,
 		}, {
 			colkey: "paperid",
-			name: "盘点单号"
+			name: "入库单号"
 		}, {
 			colkey: "userdef1",
 			name: "货位"
@@ -28,7 +29,7 @@ $(function () {
 				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
 			}
 		}],
-		jsonUrl: '/inventory/detail/findByPage.shtml?inventoryDetailFormMap.paperid=' + paperid,
+		jsonUrl: '/receipt/detail/findByPage.shtml?receiptDetailFormMap.paperid=' + paperid,
 		checkbox: true,
 		serNumber: true
 	});
@@ -61,7 +62,7 @@ function editTask() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/inventory/detail/editUI.html?id=' + cbox
+		content: '/s/buss/receipt/detail/editUI.html?id=' + cbox
 	});
 }
 function addTask() {
@@ -69,7 +70,7 @@ function addTask() {
 		title: "新增",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/inventory/detail/h/addDairyTaskUI.html'
+		content: '/s/buss/receipt/detail/h/addDairyTaskUI.html'
 	});
 }
 function delTask() {
@@ -79,7 +80,7 @@ function delTask() {
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
-		var url = '/inventory/detail/deleteEntity.shtml';
+		var url = '/receipt/detail/deleteEntity.shtml';
 		var s = CommnUtil.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");

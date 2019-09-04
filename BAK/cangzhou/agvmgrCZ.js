@@ -359,7 +359,7 @@ var ctrlInfo = [];
 			}
 		});
 		allDisabled();
-		agvId = url.param("agvId");
+		agvId = window.urlSearcher.param("agvId");
 		if (!agvId) {
 			agvId = 1;
 		}

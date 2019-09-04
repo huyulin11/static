@@ -108,7 +108,7 @@ function add() {
 		title: "新增-输入需要取出档案的所在货位名称",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/wms/shipment/main/h/shipmentMainInfoAddUI.html'
+		content: '/s/buss/wms/shipment/main/h/shipmentAddUI.html'
 	});
 }
 function detail(paperid) {
@@ -116,7 +116,7 @@ function detail(paperid) {
 		title: "出库单明细",
 		type: 2,
 		area: globalLayerArea,
-		content: '/s/buss/wms/shipment/detail/h/shipmentDetailInfoOfOne.html?shipmentMainFormMap.paperid=' + paperid
+		content: '/s/buss/wms/shipment/detail/h/shipmentDetailOfOne.html?shipmentMainFormMap.paperid=' + paperid
 	});
 }
 

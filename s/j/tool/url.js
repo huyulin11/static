@@ -7,5 +7,5 @@ class url {
 		return null;
 	}
 }
-window.url = url;
+window.urlSearcher = url;
 export { url };
