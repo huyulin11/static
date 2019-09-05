@@ -2,6 +2,8 @@ import "/s/buss/acs/g/j/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import "/s/j/tool/urlSearcher.js";
+import "/s/buss/g/j/g.p.js";
+import "/s/buss/g/j/jquery/jquery.autofill.js"
 
 window.nv = {};
 window.nv.loadPage = function (url, openType, sn) {

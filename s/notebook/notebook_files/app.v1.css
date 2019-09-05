@@ -10744,7 +10744,7 @@ nav li.current span{
 		transform: translate3d(-75%, 0px, 0px);
 	}
 	.nav-off-screen+* {
-		background-color: #f9f9f9;
+		/* background-color: #f9f9f9; */
 		-webkit-transition: -webkit-transform 0.2s ease-in-out;
 		-moz-transition: -moz-transform 0.2s ease-in-out;
 		-o-transition: -o-transform 0.2s ease-in-out;
