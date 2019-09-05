@@ -5,7 +5,7 @@ var container = function () {
 		$("#controlContainer").append("<fieldset><legend>综合控制</legend><div><table id='allCtrlTable' class='task'></table></div></fieldset>");
 		$("#topCtrlContainer").prepend("<div id='agvsHideDiv' class='close hideToggle' data-target='div#agvDiv'></div>");
 		$("#topCtrlContainer").prepend("<div id='setupHideDiv' class='close hideToggle' data-target='div#controlContainer'></div>");
-		if (localStorage.projectKey == 'LAO_FOXICONN') {
+		if (localStorage.projectKey == 'LAO_FOXCONN') {
 			$("#topCtrlContainer").prepend("<div id='liftHideDiv' class='close hideToggle' data-target='div#liftContainer'></div>");
 			$("#topCtrlContainer").prepend("<div id='doorHideDiv' class='close hideToggle' data-target='div#autodoorContainer'></div>");
 		} else if (localStorage.projectKey == 'TAIKAI_JY') {

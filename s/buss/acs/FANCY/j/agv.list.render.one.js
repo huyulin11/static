@@ -158,7 +158,7 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
         (`<tr><td colspan='2'>关联硬件状态:${agvinfo.plcstatus ? agvinfo.plcstatus : "正常"}</td></tr>`) : ``;
     var agvbusstype = localStorage.getItem("projectKey") == 'TAIKAI_JY' ?
         (`<tr><td colspan='2'>车类型:${showVal.agvbusstype ? showVal.agvbusstype : "未知"}</td></tr>`) : ``;
-    var siteStatusVal = ['CSY_DAJ', 'LAO_FOXICONN', 'TAIKAI_JY'].indexOf(localStorage.projectKey) >= 0 ?
+    var siteStatusVal = ['CSY_DAJ', 'LAO_FOXCONN', 'TAIKAI_JY'].indexOf(localStorage.projectKey) >= 0 ?
         `<tr><td>${showVal.siteStatusVal}</td><td>${showVal.currentsite}</td></tr>` : ``;
 
     var tmpStr = `<td class='agv'><div>

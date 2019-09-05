@@ -110,7 +110,7 @@ export var init = function (target) {
 		doTask(agvId, $(this).attr("id"), targetSite);
 	});
 
-	var deleverTaskLaoFoxiconn = function () {
+	var deleverTaskLaoFoxconn = function () {
 		var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)', {
 			btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B08 3F'],
 			btn1: function () {
@@ -218,8 +218,8 @@ export var init = function (target) {
 		allDisabled();
 		if (localStorage.projectKey == 'TAIKAI_JY') {
 			deleverTaskTaikaiJy();
-		} else if (localStorage.projectKey == 'LAO_FOXICONN') {
-			deleverTaskLaoFoxiconn();
+		} else if (localStorage.projectKey == 'LAO_FOXCONN') {
+			deleverTaskLaoFoxconn();
 		}
 	});
 
