@@ -8,7 +8,7 @@ var container = function () {
 		if (localStorage.projectKey == 'LAO_FOXICONN') {
 			$("#topCtrlContainer").prepend("<div id='liftHideDiv' class='close hideToggle' data-target='div#liftContainer'></div>");
 			$("#topCtrlContainer").prepend("<div id='doorHideDiv' class='close hideToggle' data-target='div#autodoorContainer'></div>");
-		} else if (localStorage.projectKey == 'TAIKAI_LINYI') {
+		} else if (localStorage.projectKey == 'TAIKAI_JY') {
 		} else if (localStorage.projectKey == 'CSY_DAJ') {
 			$("#topCtrlContainer").prepend("<div id='chargeHideDiv' class='close hideToggle' data-target='div#chargeContainer'></div>");
 			$("#topCtrlContainer").prepend("<div id='windowCenterHideDiv' class='close hideToggle' data-target='div#windowCenterContainer'></div>");

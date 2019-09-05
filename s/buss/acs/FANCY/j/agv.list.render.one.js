@@ -128,7 +128,7 @@ var getShowVal = function (agvinfo) {
     val.agvstatus = "AGV反馈状态:" + (agvinfo.agvstatus ? agvinfo.agvstatus : "");
     val.remark = (remark ? remark : "");
 
-    if (localStorage.getItem("projectKey") == 'TAIKAI_LINYI') {
+    if (localStorage.getItem("projectKey") == 'TAIKAI_JY') {
         let temp = findIotInfo(agvinfo.id, "agvbusstype");
         if (temp == 'TON_1') { val.agvbusstype = "1吨车"; } else if (temp == 'TON_2') { val.agvbusstype = "2吨车"; }
     }
@@ -156,9 +156,9 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
 
     var relativeHD = localStorage.getItem("projectKey") == 'CSY_DAJ' ?
         (`<tr><td colspan='2'>关联硬件状态:${agvinfo.plcstatus ? agvinfo.plcstatus : "正常"}</td></tr>`) : ``;
-    var agvbusstype = localStorage.getItem("projectKey") == 'TAIKAI_LINYI' ?
+    var agvbusstype = localStorage.getItem("projectKey") == 'TAIKAI_JY' ?
         (`<tr><td colspan='2'>车类型:${showVal.agvbusstype ? showVal.agvbusstype : "未知"}</td></tr>`) : ``;
-    var siteStatusVal = ['CSY_DAJ', 'LAO_FOXICONN', 'TAIKAI_LINYI'].indexOf(localStorage.projectKey) >= 0 ?
+    var siteStatusVal = ['CSY_DAJ', 'LAO_FOXICONN', 'TAIKAI_JY'].indexOf(localStorage.projectKey) >= 0 ?
         `<tr><td>${showVal.siteStatusVal}</td><td>${showVal.currentsite}</td></tr>` : ``;
 
     var tmpStr = `<td class='agv'><div>

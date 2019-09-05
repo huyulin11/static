@@ -62,7 +62,7 @@ $(function () {
     var _addTaskTo = function (agvId, tasktype, to) {
         var rtnData;
         let targetUrl = "/json/op/addTaskTo.shtml?agvId=" + agvId;
-        if (localStorage.projectKey == 'TAIKAI_LINYI' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
+        if (localStorage.projectKey == 'TAIKAI_JY' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
             targetUrl = "/json/op/fancy/addTaskTo.shtml?agvId=" + agvId;
         }
         jQuery.ajax({

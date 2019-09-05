@@ -178,7 +178,7 @@ export var init = function (target) {
 		return rtn;
 	}
 
-	var deleverTaskTaikaiLinyi = function () {
+	var deleverTaskTaikaiJy = function () {
 		var agvbusstype = findIotInfo(agvId, "agvbusstype");
 		var targets;
 		if (agvbusstype == 'TON_1') {
@@ -216,8 +216,8 @@ export var init = function (target) {
 
 	$(_target).delegate("button[id='DELIVER']", "click", function () {
 		allDisabled();
-		if (localStorage.projectKey == 'TAIKAI_LINYI') {
-			deleverTaskTaikaiLinyi();
+		if (localStorage.projectKey == 'TAIKAI_JY') {
+			deleverTaskTaikaiJy();
 		} else if (localStorage.projectKey == 'LAO_FOXICONN') {
 			deleverTaskLaoFoxiconn();
 		}
