@@ -1,4 +1,5 @@
 import { lyGrid } from "/s/j/lyGrid.js";
+import { singletask } from "/s/buss/agv/immediateTask/j/singletaskjson.js";
 
 window.datagrid = lyGrid({
 	pagId: 'paging',
@@ -32,7 +33,7 @@ window.datagrid = lyGrid({
 		name: "任务信息",
 		renderData: function (rowindex, data, rowdata, column) {
 			var taskid = JSON.parse(data).taskid;
-			for (var val of singletaskjson) {
+			for (var val of singletask()) {
 				if (taskid == val.id) {
 					return val.tasktext;
 				}
