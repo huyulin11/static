@@ -56,7 +56,7 @@ var loadPage = function (url, openType, sn) {
 
 // tb.load("/s/buss/wms/h/shipmentMainMgr.html");
 // tb.attr("src","/s/buss/wms/h/shipmentMainMgr.html");
-gf.quoteModule("/s/buss/g/h/welcome.html", _frame);
+gf.quoteModule((localStorage.index ? localStorage.index : "/s/buss/g/h/welcome.html"), _frame);
 $("[data-tip]").each(function () {
     $(this).bind("click", function () {
         var parentLi = $(this).parent("li");
