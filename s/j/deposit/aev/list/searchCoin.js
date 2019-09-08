@@ -29,7 +29,7 @@ rv.requires().defines('search',function(){
 				type : "post",
 				url : rv.urls.searchEntityListUrl + '?entitytype=' + entitytype 
 						+ '&startRow=' + startRow  ,
-				data : serializeObject($("#coinSForm")) ,
+				data : $("#coinSForm").serializeObject() ,
 				async : true,
 				success : function(json) {
 					fillData(json);

@@ -45,7 +45,7 @@ window.datagrid = dataGrid({
 	checkbox: true
 });
 $("#searchForm").click("click", function () {//绑定查询按扭
-	var searchParams = serializeObject($("#fenye"));
+	var searchParams = $("#fenye").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});

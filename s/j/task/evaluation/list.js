@@ -178,7 +178,7 @@ window.datagrid = dataGrid({
 	treeGrid: { id: 'depositstate', pid: 'depositid' }
 });
 $("#search").click("click", function () {// 绑定查询按扭
-	var searchParams = serializeObject($("#searchForm"));
+	var searchParams = $("#searchForm").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});

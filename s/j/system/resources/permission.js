@@ -51,7 +51,7 @@ function sub() {
 	gf.doAjax({
 		async: false, // 请勿改成异步，下面有些程序依赖此请数据
 		type: "POST",
-		data: serializeObject($("#from")),
+		data: $("#from").serializeObject(),
 		url: '/resources/addUserRes.shtml',
 		dataType: 'json',
 		success: function (json) {

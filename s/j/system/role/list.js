@@ -30,7 +30,7 @@ window.datagrid = dataGrid({
 	checkbox: true
 });
 $("#search").click("click", function () {// 绑定查询按扭
-	var searchParams = serializeObject($("#searchForm"));// 初始化传参数
+	var searchParams = $("#searchForm").serializeObject();// 初始化传参数
 	window.datagrid.setOptions({
 		data: searchParams
 	});
