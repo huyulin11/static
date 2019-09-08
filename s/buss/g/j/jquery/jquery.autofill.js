@@ -1,12 +1,12 @@
 import { gp } from "/s/buss/g/j/g.p.js";
 
 $(function () {
-    $("[v-autofill]:not(title)").each(function () {
+    $("[data-autofill]:not(title)").each(function () {
         $(this).html("<img src='/s/i/loading2.gif' style='width:14px;'/>");
     });
     var dssss = setInterval(function () {
         if (!(JSON.stringify(gp) == "{}") && gp.isReady()) {
-            $("[v-autofill]").each(function () {
+            $("[data-autofill]").each(function () {
                 var autokey = $(this).data("autokey");
                 if (!autokey) {
                     return;
