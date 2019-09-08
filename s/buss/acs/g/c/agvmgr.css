@@ -413,16 +413,3 @@ div#doChangeDiv {
 div[id='targets'] button.choosed {
 	background-color: #D24D57;
 }
-
-.block-tips {
-	width: 100%;
-	display: block;
-}
-
-.block-tips div.item-group {
-	width: 23%;
-	display: inline-block;
-	background-color: #ececec54;
-	margin: 1px 2px 5px 3px;
-	text-align: center;
-}

@@ -7,7 +7,7 @@ import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 var _frame = "#loadhtml";
 
-gf.quote("/s/c/all.css", null, function () {
+gf.quote("/s/c/app.all.css", null, function () {
     $('body').fadeIn(3000);
 });
 var loadPage = function (url, openType, sn) {

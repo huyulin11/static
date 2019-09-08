@@ -1769,6 +1769,10 @@ pre code {
 	.container {
 		width: 1170px;
 	}
+
+	iframe#loadhtml>html {
+		width: 1170px;
+	}
 }
 
 .container-fluid {
@@ -14531,103 +14535,4 @@ fieldset[disabled] .btn-gplus.active {
 
 .right {
 	text-align: right;
-}
-
-iframe#loadhtml {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	border: none;
-}
-
-div.op {
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-position: center;
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
-}
-
-div.addOne {
-	background-image: url(/s/i/addplus.png);
-}
-
-div.delOne {
-	background-image: url(/s/i/del.png);
-}
-
-div.item-op {
-	float: right;
-}
-
-[v-cloak] {
-	display: none;
-}
-
-.col {
-	float: left;
-	height: 36px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-.col>input,
-.col>select {
-	width: 100%;
-	height: 30px;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	border-radius: 5px;
-}
-
-div.col>::-webkit-input-placeholder {
-	color: #d8d4d4;
-}
-
-.col-sm-1 {
-	width: 10%;
-}
-
-.col-sm-3 {
-	width: 33%;
-}
-
-.col-sm-30 {
-	width: 30%;
-}
-
-.col-sm-9 {
-	width: 90%;
-}
-
-.col-sm-5 {
-	width: 45%;
-}
-
-label[class^="btn btn-default"] {
-	margin-top: -4px;
-}
-
-.delete select,
-.delete input {
-	text-decoration: line-through;
-	color: red;
-}
-
-.delete input::-webkit-input-placeholder,
-.delete input:-moz-placeholder,
-.delete input:-ms-input-placeholder {
-	text-decoration: line-through;
-	color: red;
-}
-
-.delete>::-webkit-input-placeholder {
-	text-decoration: line-through;
-	color: red;
-}
-
-div#rows {
-	background: #FFF;
 }
