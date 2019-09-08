@@ -6,8 +6,10 @@ import "/s/j/tool/urlSearcher.js";
 import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
+var _frame = "#loadhtml";
+
 gf.quote("/s/c/all.css", null, function () {
-    $('body').fadeIn(5000);
+    $('body').fadeIn(3000);
 });
 var loadPage = function (url, openType, sn) {
     if (sn) {
@@ -48,13 +50,14 @@ var loadPage = function (url, openType, sn) {
         }
     }
 
-    gf.quoteModule(url, "#loadhtml");
+    gf.quoteModule("/s/buss/g/h/welcome.html", _frame);
+    gf.quoteModule(url, _frame);
     $("#nav").removeClass("nav-off-screen");
 }
 
 // tb.load("/s/buss/wms/h/shipmentMainMgr.html");
 // tb.attr("src","/s/buss/wms/h/shipmentMainMgr.html");
-gf.quoteModule("/s/buss/g/h/welcome.html", "#loadhtml");
+gf.quoteModule("/s/buss/g/h/welcome.html", _frame);
 $("[data-tip]").each(function () {
     $(this).bind("click", function () {
         var parentLi = $(this).parent("li");
@@ -79,4 +82,7 @@ $("a#editUI").on("click", function () {
         offset: "auto",
         content: '/user/selfInfo.shtml'
     });
+});
+
+$(_frame).on("load", function (params) {
 });
