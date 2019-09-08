@@ -1,9 +1,43 @@
 /* ---------- Browser normalization ---------- */
-article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
   display: block;
 }
 
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
   margin: 0;
   padding: 0;
 }
@@ -14,24 +48,34 @@ table {
   clear: both;
 }
 
-fieldset, img {
+fieldset,
+img {
   border: 0;
 }
 
-address, caption, cite, code, dfn, th, var {
+address,
+caption,
+cite,
+code,
+dfn,
+th,
+var {
   font-style: normal;
   font-weight: normal;
 }
 
-caption, th {
+caption,
+th {
   text-align: left;
 }
 
-q:before, q:after {
+q:before,
+q:after {
   content: '';
 }
 
-abbr, acronym {
+abbr,
+acronym {
   border: 0;
   border-bottom: 1px dotted #000;
   cursor: help;
@@ -39,6 +83,8 @@ abbr, acronym {
 
 html {
   overflow-y: scroll;
+  margin: 0 auto;
+  width: 1200px;
 }
 
 html.aui-dialog-iframe-root-node {
@@ -63,11 +109,16 @@ body.portal-iframe {
   padding: 0;
 }
 
-blockquote, ul, ol, dl {
+blockquote,
+ul,
+ol,
+dl {
   /*margin: 1em;*/
 }
 
-ol, ul, dl {
+ol,
+ul,
+dl {
   /*margin-left: 2em;*/
 }
 
@@ -106,8 +157,7 @@ p {
 
 /* ---------- Links ---------- */
 /* ---------- Headers ---------- */
-h1 {
-}
+h1 {}
 
 h2 {
   font-size: 1.6em;
@@ -117,15 +167,25 @@ h3 {
   font-size: 1.4em;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 1em 0;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   font-size: 1.1em;
 }
 
-h1, h2, h3, h4, h5, h6, strong {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
   font-weight: bold;
 }
 
@@ -173,15 +233,18 @@ body.html-editor {
 }
 
 /* ---------- Text formatting ---------- */
-b, strong {
+b,
+strong {
   font-weight: bold;
 }
 
-i, em {
+i,
+em {
   font-style: italic;
 }
 
-code, pre {
+code,
+pre {
   font-family: "Courier New", Courier, monospace;
   white-space: pre;
 }
@@ -230,7 +293,8 @@ code, pre {
 }
 
 /* ---------- Separator ---------- */
-hr, .separator {
+hr,
+.separator {
   border-top: 1px dotted #BFBFBF;
 }
 
