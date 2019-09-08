@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
 
 window.datagrid = lyGrid({
 	pagId: 'paging',
