@@ -10810,7 +10810,7 @@ a:hover .caret-white {
 }
 
 .panel.panel-default {
-	border-color: #e8e8e8;
+	border-color: #FFF;
 }
 
 .panel.panel-default>.panel-heading,
@@ -11188,7 +11188,7 @@ a:hover .caret-white {
 		vertical-align: top;
 		height: 100%;
 		padding: 0;
-		background-color: #e3f9fc;
+		background-color: #FFF;
 		float: none;
 	}
 
@@ -11384,7 +11384,7 @@ a:hover .caret-white {
 .header .nav-tabs>li.active a:hover,
 .footer .nav-tabs>li.active a,
 .footer .nav-tabs>li.active a:hover {
-	background-color: #e3f9fc;
+	background-color: #FFF;
 }
 
 .header .nav-tabs.nav-white>li.active a,
@@ -11419,7 +11419,7 @@ body.container {
 }
 
 nav li.current {
-	background: #e3f9fc;
+	background: #FFF;
 }
 
 nav li.current span {
@@ -11784,14 +11784,14 @@ nav li.current span {
 
 	.navbar-fixed-top-xs+* {
 		padding-top: 50px;
-		background-color: #e3f9fc;
+		background-color: #FFF;
 	}
 
 	html,
 	body {
 		min-height: 100%;
 		overflow-x: hidden;
-		background-color: #e3f9fc;
+		background-color: #FFF;
 	}
 
 	.open,
@@ -13141,7 +13141,7 @@ fieldset[disabled] .btn-gplus.active {
 
 .bg-light.lter,
 .bg-light .lter {
-	background-color: #fefefe;
+	background-color: #FFF;
 }
 
 .bg-light.dk,
@@ -14626,4 +14626,8 @@ label[class^="btn btn-default"] {
 .delete>::-webkit-input-placeholder {
 	text-decoration: line-through;
 	color: red;
+}
+
+div#rows {
+	background: #FFF;
 }

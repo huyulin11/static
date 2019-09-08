@@ -10,7 +10,7 @@
         $("style#associating-input").html(
             `div.associating-input-container {height: auto;box-shadow: grey 10px 10px 30px 5px; position: fixed;display: none;background: #fff;}
             div.associating-input-container a {font-size: 12px;}
-            div.associating-input-container a:hover div {font-size: 13px;background-color: #e3f9fc;}`);
+            div.associating-input-container a:hover div {font-size: 13px;background-color: #FFF;}`);
         $("body").append(`<div id='${_div_id}' class='associating-input-container'></div>`);
 
         $("html").on("click", _dataarea, function (e) {
