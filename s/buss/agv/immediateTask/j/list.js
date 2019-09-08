@@ -1,7 +1,7 @@
-import { lyGrid } from "/s/j/lyGrid.js";
+import { dataGrid } from "/s/j/kf.grid.js";
 import { singletask } from "/s/buss/agv/immediateTask/j/singletaskjson.js";
 
-window.datagrid = lyGrid({
+window.datagrid = dataGrid({
 	pagId: 'paging',
 	l_column: [{
 		colkey: "taskexesid",

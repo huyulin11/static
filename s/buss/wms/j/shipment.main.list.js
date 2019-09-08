@@ -1,9 +1,9 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
-import { lyGrid } from "/s/j/lyGrid.js";
+import { dataGrid } from "/s/j/kf.grid.js";
 
 export var init = function () {
-	window.datagrid = lyGrid({
+	window.datagrid = dataGrid({
 		pagId: 'paging',
 		l_column: [{
 			colkey: "id",

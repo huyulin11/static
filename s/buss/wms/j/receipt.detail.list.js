@@ -1,9 +1,9 @@
 import { urlSearcher } from "/s/j/tool/urlSearcher.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { lyGrid } from "/s/j/lyGrid.js";
+import { dataGrid } from "/s/j/kf.grid.js";
 
 var paperid = urlSearcher.param("receiptMainFormMap.paperid");
-window.datagrid = lyGrid({
+window.datagrid = dataGrid({
 	pagId: 'paging',
 	l_column: [{
 		colkey: "id",

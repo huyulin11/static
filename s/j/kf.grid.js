@@ -1,6 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-export var lyGrid = function (params) {
+export var dataGrid = function (params) {
 	var confs = {
 		l_column: [],
 		pagId: 'paging', // 加载表格存放位置的ID
@@ -700,7 +700,7 @@ export var lyGrid = function (params) {
 		for (var i = 0; i < this.length; i++)
 			f(this[i], i, this);
 	};
-	var lyGridUp = function (jsonUrl) { // 上移所选行
+	var dataGridUp = function (jsonUrl) { // 上移所选行
 
 		var upOne = function (tr) { // 上移1行
 			if (tr.rowIndex > 0) {
@@ -741,7 +741,7 @@ export var lyGrid = function (params) {
 			dataType: 'json',
 		});
 	};
-	var lyGridDown = function (jsonUrl) { // 下移所选行
+	var dataGridDown = function (jsonUrl) { // 下移所选行
 
 		var downOne = function (tr) {
 			if (tr.rowIndex < divid.children[0].children.mytable.rows.length - 1) {
@@ -991,8 +991,8 @@ export var lyGrid = function (params) {
 		getSelectedCheckbox: getSelectedCheckbox,
 		getSelectedCheckboxCid: getSelectedCheckboxCid,
 		selectRow: selectRow,// 选中行事件
-		lyGridUp: lyGridUp,
-		lyGridDown: lyGridDown,
+		dataGridUp: dataGridUp,
+		dataGridDown: dataGridDown,
 		rowline: rowline
 	};
 };
@@ -1011,5 +1011,3 @@ var fixhead = function () {
 	 * $('#table_head').css('margin-left', -($('.t_table').scrollLeft())); });
 	 */
 };
-
-window.lyGrid = lyGrid;

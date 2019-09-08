@@ -1,7 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { lyGrid } from "/s/j/lyGrid.js";
+import { dataGrid } from "/s/j/kf.grid.js";
 
-window.datagrid = lyGrid({
+window.datagrid = dataGrid({
 	id: 'paging',
 	l_column: [{
 		colkey: "id",
@@ -63,13 +63,13 @@ $("#editFun").click("click", function () {
 $("#delFun").click("click", function () {
 	delFun();
 });
-$("#lyGridUp").click("click", function () {// 上移
+$("#dataGridUp").click("click", function () {// 上移
 	var jsonUrl = '/background/resources/sortUpdate.shtml';
-	window.datagrid.lyGridUp(jsonUrl);
+	window.datagrid.dataGridUp(jsonUrl);
 });
-$("#lyGridDown").click("click", function () {// 下移
+$("#dataGridDown").click("click", function () {// 下移
 	var jsonUrl = '/background/resources/sortUpdate.shtml';
-	window.datagrid.lyGridDown(jsonUrl);
+	window.datagrid.dataGridDown(jsonUrl);
 });
 
 function editFun() {

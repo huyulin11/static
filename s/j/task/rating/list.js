@@ -1,6 +1,6 @@
-import { lyGrid } from "/s/j/lyGrid.js";
+import { dataGrid } from "/s/j/kf.grid.js";
 
-window.datagrid = lyGrid({
+window.datagrid = dataGrid({
 	id: 'paging',
 	l_column: [
 		{

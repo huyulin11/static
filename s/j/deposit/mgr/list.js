@@ -1,6 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-window.datagrid = lyGrid({
+window.datagrid = dataGrid({
 	id: 'paging',
 	l_column: [{
 		colkey: "innerno",
