@@ -286,7 +286,7 @@ class GF {
         $("[data-url]").each(function () {
             var tb = $(this);
             tb.html(gf.loadingImg());
-            tb.load(tb.attr("data-url"));
+            tb.load(tb.data("url"));
         });
     };
 }
