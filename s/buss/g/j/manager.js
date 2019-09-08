@@ -1,12 +1,15 @@
 import "/s/buss/acs/g/j/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import "/s/j/lyGrid.js";
 import "/s/j/tool/urlSearcher.js";
 import "/s/buss/g/j/g.p.js";
-import "/s/buss/g/j/jquery/jquery.autofill.js"
+import "/s/buss/g/j/jquery/jquery.autofill.js";
 
-window.nv = {};
-window.nv.loadPage = function (url, openType, sn) {
+gf.quote("/s/c/all.css", null, function () {
+    $('body').fadeIn(5000);
+});
+var loadPage = function (url, openType, sn) {
     if (sn) {
         var snul = document.getElementById("topli");
         snul.innerHTML = '<li><i class="fa fa-home"></i> <a href="index.shtml">Home</a></li>';
@@ -17,7 +20,7 @@ window.nv.loadPage = function (url, openType, sn) {
             a.innerHTML = sn[i].name || "";
             if (sn[i].url) {
                 $(a).click(function () {
-                    window.nv.loadPage(sn[i].url);
+                    loadPage(sn[i].url);
                 });
             }
             li.appendChild(a);
@@ -45,14 +48,13 @@ window.nv.loadPage = function (url, openType, sn) {
         }
     }
 
-    gf.quote(url, "#loadhtml");
+    gf.quoteModule(url, "#loadhtml");
     $("#nav").removeClass("nav-off-screen");
 }
 
-var tb = $("#loadhtml");
-tb.html(CommnUtil.loadingImg());
-// tb.load("/s/buss/sys/dic/h/sysDicMgr.html");
-tb.load("/s/buss/g/h/welcome.html");
+// tb.load("/s/buss/wms/h/shipmentMainMgr.html");
+// tb.attr("src","/s/buss/wms/h/shipmentMainMgr.html");
+gf.quoteModule("/s/buss/g/h/welcome.html", "#loadhtml");
 $("[data-tip]").each(function () {
     $(this).bind("click", function () {
         var parentLi = $(this).parent("li");
@@ -65,7 +67,7 @@ $("[data-tip]").each(function () {
             html += '<li><a>' + sn[i] + '</a></li>';
         }
         $("#topli").html(html);
-        window.nv.loadPage(sn[2], sn[3]);
+        loadPage(sn[2], sn[3]);
     });
 });
 

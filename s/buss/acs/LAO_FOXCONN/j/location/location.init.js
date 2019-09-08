@@ -1,3 +1,5 @@
+import { gf } from "/s/buss/g/j/g.f.js";
+
 var keyNum = 1;
 var toggleColor = function () {
     var key = $("html").data("key");

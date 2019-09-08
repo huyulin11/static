@@ -1,6 +1,9 @@
-function byRes(id) {
+
+import { gf } from "/s/buss/g/j/g.f.js";
+
+export function byRes(id) {
     var url = '/resources/reslists.shtml';
-    var data = CommnUtil.ajax(url, null, "json");
+    var data = gf.ajax(url, null, "json");
     if (data != null) {
         var h = "<option value='0'>------顶级目录------</option>";
         for (var i = 0; i < data.length; i++) {

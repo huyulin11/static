@@ -1,58 +1,59 @@
 import { urlSearcher } from "/s/j/tool/urlSearcher.js";
+import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
 
 var paperid = urlSearcher.param("shipmentMainFormMap.paperid");
-$(function () {
-	window.datagrid = lyGrid({
-		pagId: 'paging',
-		l_column: [{
-			colkey: "id",
-			name: "id",
-			hide: true,
-		}, {
-			colkey: "paperid",
-			name: "出库单号"
-		}, {
-			colkey: "userdef1",
-			name: "货位"
-		}, {
-			colkey: "sequence",
-			name: "次序",
-		}, {
-			colkey: "updatetime",
-			name: "更新时间",
-			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-			}
-		}, {
-			colkey: "createtime",
-			name: "创建时间",
-			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-			}
-		}],
-		jsonUrl: '/shipment/detail/findByPage.shtml?shipmentDetailFormMap.paperid=' + paperid,
-		checkbox: true,
-		serNumber: true
-	});
-	$("#search").on("click", function () {// 绑定查询按扭
-		var searchParams = $("#searchForm").serialize();// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#addTask").click("click", function () {
-		addTask();
-	});
-	$("#editTask").click("click", function () {
-		editTask();
-	});
-	$("#delTask").click("click", function () {
-		delTask();
-	});
-	$("#permissions").click("click", function () {
-		permissions();
+window.datagrid = lyGrid({
+	pagId: 'paging',
+	l_column: [{
+		colkey: "id",
+		name: "id",
+		hide: true,
+	}, {
+		colkey: "paperid",
+		name: "出库单号"
+	}, {
+		colkey: "userdef1",
+		name: "货位"
+	}, {
+		colkey: "sequence",
+		name: "次序",
+	}, {
+		colkey: "updatetime",
+		name: "更新时间",
+		renderData: function (rowindex, data, rowdata, column) {
+			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+		}
+	}, {
+		colkey: "createtime",
+		name: "创建时间",
+		renderData: function (rowindex, data, rowdata, column) {
+			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+		}
+	}],
+	jsonUrl: '/shipment/detail/findByPage.shtml?shipmentDetailFormMap.paperid=' + paperid,
+	checkbox: true,
+	serNumber: true
+});
+$("#search").on("click", function () {// 绑定查询按扭
+	var searchParams = $("#searchForm").serialize();// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
 });
+$("#addTask").click("click", function () {
+	addTask();
+});
+$("#editTask").click("click", function () {
+	editTask();
+});
+$("#delTask").click("click", function () {
+	delTask();
+});
+$("#permissions").click("click", function () {
+	permissions();
+});
+
 function editTask() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -82,7 +83,7 @@ function delTask() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/shipment/detail/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {

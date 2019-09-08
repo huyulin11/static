@@ -1,41 +1,43 @@
-$(function () {
-	window.datagrid = lyGrid({
-		id: 'paging',
-		l_column: [{
-			colkey: "resId",
-			name: "资源编号",
-			renderData: function (rowindex, data, rowdata, column) {
-				return gv.getRes(data);
-			}
-		}, {
-			colkey: "roleId",
-			name: "角色编号",
-			renderData: function (rowindex, data, rowdata, column) {
-				return gv.getRole(data);
-			}
-		}],
-		jsonUrl: '/roleres/findByPage.shtml',
-		checkbox: true
-	});
-	$("#search").click("click", function () {// 绑定查询按扭
-		var searchParams = serializeObject($("#searchForm"));// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#addRole").click("click", function () {
-		addRole();
-	});
-	$("#editRole").click("click", function () {
-		editRole();
-	});
-	$("#delRole").click("click", function () {
-		delRole();
-	});
-	$("#permissions").click("click", function () {
-		permissions();
+import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+window.datagrid = lyGrid({
+	id: 'paging',
+	l_column: [{
+		colkey: "resId",
+		name: "资源编号",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.getRes(data);
+		}
+	}, {
+		colkey: "roleId",
+		name: "角色编号",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.getRole(data);
+		}
+	}],
+	jsonUrl: '/roleres/findByPage.shtml',
+	checkbox: true
+});
+$("#search").click("click", function () {// 绑定查询按扭
+	var searchParams = serializeObject($("#searchForm"));// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
 });
+$("#addRole").click("click", function () {
+	addRole();
+});
+$("#editRole").click("click", function () {
+	editRole();
+});
+$("#delRole").click("click", function () {
+	delRole();
+});
+$("#permissions").click("click", function () {
+	permissions();
+});
+
 function editRole() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -79,7 +81,7 @@ function delRole() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/roleres/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {

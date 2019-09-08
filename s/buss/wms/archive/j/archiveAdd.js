@@ -1,4 +1,5 @@
-//单独验证某一个input  class="checkpass"
+import { gf } from "/s/buss/g/j/g.f.js";
+
 jQuery.validator.addMethod("checkRole", function (value, element) {
 	return this.optional(element) || ((value.length <= 10) && (value.length >= 3));
 }, "角色名由3至10位字符组合构成");
@@ -6,7 +7,7 @@ $(function () {
 	$("form").validate({
 		submitHandler: function (form) {//必须写在验证前面，否则无法ajax提交
 			debugger;
-			ly.ajaxSubmit(form, {//验证新增是否成功
+			gf.doAjaxSubmit(form, {//验证新增是否成功
 				type: "post",
 				dataType: "json",
 				success: function (data) {

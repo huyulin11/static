@@ -1,50 +1,51 @@
-$(function () {
-	window.datagrid = lyGrid({
-		pagId: 'paging',
-		l_column: [{
-			colkey: "id",
-			name: "id",
-			hide: true,
-		}, {
-			colkey: "skuId",
-			name: "SKU编号",
-		}, {
-			colkey: "lapName",
-			name: "取货地点",
-			renderData: function (rowindex, data, rowdata, column) {
-				if (rowdata.delflag == "1") {
-					return data;
-				}
-				return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a class='editLapName'><img src='/s/i/edit.png'/></a>" + "</div>";
+import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+window.datagrid = lyGrid({
+	pagId: 'paging',
+	l_column: [{
+		colkey: "id",
+		name: "id",
+		hide: true,
+	}, {
+		colkey: "skuId",
+		name: "SKU编号",
+	}, {
+		colkey: "lapName",
+		name: "取货地点",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (rowdata.delflag == "1") {
+				return data;
 			}
-		}, {
-			colkey: "inUesd",
-			name: "是否在用",
-			hide: true,
-		}, {
-			colkey: "environment",
-			name: "环境",
-			hide: true,
-		}, {
-			colkey: "name",
-			name: "SKU名称",
-		}, {
-			colkey: "delflag",
-			name: "是否删除",
-			renderData: function (rowindex, data, rowdata, column) {
-				if (data == "1") {
-					$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
-					return "已删除";
-				} else {
-					return "正常使用";
-				}
+			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "<a class='editLapName'><img src='/s/i/edit.png'/></a>" + "</div>";
+		}
+	}, {
+		colkey: "inUesd",
+		name: "是否在用",
+		hide: true,
+	}, {
+		colkey: "environment",
+		name: "环境",
+		hide: true,
+	}, {
+		colkey: "name",
+		name: "SKU名称",
+	}, {
+		colkey: "delflag",
+		name: "是否删除",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (data == "1") {
+				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
+				return "已删除";
+			} else {
+				return "正常使用";
 			}
-		}],
-		jsonUrl: '/agv/lap/findByPage.shtml',
-		checkbox: true,
-		serNumber: true
-	});
+		}
+	}],
+	jsonUrl: '/agv/lap/findByPage.shtml',
+	checkbox: true,
+	serNumber: true
 });
 
 $("#search").on("click", function () {// 绑定查询按扭
@@ -75,7 +76,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/agv/lap/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {

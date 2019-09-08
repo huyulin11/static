@@ -48,7 +48,7 @@ function closeWin() {
 	parent.layer.close(parent.pageii);
 }
 function sub() {
-	ly.ajax({
+	gf.doAjax({
 		async: false, // 请勿改成异步，下面有些程序依赖此请数据
 		type: "POST",
 		data: serializeObject($("#from")),

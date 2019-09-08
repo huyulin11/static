@@ -1,4 +1,8 @@
-$(function () {
+import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+export var init = function () {
 	window.datagrid = lyGrid({
 		pagId: 'paging',
 		l_column: [{
@@ -65,35 +69,37 @@ $(function () {
 		checkbox: true,
 		serNumber: true
 	});
-	$("#search").on("click", function () {// 绑定查询按扭
-		var searchParams = $("#searchForm").serialize();// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#add").click("click", function () {
-		add();
-	});
-	$("#edit").click("click", function () {
-		edit();
-	});
-	$("#del").click("click", function () {
-		del();
-	});
+}
 
-	$("html").undelegate("button.detail", "click");
-	$("html").delegate("button.detail", "click", function () {
-		detail($(this).data("paperid"));
-	});
-
-	$("html").undelegate("button.execute", "click");
-	$("html").delegate("button.execute", "click", function () {
-		execute($(this).data("id"));
-	});
-	$("#permissions").click("click", function () {
-		permissions();
+$("#search").on("click", function () {// 绑定查询按扭
+	var searchParams = $("#searchForm").serialize();// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
 });
+$("#add").click("click", function () {
+	add();
+});
+$("#edit").click("click", function () {
+	edit();
+});
+$("#del").click("click", function () {
+	del();
+});
+
+$("html").undelegate("button.detail", "click");
+$("html").delegate("button.detail", "click", function () {
+	detail($(this).data("paperid"));
+});
+
+$("html").undelegate("button.execute", "click");
+$("html").delegate("button.execute", "click", function () {
+	execute($(this).data("id"));
+});
+$("#permissions").click("click", function () {
+	permissions();
+});
+
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -132,7 +138,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/shipment/main/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {
@@ -147,7 +153,7 @@ function del() {
 function execute(id) {
 	layer.confirm('是否下达此单到AGV执行？（此动作不可撤回）', function (index) {
 		var url = '/shipment/main/execute.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			id: id
 		}, "json");
 		if (s == "success") {

@@ -1,15 +1,29 @@
-<div class="col-md-12">
-    <div class="alert alert-warning alert-block">
-        <table style="width: 100%;">
-            <tbody>
-                <tr>
-                    <td align="center" colspan="2">
-                        <h1>
-                            <span class="autofill" data-autokey="fullProjectName"></span>
-                        </h1>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<html>
+
+<body>
+    <link type="text/css" rel="stylesheet" href="/s/c/all.css" />
+
+    <title v-autofill data-autokey='client.shortname'></title>
+    <div class="col-md-12">
+        <div class="alert alert-warning alert-block">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td align="center" colspan="2">
+                            <h1>
+                                <span v-autofill data-autokey="fullProjectName"></span>
+                            </h1>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+    <script src="/s/j/jquery-1.12.2.min.js"></script>
+    <script type="module">
+        import "/s/buss/g/j/g.p.js";
+        import "/s/buss/g/j/jquery/jquery.autofill.js";
+    </script>
+</body>
+
+</html>

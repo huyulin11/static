@@ -1,39 +1,41 @@
-$(function () {
-	window.datagrid = lyGrid({
-		pagId: 'paging',
-		l_column: [{
-			colkey: "id",
-			name: "AGV编号",
-		}, {
-			colkey: "ip",
-			name: "ip地址"
-		}, {
-			colkey: "port",
-			name: "端口"
-		}],
-		jsonUrl: '/iotinfo/agv/findByPage.shtml',
-		checkbox: true,
-		serNumber: true
-	});
-	$("#search").on("click", function () {// 绑定查询按扭
-		var searchParams = $("#searchForm").serialize();// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#add").click("click", function () {
-		add();
-	});
-	$("#edit").click("click", function () {
-		edit();
-	});
-	$("#del").click("click", function () {
-		del();
-	});
-	$("#permissions").click("click", function () {
-		permissions();
+import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+window.datagrid = lyGrid({
+	pagId: 'paging',
+	l_column: [{
+		colkey: "id",
+		name: "AGV编号",
+	}, {
+		colkey: "ip",
+		name: "ip地址"
+	}, {
+		colkey: "port",
+		name: "端口"
+	}],
+	jsonUrl: '/iotinfo/agv/findByPage.shtml',
+	checkbox: true,
+	serNumber: true
+});
+$("#search").on("click", function () {// 绑定查询按扭
+	var searchParams = $("#searchForm").serialize();// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
 });
+$("#add").click("click", function () {
+	add();
+});
+$("#edit").click("click", function () {
+	edit();
+});
+$("#del").click("click", function () {
+	del();
+});
+$("#permissions").click("click", function () {
+	permissions();
+});
+
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -63,7 +65,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/iotinfo/agv/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {

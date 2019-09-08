@@ -1,103 +1,107 @@
-$(function () {
-	window.datagrid = lyGrid({
-		pagId: 'paging',
-		l_column: [{
-			colkey: "id",
-			name: "id",
-			hide: true,
-		}, {
-			colkey: "paperid",
-			name: "盘点单号"
-		}, {
-			colkey: "totallines",
-			name: "盘点数量"
-		}, {
-			colkey: "inventorytype",
-			name: "盘点类型",
-			renderData: function (rowindex, data, rowdata, column) {
-				return gv.get("WMS_INVENTORY_TYPE", data);
-			}
-		}, {
-			colkey: "status",
-			name: "状态",
-			renderData: function (rowindex, data, rowdata, column) {
-				if (rowdata.delflag == 1) {
-					$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dedede");
-					return "已删除";
-				} else {
-					if (data == 3) {
-						$("tr[d-tree='" + rowdata.dtee + "']").css("color", "red");
-					}
+import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+window.datagrid = lyGrid({
+	pagId: 'paging',
+	l_column: [{
+		colkey: "id",
+		name: "id",
+		hide: true,
+	}, {
+		colkey: "paperid",
+		name: "盘点单号"
+	}, {
+		colkey: "totallines",
+		name: "盘点数量"
+	}, {
+		colkey: "inventorytype",
+		name: "盘点类型",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.get("WMS_INVENTORY_TYPE", data);
+		}
+	}, {
+		colkey: "status",
+		name: "状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (rowdata.delflag == 1) {
+				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dedede");
+				return "已删除";
+			} else {
+				if (data == 3) {
+					$("tr[d-tree='" + rowdata.dtee + "']").css("color", "red");
 				}
-				return gv.get("ACS_STATUS", data);
 			}
-		}, {
-			colkey: "updatetime",
-			name: "更新时间",
-			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-			}
-		}, {
-			colkey: "createtime",
-			name: "创建时间",
-			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-			}
-		}, {
-			name: "操作",
-			renderData: function (data, rowdata, rowindex, column) {
-				var btns = "<button type='button' class='btn btn-info marR10 detail' data-paperid='"
-					+ rowindex.paperid + "'>明细</button>";
-				if (rowdata.delflag != 1) {
-					btns = btns + "&nbsp;&nbsp;" + "<button type='button' class='btn btn-info marR10 whichAgv' data-paperid='"
-						+ rowindex.paperid + "'>执行AGV</button>";
-					if (rowindex.status == 1) {
-						btns = "<button type='button' class='btn btn-info marR10 execute' data-id='"
-							+ rowindex.id + "'>下达到AGV</button>" + "&nbsp;&nbsp;" + btns;
-					}
+			return gv.get("ACS_STATUS", data);
+		}
+	}, {
+		colkey: "updatetime",
+		name: "更新时间",
+		renderData: function (rowindex, data, rowdata, column) {
+			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+		}
+	}, {
+		colkey: "createtime",
+		name: "创建时间",
+		renderData: function (rowindex, data, rowdata, column) {
+			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+		}
+	}, {
+		name: "操作",
+		renderData: function (data, rowdata, rowindex, column) {
+			var btns = "<button type='button' class='btn btn-info marR10 detail' data-paperid='"
+				+ rowindex.paperid + "'>明细</button>";
+			if (rowdata.delflag != 1) {
+				btns = btns + "&nbsp;&nbsp;" + "<button type='button' class='btn btn-info marR10 whichAgv' data-paperid='"
+					+ rowindex.paperid + "'>执行AGV</button>";
+				if (rowindex.status == 1) {
+					btns = "<button type='button' class='btn btn-info marR10 execute' data-id='"
+						+ rowindex.id + "'>下达到AGV</button>" + "&nbsp;&nbsp;" + btns;
 				}
-				return btns;
 			}
-		}],
-		jsonUrl: '/inventory/main/findByPage.shtml',
-		checkbox: true,
-		serNumber: true
-	});
-	$("#search").on("click", function () {// 绑定查询按扭
-		var searchParams = $("#searchForm").serialize();// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#add").click("click", function () {
-		add();
-	});
-	$("#edit").click("click", function () {
-		edit();
-	});
-	$("#del").click("click", function () {
-		del();
-	});
+			return btns;
+		}
+	}],
+	jsonUrl: '/inventory/main/findByPage.shtml',
+	checkbox: true,
+	serNumber: true
+});
 
-	$("html").undelegate("button.detail", "click");
-	$("html").delegate("button.detail", "click", function () {
-		detail($(this).data("paperid"));
-	});
-
-	$("html").undelegate("button.whichAgv", "click");
-	$("html").delegate("button.whichAgv", "click", function () {
-		whichAgv($(this).data("paperid"));
-	});
-
-	$("html").undelegate("button.execute", "click");
-	$("html").delegate("button.execute", "click", function () {
-		execute($(this).data("id"));
-	});
-
-	$("#permissions").click("click", function () {
-		permissions();
+$("#search").on("click", function () {// 绑定查询按扭
+	var searchParams = $("#searchForm").serialize();// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
 });
+$("#add").click("click", function () {
+	add();
+});
+$("#edit").click("click", function () {
+	edit();
+});
+$("#del").click("click", function () {
+	del();
+});
+
+$("html").undelegate("button.detail", "click");
+$("html").delegate("button.detail", "click", function () {
+	detail($(this).data("paperid"));
+});
+
+$("html").undelegate("button.whichAgv", "click");
+$("html").delegate("button.whichAgv", "click", function () {
+	whichAgv($(this).data("paperid"));
+});
+
+$("html").undelegate("button.execute", "click");
+$("html").delegate("button.execute", "click", function () {
+	execute($(this).data("id"));
+});
+
+$("#permissions").click("click", function () {
+	permissions();
+});
+
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -130,7 +134,7 @@ function detail(paperid) {
 }
 function whichAgv(key) {
 	var url = '/bd/conf.shtml?table=task_agv';
-	var s = CommnUtil.ajax(url, {
+	var s = gf.ajax(url, {
 		key: key + "%"
 	}, "json");
 	var info = "";
@@ -148,7 +152,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/inventory/main/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {
@@ -163,7 +167,7 @@ function del() {
 function execute(id) {
 	layer.confirm('是否下达此单到AGV执行？（此动作不可撤回）', function (index) {
 		var url = '/inventory/main/execute.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			id: id
 		}, "json");
 		if (s == "success") {

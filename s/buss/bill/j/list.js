@@ -1,52 +1,54 @@
-$(function () {
-	window.datagrid = lyGrid({
-		pagId: 'paging',
-		l_column: [{
-			colkey: "id",
-			name: "id",
-			hide: true,
-		}, {
-			colkey: "occurdate",
-			name: "发生日期"
-		}, {
-			colkey: "species",
-			name: "类别"
-		}, {
-			colkey: "amount",
-			name: "金额",
-		}, {
-			colkey: "createtime",
-			name: "记录时间",
-			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-			}
-		}, {
-			colkey: "remarks",
-			name: "说明",
-		}],
-		jsonUrl: '/bill/findByPage.shtml',
-		checkbox: true,
-		serNumber: true
-	});
-	$("#search").on("click", function () {// 绑定查询按扭
-		var searchParams = $("#searchForm").serialize();// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#add").click("click", function () {
-		add();
-	});
-	$("#edit").click("click", function () {
-		edit();
-	});
-	$("#del").click("click", function () {
-		del();
-	});
-	$("#permissions").click("click", function () {
-		permissions();
+import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+window.datagrid = lyGrid({
+	pagId: 'paging',
+	l_column: [{
+		colkey: "id",
+		name: "id",
+		hide: true,
+	}, {
+		colkey: "occurdate",
+		name: "发生日期"
+	}, {
+		colkey: "species",
+		name: "类别"
+	}, {
+		colkey: "amount",
+		name: "金额",
+	}, {
+		colkey: "createtime",
+		name: "记录时间",
+		renderData: function (rowindex, data, rowdata, column) {
+			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+		}
+	}, {
+		colkey: "remarks",
+		name: "说明",
+	}],
+	jsonUrl: '/bill/findByPage.shtml',
+	checkbox: true,
+	serNumber: true
+});
+$("#search").on("click", function () {// 绑定查询按扭
+	var searchParams = $("#searchForm").serialize();// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
 });
+$("#add").click("click", function () {
+	add();
+});
+$("#edit").click("click", function () {
+	edit();
+});
+$("#del").click("click", function () {
+	del();
+});
+$("#permissions").click("click", function () {
+	permissions();
+});
+
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -76,7 +78,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/bill/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {

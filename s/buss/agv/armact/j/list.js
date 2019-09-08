@@ -1,49 +1,50 @@
-$(function () {
-	window.datagrid = lyGrid({
-		pagId: 'paging',
-		l_column: [{
-			colkey: "id",
-			name: "id",
-			hide: true,
-		}, {
-			colkey: "armactname",
-			name: "动作名称"
-		}, {
-			colkey: "armactcode",
-			name: "动作编码"
-		}, {
-			colkey: "delflag",
-			name: "数据状态",
-			renderData: function (rowindex, data, rowdata, column) {
-				if (rowdata.delflag == "1") {
-					$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
-					return "已删除";
-				}
-				return "正常使用";
+import { gf } from "/s/buss/g/j/g.f.js";
+import { lyGrid } from "/s/j/lyGrid.js";
+
+window.datagrid = lyGrid({
+	pagId: 'paging',
+	l_column: [{
+		colkey: "id",
+		name: "id",
+		hide: true,
+	}, {
+		colkey: "armactname",
+		name: "动作名称"
+	}, {
+		colkey: "armactcode",
+		name: "动作编码"
+	}, {
+		colkey: "delflag",
+		name: "数据状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (rowdata.delflag == "1") {
+				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
+				return "已删除";
 			}
-		}],
-		jsonUrl: '/armact/findByPage.shtml',
-		checkbox: true,
-		serNumber: true
+			return "正常使用";
+		}
+	}],
+	jsonUrl: '/armact/findByPage.shtml',
+	checkbox: true,
+	serNumber: true
+});
+$("#search").on("click", function () {// 绑定查询按扭
+	var searchParams = $("#searchForm").serialize();// 初始化传参数
+	window.datagrid.setOptions({
+		data: searchParams
 	});
-	$("#search").on("click", function () {// 绑定查询按扭
-		var searchParams = $("#searchForm").serialize();// 初始化传参数
-		window.datagrid.setOptions({
-			data: searchParams
-		});
-	});
-	$("#add").click("click", function () {
-		add();
-	});
-	$("#edit").click("click", function () {
-		edit();
-	});
-	$("#del").click("click", function () {
-		del();
-	});
-	$("#permissions").click("click", function () {
-		permissions();
-	});
+});
+$("#add").click("click", function () {
+	add();
+});
+$("#edit").click("click", function () {
+	edit();
+});
+$("#del").click("click", function () {
+	del();
+});
+$("#permissions").click("click", function () {
+	permissions();
 });
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
@@ -74,7 +75,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/armact/deleteEntity.shtml';
-		var s = CommnUtil.ajax(url, {
+		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
 		if (s == "success") {
