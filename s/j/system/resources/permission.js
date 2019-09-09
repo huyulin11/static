@@ -1,53 +1,70 @@
-$(function () {
-	$.ajax({
-		type: "POST",
-		data: {
-			"resFormMap.userId": $("#userId").val(),
-			"resFormMap.roleId": $("#roleId").val()
-		},
-		url: '/resources/findRes.shtml',
-		dataType: 'json',
-		success: function (json) {
-			for (index in json) {
-				$(
-					"input[name='resId']:checkbox[value='" + json[index].id
-					+ "']").prop('checked', 'true');
-			}
+import { gf } from "/s/buss/g/j/g.f.js";
+
+$.ajax({
+	type: "POST",
+	data: {
+		"resFormMap.userId": $("#userId").val(),
+		"resFormMap.roleId": $("#roleId").val()
+	},
+	url: '/resources/findRes.shtml',
+	dataType: 'json',
+	success: function (json) {
+		for (index in json) {
+			$(
+				"input[name='resId']:checkbox[value='" + json[index].id
+				+ "']").prop('checked', 'true');
 		}
-	});
+	}
 });
-function smenu(obj, id) {
-	$("input[_key='menu_1_" + id + "']").each(function () {
+
+function smenu(obj) {
+	$("input[_key='menu_1_" + $(obj).val() + "']").each(function () {
 		$(this).prop("checked", obj.checked);
 	});
-	$("input[_key='menu_1_1_" + id + "']").each(function () {
+	$("input[_key='menu_1_1_" + $(obj).val() + "']").each(function () {
 		$(this).prop("checked", obj.checked);
 	});
 };
-function menu_1(obj, id, pid) {
-	$("input[_key_2='menu_1_1_" + id + "']").each(function () {
+
+$(".smenu").on("click", function () {
+	smenu(this);
+});
+
+function menu_1(obj) {
+	$("input[_key_2='menu_1_1_" + $(obj).val() + "']").each(function () {
 		$(this).prop("checked", obj.checked);
 	});
 	if (obj.checked == true) {
-		$("input[_key='menu_" + pid + "']").each(function () {
+		$("input[_key='menu_" + $(obj).data("kid") + "']").each(function () {
 			$(this).prop("checked", obj.checked);
 		});
 	}
 };
-function menu_1_1(obj, id, pid) {
+
+$(".menu_1").on("click", function () {
+	menu_1(this);
+});
+
+function menu_1_1(obj) {
 	if (obj.checked == true) {
-		$("input[_key_1='menu_1_1_" + id + "']").each(function () {
+		$("input[_key_1='menu_1_1_" + $(obj).data("kcid") + "']").each(function () {
 			$(this).prop("checked", obj.checked);
 		});
-		$("input[_key='menu_" + pid + "']").each(function () {
+		$("input[_key='menu_" + $(obj).data("kid") + "']").each(function () {
 			$(this).prop("checked", obj.checked);
 		});
 	}
 }
-function closeWin() {
+
+$(".menu_1_1").on("click", function () {
+	menu_1_1(this);
+});
+
+$("#closeWin").on("click", function () {
 	parent.layer.close(parent.pageii);
-}
-function sub() {
+});
+
+$("#sub").on("click", function () {
 	gf.doAjax({
 		async: false, // 请勿改成异步，下面有些程序依赖此请数据
 		type: "POST",
@@ -74,4 +91,4 @@ function sub() {
 			;
 		}
 	});
-}
+});
