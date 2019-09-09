@@ -3,6 +3,7 @@ iframe#loadhtml {
 	height: 100%;
 	position: absolute;
 	border: none;
+	display: none;
 }
 
 div.op {

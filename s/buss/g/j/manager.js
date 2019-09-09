@@ -49,7 +49,7 @@ var loadPage = function (url, openType, sn) {
         }
     }
 
-    gf.quoteModule("/s/buss/g/h/welcome.html", _frame);
+    $(_frame).hide();
     gf.quoteModule(url, _frame);
     $("#nav").removeClass("nav-off-screen");
 }
@@ -85,4 +85,5 @@ $("a#editUI").on("click", function () {
 
 $(_frame).on("load", function (params) {
     $(this).contents().find("html").addClass("frame");
+    $(this).fadeIn();
 });
