@@ -81,10 +81,10 @@ acronym {
   cursor: help;
 }
 
-html {
-  overflow-y: scroll;
+html.frame>body {
+  /* overflow-y: scroll; */
   margin: 0 auto;
-  width: 1200px;
+  max-width: 1200px;
 }
 
 html.aui-dialog-iframe-root-node {

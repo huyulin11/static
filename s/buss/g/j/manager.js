@@ -84,4 +84,5 @@ $("a#editUI").on("click", function () {
 });
 
 $(_frame).on("load", function (params) {
+    $(this).contents().find("html").addClass("frame");
 });

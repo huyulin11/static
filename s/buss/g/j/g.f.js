@@ -1,8 +1,6 @@
 class GF {
     layerOpen(confs) {
         if ($(window).width() < 960) { window.open(confs.content); return; }
-
-        if ($(window).width() < 960) { window.open(confs.content); return; }
         var initConf = {
             type: 2,
             shade: 0,
