@@ -2793,6 +2793,7 @@ th {
 .table-bordered>tbody>tr>td,
 .table-bordered>tfoot>tr>td {
 	border: 1px solid #ddd;
+	border-style: solid;
 }
 
 .table-bordered>thead>tr>th,
