@@ -3500,7 +3500,7 @@ select[multiple].input-lg {
 	.form-horizontal .control-label {
 		padding-top: 7px;
 		margin-bottom: 0;
-		text-align: right;
+		/* text-align: right; */
 	}
 }
 
@@ -14521,7 +14521,7 @@ fieldset[disabled] .btn-gplus.active {
 }
 
 .form-group {
-	padding-left: 15px
+	padding-left: 15px;
 }
 
 .left {

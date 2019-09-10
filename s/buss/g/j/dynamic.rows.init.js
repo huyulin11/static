@@ -47,7 +47,7 @@ var getItem = (data) => {
     value="${_status}" data-value="${_status}" autocomplete="off"></div>`;
     let delOp = `<div title="删除" class="delOne op item-op"></div>`;
     return `
-    <div class="${_conf.targetClass} form-group" id="${_conf.targetClass}-${serial}">
+    <div class="${_conf.targetClass}" id="${_conf.targetClass}-${serial}">
     ${ss}${_conf.model == 'VIEW' ? '' : delOp}
     </div>`;
 }
@@ -71,6 +71,12 @@ var addItem = (data) => {
 
 export var initRows = (conf, initData) => {
     _conf = conf;
+
+    if (_conf.model == 'VIEW') {
+        $(_conf.addBtn).hide();
+        $(_conf.subBtn).hide();
+    }
+
     _initData = initData;
 
     checkDel();
