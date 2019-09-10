@@ -17,7 +17,7 @@ export var init = function () {
 			name: "仓库",
 			renderData: function (rowindex, data, rowdata, column) {
 				if (!data) {
-					return "默认仓";
+					return "--空--";
 				}
 				return gv.get("WAREHOUSE", data);
 			}

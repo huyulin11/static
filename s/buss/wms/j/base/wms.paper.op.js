@@ -33,8 +33,6 @@ export function executeRm(id) {
     });
 }
 
-
-
 export function delSm() {
     var cbox = window.datagrid.getSelectedCheckbox();
     if (cbox == "") {
@@ -67,6 +65,7 @@ export function executeSm(id) {
         });
     });
 }
+
 export function delIm() {
     var cbox = window.datagrid.getSelectedCheckbox();
     if (cbox == "") {
@@ -89,6 +88,39 @@ export function delIm() {
 export function executeIm(id) {
     layer.confirm('是否下达此执行？（此动作不可撤回）', function (index) {
         var url = '/inventory/main/execute.shtml';
+        gf.ajax(url, { id: id }, "json", function (s) {
+            if (s == "success") {
+                layer.msg('成功下达！');
+                window.datagrid.loadData();
+            } else {
+                layer.msg('下达失败！');
+            }
+        });
+    });
+}
+
+export function delTm() {
+    var cbox = window.datagrid.getSelectedCheckbox();
+    if (cbox == "") {
+        layer.msg("请选择删除项！！");
+        return;
+    }
+    layer.confirm('是否删除？', function (index) {
+        var url = '/transfer/main/deleteEntity.shtml';
+        gf.ajax(url, { ids: cbox.join(",") }, "json", function (s) {
+            if (s == "success") {
+                layer.msg('删除成功');
+                window.datagrid.loadData();
+            } else {
+                layer.msg('删除失败');
+            }
+        });
+    });
+}
+
+export function executeTm(id) {
+    layer.confirm('是否下达此执行？（此动作不可撤回）', function (index) {
+        var url = '/transfer/main/execute.shtml';
         gf.ajax(url, { id: id }, "json", function (s) {
             if (s == "success") {
                 layer.msg('成功下达！');

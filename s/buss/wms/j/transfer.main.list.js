@@ -1,6 +1,6 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
-import { delRm, executeRm } from "/s/buss/wms/j/base/wms.paper.op.js";
+import { delTm, executeTm } from "/s/buss/wms/j/base/wms.paper.op.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -16,7 +16,7 @@ window.datagrid = dataGrid({
 		name: "源仓库",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) {
-				return "默认仓";
+				return "--空--";
 			}
 			return gv.get("WAREHOUSE", data);
 		}
@@ -25,7 +25,7 @@ window.datagrid = dataGrid({
 		name: "目标仓库",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) {
-				return "默认仓";
+				return "--空--";
 			}
 			return gv.get("WAREHOUSE", data);
 		}
@@ -93,7 +93,7 @@ $("#edit").click("click", function () {
 	edit();
 });
 $("#del").click("click", function () {
-	delRm();
+	delTm();
 });
 
 $("html").undelegate("button.detail", "click");
@@ -103,7 +103,7 @@ $("html").delegate("button.detail", "click", function () {
 
 $("html").undelegate("button.execute", "click");
 $("html").delegate("button.execute", "click", function () {
-	executeRm($(this).data("id"));
+	executeTm($(this).data("id"));
 });
 
 function edit() {
