@@ -15,7 +15,6 @@ class GV {
 				str = JSON.stringify(data.res);
 				localStorage.setItem("res", str);
 			}
-			// 成功执行方法
 		});
 	}
 
@@ -99,7 +98,6 @@ class GV {
 			success: function (data) {
 				operator = data[0]["userName"];
 			}
-			// 成功执行方法
 		});
 		return operator;
 	};
