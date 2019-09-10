@@ -1,5 +1,5 @@
 import "/s/j/vue/vue.min.js";
-import { initRows } from "/s/buss/sys/dic/j/dynamic.row.js";
+import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { dicdata } from "/s/buss/sys/dic/j/dic.data.info.js";
 import { urlSearcher } from "/s/j/tool/urlSearcher.js";
 

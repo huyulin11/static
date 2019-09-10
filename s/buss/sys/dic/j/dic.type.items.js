@@ -1,4 +1,4 @@
-import { initRows } from "/s/buss/sys/dic/j/dynamic.row.js";
+import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { dictype } from "/s/buss/sys/dic/j/dic.type.info.js";
 import { urlSearcher } from "/s/j/tool/urlSearcher.js";
 

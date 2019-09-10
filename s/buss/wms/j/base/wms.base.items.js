@@ -1,4 +1,4 @@
-import { initRows } from "/s/buss/sys/dic/j/dynamic.row.js";
+import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 
 var _conf;
 
