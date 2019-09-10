@@ -9,7 +9,7 @@ $.ajax({
 	url: '/resources/findRes.shtml',
 	dataType: 'json',
 	success: function (json) {
-		for (index in json) {
+		for (let index in json) {
 			$(
 				"input[name='resId']:checkbox[value='" + json[index].id
 				+ "']").prop('checked', 'true');

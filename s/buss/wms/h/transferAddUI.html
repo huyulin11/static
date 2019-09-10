@@ -1,0 +1,48 @@
+<link type="text/css" rel="stylesheet" href="/s/c/app.all.css" />
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/jquery/jquery.form.js"></script>
+<script src="/s/j/layer/v3.1.3/layer.js"></script>
+<script src="/s/j/jquery.toJSON.js"></script>
+<script src="/s/j/jquery.format.js"></script>
+
+<div class="l_err" style="width: 100%; margin-top: 2px;"></div>
+<form id="form" name="form" class="form-horizontal" method="post" action="/transfer/detail/addEntity.shtml">
+    <section class="panel panel-default">
+        <div class="panel-body" id="panelBody" data-id=1>
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <th>
+                            <div class="col">
+                                <label>目标仓库</label>
+                                <select class="form-control jsSelect" data-patten="WAREHOUSE" name="formMap.warehouse"
+                                    autocomplete="off" data-notnull="true" id="warehouse"></select>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="col">
+                                <label>出入口</label>
+                                <select class="form-control jsSelect" data-patten="ACS_CACHE_CABLE"
+                                    name="formMap.targetPlace" autocomplete="off" data-notnull="true"></select>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <hr />
+            <div id="rows"></div>
+        </div>
+    </section>
+</form>
+<footer class="panel-footer text-right bg-light lter">
+    <div title="增加字段" class="addOne op"></div>
+    <button id="sub" class="btn btn-success btn-s-xs">提交</button>
+</footer>
+
+<script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>
+<script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>
+
+<script type="module">
+    import "/s/buss/wms/j/base/wms.base.items.js";
+    import "/s/buss/wms/j/base/wms.base.add.js";
+</script>
