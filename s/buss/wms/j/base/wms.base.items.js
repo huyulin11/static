@@ -3,6 +3,7 @@ import { initRows } from "/s/buss/sys/dic/j/dynamic.row.js";
 var _conf;
 
 if (localStorage.projectKey == 'CSY_DAJ') {
+    $("#warehouse").data("notnull", false);
     _conf = {
         container: "div#rows",
         targetClass: "item-group",

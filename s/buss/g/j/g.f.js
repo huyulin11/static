@@ -126,7 +126,7 @@ class GF {
      * this.ajax(url, data,"json")
      * 
      */
-    ajax(targetUrl, params, dataType) {
+    ajax(targetUrl, params, dataType, callback) {
         if (!this.notNull(dataType)) {
             dataType = "html";
         }
@@ -147,6 +147,7 @@ class GF {
                 html = data;
             }
         });
+        if (callback) { callback(html); }
         return html;
     };
     ajaxJson(targetUrl, params, dataType) {
@@ -173,9 +174,6 @@ class GF {
         });
         return html;
     };
-    /**
-     * 判断某对象不为空..返回true 否则 false
-     */
     notNull(obj) {
         if (obj === null) {
             return false;
@@ -194,10 +192,6 @@ class GF {
         }
 
     };
-
-    /**
-     * 判断某对象不为空..返回obj 否则 ""
-     */
     notEmpty(obj) {
         if (obj === null) {
             return "";
@@ -216,9 +210,6 @@ class GF {
         }
 
     };
-    /**
-     * html标签转义
-     */
     htmlspecialchars(str) {
         var s = "";
         if (str.length == 0)
@@ -253,9 +244,6 @@ class GF {
             }
         }
     };
-    /**
-     * in_array判断一个值是否在数组中
-     */
     in_array(array, string) {
         for (var s = 0; s < array.length; s++) {
             let thisEntry = array[s].toString();
@@ -265,9 +253,6 @@ class GF {
         }
         return false;
     };
-    /**
-     * js获取项目根路径
-     */
     rootPath() {
         //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
         var curWwwPath = window.document.location.href;

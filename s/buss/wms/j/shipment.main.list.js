@@ -1,6 +1,6 @@
-import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { delSm, executeSm } from "/s/buss/wms/j/base/wms.paper.op.js";
 
 export var init = function () {
 	window.datagrid = dataGrid({
@@ -63,7 +63,7 @@ export var init = function () {
 				if (rowdata.delflag != 1) {
 					if (rowdata.status == 1) {
 						btns = `<button type='button' class='btn btn-info marR10 execute' 
-						data-id='${rowdata.id}'>下达到AGV</button>&nbsp;&nbsp;${btns}`;
+						data-id='${rowdata.id}'>下达</button>&nbsp;&nbsp;${btns}`;
 					}
 				}
 				return btns;
@@ -88,7 +88,7 @@ $("#edit").click("click", function () {
 	edit();
 });
 $("#del").click("click", function () {
-	del();
+	delSm();
 });
 
 $("html").undelegate("button.detail", "click");
@@ -98,10 +98,7 @@ $("html").delegate("button.detail", "click", function () {
 
 $("html").undelegate("button.execute", "click");
 $("html").delegate("button.execute", "click", function () {
-	execute($(this).data("id"));
-});
-$("#permissions").click("click", function () {
-	permissions();
+	executeSm($(this).data("id"));
 });
 
 function edit() {
@@ -131,40 +128,5 @@ function detail(paperid) {
 		type: 2,
 		area: globalLayerArea,
 		content: '/s/buss/wms/h/shipmentDetailOfOne.html?shipmentMainFormMap.paperid=' + paperid
-	});
-}
-
-function del() {
-	var cbox = window.datagrid.getSelectedCheckbox();
-	if (cbox == "") {
-		layer.msg("请选择删除项！！");
-		return;
-	}
-	layer.confirm('是否删除？', function (index) {
-		var url = '/shipment/main/deleteEntity.shtml';
-		var s = gf.ajax(url, {
-			ids: cbox.join(",")
-		}, "json");
-		if (s == "success") {
-			layer.msg('删除成功');
-			window.datagrid.loadData();
-		} else {
-			layer.msg('删除失败');
-		}
-	});
-}
-
-function execute(id) {
-	layer.confirm('是否下达此单到AGV执行？（此动作不可撤回）', function (index) {
-		var url = '/shipment/main/execute.shtml';
-		var s = gf.ajax(url, {
-			id: id
-		}, "json");
-		if (s == "success") {
-			layer.msg('成功下达到AGV！');
-			window.datagrid.loadData();
-		} else {
-			layer.msg('下达失败！');
-		}
 	});
 }
