@@ -13,6 +13,15 @@ export var init = function () {
 			colkey: "paperid",
 			name: "单号"
 		}, {
+			colkey: "warehouse",
+			name: "仓库",
+			renderData: function (rowindex, data, rowdata, column) {
+				if (!data) {
+					return "默认仓";
+				}
+				return gv.get("WAREHOUSE", data);
+			}
+		}, {
 			colkey: "totallines",
 			name: "明细数"
 		}, {
@@ -41,15 +50,10 @@ export var init = function () {
 			}
 		}, {
 			colkey: "updatetime",
-			name: "更新时间",
+			name: "时间",
 			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-			}
-		}, {
-			colkey: "createtime",
-			name: "创建时间",
-			renderData: function (rowindex, data, rowdata, column) {
-				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+				return "创建：" + new Date(rowdata.createtime).format("yyyy-MM-dd hh:mm:ss") + "<br/>"
+					+ "更新：" + new Date(rowdata.updatetime).format("yyyy-MM-dd hh:mm:ss");
 			}
 		}, {
 			name: "操作",

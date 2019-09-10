@@ -31,7 +31,8 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "description",
-		name: "执行描述"
+		name: "执行描述",
+		align: "left",
 	}],
 	jsonUrl: '/log/findByPage.shtml',
 	checkbox: false

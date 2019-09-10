@@ -5,24 +5,31 @@
 <script src="/s/j/jquery.toJSON.js"></script>
 <script src="/s/j/jquery.format.js"></script>
 
-<script>
-    layer.config({
-        extend: ['default/layer.css'],
-        fix: false,
-        skin: 'layer-ext-myskin'
-    });
-</script>
-
 <div class="l_err" style="width: 100%; margin-top: 2px;"></div>
 <form id="form" name="form" class="form-horizontal" method="post" action="/receipt/detail/addEntity.shtml">
     <section class="panel panel-default">
         <div class="panel-body" id="panelBody" data-id=1>
             <div class="form-group">
-                <div class="col-sm-9">
-                    <select class="form-control jsSelect" data-patten="ACS_CACHE_CABLE" name="formMap.targetPlace"
-                        datatype="*" errormsg="目标位置不能为空！" autocomplete="off" data-notnull="true"></select>
-                </div>
+                <table>
+                    <tr>
+                        <th>
+                            <div class="col">
+                                <label>目标仓库</label>
+                                <select class="form-control jsSelect" data-patten="WAREHOUSE" name="formMap.warehouse"
+                                    autocomplete="off" data-notnull="true" id="warehouse"></select>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="col">
+                                <label>出入口</label>
+                                <select class="form-control jsSelect" data-patten="ACS_CACHE_CABLE"
+                                    name="formMap.targetPlace" autocomplete="off" data-notnull="true"></select>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
             </div>
+            <hr />
             <div id="rows"></div>
         </div>
     </section>

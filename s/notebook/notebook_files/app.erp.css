@@ -36,16 +36,20 @@ div.item-op {
 	height: 36px;
 	margin-right: 5px;
 	margin-left: 5px;
+	display: flex;
 }
 
 .col>input,
-.col>select {
+.col>select,
+.col>label>input,
+.col>label>select {
 	width: 100%;
-	height: 30px;
-	border-top: none;
-	border-left: none;
-	border-right: none;
+	height: 33px;
 	border-radius: 5px;
+}
+
+.col>label {
+	font-size: 14px;
 }
 
 div.col>::-webkit-input-placeholder {

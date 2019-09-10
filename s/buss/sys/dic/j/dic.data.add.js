@@ -5,7 +5,7 @@ $("#sub").on("click", function () {
 var submitForm = function () {
     var hasNull = false;
     $("#form").find("input,select").each(function () {
-        if (!$(this).val()) {
+        if ($(this).data("notnull") && !$(this).val()) {
             hasNull = true;
             layer.tips('不能为空', this, {
                 tips: [1, '#3595CC'],

@@ -2,6 +2,10 @@ $("#sub").on("click", function () {
     submitForm();
 });
 
+if (localStorage.projectKey == "CSY_DAJ") {
+    $("#warehouse").data("notnull", "false");
+}
+
 var submitForm = function () {
     var hasNull = false;
     $("#form").find("input,select").each(function () {
