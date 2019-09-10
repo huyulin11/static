@@ -29,7 +29,7 @@ export var init = function () {
 			name: "货物数"
 		}, {
 			colkey: "name",
-			name: "出库点",
+			name: "交接点",
 			renderData: function (rowindex, data, rowdata, column) {
 				return gv.get("ACS_CACHE_CABLE", data);
 			}

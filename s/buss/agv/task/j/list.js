@@ -24,7 +24,7 @@ window.datagrid = dataGrid({
 		name: "对应AGV编号",
 	}, {
 		colkey: "lapId",
-		name: "缓存柜编号",
+		name: "交接点编号",
 	}, {
 		colkey: "isSendToAGV",
 		name: "是否发送到AGV执行",

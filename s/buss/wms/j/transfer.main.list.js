@@ -12,8 +12,17 @@ window.datagrid = dataGrid({
 		colkey: "paperid",
 		name: "单号"
 	}, {
-		colkey: "warehouse",
-		name: "仓库",
+		colkey: "sourcewh",
+		name: "源仓库",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (!data) {
+				return "默认仓";
+			}
+			return gv.get("WAREHOUSE", data);
+		}
+	}, {
+		colkey: "targetwh",
+		name: "目标仓库",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) {
 				return "默认仓";
@@ -28,7 +37,7 @@ window.datagrid = dataGrid({
 		name: "货物数"
 	}, {
 		colkey: "name",
-		name: "入库点",
+		name: "交接点",
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("ACS_CACHE_CABLE", data);
 		}

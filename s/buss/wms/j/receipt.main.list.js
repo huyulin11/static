@@ -28,7 +28,7 @@ window.datagrid = dataGrid({
 		name: "货物数"
 	}, {
 		colkey: "name",
-		name: "入库点",
+		name: "交接点",
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("ACS_CACHE_CABLE", data);
 		}

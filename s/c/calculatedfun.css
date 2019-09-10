@@ -3,6 +3,8 @@
 /*******************  pagination  ******************/
 .pagclass{
 	padding: 0px 5px;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 .pagclass table td,.pagclass table th{
 	font-size: 12px;
