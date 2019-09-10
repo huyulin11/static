@@ -1,5 +1,5 @@
 class GV {
-	_init() {
+	init() {
 		$.ajax({
 			url: '/bd/info.shtml',
 			async: true,
@@ -20,34 +20,34 @@ class GV {
 	}
 
 	__getTS = (type) => {
-		if (!gv._dic) { gv._dic = jQuery.parseJSON(localStorage.getItem("dic")); }
-		return gv._dic.filter(function (e) { return e.type == type; });
+		if (!this._dic) { this._dic = jQuery.parseJSON(localStorage.getItem("dic")); }
+		return this._dic.filter(function (e) { return e.type == type; });
 	};
 
 	get(type, key) {
-		var o = gv.__getTS(type);
+		var o = this.__getTS(type);
 		var v = o.find((v) => { return v.key == key });
 		if (!v) return "";
 		return v.value;
 	};
 
 	getT(type) {
-		return gv.__getTS(type);
+		return this.__getTS(type);
 	};
 
 	getALS(type, key) {
-		var o = gv.__getTS(type);
+		var o = this.__getTS(type);
 		return o.find((v) => { return v.key == key }).alias;
 	};
 
 	getObj(type, key) {
-		var o = gv.__getTS(type);
+		var o = this.__getTS(type);
 		return o.find((v) => { return v.key == key }).value;
 	};
 
 	getRole(key) {
-		if (!gv._role) { gv._role = jQuery.parseJSON(localStorage.getItem("role")); }
-		var o = gv._role.find((v) => { return v.id == key });
+		if (!this._role) { this._role = jQuery.parseJSON(localStorage.getItem("role")); }
+		var o = this._role.find((v) => { return v.id == key });
 		return (!o) ? "" : o.rolename;
 	};
 
@@ -66,18 +66,18 @@ class GV {
 	};
 
 	getRes(key) {
-		if (!gv._res) { gv._res = jQuery.parseJSON(localStorage.getItem("res")); }
-		var o = gv._res.find((v) => { return v.id == key });
+		if (!this._res) { this._res = jQuery.parseJSON(localStorage.getItem("res")); }
+		var o = this._res.find((v) => { return v.id == key });
 		return (!o) ? "" : o.name;
 	};
 
 	getSite(key) {
-		var o = gv._site.find((v) => { return v.id == key });
+		var o = this._site.find((v) => { return v.id == key });
 		return (!o) ? "" : o.sitename;
 	};
 
 	getArmact(key) {
-		var o = gv._armact.find((v) => { return v.id == key });
+		var o = this._armact.find((v) => { return v.id == key });
 		return (!o) ? "" : o.armactname;
 	};
 
@@ -105,6 +105,5 @@ class GV {
 	};
 }
 var gv = new GV();
-gv._init();
 window.gv = gv;
 export { gv };

@@ -8,6 +8,7 @@ import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 var _frame = "#loadhtml";
 localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
+gv.init();
 
 gf.quote("/s/c/app.all.css", null, function () {
     $('body').fadeIn(3000);
