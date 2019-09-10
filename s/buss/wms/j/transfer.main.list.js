@@ -123,7 +123,7 @@ function add() {
 	window.pageii = layer.open({
 		title: "新增-输入需要取入档案的所在货位名称",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/s/buss/wms/h/transferAddUI.html'
 	});
 }
@@ -131,7 +131,7 @@ function detail(paperid) {
 	window.pageii = layer.open({
 		title: "入库单明细",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/s/buss/wms/h/transferDetailOfOne.html?transferMainFormMap.paperid=' + paperid
 	});
 }

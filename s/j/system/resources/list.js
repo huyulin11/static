@@ -82,7 +82,7 @@ function editFun() {
 	window.pageii = layer.open({
 		title: "编辑",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/resources/editUI.shtml?id=' + cbox
 	});
 }
@@ -90,7 +90,7 @@ function addFun() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/resources/addUI.shtml'
 	});
 }

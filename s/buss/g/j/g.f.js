@@ -1,3 +1,5 @@
+import { gv } from "/s/buss/g/j/g.v.js";
+
 class GF {
     layerOpen(confs) {
         if ($(window).width() < 960) { window.open(confs.content); return; }
@@ -5,6 +7,7 @@ class GF {
             type: 2,
             shade: 0,
             maxmin: true,
+            area: localStorage.layerArea.split(","),
             zIndex: layer.zIndex,
             success: function (layero) {
                 layer.setTop(layero);

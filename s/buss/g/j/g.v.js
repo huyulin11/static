@@ -106,7 +106,5 @@ class GV {
 }
 var gv = new GV();
 gv._init();
-gv.globalLayerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
 window.gv = gv;
-window.globalLayerArea = gv.globalLayerArea;
 export { gv };

@@ -48,7 +48,7 @@ function editRole() {
 	window.pageii = layer.open({
 		title: "编辑",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/roleres/editUI.shtml?id=' + cbox
 	});
 }
@@ -62,7 +62,7 @@ function permissions() {
 	window.pageii = layer.open({
 		title: "分配权限",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: url
 	});
 }
@@ -70,7 +70,7 @@ function addRole() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/roleres/addUI.shtml'
 	});
 }

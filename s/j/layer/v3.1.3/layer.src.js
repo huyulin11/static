@@ -201,7 +201,7 @@
       move: doms[1],
       title: '&#x4FE1;&#x606F;',
       offset: 'auto',
-      area: gv.globalLayerArea,
+      area: localStorage.layerArea.split(","),
       closeBtn: 1,
       time: 0, //0表示不自动关闭
       zIndex: 19891014, 

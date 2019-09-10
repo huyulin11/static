@@ -7,6 +7,7 @@ import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 var _frame = "#loadhtml";
+localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
 
 gf.quote("/s/c/app.all.css", null, function () {
     $('body').fadeIn(3000);
@@ -78,7 +79,7 @@ $("a#editUI").on("click", function () {
     window.pageii = layer.open({
         title: "编辑",
         type: 2,
-        area: gv.globalLayerArea,
+        area: localStorage.layerArea.split(","),
         offset: "auto",
         content: '/user/selfInfo.shtml'
     });

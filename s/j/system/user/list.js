@@ -70,7 +70,7 @@ function editAccount() {
 	window.pageii = layer.open({
 		title: "编辑",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/user/editUI.shtml?id=' + cbox
 	});
 }
@@ -78,7 +78,7 @@ function addAccount() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/user/addUI.shtml'
 	});
 }
@@ -111,7 +111,7 @@ function permissions() {
 	window.pageii = layer.open({
 		title: "分配权限",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: url
 	});
 }

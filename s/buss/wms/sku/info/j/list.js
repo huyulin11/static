@@ -70,7 +70,7 @@ function add() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: gv.globalLayerArea,
+		area: localStorage.layerArea.split(","),
 		content: '/s/buss/wms/sku/info/h/skuInfoAddUI.html'
 	});
 }
