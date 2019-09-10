@@ -10,34 +10,26 @@
     <section class="panel panel-default">
         <div class="panel-body" id="panelBody" data-id=1>
             <div class="form-group">
-                <table>
-                    <tr>
-                        <th>
-                            <div class="col">
-                                <label>源仓库</label>
-                                <select class="form-control jsSelect" data-patten="WAREHOUSE" name="formMap.sourcewh"
-                                    autocomplete="off" data-notnull="true" id="sourcewh"></select>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="col">
-                                <label>目标仓库</label>
-                                <select class="form-control jsSelect" data-patten="WAREHOUSE" name="formMap.targetwh"
-                                    autocomplete="off" data-notnull="true" id="targetwh"></select>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="col">
-                                <label>出入口</label>
-                                <select class="form-control jsSelect" data-patten="ACS_CACHE_CABLE"
-                                    name="formMap.targetPlace" autocomplete="off" data-notnull="true"></select>
-                            </div>
-                        </th>
-                    </tr>
-                </table>
+                <div class="col">
+                    <label>源仓库</label>
+                    <select class="form-control jsSelect" data-patten="WAREHOUSE" name="formMap.sourcewh"
+                        autocomplete="off" data-notnull="true" id="sourcewh"></select>
+                </div>
+                <div class="col">
+                    <label>目标仓库</label>
+                    <select class="form-control jsSelect" data-patten="WAREHOUSE" name="formMap.targetwh"
+                        autocomplete="off" data-notnull="true" id="targetwh"></select>
+                </div>
+                <div class="col">
+                    <label>出入口</label>
+                    <select class="form-control jsSelect" data-patten="ACS_CACHE_CABLE" name="formMap.targetPlace"
+                        autocomplete="off" data-notnull="true"></select>
+                </div>
             </div>
-            <hr />
-            <div id="rows"></div>
+            <div class="line line-dashed line-lg pull-in"></div>
+            <div class="block-tips">
+                <div id="rows"></div>
+            </div>
         </div>
     </section>
 </form>
