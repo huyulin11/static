@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
@@ -81,7 +82,7 @@ function editFun() {
 	window.pageii = layer.open({
 		title: "编辑",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/resources/editUI.shtml?id=' + cbox
 	});
 }
@@ -89,7 +90,7 @@ function addFun() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/resources/addUI.shtml'
 	});
 }

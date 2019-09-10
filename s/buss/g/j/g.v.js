@@ -1,5 +1,5 @@
-class gv {
-	static _init() {
+class GV {
+	_init() {
 		$.ajax({
 			url: '/bd/info.shtml',
 			async: true,
@@ -19,39 +19,39 @@ class gv {
 		});
 	}
 
-	static __getTS = (type) => {
+	__getTS = (type) => {
 		if (!gv._dic) { gv._dic = jQuery.parseJSON(localStorage.getItem("dic")); }
 		return gv._dic.filter(function (e) { return e.type == type; });
 	};
 
-	static get(type, key) {
+	get(type, key) {
 		var o = gv.__getTS(type);
 		var v = o.find((v) => { return v.key == key });
 		if (!v) return "";
 		return v.value;
 	};
 
-	static getT(type) {
+	getT(type) {
 		return gv.__getTS(type);
 	};
 
-	static getALS(type, key) {
+	getALS(type, key) {
 		var o = gv.__getTS(type);
 		return o.find((v) => { return v.key == key }).alias;
 	};
 
-	static getObj(type, key) {
+	getObj(type, key) {
 		var o = gv.__getTS(type);
 		return o.find((v) => { return v.key == key }).value;
 	};
 
-	static getRole(key) {
+	getRole(key) {
 		if (!gv._role) { gv._role = jQuery.parseJSON(localStorage.getItem("role")); }
 		var o = gv._role.find((v) => { return v.id == key });
 		return (!o) ? "" : o.rolename;
 	};
 
-	static getCurrentRole() {
+	getCurrentRole() {
 		var role = '';
 		jQuery.ajax({
 			url: "/getRole.shtml",
@@ -65,23 +65,23 @@ class gv {
 		return role;
 	};
 
-	static getRes(key) {
+	getRes(key) {
 		if (!gv._res) { gv._res = jQuery.parseJSON(localStorage.getItem("res")); }
 		var o = gv._res.find((v) => { return v.id == key });
 		return (!o) ? "" : o.name;
 	};
 
-	static getSite(key) {
+	getSite(key) {
 		var o = gv._site.find((v) => { return v.id == key });
 		return (!o) ? "" : o.sitename;
 	};
 
-	static getArmact(key) {
+	getArmact(key) {
 		var o = gv._armact.find((v) => { return v.id == key });
 		return (!o) ? "" : o.armactname;
 	};
 
-	static operator(userid) {
+	operator(userid) {
 		var operator = "";
 		if (userid == null) {
 			return operator;
@@ -104,7 +104,9 @@ class gv {
 		return operator;
 	};
 }
-
+var gv = new GV();
 gv._init();
+gv.globalLayerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
 window.gv = gv;
+window.globalLayerArea = gv.globalLayerArea;
 export { gv };

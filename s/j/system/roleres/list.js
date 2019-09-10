@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
@@ -47,7 +48,7 @@ function editRole() {
 	window.pageii = layer.open({
 		title: "编辑",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/roleres/editUI.shtml?id=' + cbox
 	});
 }
@@ -61,7 +62,7 @@ function permissions() {
 	window.pageii = layer.open({
 		title: "分配权限",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: url
 	});
 }
@@ -69,7 +70,7 @@ function addRole() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/roleres/addUI.shtml'
 	});
 }

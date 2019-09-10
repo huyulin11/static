@@ -1,5 +1,6 @@
 import { urlSearcher } from "/s/j/tool/urlSearcher.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 var paperid = urlSearcher.param("shipmentMainFormMap.paperid");
@@ -66,7 +67,7 @@ function addTask() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/s/buss/h/addDairyTaskUI.html'
 	});
 }

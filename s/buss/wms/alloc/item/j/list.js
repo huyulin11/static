@@ -97,7 +97,7 @@ function add() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/s/buss/wms/alloc/item/h/allocItemAddUI.html'
 	});
 }

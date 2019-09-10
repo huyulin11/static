@@ -118,7 +118,7 @@ function add() {
 	window.pageii = layer.open({
 		title: "新增-输入需要取出档案的所在货位名称",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/s/buss/wms/h/shipmentAddUI.html'
 	});
 }
@@ -126,7 +126,7 @@ function detail(paperid) {
 	window.pageii = layer.open({
 		title: "出库单明细",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/s/buss/wms/h/shipmentDetailOfOne.html?shipmentMainFormMap.paperid=' + paperid
 	});
 }

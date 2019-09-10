@@ -71,7 +71,7 @@ function add() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: globalLayerArea,
+		area: gv.globalLayerArea,
 		content: '/s/buss/agv/site/info/h/addSiteUI.html'
 	});
 }

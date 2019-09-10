@@ -5,7 +5,6 @@
  @License：MIT
     
  */
-var globalLayerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
 ;!function(window, undefined){
     "use strict";
     
@@ -202,7 +201,7 @@ var globalLayerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80
       move: doms[1],
       title: '&#x4FE1;&#x606F;',
       offset: 'auto',
-      area: globalLayerArea,
+      area: gv.globalLayerArea,
       closeBtn: 1,
       time: 0, //0表示不自动关闭
       zIndex: 19891014, 
