@@ -26,8 +26,14 @@ window.datagrid = dataGrid({
 		colkey: "skuid",
 		name: "SKU（货物类型）",
 		renderData: function (rowindex, data, rowdata, column) {
-			return sku.value(data);
+			let val = sku.value(data);
+			if (!val) return "无对应值" + data;
+			return val;
 		}
+	}, {
+		colkey: "num",
+		name: "数量",
+		hide: false,
 	}],
 	jsonUrl: '/sku/txm/findByPage.shtml',
 	checkbox: true,
@@ -71,7 +77,7 @@ function add() {
 		title: "新增",
 		type: 2,
 		area: localStorage.layerArea.split(","),
-		content: '/s/buss/wms/sku/txm/h/skuInfoAddUI.html'
+		content: '/s/buss/wms/sku/txm/h/skuTxmAddUI.html'
 	});
 }
 function del() {

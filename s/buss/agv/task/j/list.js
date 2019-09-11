@@ -1,5 +1,4 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
