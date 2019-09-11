@@ -54,9 +54,3 @@ var vm = new Vue({
 });
 
 $("#username").focus();
-
-setTimeout(() => {
-    if ($("#username").val() && $("#password").val()) {
-        login();
-    }
-}, 3000);
