@@ -78,6 +78,10 @@ function but(v) {
 		$("#divbut").css("display", "none");
 	}
 }
+$("select#type").on("click", function () {
+	but(this);
+});
+
 function toBut(b) {
 	$("#description").val($("#" + b.id).html());
 }
