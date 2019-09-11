@@ -10,15 +10,19 @@ _conf = {
     serial: 0,
     max: 20,
     items: [{
-        key: "skuTxmFormMap.txm",
+        key: "txm",
         name: "条形码",
         notnull: true,
     }, {
-        key: "skuTxmFormMap.skuid",
+        key: "skuid",
         name: "对应SKU",
         notnull: true,
     }, {
-        key: "skuTxmFormMap.num",
+        key: "name",
+        name: "货物名称",
+        notnull: true,
+    }, {
+        key: "num",
         name: "数量",
         notnull: true,
     },]

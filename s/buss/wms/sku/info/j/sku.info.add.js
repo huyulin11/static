@@ -10,7 +10,7 @@ _conf = {
     serial: 0,
     max: 20,
     items: [{
-        key: "skuInfoFormMap.name",
+        key: "name",
         name: "SKU名称",
         notnull: true,
     },]
