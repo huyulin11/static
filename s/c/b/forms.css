@@ -79,6 +79,10 @@ input[type="text"], input[type="password"], input[type="file"], input[type="subm
 	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
 	font: 1em Arial, Helvetica, Verdana, sans-serif;
 	padding: 5px 5px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
 }
 
 select {
