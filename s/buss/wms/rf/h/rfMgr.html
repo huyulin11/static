@@ -27,10 +27,12 @@
     </div>
     <script src="/s/j/jquery-1.12.2.min.js"></script>
     <script type="module">
-        import "/s/buss/g/j/g.p.js";
-        import "/s/buss/g/j/jquery/jquery.autofill.js";
-        $("#layout").on("click", function () {
+        import { gf } from "/s/buss/g/j/g.f.js";
+        $("#otherContainer").find("#layout").on("click", function () {
             window.location.href = "/logout.shtml";
+        });
+        $("#otherContainer").find("button[id!='layout']").on("click", function () {
+            gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
         });
     </script>
 </body>
