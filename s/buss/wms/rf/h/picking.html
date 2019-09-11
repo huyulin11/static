@@ -18,7 +18,7 @@
 <body>
     <div id="rootContainer">
         <h1>物料拣配</h1>
-        <table id="otherContainer" cellspacing="0px" cellspadding="1px">
+        <table cellspacing="0px" cellspadding="1px">
             <tbody>
                 <tr>
                     <td width="50%"><button id="priority">优先级</button></td>
@@ -42,10 +42,10 @@
     <script src="/s/j/layer/v3.1.3/layer.js"></script>
     <script type="module">
         import { gf } from "/s/buss/g/j/g.f.js";
-        $("#otherContainer").find("#layout").on("click", function () {
+        $("#rootContainer").find("#layout").on("click", function () {
             window.location.href = "/logout.shtml";
         });
-        $("#otherContainer").find("button[id!='layout']").on("click", function () {
+        $("#rootContainer").find("button[id!='layout']").on("click", function () {
             gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
         });
     </script>
