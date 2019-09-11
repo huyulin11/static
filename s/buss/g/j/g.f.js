@@ -25,6 +25,7 @@ class GF {
                 Math.random() * $(window).height() * 0.2,
                 Math.random() * $(window).width() * 0.2
             ];
+            conf.offset = 'cb';
         }
         layer.open(conf);
     };
