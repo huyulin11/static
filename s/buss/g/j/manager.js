@@ -1,4 +1,4 @@
-import "/s/buss/acs/g/j/wms.sku.js";
+import "/s/buss/wms/sku/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";

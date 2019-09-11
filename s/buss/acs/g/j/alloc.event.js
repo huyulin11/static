@@ -1,4 +1,4 @@
-import { sku } from "/s/buss/acs/g/j/wms.sku.js";
+import { sku } from "/s/buss/wms/sku/wms.sku.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { getSingleTask } from "/s/buss/acs/g/j/singletask.js";
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";

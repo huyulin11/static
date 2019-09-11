@@ -1,26 +1,20 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { gv } from "/s/buss/g/j/g.v.js";
+import { sku } from "/s/buss/wms/sku/wms.sku.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	l_column: [{
 		colkey: "id",
-		name: "SKU编号",
+		name: "ID",
 		hide: false,
 	}, {
-		colkey: "type",
-		name: "SKU类型",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
-				return data;
-			}
-			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<a class='editSkuType'><img src='/s/i/edit.png'/></a>" + "</div>";
-		}
+		colkey: "txm",
+		name: "条码",
+		hide: false,
 	}, {
 		colkey: "name",
-		name: "SKU名称",
+		name: "货物名称",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return data;
@@ -28,8 +22,14 @@ window.datagrid = dataGrid({
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<a class='editSkuName'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
+	}, {
+		colkey: "skuid",
+		name: "SKU（货物类型）",
+		renderData: function (rowindex, data, rowdata, column) {
+			return sku.value(data);
+		}
 	}],
-	jsonUrl: '/sku/info/findByPage.shtml',
+	jsonUrl: '/sku/txm/findByPage.shtml',
 	checkbox: true,
 	serNumber: true
 });
@@ -63,7 +63,7 @@ function edit() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/wms/sku/info/editUI.html?id=' + cbox
+		content: '/s/buss/wms/sku/txm/editUI.html?id=' + cbox
 	});
 }
 function add() {
@@ -71,7 +71,7 @@ function add() {
 		title: "新增",
 		type: 2,
 		area: localStorage.layerArea.split(","),
-		content: '/s/buss/wms/sku/info/h/skuInfoAddUI.html'
+		content: '/s/buss/wms/sku/txm/h/skuInfoAddUI.html'
 	});
 }
 function del() {
@@ -81,7 +81,7 @@ function del() {
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
-		var url = '/sku/info/deleteEntity.shtml';
+		var url = '/sku/txm/deleteEntity.shtml';
 		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
