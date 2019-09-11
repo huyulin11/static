@@ -413,3 +413,29 @@ div#doChangeDiv {
 div[id='targets'] button.choosed {
 	background-color: #D24D57;
 }
+
+.rf-op input {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    border-width: 1px;
+    font-size: 30px;
+}
+
+.rf-op label {
+    font-size: 30px;
+    text-align: center;
+}
+
+div.rf-op td {
+    text-align: center;
+    margin: 10px;
+    font-size: 30px;
+    height: 80px;
+}
+
+div.rf-op td button {font-size: 30px;}
+
+.rf-op h1 {
+    font-size: 45px;
+}

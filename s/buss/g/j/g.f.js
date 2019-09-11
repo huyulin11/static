@@ -88,11 +88,11 @@ class GF {
         return pwd;
     };
     loadingImg() {
-        var html = '<div class="alert alert-warning">'
-            + '<button type="button" class="close" data-dismiss="alert">'
-            + '<i class="ace-icon fa fa-times"></i></button><div style="text-align:center">'
-            + '<img src="/s/i/loading2.gif"/><div>'
-            + '</div>';
+        var html = `<div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i></button><div style="text-align:center">
+            <img src="/s/i/loading2.gif"/><div>
+            </div>`;
         return html;
     };
     doAjax(params) {
@@ -102,8 +102,7 @@ class GF {
                     type: 1,
                     title: "出错啦！",
                     area: ['95%', '95%'],
-                    content: "<div id='layerError' style='color:red'>"
-                        + XMLHttpRequest.responseText + "</div>"
+                    content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
                 });
             }
         };
@@ -117,8 +116,7 @@ class GF {
                     type: 1,
                     title: "出错啦！",
                     area: ['95%', '95%'],
-                    content: "<div id='layerError' style='color:red'>"
-                        + XMLHttpRequest.responseText + "</div>"
+                    content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
                 });
             }
         };
@@ -149,31 +147,7 @@ class GF {
             cache: false,// 设置是否缓存，默认设置成为true，当需要每次刷新都需要执行数据库操作的话，需要设置成为false
             success: function (data) {
                 html = data;
-            }
-        });
-        if (callback) { callback(html); }
-        return html;
-    };
-    ajaxJson(targetUrl, params, dataType) {
-        if (!this.notNull(dataType)) {
-            dataType = "html";
-        }
-        var html = '没有结果!';
-        if (targetUrl.indexOf("?") > -1) {
-            targetUrl = targetUrl + "&_t=" + new Date();
-        } else {
-            targetUrl = targetUrl + "?_t=" + new Date();
-        }
-        this.doAjax({
-            type: "post",
-            data: params,
-            url: targetUrl,
-            dataType: dataType,// 这里的dataType就是返回回来的数据格式了html,xml,json
-            async: false,
-            contentType: 'application/json;charset=UTF-8',
-            cache: false,// 设置是否缓存，默认设置成为true，当需要每次刷新都需要执行数据库操作的话，需要设置成为false
-            success: function (data) {
-                html = data;
+                if (callback) { callback(data); }
             }
         });
         return html;
@@ -248,7 +222,7 @@ class GF {
             }
         }
     };
-    in_array(array, string) {
+    inArray(array, string) {
         for (var s = 0; s < array.length; s++) {
             let thisEntry = array[s].toString();
             if (thisEntry == string) {
@@ -272,7 +246,7 @@ class GF {
     onloadurl() {
         $("[data-url]").each(function () {
             var tb = $(this);
-            tb.html(gf.loadingImg());
+            tb.html(this.loadingImg());
             tb.load(tb.data("url"));
         });
     };

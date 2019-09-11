@@ -291,7 +291,7 @@ export var dataGrid = function (params) {
 
 						if (l_tree.tree) {
 							var lt = l_tree.name.split(",");
-							if (gf.in_array(lt, clm)) {
+							if (gf.inArray(lt, clm)) {
 								var divtree = document.createElement("div");
 								divtree.className = "ly_tree";
 								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + column[o].align + ";");
@@ -535,7 +535,7 @@ export var dataGrid = function (params) {
 
 						if (l_tree.tree) {
 							var lt = l_tree.name.split(",");
-							if (gf.in_array(lt, column[o].colkey)) {
+							if (gf.inArray(lt, column[o].colkey)) {
 								var divtree = document.createElement("div");
 								divtree.className = "ly_tree";
 								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + column[o].align + ";margin-left: " + nb + "px;");
@@ -644,7 +644,7 @@ export var dataGrid = function (params) {
 
 							if (l_tree.tree) {
 								var lt = l_tree.name.split(",");
-								if (gf.in_array(lt, column[o].colkey)) {
+								if (gf.inArray(lt, column[o].colkey)) {
 									var divtree = document.createElement("div");
 									divtree.className = "ly_tree";
 									divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + column[o].align + ";margin-left: " + nb + "px;");

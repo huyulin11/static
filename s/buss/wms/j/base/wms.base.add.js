@@ -10,7 +10,7 @@ if (localStorage.projectKey == 'CSY_DAJ') {
         targetClass: "item-group",
         addBtn: "div.addOne",
         serial: 0,
-        max: 20,
+        max: 6,
         items: [{
             key: "allocItem",
             name: "货位名称",
@@ -22,6 +22,7 @@ if (localStorage.projectKey == 'CSY_DAJ') {
         },]
     }
 } else {
+    $("#targetPlace").parents("div.col").remove();
     _conf = {
         container: "div#rows",
         targetClass: "item-group",
