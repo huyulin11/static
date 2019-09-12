@@ -69,6 +69,9 @@ var auth = (agvInfo) => {
 			container().find("button#GOTO_CHARGE").removeAttr("disabled");
 			container().find("button#TRANSPORT").removeAttr("disabled");
 			container().find("button#DELIVER").removeAttr("disabled");
+			container().find("button#DELIVER_INIT").removeAttr("disabled");
+			container().find("button#DELIVER_STEREOTYPE").removeAttr("disabled");
+			container().find("button#DELIVER_PACK").removeAttr("disabled");
 			container().find("button#FETCH").removeAttr("disabled");
 		}
 		if (sitestatus == "CHARGING" && taskstatus == "GOTO_CHARGE") {
@@ -259,6 +262,167 @@ export var init = function (target) {
 				}
 			});
 		}
+	});
+
+	var deleverInitTaskLaoDbwy = function () {
+		var targets = [];
+		for (var i = 3012; i <= 3053; i++) {
+			targets.push({ id: i, name: i - 3011 + "号" });
+		}
+		var buttons = getButtonsHtml(targets);
+		var indexOfTips = layer.confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
+			btn: ['确定送料'],
+			btn1: function () {
+				var arr = getTargets();
+				if (!arr || arr.length == 0) {
+					alert("无有效停车站点");
+					return;
+				}
+				var targetSite = arr.join("#");
+				doTask(agvId, "DELIVER", targetSite);
+			},
+		});
+	}
+
+	var deleverStereotypeTaskLaoDbwy = function () {
+		var indexOfTips = layer.confirm('请选择送料任务的目的地', {
+			btn: ['袜机1号', '袜机2号', '袜机3号', '袜机4号', '袜机5号', '袜机6号', '袜机7号', '袜机8号', '袜机9号', '袜机10号', '定型1号', '定型2号', '定型3号', '定型4号'],
+			btn1: function () {
+				targetSite = 2001;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn2: function () {
+				targetSite = 2002;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn3: function () {
+				targetSite = 2003;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn4: function () {
+				targetSite = 2004;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn5: function () {
+				targetSite = 2005;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn6: function () {
+				targetSite = 2006;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn7: function () {
+				targetSite = 2007;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn8: function () {
+				targetSite = 2008;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn9: function () {
+				targetSite = 2009;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn10: function () {
+				targetSite = 2010;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn10: function () {
+				targetSite = 2054;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn11: function () {
+				targetSite = 2055;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn12: function () {
+				targetSite = 2056;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn13: function () {
+				targetSite = 2057;
+				doTask(agvId, "DELIVER", targetSite);
+			}
+		});
+	}
+
+	var deleverPackTaskLaoDbwy = function () {
+		var indexOfTips = layer.confirm('请选择送料任务的目的地', {
+			btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
+			btn1: function () {
+				targetSite = 2058;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn2: function () {
+				targetSite = 2059;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn3: function () {
+				targetSite = 2060;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn4: function () {
+				targetSite = 2061;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn5: function () {
+				targetSite = 2108;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn6: function () {
+				targetSite = 2109;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn7: function () {
+				targetSite = 2110;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn8: function () {
+				targetSite = 2111;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn9: function () {
+				targetSite = 2112;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn10: function () {
+				targetSite = 2113;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn11: function () {
+				targetSite = 2114;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn12: function () {
+				targetSite = 2115;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn13: function () {
+				targetSite = 2116;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn14: function () {
+				targetSite = 2117;
+				doTask(agvId, "DELIVER", targetSite);
+			},
+			btn15: function () {
+				targetSite = 2118;
+				doTask(agvId, "DELIVER", targetSite);
+			}
+		});
+	}
+
+	$(_target).delegate("button[id='DELIVER_INIT']", "click", function () {
+		allDisabled();
+		deleverInitTaskLaoDbwy();
+	});
+	$(_target).delegate("button[id='DELIVER_STEREOTYPE']", "click", function () {
+		allDisabled();
+		deleverStereotypeTaskLaoDbwy();
+	});
+	$(_target).delegate("button[id='DELIVER_PACK']", "click", function () {
+		allDisabled();
+		deleverPackTaskLaoDbwy();
 	});
 
 	var initBtns = jQuery.parseJSON(localStorage.getItem("agvControl"));
