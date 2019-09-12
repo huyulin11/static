@@ -86,7 +86,7 @@ var initPaperOp = function (keyword) {
         },
         {
             id: "execute", name: "下达", class: "btn-danger", bind: function () {
-                execute(`/${_keyword}/main/deleteEntity.shtml`);
+                execute(`/${_keyword}/main/execute.shtml`);
             }
         },
     ];
