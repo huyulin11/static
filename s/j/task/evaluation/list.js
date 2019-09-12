@@ -221,7 +221,7 @@ function searchdeposit(depositid) {
 }
 function assign() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	var num = 0;
 	for (var i = 0; i < cid.length; i++) {
 		if (cid[i] == 3) {
@@ -253,7 +253,7 @@ function bulksearcharrange(cbox) {
 }
 function bulkevaluation() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	var num = 0;
 	for (var i = 0; i < cid.length; i++) {
 		if (cid[i] == 4) {
@@ -277,7 +277,7 @@ function bulkevaluation() {
 }
 function bulkreview() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	var num = 0;
 	for (var i = 0; i < cid.length; i++) {
 		if (cid[i] == 5 || cid[i] == 6) {
@@ -301,7 +301,7 @@ function bulkreview() {
 }
 function bulksealing() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	var num = 0;
 	for (var i = 0; i < cid.length; i++) {
 		if (cid[i] == 7 || cid[i] == 8) {

@@ -40,7 +40,7 @@ $("#batchoperate").click("click", function () {
 
 function batchoperate() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	if (cbox == "") {
 		layer.msg("至少选中一个");
 		return;

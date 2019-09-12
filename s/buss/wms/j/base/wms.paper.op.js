@@ -1,13 +1,9 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-export function delRm() {
-    var cbox = window.datagrid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
-    }
+function del(url) {
+    var cbox = gf.checkNotNull(window.datagrid);
+    if (!cbox) { return; }
     layer.confirm('是否删除？', function (index) {
-        var url = '/receipt/main/deleteEntity.shtml';
         gf.ajax(url, { ids: cbox.join(",") }, "json", function (s) {
             if (s == "success") {
                 layer.msg('删除成功');
@@ -19,10 +15,11 @@ export function delRm() {
     });
 }
 
-export function executeRm(id) {
+function execute(url) {
+    var cbox = gf.checkOnlyOne(window.datagrid);
+    if (!cbox) { return; }
     layer.confirm('是否下达执行？（此动作不可撤回）', function (index) {
-        var url = '/receipt/main/execute.shtml';
-        gf.ajax(url, { id: id }, "json", function (s) {
+        gf.ajax(url, { id: cbox }, "json", function (s) {
             if (s == "success") {
                 layer.msg('成功下达！');
                 window.datagrid.loadData();
@@ -33,101 +30,85 @@ export function executeRm(id) {
     });
 }
 
-export function delSm() {
-    var cbox = window.datagrid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
+function edit(url) {
+    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    if (!cbox) { return; }
+    window.pageii = layer.open({
+        title: "编辑",
+        type: 2,
+        area: ["600px", "80%"],
+        content: url + '?id=' + cbox
+    });
+}
+
+function add(url) {
+    window.pageii = layer.open({
+        title: "新增",
+        type: 2,
+        area: localStorage.layerArea.split(","),
+        content: url
+    });
+}
+function detail(url) {
+    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    if (!cbox) { return; }
+    window.pageii = layer.open({
+        title: "明细",
+        type: 2,
+        area: localStorage.layerArea.split(","),
+        content: url + cbox
+    });
+}
+
+var _keyword = null;
+var initPaperOp = function (keyword) {
+    _keyword = keyword;
+    let btns = [
+        {
+            id: "add", name: "增加", class: "btn-primary", bind: function () {
+                add(`/s/buss/wms/h/${_keyword}AddUI.html`);
+            }
+        },
+        {
+            id: "del", name: "删除", class: "btn-danger", bind: function () {
+                del(`/${_keyword}/main/deleteEntity.shtml`);
+            }
+        },
+        {
+            id: "edit", name: "修改", class: "btn-primary", bind: function () {
+                edit(`/s/buss/wms/h/${_keyword}EditUI.html?${_keyword}MainFormMap.paperid=`);
+            }
+        },
+        {
+            id: "detail", name: "明细", class: "btn-primary", bind: function () {
+                detail(`/s/buss/wms/h/${_keyword}DetailOfOne.html?${_keyword}MainFormMap.paperid=`);
+            }
+        },
+        {
+            id: "execute", name: "下达", class: "btn-danger", bind: function () {
+                execute(`/${_keyword}/main/deleteEntity.shtml`);
+            }
+        },
+    ];
+    if (_keyword == "inventory") {
+        var whichAgv = function (url) {
+            var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+            if (!cbox) { return; }
+            var s = gf.ajax(url, { key: cbox + "%" }, "json");
+            var info = "";
+            for (var item of s) {
+                info = info + "<br/>" + item.key + ":" + item.value;
+            }
+            if (!info) { info = "未找到执行信息！"; }
+            layer.msg(info);
+        }
+        btns = btns.concat({
+            id: "whichAgv", name: "执行AGV", class: "btn-danger", bind: function () {
+                whichAgv(`/bd/conf.shtml?table=task_agv`);
+            }
+        });
     }
-    layer.confirm('是否删除？', function (index) {
-        var url = '/shipment/main/deleteEntity.shtml';
-        gf.ajax(url, { ids: cbox.join(",") }, "json", function (s) {
-            if (s == "success") {
-                layer.msg('删除成功');
-                window.datagrid.loadData();
-            } else {
-                layer.msg('删除失败');
-            }
-        });
-    });
+    gf.bindBtns("div.doc-buttons", btns);
 }
 
-export function executeSm(id) {
-    layer.confirm('是否下达执行？（此动作不可撤回）', function (index) {
-        var url = '/shipment/main/execute.shtml';
-        gf.ajax(url, { id: id }, "json", function (s) {
-            if (s == "success") {
-                layer.msg('成功下达！');
-                window.datagrid.loadData();
-            } else {
-                layer.msg('下达失败！');
-            }
-        });
-    });
-}
-
-export function delIm() {
-    var cbox = window.datagrid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
-    }
-    layer.confirm('是否删除？', function (index) {
-        var url = '/inventory/main/deleteEntity.shtml';
-        gf.ajax(url, { ids: cbox.join(",") }, "json", function (s) {
-            if (s == "success") {
-                layer.msg('删除成功');
-                window.datagrid.loadData();
-            } else {
-                layer.msg('删除失败');
-            }
-        });
-    });
-}
-
-export function executeIm(id) {
-    layer.confirm('是否下达此执行？（此动作不可撤回）', function (index) {
-        var url = '/inventory/main/execute.shtml';
-        gf.ajax(url, { id: id }, "json", function (s) {
-            if (s == "success") {
-                layer.msg('成功下达！');
-                window.datagrid.loadData();
-            } else {
-                layer.msg('下达失败！');
-            }
-        });
-    });
-}
-
-export function delTm() {
-    var cbox = window.datagrid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
-    }
-    layer.confirm('是否删除？', function (index) {
-        var url = '/transfer/main/deleteEntity.shtml';
-        gf.ajax(url, { ids: cbox.join(",") }, "json", function (s) {
-            if (s == "success") {
-                layer.msg('删除成功');
-                window.datagrid.loadData();
-            } else {
-                layer.msg('删除失败');
-            }
-        });
-    });
-}
-
-export function executeTm(id) {
-    layer.confirm('是否下达此执行？（此动作不可撤回）', function (index) {
-        var url = '/transfer/main/execute.shtml';
-        gf.ajax(url, { id: id }, "json", function (s) {
-            if (s == "success") {
-                layer.msg('成功下达！');
-                window.datagrid.loadData();
-            } else {
-                layer.msg('下达失败！');
-            }
-        });
-    });
-}
+export { initPaperOp };

@@ -250,6 +250,30 @@ class GF {
             tb.load(tb.data("url"));
         });
     };
+    checkNotNull(grid, key) {
+        var cbox = grid.getSelectedCheckbox(key);
+        if (cbox == "") {
+            layer.msg("至少需选中一个！");
+            return null;
+        }
+        return cbox;
+    };
+    checkOnlyOne(grid, key) {
+        var cbox = grid.getSelectedCheckbox(key);
+        if (cbox.length > 1 || cbox == "") {
+            layer.msg("当且仅能选择一个");
+            return null;
+        }
+        return cbox[0];
+    };
+    bindBtns(target, btns) {
+        $.each(btns, function (i, btn) {
+            $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class}">${btn.name}</button> `);
+            $(target).find(`#${btn.id}`).click("click", function () {
+                btn.bind();
+            });
+        });
+    };
 }
 
 var gf = new GF();

@@ -184,7 +184,7 @@ $("#numberprint").click(function () {
 
 function bulksealing() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	var num = 0;
 	for (var i = 0; i < cid.length; i++) {
 		if (cid[i] == 7 || cid[i] == 8) {
@@ -218,7 +218,7 @@ function sealing(requestid) {
 }
 function batchoperate() {
 	var cbox = window.datagrid.getSelectedCheckbox();
-	var cid = window.datagrid.getSelectedCheckboxCid();
+	var cid = window.datagrid.getSelectedCheckbox("cid");
 	var num = 0;
 	for (var i = 0; i < cid.length; i++) {
 		if (cid[i] == 11 || cid[i] == 12 || cid[i] == 13) {

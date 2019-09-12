@@ -265,7 +265,8 @@ export var dataGrid = function (params) {
 				var chkbox = document.createElement("INPUT");
 				chkbox.type = "checkbox";
 				// ******** 树的上下移动需要
-				chkbox.setAttribute("cid", _getValueByName(json[d], l_tree.id));
+				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
+				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], l_tree.id));
 				chkbox.setAttribute("pid", _getValueByName(json[d], l_tree.pid));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
@@ -510,7 +511,8 @@ export var dataGrid = function (params) {
 				var chkbox = document.createElement("INPUT");
 				chkbox.type = "checkbox";
 				// ******** 树的上下移动需要
-				chkbox.setAttribute("cid", _getValueByName(jsonTree[jt], "id"));
+				for (let v in jsonTree[jt]) { if (jsonTree[jt][v]) chkbox.setAttribute("data-" + v, jsonTree[jt][v]); };
+				chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], "id"));
 				chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
@@ -619,7 +621,8 @@ export var dataGrid = function (params) {
 					var chkbox = document.createElement("INPUT");
 					chkbox.type = "checkbox";
 					// ******** 树的上下移动需要
-					chkbox.setAttribute("cid", _getValueByName(jsonTree[jt], l_tree.id));
+					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
+					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], l_tree.id));
 					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], l_tree.pid));
 					// ******** 树的上下移动需要
 					chkbox.setAttribute("_l_key", "checkbox");
@@ -723,7 +726,7 @@ export var dataGrid = function (params) {
 		arr.reverse().ly_each(function (tr) {
 			var ck = getChkBox(tr);
 			if (ck.checked) {
-				var cd = ck.getAttribute("cid");
+				var cd = ck.getAttribute("data-" + "cid");
 				$("input:checkbox[pid='" + cd + "']").attr('checked', 'true');// 让子类选中
 				upOne(tr);
 			}
@@ -762,7 +765,7 @@ export var dataGrid = function (params) {
 		arr.ly_each(function (tr) {
 			var ck = getChkBox(tr);
 			if (ck.checked) {
-				var cd = ck.getAttribute("cid");
+				var cd = ck.getAttribute("data-" + "cid");
 				$("input:checkbox[pid='" + cd + "']").attr('checked', 'true');// 让子类选中
 			}
 		});
@@ -795,7 +798,12 @@ export var dataGrid = function (params) {
 		chkbox.checked ? setBgColor(tr) : restoreBgColor(tr);
 	};
 	var selectRow = function (pagId) {
-		return getSelectedCheckbox(pagId);
+		if (!pagId) { pagId = conf.pagId; }
+		var arr = [];
+		$("#" + pagId + " input[_l_key='checkbox']:checkbox:checked").each(function () {
+			arr.push($(this).val());
+		});
+		return arr;
 	};
 	var trClick = function () { // 设置行的背景色 兼容性问题很大
 		/*
@@ -964,23 +972,11 @@ export var dataGrid = function (params) {
 	/**
 	 * 获取选中的值
 	 */
-	var getSelectedCheckbox = function (pagId) {
-		if (pagId == '' || pagId == undefined) {
-			pagId = conf.pagId;
-		}
+	var getSelectedCheckbox = function (key) {
 		var arr = [];
-		$("#" + pagId + " input[_l_key='checkbox']:checkbox:checked").each(function () {
-			arr.push($(this).val());
-		});
-		return arr;
-	};
-	var getSelectedCheckboxCid = function (pagId) {
-		if (pagId == '' || pagId == undefined) {
-			pagId = conf.pagId;
-		}
-		var arr = [];
-		$("#" + pagId + " input[_l_key='checkbox']:checkbox:checked").each(function () {
-			arr.push($(this).attr("cid"));
+		$(`#${conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
+			if (key) arr.push($(this).data(key));
+			else arr.push($(this).val());
 		});
 		return arr;
 	};
@@ -989,7 +985,6 @@ export var dataGrid = function (params) {
 		setOptions: setOptions,
 		loadData: loadData,
 		getSelectedCheckbox: getSelectedCheckbox,
-		getSelectedCheckboxCid: getSelectedCheckboxCid,
 		selectRow: selectRow,// 选中行事件
 		dataGridUp: dataGridUp,
 		dataGridDown: dataGridDown,
@@ -998,16 +993,7 @@ export var dataGrid = function (params) {
 };
 
 var fixhead = function () {
-	// 获取表格的宽度
-	/*
-	 * $('#table_head').css('width',
-	 * $('.t_table').find('table:first').eq(0).width());
-	 */
 	for (var i = 0; i <= $('.t_table .pp-list tr:last').find('td:last').index(); i++) {
 		$('.pp-list th').eq(i).css('width', ($('.t_table .pp-list tr:last').find('td').eq(i).width()) + 2);
 	}
-	/*
-	 * //当有横向滚动条时，需要此js，时内容滚动头部也能滚动。 //暂时不处理横向 $('.t_table').scroll(function() {
-	 * $('#table_head').css('margin-left', -($('.t_table').scrollLeft())); });
-	 */
 };
