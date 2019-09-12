@@ -103,7 +103,7 @@ var initPaperOp = function (keyword) {
             layer.msg(info);
         }
         btns = btns.concat({
-            id: "whichAgv", name: "执行AGV", class: "btn-danger", bind: function () {
+            id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () {
                 whichAgv(`/bd/conf.shtml?table=task_agv`);
             }
         });
