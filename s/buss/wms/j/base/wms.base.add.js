@@ -3,11 +3,8 @@ import "/s/buss/g/j/dynamic.rows.add.js";
 
 let _tasktype = null;
 
-export var setTasktype = function (tasktype) {
+export var init = function (tasktype) {
     _tasktype = tasktype;
-}
-
-export var init = function () {
     var _conf = {
         container: "div#rows",
         targetClass: "item-group",
