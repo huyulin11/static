@@ -1,10 +1,15 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import "/s/buss/g/j/dynamic.rows.add.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 let _tasktype = null;
+let _paperid = null;
 
 export var init = function (tasktype) {
     _tasktype = tasktype;
+    _paperid = gf.urlParam("paperid");
+    console.log(_paperid);
+
     var _conf = {
         container: "div#rows",
         targetClass: "item-group",
@@ -13,7 +18,7 @@ export var init = function (tasktype) {
         max: 20,
     };
 
-    if (_tasktype == 'INVENTORY') {
+    if (_tasktype == 'inventory') {
         _conf.items = [{
             key: "allocItem",
             name: "纵号/行号（全盘无需填写）",

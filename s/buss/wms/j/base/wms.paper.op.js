@@ -37,7 +37,7 @@ function edit(url) {
         title: "编辑",
         type: 2,
         area: ["600px", "80%"],
-        content: url + '?id=' + cbox
+        content: url + "?paperid=" + cbox
     });
 }
 
@@ -76,7 +76,7 @@ var initPaperOp = function (keyword) {
         },
         {
             id: "edit", name: "修改", class: "btn-primary", bind: function () {
-                edit(`/s/buss/wms/h/${_keyword}AddUI.html?${_keyword}MainFormMap.paperid=`);
+                edit(`/s/buss/wms/h/${_keyword}AddUI.html`);
             }
         },
         {
