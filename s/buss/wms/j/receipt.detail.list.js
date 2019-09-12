@@ -1,9 +1,8 @@
-import { urlSearcher } from "/s/j/tool/urlSearcher.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
-var paperid = urlSearcher.param("receiptMainFormMap.paperid");
+var paperid = gf.urlParam("receiptMainFormMap.paperid");
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	l_column: [{

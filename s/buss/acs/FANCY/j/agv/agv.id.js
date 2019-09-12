@@ -1,4 +1,3 @@
-import { urlSearcher } from "/s/j/tool/urlSearcher.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
-export var currentAgvId = urlSearcher.param("agvId");
-
+export var currentAgvId = gf.urlParam("agvId");

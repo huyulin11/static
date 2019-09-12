@@ -76,12 +76,12 @@ var initPaperOp = function (keyword) {
         },
         {
             id: "edit", name: "修改", class: "btn-primary", bind: function () {
-                edit(`/s/buss/wms/h/${_keyword}EditUI.html?${_keyword}MainFormMap.paperid=`);
+                edit(`/s/buss/wms/h/${_keyword}AddUI.html?${_keyword}MainFormMap.paperid=`);
             }
         },
         {
             id: "detail", name: "明细", class: "btn-primary", bind: function () {
-                detail(`/s/buss/wms/h/${_keyword}DetailOfOne.html?${_keyword}MainFormMap.paperid=`);
+                detail(`/s/buss/wms/h/${_keyword}Details.html?${_keyword}MainFormMap.paperid=`);
             }
         },
         {

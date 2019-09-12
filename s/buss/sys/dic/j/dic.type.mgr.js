@@ -1,12 +1,12 @@
 import "/s/j/vue/vue.min.js";
-import { urlSearcher } from "/s/j/tool/urlSearcher.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 var vm = new Vue({
     data: { dictype: null },
     el: "#container",
     created: function () {
         $.ajax({
-            url: '/sys/dic/type/findByPage.shtml?sysDicTypeFormMap.dictype=' + urlSearcher.param("dictype"),
+            url: '/sys/dic/type/findByPage.shtml?sysDicTypeFormMap.dictype=' + gf.urlParam("dictype"),
             async: false,
             type: 'GET',
             dataType: 'json',

@@ -1,6 +1,6 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { dictype } from "/s/buss/sys/dic/j/dic.type.info.js";
-import { urlSearcher } from "/s/j/tool/urlSearcher.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 var _conf = {
     container: "div#rows",
@@ -51,6 +51,6 @@ window.addEventListener('associating_val_changed', function (event) {
     initRows(_conf);
 });
 
-if (urlSearcher.param("dictype")) {
-    dictype(urlSearcher.param("dictype"), doInitRows);
+if (gf.urlParam("dictype")) {
+    dictype(gf.urlParam("dictype"), doInitRows);
 }
