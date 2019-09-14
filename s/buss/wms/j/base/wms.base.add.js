@@ -28,6 +28,7 @@ export var init = function (tasktype) {
             max: 6,
             items: [{
                 key: "allocItem",
+                alias: "userdef1",
                 name: "货位名称",
                 notnull: true,
                 type: "associating-input",
@@ -84,7 +85,8 @@ var _initPage = function () {
         let details = s.object.detail;
         $("#panelBody").find("select,input").each(function () {
             let v = main[$(this).attr("name")];
-            if (v) $(this).val(v);
+            if (v) { $(this).val(v); }
+            else if (main[$(this).data("alias")]) { $(this).val(main[$(this).data("alias")]); }
         });
         initRows(_conf, details);
     });

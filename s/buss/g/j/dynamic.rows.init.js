@@ -8,7 +8,7 @@ var getItem = (data) => {
     for (let item of _conf.items) {
         var itemDesc = "";
         var value = (data && data[item.key]) ? data[item.key] : (item.default ? item.default : "");
-        if (!value) { value = data[item.alias]; }
+        if (!value && data[item.alias]) { value = data[item.alias]; }
         if (_conf.model == 'VIEW') {
             if ("select" == item.type) {
                 let dics = gv.getT(item.dic);
