@@ -25,7 +25,8 @@ var submitForm = function () {
         timeout: 2000,
         data: { dictype: $("#dictype").html() },
         error: function (data) {
-            alert("连接错误！");
+            if (layer) layer.msg("连接错误！");
+            else alert("连接错误！");
         },
         success: function (json) {
             if (json == "success") {

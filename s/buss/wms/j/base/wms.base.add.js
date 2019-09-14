@@ -18,6 +18,7 @@ export var init = function (tasktype) {
     if (_tasktype == 'inventory') {
         _conf.items = [{
             key: "allocItem",
+            alias: "userdef1",
             name: "纵号/行号（全盘无需填写）",
             notnull: true,
             type: "input",
