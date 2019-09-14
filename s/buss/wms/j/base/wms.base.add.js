@@ -4,19 +4,16 @@ import { gf } from "/s/buss/g/j/g.f.js";
 
 let _tasktype = null;
 let _paperid = null;
+let _conf = {
+    container: "div#rows",
+    targetClass: "item-group",
+    addBtn: "div.addOne",
+    serial: 0,
+    max: 20,
+};
 
 export var init = function (tasktype) {
     _tasktype = tasktype;
-    _paperid = gf.urlParam("paperid");
-    console.log(_paperid);
-
-    var _conf = {
-        container: "div#rows",
-        targetClass: "item-group",
-        addBtn: "div.addOne",
-        serial: 0,
-        max: 20,
-    };
 
     if (_tasktype == 'inventory') {
         _conf.items = [{
@@ -46,6 +43,7 @@ export var init = function (tasktype) {
             max: 20,
             items: [{
                 key: "allocItem",
+                alias: "userdef1",
                 name: "货位名称",
                 notnull: true,
                 type: "associating-input",
@@ -66,5 +64,25 @@ export var init = function (tasktype) {
         }
         Object.assign(_conf, obj);
     }
-    initRows(_conf);
+    _initPage();
+}
+
+
+var _initPage = function () {
+    _paperid = gf.urlParam("paperid");
+    if (!_paperid) {
+        initRows(_conf);
+        return;
+    }
+
+    let url = `/${_tasktype}/main/findOneData.shtml`;
+    gf.ajax(url, { paperid: _paperid }, "json", function (s) {
+        let main = s.object.main;
+        let details = s.object.detail;
+        $("#panelBody").find("select,input").each(function () {
+            let v = main[$(this).attr("name")];
+            if (v) $(this).val(v);
+        });
+        initRows(_conf, details);
+    });
 }
