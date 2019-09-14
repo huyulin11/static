@@ -7,8 +7,13 @@ var getItem = (data) => {
     let serial = _conf.serial++;
     for (let item of _conf.items) {
         var itemDesc = "";
-        var value = (data && data[item.key]) ? data[item.key] : (item.default ? item.default : "");
-        if (!value && data[item.alias]) { value = data[item.alias]; }
+        var value = "";
+        if (data) {
+            value = (data[item.key]) ? data[item.key] : "";
+            if (!value && item.alias && data[item.alias]) { value = data[item.alias]; }
+        } else {
+            if (!value && item.default) { value = item.default; }
+        }
         if (_conf.model == 'VIEW') {
             if ("select" == item.type) {
                 let dics = gv.getT(item.dic);
