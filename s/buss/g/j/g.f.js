@@ -244,9 +244,10 @@ class GF {
         return (localhostPaht + projectName);
     };
     onloadurl() {
+        var thisFun = this.loadingImg();
         $("[data-url]").each(function () {
             var tb = $(this);
-            tb.html(this.loadingImg());
+            tb.html(thisFun);
             tb.load(tb.data("url"));
         });
     };
