@@ -70,10 +70,13 @@ export var init = function (tasktype) {
 
 var _initPage = function () {
     _paperid = gf.urlParam("paperid");
+
     if (!_paperid) {
+        $("#form").attr("action", `/${_tasktype}/detail/addEntity.shtml`);
         initRows(_conf);
         return;
     }
+    $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml`);
 
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: _paperid }, "json", function (s) {
