@@ -78,7 +78,7 @@ var _initPage = function () {
         initRows(_conf);
         return;
     }
-    $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml`);
+    $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
 
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: _paperid }, "json", function (s) {
