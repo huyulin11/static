@@ -33,8 +33,8 @@
                     <td><input id="tu" /></td>
                 </tr>
                 <tr>
-                    <td><button id="priority">确认</button></td>
-                    <td><button id="receipt">取消</button></td>
+                    <td><button id="sub">确认</button></td>
+                    <td><button id="cancel">取消</button></td>
                 </tr>
                 <tr>
                     <td><button id="back">返回</button></td>
@@ -58,6 +58,15 @@
         });
         $("#rootContainer").find("#layout").on("click", function () {
             window.location.href = "/logout.shtml";
+        });
+        $("#rootContainer").find("#sub").on("click", function () {
+            gf.doAjax({
+                url: `/receipt/detail/addItem.shtml?paperid=ARKD00000053`,//${paperid}`,
+                data: { allocItem: $("#su").val(), itemcount: $("#tu").val() },
+                success: function (data) {
+                    layer.msg(data);
+                }
+            });
         });
     </script>
 </body>
