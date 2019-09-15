@@ -84,6 +84,11 @@ var _initPage = function () {
     gf.ajax(url, { paperid: _paperid }, "json", function (s) {
         let main = s.object.main;
         let details = s.object.detail;
+        if (main["status"] != "1" || main["delflag"] != "0") {
+            alert("该单无法修改！");
+            parent.layer.close(parent.pageii);
+            return;
+        }
         $("#panelBody").find("select,input").each(function () {
             let v = main[$(this).attr("name")];
             if (v) { $(this).val(v); }
