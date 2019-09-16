@@ -26,8 +26,7 @@ var initAllocColumn = function () {
                     + " data-allowedSkuType='" + column.allowedSkuType + "'"
                     + ">" + info + "</button></td>";
             });
-            $("table.allocCol").append(
-                "<tr class='allocColTr'>" + tmpStr + "</tr>");
+            $("table.allocCol").append("<tr class='allocColTr'>" + tmpStr + "</tr>");
         },
         complete: function (data) {
         },

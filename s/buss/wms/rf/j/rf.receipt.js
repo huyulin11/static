@@ -2,33 +2,18 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
-let _type = null;
 
-export var initRf = function (type) {
-    _type = type;
-
+export var initRf = function () {
     var vm = new Vue({
         data: {},
         el: container,
         created: function () {
         },
         mounted: function () {
-            if (_type == "receipt") {
-                this.initReceipt();
-            } else if (_type == "main") {
-                this.initMain();
-            }
+            this.initReceipt();
             gf.resizeTable();
         },
         methods: {
-            initMain: function () {
-                $("#rootContainer").find("#logout").on("click", function () {
-                    window.location.href = "/logout.shtml";
-                });
-                $("#rootContainer").find("button[id!='logout']").on("click", function () {
-                    gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
-                });
-            },
             initReceipt: function () {
                 $(container).find("#start").on("click", function () { vm.start(); });
                 $(container).find("#sub").on("click", function () { vm.sub(); });
