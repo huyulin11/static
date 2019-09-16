@@ -29,8 +29,7 @@ var submitForm = function () {
             else alert("连接错误！" + data);
         },
         success: function (json) {
-            debugger
-            if (json == "success") {
+            if (json.code >= 0) {
                 parent.datagrid.loadData();
 
                 var to = setTimeout(() => {
@@ -47,7 +46,7 @@ var submitForm = function () {
                     parent.layer.close(parent.pageii);
                 });
             } else {
-                layer.alert("新增失败！！" + json, {
+                layer.alert("新增失败！！" + json.msg, {
                     icon: 3,
                     offset: 'auto'
                 });

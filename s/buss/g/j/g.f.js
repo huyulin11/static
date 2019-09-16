@@ -2,7 +2,14 @@ import { gv } from "/s/buss/g/j/g.v.js";
 
 class GF {
     layerOpen(confs) {
-        if ($(window).width() < 960) { window.open(confs.content); return; }
+        if ($(window).width() < 960) {
+            if (confs.newTab) {
+                window.open(confs.content);
+            } else {
+                window.location.href = confs.content;
+            }
+            return;
+        }
         var initConf = {
             type: 2,
             shade: 0,
