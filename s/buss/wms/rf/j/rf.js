@@ -21,30 +21,6 @@ export var initRf = function (type) {
             gf.resizeTable();
         },
         methods: {
-            initReceipt: function () {
-                $(container).find("#startReceipt").on("click", function () {
-                    vm.startReceipt();
-                });
-
-                $(container).find("#sub").on("click", function () {
-                    vm.sub();
-                });
-
-                $(container).find("#back").on("click", function () {
-                    if (parent.pageii) {
-                        parent.layer.close(parent.pageii);
-                    } else {
-                        window.location.href = "/s/buss/wms/rf/h/rfMgr.html";
-                    }
-                });
-
-                if (localStorage.receiptPaperId) {
-                    $(container).find("h1").each(function () {
-                        $(this).html($(this).html() + localStorage.receiptPaperId);
-                    });
-                }
-                $("#su").focus();
-            },
             initMain: function () {
                 $("#rootContainer").find("#logout").on("click", function () {
                     window.location.href = "/logout.shtml";
@@ -53,7 +29,31 @@ export var initRf = function (type) {
                     gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
                 });
             },
-            startReceipt: function () {
+            initReceipt: function () {
+                $(container).find("#start").on("click", function () { vm.start(); });
+                $(container).find("#sub").on("click", function () { vm.sub(); });
+                $(container).find("#cancel").on("click", function () { vm.cancel(); });
+                $(container).find("#back").on("click", function () { vm.backMain(); });
+                $(container).find("#execute").on("click", function () { vm.execute(); });
+
+                if (localStorage.receiptPaperId) {
+                    let url = `/receipt/main/findOneData.shtml`;
+                    gf.ajax(url, { paperid: localStorage.receiptPaperId }, "json", function (s) {
+                        let main = s.object.main;
+                        if (main["status"] != "1" || main["delflag"] != "0") {
+                            layer.msg(localStorage.receiptPaperId + "该单无法继续操作，如需查看请移步入库单管理！");
+                            localStorage.receiptPaperId = "";
+                            return;
+                        } else {
+                            $(container).find("h1").each(function () {
+                                $(this).html($(this).html() + localStorage.receiptPaperId);
+                            });
+                        }
+                    });
+                }
+                $("#su").focus();
+            },
+            start: function () {
                 if (localStorage.receiptPaperId) {
                     layer.msg("当前入库单尚未处理完成，不能再呼叫空车！");
                     return;
@@ -70,6 +70,47 @@ export var initRf = function (type) {
                         }
                     }
                 });
+            },
+            execute: function () {
+                if (!localStorage.receiptPaperId) {
+                    layer.msg("没有生成对应入库单，不能进行执行操作！");
+                    return;
+                }
+                gf.doAjax({
+                    url: `/receipt/main/execute.shtml?paperid=${localStorage.receiptPaperId}`,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        layer.msg(data.msg);
+                        if (data.code >= 0) {
+                            localStorage.receiptPaperId = "";
+                            window.location.reload();
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                if (!localStorage.receiptPaperId) {
+                    layer.msg("没有生成对应入库单，不能进行取消操作！");
+                    return;
+                }
+                gf.doAjax({
+                    url: `/receipt/detail/cancel.shtml?paperid=${localStorage.receiptPaperId}`,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        layer.msg(data.msg);
+                        if (data.code >= 0) {
+                            localStorage.receiptPaperId = "";
+                            window.location.reload();
+                        }
+                    }
+                });
+            },
+            backMain: function () {
+                if (parent.pageii) {
+                    parent.layer.close(parent.pageii);
+                } else {
+                    window.location.href = "/s/buss/wms/rf/h/rfMgr.html";
+                }
             },
             suEnter: function () {
                 $("#tu").focus();
