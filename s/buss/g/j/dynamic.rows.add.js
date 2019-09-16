@@ -25,10 +25,11 @@ var submitForm = function () {
         timeout: 2000,
         data: { dictype: $("#dictype").html() },
         error: function (data) {
-            if (layer) layer.msg("连接错误！");
-            else alert("连接错误！");
+            if (layer) layer.msg("连接错误！" + data);
+            else alert("连接错误！" + data);
         },
         success: function (json) {
+            debugger
             if (json == "success") {
                 parent.datagrid.loadData();
 

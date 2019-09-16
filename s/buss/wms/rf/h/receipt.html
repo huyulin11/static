@@ -21,16 +21,16 @@
         <table cellspacing="10px" cellspadding="1px">
             <tbody>
                 <tr>
-                    <td width="50%"><button id="startReceipt">呼叫空架</button></td>
-                    <td><button id="endReceipt">漫架入库</button></td>
+                    <td><button id="startReceipt">呼叫空架</button></td>
+                    <td><button id="endReceipt">满架入库</button></td>
                 </tr>
                 <tr>
                     <td><label>SU</label></td>
-                    <td><input id="su" /></td>
+                    <td><input id="su" @keyup.enter="suEnter" /></td>
                 </tr>
                 <tr>
                     <td><label>TU</label></td>
-                    <td><input id="tu" /></td>
+                    <td><input id="tu" @keyup.enter="tuEnter" /></td>
                 </tr>
                 <tr>
                     <td><button id="sub">确认</button></td>
@@ -46,28 +46,8 @@
     <script src="/s/j/jquery/jquery.form.js"></script>
     <script src="/s/j/layer/v3.1.3/layer.js"></script>
     <script type="module">
-        import { gf } from "/s/buss/g/j/g.f.js";
-        $("#rootContainer").find("#startReceipt").on("click", function () {
-            gf.doAjax({
-                url: "/receipt/detail/addEntity.shtml",
-                data: { warehouse: 4 },
-                success: function (data) {
-                    layer.msg(data);
-                }
-            });
-        });
-        $("#rootContainer").find("#layout").on("click", function () {
-            window.location.href = "/logout.shtml";
-        });
-        $("#rootContainer").find("#sub").on("click", function () {
-            gf.doAjax({
-                url: `/receipt/detail/addItem.shtml?paperid=ARKD00000053`,//${paperid}`,
-                data: { allocItem: $("#su").val(), itemcount: $("#tu").val() },
-                success: function (data) {
-                    layer.msg(data);
-                }
-            });
-        });
+        import { initRf } from "/s/buss/wms/rf/j/rf.js";
+        initRf("receipt");
     </script>
 </body>
 

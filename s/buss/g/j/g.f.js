@@ -27,7 +27,7 @@ class GF {
             ];
             conf.offset = 'cb';
         }
-        layer.open(conf);
+        window.pageii = layer.open(conf);
     };
     resizeTable() {
         $("table").each(function () {

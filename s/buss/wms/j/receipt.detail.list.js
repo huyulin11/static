@@ -16,6 +16,15 @@ window.datagrid = dataGrid({
 		colkey: "userdef1",
 		name: "货位"
 	}, {
+		colkey: "item",
+		name: "SU"
+	}, {
+		colkey: "userdef3",
+		name: "TU"
+	}, {
+		colkey: "itemcount",
+		name: "数量"
+	}, {
 		colkey: "sequence",
 		name: "次序",
 	}, {

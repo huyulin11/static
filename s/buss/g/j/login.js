@@ -26,7 +26,8 @@ var vm = new Vue({
         console.log('App is power by: ' + this.shortname);
     },
     mounted: function () {
-        console.log('App is power by: ' + this.shortname)
+        console.log('App is power by: ' + this.shortname);
+        $("#username").focus();
     },
     methods: {
         checkUserForm: function () {
@@ -52,5 +53,3 @@ var vm = new Vue({
         }
     }
 });
-
-$("#username").focus();
