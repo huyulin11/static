@@ -46,7 +46,7 @@ export var initRf = function (type) {
                             return;
                         } else {
                             $(container).find("h1").each(function () {
-                                $(this).html($(this).html() + localStorage.receiptPaperId);
+                                $(this).html("正在入库" + localStorage.receiptPaperId);
                             });
                         }
                     });
