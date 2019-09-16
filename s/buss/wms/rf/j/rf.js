@@ -93,17 +93,19 @@ export var initRf = function (type) {
                     layer.msg("没有生成对应入库单，不能进行取消操作！");
                     return;
                 }
-                gf.doAjax({
-                    url: `/receipt/detail/cancel.shtml?paperid=${localStorage.receiptPaperId}`,
-                    success: function (data) {
-                        data = JSON.parse(data);
-                        layer.msg(data.msg);
-                        if (data.code >= 0) {
-                            localStorage.receiptPaperId = "";
-                            window.location.reload();
+                if (window.confirm("取消操作将删除当前正在操作的入库单，是否继续？")) {
+                    gf.doAjax({
+                        url: `/receipt/main/deleteEntity.shtml?paperid=${localStorage.receiptPaperId}`,
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            layer.msg(data.msg);
+                            if (data.code >= 0) {
+                                localStorage.receiptPaperId = "";
+                                window.location.reload();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             },
             backMain: function () {
                 if (parent.pageii) {
