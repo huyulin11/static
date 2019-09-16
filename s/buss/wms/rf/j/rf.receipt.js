@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { rfMgr } from "/s/buss/wms/rf/j/rf.main.js";
 import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
@@ -24,7 +25,7 @@ export var initRf = function () {
                 $(container).find("#start").on("click", function () { vm.start(); });
                 $(container).find("#sub").on("click", function () { vm.sub(); });
                 $(container).find("#cancel").on("click", function () { vm.cancel(); });
-                $(container).find("#rfMgr").on("click", function () { vm.rfMgr(); });
+                $(container).find("#rfMgr").on("click", function () { rfMgr(); });
                 $(container).find("#execute").on("click", function () { vm.execute(); });
 
                 if (currentPaperid()) {
@@ -96,13 +97,6 @@ export var initRf = function () {
                             }
                         }
                     });
-                }
-            },
-            rfMgr: function () {
-                if (parent.pageii) {
-                    parent.layer.close(parent.pageii);
-                } else {
-                    window.location.href = "/s/buss/wms/rf/h/rfMgr.html";
                 }
             },
             suEnter: function () {

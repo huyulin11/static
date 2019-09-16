@@ -3,6 +3,14 @@ import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
 
+export var rfMgr = function () {
+    if (parent.pageii) {
+        parent.layer.close(parent.pageii);
+    } else {
+        window.location.href = "/s/buss/wms/rf/h/rfMgr.html";
+    }
+}
+
 export var initRf = function () {
     var vm = new Vue({
         data: {},

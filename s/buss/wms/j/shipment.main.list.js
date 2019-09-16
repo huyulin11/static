@@ -63,28 +63,17 @@ let params = {
 export var init = function () {
 	let choosedStatus = gf.urlParam("status");
 	if (choosedStatus) {
+		initPaperOp("shipment", "RF");
 		$("html").addClass("frame");
 		$("#searchForm").hide();
-		$(".doc-buttons").hide();
 		params = Object.assign(params, {
 			data: {
 				"shipmentMainFormMap.status": choosedStatus,
 				"shipmentMainFormMap.delflag": 0
 			}
 		});
-		params.l_column = params.l_column.concat({
-			colkey: "updatetime",
-			name: "操作",
-			renderData: function (rowindex, data, rowdata, column) {
-				if (rowdata.delflag == "1") {
-					return "";
-				}
-				var btns = "";
-				btns += `<button type='button' class='btn btn-info marR10 mgr' 
-							data-dictype='${ rowdata.dictype}'>接单</button>`;
-				return btns;
-			}
-		});
+	} else {
+		initPaperOp("shipment");
 	}
 
 	window.datagrid = dataGrid(params);
@@ -96,5 +85,3 @@ $("#search").on("click", function () {
 		data: searchParams
 	});
 });
-
-initPaperOp("shipment");

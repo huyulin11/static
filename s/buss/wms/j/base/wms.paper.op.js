@@ -55,12 +55,38 @@ function detail(url) {
         content: url + cbox
     });
 }
+function take(url) {
+    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    if (!cbox) { return; }
+    layer.confirm('是否接单？', function (index) {
+        gf.ajax(url, { id: cbox }, "json", function (s) {
+            if (s.code >= 0) {
+                layer.msg('成功下达！');
+                window.datagrid.loadData();
+            } else {
+                layer.msg('下达失败！' + s.msg);
+            }
+        });
+    });
+}
 
 var _keyword = null;
-var initPaperOp = function (keyword) {
+var initPaperOp = function (keyword, rf) {
     _keyword = keyword;
-    let btns = [
+    let btns = null;
+    if (rf == "RF") {
+        btns = [{
+            id: "detail", name: "明细", class: "btn-primary", bind: function () {
+                detail(`/s/buss/wms/h/${_keyword}Details.html?${_keyword}MainFormMap.paperid=`);
+            }
+        },
         {
+            id: "add", name: "接单", class: "btn-primary", bind: function () {
+                take(`/${_keyword}/main/take.shtml`);
+            }
+        },];
+    } else {
+        btns = [{
             id: "add", name: "增加", class: "btn-primary", bind: function () {
                 add(`/s/buss/wms/h/${_keyword}AddUI.html`);
             }
@@ -84,8 +110,8 @@ var initPaperOp = function (keyword) {
             id: "execute", name: "下达", class: "btn-danger", bind: function () {
                 execute(`/${_keyword}/main/execute.shtml`);
             }
-        },
-    ];
+        },];
+    }
     if (_keyword == "inventory") {
         var whichAgv = function (url) {
             var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
