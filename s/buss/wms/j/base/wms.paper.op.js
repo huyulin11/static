@@ -61,10 +61,10 @@ function taked(url) {
     layer.confirm('是否接单？', function (index) {
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (s.code >= 0) {
-                layer.msg('成功下达！');
+                layer.msg('成功接单！');
                 window.datagrid.loadData();
             } else {
-                layer.msg('下达失败！' + s.msg);
+                layer.msg('接单失败！' + s.msg);
             }
         });
     });
@@ -79,8 +79,7 @@ var initPaperOp = function (keyword, rf) {
             id: "detail", name: "明细", class: "btn-primary", bind: function () {
                 detail(`/s/buss/wms/h/${_keyword}Details.html?${_keyword}MainFormMap.paperid=`);
             }
-        },
-        {
+        }, {
             id: "taked", name: "接单", class: "btn-primary", bind: function () {
                 taked(`/${_keyword}/main/taked.shtml`);
             }
@@ -90,28 +89,23 @@ var initPaperOp = function (keyword, rf) {
             id: "add", name: "增加", class: "btn-primary", bind: function () {
                 add(`/s/buss/wms/h/${_keyword}AddUI.html`);
             }
-        },
-        {
+        }, {
             id: "del", name: "删除", class: "btn-danger", bind: function () {
                 del(`/${_keyword}/main/deleteEntity.shtml`);
             }
-        },
-        {
+        }, {
             id: "edit", name: "修改", class: "btn-primary", bind: function () {
                 edit(`/s/buss/wms/h/${_keyword}AddUI.html`);
             }
-        },
-        {
+        }, {
             id: "detail", name: "明细", class: "btn-primary", bind: function () {
                 detail(`/s/buss/wms/h/${_keyword}Details.html?${_keyword}MainFormMap.paperid=`);
             }
-        },
-        {
+        }, {
             id: "execute", name: "下达", class: "btn-danger", bind: function () {
                 execute(`/${_keyword}/main/execute.shtml`);
             }
-        },
-        {
+        }, {
             id: "taked", name: "接单", class: "btn-primary", bind: function () {
                 taked(`/${_keyword}/main/taked.shtml`);
             }
