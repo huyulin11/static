@@ -46,9 +46,11 @@
             if (window.dispatchEvent) { window.dispatchEvent(myEvent); } else { window.fireEvent(myEvent); }
         });
 
-        $("html").one("focus", _target, function () {
-            $(this).trigger("click");
-        });
+        // $("html").one("focus", _target, function () {
+        //     setTimeout(() => {
+        //         $(this).trigger("click");
+        //     }, 100);
+        // });
 
         var flag = false;
 
