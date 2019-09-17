@@ -37,11 +37,11 @@ var whenEditInputEnter = function (that) {
         "ImmediateTaskFormMap.taskexesid": taskexesid,
         "ImmediateTaskFormMap.json": data
     }, "json");
-    if (s == "success") {
+    if (s.code >= 0) {
         layer.msg('修改成功！');
         window.datagrid.loadData();
     } else {
-        layer.msg('修改失败：' + s);
+        layer.msg('修改失败：' + s.msg);
         td.find("input").focus();
     }
 

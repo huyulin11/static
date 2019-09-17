@@ -38,11 +38,11 @@ var whenEditInputEnter = function (that) {
         "skuInfoFormMap.name": data
     }, "json");
     localStorage.setItem("refreshSkuInfo", 1);
-    if (s == "success") {
+    if (s.code >= 0) {
         layer.msg('修改成功！');
         window.datagrid.loadData();
     } else {
-        layer.msg('修改失败：' + s);
+        layer.msg('修改失败：' + s.msg);
         td.find("input").focus();
     }
 

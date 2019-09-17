@@ -79,11 +79,11 @@ function del() {
 		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
-		if (s == "success") {
+		if (s.code >= 0) {
 			layer.msg('删除成功');
 			window.datagrid.loadData();
 		} else {
-			layer.msg('删除失败');
+			layer.msg(s.msg);
 		}
 	});
 }

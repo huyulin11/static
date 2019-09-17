@@ -47,11 +47,11 @@ function saveAll() {
 	layer.confirm('是否确认保存所有数据？', function (index) {
 		var url = '/iotinfo/relation/saveAll.shtml';
 		var s = gf.ajax(url, $("#formInList").serialize(), "json");
-		if (s == "success") {
+		if (s.code >= 0) {
 			layer.msg('保存成功');
 			window.datagrid.loadData();
 		} else {
-			layer.msg('保存失败！' + s);
+			layer.msg('保存失败！' + s.msg);
 		}
 	});
 }

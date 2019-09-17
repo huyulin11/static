@@ -11,7 +11,7 @@ $("form").validate({
 			type: "post",
 			dataType: "json",
 			success: function (data) {
-				if (data == "success") {
+				if (data.code >= 0) {
 					layer.confirm('添加成功!是否关闭窗口?', function (index) {
 						parent.datagrid.loadData();
 						parent.layer.close(parent.pageii);
@@ -19,7 +19,7 @@ $("form").validate({
 					});
 					$("#form")[0].reset();
 				} else {
-					layer.msg('添加失败！');
+					layer.msg('添加失败！' + data.msg);
 				}
 			}
 		});

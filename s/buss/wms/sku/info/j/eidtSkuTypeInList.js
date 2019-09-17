@@ -53,13 +53,13 @@ var whenEditInputEnter = function () {
         "skuInfoFormMap.type": data
     }, "json");
     localStorage.setItem("refreshSkuInfo", 1);
-    if (s == "success") {
+    if (s.code >= 0) {
         layer.msg('修改成功！');
         $currentTd.find("div.changable").find("span").html(data);
         _toggle();
         window.datagrid.loadData();
     } else {
-        layer.msg('修改失败：' + s);
+        layer.msg('修改失败：' + s.msg);
         $currentTd.find("input").focus();
     }
 }

@@ -6,14 +6,14 @@ $("form").validate({
 			type: "post",
 			dataType: "json",
 			success: function (data) {
-				if (data == "success") {
+				if (data.code >= 0) {
 					layer.confirm('编辑成功!是否关闭窗口?', function (index) {
 						parent.datagrid.loadData();
 						parent.layer.close(parent.pageii);
 						return false;
 					});
 				} else {
-					layer.alert('编辑失败！', 3);
+					layer.alert('编辑失败！' + data.msg, 3);
 				}
 			}
 		});

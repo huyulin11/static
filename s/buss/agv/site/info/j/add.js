@@ -9,7 +9,7 @@ var demo = $("#form").Validform({
     },
     ajaxPost: true,
     callback: function (json) {
-        if (json == "success") {
+        if (json.code >= 0) {
             $.Hidemsg();
             parent.datagrid.loadData();
 
@@ -27,7 +27,7 @@ var demo = $("#form").Validform({
                 parent.layer.close(parent.pageii);
             });
         } else {
-            layer.alert(json, {
+            layer.alert(json.msg, {
                 icon: 3,
                 offset: 'auto'
             });

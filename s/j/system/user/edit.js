@@ -6,14 +6,14 @@ $("form").validate({
 			type: "post",
 			dataType: "json",// ajaxSubmi带有文件上传的。不需要设置json
 			success: function (data) {
-				if (data == "success") {
+				if (data.code >= 0) {
 					layer.confirm('更新成功!是否关闭窗口?', function (index) {
 						parent.datagrid.loadData();
 						parent.layer.close(parent.pageii);
 						return false;
 					});
 				} else {
-					layer.msg('更新失败！', 3);
+					layer.msg('更新失败！' + data.msg, 3);
 				}
 			}
 		});

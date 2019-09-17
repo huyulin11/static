@@ -10,10 +10,10 @@ var login = function () {
             layer.msg("连接错误！");
         },
         success: function (data) {
-            if (data == "SUCCESS") {
+            if (data.code >= 0) {
                 window.location.href = "/manager.shtml";
             } else {
-                layer.msg(data);
+                layer.msg(data.msg);
                 $("#username").focus();
             }
         }

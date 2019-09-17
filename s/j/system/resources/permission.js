@@ -72,7 +72,7 @@ $("#sub").on("click", function () {
 		url: '/resources/addUserRes.shtml',
 		dataType: 'json',
 		success: function (json) {
-			if (json == "success") {
+			if (json.code >= 0) {
 				layer.confirm('分配成功！是否关闭窗口？', {
 					icon: 3,
 					area: ["25%", "25%"],
@@ -82,7 +82,7 @@ $("#sub").on("click", function () {
 					return false;
 				});
 			} else {
-				layer.alert("分配失败！！", {
+				layer.alert("分配失败！！" + json.msg, {
 					icon: 3,
 					area: ["25%", "25%"],
 					offset: 'auto'
