@@ -61,6 +61,7 @@ var auth = (agvInfo) => {
 		|| movestatus == "PAUSE_OUT_ERR" || movestatus == "PAUSE_REPATH_ERR"
 		|| movestatus == "PAUSE_CACHE_ERR") {
 		container().find("button#CONTINUE").removeAttr("disabled");
+		container().find("button#CONFIRM").removeAttr("disabled");
 		container().find("button#GOTO_INIT").removeAttr("disabled");
 		container().find("button#RE_PATH").removeAttr("disabled");
 	} else {
@@ -78,6 +79,7 @@ var auth = (agvInfo) => {
 			container().find("button#BACK_CHARGE").removeAttr("disabled");
 		}
 	}
+	container().find("button#CONFIRM").removeAttr("disabled");
 	container().find("button#GOTO_INIT").removeAttr("disabled");
 	container().find("button#RE_PATH").removeAttr("disabled");
 	container().find("button#SHUTDOWN").removeAttr("disabled");
