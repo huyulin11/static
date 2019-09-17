@@ -113,11 +113,13 @@ var initPaperOp = function (keyword, rf) {
     }, cancelBtn = {
         id: "cancel", name: "撤销", class: "btn-danger", bind: function () { cancel(this); },
         url: `/${_keyword}/main/cancel.shtml`
+    }, refreshBtn = {
+        id: "refresh", name: "刷新", class: "btn-info", bind: function () { window.datagrid.loadData(); },
     };
     if (rf == "RF") {
-        btns = [addBtn, takedBtn, cancelBtn,];
+        btns = [addBtn, takedBtn, cancelBtn, refreshBtn,];
     } else {
-        btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn,];
+        btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn,];
     }
     if (_keyword == "inventory") {
         var whichAgv = function (that) {
