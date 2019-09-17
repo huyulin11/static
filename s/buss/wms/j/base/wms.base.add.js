@@ -1,7 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import "/s/buss/g/j/dynamic.rows.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { initUdf } from "./wms.base.add.init.js";
+import { initUdf } from "./udf/wms.base.add.init.BJJK_HUIRUI.js";
 
 let _tasktype = null;
 let _paperid = null;
