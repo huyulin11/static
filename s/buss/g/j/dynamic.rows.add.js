@@ -36,7 +36,7 @@ var submitForm = function () {
                     parent.layer.close(parent.pageii);
                 }, 2000);
 
-                layer.confirm('新增成功！是否继续添加？（两秒钟后自动关闭）', {
+                layer.confirm('保存成功！是否继续添加？（两秒钟后自动关闭）', {
                     btn: ['继续', '关闭']
                 }, function () {
                     clearTimeout(to);
