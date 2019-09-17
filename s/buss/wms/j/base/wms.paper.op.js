@@ -55,11 +55,11 @@ function detail(url) {
         content: url + cbox
     });
 }
-function take(url) {
+function taked(url) {
     var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
     if (!cbox) { return; }
     layer.confirm('是否接单？', function (index) {
-        gf.ajax(url, { id: cbox }, "json", function (s) {
+        gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (s.code >= 0) {
                 layer.msg('成功下达！');
                 window.datagrid.loadData();
@@ -81,8 +81,8 @@ var initPaperOp = function (keyword, rf) {
             }
         },
         {
-            id: "add", name: "接单", class: "btn-primary", bind: function () {
-                take(`/${_keyword}/main/take.shtml`);
+            id: "taked", name: "接单", class: "btn-primary", bind: function () {
+                taked(`/${_keyword}/main/taked.shtml`);
             }
         },];
     } else {
@@ -109,6 +109,11 @@ var initPaperOp = function (keyword, rf) {
         {
             id: "execute", name: "下达", class: "btn-danger", bind: function () {
                 execute(`/${_keyword}/main/execute.shtml`);
+            }
+        },
+        {
+            id: "taked", name: "接单", class: "btn-primary", bind: function () {
+                taked(`/${_keyword}/main/taked.shtml`);
             }
         },];
     }

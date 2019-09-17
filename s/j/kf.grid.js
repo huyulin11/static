@@ -85,8 +85,7 @@ export var dataGrid = function (params) {
 			},
 			error: function (msg) {
 				console.log(msg);
-				layer.msg("未能联网获取服务器数据，请刷新界面检查是否登录超时！"
-					+ "<br/><font color='red'>或者联系管理员是否开通对应服务！</font>");
+				layer.msg("数据错误！请检查网络或权限配置！");
 				json = '';
 			}
 		});
