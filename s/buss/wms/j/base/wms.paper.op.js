@@ -123,18 +123,20 @@ var initPaperOp = function (keyword, rf) {
         var whichAgv = function (that) {
             var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
             if (!cbox) { return; }
-            var s = gf.ajax(that.url, { key: cbox + "%" }, "json");
-            var info = "";
-            for (var item of s) {
-                info = info + "<br/>" + item.key + ":" + item.value;
-            }
-            if (!info) { info = "未找到执行信息！"; }
-            layer.msg(info);
+            gf.ajax(that.url, { key: cbox + "%" }, "json", function (s) {
+                var info = "";
+                for (var item of s) {
+                    info = info + "<br/>" + item.key + ":" + item.value;
+                }
+                if (!info) { info = "未找到执行信息！"; }
+                layer.msg(info);
+            });
         }
-        btns = btns.concat({
+        let whichAgvBtn = {
             id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { whichAgv(this); },
             url: `/bd/conf.shtml?table=task_agv`
-        });
+        };
+        btns = btns.concat(whichAgvBtn);
     }
     gf.bindBtns("div.doc-buttons", btns);
 }
