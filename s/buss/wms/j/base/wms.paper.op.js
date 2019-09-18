@@ -44,6 +44,21 @@ function detail(that) {
     });
 }
 
+function send(that) {
+    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    if (!cbox) { return; }
+    layer.confirm(`是否${that.name}${cbox}？`, function (index) {
+        gf.ajax(that.url, { paperid: cbox }, "json", function (s) {
+            if (s.code >= 0) {
+                layer.msg(`成功${that.name}！`);
+                window.datagrid.loadData();
+            } else {
+                layer.msg(`${that.name}失败！` + s.msg);
+            }
+        });
+    });
+}
+
 function execute(that) {
     var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
     if (!cbox) { return; }
@@ -127,8 +142,11 @@ var initPaperOp = function (keyword, rf) {
     }, detailBtn = {
         id: "detail", name: "明细", class: "btn-primary", bind: function () { detail(this); },
         url: `/s/buss/wms/h/${_keyword}Details.html?${_keyword}MainFormMap.paperid=`
+    }, sendBtn = {
+        id: "send", name: "下达", class: "btn-danger", bind: function () { send(this); },
+        url: `/${_keyword}/main/send.shtml`
     }, executeBtn = {
-        id: "execute", name: "下达", class: "btn-danger", bind: function () { execute(this); },
+        id: "execute", name: "执行", class: "btn-danger", bind: function () { execute(this); },
         url: `/${_keyword}/main/execute.shtml`
     }, takedBtn = {
         id: "taked", name: "接单", class: "btn-primary", bind: function () { taked(this); },
@@ -151,12 +169,12 @@ var initPaperOp = function (keyword, rf) {
         btns = [addBtn, takedBtn, cancelBtn, refreshBtn,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
-            btns = [addBtn, editBtn, detailBtn, executeBtn, delBtn, refreshBtn,];
+            btns = [addBtn, editBtn, detailBtn, sendBtn, execute, delBtn, refreshBtn,];
             if (_keyword == "inventory") {
                 btns = btns.concat(whichAgvBtn);
             }
         } else {
-            btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn,];
+            btns = [addBtn, editBtn, detailBtn, sendBtn, execute, takedBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn,];
         }
     }
     gf.bindBtns("div.doc-buttons", btns);
