@@ -9,6 +9,51 @@ var currentTask = new Array();
 
 var _target;
 
+var doTask = (agvId, task, targetSite) => {
+	if (!targetSite || (isNaN(Number(targetSite)) && isNaN(Number(targetSite.replace(/#/g, ""))))) {
+		layer.msg("请输入有效的目标站点编号！");
+		return;
+	}
+	layer.msg(taskexe.addTaskTo(agvId, task, targetSite));
+}
+
+var getTargets = function () {
+	var arr = [];
+	$("div#targets button.choosed").each(function () {
+		var id = $(this).data("id");
+		arr.push(id);
+	});
+	return arr;
+}
+
+var getButtonsHtml = (targets) => {
+	var index = 1;
+	var numInLine = 7;
+	var tmpStr = "";
+	var buttons = ``;
+	for (var target of targets) {
+		var tmpItemStr;
+		if (typeof (target) == "number" || typeof (target) == "string") {
+			tmpItemStr = `<td><button data-id='${target}'>${target}</button></td>`;
+		} else {
+			tmpItemStr = `<td><button data-id='${target.id}'>${target.name}-${target.id}</button></td>`;
+		}
+		tmpStr = tmpStr + tmpItemStr;
+		if (index >= numInLine) {
+			buttons = `${buttons}<tr>${tmpStr}</tr>`;
+			index = 1;
+			tmpStr = "";
+		} else {
+			index++;
+		}
+	}
+	if (tmpStr) {
+		buttons = `${buttons}<tr>${tmpStr}</tr>`;
+	}
+	var rtn = `<div id='targets'><table>${buttons}</table></div>`;
+	return rtn;
+}
+
 var container = function () {
 	if ($(_target).length == 0) {
 		console.log("get oneCtrilTr err");
@@ -91,13 +136,210 @@ var auth = (agvInfo) => {
 	});
 }
 
+var deleverTaskLaoFoxconn = function () {
+	var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)', {
+		btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B08 3F'],
+		btn1: function () {
+			targetSite = 53;
+			doTask(agvId, task, targetSite);
+		},
+		btn2: function () {
+			targetSite = 89;
+			doTask(agvId, task, targetSite);
+		},
+		btn3: function () {
+			targetSite = 62;
+			doTask(agvId, task, targetSite);
+		},
+		btn4: function () {
+			targetSite = 105;
+			doTask(agvId, task, targetSite);
+		}
+	});
+}
 
-var doTask = (agvId, task, targetSite) => {
-	if (!targetSite || (isNaN(Number(targetSite)) && isNaN(Number(targetSite.replace(/#/g, ""))))) {
-		layer.msg("请输入有效的目标站点编号！");
-		return;
+var deleverTaskTaikaiJy = function () {
+	var agvbusstype = findIotInfo(agvId, "agvbusstype");
+	var targets;
+	if (agvbusstype == 'TON_1') {
+		if (agvId == 5) {
+			targets = [{ id: 12, name: "20号" }, { id: 13, name: "19号" }, { id: 14, name: "18号" }, { id: 15, name: "17号" },
+			{ id: 16, name: "9号" }, { id: 17, name: "10号" }, { id: 18, name: "12号" }];
+		} else if (agvId == 4) {
+			targets = [{ id: 2, name: "22号" }, { id: 3, name: "21号" }, { id: 4, name: "13号" },
+			{ id: 5, name: "14号" }, { id: 6, name: "15号" }, { id: 7, name: "16号" }];
+		}
+	} else if (agvbusstype == 'TON_2') {
+		targets = [62, 61, 60, 65];
 	}
-	layer.msg(taskexe.addTaskTo(agvId, task, targetSite));
+	var buttons = getButtonsHtml(targets);
+	var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
+		btn: ['确定送料'],
+		btn1: function () {
+			var arr = getTargets();
+			if (!arr || arr.length == 0) {
+				alert("无有效停车站点");
+				return;
+			} else if (arr.length > 1 && agvbusstype == 'TON_2') {
+				alert("大车只能选择1个点");
+				return;
+			}
+			var targetSite = arr.join("#");
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn2: function () {
+			targetSite = 105;
+			doTask(agvId, "DELIVER", targetSite);
+		}
+	});
+}
+
+var deleverInitTaskLaoDbwy = function () {
+	var targets = [];
+	for (var i = 3012; i <= 3053; i++) {
+		targets.push({ id: i, name: i - 3011 + "号" });
+	}
+	var buttons = getButtonsHtml(targets);
+	var indexOfTips = layer.confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
+		btn: ['确定送料'],
+		btn1: function () {
+			var arr = getTargets();
+			if (!arr || arr.length == 0) {
+				alert("无有效停车站点");
+				return;
+			}
+			var targetSite = arr.join("#");
+			doTask(agvId, "DELIVER", targetSite);
+		},
+	});
+}
+
+var deleverStereotypeTaskLaoDbwy = function () {
+	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
+		btn: ['袜机1号', '袜机2号', '袜机3号', '袜机4号', '袜机5号', '袜机6号', '袜机7号', '袜机8号', '袜机9号', '袜机10号', '定型1号', '定型2号', '定型3号', '定型4号'],
+		btn1: function () {
+			targetSite = 2001;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn2: function () {
+			targetSite = 2002;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn3: function () {
+			targetSite = 2003;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn4: function () {
+			targetSite = 2004;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn5: function () {
+			targetSite = 2005;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn6: function () {
+			targetSite = 2006;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn7: function () {
+			targetSite = 2007;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn8: function () {
+			targetSite = 2008;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn9: function () {
+			targetSite = 2009;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn10: function () {
+			targetSite = 2010;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn10: function () {
+			targetSite = 2054;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn11: function () {
+			targetSite = 2055;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn12: function () {
+			targetSite = 2056;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn13: function () {
+			targetSite = 2057;
+			doTask(agvId, "DELIVER", targetSite);
+		}
+	});
+}
+
+var deleverPackTaskLaoDbwy = function () {
+	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
+		btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
+		btn1: function () {
+			targetSite = 2058;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn2: function () {
+			targetSite = 2059;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn3: function () {
+			targetSite = 2060;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn4: function () {
+			targetSite = 2061;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn5: function () {
+			targetSite = 2108;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn6: function () {
+			targetSite = 2109;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn7: function () {
+			targetSite = 2110;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn8: function () {
+			targetSite = 2111;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn9: function () {
+			targetSite = 2112;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn10: function () {
+			targetSite = 2113;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn11: function () {
+			targetSite = 2114;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn12: function () {
+			targetSite = 2115;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn13: function () {
+			targetSite = 2116;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn14: function () {
+			targetSite = 2117;
+			doTask(agvId, "DELIVER", targetSite);
+		},
+		btn15: function () {
+			targetSite = 2118;
+			doTask(agvId, "DELIVER", targetSite);
+		}
+	});
 }
 
 export var init = function (target) {
@@ -115,28 +357,6 @@ export var init = function (target) {
 		doTask(agvId, $(this).attr("id"), targetSite);
 	});
 
-	var deleverTaskLaoFoxconn = function () {
-		var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)', {
-			btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B08 3F'],
-			btn1: function () {
-				targetSite = 53;
-				doTask(agvId, task, targetSite);
-			},
-			btn2: function () {
-				targetSite = 89;
-				doTask(agvId, task, targetSite);
-			},
-			btn3: function () {
-				targetSite = 62;
-				doTask(agvId, task, targetSite);
-			},
-			btn4: function () {
-				targetSite = 105;
-				doTask(agvId, task, targetSite);
-			}
-		});
-	}
-
 	$("html").delegate("div[id='targets'] button", "click", function () {
 		var that = $(this);
 		if (that.hasClass("choosed")) {
@@ -145,79 +365,6 @@ export var init = function (target) {
 			that.addClass("choosed");
 		}
 	});
-
-	var getTargets = function () {
-		var arr = [];
-		$("div#targets button.choosed").each(function () {
-			var id = $(this).data("id");
-			arr.push(id);
-		});
-		return arr;
-	}
-
-	var getButtonsHtml = (targets) => {
-		var index = 1;
-		var numInLine = 7;
-		var tmpStr = "";
-		var buttons = ``;
-		for (var target of targets) {
-			var tmpItemStr;
-			if (typeof (target) == "number" || typeof (target) == "string") {
-				tmpItemStr = `<td><button data-id='${target}'>${target}</button></td>`;
-			} else {
-				tmpItemStr = `<td><button data-id='${target.id}'>${target.name}-${target.id}</button></td>`;
-			}
-			tmpStr = tmpStr + tmpItemStr;
-			if (index >= numInLine) {
-				buttons = `${buttons}<tr>${tmpStr}</tr>`;
-				index = 1;
-				tmpStr = "";
-			} else {
-				index++;
-			}
-		}
-		if (tmpStr) {
-			buttons = `${buttons}<tr>${tmpStr}</tr>`;
-		}
-		var rtn = `<div id='targets'><table>${buttons}</table></div>`;
-		return rtn;
-	}
-
-	var deleverTaskTaikaiJy = function () {
-		var agvbusstype = findIotInfo(agvId, "agvbusstype");
-		var targets;
-		if (agvbusstype == 'TON_1') {
-			if (agvId == 5) {
-				targets = [{ id: 12, name: "20号" }, { id: 13, name: "19号" }, { id: 14, name: "18号" }, { id: 15, name: "17号" },
-				{ id: 16, name: "9号" }, { id: 17, name: "10号" }, { id: 18, name: "12号" }];
-			} else if (agvId == 4) {
-				targets = [{ id: 2, name: "22号" }, { id: 3, name: "21号" }, { id: 4, name: "13号" },
-				{ id: 5, name: "14号" }, { id: 6, name: "15号" }, { id: 7, name: "16号" }];
-			}
-		} else if (agvbusstype == 'TON_2') {
-			targets = [62, 61, 60, 65];
-		}
-		var buttons = getButtonsHtml(targets);
-		var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
-			btn: ['确定送料'],
-			btn1: function () {
-				var arr = getTargets();
-				if (!arr || arr.length == 0) {
-					alert("无有效停车站点");
-					return;
-				} else if (arr.length > 1 && agvbusstype == 'TON_2') {
-					alert("大车只能选择1个点");
-					return;
-				}
-				var targetSite = arr.join("#");
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn2: function () {
-				targetSite = 105;
-				doTask(agvId, "DELIVER", targetSite);
-			}
-		});
-	}
 
 	$(_target).delegate("button[id='DELIVER']", "click", function () {
 		allDisabled();
@@ -265,154 +412,6 @@ export var init = function (target) {
 			});
 		}
 	});
-
-	var deleverInitTaskLaoDbwy = function () {
-		var targets = [];
-		for (var i = 3012; i <= 3053; i++) {
-			targets.push({ id: i, name: i - 3011 + "号" });
-		}
-		var buttons = getButtonsHtml(targets);
-		var indexOfTips = layer.confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
-			btn: ['确定送料'],
-			btn1: function () {
-				var arr = getTargets();
-				if (!arr || arr.length == 0) {
-					alert("无有效停车站点");
-					return;
-				}
-				var targetSite = arr.join("#");
-				doTask(agvId, "DELIVER", targetSite);
-			},
-		});
-	}
-
-	var deleverStereotypeTaskLaoDbwy = function () {
-		var indexOfTips = layer.confirm('请选择送料任务的目的地', {
-			btn: ['袜机1号', '袜机2号', '袜机3号', '袜机4号', '袜机5号', '袜机6号', '袜机7号', '袜机8号', '袜机9号', '袜机10号', '定型1号', '定型2号', '定型3号', '定型4号'],
-			btn1: function () {
-				targetSite = 2001;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn2: function () {
-				targetSite = 2002;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn3: function () {
-				targetSite = 2003;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn4: function () {
-				targetSite = 2004;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn5: function () {
-				targetSite = 2005;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn6: function () {
-				targetSite = 2006;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn7: function () {
-				targetSite = 2007;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn8: function () {
-				targetSite = 2008;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn9: function () {
-				targetSite = 2009;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn10: function () {
-				targetSite = 2010;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn10: function () {
-				targetSite = 2054;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn11: function () {
-				targetSite = 2055;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn12: function () {
-				targetSite = 2056;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn13: function () {
-				targetSite = 2057;
-				doTask(agvId, "DELIVER", targetSite);
-			}
-		});
-	}
-
-	var deleverPackTaskLaoDbwy = function () {
-		var indexOfTips = layer.confirm('请选择送料任务的目的地', {
-			btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
-			btn1: function () {
-				targetSite = 2058;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn2: function () {
-				targetSite = 2059;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn3: function () {
-				targetSite = 2060;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn4: function () {
-				targetSite = 2061;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn5: function () {
-				targetSite = 2108;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn6: function () {
-				targetSite = 2109;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn7: function () {
-				targetSite = 2110;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn8: function () {
-				targetSite = 2111;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn9: function () {
-				targetSite = 2112;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn10: function () {
-				targetSite = 2113;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn11: function () {
-				targetSite = 2114;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn12: function () {
-				targetSite = 2115;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn13: function () {
-				targetSite = 2116;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn14: function () {
-				targetSite = 2117;
-				doTask(agvId, "DELIVER", targetSite);
-			},
-			btn15: function () {
-				targetSite = 2118;
-				doTask(agvId, "DELIVER", targetSite);
-			}
-		});
-	}
 
 	$(_target).delegate("button[id='DELIVER_INIT']", "click", function () {
 		allDisabled();
