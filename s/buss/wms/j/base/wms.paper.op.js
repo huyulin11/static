@@ -89,6 +89,19 @@ function taked(that) {
     });
 }
 
+var whichAgv = function (that) {
+    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    if (!cbox) { return; }
+    gf.ajax(that.url, { key: cbox + "%" }, "json", function (s) {
+        var info = "";
+        for (var item of s) {
+            info = info + "<br/>" + item.key + ":" + item.value;
+        }
+        if (!info) { info = "未找到执行信息！"; }
+        layer.msg(info);
+    });
+}
+
 var initPaperOp = function (keyword, rf) {
     _keyword = keyword;
     let btns = null;
@@ -115,34 +128,21 @@ var initPaperOp = function (keyword, rf) {
         url: `/${_keyword}/main/cancel.shtml`
     }, refreshBtn = {
         id: "refresh", name: "刷新", class: "btn-info", bind: function () { window.datagrid.loadData(); },
+    }, whichAgvBtn = {
+        id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { whichAgv(this); },
+        url: `/bd/conf.shtml?table=task_agv`
     };
     if (rf == "RF") {
         btns = [addBtn, takedBtn, cancelBtn, refreshBtn,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
             btns = [addBtn, editBtn, detailBtn, executeBtn, delBtn, refreshBtn,];
+            if (_keyword == "inventory") {
+                btns = btns.concat(whichAgvBtn);
+            }
         } else {
             btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn,];
         }
-    }
-    if (_keyword == "inventory") {
-        var whichAgv = function (that) {
-            var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
-            if (!cbox) { return; }
-            gf.ajax(that.url, { key: cbox + "%" }, "json", function (s) {
-                var info = "";
-                for (var item of s) {
-                    info = info + "<br/>" + item.key + ":" + item.value;
-                }
-                if (!info) { info = "未找到执行信息！"; }
-                layer.msg(info);
-            });
-        }
-        let whichAgvBtn = {
-            id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { whichAgv(this); },
-            url: `/bd/conf.shtml?table=task_agv`
-        };
-        btns = btns.concat(whichAgvBtn);
     }
     gf.bindBtns("div.doc-buttons", btns);
 }
