@@ -31,6 +31,11 @@ export var initRf = function () {
                 if (currentPaperid()) {
                     let url = `/receipt/main/findOneData.shtml`;
                     gf.ajax(url, { paperid: currentPaperid() }, "json", function (s) {
+                        if (s.code < 0) {
+                            layer.msg(currentPaperid() + s.msg);
+                            setCurrentPaperid("");
+                            return;
+                        }
                         let main = s.object.main;
                         if (main["status"] != "1" || main["delflag"] != "0") {
                             layer.msg(currentPaperid() + "该单无法继续操作，如需查看请移步入库单管理！");
