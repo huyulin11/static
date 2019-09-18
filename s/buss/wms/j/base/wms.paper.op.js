@@ -119,7 +119,11 @@ var initPaperOp = function (keyword, rf) {
     if (rf == "RF") {
         btns = [addBtn, takedBtn, cancelBtn, refreshBtn,];
     } else {
-        btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn,];
+        if (localStorage.projectKey == "CSY_DAJ") {
+            btns = [addBtn, editBtn, detailBtn, executeBtn, delBtn, refreshBtn,];
+        } else {
+            btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn,];
+        }
     }
     if (_keyword == "inventory") {
         var whichAgv = function (that) {
