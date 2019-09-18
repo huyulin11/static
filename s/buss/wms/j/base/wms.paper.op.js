@@ -95,11 +95,24 @@ var whichAgv = function (that) {
     gf.ajax(that.url, { key: cbox + "%" }, "json", function (s) {
         var info = "";
         for (var item of s) {
-            info = info + "<br/>" + item.key + ":" + item.value;
+            info = info + item.key + ":" + item.value + "<br/>";
         }
         if (!info) { info = "未找到执行信息！"; }
         layer.msg(info);
     });
+}
+
+var whichOne = function (that) {
+    var cbox = gf.checkOnlyOne(window.datagrid, "json");
+    if (!cbox) { return; }
+    var info = "";
+    if (cbox) {
+        Object.keys(cbox).forEach(function (key) {
+            info = info + key + ":" + cbox[key] + "<br/>";
+        });
+    }
+    if (!info) { info = "未找到相关信息！"; }
+    layer.msg(info);
 }
 
 var initPaperOp = function (keyword, rf) {
@@ -129,8 +142,10 @@ var initPaperOp = function (keyword, rf) {
     }, refreshBtn = {
         id: "refresh", name: "刷新", class: "btn-info", bind: function () { window.datagrid.loadData(); },
     }, whichAgvBtn = {
-        id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { whichAgv(this); },
+        id: "whichAgv", name: "经办", class: "btn-info", bind: function () { whichAgv(this); },
         url: `/bd/conf.shtml?table=task_agv`
+    }, whichOneBtn = {
+        id: "whichOne", name: "经办", class: "btn-info", bind: function () { whichOne(this); },
     };
     if (rf == "RF") {
         btns = [addBtn, takedBtn, cancelBtn, refreshBtn,];
@@ -141,7 +156,7 @@ var initPaperOp = function (keyword, rf) {
                 btns = btns.concat(whichAgvBtn);
             }
         } else {
-            btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn,];
+            btns = [addBtn, editBtn, detailBtn, executeBtn, takedBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn,];
         }
     }
     gf.bindBtns("div.doc-buttons", btns);
