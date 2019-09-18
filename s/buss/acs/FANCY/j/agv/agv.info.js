@@ -157,7 +157,7 @@ export var init = function (target) {
 
 	var getButtonsHtml = (targets) => {
 		var index = 1;
-		var numInLine = 4;
+		var numInLine = 7;
 		var tmpStr = "";
 		var buttons = ``;
 		for (var target of targets) {
