@@ -54,13 +54,6 @@ var getButtonsHtml = (targets) => {
 	return rtn;
 }
 
-var container = function () {
-	if ($(_target).length == 0) {
-		console.log("get oneCtrilTr err");
-	}
-	return $(_target);
-}
-
 var agvinfo = function () {
 	jQuery.ajax({
 		url: "/s/jsons/" + localStorage.projectKey + "/agv/agvInfo" + agvId + ".json",
@@ -78,7 +71,7 @@ var agvinfo = function () {
 }
 
 var allDisabled = function () {
-	container().find("button").attr("disabled", "true").css("background-color", "");
+	$(_target).find("button").attr("disabled", "true").css("background-color", "");
 	$(".taskTr button").attr("disabled", "true");
 }
 
@@ -105,29 +98,29 @@ var auth = (agvInfo) => {
 	if (movestatus == "PAUSE_USER" || movestatus == "PAUSE_SYS" || movestatus == "PAUSE_SELF"
 		|| movestatus == "PAUSE_OUT_ERR" || movestatus == "PAUSE_REPATH_ERR"
 		|| movestatus == "PAUSE_CACHE_ERR") {
-		container().find("button#CONTINUE").removeAttr("disabled");
-		container().find("button#CONFIRM").removeAttr("disabled");
-		container().find("button#GOTO_INIT").removeAttr("disabled");
-		container().find("button#RE_PATH").removeAttr("disabled");
+		$(_target).find("button#CONTINUE").removeAttr("disabled");
+		$(_target).find("button#CONFIRM").removeAttr("disabled");
+		$(_target).find("button#GOTO_INIT").removeAttr("disabled");
+		$(_target).find("button#RE_PATH").removeAttr("disabled");
 	} else {
-		container().find("button#PAUSE_USER").removeAttr("disabled");
+		$(_target).find("button#PAUSE_USER").removeAttr("disabled");
 		if (sitestatus == "INIT" && taskstatus == "FREE") {
-			container().find("button#GOTO_CHARGE").removeAttr("disabled");
-			container().find("button#TRANSPORT").removeAttr("disabled");
-			container().find("button#DELIVER").removeAttr("disabled");
-			container().find("button#DELIVER_INIT").removeAttr("disabled");
-			container().find("button#DELIVER_STEREOTYPE").removeAttr("disabled");
-			container().find("button#DELIVER_PACK").removeAttr("disabled");
-			container().find("button#FETCH").removeAttr("disabled");
+			$(_target).find("button#GOTO_CHARGE").removeAttr("disabled");
+			$(_target).find("button#TRANSPORT").removeAttr("disabled");
+			$(_target).find("button#DELIVER").removeAttr("disabled");
+			$(_target).find("button#DELIVER_INIT").removeAttr("disabled");
+			$(_target).find("button#DELIVER_STEREOTYPE").removeAttr("disabled");
+			$(_target).find("button#DELIVER_PACK").removeAttr("disabled");
+			$(_target).find("button#FETCH").removeAttr("disabled");
 		}
 		if (sitestatus == "CHARGING" && taskstatus == "GOTO_CHARGE") {
-			container().find("button#BACK_CHARGE").removeAttr("disabled");
+			$(_target).find("button#BACK_CHARGE").removeAttr("disabled");
 		}
 	}
-	container().find("button#CONFIRM").removeAttr("disabled");
-	container().find("button#GOTO_INIT").removeAttr("disabled");
-	container().find("button#RE_PATH").removeAttr("disabled");
-	container().find("button#SHUTDOWN").removeAttr("disabled");
+	$(_target).find("button#CONFIRM").removeAttr("disabled");
+	$(_target).find("button#GOTO_INIT").removeAttr("disabled");
+	$(_target).find("button#RE_PATH").removeAttr("disabled");
+	$(_target).find("button#SHUTDOWN").removeAttr("disabled");
 	$(_target).find("button:enabled").each(function () {
 		const backcolor = $(this).data("backcolor");
 		if (backcolor) {
@@ -428,7 +421,7 @@ export var init = function (target) {
 
 	var initBtns = jQuery.parseJSON(localStorage.getItem("agvControl"));
 	for (var btn of initBtns) {
-		container().append(`<td><div><button id='${btn.id}'`
+		$(_target).append(`<td><div><button id='${btn.id}'`
 			+ ((btn.color) ? (`data-backcolor='${btn.color}'`) : "")
 			+ ((btn.to) ? (`data-to='${btn.to}'`) : "")
 			+ `>${btn.name}</button></div></td>`);
