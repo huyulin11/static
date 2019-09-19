@@ -136,15 +136,6 @@ var transportHandler = function () {
 	doTask(agvId, $(this).attr("id"), targetSite);
 }
 
-var deliverHandler = function () {
-	allDisabled();
-	if (localStorage.projectKey == 'TAIKAI_JY') {
-		deleverTaskTaikaiJy();
-	} else if (localStorage.projectKey == 'LAO_FOXCONN') {
-		deleverTaskLaoFoxconn();
-	}
-}
-
 var fetchHandler = function (that) {
 	allDisabled();
 	var agvbusstype = findIotInfo(agvId, "agvbusstype");
@@ -180,6 +171,15 @@ var fetchHandler = function (that) {
 				doTask(agvId, task, targetSite);
 			}
 		});
+	}
+}
+
+var deliverHandler = function () {
+	allDisabled();
+	if (localStorage.projectKey == 'TAIKAI_JY') {
+		deleverTaskTaikaiJy();
+	} else if (localStorage.projectKey == 'LAO_FOXCONN') {
+		deleverTaskLaoFoxconn();
 	}
 }
 
