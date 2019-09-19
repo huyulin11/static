@@ -210,11 +210,9 @@ var deleverTaskTaikaiJy = function () {
 	var targets;
 	if (agvbusstype == 'TON_1') {
 		if (agvId == 5) {
-			targets = [{ id: 12, name: "20号" }, { id: 13, name: "19号" }, { id: 14, name: "18号" }, { id: 15, name: "17号" },
-			{ id: 16, name: "9号" }, { id: 17, name: "10号" }, { id: 18, name: "12号" }];
+			targets = [{ id: 12, name: "20号" }, { id: 13, name: "19号" }, { id: 14, name: "18号" }, { id: 15, name: "17号" }, { id: 16, name: "9号" }, { id: 17, name: "10号" }, { id: 18, name: "12号" }];
 		} else if (agvId == 4) {
-			targets = [{ id: 2, name: "22号" }, { id: 3, name: "21号" }, { id: 4, name: "13号" },
-			{ id: 5, name: "14号" }, { id: 6, name: "15号" }, { id: 7, name: "16号" }];
+			targets = [{ id: 2, name: "22号" }, { id: 3, name: "21号" }, { id: 4, name: "13号" }, { id: 5, name: "14号" }, { id: 6, name: "15号" }, { id: 7, name: "16号" }];
 		}
 	} else if (agvbusstype == 'TON_2') {
 		targets = [62, 61, 60, 65];
@@ -413,7 +411,7 @@ export var init = function (target) {
 		}
 	}, {
 		id: 'FETCH', handler: function () {
-			fetchHandler();
+			fetchHandler(this);
 		}
 	}, {
 		id: 'DELIVER_INIT', handler: function () {
@@ -429,15 +427,15 @@ export var init = function (target) {
 		}
 	},];
 
-	let escapes = "";
+	let especial = "";
 	for (let item of items) {
 		$(_target).delegate(`button[id='${item.id}']`, "click", function () {
 			item.handler();
 		});
-		escapes += `[id!='${item.id}']`;
+		especial += `[id!='${item.id}']`;
 	}
 
-	$(_target).delegate("button" + escapes, "click", function () {
+	$(_target).delegate("button" + especial, "click", function () {
 		allDisabled();
 		if (!confirm('是否确认执行该操作?')) { return; }
 		layer.msg(taskexe.addCtrlTask(agvId, $(this).attr("id")));
