@@ -44,7 +44,7 @@ function detail(that) {
     });
 }
 
-function send(that) {
+function doJob(param, that) {
     var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
     if (!cbox) { return; }
     layer.confirm(`是否${that.name}${cbox}？`, function (index) {
@@ -57,51 +57,26 @@ function send(that) {
             }
         });
     });
+}
+
+function send(that) {
+    doJob("send", that);
 }
 
 function execute(that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
-    if (!cbox) { return; }
-    layer.confirm(`是否${that.name}${cbox}？`, function (index) {
-        gf.ajax(that.url, { paperid: cbox }, "json", function (s) {
-            if (s.code >= 0) {
-                layer.msg(`成功${that.name}！`);
-                window.datagrid.loadData();
-            } else {
-                layer.msg(`${that.name}失败！` + s.msg);
-            }
-        });
-    });
+    doJob("execute", that);
+}
+
+function over(that) {
+    doJob("over", that);
 }
 
 function cancel(that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
-    if (!cbox) { return; }
-    layer.confirm(`是否${that.name}${cbox}？`, function (index) {
-        gf.ajax(that.url, { paperid: cbox }, "json", function (s) {
-            if (s.code >= 0) {
-                layer.msg(`成功${that.name}！`);
-                window.datagrid.loadData();
-            } else {
-                layer.msg(`${that.name}失败！` + s.msg);
-            }
-        });
-    });
+    doJob("cancel", that);
 }
 
 function taked(that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
-    if (!cbox) { return; }
-    layer.confirm(`是否${that.name}${cbox}？`, function (index) {
-        gf.ajax(that.url, { paperid: cbox }, "json", function (s) {
-            if (s.code >= 0) {
-                layer.msg(`成功${that.name}！`);
-                window.datagrid.loadData();
-            } else {
-                layer.msg(`${that.name}失败！` + s.msg);
-            }
-        });
-    });
+    doJob("taked", that);
 }
 
 var whichAgv = function (that) {
@@ -136,21 +111,24 @@ var initPaperOp = function (keyword, rf) {
     let addBtn = {
         id: "add", name: "增加", class: "btn-primary", bind: function () { add(this); },
         url: `/s/buss/wms/h/${_keyword}AddUI.html`
-    }, editBtn = {
-        id: "edit", name: "修改", class: "btn-primary", bind: function () { edit(this); },
-        url: `/s/buss/wms/h/${_keyword}AddUI.html`
     }, detailBtn = {
         id: "detail", name: "明细", class: "btn-primary", bind: function () { detail(this); },
         url: `/s/buss/wms/h/${_keyword}Details.html?${_keyword}MainFormMap.paperid=`
+    }, editBtn = {
+        id: "edit", name: "修改", class: "btn-warning", bind: function () { edit(this); },
+        url: `/s/buss/wms/h/${_keyword}AddUI.html`
     }, sendBtn = {
-        id: "send", name: "下达", class: "btn-danger", bind: function () { send(this); },
+        id: "send", name: "下达", class: "btn-warning", bind: function () { send(this); },
         url: `/${_keyword}/main/send.shtml`
     }, executeBtn = {
-        id: "execute", name: "执行", class: "btn-danger", bind: function () { execute(this); },
+        id: "execute", name: "执行", class: "btn-warning", bind: function () { execute(this); },
         url: `/${_keyword}/main/execute.shtml`
     }, takedBtn = {
-        id: "taked", name: "接单", class: "btn-primary", bind: function () { taked(this); },
+        id: "taked", name: "接单", class: "btn-warning", bind: function () { taked(this); },
         url: `/${_keyword}/main/taked.shtml`
+    }, overBtn = {
+        id: "over", name: "结束", class: "btn-danger", bind: function () { over(this); },
+        url: `/${_keyword}/main/over.shtml`
     }, delBtn = {
         id: "del", name: "删除", class: "btn-danger", bind: function () { del(this); },
         url: `/${_keyword}/main/deleteEntity.shtml`
@@ -160,21 +138,22 @@ var initPaperOp = function (keyword, rf) {
     }, refreshBtn = {
         id: "refresh", name: "刷新", class: "btn-info", bind: function () { window.datagrid.loadData(); },
     }, whichAgvBtn = {
-        id: "whichAgv", name: "经办", class: "btn-info", bind: function () { whichAgv(this); },
+        id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { whichAgv(this); },
         url: `/bd/conf.shtml?table=task_agv`
     }, whichOneBtn = {
         id: "whichOne", name: "经办", class: "btn-info", bind: function () { whichOne(this); },
     };
     if (rf == "RF") {
-        btns = [addBtn, takedBtn, cancelBtn, refreshBtn,];
+        btns = [detailBtn, takedBtn, cancelBtn, refreshBtn,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
-            btns = [addBtn, editBtn, detailBtn, sendBtn, execute, delBtn, refreshBtn,];
+            btns = [addBtn, detailBtn, editBtn, sendBtn, executeBtn, delBtn, refreshBtn,];
             if (_keyword == "inventory") {
                 btns = btns.concat(whichAgvBtn);
             }
         } else {
-            btns = [addBtn, editBtn, detailBtn, sendBtn, execute, takedBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn,];
+            btns = [addBtn, detailBtn, editBtn, sendBtn, executeBtn,
+                takedBtn, overBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn,];
         }
     }
     gf.bindBtns("div.doc-buttons", btns);
