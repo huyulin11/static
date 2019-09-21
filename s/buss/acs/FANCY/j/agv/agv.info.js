@@ -101,6 +101,7 @@ var auth = (agvInfo) => {
 		$(_target).find("button#CONTINUE").removeAttr("disabled");
 		$(_target).find("button#CONFIRM").removeAttr("disabled");
 		$(_target).find("button#GOTO_INIT").removeAttr("disabled");
+		$(_target).find("button#GOTO_INITS").removeAttr("disabled");
 		$(_target).find("button#RE_PATH").removeAttr("disabled");
 	} else {
 		$(_target).find("button#PAUSE_USER").removeAttr("disabled");
@@ -119,6 +120,7 @@ var auth = (agvInfo) => {
 	}
 	$(_target).find("button#CONFIRM").removeAttr("disabled");
 	$(_target).find("button#GOTO_INIT").removeAttr("disabled");
+	$(_target).find("button#GOTO_INITS").removeAttr("disabled");
 	$(_target).find("button#RE_PATH").removeAttr("disabled");
 	$(_target).find("button#SHUTDOWN").removeAttr("disabled");
 	$(_target).find("button:enabled").each(function () {
@@ -129,11 +131,11 @@ var auth = (agvInfo) => {
 	});
 }
 
-var transportHandler = function () {
+var transportHandler = function (that) {
 	allDisabled();
 	if (!confirm('是否确认执行该操作?')) { return; }
 	var targetSite = prompt("请输入有效的目标站点编号！");
-	doTask(agvId, $(this).attr("id"), targetSite);
+	doTask(agvId, $(that).attr("id"), targetSite);
 }
 
 var fetchHandler = function (that) {
@@ -262,6 +264,7 @@ var deleverInitHandler = function () {
 
 var deleverStereotypeHandler = function () {
 	allDisabled();
+	var targetSite = 0;
 	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
 		btn: ['袜机1号', '袜机2号', '袜机3号', '袜机4号', '袜机5号', '袜机6号', '袜机7号', '袜机8号', '袜机9号', '袜机10号', '定型1号', '定型2号', '定型3号', '定型4号'],
 		btn1: function () {
@@ -325,6 +328,7 @@ var deleverStereotypeHandler = function () {
 
 var deleverPackHandler = function () {
 	allDisabled();
+	var targetSite = 0;
 	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
 		btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
 		btn1: function () {
@@ -390,6 +394,23 @@ var deleverPackHandler = function () {
 	});
 }
 
+var gotoInitsHandler = function () {
+	allDisabled();
+	var targetSite = 0;
+	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
+		btn: ['原料库1号-3054', '原料库2号-3055'],
+		btn1: function () {
+			debugger
+			targetSite = 3054;
+			doTask(agvId, "TRANSPORT", targetSite);
+		},
+		btn2: function () {
+			targetSite = 3055;
+			doTask(agvId, "TRANSPORT", targetSite);
+		}
+	});
+}
+
 export var init = function (target) {
 	_target = target;
 	$("html").delegate("div[id='targets'] button", "click", function () {
@@ -403,7 +424,7 @@ export var init = function (target) {
 
 	let items = [{
 		id: 'TRANSPORT', handler: function () {
-			transportHandler();
+			transportHandler(this);
 		}
 	}, {
 		id: 'DELIVER', handler: function () {
@@ -424,6 +445,10 @@ export var init = function (target) {
 	}, {
 		id: 'DELIVER_PACK', handler: function () {
 			deleverPackHandler();
+		}
+	}, {
+		id: 'GOTO_INITS', handler: function () {
+			gotoInitsHandler();
 		}
 	},];
 
