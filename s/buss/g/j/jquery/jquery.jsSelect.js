@@ -1,7 +1,7 @@
 (function ($) {
-    $("select.jsSelect").each(function () {
-        var type = $(this).data("patten");
-        var initval = $(this).data("initval");
+    var renderSelect = function (that) {
+        var type = $(that).data("patten");
+        var initval = $(that).data("initval");
         var _tl;
         try {
             if (type.indexOf(".") > 0) {
@@ -15,14 +15,18 @@
             _tl = jQuery.parseJSON(localStorage.getItem("dic")).filter(function (e) { return e.type == type; });
         }
         if (!initval) {
-            $(this).append("<option value=" + ">" + "----请选择----" + "</option>");
+            $(that).append("<option value=" + ">" + "----请选择----" + "</option>");
         }
         for (var ii of _tl) {
             var value = ii.value;
             if (!value) { value = ii.ip + ":" + ii.port; }
-            $(this).append("<option value='" + ii.key + "' "
+            $(that).append("<option value='" + ii.key + "' "
                 + ((ii.key == initval) ? "selected" : "")
                 + ">" + value + "</option>");
         }
+    }
+
+    $("select.jsSelect").each(function () {
+        renderSelect(this);
     });
 })(jQuery);

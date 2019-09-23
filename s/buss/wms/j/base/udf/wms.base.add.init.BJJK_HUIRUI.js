@@ -12,24 +12,13 @@ export var initUdf = function (_tasktype, _conf) {
         let obj = {
             max: 20,
             items: [{
-                key: "allocItem",
-                alias: "userdef1",
-                name: "货位名称",
-                notnull: true,
-                type: "associating-input",
-                searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
-                containerofinput: "#panelBody",
-                showcol: 'text,getStatus(status),num',
-            }, {
-                key: "itemcount",
-                name: "数量",
-                notnull: true,
-                default: 1,
-            }, {
                 key: "item",
-                name: "货物种类",
+                name: "SU",
                 notnull: true,
-                default: 1,
+            }, {
+                key: "userdef3",
+                name: "TU",
+                notnull: true,
             },]
         }
         Object.assign(_conf, obj);
@@ -38,24 +27,9 @@ export var initUdf = function (_tasktype, _conf) {
         let obj = {
             max: 20,
             items: [{
-                key: "allocItem",
-                alias: "userdef1",
-                name: "货位名称",
-                notnull: true,
-                type: "associating-input",
-                searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.inStock=true&allocItemFormMap.text=",
-                containerofinput: "#panelBody",
-                showcol: 'text,getStatus(status),num',
-            }, {
-                key: "itemcount",
-                name: "数量",
-                notnull: true,
-                default: 1,
-            }, {
                 key: "item",
-                name: "货物种类",
+                name: "SU",
                 notnull: true,
-                default: 1,
             },]
         }
         Object.assign(_conf, obj);
