@@ -79,7 +79,11 @@ function cancel(that) {
 
 function taked(that) {
     if (currentShipmentPaperid()) {
-        layer.msg("当前有出库单尚未完成处理！" + currentShipmentPaperid());
+        layer.confirm(("当前有出库单尚未完成处理，是否前去处理？" + currentShipmentPaperid()), {
+            btn: ['是', '否']
+        }, function () {
+            gotoRfMgr("shipment");
+        });
         return;
     }
     doJob("taked", that, function (paperid) {
