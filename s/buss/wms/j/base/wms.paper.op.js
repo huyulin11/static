@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 
 var _keyword = null;
 
@@ -44,7 +45,7 @@ function detail(that) {
     });
 }
 
-function doJob(param, that) {
+function doJob(param, that, callback) {
     var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
     if (!cbox) { return; }
     layer.confirm(`是否${that.name}${cbox}？`, function (index) {
@@ -52,6 +53,7 @@ function doJob(param, that) {
             if (s.code >= 0) {
                 layer.msg(`成功${that.name}！`);
                 window.datagrid.loadData();
+                if (callback) { callback(cbox); }
             } else {
                 layer.msg(`${that.name}失败！` + s.msg);
             }
@@ -76,7 +78,14 @@ function cancel(that) {
 }
 
 function taked(that) {
-    doJob("taked", that);
+    if (currentShipmentPaperid()) {
+        layer.msg("当前有出库单尚未完成处理！" + currentShipmentPaperid());
+        return;
+    }
+    doJob("taked", that, function (paperid) {
+        setCurrentShipmentPaperid(paperid);
+        gotoRfMgr("shipment");
+    });
 }
 
 var whichAgv = function (that) {

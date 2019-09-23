@@ -1,48 +1,41 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { rfMgr } from "/s/buss/wms/rf/j/rf.main.js";
+import { gotoRfMgr, currentReceiptPaperid, setCurrentReceiptPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
-
-var currentPaperid = function () {
-    return localStorage.__receiptPaperId;
-};
-var setCurrentPaperid = function (val) {
-    return localStorage.__receiptPaperId = val;
-};
 
 var initReceipt = function () {
     $(container).find("#start").on("click", function () { start(); });
     $(container).find("#sub").on("click", function () { sub(); });
     $(container).find("#cancel").on("click", function () { cancel(); });
-    $(container).find("#rfMgr").on("click", function () { rfMgr(); });
+    $(container).find("#gotoRfMgr").on("click", function () { gotoRfMgr(); });
     $(container).find("#send").on("click", function () { send(); });
     $(container).find("#execute").on("click", function () { execute(); });
     $(container).find("#agvOk").on("click", function () { agvOk(); });
 
-    if (currentPaperid()) {
+    if (currentReceiptPaperid()) {
         let url = `/receipt/main/findOneData.shtml`;
-        gf.ajax(url, { paperid: currentPaperid() }, "json", function (s) {
+        gf.ajax(url, { paperid: currentReceiptPaperid() }, "json", function (s) {
             if (s.code < 0) {
-                layer.msg(currentPaperid() + s.msg);
-                setCurrentPaperid("");
+                layer.msg(currentReceiptPaperid() + s.msg);
+                setCurrentReceiptPaperid("");
                 return;
             }
             let main = s.object.main;
             if (main["status"] != "1" || main["delflag"] != "0") {
-                layer.msg(currentPaperid() + "该单无法继续操作，如需查看请移步入库单管理！");
-                setCurrentPaperid("");
+                layer.msg(currentReceiptPaperid() + "该单无法继续操作，如需查看请移步入库单管理！");
+                setCurrentReceiptPaperid("");
                 return;
             } else {
                 $(container).find("h1").each(function () {
-                    $(this).html("正在入库" + currentPaperid());
+                    $(this).html("正在入库" + currentReceiptPaperid());
                 });
             }
         });
     }
     $("#su").focus();
 }, start = function () {
-    if (currentPaperid()) {
+    if (currentReceiptPaperid()) {
         layer.msg("当前入库单尚未处理完成，不能再呼叫空车！");
         return;
     }
@@ -53,39 +46,39 @@ var initReceipt = function () {
             data = JSON.parse(data);
             layer.msg(data.msg);
             if (data.code >= 0) {
-                setCurrentPaperid(data.object);
+                setCurrentReceiptPaperid(data.object);
                 window.location.reload();
             }
         }
     });
 }, send = function () {
-    if (!currentPaperid()) {
+    if (!currentReceiptPaperid()) {
         layer.msg("没有生成对应入库单，不能进行执行操作！");
         return;
     }
     gf.doAjax({
-        url: `/receipt/main/send.shtml?paperid=${currentPaperid()}`,
+        url: `/receipt/main/send.shtml?paperid=${currentReceiptPaperid()}`,
         success: function (data) {
             data = JSON.parse(data);
             layer.msg(data.msg);
             if (data.code >= 0) {
-                setCurrentPaperid("");
+                setCurrentReceiptPaperid("");
                 window.location.reload();
             }
         }
     });
 }, execute = function () {
-    if (!currentPaperid()) {
+    if (!currentReceiptPaperid()) {
         layer.msg("没有生成对应入库单，不能进行执行操作！");
         return;
     }
     gf.doAjax({
-        url: `/receipt/main/execute.shtml?paperid=${currentPaperid()}`,
+        url: `/receipt/main/execute.shtml?paperid=${currentReceiptPaperid()}`,
         success: function (data) {
             data = JSON.parse(data);
             layer.msg(data.msg);
             if (data.code >= 0) {
-                setCurrentPaperid("");
+                setCurrentReceiptPaperid("");
                 window.location.reload();
             }
         }
@@ -98,25 +91,25 @@ var initReceipt = function () {
                 data = JSON.parse(data);
                 layer.msg(data.msg);
                 if (data.code >= 0) {
-                    setCurrentPaperid("");
+                    setCurrentReceiptPaperid("");
                     window.location.reload();
                 }
             }
         });
     }
 }, cancel = function () {
-    if (!currentPaperid()) {
+    if (!currentReceiptPaperid()) {
         layer.msg("没有生成对应入库单，不能进行取消操作！");
         return;
     }
     if (window.confirm("取消操作将删除当前正在操作的入库单，是否继续？")) {
         gf.doAjax({
-            url: `/receipt/main/deleteEntity.shtml?paperid=${currentPaperid()}`,
+            url: `/receipt/main/deleteEntity.shtml?paperid=${currentReceiptPaperid()}`,
             success: function (data) {
                 data = JSON.parse(data);
                 layer.msg(data.msg);
                 if (data.code >= 0) {
-                    setCurrentPaperid("");
+                    setCurrentReceiptPaperid("");
                     window.location.reload();
                 }
             }
@@ -134,9 +127,9 @@ var initReceipt = function () {
         }
         return;
     }
-    if (currentPaperid()) {
+    if (currentReceiptPaperid()) {
         gf.doAjax({
-            url: `/receipt/detail/addItem.shtml?paperid=${currentPaperid()}`,
+            url: `/receipt/detail/addItem.shtml?paperid=${currentReceiptPaperid()}`,
             data: { item: su, userdef3: tu },
             success: function (data) {
                 layer.msg(data + ":su:" + su + ",tu:" + tu);

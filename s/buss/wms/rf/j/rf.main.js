@@ -3,11 +3,35 @@ import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
 
-export var rfMgr = function () {
+export var currentReceiptPaperid = function () {
+    return localStorage.__receiptPaperId;
+};
+export var setCurrentReceiptPaperid = function (val) {
+    return localStorage.__receiptPaperId = val;
+};
+
+export var currentShipmentPaperid = function () {
+    return localStorage.__shipmentPaperId;
+};
+export var setCurrentShipmentPaperid = function (val) {
+    return localStorage.__shipmentPaperId = val;
+};
+
+export var gotoRfMgr = function (target) {
+    let targetFrame = "";
+    if (target == "shipment") {
+        targetFrame = "/s/buss/wms/rf/h/shipment.html";
+    } else {
+        targetFrame = "/s/buss/wms/rf/h/rfMgr.html";
+    }
+
     if (parent.pageii) {
+        if (target) {
+            parent.location.href = targetFrame;
+        }
         parent.layer.close(parent.pageii);
     } else {
-        window.location.href = "/s/buss/wms/rf/h/rfMgr.html";
+        window.location.href = targetFrame;
     }
 }
 
@@ -27,14 +51,13 @@ export var initRf = function () {
                     window.location.href = "/logout.shtml";
                 });
                 $("#rootContainer").find("#priority,#receipt,#picking,#groupdisk,#failure").on("click", function () {
-                    gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
+                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#shipment").on("click", function () {
-                    gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
-                    // gf.layerOpen({ content: `/s/buss/wms/h/shipmentMainMgr.html?status=2` });
+                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#alloc").on("click", function () {
-                    gf.layerOpen({ content: `/s/buss/wms/alloc/item/h/alloc.html` });
+                    window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
                 });
             },
         },
