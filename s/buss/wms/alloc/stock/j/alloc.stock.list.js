@@ -46,6 +46,18 @@ window.datagrid = dataGrid({
 			}
 			return gv.get("ALLOC_ITEM_STATUS", data);
 		}
+	}, {
+		colkey: "json",
+		name: "明细",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (!data) { return ""; }
+			let details = "";
+			let json = JSON.parse(data);
+			for (let item of json.items) {
+				details += `SU:${item.SU},TU:${item.TU}<br/>`;
+			}
+			return details;
+		}
 	}],
 	jsonUrl: '/alloc/item/findByPage.shtml?allocItemFormMap.inStock=true',
 	checkbox: false,
