@@ -30,20 +30,12 @@ window.datagrid = dataGrid({
 				+ "<a class='editSite'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}, {
-		colkey: "json",
+		colkey: "whid",
 		name: "仓库",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
-				return data;
-			}
 			var whId = "";
-			if (data) {
-				var json = JSON.parse(data);
-				whId = json.whId;
-			}
-			whId = (whId ? gv.get("WAREHOUSE", whId) : "");
-			return "<div class='changable'>" + "<span>" + whId + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<a class='editWh'><img src='/s/i/edit.png'/></a>" + "</div>";
+			whId = (data ? gv.get("WAREHOUSE", data) : "");
+			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
 		}
 	}, {
 		colkey: "status",

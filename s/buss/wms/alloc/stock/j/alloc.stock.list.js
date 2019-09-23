@@ -9,6 +9,14 @@ window.datagrid = dataGrid({
 		name: "货位ID",
 		hide: true,
 	}, {
+		colkey: "whid",
+		name: "仓库",
+		renderData: function (rowindex, data, rowdata, column) {
+			var whId = "";
+			whId = (data ? gv.get("WAREHOUSE", data) : "");
+			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
+		}
+	}, {
 		colkey: "text",
 		name: "货位名称",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -45,6 +53,14 @@ window.datagrid = dataGrid({
 				return "已删除";
 			}
 			return gv.get("ALLOC_ITEM_STATUS", data);
+		}
+	}, {
+		colkey: "whid",
+		name: "仓库",
+		renderData: function (rowindex, data, rowdata, column) {
+			var whId = "";
+			whId = (data ? gv.get("WAREHOUSE", data) : "");
+			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
 		}
 	}, {
 		colkey: "json",
