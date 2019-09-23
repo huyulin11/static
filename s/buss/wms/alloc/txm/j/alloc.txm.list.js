@@ -13,6 +13,10 @@ window.datagrid = dataGrid({
 		name: "条码",
 		hide: false,
 	}, {
+		colkey: "alloc",
+		name: "货位",
+		hide: false,
+	}, {
 		colkey: "name",
 		name: "货物名称",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -20,7 +24,7 @@ window.datagrid = dataGrid({
 				return data;
 			}
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<a class='editSkuName'><img src='/s/i/edit.png'/></a>" + "</div>";
+				+ "<a class='editAllocName'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}, {
 		colkey: "skuid",
@@ -35,7 +39,7 @@ window.datagrid = dataGrid({
 		name: "数量",
 		hide: false,
 	}],
-	jsonUrl: '/sku/txm/findByPage.shtml',
+	jsonUrl: '/alloc/txm/findByPage.shtml',
 	checkbox: true,
 	serNumber: true
 });
@@ -69,7 +73,7 @@ function edit() {
 		title: "编辑",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/wms/sku/txm/editUI.html?id=' + cbox
+		content: '/s/buss/wms/alloc/txm/editUI.html?id=' + cbox
 	});
 }
 function add() {
@@ -77,7 +81,7 @@ function add() {
 		title: "新增",
 		type: 2,
 		area: localStorage.layerArea.split(","),
-		content: '/s/buss/wms/sku/txm/h/skuTxmAddUI.html'
+		content: '/s/buss/wms/alloc/txm/h/allocTxmAddUI.html'
 	});
 }
 function del() {
@@ -87,7 +91,7 @@ function del() {
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
-		var url = '/sku/txm/deleteEntity.shtml';
+		var url = '/alloc/txm/deleteEntity.shtml';
 		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");
