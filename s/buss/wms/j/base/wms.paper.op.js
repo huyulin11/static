@@ -45,6 +45,15 @@ function detail(that) {
     });
 }
 
+function gotoRfShipment(that) {
+    window.pageii = layer.open({
+        title: `${that.name}`,
+        type: 2,
+        area: localStorage.layerArea.split(","),
+        content: that.url
+    });
+}
+
 function doJob(param, that, callback) {
     var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
     if (!cbox) { return; }
@@ -155,6 +164,9 @@ var initPaperOp = function (keyword, rf) {
         url: `/bd/conf.shtml?table=task_agv`
     }, whichOneBtn = {
         id: "whichOne", name: "经办", class: "btn-info", bind: function () { whichOne(this); },
+    }, gotoRfShipmentBtn = {
+        id: "gotoRfShipment", name: "出库操作", class: "btn-primary", bind: function () { gotoRfShipment(this); },
+        url: `/s/buss/wms/rf/h/shipment.html`,
     };
     if (rf == "RF") {
         btns = [detailBtn, takedBtn, cancelBtn, refreshBtn,];
@@ -166,7 +178,7 @@ var initPaperOp = function (keyword, rf) {
             }
         } else {
             btns = [addBtn, detailBtn, editBtn, sendBtn, executeBtn,
-                takedBtn, overBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn,];
+                takedBtn, overBtn, delBtn, cancelBtn, refreshBtn, whichOneBtn, gotoRfShipmentBtn,];
         }
     }
     gf.bindBtns("div.doc-buttons", btns);
