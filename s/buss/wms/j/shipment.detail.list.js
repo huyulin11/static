@@ -16,8 +16,20 @@ window.datagrid = dataGrid({
 		colkey: "userdef1",
 		name: "货位"
 	}, {
+		colkey: "item",
+		name: "SU"
+	}, {
+		colkey: "userdef3",
+		name: "TU"
+	}, {
 		colkey: "sequence",
 		name: "次序",
+	}, {
+		colkey: "status",
+		name: "状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gf.getStatusDesc(rowindex, data, rowdata, column);
+		}
 	}, {
 		colkey: "updatetime",
 		name: "时间",

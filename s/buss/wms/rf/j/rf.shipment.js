@@ -1,16 +1,74 @@
 import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 
-$("#rootContainer").find("#layout").on("click", function () {
+let container = "#rootContainer";
+
+var initRf = function () {
+    var vm = new Vue({
+        data: {},
+        el: container,
+        created: function () {
+        },
+        mounted: function () {
+            initShipment();
+            gf.resizeTable();
+        },
+        methods: {
+            suEnter: function () {
+                $("#tu").focus();
+            },
+            tuEnter: function () {
+                sub();
+            },
+        }
+    });
+}
+
+var sub = function () {
+    let su = $("#su").val();
+    let tu = $("#tu").val();
+    if (!su || !tu) {
+        layer.msg("tu与su均不能为空！");
+        if (!su) {
+            $("#su").focus();
+        } else if (!tu) {
+            $("#tu").focus();
+        }
+        return;
+    }
+    if (currentShipmentPaperid()) {
+        gf.doAjax({
+            url: `/shipment/detail/addItem.shtml?paperid=${currentShipmentPaperid()}`,
+            data: { item: su, userdef3: tu },
+            success: function (data) {
+                layer.msg(data + ":su:" + su + ",tu:" + tu);
+                $("#su").val("");
+                $("#tu").val("");
+                $("#su").focus();
+            }
+        });
+    } else {
+        return;
+    }
+}
+
+var initShipment = function () {
+    $(container).find("h1").each(function () {
+        $(this).html("正在出库" + currentShipmentPaperid());
+        $(container).find("table").show();
+        $(container).find("#sub").on("click", function () { sub(); });
+        $("#su").focus();
+    });
+}
+
+$(container).find("#layout").on("click", function () {
     window.location.href = "/logout.shtml";
 });
-$("#rootContainer").find("button#gotoRfMgr").on("click", function () {
+$(container).find("button#gotoRfMgr").on("click", function () {
     gotoRfMgr();
 });
 if (currentShipmentPaperid()) {
-    $("#rootContainer").find("h1").each(function () {
-        $(this).html("正在出库" + currentShipmentPaperid());
-    });
+    initRf();
 } else {
-    $("#rootContainer").append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
+    $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
     $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2");
 }

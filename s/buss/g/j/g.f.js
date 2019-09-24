@@ -290,6 +290,18 @@ class GF {
             return unescape(r[2]);
         return null;
     };
+    getStatusDesc(rowindex, data, rowdata, column) {
+        var btns = "";
+        if (data == 3) {
+            $(`tr[d-tree='${rowdata.dtee}]`).css("color", "red");
+        }
+        if (rowdata.delflag == 1) {
+            $(`tr[d-tree='${rowdata.dtee}']`).css("color", "#dedede");
+            btns = "-已删除";
+        }
+        btns = gv.get("ACS_STATUS", data) + btns;
+        return btns;
+    };
 }
 
 var gf = new GF();
