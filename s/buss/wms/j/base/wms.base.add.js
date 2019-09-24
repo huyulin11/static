@@ -34,7 +34,7 @@ var _initPage = function () {
         let main = s.object.main;
         let details = s.object.detail;
         if (main["status"] != "1" || main["delflag"] != "0") {
-            alert("该单无法修改！");
+            layer.msg("该单无法修改！");
             parent.layer.close(parent.pageii);
             return;
         }

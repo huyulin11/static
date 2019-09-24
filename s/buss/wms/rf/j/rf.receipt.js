@@ -21,7 +21,7 @@ var initReceipt = function () {
                 return;
             }
             let main = s.object.main;
-            if (main["status"] != "1" || main["delflag"] != "0") {
+            if (!main || main["status"] != "1" || main["delflag"] != "0") {
                 layer.msg(currentReceiptPaperid() + "该单无法继续操作，如需查看请移步入库单管理！");
                 setCurrentReceiptPaperid("");
                 return;

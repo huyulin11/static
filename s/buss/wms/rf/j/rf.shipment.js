@@ -1,4 +1,6 @@
 import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
+import { initPaperOp, overPaper } from "/s/buss/wms/j/base/wms.paper.op.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 let container = "#rootContainer";
 
@@ -9,7 +11,33 @@ var initRf = function () {
         created: function () {
         },
         mounted: function () {
+            var paperid = gf.urlParam("paperid");
+            if (paperid) setCurrentShipmentPaperid(paperid);
             initShipment();
+            if (!currentShipmentPaperid()) {
+                $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
+                $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2");
+            } else {
+                $(container).find("h1").each(function () {
+                    $(this).html("正在出库" + currentShipmentPaperid());
+                    $(container).find("table").show();
+                    $(container).find("#sub").on("click", function () { sub(); });
+                    initPaperOp("shipment");
+                    $(container).find("#over").on("click", function () {
+                        if (currentShipmentPaperid()) {
+                            overPaper(currentShipmentPaperid());
+                        }
+                    });
+                    $("#su").focus();
+                });
+            }
+
+            $(container).find("#layout").on("click", function () {
+                window.location.href = "/logout.shtml";
+            });
+            $(container).find("#gotoRfMgr").on("click", function () {
+                gotoRfMgr();
+            });
             gf.resizeTable();
         },
         methods: {
@@ -55,24 +83,26 @@ var sub = function () {
 }
 
 var initShipment = function () {
-    $(container).find("h1").each(function () {
-        $(this).html("正在出库" + currentShipmentPaperid());
-        $(container).find("table").show();
-        $(container).find("#sub").on("click", function () { sub(); });
-        $("#su").focus();
-    });
+    if (currentShipmentPaperid()) {
+        let url = `/shipment/main/findOneData.shtml`;
+        gf.ajax(url, { paperid: currentShipmentPaperid() }, "json", function (s) {
+            if (s.code < 0) {
+                layer.msg(currentShipmentPaperid() + s.msg);
+                setCurrentShipmentPaperid("");
+                return;
+            }
+            let main = s.object.main;
+            if (!main || main["status"] != "TAKED" || main["delflag"] != "0") {
+                layer.msg(currentShipmentPaperid() + "该单无法继续操作，如需查看请移步出库单管理！");
+                setCurrentShipmentPaperid("");
+                return;
+            } else {
+                $(container).find("h1").each(function () {
+                    $(this).html("正在出库" + currentShipmentPaperid());
+                });
+            }
+        });
+    }
 }
 
-if (currentShipmentPaperid()) {
-    initRf();
-} else {
-    $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
-    $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2");
-}
-
-$(container).find("#layout").on("click", function () {
-    window.location.href = "/logout.shtml";
-});
-$(container).find("#gotoRfMgr").on("click", function () {
-    gotoRfMgr();
-});
+initRf();

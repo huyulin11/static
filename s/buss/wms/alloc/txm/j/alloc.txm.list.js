@@ -17,6 +17,10 @@ window.datagrid = dataGrid({
 		name: "货位",
 		hide: false,
 	}, {
+		colkey: "place",
+		name: "位置",
+		hide: false,
+	}, {
 		colkey: "name",
 		name: "货物名称",
 		renderData: function (rowindex, data, rowdata, column) {
