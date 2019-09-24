@@ -40,6 +40,7 @@ var sub = function () {
             url: `/shipment/detail/addItem.shtml?paperid=${currentShipmentPaperid()}`,
             data: { item: su, userdef3: tu },
             success: function (data) {
+                if (typeof data == "string") data = JSON.parse(data);
                 layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
                 if (data.code >= 0) {
                     $("#su").val("");

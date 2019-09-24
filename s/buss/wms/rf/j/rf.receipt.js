@@ -117,6 +117,7 @@ var initReceipt = function () {
             url: `/receipt/detail/addItem.shtml?paperid=${currentReceiptPaperid()}`,
             data: { item: su, userdef3: tu },
             success: function (data) {
+                if (typeof data == "string") data = JSON.parse(data);
                 layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
                 $("#su").val("");
                 $("#tu").val("");
