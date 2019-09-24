@@ -40,9 +40,11 @@ var sub = function () {
             url: `/shipment/detail/addItem.shtml?paperid=${currentShipmentPaperid()}`,
             data: { item: su, userdef3: tu },
             success: function (data) {
-                layer.msg(data + ":su:" + su + ",tu:" + tu);
-                $("#su").val("");
-                $("#tu").val("");
+                layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
+                if (data.code >= 0) {
+                    $("#su").val("");
+                    $("#tu").val("");
+                }
                 $("#su").focus();
             }
         });
@@ -60,15 +62,16 @@ var initShipment = function () {
     });
 }
 
-$(container).find("#layout").on("click", function () {
-    window.location.href = "/logout.shtml";
-});
-$(container).find("button#gotoRfMgr").on("click", function () {
-    gotoRfMgr();
-});
 if (currentShipmentPaperid()) {
     initRf();
 } else {
     $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
     $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2");
 }
+
+$(container).find("#layout").on("click", function () {
+    window.location.href = "/logout.shtml";
+});
+$(container).find("#gotoRfMgr").on("click", function () {
+    gotoRfMgr();
+});
