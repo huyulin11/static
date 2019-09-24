@@ -17,6 +17,23 @@ export var setCurrentShipmentPaperid = function (val) {
     return localStorage.__shipmentPaperId = val;
 };
 
+var agvOk = function () {
+    if (window.confirm("该功能仅为测试使用，点击后，所有入库单的状态都将从下达变成完成，是否继续？")) {
+        gf.doAjax({
+            url: `/receipt/main/agvOk.shtml`,
+            success: function (data) {
+                data = JSON.parse(data);
+                layer.msg(data.msg);
+                if (data.code >= 0) {
+                    setCurrentReceiptPaperid("");
+                    setCurrentShipmentPaperid("");
+                    window.location.reload();
+                }
+            }
+        });
+    }
+};
+
 export var gotoRfMgr = function (target) {
     let targetFrame = "";
     if (target == "shipment") {
@@ -59,6 +76,7 @@ export var initRf = function () {
                 $("#rootContainer").find("#alloc").on("click", function () {
                     window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
                 });
+                $(container).find("#agvOk").on("click", function () { agvOk(); });
             },
         },
     });

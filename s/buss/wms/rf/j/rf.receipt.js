@@ -11,7 +11,6 @@ var initReceipt = function () {
     $(container).find("#gotoRfMgr").on("click", function () { gotoRfMgr(); });
     $(container).find("#send").on("click", function () { send(); });
     $(container).find("#execute").on("click", function () { execute(); });
-    $(container).find("#agvOk").on("click", function () { agvOk(); });
 
     if (currentReceiptPaperid()) {
         let url = `/receipt/main/findOneData.shtml`;
@@ -83,20 +82,6 @@ var initReceipt = function () {
             }
         }
     });
-}, agvOk = function () {
-    if (window.confirm("该功能仅为测试使用，点击后，所有入库单的状态都将从下达变成完成，是否继续？")) {
-        gf.doAjax({
-            url: `/receipt/main/agvOk.shtml`,
-            success: function (data) {
-                data = JSON.parse(data);
-                layer.msg(data.msg);
-                if (data.code >= 0) {
-                    setCurrentReceiptPaperid("");
-                    window.location.reload();
-                }
-            }
-        });
-    }
 }, cancel = function () {
     if (!currentReceiptPaperid()) {
         layer.msg("没有生成对应入库单，不能进行取消操作！");
