@@ -103,7 +103,11 @@ var del = function (that) {
 }, execute = function (that) {
     doJob("execute", that);
 }, over = function (that) {
-    doJob("over", that);
+    doJob("over", that, function (paperid) {
+        if (paperid == currentShipmentPaperid()) {
+            setCurrentShipmentPaperid("");
+        }
+    });
 }, cancel = function (that) {
     doJob("cancel", that);
 }, taked = function (that) {
