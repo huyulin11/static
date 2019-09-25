@@ -18,6 +18,10 @@ var del = function (that) {
 
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: cbox }, "json", function (s) {
+        if (!s.object) {
+            layer.msg(`该单无法${that.name}！`);
+            return;
+        }
         let main = s.object.main;
         if (!main || (main["status"] != "1") || main["delflag"] != "0") {
             layer.msg(`该单无法${that.name}！`);
@@ -36,6 +40,10 @@ var del = function (that) {
 
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: cbox }, "json", function (s) {
+        if (!s.object) {
+            layer.msg(`该单无法${that.name}！`);
+            return;
+        }
         let main = s.object.main;
         if (!main || (main["status"] != "TAKED" && main["status"] != "SCANED") || main["delflag"] != "0") {
             layer.msg(`该单无法${that.name}！`);
