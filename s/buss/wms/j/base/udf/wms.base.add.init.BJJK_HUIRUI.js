@@ -30,6 +30,10 @@ export var initUdf = function (_tasktype, _conf) {
                 key: "item",
                 name: "SU",
                 notnull: true,
+            }, {
+                key: "userdef3",
+                name: "TU",
+                notnull: true,
             },]
         }
         Object.assign(_conf, obj);
