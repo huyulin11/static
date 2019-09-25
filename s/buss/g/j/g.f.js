@@ -259,16 +259,26 @@ class GF {
             tb.load(tb.data("url"));
         });
     };
-    checkNotNull(grid, key) {
-        var cbox = grid.getSelectedCheckbox(key);
+    getCheckedVal(conf) {
+        var cbox;
+        if (conf && conf.dataType && conf.dataType == 'json') {
+            cbox = window.datagrid.getSelectedCheckboxObj();
+        } else {
+            cbox = window.datagrid.getSelectedCheckbox(
+                conf && conf.key ? conf.key : (typeof conf == "string" ? conf : null));
+        }
+        return cbox;
+    };
+    checkNotNull(conf) {
+        var cbox = this.getCheckedVal(conf);
         if (cbox == "") {
             layer.msg("至少需选中一个！");
             return null;
         }
         return cbox;
     };
-    checkOnlyOne(grid, key) {
-        var cbox = grid.getSelectedCheckbox(key);
+    checkOnlyOne(conf) {
+        var cbox = this.getCheckedVal(conf);
         if (cbox.length > 1 || cbox == "") {
             layer.msg("当且仅能选择一个");
             return null;

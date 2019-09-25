@@ -4,7 +4,7 @@ import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s
 var _tasktype = null;
 
 var del = function (that) {
-    var cbox = gf.checkNotNull(window.datagrid, "paperid");
+    var cbox = gf.checkNotNull("paperid");
     if (!cbox) { return; }
     layer.confirm(`是否${that.name}${cbox}？`, function (index) {
         gf.ajax(that.url, { paperids: cbox.join(",") }, "json", function (s) {
@@ -13,7 +13,7 @@ var del = function (that) {
         });
     });
 }, edit = function (that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    var cbox = gf.checkOnlyOne("paperid");
     if (!cbox) { return; }
 
     let url = `/${_tasktype}/main/findOneData.shtml`;
@@ -31,13 +31,13 @@ var del = function (that) {
         });
     });
 }, picking = function (that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    var cbox = gf.checkOnlyOne("paperid");
     if (!cbox) { return; }
 
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: cbox }, "json", function (s) {
         let main = s.object.main;
-        if (!main || (main["status"] != "TAKED" && main["delflag"] != "SCANED") || main["delflag"] != "0") {
+        if (!main || (main["status"] != "TAKED" && main["status"] != "SCANED") || main["delflag"] != "0") {
             layer.msg(`该单无法${that.name}！`);
             return;
         }
@@ -56,7 +56,7 @@ var del = function (that) {
         content: that.url
     });
 }, detail = function (that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    var cbox = gf.checkOnlyOne("paperid");
     if (!cbox) { return; }
     window.pageii = layer.open({
         title: `${that.name}：` + cbox,
@@ -76,7 +76,7 @@ var del = function (that) {
     if (that.paperid) {
         paperid = that.paperid;
     } else {
-        paperid = gf.checkOnlyOne(window.datagrid, "paperid");
+        paperid = gf.checkOnlyOne("paperid");
     }
     if (!paperid) { return; }
     layer.confirm(`是否${that.name}${paperid}？`, function (index) {
@@ -118,7 +118,7 @@ var del = function (that) {
         });
     }
 }, whichAgv = function (that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "paperid");
+    var cbox = gf.checkOnlyOne("paperid");
     if (!cbox) { return; }
     gf.ajax(that.url, { key: cbox + "%" }, "json", function (s) {
         var info = "";
@@ -129,7 +129,7 @@ var del = function (that) {
         layer.msg(info);
     });
 }, whichOne = function (that) {
-    var cbox = gf.checkOnlyOne(window.datagrid, "json");
+    var cbox = gf.checkOnlyOne("json");
     if (!cbox) { return; }
     var info = "";
     if (cbox) {

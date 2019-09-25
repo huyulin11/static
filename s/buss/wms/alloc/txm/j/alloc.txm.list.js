@@ -25,7 +25,8 @@ window.datagrid = dataGrid({
 		name: "货物名称",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
-				return data;
+				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dedede");
+				return data + "-已删除";
 			}
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<a class='editAllocName'><img src='/s/i/edit.png'/></a>" + "</div>";
@@ -89,15 +90,15 @@ function add() {
 	});
 }
 function del() {
-	var cbox = window.datagrid.getSelectedCheckbox();
-	if (cbox == "") {
-		layer.msg("请选择删除项！！");
+	var cbox = gf.checkNotNull({ dataType: 'json' });
+	if (!cbox) {
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/alloc/txm/deleteEntity.shtml';
 		var s = gf.ajax(url, {
-			ids: cbox.join(",")
+			data: JSON.stringify(cbox),
+			datatype: 'json'
 		}, "json");
 		if (s.code >= 0) {
 			layer.msg('删除成功');

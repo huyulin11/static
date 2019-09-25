@@ -979,10 +979,18 @@ export var dataGrid = function (params) {
 		});
 		return arr;
 	};
+	var getSelectedCheckboxObj = function () {
+		var arr = [];
+		$(`#${conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
+			arr.push($(this).data());
+		});
+		return arr;
+	};
 	init();
 	return {
 		setOptions: setOptions,
 		loadData: loadData,
+		getSelectedCheckboxObj: getSelectedCheckboxObj,
 		getSelectedCheckbox: getSelectedCheckbox,
 		selectRow: selectRow,// 选中行事件
 		dataGridUp: dataGridUp,
