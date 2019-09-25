@@ -70,7 +70,7 @@ var initRf = function () {
             initShipment();
             if (!currentShipmentPaperid()) {
                 $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
-                $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2");
+                $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED");
             } else {
                 $(container).find("h1").each(function () {
                     $(this).html("正在出库" + currentShipmentPaperid());
