@@ -54,26 +54,18 @@ window.datagrid = dataGrid({
 			}
 			return gv.get("ALLOC_ITEM_STATUS", data);
 		}
-	}, {
-		colkey: "whid",
-		name: "仓库",
-		renderData: function (rowindex, data, rowdata, column) {
-			var whId = "";
-			whId = (data ? gv.get("WAREHOUSE", data) : "");
-			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
-		}
-	}, {
-		colkey: "json",
-		name: "明细",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) { return ""; }
-			let details = "";
-			let json = JSON.parse(data);
-			for (let item of json.items) {
-				details += `SU:${item.SU},TU:${item.TU}<br/>`;
-			}
-			return details;
-		}
+		// }, {
+		// 	colkey: "json",
+		// 	name: "明细",
+		// 	renderData: function (rowindex, data, rowdata, column) {
+		// 		if (!data) { return ""; }
+		// 		let details = "";
+		// 		let json = JSON.parse(data);
+		// 		for (let item of json.items) {
+		// 			details += `SU:${item.SU},TU:${item.TU}<br/>`;
+		// 		}
+		// 		return details;
+		// 	}
 	}],
 	jsonUrl: '/alloc/item/findByPage.shtml?allocItemFormMap.inStock=true',
 	checkbox: false,
