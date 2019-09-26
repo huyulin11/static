@@ -5,10 +5,6 @@ import { dataGrid } from "/s/j/kf.grid.js";
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	l_column: [{
-		colkey: "id",
-		name: "货位ID",
-		hide: true,
-	}, {
 		colkey: "whid",
 		name: "仓库",
 		renderData: function (rowindex, data, rowdata, column) {
