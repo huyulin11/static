@@ -24,8 +24,7 @@ window.datagrid = dataGrid({
 				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dedede");
 				return data + "-已删除";
 			}
-			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<a class='editAllocName'><img src='/s/i/edit.png'/></a>" + "</div>";
+			return data;
 		}
 	}, {
 		colkey: "skuid",
