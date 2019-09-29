@@ -91,7 +91,8 @@ var del = function (that) {
         gf.ajax(that.url, { paperid: paperid }, "json", function (s) {
             if (s.code >= 0) {
                 layer.msg(`成功${that.name}！`);
-                window.datagrid.loadData();
+                if (window.datagrid) window.datagrid.loadData();
+                else if (parent.datagrid) parent.datagrid.loadData();
                 if (callback) { callback(paperid); }
             } else {
                 layer.msg(`${that.name}失败！` + s.msg);
@@ -107,6 +108,7 @@ var del = function (that) {
         if (paperid == currentShipmentPaperid()) {
             setCurrentShipmentPaperid("");
         }
+        if (parent && parent.layer) { parent.layer.close(parent.pageii); }
     });
 }, cancel = function (that) {
     doJob("cancel", that);
