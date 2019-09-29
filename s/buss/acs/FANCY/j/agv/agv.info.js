@@ -112,6 +112,8 @@ var auth = (agvInfo) => {
 			$(_target).find("button#DELIVER_INIT").removeAttr("disabled");
 			$(_target).find("button#DELIVER_STEREOTYPE").removeAttr("disabled");
 			$(_target).find("button#DELIVER_PACK").removeAttr("disabled");
+			$(_target).find("button#GOTO_STEREOTYPE").removeAttr("disabled");
+			$(_target).find("button#GOTO_PACK").removeAttr("disabled");
 			$(_target).find("button#FETCH").removeAttr("disabled");
 		}
 		if (sitestatus == "CHARGING" && taskstatus == "GOTO_CHARGE") {
@@ -176,16 +178,18 @@ var fetchHandler = function (that) {
 	}
 }
 
-var deliverHandler = function () {
+var deliverHandler = function (that) {
 	allDisabled();
 	if (localStorage.projectKey == 'TAIKAI_JY') {
 		deleverTaskTaikaiJy();
 	} else if (localStorage.projectKey == 'LAO_FOXCONN') {
-		deleverTaskLaoFoxconn();
+		deleverTaskLaoFoxconn(that);
 	}
 }
 
-var deleverTaskLaoFoxconn = function () {
+var deleverTaskLaoFoxconn = function (that) {
+	var targetSite = 0;
+	var task = $(that).attr("id");
 	var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)', {
 		btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B08 3F'],
 		btn1: function () {
@@ -307,19 +311,19 @@ var deleverStereotypeHandler = function () {
 			targetSite = 2010;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn10: function () {
+		btn11: function () {
 			targetSite = 2054;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn11: function () {
+		btn12: function () {
 			targetSite = 2055;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn12: function () {
+		btn13: function () {
 			targetSite = 2056;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn13: function () {
+		btn14: function () {
 			targetSite = 2057;
 			doTask(agvId, "DELIVER", targetSite);
 		}
@@ -400,13 +404,61 @@ var gotoInitsHandler = function () {
 	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
 		btn: ['原料库1号-3054', '原料库2号-3055'],
 		btn1: function () {
-			debugger
 			targetSite = 3054;
 			doTask(agvId, "TRANSPORT", targetSite);
 		},
 		btn2: function () {
 			targetSite = 3055;
 			doTask(agvId, "TRANSPORT", targetSite);
+		}
+	});
+}
+
+var gotoStereotypeHandler = function () {
+	allDisabled();
+	var targets = [];
+	for (var i = 2011; i <= 2053; i++) {
+		if (i == 2041) continue;
+		targets.push({ id: i, name: i - 2010 + "号" });
+	}
+	var buttons = getButtonsHtml(targets);
+	var indexOfTips = layer.confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
+		btn: ['确定前往'],
+		btn1: function () {
+			var arr = getTargets();
+			if (!arr || arr.length == 0) {
+				alert("无有效停车站点");
+				return;
+			} else if (arr.length > 1) {
+				alert("只能选择1个点");
+				return;
+			}
+			var targetSite = arr.join("#");
+			doTask(agvId, "DELIVER", targetSite);
+		}
+	});
+}
+
+var gotoPackHandler = function () {
+	allDisabled();
+	var targets = [];
+	for (var i = 2062; i <= 2107; i++) {
+		targets.push({ id: i, name: i - 2061 + "号" });
+	}
+	var buttons = getButtonsHtml(targets);
+	var indexOfTips = layer.confirm('请选择前往包装暂存区的目的地' + '<br/>' + buttons, {
+		btn: ['确定前往'],
+		btn1: function () {
+			var arr = getTargets();
+			if (!arr || arr.length == 0) {
+				alert("无有效停车站点");
+				return;
+			} else if (arr.length > 1) {
+				alert("只能选择1个点");
+				return;
+			}
+			var targetSite = arr.join("#");
+			doTask(agvId, "DELIVER", targetSite);
 		}
 	});
 }
@@ -428,7 +480,7 @@ export var init = function (target) {
 		}
 	}, {
 		id: 'DELIVER', handler: function () {
-			deliverHandler();
+			deliverHandler(this);
 		}
 	}, {
 		id: 'FETCH', handler: function () {
@@ -449,6 +501,14 @@ export var init = function (target) {
 	}, {
 		id: 'GOTO_INITS', handler: function () {
 			gotoInitsHandler();
+		}
+	}, {
+		id: 'GOTO_STEREOTYPE', handler: function () {
+			gotoStereotypeHandler();
+		}
+	}, {
+		id: 'GOTO_PACK', handler: function () {
+			gotoPackHandler();
 		}
 	},];
 
