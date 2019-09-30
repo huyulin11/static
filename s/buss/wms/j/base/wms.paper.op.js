@@ -34,7 +34,7 @@ var initBtns = function () {
         id: "cancel", name: "撤销", class: "btn-danger", bind: function () { paperUtil.cancel(this); },
         url: `/${_tasktype}/main/cancel.shtml`
     }, allBtns.refresh = {
-        id: "refresh", name: "刷新", class: "btn-info", bind: function () { paperUtil.window.datagrid.loadData(); },
+        id: "refresh", name: "刷新", class: "btn-info", bind: function () { window.datagrid.loadData(); },
     }, allBtns.whichAgv = {
         id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { paperUtil.whichAgv(this); },
         url: `/bd/conf.shtml?table=task_agv`
@@ -63,7 +63,7 @@ var initPaperOp = function (tasktype, rf) {
         tempBtns = [allBtns.detail, allBtns.taked, allBtns.picking, allBtns.cancel, allBtns.refresh,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
-            tempBtns = [allBtns.add, allBtns.detail, allBtns.edit, allBtns.send, allBtns.execute, allBtns.del, allBtns.refresh,];
+            tempBtns = [allBtns.add, allBtns.detail, allBtns.edit, allBtns.send, allBtns.execute, allBtns.cancel, allBtns.del, allBtns.refresh,];
             if (_tasktype == "inventory") {
                 tempBtns = tempBtns.concat(allBtns.whichAgv);
             }
