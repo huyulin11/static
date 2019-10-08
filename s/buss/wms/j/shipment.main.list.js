@@ -57,7 +57,6 @@ export var init = function () {
 	if (choosedStatus) {
 		initPaperOp("shipment", "RF");
 		$("html").addClass("frame");
-		$("#searchForm").hide();
 		params = Object.assign(params, {
 			data: {
 				"shipmentMainFormMap.status": choosedStatus,
@@ -65,6 +64,7 @@ export var init = function () {
 			}
 		});
 	} else {
+		$("#searchForm").show();
 		initPaperOp("shipment");
 	}
 

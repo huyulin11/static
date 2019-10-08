@@ -9,22 +9,30 @@ var readWorkbookFromLocalFile = function (file, callback) {
     reader.readAsBinaryString(file);
 };
 
-var submit = function (e) {
+var dealDemo = function (workbook) {
+    console.log("请自定义数据处理方法！");
+    var fromTo = '', persons = [];
+    for (var sheetName in workbook.Sheets) {
+        if (workbook.Sheets.hasOwnProperty(sheetName)) {
+            let sheet = workbook.Sheets[sheetName];
+            fromTo = sheet['!ref'];
+            console.log(fromTo);
+            persons = persons.concat(XLSX.utils.sheet_to_json(sheet));
+            console.log(persons);
+        }
+    }
+    console.log(persons);
+}
+
+var submit = function (e, callback) {
     var files = e.target.files;
     for (let file of files) {
         readWorkbookFromLocalFile(file, function (workbook) {
-            var fromTo = '', persons = [];
-            for (var sheetName in workbook.Sheets) {
-                if (workbook.Sheets.hasOwnProperty(sheetName)) {
-                    let sheet = workbook.Sheets[sheetName];
-                    debugger
-                    fromTo = sheet['!ref'];
-                    console.log(fromTo);
-                    persons = persons.concat(XLSX.utils.sheet_to_json(sheet));
-                    console.log(persons);
-                }
+            if (callback) {
+                callback(workbook);
+                return;
             }
-            console.log(persons);
+            dealDemo(workbook);
         });
     }
 };
