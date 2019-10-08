@@ -3,7 +3,7 @@ import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s
 
 var _tasktype = null;
 
-class PaperUtil {
+class PaperOp {
     del(that) {
         var cbox = gf.checkNotNull("paperid");
         if (!cbox) { return; }
@@ -101,18 +101,18 @@ class PaperUtil {
             });
         });
     }; send(that) {
-        paperUtil.doJob("send", that);
+        paperOp.doJob("send", that);
     }; execute(that) {
-        paperUtil.doJob("execute", that);
+        paperOp.doJob("execute", that);
     }; over(that) {
-        paperUtil.doJob("over", that, function (paperid) {
+        paperOp.doJob("over", that, function (paperid) {
             if (paperid == currentShipmentPaperid()) {
                 setCurrentShipmentPaperid("");
             }
             if (parent && parent.layer) { parent.layer.close(parent.pageii); }
         });
     }; cancel(that) {
-        paperUtil.doJob("cancel", that);
+        paperOp.doJob("cancel", that);
     }; taked(that) {
         if (currentShipmentPaperid()) {
             let msg = function () {
@@ -123,12 +123,12 @@ class PaperUtil {
             }, function () {
                 gotoRfMgr("shipment");
             }, function () {
-                paperUtil.doJob("taked", that, function (paperid) {
+                paperOp.doJob("taked", that, function (paperid) {
                     setCurrentShipmentPaperid(paperid);
                 });
             });
         } else {
-            paperUtil.doJob("taked", that, function (paperid) {
+            paperOp.doJob("taked", that, function (paperid) {
                 setCurrentShipmentPaperid(paperid);
             });
         }
@@ -154,13 +154,17 @@ class PaperUtil {
         }
         if (!info) { info = "未找到相关信息！"; }
         layer.msg(info);
+    }; import(that) {
+        var info = "";
+        if (!info) { info = "未找到相关信息！"; }
+        layer.msg(info);
     }
 }
 
-var paperUtil = new PaperUtil();
+var paperOp = new PaperOp();
 
-var initPaperUtil = function (tasktype) {
+var doInitPaperOp = function (tasktype) {
     _tasktype = tasktype;
 }
 
-export { initPaperUtil, paperUtil };
+export { doInitPaperOp, paperOp };
