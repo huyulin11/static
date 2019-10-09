@@ -107,7 +107,6 @@ function view(dictype) {
 }
 
 function add() {
-	debugger
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,

@@ -1,6 +1,9 @@
 import { gv } from "/s/buss/g/j/g.v.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
+
+let _receipttype = gf.urlParam("receipttype");
 
 let cols = [{
 	colkey: "id",
@@ -72,7 +75,7 @@ if (localStorage.projectKey == "BJJK_HUIRUI") {
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	l_column: cols,
-	jsonUrl: '/receipt/main/find.shtml',
+	jsonUrl: `/receipt/main/find.shtml?receipttype=${_receipttype}`,
 	checkbox: true,
 	serNumber: true
 });

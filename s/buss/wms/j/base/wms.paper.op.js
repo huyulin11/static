@@ -4,11 +4,13 @@ import { submit } from "/s/buss/g/j/g.xlsx.js";
 
 var _tasktype = null;
 
+let _receipttype = gf.urlParam("receipttype");
+
 let allBtns = {};
 var initBtns = function () {
     allBtns.add = {
         id: "add", name: "增加", class: "btn-primary", bind: function () { paperOp.add(this); },
-        url: `/s/buss/wms/h/${_tasktype}AddUI.html`
+        url: `/s/buss/wms/h/${_tasktype}AddUI.html?receipttype=${_receipttype}`
     }; allBtns.detail = {
         id: "detail", name: "明细", class: "btn-primary", bind: function () { paperOp.detail(this); },
         url: `/s/buss/wms/h/${_tasktype}Details.html?${_tasktype}MainFormMap.paperid=`
