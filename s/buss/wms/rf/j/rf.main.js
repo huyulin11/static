@@ -67,7 +67,10 @@ export var initRf = function () {
                 $("#rootContainer").find("#logout").on("click", function () {
                     window.location.href = "/logout.shtml";
                 });
-                $("#rootContainer").find("#priority,#receipt,#picking,#groupdisk,#failure").on("click", function () {
+                $("#rootContainer").find("#priority,#picking,#groupdisk,#failure").on("click", function () {
+                    layer.msg("尚未开通！");
+                });
+                $("#rootContainer").find("#receipt").on("click", function () {
                     window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#shipment").on("click", function () {
