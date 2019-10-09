@@ -76,6 +76,9 @@ export var initRf = function () {
                 $("#rootContainer").find("#shipment").on("click", function () {
                     window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
+                $("#rootContainer").find("#stockOut").on("click", function () {
+                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
+                });
                 $("#rootContainer").find("#alloc").on("click", function () {
                     window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
                 });

@@ -41,7 +41,7 @@ var initBtns = function () {
     }; allBtns.whichOne = {
         id: "whichOne", name: "经办", class: "btn-info", bind: function () { paperOp.whichOne(this); },
     }; allBtns.gotoRfShipment = {
-        id: "gotoRfShipment", name: "出库操作", class: "btn-primary", bind: function () { paperOp.gotoRfShipment(this); },
+        id: "gotoRfShipment", name: "RF出库", class: "btn-primary", bind: function () { paperOp.gotoRfShipment(this); },
         url: `/s/buss/wms/rf/h/shipment.html`,
     }; allBtns.picking = {
         id: "picking", name: "拣货", class: "btn-warning", bind: function () { paperOp.picking(this); },
@@ -64,15 +64,18 @@ var initPaperOp = function (tasktype, rf) {
         tempBtns = [allBtns.detail, allBtns.taked, allBtns.picking, allBtns.cancel, allBtns.refresh,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
-            tempBtns = [allBtns.add, allBtns.detail, allBtns.edit, allBtns.send, allBtns.execute, allBtns.cancel, allBtns.del, allBtns.refresh,];
+            tempBtns = [allBtns.add, allBtns.detail, allBtns.edit, allBtns.send,
+            allBtns.cancel, allBtns.del, allBtns.refresh,];
             if (_tasktype == "inventory") {
                 tempBtns = tempBtns.concat(allBtns.whichAgv);
             }
         } else {
-            tempBtns = [allBtns.add, allBtns.detail, allBtns.edit, allBtns.send, allBtns.execute,
-            allBtns.taked, allBtns.picking, allBtns.over, allBtns.del, allBtns.cancel,
-            allBtns.refresh, allBtns.whichOne, allBtns.gotoRfShipment,];
+            tempBtns = [allBtns.add, allBtns.detail, allBtns.edit, allBtns.send,
+            allBtns.taked, allBtns.over, allBtns.del, allBtns.cancel,
+            allBtns.refresh, allBtns.whichOne,];
             if (_tasktype == "shipment") {
+                tempBtns = tempBtns.concat(allBtns.picking);
+                tempBtns = tempBtns.concat(allBtns.gotoRfShipment);
                 $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);
                 $('#excel-file').on("change", function (e) {
                     submit(e, function (workbook) {
@@ -86,6 +89,8 @@ var initPaperOp = function (tasktype, rf) {
                         }
                     });
                 });
+            } else if (_tasktype == "receipt") {
+                tempBtns = tempBtns.concat(allBtns.execute);
             }
         }
     }
