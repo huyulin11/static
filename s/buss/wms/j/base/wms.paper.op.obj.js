@@ -47,6 +47,9 @@ var initBtns = function () {
     }; btns.picking = {
         id: "picking", name: "拣货", class: "btn-warning", bind: function () { paperOp.picking(this); },
         url: `/s/buss/wms/rf/h/shipment.html`,
+    }; btns.combineVna = {
+        id: "combineVna", name: "VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
+        url: `/s/buss/wms/rf/h/combine.html?warehouse=1`,
     };
 }
 
@@ -103,6 +106,13 @@ class PaperOp {
                 area: localStorage.layerArea.split(","),
                 content: that.url + "?paperid=" + cbox
             });
+        });
+    }; combine(that) {
+        window.pageii = layer.open({
+            title: `${that.name}：`,
+            type: 2,
+            area: localStorage.layerArea.split(","),
+            content: that.url
         });
     }; add(that) {
         window.pageii = layer.open({

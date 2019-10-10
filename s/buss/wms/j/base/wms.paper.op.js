@@ -27,6 +27,7 @@ var initPaperOp = function (tasktype, model) {
                 } else {
                     tempBtns = tempBtns.concat(btns.taked);
                     tempBtns = tempBtns.concat(btns.picking);
+                    tempBtns = tempBtns.concat(btns.combineVna);
                     tempBtns = tempBtns.concat(btns.gotoRfShipment);
                     $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);
                     $('#excel-file').on("change", function (e) {
