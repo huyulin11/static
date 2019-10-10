@@ -27,7 +27,7 @@ var initReceipt = function () {
                 return;
             } else {
                 $(container).find("h1").each(function () {
-                    $(this).html("正在入库" + currentReceiptPaperid());
+                    $(this).html(`正在${main.receipttype == '2' ? "返料入库" : "入库"}` + currentReceiptPaperid());
                 });
             }
         });
