@@ -17,7 +17,7 @@ export var dataGrid = function (params) {
 		totalPages: 'pageCount',// 总页数
 		totalRecords: 'rowCount',// 总记录数
 		pagecode: '20',// 分页时，最多显示几个页码
-		async: false, // 默认为同步
+		async: true, // 默认为同步
 		data: '', // 发送给后台的数据 是json数据 例如{nama:"a",age:"100"}....
 		pageSize: 40, // 每页显示多少条数据
 		checkbox: false,// 是否显示复选框
@@ -63,8 +63,7 @@ export var dataGrid = function (params) {
 	;
 	var column = conf.l_column;
 	var init = function () {
-		createHtml();
-		fixhead();
+		jsonRequest(createHtml);
 	};
 	var extend = function (o, n, override) {
 		for (var p in n)
@@ -72,8 +71,7 @@ export var dataGrid = function (params) {
 				o[p] = n[p];
 	};
 
-	var jsonRequest = function () {
-		var json = '';
+	var jsonRequest = function (callback) {
 		$.ajax({
 			type: 'POST',
 			async: conf.async,
@@ -81,7 +79,7 @@ export var dataGrid = function (params) {
 			url: conf.jsonUrl,
 			dataType: 'json',
 			success: function (data) {
-				json = data;
+				callback(data);
 			},
 			error: function (msg) {
 				console.log(msg);
@@ -89,12 +87,10 @@ export var dataGrid = function (params) {
 				json = '';
 			}
 		});
-		return json;
 	};
 	var divid = "";
 	var tee = "1-0";
-	var createHtml = function () {
-		var jsonData = jsonRequest();
+	var createHtml = function (jsonData) {
 		if (jsonData == '') {
 			return;
 		}
@@ -120,6 +116,7 @@ export var dataGrid = function (params) {
 				conf.callback();
 			}, 500);
 		}
+		fixhead();
 	};
 	var cHeadTable = function (divid) {
 		var table = document.createElement("table");// 1.创建一个table表
