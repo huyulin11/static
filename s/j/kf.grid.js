@@ -94,7 +94,6 @@ export var dataGrid = function (params) {
 	var divid = "";
 	var tee = "1-0";
 	var createHtml = function () {
-
 		var jsonData = jsonRequest();
 		if (jsonData == '') {
 			return;

@@ -22,17 +22,11 @@ let params = {
 			return gv.get("WAREHOUSE", data);
 		}
 	}, {
-		colkey: "totallines",
-		name: "明细数"
+		colkey: "item",
+		name: "SU"
 	}, {
-		colkey: "totalqty",
-		name: "货物数"
-	}, {
-		colkey: "name",
-		name: "交接点",
-		renderData: function (rowindex, data, rowdata, column) {
-			return gv.get("ACS_CACHE_CABLE", data);
-		}
+		colkey: "userdef3",
+		name: "TU"
 	}, {
 		colkey: "status",
 		name: "状态",
@@ -65,7 +59,7 @@ export var init = function () {
 		});
 	} else {
 		$("#searchForm").show();
-		initPaperOp("shipment");
+		initPaperOp("shipment", "DETAIL");
 	}
 
 	window.datagrid = dataGrid(params);

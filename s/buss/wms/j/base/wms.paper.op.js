@@ -57,12 +57,12 @@ export var overPaper = function (paperid) {
     paperOp.over(obj);
 }
 
-var initPaperOp = function (tasktype, rf) {
+var initPaperOp = function (tasktype, model) {
     _tasktype = tasktype;
     doInitPaperOp(_tasktype);
     initBtns();
     let tempBtns = null;
-    if (rf == "RF") {
+    if (model == "RF") {
         tempBtns = [allBtns.detail, allBtns.taked, allBtns.picking, allBtns.cancel, allBtns.refresh,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
@@ -76,21 +76,25 @@ var initPaperOp = function (tasktype, rf) {
             allBtns.taked, allBtns.over, allBtns.del, allBtns.cancel,
             allBtns.refresh, allBtns.whichOne,];
             if (_tasktype == "shipment") {
-                tempBtns = tempBtns.concat(allBtns.picking);
-                tempBtns = tempBtns.concat(allBtns.gotoRfShipment);
-                $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);
-                $('#excel-file').on("change", function (e) {
-                    submit(e, function (workbook) {
-                        for (var sheetName in workbook.Sheets) {
-                            if (workbook.Sheets.hasOwnProperty(sheetName)) {
-                                debugger
-                                let sheet = workbook.Sheets[sheetName];
-                                let json = XLSX.utils.sheet_to_json(sheet);
-                                console.log(json);
+                if (model == "DETAIL") {
+                    tempBtns = [allBtns.refresh,];
+                } else {
+                    tempBtns = tempBtns.concat(allBtns.picking);
+                    tempBtns = tempBtns.concat(allBtns.gotoRfShipment);
+                    $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);
+                    $('#excel-file').on("change", function (e) {
+                        submit(e, function (workbook) {
+                            for (var sheetName in workbook.Sheets) {
+                                if (workbook.Sheets.hasOwnProperty(sheetName)) {
+                                    debugger
+                                    let sheet = workbook.Sheets[sheetName];
+                                    let json = XLSX.utils.sheet_to_json(sheet);
+                                    console.log(json);
+                                }
                             }
-                        }
+                        });
                     });
-                });
+                }
             } else if (_tasktype == "receipt") {
                 tempBtns = tempBtns.concat(allBtns.execute);
             }
