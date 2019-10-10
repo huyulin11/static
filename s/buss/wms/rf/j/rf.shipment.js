@@ -1,5 +1,6 @@
 import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
-import { initPaperOp, overPaper } from "/s/buss/wms/j/base/wms.paper.op.js";
+import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
+import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
 let container = "#rootContainer";
