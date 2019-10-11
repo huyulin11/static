@@ -19,24 +19,19 @@ var sub = function () {
         return;
     }
 
-
-    if (_paperid) {
-        gf.doAjax({
-            url: `/shipment/detail/addItem.shtml?paperid=${_paperid}`,
-            data: { item: su, userdef3: tu },
-            success: function (data) {
-                if (typeof data == "string") data = JSON.parse(data);
-                layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
-                if (data.code >= 0) {
-                    $("#su").val("");
-                    $("#tu").val("");
-                }
-                $("#su").focus();
+    gf.doAjax({
+        url: `/shipment/detail/addItem.shtml?paperid=${_paperid}`,
+        data: { item: su, userdef3: tu },
+        success: function (data) {
+            if (typeof data == "string") data = JSON.parse(data);
+            layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
+            if (data.code >= 0) {
+                $("#su").val("");
+                $("#tu").val("");
             }
-        });
-    } else {
-        return;
-    }
+            $("#tu").focus();
+        }
+    });
 }
 
 var initShipment = function () {
@@ -85,7 +80,7 @@ var initRf = function () {
             $(container).find("table").show();
             $(container).find("#sub").on("click", function () { sub(); });
             initPaperOp("shipment");
-            $("#su").focus();
+            $("#tu").focus();
 
             $(container).find("#layout").on("click", function () {
                 window.location.href = "/logout.shtml";
@@ -96,10 +91,10 @@ var initRf = function () {
             gf.resizeTable();
         },
         methods: {
-            suEnter: function () {
-                $("#tu").focus();
-            },
             tuEnter: function () {
+                $("#su").focus();
+            },
+            suEnter: function () {
                 sub();
             },
         }
