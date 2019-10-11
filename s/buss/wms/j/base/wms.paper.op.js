@@ -10,7 +10,7 @@ var initPaperOp = function (tasktype, model) {
 
     let tempBtns = null;
     if (model == "RF") {
-        tempBtns = [btns.detail, btns.taked, btns.picking, btns.cancel, btns.refresh,];
+        tempBtns = [btns.detail, btns.taked, btns.pickOne, btns.pickMore, btns.cancel, btns.refresh,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
             tempBtns = [btns.add, btns.detail, btns.edit, btns.send,
@@ -26,7 +26,8 @@ var initPaperOp = function (tasktype, model) {
                     tempBtns = [btns.refresh,];
                 } else {
                     tempBtns = tempBtns.concat(btns.taked);
-                    tempBtns = tempBtns.concat(btns.picking);
+                    tempBtns = tempBtns.concat(btns.pickOne);
+                    tempBtns = tempBtns.concat(btns.pickMore);
                     tempBtns = tempBtns.concat(btns.combineVna);
                     tempBtns = tempBtns.concat(btns.gotoRfShipment);
                     $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);

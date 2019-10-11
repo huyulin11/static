@@ -44,9 +44,12 @@ var initBtns = function () {
     }; btns.gotoRfShipment = {
         id: "gotoRfShipment", name: "RF出库", class: "btn-primary", bind: function () { paperOp.gotoRfShipment(this); },
         url: `/s/buss/wms/rf/h/shipment.html`,
-    }; btns.picking = {
-        id: "picking", name: "拣货", class: "btn-warning", bind: function () { paperOp.picking(this); },
-        url: `/s/buss/wms/rf/h/shipment.html`,
+    }; btns.pickOne = {
+        id: "pickOne", name: "按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
+        url: `/s/buss/wms/rf/h/picking.html`,
+    }; btns.pickMore = {
+        id: "pickMore", name: "混合拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
+        url: `/s/buss/wms/rf/h/picking.html?opentype=mix`,
     }; btns.combineVna = {
         id: "combineVna", name: "VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
         url: `/s/buss/wms/rf/h/combine.html?warehouse=1`,
@@ -85,7 +88,7 @@ class PaperOp {
                 content: that.url + "?paperid=" + cbox
             });
         });
-    }; picking(that) {
+    }; pickOne(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }
 
@@ -100,13 +103,10 @@ class PaperOp {
                 layer.msg(`该单无法${that.name}！`);
                 return;
             }
-            window.pageii = layer.open({
-                title: `${that.name}：` + cbox,
-                type: 2,
-                area: localStorage.layerArea.split(","),
-                content: that.url + "?paperid=" + cbox
-            });
+            window.location.href = that.url + "?paperid=" + cbox
         });
+    }; pickMore(that) {
+        window.location.href = that.url
     }; combine(that) {
         window.pageii = layer.open({
             title: `${that.name}：`,
@@ -171,24 +171,9 @@ class PaperOp {
     }; cancel(that) {
         paperOp.doJob("cancel", that);
     }; taked(that) {
-        if (currentShipmentPaperid()) {
-            let msg = function () {
-                return ("当前有出库单尚未完成处理，是否前去处理？" + currentShipmentPaperid())
-            };
-            layer.confirm(msg(), {
-                btn: ['是', '否，仍然接单']
-            }, function () {
-                gotoRfMgr("shipment");
-            }, function () {
-                paperOp.doJob("taked", that, function (paperid) {
-                    setCurrentShipmentPaperid(paperid);
-                });
-            });
-        } else {
-            paperOp.doJob("taked", that, function (paperid) {
-                setCurrentShipmentPaperid(paperid);
-            });
-        }
+        paperOp.doJob("taked", that, function (paperid) {
+            setCurrentShipmentPaperid(paperid);
+        });
     }; whichAgv(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }

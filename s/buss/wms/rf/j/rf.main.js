@@ -67,8 +67,11 @@ export var initRf = function () {
                 $("#rootContainer").find("#logout").on("click", function () {
                     window.location.href = "/logout.shtml";
                 });
-                $("#rootContainer").find("#priority,#picking,#failure").on("click", function () {
+                $("#rootContainer").find("#priority,#failure").on("click", function () {
                     layer.msg("尚未开通！");
+                });
+                $("#rootContainer").find("#picking").on("click", function () {
+                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#combine").on("click", function () {
                     window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
@@ -77,7 +80,7 @@ export var initRf = function () {
                     window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#shipment").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
+                    window.location.href = "/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED";
                 });
                 $("#rootContainer").find("#stockOut").on("click", function () {
                     window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
