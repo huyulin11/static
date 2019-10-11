@@ -11,12 +11,12 @@
 
 <body>
     <div class="l_err" style="width: 100%; margin-top: 2px;"></div>
-    <form id="form" name="form" class="form-horizontal" method="post" action="/agv/lap/addEntity.shtml">
+    <form id="form" name="form" class="form-horizontal" method="post" action="/sys/lap/addEntity.shtml">
         <section class="panel panel-default">
             <div class="panel-body">
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="输入：地点名称" name="agvLapFormMap.lapName"
+                        <input type="text" class="form-control" placeholder="输入：地点名称" name="lapInfoFormMap.lapName"
                             id="lapName" datatype="*" errormsg="地点名称不能为空！">
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                             datatype="*" errormsg="SKU名称不能为空！" autocomplete="off" data-nulltips="输入关键字查找SKU名称……"
                             data-searchurl='/sku/info/findByName.shtml?skuInfoFormMap.name='
                             data-containerofinput="#panelBody" data-showcol='name' id="input0">
-                        <input type="text" id="skuId" name="agvLapFormMap.skuId" style="display: none">
+                        <input type="text" id="skuId" name="lapInfoFormMap.skuId" style="display: none">
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 </body>
 
 <script src="/s/j/validform/Validform_v5.3.2_ncr_min.js"></script>
-<script src="/s/buss/agv/lap/j/add.js"></script>
+<script src="/s/buss/sys/lap/j/add.js"></script>
 <script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>
 <script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>
 

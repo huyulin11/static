@@ -44,7 +44,7 @@ window.datagrid = dataGrid({
 			}
 		}
 	}],
-	jsonUrl: '/agv/lap/findByPage.shtml',
+	jsonUrl: '/sys/lap/findByPage.shtml',
 	checkbox: true,
 	serNumber: true
 });
@@ -66,7 +66,7 @@ function add() {
 		title: "新增",
 		type: 2,
 		area: localStorage.layerArea.split(","),
-		content: '/s/buss/agv/lap/h/agvlapAddUI.html'
+		content: '/s/buss/sys/lap/h/lapInfoAddUI.html'
 	});
 }
 function del() {
@@ -76,7 +76,7 @@ function del() {
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
-		var url = '/agv/lap/deleteEntity.shtml';
+		var url = '/sys/lap/deleteEntity.shtml';
 		var s = gf.ajax(url, {
 			ids: cbox.join(",")
 		}, "json");

@@ -7,7 +7,7 @@ var doEdit = function (that) {
     var td = $(that).parents("td");
     var tr = $(that).parents("tr");
     var data = td.find("span").html();
-    td.html("<input type='text' class='editLapNameInput' name='agvLapFormMap.lapName' value='" + data
+    td.html("<input type='text' class='editLapNameInput' name='lapInfoFormMap.lapName' value='" + data
         + "' data-orivalue='" + data + "' title='回车保存！'/>");
     td.find("input").focus();
 }
@@ -32,10 +32,10 @@ var whenEditInputEnter = function (that) {
     var tr = $(that).parents("tr");
     var data = td.find("input").val();
     var currentid = tr.find("input:checkbox").val();
-    var url = '/agv/lap/editEntity.shtml';
+    var url = '/sys/lap/editEntity.shtml';
     var s = gf.ajax(url, {
-        "agvLapFormMap.id": currentid,
-        "agvLapFormMap.lapName": data
+        "lapInfoFormMap.id": currentid,
+        "lapInfoFormMap.lapName": data
     }, "json");
     if (s.code >= 0) {
         layer.msg('修改成功！');
