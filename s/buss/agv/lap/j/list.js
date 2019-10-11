@@ -9,11 +9,8 @@ window.datagrid = dataGrid({
 		name: "id",
 		hide: true,
 	}, {
-		colkey: "skuId",
-		name: "SKU编号",
-	}, {
 		colkey: "lapName",
-		name: "取货地点",
+		name: "地点名称",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return data;
@@ -21,6 +18,9 @@ window.datagrid = dataGrid({
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<a class='editLapName'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
+	}, {
+		colkey: "skuId",
+		name: "SKU编号",
 	}, {
 		colkey: "inUesd",
 		name: "是否在用",
