@@ -7,7 +7,7 @@ var doEdit = function (that) {
     var td = $(that).parents("td");
     var tr = $(that).parents("tr");
     var data = td.find("span").html();
-    td.html("<input type='text' class='editLapNameInput' name='lapInfoFormMap.lapName' value='" + data
+    td.html("<input type='text' class='editLapNameInput' name='lapInfoFormMap.name' value='" + data
         + "' data-orivalue='" + data + "' title='回车保存！'/>");
     td.find("input").focus();
 }
@@ -35,7 +35,7 @@ var whenEditInputEnter = function (that) {
     var url = '/sys/lap/editEntity.shtml';
     var s = gf.ajax(url, {
         "lapInfoFormMap.id": currentid,
-        "lapInfoFormMap.lapName": data
+        "lapInfoFormMap.name": data
     }, "json");
     if (s.code >= 0) {
         layer.msg('修改成功！');

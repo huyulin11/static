@@ -9,7 +9,7 @@ window.datagrid = dataGrid({
 		name: "id",
 		hide: true,
 	}, {
-		colkey: "lapName",
+		colkey: "name",
 		name: "地点名称",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
@@ -17,6 +17,12 @@ window.datagrid = dataGrid({
 			}
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<a class='editLapName'><img src='/s/i/edit.png'/></a>" + "</div>";
+		}
+	}, {
+		colkey: "type",
+		name: "地点类型",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.get("LAP_TYPE", data);
 		}
 	}, {
 		colkey: "skuId",
