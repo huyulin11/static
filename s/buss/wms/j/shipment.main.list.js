@@ -58,15 +58,14 @@ let params = {
 }
 
 export var init = function () {
-	params = Object.assign(params, { data: { "shipmentMainFormMap.warehouse": _warehouse, } });
+	params.data = {};
+	params.data = Object.assign(params.data, { "shipmentMainFormMap.warehouse": _warehouse, });
 	if (_choosedStatus) {
 		initPaperOp("shipment", "RF");
 		$("html").addClass("frame");
-		params = Object.assign(params, {
-			data: {
-				"shipmentMainFormMap.status": _choosedStatus,
-				"shipmentMainFormMap.delflag": 0
-			}
+		params.data = Object.assign(params.data, {
+			"shipmentMainFormMap.status": _choosedStatus,
+			"shipmentMainFormMap.delflag": 0
 		});
 	} else {
 		$("#searchForm").show();
