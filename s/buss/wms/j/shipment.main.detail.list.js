@@ -10,9 +10,6 @@ let params = {
 		name: "id",
 		hide: true,
 	}, {
-		colkey: "paperid",
-		name: "单号"
-	}, {
 		colkey: "warehouse",
 		name: "仓库",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -22,14 +19,23 @@ let params = {
 			return gv.get("WAREHOUSE", data);
 		}
 	}, {
+		colkey: "paperid",
+		name: "单号"
+	}, {
+		colkey: "status",
+		name: "单据状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gf.getStatusDesc(rowindex, data, rowdata, column);
+		}
+	}, {
 		colkey: "item",
 		name: "SU"
 	}, {
 		colkey: "userdef3",
 		name: "TU"
 	}, {
-		colkey: "status",
-		name: "状态",
+		colkey: "detailstatus",
+		name: "明细状态",
 		renderData: function (rowindex, data, rowdata, column) {
 			return gf.getStatusDesc(rowindex, data, rowdata, column);
 		}
