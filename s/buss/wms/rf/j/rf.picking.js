@@ -7,26 +7,22 @@ let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
 
 var sub = function () {
-    let su = $("#su").val();
     let tu = $("#tu").val();
-    if (!su || !tu) {
-        layer.msg("tu与su均不能为空！");
-        if (!su) {
-            $("#su").focus();
-        } else if (!tu) {
+    if (!tu) {
+        layer.msg("tu不能为空！");
+        if (!tu) {
             $("#tu").focus();
         }
         return;
     }
 
     gf.doAjax({
-        url: `/shipment/detail/addItem.shtml?paperid=${_paperid}`,
-        data: { item: su, userdef3: tu },
+        url: `/shipment/detail/addPickingItem.shtml?paperid=${_paperid}`,
+        data: { userdef3: tu },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
+            layer.msg(data.msg + "tu:" + tu);
             if (data.code >= 0) {
-                $("#su").val("");
                 $("#tu").val("");
             }
             $("#tu").focus();
@@ -92,9 +88,6 @@ var initRf = function () {
         },
         methods: {
             tuEnter: function () {
-                $("#su").focus();
-            },
-            suEnter: function () {
                 sub();
             },
         }
