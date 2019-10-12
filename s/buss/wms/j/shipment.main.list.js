@@ -3,6 +3,11 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 
+let _type = gf.urlParam("type");
+let _choosedStatus = gf.urlParam("status");
+let _warehouse = gf.urlParam("warehouse");
+if (_type) $("h1").html(unescape(_type));
+
 let params = {
 	pagId: 'paging',
 	l_column: [{
@@ -53,13 +58,13 @@ let params = {
 }
 
 export var init = function () {
-	let choosedStatus = gf.urlParam("status");
-	if (choosedStatus) {
+	params = Object.assign(params, { data: { "shipmentMainFormMap.warehouse": _warehouse, } });
+	if (_choosedStatus) {
 		initPaperOp("shipment", "RF");
 		$("html").addClass("frame");
 		params = Object.assign(params, {
 			data: {
-				"shipmentMainFormMap.status": choosedStatus,
+				"shipmentMainFormMap.status": _choosedStatus,
 				"shipmentMainFormMap.delflag": 0
 			}
 		});

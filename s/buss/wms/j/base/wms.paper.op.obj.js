@@ -41,17 +41,17 @@ var initBtns = function () {
         url: `/bd/conf.shtml?table=task_agv`
     }; btns.whichOne = {
         id: "whichOne", name: "经办", class: "btn-info", bind: function () { paperOp.whichOne(this); },
-    }; btns.gotoRfShipment = {
-        id: "gotoRfShipment", name: "RF出库", class: "btn-primary", bind: function () { paperOp.gotoRfShipment(this); },
-        url: `/s/buss/wms/rf/h/shipment.html`,
+    }; btns.stockOut = {
+        id: "stockOut", name: "RF-出库", class: "btn-primary", bind: function () { paperOp.stockOut(this); },
+        url: `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=RF${escape("出库")}`,
     }; btns.pickOne = {
-        id: "pickOne", name: "按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
+        id: "pickOne", name: "RF-按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
         url: `/s/buss/wms/rf/h/picking.html`,
     }; btns.pickMore = {
-        id: "pickMore", name: "VNA拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
+        id: "pickMore", name: "RF-VNA拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
         url: `/s/buss/wms/rf/h/picking.html?warehouse=1`,
     }; btns.combineVna = {
-        id: "combineVna", name: "VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
+        id: "combineVna", name: "RF-VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
         url: `/s/buss/wms/rf/h/combine.html?warehouse=1`,
     };
 }
@@ -130,13 +130,8 @@ class PaperOp {
             area: localStorage.layerArea.split(","),
             content: that.url + cbox
         });
-    }; gotoRfShipment(that) {
-        window.pageii = layer.open({
-            title: `${that.name}`,
-            type: 2,
-            area: localStorage.layerArea.split(","),
-            content: that.url
-        });
+    }; stockOut(that) {
+        window.location.href = that.url;
     }; doJob(param, that, callback) {
         var paperid;
         if (that.paperid) {

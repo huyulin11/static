@@ -79,11 +79,8 @@ export var initRf = function () {
                 $("#rootContainer").find("#receipt").on("click", function () {
                     window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
                 });
-                $("#rootContainer").find("#shipment").on("click", function () {
-                    window.location.href = "/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED";
-                });
                 $("#rootContainer").find("#stockOut").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
+                    window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=${escape("冷库出库")}&warehouse=2`;
                 });
                 $("#rootContainer").find("#alloc").on("click", function () {
                     window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;

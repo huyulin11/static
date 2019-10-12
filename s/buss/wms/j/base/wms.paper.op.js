@@ -29,7 +29,7 @@ var initPaperOp = function (tasktype, model) {
                     tempBtns = tempBtns.concat(btns.pickOne);
                     tempBtns = tempBtns.concat(btns.pickMore);
                     tempBtns = tempBtns.concat(btns.combineVna);
-                    tempBtns = tempBtns.concat(btns.gotoRfShipment);
+                    tempBtns = tempBtns.concat(btns.stockOut);
                     $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);
                     $('#excel-file').on("change", function (e) {
                         submit(e, function (workbook) {
