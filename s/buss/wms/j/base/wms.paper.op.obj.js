@@ -48,8 +48,8 @@ var initBtns = function () {
         id: "pickOne", name: "按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
         url: `/s/buss/wms/rf/h/picking.html`,
     }; btns.pickMore = {
-        id: "pickMore", name: "混合拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
-        url: `/s/buss/wms/rf/h/picking.html?opentype=mix`,
+        id: "pickMore", name: "VNA拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
+        url: `/s/buss/wms/rf/h/picking.html?warehouse=1`,
     }; btns.combineVna = {
         id: "combineVna", name: "VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
         url: `/s/buss/wms/rf/h/combine.html?warehouse=1`,

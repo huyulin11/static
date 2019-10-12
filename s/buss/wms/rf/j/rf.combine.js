@@ -33,6 +33,13 @@ var sub = function () {
 }
 
 var initCombine = function () {
+    $(container).find("h1").each(function () {
+        if (_warehouse) {
+            $(this).html(`正在组盘-${gv.get("WAREHOUSE", _warehouse)}`);
+        } else {
+            $(this).html(`未找到组盘识别数据`);
+        }
+    });
 }
 
 var initRf = function () {
@@ -43,13 +50,11 @@ var initRf = function () {
         },
         mounted: function () {
             initCombine();
-            $(container).find("h1").each(function () {
-                $(this).html(`正在组盘-${gv.get("WAREHOUSE", _warehouse)}`);
-                $(container).find("table").show();
-                $(container).find("#sub").on("click", function () { sub(); });
-                initPaperOp("shipment");
-                $("#tu").focus();
-            });
+
+            $(container).find("table").show();
+            $(container).find("#sub").on("click", function () { sub(); });
+            initPaperOp("shipment");
+            $("#tu").focus();
 
             $(container).find("#layout").on("click", function () {
                 window.location.href = "/logout.shtml";

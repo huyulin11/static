@@ -5,6 +5,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
+let _warehouse = gf.urlParam("warehouse");
 
 var sub = function () {
     let tu = $("#tu").val();
@@ -17,8 +18,8 @@ var sub = function () {
     }
 
     gf.doAjax({
-        url: `/shipment/detail/addPickingItem.shtml?paperid=${_paperid}`,
-        data: { userdef3: tu },
+        url: `/shipment/detail/addPickingItem.shtml`,
+        data: { userdef3: tu, paperid: _paperid, warehouse: _warehouse },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             layer.msg(data.msg + "tu:" + tu);
@@ -42,13 +43,19 @@ var initShipment = function () {
             if (!main || (main["status"] != "TAKED" && main["status"] != "SCANED") || main["delflag"] != "0") {
                 layer.msg(_paperid + "该单无法继续操作，如需查看请移步出库单管理！");
                 return;
-            } else {
-                $(container).find("h1").each(function () {
-                    $(this).html("正在出库" + _paperid);
-                });
             }
         });
     }
+
+    $(container).find("h1").each(function () {
+        if (_paperid) {
+            $(this).html("正在拣货-" + _paperid);
+        } else if (_warehouse) {
+            $(this).html(`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
+        } else {
+            $(this).html(`未找到拣货识别数据`);
+        }
+    });
 }
 
 var initRf = function () {
@@ -60,17 +67,10 @@ var initRf = function () {
         mounted: function () {
             initShipment();
             if (_paperid) {
-                $(container).find("h1").each(function () {
-                    $(this).html(`正在拣货${_paperid}`);
-                });
                 $(container).find("#over").on("click", function () {
                     if (_paperid) {
                         overPaper(_paperid);
                     }
-                });
-            } else {
-                $(container).find("h1").each(function () {
-                    $(this).html("正在拣货-混合拣货");
                 });
             }
             $(container).find("table").show();
