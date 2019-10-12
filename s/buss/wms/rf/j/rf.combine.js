@@ -20,7 +20,7 @@ var sub = function () {
     }
     gf.doAjax({
         url: `/shipment/detail/addCombinedItem.shtml`,
-        data: { item: su, userdef3: tu, warehouse: _warehouse },
+        data: { item: su, userdef4: tu, warehouse: _warehouse },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
