@@ -108,12 +108,7 @@ class PaperOp {
     }; pickMore(that) {
         window.location.href = that.url
     }; combine(that) {
-        window.pageii = layer.open({
-            title: `${that.name}：`,
-            type: 2,
-            area: localStorage.layerArea.split(","),
-            content: that.url
-        });
+        window.location.href = that.url
     }; add(that) {
         window.pageii = layer.open({
             title: `${that.name}`,
