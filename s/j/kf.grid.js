@@ -32,7 +32,7 @@ var defaultConf = {
 	// 树形式 {tree : false,//是否显示树 name : 'name'}//以哪个字段 的树形式
 };
 
-var fields = {
+var fieldModel = {
 	colkey: null,
 	name: null,
 	width: 'auto',
@@ -42,57 +42,52 @@ var fields = {
 	renderData: null
 };
 
+var jsonRequest = function (conf, callback) {
+	$.ajax({
+		type: 'POST',
+		async: conf.async,
+		data: conf.data,
+		url: conf.jsonUrl,
+		dataType: 'json',
+		success: function (data) {
+			callback(data);
+		},
+		error: function (msg) {
+			console.log(msg);
+			layer.msg("数据错误！请检查网络或权限配置！");
+			json = '';
+		}
+	});
+};
+
 export var dataGrid = function (params) {
 	var finalConf = $.extend(defaultConf, params);
-	var l_tree = finalConf.treeGrid;
-	var field = [];
-	for (var i = 0; i < finalConf.columns.length; i++) {
-		field.push(fields);
+	var confTreeGrid = finalConf.treeGrid;
+	var confFields = [];
+	for (var iii = 0; iii < finalConf.columns.length; iii++) {
+		confFields.push(fieldModel);
 	}
-	// var column = jQuery.extend(true, col, confs.columns);
-	for (var i = 0; i < field.length; i++) {
-		for (var p in field[i])
-			if (field[i].hasOwnProperty(p) && (!finalConf.columns[i].hasOwnProperty(p)))
-				finalConf.columns[i][p] = field[i][p];
+	for (var iii = 0; iii < confFields.length; iii++) {
+		for (var p in confFields[iii])
+			if (confFields[iii].hasOwnProperty(p) && (!finalConf.columns[iii].hasOwnProperty(p)))
+				finalConf.columns[iii][p] = confFields[iii][p];
 	}
 	var column = finalConf.columns;
-	var init = function () {
-		jsonRequest(createHtml);
-	};
-	var extend = function (o, n, override) {
-		for (var p in n)
-			if (n.hasOwnProperty(p) && (!o.hasOwnProperty(p) || override))
-				o[p] = n[p];
-	};
-
-	var jsonRequest = function (callback) {
-		$.ajax({
-			type: 'POST',
-			async: finalConf.async,
-			data: finalConf.data,
-			url: finalConf.jsonUrl,
-			dataType: 'json',
-			success: function (data) {
-				callback(data);
-			},
-			error: function (msg) {
-				console.log(msg);
-				layer.msg("数据错误！请检查网络或权限配置！");
-				json = '';
-			}
-		});
-	};
 	var divid = "";
 	var tee = "1-0";
+
+	var initGrid = function (conf) {
+		jsonRequest(conf, createHtml);
+	};
+
 	var createHtml = function (jsonData) {
 		if (jsonData == '') {
 			return;
 		}
 		var id = finalConf.pagId;
 		divid = typeof (id) == "string" ? document.getElementById(id) : id;
-		if (divid == "" || divid == undefined || divid == null) {
+		if (!divid) {
 			console.error("找不到 id= " + id + " 选择器！");
-			;
 			return;
 		}
 
@@ -149,7 +144,7 @@ export var dataGrid = function (params) {
 			} else {
 				isHide = column[o].hide;
 			}
-			if (!isHide || isHide == undefined) {
+			if (!isHide) {
 				var th = document.createElement('th');
 				th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + finalConf.theadHeight + ";vertical-align: middle;");
 				th.innerHTML = column[o].name;
@@ -218,7 +213,7 @@ export var dataGrid = function (params) {
 				} else {
 					isHide = column[o].hide;
 				}
-				if (!isHide || isHide == undefined) {
+				if (!isHide) {
 					var th = document.createElement('th');
 					th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + finalConf.theadHeight + ";vertical-align: middle;");
 					th.innerHTML = column[o].name;
@@ -255,8 +250,8 @@ export var dataGrid = function (params) {
 				chkbox.type = "checkbox";
 				// ******** 树的上下移动需要
 				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], l_tree.id));
-				chkbox.setAttribute("pid", _getValueByName(json[d], l_tree.pid));
+				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], confTreeGrid.id));
+				chkbox.setAttribute("pid", _getValueByName(json[d], confTreeGrid.pid));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
 				chkbox.value = _getValueByName(json[d], finalConf.checkValue);
@@ -269,7 +264,7 @@ export var dataGrid = function (params) {
 					} else {
 						isHide = column[o].hide;
 					}
-					if (!isHide || isHide == undefined) {
+					if (!isHide) {
 						var td_o = tr.insertCell(-1);
 						td_o.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";vertical-align: middle;");
 
@@ -279,8 +274,8 @@ export var dataGrid = function (params) {
 						var clm = column[o].colkey;
 						var data = gf.notEmpty(_getValueByName(rowdata, clm));
 
-						if (l_tree.tree) {
-							var lt = l_tree.name.split(",");
+						if (confTreeGrid.tree) {
+							var lt = confTreeGrid.name.split(",");
 							if (gf.inArray(lt, clm)) {
 								var divtree = document.createElement("div");
 								divtree.className = "ly_tree";
@@ -318,8 +313,8 @@ export var dataGrid = function (params) {
 						;
 					}
 				});
-				if (l_tree.tree) {
-					if (l_tree.type == 1) {
+				if (confTreeGrid.tree) {
+					if (confTreeGrid.type == 1) {
 						tee = tee + "-0";
 						treeHtml(tbody, json[d]);// 树形式
 					} else {
@@ -464,16 +459,13 @@ export var dataGrid = function (params) {
 	};
 	var nb = '20';
 	var treeHtml = function (tbody, data) {
-		if (data == undefined)
+		if (!data)
 			return;
 		var jsonTree = data.children;
-		if (jsonTree == undefined || jsonTree == '' || jsonTree == null) {
-		} else {
-			var tte = false;
+		if (jsonTree) {
 			$.each(jsonTree, function (jt) {
-
 				var tte = false;
-				if (jsonTree[jt].children != undefined && jsonTree[jt].children != '' && jsonTree[jt].children != null) {
+				if (jsonTree[jt].children) {
 					tte = true;
 				}
 				var tr = document.createElement('tr');
@@ -515,7 +507,7 @@ export var dataGrid = function (params) {
 					} else {
 						isHide = column[o].hide;
 					}
-					if (!isHide || isHide == undefined) {
+					if (!isHide) {
 						var td_o = tr.insertCell(-1);
 						td_o.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";vertical-align: middle;");
 						var rowdata = jsonTree[jt];
@@ -524,8 +516,8 @@ export var dataGrid = function (params) {
 						var clm = column[o].colkey;
 						var data = gf.notEmpty(_getValueByName(rowdata, clm));
 
-						if (l_tree.tree) {
-							var lt = l_tree.name.split(",");
+						if (confTreeGrid.tree) {
+							var lt = confTreeGrid.name.split(",");
 							if (gf.inArray(lt, column[o].colkey)) {
 								var divtree = document.createElement("div");
 								divtree.className = "ly_tree";
@@ -582,8 +574,8 @@ export var dataGrid = function (params) {
 		tee = tee + "-0"
 		$.each(jsonTree, function (jt) {
 			if (gf.notNull(jsonTree[jt])) {
-				var jsb = _getValueByName(jsonTree[jt], l_tree.pid);
-				var ob = _getValueByName(obj, l_tree.id);
+				var jsb = _getValueByName(jsonTree[jt], confTreeGrid.pid);
+				var ob = _getValueByName(obj, confTreeGrid.id);
 				if (jsb == ob) {
 					tte = true;
 					var tr = document.createElement('tr');
@@ -611,8 +603,8 @@ export var dataGrid = function (params) {
 					chkbox.type = "checkbox";
 					// ******** 树的上下移动需要
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], l_tree.id));
-					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], l_tree.pid));
+					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], confTreeGrid.id));
+					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], confTreeGrid.pid));
 					// ******** 树的上下移动需要
 					chkbox.setAttribute("_l_key", "checkbox");
 					chkbox.value = _getValueByName(jsonTree[jt], finalConf.checkValue);
@@ -625,7 +617,7 @@ export var dataGrid = function (params) {
 						} else {
 							isHide = column[o].hide;
 						}
-						if (!isHide || isHide == undefined) {
+						if (!isHide) {
 							var td_o = tr.insertCell(-1);
 							td_o.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";vertical-align: middle;");
 							var rowdata = jsonTree[jt];
@@ -634,8 +626,8 @@ export var dataGrid = function (params) {
 							var clm = column[o].colkey;
 							var data = gf.notEmpty(_getValueByName(rowdata, clm));
 
-							if (l_tree.tree) {
-								var lt = l_tree.name.split(",");
+							if (confTreeGrid.tree) {
+								var lt = confTreeGrid.name.split(",");
 								if (gf.inArray(lt, column[o].colkey)) {
 									var divtree = document.createElement("div");
 									divtree.className = "ly_tree";
@@ -821,7 +813,7 @@ export var dataGrid = function (params) {
 		finalConf.data = $.extend(finalConf.data, {
 			pageNow: page
 		});
-		init();
+		initGrid(finalConf);
 	};
 	var datatree = function () { // 页数
 		var evt = arguments[0] || window.event;
@@ -903,13 +895,6 @@ export var dataGrid = function (params) {
 	 * 
 	 */
 	var pagesIndex = function (pagecode, pageNow, pageCount) {
-		/*
-		 * var pagecode = _getValueByName(jsonData,conf.pagecode) ==
-		 * undefined ? conf.pagecode
-		 * :_getValueByName(jsonData,conf.pagecode); var sten =
-		 * pagesIndex(pagecode, pageNow,totalPages); var
-		 * startpage=sten.start; var endpage=sten.end;
-		 */
 		pagecode = parseInt(pagecode);
 		pageNow = parseInt(pageNow);
 		pageCount = parseInt(pageCount);
@@ -941,14 +926,14 @@ export var dataGrid = function (params) {
 	 */
 	var loadData = function () {
 		$.extend(finalConf, params);
-		init();
+		initGrid(finalConf);
 	};
 	/**
 	 * 查询时，设置参数查询
 	 */
 	var setOptions = function (params) {
 		$.extend(finalConf, params);
-		init();
+		initGrid(finalConf);
 	};
 	/**
 	 * 获取选中的值
@@ -968,7 +953,7 @@ export var dataGrid = function (params) {
 		});
 		return arr;
 	};
-	init();
+	initGrid(finalConf);
 	return {
 		setOptions: setOptions,
 		loadData: loadData,
