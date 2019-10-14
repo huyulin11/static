@@ -800,14 +800,6 @@ export var dataGrid = function (params) {
 		});
 		return arr;
 	};
-	var trClick = function () { // 设置行的背景色 兼容性问题很大
-		/*
-		 * var evt = arguments[0] || window.event; var tr = evt.srcElement ||
-		 * evt.currentTarget; var chkbox = getChkBox(tr);
-		 * if(chkbox.checked){ chkbox.checked = false; restoreBgColor(tr);
-		 * }else{ chkbox.checked=true; setBgColor(tr); }
-		 */
-	};
 	var checkboxbind = function () { // 全选/反选
 		var evt = arguments[0] || window.event;
 		var chkbox = evt.srcElement || evt.target;
