@@ -10,7 +10,7 @@ var initPaperOp = function (tasktype, model) {
 
     let tempBtns = null;
     if (model == "RF") {
-        tempBtns = [btns.detail, btns.taked, btns.pickOne, btns.pickMore, btns.cancel, btns.refresh,];
+        tempBtns = [btns.detail, btns.taked, btns.pickOne, btns.pickMore, btns.cancel, btns.refresh, btns.back,];
     } else {
         if (localStorage.projectKey == "CSY_DAJ") {
             tempBtns = [btns.add, btns.detail, btns.edit, btns.send,

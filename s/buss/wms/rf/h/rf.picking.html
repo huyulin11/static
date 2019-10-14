@@ -17,23 +17,16 @@
 
 <body>
     <div id="rootContainer" class="rf-op">
-        <h1>物料组盘</h1>
-        <table cellspacing="10px" cellspadding="1px">
+        <h1>拣货</h1><button id="back" class="small">返回</button>
+        <table cellspacing="10px" cellspadding="1px" style="display: none;">
             <tbody>
                 <tr>
-                    <td width="50%"><button id="priority">优先级</button></td>
-                    <td><button id="receipt">冷库入库</button></td>
+                    <td><label>TU</label></td>
+                    <td><input id="tu" @keyup.enter="tuEnter" /></td>
                 </tr>
                 <tr>
-                    <td><button id="picking">拣配</button></td>
-                    <td><button id="shipment">冷库出库</button></td>
-                </tr>
-                <tr>
-                    <td><button id="groupdisk">组盘</button></td>
-                    <td><button id="failure">机台故障</button></td>
-                </tr>
-                <tr>
-                    <td><button id="layout">退出</button></td>
+                    <td><button id="sub">确认</button></td>
+                    <td><button id="over">结束</button></td>
                 </tr>
             </tbody>
         </table>
@@ -41,13 +34,7 @@
     <script src="/s/j/jquery-1.12.2.min.js"></script>
     <script src="/s/j/layer/v3.1.3/layer.js"></script>
     <script type="module">
-        import { gf } from "/s/buss/g/j/g.f.js";
-        $("#rootContainer").find("#layout").on("click", function () {
-            window.location.href = "/logout.shtml";
-        });
-        $("#rootContainer").find("button[id!='layout']").on("click", function () {
-            gf.layerOpen({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
-        });
+        import "/s/buss/wms/rf/j/rf.picking.js";
     </script>
 </body>
 

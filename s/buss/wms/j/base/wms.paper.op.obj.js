@@ -1,5 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { gotoRfMgr, currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
+import { currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 
 var _tasktype = null;
 
@@ -53,6 +53,8 @@ var initBtns = function () {
     }; btns.combineVna = {
         id: "combineVna", name: "RF-VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
         url: `/s/buss/wms/rf/h/combine.html?warehouse=1`,
+    }; btns.back = {
+        id: "combineVna", name: "返回", class: "btn-info", bind: function () { window.history.back(); },
     };
 }
 

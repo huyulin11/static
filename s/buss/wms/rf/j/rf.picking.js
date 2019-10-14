@@ -1,4 +1,3 @@
-import { gotoRfMgr } from "/s/buss/wms/rf/j/rf.main.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
@@ -81,8 +80,8 @@ var initRf = function () {
             $(container).find("#layout").on("click", function () {
                 window.location.href = "/logout.shtml";
             });
-            $(container).find("#gotoRfMgr").on("click", function () {
-                gotoRfMgr();
+            $(container).find("#back").on("click", function () {
+                window.history.back();
             });
             gf.resizeTable();
         },

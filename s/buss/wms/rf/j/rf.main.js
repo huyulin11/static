@@ -34,24 +34,6 @@ var agvOk = function () {
     }
 };
 
-export var gotoRfMgr = function (target) {
-    let targetFrame = "";
-    if (target == "shipment") {
-        targetFrame = "/s/buss/wms/rf/h/shipment.html";
-    } else {
-        targetFrame = "/s/buss/wms/rf/h/rfMgr.html";
-    }
-
-    if (parent.pageii) {
-        if (target) {
-            parent.location.href = targetFrame;
-        }
-        parent.layer.close(parent.pageii);
-    } else {
-        window.location.href = targetFrame;
-    }
-}
-
 export var initRf = function () {
     var vm = new Vue({
         data: {},
@@ -71,13 +53,13 @@ export var initRf = function () {
                     layer.msg("尚未开通！");
                 });
                 $("#rootContainer").find("#picking").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
+                    window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#combine").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
+                    window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#receipt").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/${$(this).attr('id')}.html`;
+                    window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#stockOut").on("click", function () {
                     window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=${escape("冷库出库")}&warehouse=2`;

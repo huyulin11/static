@@ -1,5 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { gotoRfMgr, currentReceiptPaperid, setCurrentReceiptPaperid } from "/s/buss/wms/rf/j/rf.main.js";
+import { currentReceiptPaperid, setCurrentReceiptPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
@@ -8,7 +8,7 @@ var initReceipt = function () {
     $(container).find("#start").on("click", function () { start(); });
     $(container).find("#sub").on("click", function () { sub(); });
     $(container).find("#cancel").on("click", function () { cancel(); });
-    $(container).find("#gotoRfMgr").on("click", function () { gotoRfMgr(); });
+    $(container).find("#back").on("click", function () { window.history.back(); });
     $(container).find("#send").on("click", function () { send(); });
     $(container).find("#execute").on("click", function () { execute(); });
 
