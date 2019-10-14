@@ -42,7 +42,8 @@ var initCombine = function () {
     });
 }
 
-var getCombinedList = function (tuVal) {
+var getCombinedList = function () {
+    var tuVal = $("#tu").val();
     if (!tuVal) { layer.msg("组盘货架号不能为空！"); $("#tu").focus(); return; }
     gf.doAjax({
         url: `/app/conf/findJsonList.shtml`,
@@ -87,11 +88,13 @@ var initRf = function () {
                 $("#su").focus();
             },
             getCombinedList: function () {
-                var tuVal = $("#tu").val();
-                getCombinedList(tuVal);
+                getCombinedList();
             },
             suEnter: function () {
                 sub();
+                setTimeout(() => {
+                    getCombinedList();
+                }, 3000);
             },
         }
     });
