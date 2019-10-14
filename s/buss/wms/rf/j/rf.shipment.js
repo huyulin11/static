@@ -51,7 +51,7 @@ var initShipment = function () {
                 setCurrentShipmentPaperid("");
                 return;
             } else {
-                $(container).find("h1").each(function () {
+                $(container).find("h2").each(function () {
                     $(this).html("正在出库" + currentShipmentPaperid());
                 });
             }
@@ -73,7 +73,7 @@ var initRf = function () {
                 $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
                 $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED");
             } else {
-                $(container).find("h1").each(function () {
+                $(container).find("h2").each(function () {
                     $(this).html("正在出库" + currentShipmentPaperid());
                     $(container).find("table").show();
                     $(container).find("#sub").on("click", function () { sub(); });

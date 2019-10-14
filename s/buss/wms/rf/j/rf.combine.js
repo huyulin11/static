@@ -32,7 +32,7 @@ var sub = function () {
 }
 
 var initCombine = function () {
-    $(container).find("h1").each(function () {
+    $(container).find("h2").each(function () {
         if (_warehouse) {
             $(this).html(`正在组盘-${gv.get("WAREHOUSE", _warehouse)}`);
         } else {

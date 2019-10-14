@@ -46,7 +46,7 @@ var initShipment = function () {
         });
     }
 
-    $(container).find("h1").each(function () {
+    $(container).find("h2").each(function () {
         if (_paperid) {
             $(this).html("正在拣货-" + _paperid);
         } else if (_warehouse) {

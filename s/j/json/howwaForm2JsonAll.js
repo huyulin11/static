@@ -13,7 +13,7 @@ var howwaForm2Json = new Object();
 * 输出由form元素名称及其值组成的json字符串
 * 元素的值全部使用escape()进行了转意处理
 * 每个元素对应的值全部是数组
-* 格式形如：{"xm":["%u5F20%u4E09"],"xb":["%u7537"],"VIP":["h1","h3","h5"]}
+* 格式形如：{"xm":["%u5F20%u4E09"],"xb":["%u7537"],"VIP":["h2","h3","h5"]}
 */
 howwaForm2Json.formToJSON = function (form)  {
     var json = '{';
@@ -158,7 +158,7 @@ howwaForm2Json. getJsonItemStr = function(oJ, strName){
 * 传入json对象和web form对象
 * 传入json对象的数据应使用escape()进行了转意处理
 * 传入json对象的每个元素对应的值全部是数组
-* 传入json对象形如：{"xm":["%u5F20%u4E09"],"xb":["%u7537"],"VIP":["h1","h3","h5"]}
+* 传入json对象形如：{"xm":["%u5F20%u4E09"],"xb":["%u7537"],"VIP":["h2","h3","h5"]}
 */
 howwaForm2Json.JSONToform = function (form, oJson)  {
 	var max = form.elements.length; 
