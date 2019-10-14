@@ -5,7 +5,7 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 
 let params = {
 	pagId: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "id",
 		name: "id",
 		hide: true,

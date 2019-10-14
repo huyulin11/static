@@ -3,7 +3,7 @@ import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "id",
 		name: "id",
 		hide: true,

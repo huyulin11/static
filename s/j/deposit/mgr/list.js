@@ -2,7 +2,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 
 window.datagrid = dataGrid({
 	id: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "innerno",
 		name: "内部流转号"
 	}, {

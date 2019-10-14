@@ -4,7 +4,7 @@ import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
 	id: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "resId",
 		name: "资源编号",
 		renderData: function (rowindex, data, rowdata, column) {

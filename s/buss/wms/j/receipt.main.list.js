@@ -74,7 +74,7 @@ if (localStorage.projectKey == "BJJK_HUIRUI") {
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
-	l_column: cols,
+	columns: cols,
 	jsonUrl: `/receipt/main/find.shtml?receipttype=${_receipttype}`,
 	checkbox: true,
 	serNumber: true

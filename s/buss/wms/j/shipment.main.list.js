@@ -11,7 +11,7 @@ else $("h2#thisTitle").html("出库管理");
 
 let params = {
 	pagId: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "id",
 		name: "id",
 		hide: true,

@@ -3,7 +3,7 @@ import { dataGrid } from "/s/j/kf.grid.js";
 var flag = $("#checkflag").val();
 window.datagrid = dataGrid({
 	id: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "innerno",
 		name: "内部流转号",
 		renderData: function (rowindex, data, rowdata, column) {

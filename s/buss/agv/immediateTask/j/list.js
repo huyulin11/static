@@ -3,7 +3,7 @@ import { singletask } from "/s/buss/agv/immediateTask/j/singletaskjson.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "taskexesid",
 		name: "任务号",
 	}, {

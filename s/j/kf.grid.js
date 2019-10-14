@@ -1,67 +1,62 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-export var dataGrid = function (params) {
-	var confs = {
-		l_column: [],
-		pagId: 'paging', // 加载表格存放位置的ID
-		width: '100%', // 表格高度
-		height: '100%', // 表格宽度
-		theadHeight: '28px', // 表格的thead高度
-		tbodyHeight: '27px',// 表格body的每一行高度
-		jsonUrl: '', // 访问后台地址
-		isFixed: false,//是否固定表头
-		usePage: true,// 是否分页
-		serNumber: false,// 是否显示序号
-		records: 'records',// 分页数据
-		pageNow: 'pageNow',// 当前页码 或 当前第几页a
-		totalPages: 'pageCount',// 总页数
-		totalRecords: 'rowCount',// 总记录数
-		pagecode: '20',// 分页时，最多显示几个页码
-		async: true, // 默认为同步
-		data: '', // 发送给后台的数据 是json数据 例如{nama:"a",age:"100"}....
-		pageSize: 40, // 每页显示多少条数据
-		checkbox: false,// 是否显示复选框
-		checkValue: 'id', // 当checkbox为true时，需要设置存放checkbox的值字段 默认存放字段id的值
-		treeGrid: {
-			type: 1, //1 表示后台已经处理好父类带children集合 2 表示没有处理,由前端处理树形式
-			tree: false,// 是否显示树
-			name: 'name',// 以哪个字段 的树形式 如果是多个 name,key
-			id: "id",
-			pid: "pid"
-		},
-		callback: function () { }
-		// 树形式 {tree : false,//是否显示树 name : 'name'}//以哪个字段 的树形式
-	};
-	var l_col = {
-		colkey: null,
-		name: null,
-		width: 'auto',
-		height: 'auto',
-		align: 'center',
-		hide: false,
-		renderData: null
-		// 渲染数据function( rowindex ,data, rowdata, colkey)
-	};
-	var l_treeGrid = {
+var defaultConf = {
+	columns: [],
+	pagId: 'paging', // 加载表格存放位置的ID
+	width: '100%', // 表格高度
+	height: '100%', // 表格宽度
+	theadHeight: '28px', // 表格的thead高度
+	tbodyHeight: '27px',// 表格body的每一行高度
+	jsonUrl: '', // 访问后台地址
+	isFixed: false,//是否固定表头
+	usePage: true,// 是否分页
+	serNumber: false,// 是否显示序号
+	records: 'records',// 分页数据
+	pageNow: 'pageNow',// 当前页码 或 当前第几页a
+	totalPages: 'pageCount',// 总页数
+	totalRecords: 'rowCount',// 总记录数
+	pagecode: '20',// 分页时，最多显示几个页码
+	async: true, // 默认为同步
+	data: '', // 发送给后台的数据 是json数据 例如{nama:"a",age:"100"}....
+	pageSize: 40, // 每页显示多少条数据
+	checkbox: false,// 是否显示复选框
+	checkValue: 'id', // 当checkbox为true时，需要设置存放checkbox的值字段 默认存放字段id的值
+	treeGrid: {
+		type: 1, //1 表示后台已经处理好父类带children集合 2 表示没有处理,由前端处理树形式
 		tree: false,// 是否显示树
-		name: 'name',// 以哪个字段 的树形式
+		name: 'name',// 以哪个字段 的树形式 如果是多个 name,key
 		id: "id",
 		pid: "pid"
-	};
-	var conf = $.extend(confs, params);
-	var l_tree = conf.treeGrid;
-	var col = [];
-	for (var i = 0; i < conf.l_column.length; i++) {
-		col.push(l_col);
+	},
+	callback: function () { }
+	// 树形式 {tree : false,//是否显示树 name : 'name'}//以哪个字段 的树形式
+};
+
+var fields = {
+	colkey: null,
+	name: null,
+	width: 'auto',
+	height: 'auto',
+	align: 'center',
+	hide: false,
+	renderData: null
+	// 渲染数据function( rowindex ,data, rowdata, colkey)
+};
+
+export var dataGrid = function (params) {
+	var finalConf = $.extend(defaultConf, params);
+	var l_tree = finalConf.treeGrid;
+	var field = [];
+	for (var i = 0; i < finalConf.columns.length; i++) {
+		field.push(fields);
 	}
-	// var column = jQuery.extend(true, col, confs.l_column);
-	for (var i = 0; i < col.length; i++) {
-		for (var p in col[i])
-			if (col[i].hasOwnProperty(p) && (!conf.l_column[i].hasOwnProperty(p)))
-				conf.l_column[i][p] = col[i][p];
+	// var column = jQuery.extend(true, col, confs.columns);
+	for (var i = 0; i < field.length; i++) {
+		for (var p in field[i])
+			if (field[i].hasOwnProperty(p) && (!finalConf.columns[i].hasOwnProperty(p)))
+				finalConf.columns[i][p] = field[i][p];
 	}
-	;
-	var column = conf.l_column;
+	var column = finalConf.columns;
 	var init = function () {
 		jsonRequest(createHtml);
 	};
@@ -74,9 +69,9 @@ export var dataGrid = function (params) {
 	var jsonRequest = function (callback) {
 		$.ajax({
 			type: 'POST',
-			async: conf.async,
-			data: conf.data,
-			url: conf.jsonUrl,
+			async: finalConf.async,
+			data: finalConf.data,
+			url: finalConf.jsonUrl,
 			dataType: 'json',
 			success: function (data) {
 				callback(data);
@@ -94,7 +89,7 @@ export var dataGrid = function (params) {
 		if (jsonData == '') {
 			return;
 		}
-		var id = conf.pagId;
+		var id = finalConf.pagId;
 		divid = typeof (id) == "string" ? document.getElementById(id) : id;
 		if (divid == "" || divid == undefined || divid == null) {
 			console.error("找不到 id= " + id + " 选择器！");
@@ -103,17 +98,17 @@ export var dataGrid = function (params) {
 		}
 
 		divid.innerHTML = '';
-		if (conf.isFixed) {//不固定表头
+		if (finalConf.isFixed) {//不固定表头
 			cHeadTable(divid);
 		}
 		cBodyTable(divid, jsonData);
-		if (conf.usePage) {// 是否分页
+		if (finalConf.usePage) {// 是否分页
 			fenyeDiv(divid, jsonData);
 		}
 
-		if (conf.callback) {
+		if (finalConf.callback) {
 			setTimeout(() => {
-				conf.callback();
+				finalConf.callback();
 			}, 500);
 		}
 		fixhead();
@@ -127,24 +122,24 @@ export var dataGrid = function (params) {
 		var thead = document.createElement('thead');
 		table.appendChild(thead);
 		var tr = document.createElement('tr');
-		tr.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+		tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 		thead.appendChild(tr);
 		var cn = "";
-		if (!conf.serNumber) {
+		if (!finalConf.serNumber) {
 			cn = "none";
 		}
 		var th = document.createElement('th');
 		th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
 		tr.appendChild(th);
 		var cbk = "";
-		if (!conf.checkbox) {
+		if (!finalConf.checkbox) {
 			cbk = "none";
 		}
 		var cth = document.createElement('th');
 		cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
 		var chkbox = document.createElement("INPUT");
 		chkbox.type = "checkbox";
-		chkbox.setAttribute("pagId", conf.pagId);
+		chkbox.setAttribute("pagId", finalConf.pagId);
 		chkbox.onclick = checkboxbind.bind();
 		cth.appendChild(chkbox); // 第一列添加复选框
 		tr.appendChild(cth);
@@ -157,7 +152,7 @@ export var dataGrid = function (params) {
 			}
 			if (!isHide || isHide == undefined) {
 				var th = document.createElement('th');
-				th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + conf.theadHeight + ";vertical-align: middle;");
+				th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + finalConf.theadHeight + ";vertical-align: middle;");
 				th.innerHTML = column[o].name;
 				tr.appendChild(th);
 			}
@@ -167,19 +162,19 @@ export var dataGrid = function (params) {
 		var tdiv = document.createElement("div");
 		var h = '';
 		var xy = "hidden";
-		if (conf.height == "100%") {
-			if (!conf.isFixed) {// //不固定表头
+		if (finalConf.height == "100%") {
+			if (!finalConf.isFixed) {// //不固定表头
 				h = "auto";
 			} else {
 				xy = "auto";
 				h = $(window).height() - $("#table_head").offset().top - $('#table_head').find('th:last').eq(0).height();
-				if (conf.usePage) {// 是否分页
+				if (finalConf.usePage) {// 是否分页
 					h -= 55;
 				}
 				h += "px";
 			}
 		} else {
-			h = conf.height;
+			h = finalConf.height;
 		}
 		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;background: white;');
 		tdiv.className = "t_table";
@@ -192,28 +187,28 @@ export var dataGrid = function (params) {
 		tdiv.appendChild(table2);
 		var tbody = document.createElement("tbody");// 1.创建一个table表
 		table2.appendChild(tbody);
-		var json = _getValueByName(jsonData, conf.records);
+		var json = _getValueByName(jsonData, finalConf.records);
 
-		if (!conf.isFixed) {//不固定表头
+		if (!finalConf.isFixed) {//不固定表头
 			var tr = document.createElement('tr');
-			tr.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+			tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 			tbody.appendChild(tr);
 			var cn = "";
-			if (!conf.serNumber) {
+			if (!finalConf.serNumber) {
 				cn = "none";
 			}
 			var th = document.createElement('th');
 			th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
 			tr.appendChild(th);
 			var cbk = "";
-			if (!conf.checkbox) {
+			if (!finalConf.checkbox) {
 				cbk = "none";
 			}
 			var cth = document.createElement('th');
 			cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
 			var chkbox = document.createElement("INPUT");
 			chkbox.type = "checkbox";
-			chkbox.setAttribute("pagId", conf.pagId);
+			chkbox.setAttribute("pagId", finalConf.pagId);
 			chkbox.onclick = checkboxbind.bind();
 			cth.appendChild(chkbox); // 第一列添加复选框
 			tr.appendChild(cth);
@@ -226,7 +221,7 @@ export var dataGrid = function (params) {
 				}
 				if (!isHide || isHide == undefined) {
 					var th = document.createElement('th');
-					th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + conf.theadHeight + ";vertical-align: middle;");
+					th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + finalConf.theadHeight + ";vertical-align: middle;");
 					th.innerHTML = column[o].name;
 					tr.appendChild(th);
 				}
@@ -236,14 +231,14 @@ export var dataGrid = function (params) {
 		$.each(json, function (d) {
 			if (gf.notNull(json[d])) {
 				var tr = document.createElement('tr');
-				tr.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+				tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 				var sm = parseInt(tee.substring(tee.length - 1), 10) + 1;
 				tee = tee.substring(0, tee.length - 2);
 				tee = tee + "-" + sm;
 				tr.setAttribute("d-tree", tee);
 				tbody.appendChild(tr);
 				var cn = "";
-				if (!conf.serNumber) {
+				if (!finalConf.serNumber) {
 					cn = "none";
 				}
 				var ntd_d = tr.insertCell(-1);
@@ -252,7 +247,7 @@ export var dataGrid = function (params) {
 
 				ntd_d.innerHTML = rowindex;
 				var cbk = "";
-				if (!conf.checkbox) {
+				if (!finalConf.checkbox) {
 					cbk = "none";
 				}
 				var td_d = tr.insertCell(-1);
@@ -265,7 +260,7 @@ export var dataGrid = function (params) {
 				chkbox.setAttribute("pid", _getValueByName(json[d], l_tree.pid));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(json[d], conf.checkValue);
+				chkbox.value = _getValueByName(json[d], finalConf.checkValue);
 				chkbox.onclick = highlight.bind(this);
 				td_d.appendChild(chkbox); // 第一列添加复选框
 				$.each(column, function (o) {
@@ -298,7 +293,7 @@ export var dataGrid = function (params) {
 								td_o.appendChild(divtree);
 								var divspan = document.createElement("span");
 								divspan.className = "l_test";
-								divspan.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+								divspan.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 
 								if (column[o].renderData) {
 									divspan.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
@@ -339,9 +334,9 @@ export var dataGrid = function (params) {
 		});
 	};
 	var fenyeDiv = function (divid, jsonData) {
-		var totalRecords = _getValueByName(jsonData, conf.totalRecords);
-		var totalPages = _getValueByName(jsonData, conf.totalPages);
-		var pageNow = _getValueByName(jsonData, conf.pageNow);
+		var totalRecords = _getValueByName(jsonData, finalConf.totalRecords);
+		var totalPages = _getValueByName(jsonData, finalConf.totalPages);
+		var pageNow = _getValueByName(jsonData, finalConf.pageNow);
 		var bdiv = document.createElement("div");
 		bdiv.setAttribute("style", "vertical-align: middle;");
 
@@ -366,7 +361,7 @@ export var dataGrid = function (params) {
 		var lia = document.createElement("a");
 		lia.href = "javascript:void(0);";
 		ulli.appendChild(lia);
-		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;每页&nbsp;' + conf.pageSize + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
+		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;每页&nbsp;' + finalConf.pageSize + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
 
 		var btd_1 = document.createElement("td");
 		btd_1.style.textAlign = "right";
@@ -393,7 +388,7 @@ export var dataGrid = function (params) {
 			lia_2.innerHTML = '← prev';
 			ulli_2.appendChild(lia_2);
 		}
-		var pg = pagesIndex(conf.pagecode, pageNow, totalPages);
+		var pg = pagesIndex(finalConf.pagecode, pageNow, totalPages);
 		var startpage = pg.start;
 		var endpage = pg.end;
 		if (startpage != 1) {
@@ -483,14 +478,14 @@ export var dataGrid = function (params) {
 					tte = true;
 				}
 				var tr = document.createElement('tr');
-				tr.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+				tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 				var sm = parseInt(tee.substring(tee.length - 1), 10) + 1;
 				tee = tee.substring(0, tee.length - 2);
 				tee = tee + "-" + sm;
 				tr.setAttribute("d-tree", tee);
 				tbody.appendChild(tr);
 				var cn = "";
-				if (!conf.serNumber) {
+				if (!finalConf.serNumber) {
 					cn = "none";
 				}
 				var ntd_d = tr.insertCell(-1);
@@ -498,7 +493,7 @@ export var dataGrid = function (params) {
 				var rowindex = tr.rowIndex;
 				ntd_d.innerHTML = rowindex;
 				var cbk = "";
-				if (!conf.checkbox) {
+				if (!finalConf.checkbox) {
 					cbk = "none";
 				}
 				var td_d = tr.insertCell(-1);
@@ -511,7 +506,7 @@ export var dataGrid = function (params) {
 				chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(jsonTree[jt], conf.checkValue);
+				chkbox.value = _getValueByName(jsonTree[jt], finalConf.checkValue);
 				chkbox.onclick = highlight.bind(this);
 				td_d.appendChild(chkbox); // 第一列添加复选框
 				$.each(column, function (o) {
@@ -545,7 +540,7 @@ export var dataGrid = function (params) {
 								td_o.appendChild(divtree);
 								var divspan = document.createElement("span");
 								divspan.className = "l_test";
-								divspan.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+								divspan.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 								if (column[o].renderData) {
 									divspan.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
 								} else {
@@ -593,14 +588,14 @@ export var dataGrid = function (params) {
 				if (jsb == ob) {
 					tte = true;
 					var tr = document.createElement('tr');
-					tr.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+					tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 					var sm = parseInt(tee.substring(tee.length - 1), 10) + 1;
 					tee = tee.substring(0, tee.length - 2);
 					tee = tee + "-" + sm;
 					tr.setAttribute("d-tree", tee);
 					tbody.appendChild(tr);
 					var cn = "";
-					if (!conf.serNumber) {
+					if (!finalConf.serNumber) {
 						cn = "none";
 					}
 					var ntd_d = tr.insertCell(-1);
@@ -608,7 +603,7 @@ export var dataGrid = function (params) {
 					var rowindex = tr.rowIndex;
 					ntd_d.innerHTML = rowindex;
 					var cbk = "";
-					if (!conf.checkbox) {
+					if (!finalConf.checkbox) {
 						cbk = "none";
 					}
 					var td_d = tr.insertCell(-1);
@@ -621,7 +616,7 @@ export var dataGrid = function (params) {
 					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], l_tree.pid));
 					// ******** 树的上下移动需要
 					chkbox.setAttribute("_l_key", "checkbox");
-					chkbox.value = _getValueByName(jsonTree[jt], conf.checkValue);
+					chkbox.value = _getValueByName(jsonTree[jt], finalConf.checkValue);
 					chkbox.onclick = highlight.bind(this);
 					td_d.appendChild(chkbox); // 第一列添加复选框
 					$.each(column, function (o) {
@@ -653,7 +648,7 @@ export var dataGrid = function (params) {
 									td_o.appendChild(divtree);
 									var divspan = document.createElement("span");
 									divspan.className = "l_test";
-									divspan.setAttribute("style", "line-height:" + conf.tbodyHeight + ";");
+									divspan.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
 									if (column[o].renderData) {
 										divspan.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
 									} else {
@@ -729,7 +724,7 @@ export var dataGrid = function (params) {
 		var row = grid.rowline();// 数组对象默认是{"rowNum":row,"rowId":cbox};
 		var data = [];
 		$.each(row, function (i) {
-			data.push(conf.checkValue + "[" + i + "]=" + row[i].rowId);
+			data.push(finalConf.checkValue + "[" + i + "]=" + row[i].rowId);
 			data.push("rowId[" + i + "]=" + row[i].rowNum);
 		});
 		$.ajax({
@@ -772,10 +767,10 @@ export var dataGrid = function (params) {
 		var data = [];
 		$.each(row, function (i) {
 			if (!isNaN(row[i].rowId)) {
-				data.push(conf.checkValue + "[" + i + "]=" + row[i].rowId);
+				data.push(finalConf.checkValue + "[" + i + "]=" + row[i].rowId);
 				data.push("rowId[" + i + "]=" + row[i].rowNum);
 			} else {
-				data.push(conf.checkValue + "[" + i + "]=" + i);
+				data.push(finalConf.checkValue + "[" + i + "]=" + i);
 				data.push("rowId[" + i + "]=" + row[i].rowNum);
 			}
 		});
@@ -793,7 +788,7 @@ export var dataGrid = function (params) {
 		chkbox.checked ? setBgColor(tr) : restoreBgColor(tr);
 	};
 	var selectRow = function (pagId) {
-		if (!pagId) { pagId = conf.pagId; }
+		if (!pagId) { pagId = finalConf.pagId; }
 		var arr = [];
 		$("#" + pagId + " input[_l_key='checkbox']:checkbox:checked").each(function () {
 			arr.push($(this).val());
@@ -824,7 +819,7 @@ export var dataGrid = function (params) {
 		var evt = arguments[0] || window.event;
 		var a = evt.srcElement || evt.target;
 		var page = a.id.split('_')[1];
-		conf.data = $.extend(conf.data, {
+		finalConf.data = $.extend(finalConf.data, {
 			pageNow: page
 		});
 		init();
@@ -946,14 +941,14 @@ export var dataGrid = function (params) {
 	 * 重新加载
 	 */
 	var loadData = function () {
-		$.extend(conf, params);
+		$.extend(finalConf, params);
 		init();
 	};
 	/**
 	 * 查询时，设置参数查询
 	 */
 	var setOptions = function (params) {
-		$.extend(conf, params);
+		$.extend(finalConf, params);
 		init();
 	};
 	/**
@@ -961,7 +956,7 @@ export var dataGrid = function (params) {
 	 */
 	var getSelectedCheckbox = function (key) {
 		var arr = [];
-		$(`#${conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
+		$(`#${finalConf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
 			if (key) arr.push($(this).data(key));
 			else arr.push($(this).val());
 		});
@@ -969,7 +964,7 @@ export var dataGrid = function (params) {
 	};
 	var getSelectedCheckboxObj = function () {
 		var arr = [];
-		$(`#${conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
+		$(`#${finalConf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
 			arr.push($(this).data());
 		});
 		return arr;

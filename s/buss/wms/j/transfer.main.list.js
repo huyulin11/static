@@ -4,7 +4,7 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
-	l_column: [{
+	columns: [{
 		colkey: "id",
 		name: "id",
 		hide: true,
