@@ -331,10 +331,11 @@ div.doc-buttons {
   width: 100%;
   /* left: 100px; */
   bottom: 0px;
-  background: #eee;
+  background: #eeeeee59;
   padding: 5 5 5 5;
   margin: 0 auto;
   /* max-width: 1200px; */
+  /* text-align: right; */
 }
 
 h2#thisTitle {
