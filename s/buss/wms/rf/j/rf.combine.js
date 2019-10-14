@@ -1,6 +1,7 @@
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
+import { dataGrid } from "/s/j/kf.grid.js";
 
 let container = "#rootContainer";
 let _warehouse = gf.urlParam("warehouse");
@@ -41,6 +42,25 @@ var initCombine = function () {
     });
 }
 
+var getCombinedList = function (tuVal) {
+    if (!tuVal) { layer.msg("组盘货架号不能为空！"); $("#tu").focus(); return; }
+    gf.doAjax({
+        url: `/app/conf/findJsonList.shtml`,
+        data: { TABLE_KEY: "COMBINED_TU_INFO", key: tuVal },
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data) {
+                let items = data[0].value;
+                items = JSON.parse(items).items;
+                debugger
+                if (items) {
+                    layer.msg("该托盘已组盘货物有：" + items);
+                }
+            }
+        }
+    });
+}
+
 var initRf = function () {
     var vm = new Vue({
         data: {},
@@ -66,6 +86,10 @@ var initRf = function () {
         methods: {
             tuEnter: function () {
                 $("#su").focus();
+            },
+            getCombinedList: function () {
+                var tuVal = $("#tu").val();
+                getCombinedList(tuVal);
             },
             suEnter: function () {
                 sub();

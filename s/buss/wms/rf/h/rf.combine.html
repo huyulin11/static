@@ -22,7 +22,7 @@
             <tbody>
                 <tr>
                     <td><label>组盘货架号</label></td>
-                    <td><input id="tu" @keyup.enter="tuEnter" /></td>
+                    <td><input id="tu" @keyup.enter="tuEnter" @blur="getCombinedList" /></td>
                 </tr>
                 <tr>
                     <td><label>SU</label></td>
