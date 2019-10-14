@@ -330,6 +330,8 @@ div.doc-buttons {
   width: auto;
   left: 100px;
   bottom: 0px;
+  background: #ddd;
+  padding: 3 3 3 3;
 }
 
 .ui-upload {
