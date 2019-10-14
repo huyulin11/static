@@ -46,13 +46,13 @@ var initBtns = function () {
         url: `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=RF${escape("出库")}`,
     }; btns.pickOne = {
         id: "pickOne", name: "RF-按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
-        url: `/s/buss/wms/rf/h/picking.html`,
+        url: `/s/buss/wms/rf/h/rf.picking.html`,
     }; btns.pickMore = {
         id: "pickMore", name: "RF-VNA拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
-        url: `/s/buss/wms/rf/h/picking.html?warehouse=1`,
+        url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=1`,
     }; btns.combineVna = {
         id: "combineVna", name: "RF-VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
-        url: `/s/buss/wms/rf/h/combine.html?warehouse=1`,
+        url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=1`,
     }; btns.back = {
         id: "combineVna", name: "返回", class: "btn-info", bind: function () { window.history.back(); },
     };
