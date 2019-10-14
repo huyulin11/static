@@ -40,7 +40,6 @@ var fields = {
 	align: 'center',
 	hide: false,
 	renderData: null
-	// 渲染数据function( rowindex ,data, rowdata, colkey)
 };
 
 export var dataGrid = function (params) {
