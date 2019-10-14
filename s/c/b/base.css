@@ -84,7 +84,7 @@ acronym {
 html.frame>body {
   /* overflow-y: scroll; */
   margin: 0 auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 html.aui-dialog-iframe-root-node {
@@ -327,10 +327,10 @@ form#searchForm label>span {
 
 div.doc-buttons {
   position: fixed;
-  width: auto;
-  left: 100px;
+  width: 100%;
+  /* left: 100px; */
   bottom: 0px;
-  background: #ddd;
+  background: #eee;
   padding: 3 3 3 3;
 }
 

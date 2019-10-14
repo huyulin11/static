@@ -118,6 +118,9 @@
 
 .panel-heading {
 	padding: 5px;
+	padding: 0px 5px;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .panel {

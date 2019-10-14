@@ -6,7 +6,7 @@
 <script src="/s/j/jquery.format.js"></script>
 
 <script type="module" src="/s/buss/agv/task/j/list.js"></script>
-<div class="m-b-md">
+<header class="panel-heading">
     <form class="form-inline" role="form" id="searchForm" name="searchForm">
         <div class="form-group">
             <table>
@@ -36,13 +36,11 @@
             </table>
         </div>
     </form>
-</div>
-<header class="panel-heading">
-    <div class="doc-buttons">
-        <button type="button" id="addTask" class="btn btn-primary marR10 hidden">增加任务</button>
-        <button type="button" id="delTask" class="btn btn-danger marR10">删除任务</button>
-    </div>
 </header>
+<div class="doc-buttons">
+    <button type="button" id="addTask" class="btn btn-primary marR10 hidden">增加任务</button>
+    <button type="button" id="delTask" class="btn btn-danger marR10">删除任务</button>
+</div>
 <div class="table-responsive">
     <div id="paging" class="pagclass"></div>
 </div>
