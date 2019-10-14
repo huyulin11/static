@@ -47,7 +47,7 @@ var initShipment = function () {
             }
             let main = s.object.main;
             if (!main || (main["status"] != "TAKED" && main["status"] != "SCANED") || main["delflag"] != "0") {
-                layer.msg(currentShipmentPaperid() + "该单无法继续操作，如需查看请移步出库单管理！");
+                layer.msg(currentShipmentPaperid() + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 setCurrentShipmentPaperid("");
                 return;
             } else {
