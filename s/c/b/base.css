@@ -325,6 +325,7 @@ form#searchForm label>span {
   text-align: right;
 }
 
+div.doc-foot,
 div.doc-buttons {
   position: fixed;
   width: 100%;
@@ -334,6 +335,14 @@ div.doc-buttons {
   padding: 5 5 5 5;
   margin: 0 auto;
   /* max-width: 1200px; */
+}
+
+h2#thisTitle {
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+  z-index: 100;
+  font-size: 29px;
 }
 
 .ui-upload {

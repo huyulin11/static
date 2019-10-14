@@ -6,7 +6,8 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 let _type = gf.urlParam("type");
 let _choosedStatus = gf.urlParam("status");
 let _warehouse = gf.urlParam("warehouse");
-if (_type) $("h2").html(unescape(_type));
+if (_type) $("h2#thisTitle").html(unescape(_type));
+else $("h2#thisTitle").html("出库管理");
 
 let params = {
 	pagId: 'paging',
