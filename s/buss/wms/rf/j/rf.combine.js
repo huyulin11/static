@@ -52,9 +52,8 @@ var getCombinedList = function (tuVal) {
             if (data) {
                 let items = data[0].value;
                 items = JSON.parse(items).items;
-                debugger
                 if (items) {
-                    layer.msg("该托盘已组盘货物有：" + items);
+                    layer.msg(tuVal + "托盘已组盘货物有：" + items);
                 }
             }
         }
