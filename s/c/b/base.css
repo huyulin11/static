@@ -311,3 +311,39 @@ hr,
   font-weight: bold;
   margin: 0 1px;
 }
+
+form#searchForm select,
+form#searchForm input {
+  width: 100px;
+}
+
+form#searchForm label {
+  text-align: right;
+}
+
+form#searchForm label>span {
+  text-align: right;
+}
+
+div.doc-buttons {
+  position: fixed;
+  width: auto;
+  left: 100px;
+  bottom: 0px;
+}
+
+.ui-upload {
+  /* height: 30px; */
+  /* width: 80px; */
+  background-color: #00abff;
+  /* font-size: 12px; */
+  line-height: 32px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  border-radius: 3px;
+  margin-right: 5px;
+  padding-left: 3;
+  padding-right: 3;
+}

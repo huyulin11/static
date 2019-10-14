@@ -30,8 +30,8 @@ var initPaperOp = function (tasktype, model) {
                     tempBtns = tempBtns.concat(btns.pickMore);
                     tempBtns = tempBtns.concat(btns.combineVna);
                     tempBtns = tempBtns.concat(btns.stockOut);
-                    $("div.doc-buttons").append(`<div><label>导入出库单：</label><input type="file" id="excel-file" multiple /></div>`);
-                    $('#excel-file').on("change", function (e) {
+                    $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input type="file" id="upload" style="display: none;" /></label>`);
+                    $('#upload').on("change", function (e) {
                         submit(e, function (workbook) {
                             for (var sheetName in workbook.Sheets) {
                                 if (workbook.Sheets.hasOwnProperty(sheetName)) {
