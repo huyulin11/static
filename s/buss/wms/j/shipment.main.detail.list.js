@@ -53,13 +53,14 @@ let params = {
 }
 
 export var init = function () {
-	let choosedStatus = gf.urlParam("status");
-	if (choosedStatus) {
-		initPaperOp("shipment", "RF");
+	let _status = gf.urlParam("status");
+	let _type = gf.urlParam("type");
+	if (_type) {
+		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
 		params = Object.assign(params, {
 			data: {
-				"shipmentMainFormMap.status": choosedStatus,
+				"shipmentMainFormMap.status": _status,
 				"shipmentMainFormMap.delflag": 0
 			}
 		});

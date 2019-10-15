@@ -50,7 +50,7 @@ var getCombinedList = function () {
         data: { TABLE_KEY: "COMBINED_TU_INFO", key: tuVal },
         success: function (data) {
             data = JSON.parse(data);
-            if (data) {
+            if (data && data[0]) {
                 let items = data[0].value;
                 items = JSON.parse(items).items;
                 if (items) {

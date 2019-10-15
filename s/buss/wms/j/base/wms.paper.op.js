@@ -6,7 +6,7 @@ var _tasktype = null;
 
 let _warehouse = gf.urlParam("warehouse");
 
-let chooseByWarehouse = function () {
+let chooseByWarehouse = function (model) {
     let temp = [];
     if (!_warehouse) {
         temp = temp.concat(btns.pickVNA);
@@ -30,7 +30,7 @@ var initPaperOp = function (tasktype, model) {
     _tasktype = tasktype;
     doInitPaperOp(_tasktype);
 
-    let tempBtns = null;
+    let tempBtns = [];
     if (localStorage.projectKey == "CSY_DAJ") {
         tempBtns = [btns.add, btns.detail, btns.edit, btns.send,
         btns.cancel, btns.del, btns.refresh,];
@@ -38,14 +38,17 @@ var initPaperOp = function (tasktype, model) {
             tempBtns = tempBtns.concat(btns.whichAgv);
         }
     } else {
-        tempBtns = [btns.add, btns.detail, btns.edit, btns.send,
-        btns.over, btns.del, btns.cancel, btns.refresh, btns.whichOne,];
+        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.cancel, btns.refresh, btns.whichOne,];
         if (_tasktype == "shipment") {
             if (model == "RF") {
                 tempBtns = [btns.detail, btns.taked, btns.pickOne, btns.cancel, btns.refresh, btns.back,];
                 tempBtns = tempBtns.concat(chooseByWarehouse(tempBtns));
             } else if (model == "DETAIL") {
                 tempBtns = [btns.refresh,];
+            } else if (model == "COMBINED") {
+                tempBtns = [btns.refresh,];
+                tempBtns = tempBtns.concat(btns.combineVNA);
+                tempBtns = tempBtns.concat(btns.combineCold);
             } else {
                 tempBtns = tempBtns.concat(btns.taked);
                 tempBtns = tempBtns.concat(btns.pickOne);

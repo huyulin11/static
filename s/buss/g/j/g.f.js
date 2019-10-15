@@ -312,6 +312,9 @@ class GF {
         btns = gv.get("ACS_STATUS", data) + btns;
         return btns;
     };
+    ifThen(flag, callback) {
+        if (flag) { callback(); }
+    }
 }
 
 var gf = new GF();
