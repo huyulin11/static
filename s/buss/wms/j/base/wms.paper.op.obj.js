@@ -189,7 +189,7 @@ class PaperOp {
                 area: localStorage.layerArea.split(","),
                 content: that.url + "?paperid=" + cbox
             });
-        }); receiptCold
+        });
     }; pickOne(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }
