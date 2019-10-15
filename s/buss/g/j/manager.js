@@ -9,7 +9,7 @@ var _frame = "#loadhtml";
 localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
 gv.init();
 
-$('body').fadeIn(3000);
+$('body').fadeIn();
 var loadPage = function (url, openType, sn) {
     if (sn) {
         var snul = document.getElementById("topli");
@@ -85,5 +85,12 @@ $("a#editUI").on("click", function () {
 
 $(_frame).on("load", function (params) {
     $(this).contents().find("html").addClass("frame");
-    $(this).fadeIn();
+    let key = Math.random(0, 1);
+    if (key > 0.7) {
+        $(this).show();
+    } else if (key > 0.4) {
+        $(this).slideDown();
+    } else {
+        $(this).fadeIn();
+    }
 });
