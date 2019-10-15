@@ -8,9 +8,9 @@ if (_paperid) {
     setCurrentReceiptPaperid(_paperid);
 } else {
     if (currentReceiptPaperid()) {
-        if (window.confirm("有入库任务尚未结束，是否继续？" + currentReceiptPaperid())) {
-            _paperid = currentReceiptPaperid();
-        }
+        _paperid = currentReceiptPaperid();
+        // if (window.confirm("有入库任务尚未结束，是否继续？" + currentReceiptPaperid())) {
+        // }
     }
 }
 
@@ -28,12 +28,14 @@ var initReceipt = function () {
             if (s.code < 0) {
                 layer.msg(_paperid + s.msg);
                 _paperid = "";
+                setCurrentReceiptPaperid("");
                 return;
             }
             let main = s.object.main;
             if (!main || main["status"] != "1" || main["delflag"] != "0") {
                 layer.msg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！");
                 _paperid = "";
+                setCurrentReceiptPaperid("");
                 return;
             } else {
                 $(container).find("h2").html(`正在${main.receipttype == '2' ? "返料入库" : "入库"}` + _paperid);
@@ -54,6 +56,7 @@ var initReceipt = function () {
             layer.msg(data.msg);
             if (data.code >= 0) {
                 _paperid = data.object;
+                setCurrentReceiptPaperid(_paperid);
                 window.location.reload();
             }
         }
@@ -70,6 +73,7 @@ var initReceipt = function () {
             layer.msg(data.msg);
             if (data.code >= 0) {
                 _paperid = "";
+                setCurrentReceiptPaperid("");
                 window.location.reload();
             }
         }
@@ -86,6 +90,7 @@ var initReceipt = function () {
             layer.msg(data.msg);
             if (data.code >= 0) {
                 _paperid = "";
+                setCurrentReceiptPaperid("");
                 window.location.reload();
             }
         }
@@ -103,6 +108,7 @@ var initReceipt = function () {
                 layer.msg(data.msg);
                 if (data.code >= 0) {
                     _paperid = "";
+                    setCurrentReceiptPaperid("");
                     window.location.reload();
                 }
             }
