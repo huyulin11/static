@@ -8,59 +8,122 @@ let _receipttype = gf.urlParam("receipttype");
 export var btns = {};
 var initBtns = function () {
     btns.add = {
-        id: "add", name: "增加", class: "btn-primary", bind: function () { paperOp.add(this); },
+        id: "add", name: "增加", class: "btn-primary", bind: function () {
+            paperOp.add(this);
+        },
         url: `/s/buss/wms/h/${_tasktype}AddUI.html?receipttype=${_receipttype}`
     }; btns.detail = {
-        id: "detail", name: "明细", class: "btn-primary", bind: function () { paperOp.detail(this); },
+        id: "detail", name: "明细", class: "btn-primary", bind: function () {
+            paperOp.detail(this);
+        },
         url: `/s/buss/wms/h/${_tasktype}Details.html?${_tasktype}MainFormMap.paperid=`
     }; btns.edit = {
-        id: "edit", name: "修改", class: "btn-warning", bind: function () { paperOp.edit(this); },
+        id: "edit", name: "修改", class: "btn-warning", bind: function () {
+            paperOp.edit(this);
+        },
         url: `/s/buss/wms/h/${_tasktype}AddUI.html`
     }; btns.send = {
-        id: "send", name: "下达", class: "btn-warning", bind: function () { paperOp.send(this); },
+        id: "send", name: "下达", class: "btn-warning", bind: function () {
+            paperOp.doJob("send", this);
+        },
         url: `/${_tasktype}/main/send.shtml`
     }; btns.execute = {
-        id: "execute", name: "执行", class: "btn-warning", bind: function () { paperOp.execute(this); },
+        id: "execute", name: "执行", class: "btn-warning", bind: function () {
+            paperOp.doJob("execute", this);
+        },
         url: `/${_tasktype}/main/execute.shtml`
     }; btns.taked = {
-        id: "taked", name: "接单", class: "btn-warning", bind: function () { paperOp.taked(this); },
+        id: "taked", name: "接单", class: "btn-warning", bind: function () {
+            paperOp.doJob("taked", this, function (paperid) {
+                setCurrentShipmentPaperid(paperid);
+            });
+        },
         url: `/${_tasktype}/main/taked.shtml`
     }; btns.over = {
-        id: "over", name: "结束", class: "btn-danger", bind: function () { paperOp.over(this); },
+        id: "over", name: "结束", class: "btn-danger", bind: function () {
+            paperOp.doJob("over", this, function (paperid) {
+                if (paperid == currentShipmentPaperid()) {
+                    setCurrentShipmentPaperid("");
+                }
+                if (parent && parent.layer) { parent.layer.close(parent.pageii); }
+            });
+        },
         url: `/${_tasktype}/main/over.shtml`
     }; btns.del = {
-        id: "del", name: "删除", class: "btn-danger", bind: function () { paperOp.del(this); },
+        id: "del", name: "删除", class: "btn-danger", bind: function () {
+            paperOp.del(this);
+        },
         url: `/${_tasktype}/main/deleteEntity.shtml`
     }; btns.cancel = {
-        id: "cancel", name: "撤销", class: "btn-danger", bind: function () { paperOp.cancel(this); },
+        id: "cancel", name: "撤销", class: "btn-danger", bind: function () {
+            paperOp.doJob("cancel", this);
+        },
         url: `/${_tasktype}/main/cancel.shtml`
     }; btns.refresh = {
-        id: "refresh", name: "刷新", class: "btn-info", bind: function () { window.datagrid.loadData(); },
+        id: "refresh", name: "刷新", class: "btn-info", bind: function () {
+            window.datagrid.loadData();
+        },
     }; btns.whichAgv = {
-        id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () { paperOp.whichAgv(this); },
+        id: "whichAgv", name: "执行AGV", class: "btn-info", bind: function () {
+            var cbox = gf.checkOnlyOne("paperid");
+            if (!cbox) { return; }
+            gf.ajax(this.url, { key: cbox + "%" }, "json", function (s) {
+                var info = "";
+                for (var item of s) {
+                    info = info + item.key + ":" + item.value + "<br/>";
+                }
+                if (!info) { info = "未找到执行信息！"; }
+                layer.msg(info);
+            });
+        },
         url: `/bd/conf.shtml?table=task_agv`
     }; btns.whichOne = {
-        id: "whichOne", name: "经办", class: "btn-info", bind: function () { paperOp.whichOne(this); },
+        id: "whichOne", name: "经办", class: "btn-info", bind: function () {
+            var cbox = gf.checkOnlyOne("json");
+            if (!cbox) { return; }
+            var info = "";
+            if (cbox) {
+                Object.keys(cbox).forEach(function (key) {
+                    info = info + key + ":" + cbox[key] + "<br/>";
+                });
+            }
+            if (!info) { info = "未找到相关信息！"; }
+            layer.msg(info);
+        },
     }; btns.stockOut = {
-        id: "stockOut", name: "RF-出库", class: "btn-primary", bind: function () { paperOp.stockOut(this); },
+        id: "stockOut", name: "RF-出库", class: "btn-primary", bind: function () {
+            window.location.href = this.url;
+        },
         url: `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=RF${escape("出库")}`,
     }; btns.receiptColdOne = {
-        id: "receiptColdOne", name: "RF-冷库按单入库", class: "btn-warning", bind: function () { paperOp.receiptColdOne(this); },
+        id: "receiptColdOne", name: "RF-冷库按单入库", class: "btn-warning", bind: function () {
+            paperOp.receiptColdOne(this);
+        },
         url: `/s/buss/wms/rf/h/rf.receipt.html?warehouse=2`,
     }; btns.receiptColdMore = {
-        id: "receiptColdMore", name: "RF-冷库入库", class: "btn-warning", bind: function () { paperOp.receiptColdMore(this); },
+        id: "receiptColdMore", name: "RF-冷库入库", class: "btn-warning", bind: function () {
+            window.location.href = this.url;
+        },
         url: `/s/buss/wms/rf/h/rf.receipt.html?warehouse=2`,
     }; btns.pickOne = {
-        id: "pickOne", name: "RF-按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
+        id: "pickOne", name: "RF-按单拣货", class: "btn-warning", bind: function () {
+            paperOp.pickOne(this);
+        },
         url: `/s/buss/wms/rf/h/rf.picking.html`,
     }; btns.pickMore = {
-        id: "pickMore", name: "RF-VNA拣货", class: "btn-warning", bind: function () { paperOp.pickMore(this); },
+        id: "pickMore", name: "RF-VNA拣货", class: "btn-warning", bind: function () {
+            window.location.href = this.url;
+        },
         url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=1`,
     }; btns.combineVna = {
-        id: "combineVna", name: "RF-VNA组盘", class: "btn-warning", bind: function () { paperOp.combine(this); },
+        id: "combineVna", name: "RF-VNA组盘", class: "btn-warning", bind: function () {
+            window.location.href = this.url;
+        },
         url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=1`,
     }; btns.back = {
-        id: "combineVna", name: "返回", class: "btn-info", bind: function () { window.history.back(); },
+        id: "combineVna", name: "返回", class: "btn-info", bind: function () {
+            window.history.back();
+        },
     };
 }
 
@@ -113,8 +176,6 @@ class PaperOp {
             }
             window.location.href = that.url + "?paperid=" + cbox
         });
-    }; pickMore(that) {
-        window.location.href = that.url
     }; receiptColdOne(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }
@@ -132,10 +193,6 @@ class PaperOp {
             }
             window.location.href = that.url + "&paperid=" + cbox
         });
-    }; receiptColdMore(that) {
-        window.location.href = that.url
-    }; combine(that) {
-        window.location.href = that.url
     }; add(that) {
         window.pageii = layer.open({
             title: `${that.name}`,
@@ -152,8 +209,6 @@ class PaperOp {
             area: localStorage.layerArea.split(","),
             content: that.url + cbox
         });
-    }; stockOut(that) {
-        window.location.href = that.url;
     }; doJob(param, that, callback) {
         var paperid;
         if (that.paperid) {
@@ -174,49 +229,6 @@ class PaperOp {
                 }
             });
         });
-    }; send(that) {
-        paperOp.doJob("send", that);
-    }; execute(that) {
-        paperOp.doJob("execute", that);
-    }; over(that) {
-        paperOp.doJob("over", that, function (paperid) {
-            if (paperid == currentShipmentPaperid()) {
-                setCurrentShipmentPaperid("");
-            }
-            if (parent && parent.layer) { parent.layer.close(parent.pageii); }
-        });
-    }; cancel(that) {
-        paperOp.doJob("cancel", that);
-    }; taked(that) {
-        paperOp.doJob("taked", that, function (paperid) {
-            setCurrentShipmentPaperid(paperid);
-        });
-    }; whichAgv(that) {
-        var cbox = gf.checkOnlyOne("paperid");
-        if (!cbox) { return; }
-        gf.ajax(that.url, { key: cbox + "%" }, "json", function (s) {
-            var info = "";
-            for (var item of s) {
-                info = info + item.key + ":" + item.value + "<br/>";
-            }
-            if (!info) { info = "未找到执行信息！"; }
-            layer.msg(info);
-        });
-    }; whichOne(that) {
-        var cbox = gf.checkOnlyOne("json");
-        if (!cbox) { return; }
-        var info = "";
-        if (cbox) {
-            Object.keys(cbox).forEach(function (key) {
-                info = info + key + ":" + cbox[key] + "<br/>";
-            });
-        }
-        if (!info) { info = "未找到相关信息！"; }
-        layer.msg(info);
-    }; import(that) {
-        var info = "";
-        if (!info) { info = "未找到相关信息！"; }
-        layer.msg(info);
     }
 }
 
@@ -227,10 +239,10 @@ var doInitPaperOp = function (tasktype) {
     initBtns();
 }
 
-export var overPaper = function (paperid) {
+var overPaper = function (paperid) {
     let obj = {};
     Object.assign(obj, btns.over, { paperid: paperid });
     paperOp.over(obj);
 }
 
-export { doInitPaperOp, paperOp };
+export { doInitPaperOp, paperOp, overPaper };
