@@ -130,7 +130,7 @@ class PaperOp {
                 layer.msg(`该单无法${that.name}！`);
                 return;
             }
-            window.location.href = that.url + "?paperid=" + cbox
+            window.location.href = that.url + "&paperid=" + cbox
         });
     }; receiptColdMore(that) {
         window.location.href = that.url
