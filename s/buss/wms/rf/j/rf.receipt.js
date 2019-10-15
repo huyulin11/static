@@ -40,7 +40,7 @@ var initReceipt = function () {
     }
     gf.doAjax({
         url: "/receipt/detail/addEntity.shtml",
-        data: { warehouse: 4 },
+        data: { warehouse: 2 },
         success: function (data) {
             data = JSON.parse(data);
             layer.msg(data.msg);

@@ -44,6 +44,12 @@ var initBtns = function () {
     }; btns.stockOut = {
         id: "stockOut", name: "RF-出库", class: "btn-primary", bind: function () { paperOp.stockOut(this); },
         url: `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=RF${escape("出库")}`,
+    }; btns.receiptColdOne = {
+        id: "receiptColdOne", name: "RF-冷库按单入库", class: "btn-warning", bind: function () { paperOp.receiptColdOne(this); },
+        url: `/s/buss/wms/rf/h/rf.receipt.html?warehouse=2`,
+    }; btns.receiptColdMore = {
+        id: "receiptColdMore", name: "RF-冷库入库", class: "btn-warning", bind: function () { paperOp.receiptColdMore(this); },
+        url: `/s/buss/wms/rf/h/rf.receipt.html?warehouse=2`,
     }; btns.pickOne = {
         id: "pickOne", name: "RF-按单拣货", class: "btn-warning", bind: function () { paperOp.pickOne(this); },
         url: `/s/buss/wms/rf/h/rf.picking.html`,
@@ -89,7 +95,7 @@ class PaperOp {
                 area: localStorage.layerArea.split(","),
                 content: that.url + "?paperid=" + cbox
             });
-        });
+        }); receiptCold
     }; pickOne(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }
@@ -108,6 +114,25 @@ class PaperOp {
             window.location.href = that.url + "?paperid=" + cbox
         });
     }; pickMore(that) {
+        window.location.href = that.url
+    }; receiptColdOne(that) {
+        var cbox = gf.checkOnlyOne("paperid");
+        if (!cbox) { return; }
+
+        let url = `/${_tasktype}/main/findOneData.shtml`;
+        gf.ajax(url, { paperid: cbox }, "json", function (s) {
+            if (!s.object) {
+                layer.msg(`该单无法${that.name}！`);
+                return;
+            }
+            let main = s.object.main;
+            if (!main || (main["status"] != "1") || main["delflag"] != "0") {
+                layer.msg(`该单无法${that.name}！`);
+                return;
+            }
+            window.location.href = that.url + "?paperid=" + cbox
+        });
+    }; receiptColdMore(that) {
         window.location.href = that.url
     }; combine(that) {
         window.location.href = that.url

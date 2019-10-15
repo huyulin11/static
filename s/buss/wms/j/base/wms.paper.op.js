@@ -46,6 +46,8 @@ var initPaperOp = function (tasktype, model) {
                 }
             } else if (_tasktype == "receipt") {
                 tempBtns = tempBtns.concat(btns.execute);
+                tempBtns = tempBtns.concat(btns.receiptColdOne);
+                tempBtns = tempBtns.concat(btns.receiptColdMore);
             }
         }
     }
