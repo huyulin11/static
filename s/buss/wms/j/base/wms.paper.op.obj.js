@@ -126,20 +126,32 @@ var initBtns = function () {
         bind: function () {
             paperOp.pickOne(this);
         },
-    }; btns.pickMore = {
+    }; btns.pickVNA = {
         url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=1`,
-        id: "pickMore", name: "RF-VNA拣货", class: "btn-warning",
+        id: "pickVNA", name: "RF-VNA拣货", class: "btn-warning",
         bind: function () {
             window.location.href = this.url;
         },
-    }; btns.combineVna = {
+    }; btns.pickCold = {
+        url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=2`,
+        id: "pickCold", name: "RF-冷库拣货", class: "btn-warning",
+        bind: function () {
+            window.location.href = this.url;
+        },
+    }; btns.combineVNA = {
         url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=1`,
-        id: "combineVna", name: "RF-VNA组盘", class: "btn-warning",
+        id: "combineVNA", name: "RF-VNA组盘", class: "btn-warning",
+        bind: function () {
+            window.location.href = this.url;
+        },
+    }; btns.combineCold = {
+        url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=2`,
+        id: "combineCold", name: "RF-冷库组盘", class: "btn-warning",
         bind: function () {
             window.location.href = this.url;
         },
     }; btns.back = {
-        id: "combineVna", name: "返回", class: "btn-info",
+        id: "back", name: "返回", class: "btn-info",
         bind: function () {
             window.history.back();
         },
