@@ -60,6 +60,24 @@ var jsonRequest = function (conf, callback) {
 	});
 };
 
+var restoreBgColor = function (tr) {// 不勾选设置背景色
+	for (var i = 0; i < tr.childNodes.length; i++) {
+		tr.childNodes[i].style.backgroundColor = "";
+	}
+};
+var setBgColor = function (tr) { // 设置背景色
+	for (var i = 0; i < tr.childNodes.length; i++) {
+		tr.childNodes[i].style.backgroundColor = "#D4D4D4";
+	}
+};
+
+var highlight = function () { // 设置行的背景色
+	var evt = arguments[0] || window.event;
+	var chkbox = evt.srcElement || evt.target;
+	var tr = chkbox.parentNode.parentNode;
+	chkbox.checked ? setBgColor(tr) : restoreBgColor(tr);
+};
+
 export var dataGrid = function (params) {
 	var finalConf = $.extend(defaultConf, params);
 	var confTreeGrid = finalConf.treeGrid;
@@ -81,7 +99,7 @@ export var dataGrid = function (params) {
 	};
 
 	var createHtml = function (jsonData) {
-		if (jsonData == '') {
+		if (!jsonData) {
 			return;
 		}
 		var id = finalConf.pagId;
@@ -92,6 +110,7 @@ export var dataGrid = function (params) {
 		}
 
 		divid.innerHTML = '';
+		debugger
 		if (finalConf.isFixed) {//不固定表头
 			cHeadTable(divid);
 		}
@@ -101,9 +120,7 @@ export var dataGrid = function (params) {
 		}
 
 		if (finalConf.callback) {
-			setTimeout(() => {
-				finalConf.callback();
-			}, 500);
+			finalConf.callback();
 		}
 		fixhead();
 	};
@@ -772,12 +789,6 @@ export var dataGrid = function (params) {
 			dataType: 'json',
 		});
 	};
-	var highlight = function () { // 设置行的背景色
-		var evt = arguments[0] || window.event;
-		var chkbox = evt.srcElement || evt.target;
-		var tr = chkbox.parentNode.parentNode;
-		chkbox.checked ? setBgColor(tr) : restoreBgColor(tr);
-	};
 	var selectRow = function (pagId) {
 		if (!pagId) { pagId = finalConf.pagId; }
 		var arr = [];
@@ -837,16 +848,6 @@ export var dataGrid = function (params) {
 	var getChkBox = function (tr) { // 从tr得到 checkbox对象
 		return tr.cells[1].firstChild;
 
-	};
-	var restoreBgColor = function (tr) {// 不勾选设置背景色
-		for (var i = 0; i < tr.childNodes.length; i++) {
-			tr.childNodes[i].style.backgroundColor = "";
-		}
-	};
-	var setBgColor = function (tr) { // 设置背景色
-		for (var i = 0; i < tr.childNodes.length; i++) {
-			tr.childNodes[i].style.backgroundColor = "#D4D4D4";
-		}
 	};
 	function $A(arrayLike) { // 数值的填充
 		for (var i = 0, ret = []; i < arrayLike.length; i++)
