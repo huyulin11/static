@@ -341,10 +341,11 @@ div.doc-buttons {
 
 h2#thisTitle {
   position: fixed;
-  top: -15px;
+  bottom: 60px;
   right: 10px;
-  z-index: 100;
+  z-index: 91;
   font-size: 29px;
+  color: #0000003b;
 }
 
 .ui-upload {
