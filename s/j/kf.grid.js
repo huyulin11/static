@@ -78,21 +78,34 @@ var highlight = function () { // 设置行的背景色
 	chkbox.checked ? setBgColor(tr) : restoreBgColor(tr);
 };
 
+var fixhead = function () {
+	for (var i = 0; i <= $('.t_table .pp-list tr:last').find('td:last').index(); i++) {
+		$('.pp-list th').eq(i).css('width', ($('.t_table .pp-list tr:last').find('td').eq(i).width()) + 2);
+	}
+};
+
+var _container;
+var _conf;
+var _confTreeGrid;
+var _confFields = [];
+var _columns;
+var _tee = "1-0";
+var _nb = '20';
+var _img;
+
 export var dataGrid = function (params) {
-	var finalConf = $.extend(defaultConf, params);
-	var confTreeGrid = finalConf.treeGrid;
-	var confFields = [];
-	for (var iii = 0; iii < finalConf.columns.length; iii++) {
-		confFields.push(fieldModel);
+	_conf = $.extend(defaultConf, params);
+	_confTreeGrid = _conf.treeGrid;
+	_columns = _conf.columns;
+
+	for (var iii = 0; iii < _columns.length; iii++) {
+		_confFields.push(fieldModel);
 	}
-	for (var iii = 0; iii < confFields.length; iii++) {
-		for (var p in confFields[iii])
-			if (confFields[iii].hasOwnProperty(p) && (!finalConf.columns[iii].hasOwnProperty(p)))
-				finalConf.columns[iii][p] = confFields[iii][p];
+	for (var iii = 0; iii < _confFields.length; iii++) {
+		for (var p in _confFields[iii])
+			if (_confFields[iii].hasOwnProperty(p) && (!_columns[iii].hasOwnProperty(p)))
+				_columns[iii][p] = _confFields[iii][p];
 	}
-	var column = finalConf.columns;
-	var divid = "";
-	var tee = "1-0";
 
 	var initGrid = function (conf) {
 		jsonRequest(conf, createHtml);
@@ -102,29 +115,27 @@ export var dataGrid = function (params) {
 		if (!jsonData) {
 			return;
 		}
-		var id = finalConf.pagId;
-		divid = typeof (id) == "string" ? document.getElementById(id) : id;
-		if (!divid) {
-			console.error("找不到 id= " + id + " 选择器！");
+		_container = document.getElementById(_conf.pagId);
+		if (!_container) {
+			console.error(`找不到id=${_conf.pagId}选择器！`);
 			return;
 		}
 
-		divid.innerHTML = '';
-		debugger
-		if (finalConf.isFixed) {//不固定表头
-			cHeadTable(divid);
+		_container.innerHTML = '';
+		if (_conf.isFixed) {//不固定表头
+			createHead(_container);
 		}
-		cBodyTable(divid, jsonData);
-		if (finalConf.usePage) {// 是否分页
-			fenyeDiv(divid, jsonData);
+		createBody(_container, jsonData);
+		if (_conf.usePage) {// 是否分页
+			createFenye(_container, jsonData);
 		}
 
-		if (finalConf.callback) {
-			finalConf.callback();
+		if (_conf.callback) {
+			_conf.callback();
 		}
 		fixhead();
 	};
-	var cHeadTable = function (divid) {
+	var createHead = function (divid) {
 		var table = document.createElement("table");// 1.创建一个table表
 		table.id = "table_head";// 2.设置id属性
 		table.className = "pp-list table table-striped table-bordered";
@@ -133,59 +144,59 @@ export var dataGrid = function (params) {
 		var thead = document.createElement('thead');
 		table.appendChild(thead);
 		var tr = document.createElement('tr');
-		tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
+		tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 		thead.appendChild(tr);
 		var cn = "";
-		if (!finalConf.serNumber) {
+		if (!_conf.serNumber) {
 			cn = "none";
 		}
 		var th = document.createElement('th');
 		th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
 		tr.appendChild(th);
 		var cbk = "";
-		if (!finalConf.checkbox) {
+		if (!_conf.checkbox) {
 			cbk = "none";
 		}
 		var cth = document.createElement('th');
 		cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
 		var chkbox = document.createElement("INPUT");
 		chkbox.type = "checkbox";
-		chkbox.setAttribute("pagId", finalConf.pagId);
+		chkbox.setAttribute("pagId", _conf.pagId);
 		chkbox.onclick = checkboxbind.bind();
 		cth.appendChild(chkbox); // 第一列添加复选框
 		tr.appendChild(cth);
-		$.each(column, function (o) {
+		$.each(_columns, function (o) {
 			var isHide;
-			if (typeof (column[o].hide) == "function") {
-				isHide = column[o].hide();
+			if (typeof (_columns[o].hide) == "function") {
+				isHide = _columns[o].hide();
 			} else {
-				isHide = column[o].hide;
+				isHide = _columns[o].hide;
 			}
 			if (!isHide) {
 				var th = document.createElement('th');
-				th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + finalConf.theadHeight + ";vertical-align: middle;");
-				th.innerHTML = column[o].name;
+				th.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
+				th.innerHTML = _columns[o].name;
 				tr.appendChild(th);
 			}
 		});
 	};
-	var cBodyTable = function (divid, jsonData) {
+	var createBody = function (divid, jsonData) {
 		var tdiv = document.createElement("div");
 		var h = '';
 		var xy = "hidden";
-		if (finalConf.height == "100%") {
-			if (!finalConf.isFixed) {// //不固定表头
+		if (_conf.height == "100%") {
+			if (!_conf.isFixed) {// //不固定表头
 				h = "auto";
 			} else {
 				xy = "auto";
 				h = $(window).height() - $("#table_head").offset().top - $('#table_head').find('th:last').eq(0).height();
-				if (finalConf.usePage) {// 是否分页
+				if (_conf.usePage) {// 是否分页
 					h -= 55;
 				}
 				h += "px";
 			}
 		} else {
-			h = finalConf.height;
+			h = _conf.height;
 		}
 		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;background: white;');
 		tdiv.className = "t_table";
@@ -198,42 +209,42 @@ export var dataGrid = function (params) {
 		tdiv.appendChild(table2);
 		var tbody = document.createElement("tbody");// 1.创建一个table表
 		table2.appendChild(tbody);
-		var json = _getValueByName(jsonData, finalConf.records);
+		var json = _getValueByName(jsonData, _conf.records);
 
-		if (!finalConf.isFixed) {//不固定表头
+		if (!_conf.isFixed) {//不固定表头
 			var tr = document.createElement('tr');
-			tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
+			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 			tbody.appendChild(tr);
 			var cn = "";
-			if (!finalConf.serNumber) {
+			if (!_conf.serNumber) {
 				cn = "none";
 			}
 			var th = document.createElement('th');
 			th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
 			tr.appendChild(th);
 			var cbk = "";
-			if (!finalConf.checkbox) {
+			if (!_conf.checkbox) {
 				cbk = "none";
 			}
 			var cth = document.createElement('th');
 			cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
 			var chkbox = document.createElement("INPUT");
 			chkbox.type = "checkbox";
-			chkbox.setAttribute("pagId", finalConf.pagId);
+			chkbox.setAttribute("pagId", _conf.pagId);
 			chkbox.onclick = checkboxbind.bind();
 			cth.appendChild(chkbox); // 第一列添加复选框
 			tr.appendChild(cth);
-			$.each(column, function (o) {
+			$.each(_columns, function (o) {
 				var isHide;
-				if (typeof (column[o].hide) == "function") {
-					isHide = column[o].hide();
+				if (typeof (_columns[o].hide) == "function") {
+					isHide = _columns[o].hide();
 				} else {
-					isHide = column[o].hide;
+					isHide = _columns[o].hide;
 				}
 				if (!isHide) {
 					var th = document.createElement('th');
-					th.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";height:" + finalConf.theadHeight + ";vertical-align: middle;");
-					th.innerHTML = column[o].name;
+					th.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
+					th.innerHTML = _columns[o].name;
 					tr.appendChild(th);
 				}
 			});
@@ -242,14 +253,14 @@ export var dataGrid = function (params) {
 		$.each(json, function (d) {
 			if (gf.notNull(json[d])) {
 				var tr = document.createElement('tr');
-				tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
-				var sm = parseInt(tee.substring(tee.length - 1), 10) + 1;
-				tee = tee.substring(0, tee.length - 2);
-				tee = tee + "-" + sm;
-				tr.setAttribute("d-tree", tee);
+				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
+				_tee = _tee.substring(0, _tee.length - 2);
+				_tee = _tee + "-" + sm;
+				tr.setAttribute("d-tree", _tee);
 				tbody.appendChild(tr);
 				var cn = "";
-				if (!finalConf.serNumber) {
+				if (!_conf.serNumber) {
 					cn = "none";
 				}
 				var ntd_d = tr.insertCell(-1);
@@ -258,7 +269,7 @@ export var dataGrid = function (params) {
 
 				ntd_d.innerHTML = rowindex;
 				var cbk = "";
-				if (!finalConf.checkbox) {
+				if (!_conf.checkbox) {
 					cbk = "none";
 				}
 				var td_d = tr.insertCell(-1);
@@ -267,36 +278,36 @@ export var dataGrid = function (params) {
 				chkbox.type = "checkbox";
 				// ******** 树的上下移动需要
 				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], confTreeGrid.id));
-				chkbox.setAttribute("pid", _getValueByName(json[d], confTreeGrid.pid));
+				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], _confTreeGrid.id));
+				chkbox.setAttribute("pid", _getValueByName(json[d], _confTreeGrid.pid));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(json[d], finalConf.checkValue);
+				chkbox.value = _getValueByName(json[d], _conf.checkValue);
 				chkbox.onclick = highlight.bind(this);
 				td_d.appendChild(chkbox); // 第一列添加复选框
-				$.each(column, function (o) {
+				$.each(_columns, function (o) {
 					var isHide;
-					if (typeof (column[o].hide) == "function") {
-						isHide = column[o].hide();
+					if (typeof (_columns[o].hide) == "function") {
+						isHide = _columns[o].hide();
 					} else {
-						isHide = column[o].hide;
+						isHide = _columns[o].hide;
 					}
 					if (!isHide) {
 						var td_o = tr.insertCell(-1);
-						td_o.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";vertical-align: middle;");
+						td_o.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";vertical-align: middle;");
 
 						var rowdata = json[d];
-						var dtee = tee;
+						var dtee = _tee;
 						rowdata.dtee = dtee;
-						var clm = column[o].colkey;
+						var clm = _columns[o].colkey;
 						var data = gf.notEmpty(_getValueByName(rowdata, clm));
 
-						if (confTreeGrid.tree) {
-							var lt = confTreeGrid.name.split(",");
+						if (_confTreeGrid.tree) {
+							var lt = _confTreeGrid.name.split(",");
 							if (gf.inArray(lt, clm)) {
 								var divtree = document.createElement("div");
 								divtree.className = "ly_tree";
-								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + column[o].align + ";");
+								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + _columns[o].align + ";");
 								var img = document.createElement('img');
 								img.src = "/s/i/tree/nolines_minus.gif";
 								img.onclick = datatree.bind();
@@ -304,25 +315,25 @@ export var dataGrid = function (params) {
 								td_o.appendChild(divtree);
 								var divspan = document.createElement("span");
 								divspan.className = "l_test";
-								divspan.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
+								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 
-								if (column[o].renderData) {
-									divspan.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+								if (_columns[o].renderData) {
+									divspan.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 								} else {
 									divspan.innerHTML = data;
 								}
 								td_o.appendChild(divspan);
 							} else {
-								if (column[o].renderData) {
-									td_o.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+								if (_columns[o].renderData) {
+									td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 								} else {
 									td_o.innerHTML = data;
 								}
 							}
 							;
 						} else {
-							if (column[o].renderData) {
-								td_o.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+							if (_columns[o].renderData) {
+								td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 							} else {
 								td_o.innerHTML = data;
 							}
@@ -330,24 +341,24 @@ export var dataGrid = function (params) {
 						;
 					}
 				});
-				if (confTreeGrid.tree) {
-					if (confTreeGrid.type == 1) {
-						tee = tee + "-0";
+				if (_confTreeGrid.tree) {
+					if (_confTreeGrid.type == 1) {
+						_tee = _tee + "-0";
 						treeHtml(tbody, json[d]);// 树形式
 					} else {
 						var obj = json[d];
 						delete json[d];
-						nb = 20;
+						_nb = 20;
 						treeSimpleHtml(tbody, json, obj);
 					}
 				}
 			}
 		});
 	};
-	var fenyeDiv = function (divid, jsonData) {
-		var totalRecords = _getValueByName(jsonData, finalConf.totalRecords);
-		var totalPages = _getValueByName(jsonData, finalConf.totalPages);
-		var pageNow = _getValueByName(jsonData, finalConf.pageNow);
+	var createFenye = function (divid, jsonData) {
+		var totalRecords = _getValueByName(jsonData, _conf.totalRecords);
+		var totalPages = _getValueByName(jsonData, _conf.totalPages);
+		var pageNow = _getValueByName(jsonData, _conf.pageNow);
 		var bdiv = document.createElement("div");
 		bdiv.setAttribute("style", "vertical-align: middle;");
 
@@ -372,7 +383,7 @@ export var dataGrid = function (params) {
 		var lia = document.createElement("a");
 		lia.href = "javascript:void(0);";
 		ulli.appendChild(lia);
-		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;每页&nbsp;' + finalConf.pageSize + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
+		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;每页&nbsp;' + _conf.pageSize + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
 
 		var btd_1 = document.createElement("td");
 		btd_1.style.textAlign = "right";
@@ -399,7 +410,7 @@ export var dataGrid = function (params) {
 			lia_2.innerHTML = '← prev';
 			ulli_2.appendChild(lia_2);
 		}
-		var pg = pagesIndex(finalConf.pagecode, pageNow, totalPages);
+		var pg = pagesIndex(_conf.pagecode, pageNow, totalPages);
 		var startpage = pg.start;
 		var endpage = pg.end;
 		if (startpage != 1) {
@@ -474,7 +485,6 @@ export var dataGrid = function (params) {
 		}
 		;
 	};
-	var nb = '20';
 	var treeHtml = function (tbody, data) {
 		if (!data)
 			return;
@@ -486,14 +496,14 @@ export var dataGrid = function (params) {
 					tte = true;
 				}
 				var tr = document.createElement('tr');
-				tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
-				var sm = parseInt(tee.substring(tee.length - 1), 10) + 1;
-				tee = tee.substring(0, tee.length - 2);
-				tee = tee + "-" + sm;
-				tr.setAttribute("d-tree", tee);
+				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
+				_tee = _tee.substring(0, _tee.length - 2);
+				_tee = _tee + "-" + sm;
+				tr.setAttribute("d-tree", _tee);
 				tbody.appendChild(tr);
 				var cn = "";
-				if (!finalConf.serNumber) {
+				if (!_conf.serNumber) {
 					cn = "none";
 				}
 				var ntd_d = tr.insertCell(-1);
@@ -501,7 +511,7 @@ export var dataGrid = function (params) {
 				var rowindex = tr.rowIndex;
 				ntd_d.innerHTML = rowindex;
 				var cbk = "";
-				if (!finalConf.checkbox) {
+				if (!_conf.checkbox) {
 					cbk = "none";
 				}
 				var td_d = tr.insertCell(-1);
@@ -514,31 +524,31 @@ export var dataGrid = function (params) {
 				chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
 				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(jsonTree[jt], finalConf.checkValue);
+				chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
 				chkbox.onclick = highlight.bind(this);
 				td_d.appendChild(chkbox); // 第一列添加复选框
-				$.each(column, function (o) {
+				$.each(_columns, function (o) {
 					var isHide;
-					if (typeof (column[o].hide) == "function") {
-						isHide = column[o].hide();
+					if (typeof (_columns[o].hide) == "function") {
+						isHide = _columns[o].hide();
 					} else {
-						isHide = column[o].hide;
+						isHide = _columns[o].hide;
 					}
 					if (!isHide) {
 						var td_o = tr.insertCell(-1);
-						td_o.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";vertical-align: middle;");
+						td_o.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";vertical-align: middle;");
 						var rowdata = jsonTree[jt];
-						var dtee = tee;
+						var dtee = _tee;
 						rowdata.dtee = dtee;
-						var clm = column[o].colkey;
+						var clm = _columns[o].colkey;
 						var data = gf.notEmpty(_getValueByName(rowdata, clm));
 
-						if (confTreeGrid.tree) {
-							var lt = confTreeGrid.name.split(",");
-							if (gf.inArray(lt, column[o].colkey)) {
+						if (_confTreeGrid.tree) {
+							var lt = _confTreeGrid.name.split(",");
+							if (gf.inArray(lt, _columns[o].colkey)) {
 								var divtree = document.createElement("div");
 								divtree.className = "ly_tree";
-								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + column[o].align + ";margin-left: " + nb + "px;");
+								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + _columns[o].align + ";margin-left: " + _nb + "px;");
 								if (tte) {
 									var img = document.createElement('img');
 									img.src = "/s/i/tree/nolines_minus.gif";
@@ -548,24 +558,24 @@ export var dataGrid = function (params) {
 								td_o.appendChild(divtree);
 								var divspan = document.createElement("span");
 								divspan.className = "l_test";
-								divspan.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
-								if (column[o].renderData) {
-									divspan.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+								if (_columns[o].renderData) {
+									divspan.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 								} else {
 									divspan.innerHTML = data;
 								}
 								td_o.appendChild(divspan);
 							} else {
-								if (column[o].renderData) {
-									td_o.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+								if (_columns[o].renderData) {
+									td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 								} else {
 									td_o.innerHTML = data;
 								}
 							}
 							;
 						} else {
-							if (column[o].renderData) {
-								td_o.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+							if (_columns[o].renderData) {
+								td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 							} else {
 								td_o.innerHTML = data;
 							}
@@ -575,35 +585,34 @@ export var dataGrid = function (params) {
 				});
 				if (tte) {
 					//1-1
-					tee = tee + "-0";
-					nb = parseInt(nb, 10) + 20;
+					_tee = _tee + "-0";
+					_nb = parseInt(_nb, 10) + 20;
 					treeHtml(tbody, jsonTree[jt]);
 				}
 
 			});
-			tee = tee.substring(0, tee.length - 2);
-			nb = 20;
+			_tee = _tee.substring(0, _tee.length - 2);
+			_nb = 20;
 		}
 	};
-	var img;
 	var treeSimpleHtml = function (tbody, jsonTree, obj) {
 		var tte = false;
-		tee = tee + "-0"
+		_tee = _tee + "-0"
 		$.each(jsonTree, function (jt) {
 			if (gf.notNull(jsonTree[jt])) {
-				var jsb = _getValueByName(jsonTree[jt], confTreeGrid.pid);
-				var ob = _getValueByName(obj, confTreeGrid.id);
+				var jsb = _getValueByName(jsonTree[jt], _confTreeGrid.pid);
+				var ob = _getValueByName(obj, _confTreeGrid.id);
 				if (jsb == ob) {
 					tte = true;
 					var tr = document.createElement('tr');
-					tr.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
-					var sm = parseInt(tee.substring(tee.length - 1), 10) + 1;
-					tee = tee.substring(0, tee.length - 2);
-					tee = tee + "-" + sm;
-					tr.setAttribute("d-tree", tee);
+					tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+					var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
+					_tee = _tee.substring(0, _tee.length - 2);
+					_tee = _tee + "-" + sm;
+					tr.setAttribute("d-tree", _tee);
 					tbody.appendChild(tr);
 					var cn = "";
-					if (!finalConf.serNumber) {
+					if (!_conf.serNumber) {
 						cn = "none";
 					}
 					var ntd_d = tr.insertCell(-1);
@@ -611,7 +620,7 @@ export var dataGrid = function (params) {
 					var rowindex = tr.rowIndex;
 					ntd_d.innerHTML = rowindex;
 					var cbk = "";
-					if (!finalConf.checkbox) {
+					if (!_conf.checkbox) {
 						cbk = "none";
 					}
 					var td_d = tr.insertCell(-1);
@@ -620,60 +629,60 @@ export var dataGrid = function (params) {
 					chkbox.type = "checkbox";
 					// ******** 树的上下移动需要
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], confTreeGrid.id));
-					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], confTreeGrid.pid));
+					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], _confTreeGrid.id));
+					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], _confTreeGrid.pid));
 					// ******** 树的上下移动需要
 					chkbox.setAttribute("_l_key", "checkbox");
-					chkbox.value = _getValueByName(jsonTree[jt], finalConf.checkValue);
+					chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
 					chkbox.onclick = highlight.bind(this);
 					td_d.appendChild(chkbox); // 第一列添加复选框
-					$.each(column, function (o) {
+					$.each(_columns, function (o) {
 						var isHide;
-						if (typeof (column[o].hide) == "function") {
-							isHide = column[o].hide();
+						if (typeof (_columns[o].hide) == "function") {
+							isHide = _columns[o].hide();
 						} else {
-							isHide = column[o].hide;
+							isHide = _columns[o].hide;
 						}
 						if (!isHide) {
 							var td_o = tr.insertCell(-1);
-							td_o.setAttribute("style", "text-align:" + column[o].align + ";width: " + column[o].width + ";vertical-align: middle;");
+							td_o.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";vertical-align: middle;");
 							var rowdata = jsonTree[jt];
-							var dtee = tee;
+							var dtee = _tee;
 							rowdata.dtee = dtee;
-							var clm = column[o].colkey;
+							var clm = _columns[o].colkey;
 							var data = gf.notEmpty(_getValueByName(rowdata, clm));
 
-							if (confTreeGrid.tree) {
-								var lt = confTreeGrid.name.split(",");
-								if (gf.inArray(lt, column[o].colkey)) {
+							if (_confTreeGrid.tree) {
+								var lt = _confTreeGrid.name.split(",");
+								if (gf.inArray(lt, _columns[o].colkey)) {
 									var divtree = document.createElement("div");
 									divtree.className = "ly_tree";
-									divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + column[o].align + ";margin-left: " + nb + "px;");
-									img = document.createElement('img');
-									img.src = "/s/i/tree/nolines_minus.gif";
-									img.onclick = datatree.bind();
-									divtree.appendChild(img);
+									divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + _columns[o].align + ";margin-left: " + _nb + "px;");
+									_img = document.createElement('img');
+									_img.src = "/s/i/tree/nolines_minus.gif";
+									_img.onclick = datatree.bind();
+									divtree.appendChild(_img);
 									td_o.appendChild(divtree);
 									var divspan = document.createElement("span");
 									divspan.className = "l_test";
-									divspan.setAttribute("style", "line-height:" + finalConf.tbodyHeight + ";");
-									if (column[o].renderData) {
-										divspan.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+									divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+									if (_columns[o].renderData) {
+										divspan.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 									} else {
 										divspan.innerHTML = data;
 									}
 									td_o.appendChild(divspan);
 								} else {
-									if (column[o].renderData) {
-										td_o.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+									if (_columns[o].renderData) {
+										td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 									} else {
 										td_o.innerHTML = data;
 									}
 								}
 								;
 							} else {
-								if (column[o].renderData) {
-									td_o.innerHTML = column[o].renderData(rowindex, data, rowdata, clm);
+								if (_columns[o].renderData) {
+									td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
 								} else {
 									td_o.innerHTML = data;
 								}
@@ -683,34 +692,33 @@ export var dataGrid = function (params) {
 					});
 					var o = jsonTree[jt];
 					delete jsonTree[jt];
-					nb = parseInt(nb, 10) + 20;
+					_nb = parseInt(_nb, 10) + 20;
 					treeSimpleHtml(tbody, jsonTree, o)
 				}
 			}
 		});
 		if (!tte) {
-			if (gf.notNull(img)) {
-				img.remove(img.selectedIndex);
+			if (gf.notNull(_img)) {
+				_img.remove(_img.selectedIndex);
 			}
 		}
 
-		tee = tee.substring(0, tee.length - 2);
-		nb = parseInt(nb, 10) - 20;;
+		_tee = _tee.substring(0, _tee.length - 2);
+		_nb = parseInt(_nb, 10) - 20;;
 	};
 	Array.prototype.ly_each = function (f) { // 数组的遍历
 		for (var i = 0; i < this.length; i++)
 			f(this[i], i, this);
 	};
 	var dataGridUp = function (jsonUrl) { // 上移所选行
-
 		var upOne = function (tr) { // 上移1行
 			if (tr.rowIndex > 0) {
-				var ctr = divid.children[0].children.mytable.rows[tr.rowIndex - 1];
+				var ctr = _container.children[0].children.mytable.rows[tr.rowIndex - 1];
 				swapTr(tr, ctr);
 				getChkBox(tr).checked = true;
 			}
 		};
-		var arr = $A(divid.children[0].children.mytable.rows).reverse(); // 反选
+		var arr = $A(_container.children[0].children.mytable.rows).reverse(); // 反选
 		if (arr.length > 0 && getChkBox(arr[arr.length - 1]).checked) {
 			for (var i = arr.length - 1; i >= 0; i--) {
 				if (getChkBox(arr[i]).checked) {
@@ -720,7 +728,6 @@ export var dataGrid = function (params) {
 				}
 			}
 		}
-		;
 		arr.reverse().ly_each(function (tr) {
 			var ck = getChkBox(tr);
 			if (ck.checked) {
@@ -732,7 +739,7 @@ export var dataGrid = function (params) {
 		var row = grid.rowline();// 数组对象默认是{"rowNum":row,"rowId":cbox};
 		var data = [];
 		$.each(row, function (i) {
-			data.push(finalConf.checkValue + "[" + i + "]=" + row[i].rowId);
+			data.push(_conf.checkValue + "[" + i + "]=" + row[i].rowId);
 			data.push("rowId[" + i + "]=" + row[i].rowNum);
 		});
 		$.ajax({
@@ -743,14 +750,13 @@ export var dataGrid = function (params) {
 		});
 	};
 	var dataGridDown = function (jsonUrl) { // 下移所选行
-
 		var downOne = function (tr) {
-			if (tr.rowIndex < divid.children[0].children.mytable.rows.length - 1) {
-				swapTr(tr, divid.children[0].children.mytable.rows[tr.rowIndex + 1]);
+			if (tr.rowIndex < _container.children[0].children.mytable.rows.length - 1) {
+				swapTr(tr, _container.children[0].children.mytable.rows[tr.rowIndex + 1]);
 				getChkBox(tr).checked = true;
 			}
 		};
-		var arr = $A(divid.children[0].children.mytable.rows);
+		var arr = $A(_container.children[0].children.mytable.rows);
 		if (arr.length > 0 && getChkBox(arr[arr.length - 1]).checked) {
 			for (var i = arr.length - 1; i >= 0; i--) {
 				if (getChkBox(arr[i]).checked) {
@@ -775,10 +781,10 @@ export var dataGrid = function (params) {
 		var data = [];
 		$.each(row, function (i) {
 			if (!isNaN(row[i].rowId)) {
-				data.push(finalConf.checkValue + "[" + i + "]=" + row[i].rowId);
+				data.push(_conf.checkValue + "[" + i + "]=" + row[i].rowId);
 				data.push("rowId[" + i + "]=" + row[i].rowNum);
 			} else {
-				data.push(finalConf.checkValue + "[" + i + "]=" + i);
+				data.push(_conf.checkValue + "[" + i + "]=" + i);
 				data.push("rowId[" + i + "]=" + row[i].rowNum);
 			}
 		});
@@ -790,7 +796,7 @@ export var dataGrid = function (params) {
 		});
 	};
 	var selectRow = function (pagId) {
-		if (!pagId) { pagId = finalConf.pagId; }
+		if (!pagId) { pagId = _conf.pagId; }
 		var arr = [];
 		$("#" + pagId + " input[_l_key='checkbox']:checkbox:checked").each(function () {
 			arr.push($(this).val());
@@ -821,10 +827,10 @@ export var dataGrid = function (params) {
 		var evt = arguments[0] || window.event;
 		var a = evt.srcElement || evt.target;
 		var page = a.id.split('_')[1];
-		finalConf.data = $.extend(finalConf.data, {
+		_conf.data = $.extend(_conf.data, {
 			pageNow: page
 		});
-		initGrid(finalConf);
+		initGrid(_conf);
 	};
 	var datatree = function () { // 页数
 		var evt = arguments[0] || window.event;
@@ -853,8 +859,7 @@ export var dataGrid = function (params) {
 		for (var i = 0, ret = []; i < arrayLike.length; i++)
 			ret.push(arrayLike[i]);
 		return ret;
-	}
-	;
+	};
 	Function.prototype.bind = function () { // 数据的绑定
 		var __method = this, args = $A(arguments), object = args.shift();
 		return function () {
@@ -878,7 +883,7 @@ export var dataGrid = function (params) {
 	var rowline = function () {
 		var cb = [];
 
-		var arr = $A(divid.children[0].children.mytable.rows);
+		var arr = $A(_container.children[0].children.mytable.rows);
 		for (var i = arr.length - 1; i > 0; i--) {
 			var cbox = getChkBox(arr[i]).value;
 			var row = arr[i].rowIndex;
@@ -914,8 +919,7 @@ export var dataGrid = function (params) {
 				startpage = endpage - pagecode + 1;
 			else
 				startpage = 1;
-		}
-		;
+		};
 		var se = {
 			start: startpage,
 			end: endpage
@@ -926,22 +930,22 @@ export var dataGrid = function (params) {
 	 * 重新加载
 	 */
 	var loadData = function () {
-		$.extend(finalConf, params);
-		initGrid(finalConf);
+		$.extend(_conf, params);
+		initGrid(_conf);
 	};
 	/**
 	 * 查询时，设置参数查询
 	 */
 	var setOptions = function (params) {
-		$.extend(finalConf, params);
-		initGrid(finalConf);
+		$.extend(_conf, params);
+		initGrid(_conf);
 	};
 	/**
 	 * 获取选中的值
 	 */
 	var getSelectedCheckbox = function (key) {
 		var arr = [];
-		$(`#${finalConf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
+		$(`#${_conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
 			if (key) arr.push($(this).data(key));
 			else arr.push($(this).val());
 		});
@@ -949,12 +953,12 @@ export var dataGrid = function (params) {
 	};
 	var getSelectedCheckboxObj = function () {
 		var arr = [];
-		$(`#${finalConf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
+		$(`#${_conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
 			arr.push($(this).data());
 		});
 		return arr;
 	};
-	initGrid(finalConf);
+	initGrid(_conf);
 	return {
 		setOptions: setOptions,
 		loadData: loadData,
@@ -965,10 +969,4 @@ export var dataGrid = function (params) {
 		dataGridDown: dataGridDown,
 		rowline: rowline
 	};
-};
-
-var fixhead = function () {
-	for (var i = 0; i <= $('.t_table .pp-list tr:last').find('td:last').index(); i++) {
-		$('.pp-list th').eq(i).css('width', ($('.t_table .pp-list tr:last').find('td').eq(i).width()) + 2);
-	}
 };
