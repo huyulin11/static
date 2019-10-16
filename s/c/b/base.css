@@ -85,7 +85,7 @@ html.frame>body {
   /* overflow-y: scroll; */
   margin: 0 auto;
   /* max-width: 1200px; */
-  padding-bottom: 40px;
+  padding-top: 50px;
 }
 
 html.aui-dialog-iframe-root-node {
@@ -331,7 +331,7 @@ div.doc-buttons {
   position: fixed;
   width: 100%;
   /* left: 100px; */
-  bottom: 0px;
+  top: 0px;
   background: #eeeeee59;
   padding: 5 5 5 5;
   margin: 0 auto;
@@ -341,7 +341,7 @@ div.doc-buttons {
 
 h2#thisTitle {
   position: fixed;
-  bottom: 60px;
+  bottom: 90px;
   right: 10px;
   z-index: 91;
   font-size: 29px;
