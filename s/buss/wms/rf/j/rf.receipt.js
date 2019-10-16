@@ -42,7 +42,7 @@ var initReceipt = function () {
             }
         });
     }
-    $("#su").focus();
+    $("#tu").focus();
 }, start = function () {
     if (_paperid) {
         layer.msg("当前入库单尚未处理完成，不能再呼叫空车！");
@@ -134,7 +134,6 @@ var initReceipt = function () {
                 if (typeof data == "string") data = JSON.parse(data);
                 layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
                 $("#su").val("");
-                $("#tu").val("");
                 $("#su").focus();
             }
         });
@@ -155,10 +154,10 @@ export var initRf = function () {
         },
         methods: {
             suEnter: function () {
-                $("#tu").focus();
+                sub();
             },
             tuEnter: function () {
-                sub();
+                $("#tu").focus();
             },
         }
     });
