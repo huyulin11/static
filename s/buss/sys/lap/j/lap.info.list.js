@@ -1,6 +1,8 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import "/s/buss/sys/lap/j/lap.info.edit.status.js";
+import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -10,7 +12,7 @@ window.datagrid = dataGrid({
 		hide: true,
 	}, {
 		colkey: "name",
-		name: "地点名称",
+		name: "名称",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return data;
@@ -20,19 +22,26 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "type",
-		name: "地点类型",
+		name: "类型",
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("LAP_TYPE", data);
 		}
 	}, {
 		colkey: "status",
-		name: "地点状态",
+		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
-			return gv.get("LAP_STATUS", data);
+			if (rowdata.delflag == "1") {
+				return gv.get("LAP_STATUS", data);
+			}
+			if (!data) { data = "NORMAL"; }
+			let json = { id: rowdata.id, name: rowdata.name };
+			let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
+			return gv.select("LAP_STATUS", data) + btnStr;
 		}
 	}, {
 		colkey: "skuId",
-		name: "SKU编号",
+		name: "SKU",
+		hide: true,
 	}, {
 		colkey: "inUesd",
 		name: "是否在用",
@@ -42,9 +51,6 @@ window.datagrid = dataGrid({
 		name: "环境",
 		hide: true,
 	}, {
-		colkey: "name",
-		name: "SKU名称",
-	}, {
 		colkey: "delflag",
 		name: "是否删除",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -52,7 +58,7 @@ window.datagrid = dataGrid({
 				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
 				return "已删除";
 			} else {
-				return "正常使用";
+				return "使用中";
 			}
 		}
 	}],
@@ -61,8 +67,21 @@ window.datagrid = dataGrid({
 	serNumber: true
 });
 
-$("#search").on("click", function () {// 绑定查询按扭
-	var searchParams = $("#searchForm").serialize();// 初始化传参数
+$("#paging").delegate(".edit", "click", function (e) {
+	let id = $(this).data("id");
+	let name = $(this).data("name");
+	let targetVal = $(this).parent("td").find("select").val();
+	let target = $(this).parent("td").find("select").find("option:selected").text();
+	if (window.confirm(`是否要改变${name}的状态为${target}？`)) {
+		gf.doAjax({
+			url: `/sys/lap/editEntity.shtml`,
+			data: { id: id, status: targetVal }
+		});
+	}
+});
+
+$("#search").on("click", function () {
+	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});

@@ -111,6 +111,14 @@ class GF {
                     area: ['95%', '95%'],
                     content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
                 });
+            },
+            success: function (data) {
+                if (typeof data == "string") data = JSON.parse(data);
+                if (data.code >= 0) {
+                    layer.msg("保存成功！");
+                } else {
+                    layer.msg(data.msg);
+                }
             }
         };
         $.extend(pp, params);
@@ -314,6 +322,17 @@ class GF {
     };
     ifThen(flag, callback) {
         if (flag) { callback(); }
+    };
+    jsonToLabelData(json) {
+        let dataStr = "";
+        if (json) {
+            if (typeof json == "object") {
+                for (let key in json) {
+                    dataStr += ` data-${key}="${json[key]}" `;
+                }
+            }
+        }
+        return dataStr;
     }
 }
 

@@ -1,3 +1,5 @@
+import { gf } from "/s/buss/g/j/g.f.js";
+
 class GV {
 	init() {
 		$.ajax({
@@ -16,6 +18,18 @@ class GV {
 				localStorage.setItem("res", str);
 			}
 		});
+	}
+
+	select(type, defalutVal, data) {
+		let tmpOpStr = "";
+		var all = this.__getTS(type);
+		if (!all) { return ""; }
+		for (let one of all) {
+			tmpOpStr = tmpOpStr + "<option " + "value='" + one.key + "' "
+				+ (one.key == defalutVal ? "selected='selected'" : "") + ">"
+				+ one.value + "</option>";
+		};
+		return `<select class='${type}' ${gf.jsonToLabelData(data)}>${tmpOpStr}</select>`;
 	}
 
 	__getTS = (type) => {
