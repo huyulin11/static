@@ -25,6 +25,12 @@ window.datagrid = dataGrid({
 			return gv.get("LAP_TYPE", data);
 		}
 	}, {
+		colkey: "status",
+		name: "地点状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.get("LAP_STATUS", data);
+		}
+	}, {
 		colkey: "skuId",
 		name: "SKU编号",
 	}, {
