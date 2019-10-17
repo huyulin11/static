@@ -28,6 +28,10 @@
                     <td><label>SU</label></td>
                     <td><input id="su" @keyup.enter="suEnter" autocomplete="off" /></td>
                 </tr>
+                <tr id="paperTr" class="hidden">
+                    <td><label>出库单号</label></td>
+                    <td><input id="paperid" @keyup.enter="paperEnter" autocomplete="off" /></td>
+                </tr>
                 <tr>
                     <td><button id="sub">确认</button></td>
                     <td><button id="back">返回</button></td>

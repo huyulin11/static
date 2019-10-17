@@ -20,14 +20,21 @@ var sub = function () {
     }
     gf.doAjax({
         url: `/shipment/detail/addCombinedItem.shtml`,
-        data: { item: su, userdef4: tu, warehouse: _warehouse },
+        data: { item: su, userdef4: tu, warehouse: _warehouse, paperid: $("#paperid").val() },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
             if (data.code >= 0) {
                 $("#su").val("");
+                $("#paperid").val("");
+                $("#paperTr").addClass("hidden");
+                $("#su").focus();
+            } else if (data.code == -100) {
+                $("#paperTr").removeClass("hidden");
+                $("#paperid").focus();
+            } else {
+                $("#su").focus();
             }
-            $("#su").focus();
         }
     });
 }
