@@ -29,7 +29,6 @@ var _defaultConf = {
 		pid: "pid"
 	},
 	callback: function () { }
-	// 树形式 {tree : false,//是否显示树 name : 'name'}//以哪个字段 的树形式
 };
 
 var jsonRequest = function (conf, callback) {
@@ -127,7 +126,7 @@ var dataGrid = function (params) {
 	var createHead = function (divid) {
 		if (!_conf.isFixed) { return; }
 		var table = document.createElement("table");
-		table.id = "table_head";// 2.设置id属性
+		table.id = "table_head";
 		table.className = "pp-list table table-striped table-bordered";
 		table.setAttribute("style", "margin-bottom: -3px;");
 		divid.appendChild(table);
@@ -153,7 +152,7 @@ var dataGrid = function (params) {
 		chkbox.type = "checkbox";
 		chkbox.setAttribute("pagId", _conf.pagId);
 		chkbox.onclick = checkboxbind.bind();
-		cth.appendChild(chkbox); // 第一列添加复选框
+		cth.appendChild(chkbox);
 		tr.appendChild(cth);
 		$.each(_columns, function (o) {
 			var isHide;
@@ -223,7 +222,7 @@ var dataGrid = function (params) {
 			chkbox.type = "checkbox";
 			chkbox.setAttribute("pagId", _conf.pagId);
 			chkbox.onclick = checkboxbind.bind();
-			cth.appendChild(chkbox); // 第一列添加复选框
+			cth.appendChild(chkbox);
 			tr.appendChild(cth);
 			$.each(_columns, function (o) {
 				var isHide;
@@ -267,15 +266,13 @@ var dataGrid = function (params) {
 				td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
 				var chkbox = document.createElement("INPUT");
 				chkbox.type = "checkbox";
-				// ******** 树的上下移动需要
 				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
 				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], _confTreeGrid.id));
 				chkbox.setAttribute("pid", _getValueByName(json[d], _confTreeGrid.pid));
-				// ******** 树的上下移动需要
 				chkbox.setAttribute("_l_key", "checkbox");
 				chkbox.value = _getValueByName(json[d], _conf.checkValue);
 				chkbox.onclick = highlight.bind(this);
-				td_d.appendChild(chkbox); // 第一列添加复选框
+				td_d.appendChild(chkbox);
 				$.each(_columns, function (o) {
 					var isHide;
 					if (typeof (_columns[o].hide) == "function") {
@@ -335,7 +332,7 @@ var dataGrid = function (params) {
 				if (_confTreeGrid.tree) {
 					if (_confTreeGrid.type == 1) {
 						_tee = _tee + "-0";
-						treeHtml(tbody, json[d]);// 树形式
+						treeHtml(tbody, json[d]);
 					} else {
 						var obj = json[d];
 						delete json[d];
@@ -510,15 +507,15 @@ var dataGrid = function (params) {
 				td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
 				var chkbox = document.createElement("INPUT");
 				chkbox.type = "checkbox";
-				// ******** 树的上下移动需要
+
 				for (let v in jsonTree[jt]) { if (jsonTree[jt][v]) chkbox.setAttribute("data-" + v, jsonTree[jt][v]); };
 				chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], "id"));
 				chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
-				// ******** 树的上下移动需要
+
 				chkbox.setAttribute("_l_key", "checkbox");
 				chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
 				chkbox.onclick = highlight.bind(this);
-				td_d.appendChild(chkbox); // 第一列添加复选框
+				td_d.appendChild(chkbox);
 				$.each(_columns, function (o) {
 					var isHide;
 					if (typeof (_columns[o].hide) == "function") {
@@ -619,15 +616,13 @@ var dataGrid = function (params) {
 					td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
 					var chkbox = document.createElement("INPUT");
 					chkbox.type = "checkbox";
-					// ******** 树的上下移动需要
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
 					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], _confTreeGrid.id));
 					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], _confTreeGrid.pid));
-					// ******** 树的上下移动需要
 					chkbox.setAttribute("_l_key", "checkbox");
 					chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
 					chkbox.onclick = highlight.bind(this);
-					td_d.appendChild(chkbox); // 第一列添加复选框
+					td_d.appendChild(chkbox);
 					$.each(_columns, function (o) {
 						var isHide;
 						if (typeof (_columns[o].hide) == "function") {
@@ -698,12 +693,12 @@ var dataGrid = function (params) {
 		_tee = _tee.substring(0, _tee.length - 2);
 		_nb = parseInt(_nb, 10) - 20;;
 	};
-	Array.prototype.ly_each = function (f) { // 数组的遍历
+	Array.prototype.ly_each = function (f) {
 		for (var i = 0; i < this.length; i++)
 			f(this[i], i, this);
 	};
-	var dataGridUp = function (jsonUrl) { // 上移所选行
-		var upOne = function (tr) { // 上移1行
+	var dataGridUp = function (jsonUrl) {
+		var upOne = function (tr) {
 			if (tr.rowIndex > 0) {
 				var ctr = _container.children[0].children.mytable.rows[tr.rowIndex - 1];
 				swapTr(tr, ctr);
@@ -728,7 +723,7 @@ var dataGrid = function (params) {
 				upOne(tr);
 			}
 		});
-		var row = grid.rowline();// 数组对象默认是{"rowNum":row,"rowId":cbox};
+		var row = grid.rowline();
 		var data = [];
 		$.each(row, function (i) {
 			data.push(_conf.checkValue + "[" + i + "]=" + row[i].rowId);
@@ -741,7 +736,7 @@ var dataGrid = function (params) {
 			dataType: 'json',
 		});
 	};
-	var dataGridDown = function (jsonUrl) { // 下移所选行
+	var dataGridDown = function (jsonUrl) {
 		var downOne = function (tr) {
 			if (tr.rowIndex < _container.children[0].children.mytable.rows.length - 1) {
 				swapTr(tr, _container.children[0].children.mytable.rows[tr.rowIndex + 1]);
@@ -769,7 +764,7 @@ var dataGrid = function (params) {
 			if (getChkBox(tr).checked)
 				downOne(tr);
 		});
-		var row = grid.rowline();// 数组对象默认是{"rowNum":row,"rowId":cbox};
+		var row = grid.rowline();
 		var data = [];
 		$.each(row, function (i) {
 			if (!isNaN(row[i].rowId)) {
@@ -795,7 +790,7 @@ var dataGrid = function (params) {
 		});
 		return arr;
 	};
-	var checkboxbind = function () { // 全选/反选
+	var checkboxbind = function () {
 		var evt = arguments[0] || window.event;
 		var chkbox = evt.srcElement || evt.target;
 		var checkboxes = $("#" + chkbox.attributes.pagId.value + " input[_l_key='checkbox']");
@@ -815,7 +810,7 @@ var dataGrid = function (params) {
 		});
 	};
 
-	var pageBind = function () { // 页数
+	var pageBind = function () {
 		var evt = arguments[0] || window.event;
 		var a = evt.srcElement || evt.target;
 		var page = a.id.split('_')[1];
@@ -824,7 +819,7 @@ var dataGrid = function (params) {
 		});
 		initGrid(_conf);
 	};
-	var datatree = function () { // 页数
+	var datatree = function () {
 		var evt = arguments[0] || window.event;
 		var img = evt.srcElement || evt.target;
 		var ttr = img.parentElement.parentElement.parentElement.getAttribute('d-tree');
@@ -837,22 +832,22 @@ var dataGrid = function (params) {
 		}
 	};
 
-	var swapTr = function (tr1, tr2) { // 交换tr1和tr2的位置
+	var swapTr = function (tr1, tr2) {
 		var target = (tr1.rowIndex < tr2.rowIndex) ? tr2.nextSibling : tr2;
 		var tBody = tr1.parentNode;
 		tBody.replaceChild(tr2, tr1);
 		tBody.insertBefore(tr1, target);
 	};
-	var getChkBox = function (tr) { // 从tr得到 checkbox对象
+	var getChkBox = function (tr) {
 		return tr.cells[1].firstChild;
 
 	};
-	function $A(arrayLike) { // 数值的填充
+	function $A(arrayLike) {
 		for (var i = 0, ret = []; i < arrayLike.length; i++)
 			ret.push(arrayLike[i]);
 		return ret;
 	};
-	Function.prototype.bind = function () { // 数据的绑定
+	Function.prototype.bind = function () {
 		var __method = this, args = $A(arguments), object = args.shift();
 		return function () {
 			return __method.apply(object, args.concat($A(arguments)));
@@ -887,11 +882,6 @@ var dataGrid = function (params) {
 		;
 		return cb.reverse();
 	};
-	/**
-	 * 这是一个分页工具 主要用于显示页码,得到返回来的 开始页码和结束页码 pagecode 要获得记录的开始索引 即 开始页码 pageNow
-	 * 当前页 pageCount 总页数
-	 * 
-	 */
 	var pagesIndex = function (pagecode, pageNow, pageCount) {
 		pagecode = parseInt(pagecode);
 		pageNow = parseInt(pageNow);
@@ -918,23 +908,14 @@ var dataGrid = function (params) {
 		};
 		return se;
 	};
-	/**
-	 * 重新加载
-	 */
 	var loadData = function () {
 		$.extend(_conf, _params);
 		initGrid(_conf);
 	};
-	/**
-	 * 查询时，设置参数查询
-	 */
 	var setOptions = function (params) {
 		$.extend(_conf, params);
 		initGrid(_conf);
 	};
-	/**
-	 * 获取选中的值
-	 */
 	var getSelectedCheckbox = function (key) {
 		var arr = [];
 		$(`#${_conf.pagId} input[_l_key='checkbox']:checkbox:checked`).each(function () {
@@ -956,7 +937,7 @@ var dataGrid = function (params) {
 		loadData: loadData,
 		getSelectedCheckboxObj: getSelectedCheckboxObj,
 		getSelectedCheckbox: getSelectedCheckbox,
-		selectRow: selectRow,// 选中行事件
+		selectRow: selectRow,
 		dataGridUp: dataGridUp,
 		dataGridDown: dataGridDown,
 		rowline: rowline
