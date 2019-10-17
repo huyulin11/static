@@ -9,7 +9,7 @@ var defaultConf = {
 	tbodyHeight: '27px',// 表格body的每一行高度
 	jsonUrl: '', // 访问后台地址
 	isFixed: false,//是否固定表头
-	usePage: true,// 是否分页
+	usePage: true,
 	serNumber: false,// 是否显示序号
 	records: 'records',// 分页数据
 	pageNow: 'pageNow',// 当前页码 或 当前第几页a
@@ -126,7 +126,7 @@ var dataGrid = function (params) {
 
 	var createHead = function (divid) {
 		if (!_conf.isFixed) { return; }
-		var table = document.createElement("table");// 1.创建一个table表
+		var table = document.createElement("table");
 		table.id = "table_head";// 2.设置id属性
 		table.className = "pp-list table table-striped table-bordered";
 		table.setAttribute("style", "margin-bottom: -3px;");
@@ -176,12 +176,12 @@ var dataGrid = function (params) {
 		var h = '';
 		var xy = "hidden";
 		if (_conf.height == "100%") {
-			if (!_conf.isFixed) {// //不固定表头
+			if (!_conf.isFixed) {
 				h = "auto";
 			} else {
 				xy = "auto";
 				h = $(window).height() - $("#table_head").offset().top - $('#table_head').find('th:last').eq(0).height();
-				if (_conf.usePage) {// 是否分页
+				if (_conf.usePage) {
 					h -= 55;
 				}
 				h += "px";
@@ -192,17 +192,17 @@ var dataGrid = function (params) {
 		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;background: white;');
 		tdiv.className = "t_table";
 		divid.appendChild(tdiv);
-		var table2 = document.createElement("table");// 1.创建一个table表
+		var table2 = document.createElement("table");
 		table2.id = "mytable";
 		table2.className = "pp-list table table-striped table-bordered";
 		table2.setAttribute("style", "margin-bottom: -3px;");
 
 		tdiv.appendChild(table2);
-		var tbody = document.createElement("tbody");// 1.创建一个table表
+		var tbody = document.createElement("tbody");
 		table2.appendChild(tbody);
 		var json = _getValueByName(jsonData, _conf.records);
 
-		if (!_conf.isFixed) {//不固定表头
+		if (!_conf.isFixed) {
 			var tr = document.createElement('tr');
 			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 			tbody.appendChild(tr);
