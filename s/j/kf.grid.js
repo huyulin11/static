@@ -32,16 +32,6 @@ var defaultConf = {
 	// 树形式 {tree : false,//是否显示树 name : 'name'}//以哪个字段 的树形式
 };
 
-var fieldModel = {
-	colkey: null,
-	name: null,
-	width: 'auto',
-	height: 'auto',
-	align: 'center',
-	hide: false,
-	renderData: null
-};
-
 var jsonRequest = function (conf, callback) {
 	$.ajax({
 		type: 'POST',
@@ -50,7 +40,7 @@ var jsonRequest = function (conf, callback) {
 		url: conf.jsonUrl,
 		dataType: 'json',
 		success: function (data) {
-			callback(data);
+			if (data) { callback(data); }
 		},
 		error: function (msg) {
 			console.log(msg);
@@ -84,58 +74,58 @@ var fixhead = function () {
 	}
 };
 
+var _fieldModel = {
+	colkey: null,
+	name: null,
+	width: 'auto',
+	height: 'auto',
+	align: 'center',
+	hide: false,
+	renderData: null
+};
+
 var _container;
 var _conf;
 var _confTreeGrid;
-var _confFields = [];
 var _columns;
 var _tee = "1-0";
 var _nb = '20';
 var _img;
+var _params;
 
-export var dataGrid = function (params) {
-	_conf = $.extend(defaultConf, params);
+var dataGrid = function (params) {
+	_params = params;
+	_conf = $.extend(defaultConf, _params);
 	_confTreeGrid = _conf.treeGrid;
 	_columns = _conf.columns;
 
-	for (var iii = 0; iii < _columns.length; iii++) {
-		_confFields.push(fieldModel);
-	}
-	for (var iii = 0; iii < _confFields.length; iii++) {
-		for (var p in _confFields[iii])
-			if (_confFields[iii].hasOwnProperty(p) && (!_columns[iii].hasOwnProperty(p)))
-				_columns[iii][p] = _confFields[iii][p];
+	for (var oneColumn of _columns) {
+		for (var p in _fieldModel)
+			if (_fieldModel.hasOwnProperty(p) && (!oneColumn.hasOwnProperty(p)))
+				oneColumn[p] = _fieldModel[p];
 	}
 
 	var initGrid = function (conf) {
-		jsonRequest(conf, createHtml);
-	};
-
-	var createHtml = function (jsonData) {
-		if (!jsonData) {
-			return;
-		}
 		_container = document.getElementById(_conf.pagId);
 		if (!_container) {
 			console.error(`找不到id=${_conf.pagId}选择器！`);
 			return;
 		}
-
 		_container.innerHTML = '';
-		if (_conf.isFixed) {//不固定表头
-			createHead(_container);
-		}
-		createBody(_container, jsonData);
-		if (_conf.usePage) {// 是否分页
-			createFenye(_container, jsonData);
-		}
+		jsonRequest(conf, create);
+	};
 
-		if (_conf.callback) {
-			_conf.callback();
-		}
+	var create = function (jsonData) {
+		createHead(_container);
+		createBody(_container, jsonData);
+		createFenye(_container, jsonData);
+
+		if (_conf.callback) { _conf.callback(); }
 		fixhead();
 	};
+
 	var createHead = function (divid) {
+		if (!_conf.isFixed) { return; }
 		var table = document.createElement("table");// 1.创建一个table表
 		table.id = "table_head";// 2.设置id属性
 		table.className = "pp-list table table-striped table-bordered";
@@ -180,6 +170,7 @@ export var dataGrid = function (params) {
 			}
 		});
 	};
+
 	var createBody = function (divid, jsonData) {
 		var tdiv = document.createElement("div");
 		var h = '';
@@ -356,6 +347,7 @@ export var dataGrid = function (params) {
 		});
 	};
 	var createFenye = function (divid, jsonData) {
+		if (!_conf.usePage) { return; }
 		var totalRecords = _getValueByName(jsonData, _conf.totalRecords);
 		var totalPages = _getValueByName(jsonData, _conf.totalPages);
 		var pageNow = _getValueByName(jsonData, _conf.pageNow);
@@ -930,7 +922,7 @@ export var dataGrid = function (params) {
 	 * 重新加载
 	 */
 	var loadData = function () {
-		$.extend(_conf, params);
+		$.extend(_conf, _params);
 		initGrid(_conf);
 	};
 	/**
@@ -970,3 +962,5 @@ export var dataGrid = function (params) {
 		rowline: rowline
 	};
 };
+
+export { dataGrid };
