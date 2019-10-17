@@ -7,23 +7,24 @@ let container = "#rootContainer";
 let _warehouse = gf.urlParam("warehouse");
 
 var sub = function () {
-    let su = $("#su").val();
-    let tu = $("#tu").val();
-    if (!su || !tu) {
+    let _su = $("#su").val();
+    let _tu = $("#tu").val();
+    let _paperid = $("#paperid").val();
+    if (!_su || !_tu) {
         layer.msg("tu与su均不能为空！");
-        if (!su) {
+        if (!_su) {
             $("#su").focus();
-        } else if (!tu) {
+        } else if (!_tu) {
             $("#tu").focus();
         }
         return;
     }
     gf.doAjax({
         url: `/shipment/detail/addCombinedItem.shtml`,
-        data: { item: su, userdef4: tu, warehouse: _warehouse, paperid: $("#paperid").val() },
+        data: { item: _su, userdef4: _tu, warehouse: _warehouse, paperid: _paperid },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
+            layer.msg(data.msg + ":su:" + _su + ",tu:" + _tu);
             if (data.code >= 0) {
                 $("#su").val("");
                 $("#paperid").val("");

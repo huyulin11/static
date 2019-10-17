@@ -85,7 +85,7 @@ html.frame>body {
   /* overflow-y: scroll; */
   margin: 0 auto;
   /* max-width: 1200px; */
-  padding-top: 50px;
+  /* padding-top: 72px; */
 }
 
 html.aui-dialog-iframe-root-node {
@@ -333,7 +333,7 @@ div.doc-buttons {
   /* left: 100px; */
   top: 0px;
   background: #eeeeee59;
-  padding: 5 5 5 5;
+  /* padding: 5 5 5 5; */
   margin: 0 auto;
   /* max-width: 1200px; */
   text-align: center;

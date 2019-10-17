@@ -93,4 +93,9 @@ $(_frame).on("load", function (params) {
     } else {
         $(this).fadeIn();
     }
+
+    let paddingTop = $(this).contents().find(".doc-buttons").height();
+    if (paddingTop) {
+        $(this).contents().find("html>body").css("padding-top", paddingTop + 10);
+    }
 });
