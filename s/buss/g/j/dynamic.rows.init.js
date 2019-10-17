@@ -27,7 +27,8 @@ var getItem = (data) => {
                 let dics = gv.getT(item.dic);
                 itemDesc += `<option value="">----选择【${item.name}】----</option>`;
                 for (let dic of dics) {
-                    itemDesc += `<option ${(data && dic.key == data[item.key]) ? "selected" : ""} value="${dic.key}">${dic.value}</option>`;
+                    let selectFlag = (data && dic.key == data[item.key]) ? "selected" : "";
+                    itemDesc += `<option ${selectFlag} value="${dic.key}">${dic.value}</option>`;
                 }
                 itemDesc = `<select id="${item.key}${serial}" name="${item.key}[${serial}]"
             data-notnull='${item.notnull}'>${itemDesc}</select>`;

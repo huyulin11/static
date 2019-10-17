@@ -1,5 +1,6 @@
 import "/s/j/vue/vue.min.js";
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
+import "/s/buss/g/j/dynamic.rows.add.js";
 import { dicdata } from "/s/buss/sys/dic/j/dic.data.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 

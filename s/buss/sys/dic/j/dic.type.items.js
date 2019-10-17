@@ -40,12 +40,12 @@ var doInitRows = (dictypeinfo) => {
     }
 }
 
-window.addEventListener('associating_val_choosed', function (event) {
+window.addEventListener('ASSOCIATING_VAL_CHOOSED', function (event) {
     console.log('选择操作的类型为：', event.detail.val);
     dictype(event.detail.val, doInitRows);
 });
 
-window.addEventListener('associating_val_changed', function (event) {
+window.addEventListener('ASSOCIATING_VAL_CHANGED', function (event) {
     console.log('选择操作的类型值变化为：', event.detail.val);
     $(_conf.addBtn).addClass("hidden");
     initRows(_conf);

@@ -30,21 +30,26 @@ var submitForm = function () {
         },
         success: function (json) {
             if (json.code >= 0) {
-                parent.datagrid.loadData();
-
-                var to = setTimeout(() => {
-                    parent.layer.close(parent.pageii);
-                }, 2000);
-
-                layer.confirm('保存成功！是否继续添加？（两秒钟后自动关闭）', {
-                    btn: ['继续', '关闭']
-                }, function () {
-                    clearTimeout(to);
-                    layer.msg('继续添加！');
-                    window.location.reload();
-                }, function () {
-                    parent.layer.close(parent.pageii);
-                });
+                if (parent.datagrid) {
+                    parent.datagrid.loadData();
+                    var to = setTimeout(() => {
+                        parent.layer.close(parent.pageii);
+                    }, 2000);
+                    layer.confirm('保存成功！是否继续添加？（两秒钟后自动关闭）', {
+                        btn: ['继续', '关闭']
+                    }, function () {
+                        clearTimeout(to);
+                        layer.msg('继续添加！');
+                        window.location.reload();
+                    }, function () {
+                        parent.layer.close(parent.pageii);
+                    });
+                } else {
+                    layer.msg('保存成功！');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                }
             } else {
                 layer.alert("新增失败！！" + json.msg, {
                     icon: 3,

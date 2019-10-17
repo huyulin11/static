@@ -27,7 +27,7 @@
             $target.val($(this).find("div").data("keyinfo")).trigger("blur");
             $target.focus();
 
-            var myEvent = new CustomEvent('associating_val_choosed', {
+            var myEvent = new CustomEvent('ASSOCIATING_VAL_CHOOSED', {
                 detail: { val: $target.val() },
             });
             if (window.dispatchEvent) { window.dispatchEvent(myEvent); } else { window.fireEvent(myEvent); }
@@ -40,7 +40,7 @@
 
         $("html").on("input", _target, function () {
             _showTipsContent(this);
-            var myEvent = new CustomEvent('associating_val_changed', {
+            var myEvent = new CustomEvent('ASSOCIATING_VAL_CHANGED', {
                 detail: { val: $(this).val() },
             });
             if (window.dispatchEvent) { window.dispatchEvent(myEvent); } else { window.fireEvent(myEvent); }
