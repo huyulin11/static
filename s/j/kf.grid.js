@@ -1,6 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-var defaultConf = {
+var _defaultConf = {
 	columns: [],
 	pagId: 'paging', // 加载表格存放位置的ID
 	width: '100%', // 表格高度
@@ -95,7 +95,7 @@ var _params;
 
 var dataGrid = function (params) {
 	_params = params;
-	_conf = $.extend(defaultConf, _params);
+	_conf = $.extend(_defaultConf, _params);
 	_confTreeGrid = _conf.treeGrid;
 	_columns = _conf.columns;
 
