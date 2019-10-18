@@ -62,7 +62,7 @@ export var initRf = function () {
                     window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
                 });
                 $("#rootContainer").find("#stockOut").on("click", function () {
-                    window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:SCANED&type=${escape("冷库出库")}&warehouse=2`;
+                    window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=${escape("冷库出库")}&warehouse=2`;
                 });
                 $("#rootContainer").find("#alloc").on("click", function () {
                     window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;

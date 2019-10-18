@@ -103,7 +103,7 @@ var initBtns = function () {
             layer.msg(info);
         },
     }; btns.stockOut = {
-        url: `/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED&type=RF${escape("出库")}`,
+        url: `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=RF${escape("出库")}`,
         id: "stockOut", name: "RF-出库", class: "btn-primary",
         bind: function () {
             window.location.href = this.url;
@@ -201,7 +201,7 @@ class PaperOp {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "TAKED" && main["status"] != "SCANED") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "TAKED" && main["status"] != "PICKED") || main["delflag"] != "0") {
                 layer.msg(`该单无法${that.name}！`);
                 return;
             }

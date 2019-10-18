@@ -46,7 +46,7 @@ var initShipment = function () {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "TAKED" && main["status"] != "SCANED") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "TAKED" && main["status"] != "PICKED") || main["delflag"] != "0") {
                 layer.msg(currentShipmentPaperid() + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 setCurrentShipmentPaperid("");
                 return;
@@ -71,7 +71,7 @@ var initRf = function () {
             initShipment();
             if (!currentShipmentPaperid()) {
                 $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
-                $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2,TAKED,SCANED");
+                $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED");
             } else {
                 $(container).find("h2").each(function () {
                     $(this).html("正在出库" + currentShipmentPaperid());
