@@ -44,7 +44,6 @@ var jsonRequest = function (conf, callback) {
 		error: function (msg) {
 			console.log(msg);
 			layer.msg("数据错误！请检查网络或权限配置！");
-			json = '';
 		}
 	});
 };
@@ -111,19 +110,19 @@ var dataGrid = function (params) {
 			return;
 		}
 		_container.innerHTML = '';
-		jsonRequest(conf, create);
+		jsonRequest(conf, render);
 	};
 
-	var create = function (jsonData) {
-		createHead(_container);
-		createBody(_container, jsonData);
-		createFenye(_container, jsonData);
+	var render = function (jsonData) {
+		renderHead(_container);
+		renderBody(_container, jsonData);
+		renderFenye(_container, jsonData);
 
 		if (_conf.callback) { _conf.callback(); }
 		fixhead();
 	};
 
-	var createHead = function (divid) {
+	var renderHead = function (divid) {
 		if (!_conf.isFixed) { return; }
 		var table = document.createElement("table");
 		table.id = "table_head";
@@ -170,7 +169,7 @@ var dataGrid = function (params) {
 		});
 	};
 
-	var createBody = function (divid, jsonData) {
+	var renderBody = function (divid, jsonData) {
 		var tdiv = document.createElement("div");
 		var h = '';
 		var xy = "hidden";
@@ -343,7 +342,7 @@ var dataGrid = function (params) {
 			}
 		});
 	};
-	var createFenye = function (divid, jsonData) {
+	var renderFenye = function (divid, jsonData) {
 		if (!_conf.usePage) { return; }
 		var totalRecords = _getValueByName(jsonData, _conf.totalRecords);
 		var totalPages = _getValueByName(jsonData, _conf.totalPages);
