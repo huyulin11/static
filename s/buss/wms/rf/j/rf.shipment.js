@@ -37,6 +37,7 @@ var sub = function () {
 }
 
 var initShipment = function () {
+    let title = "出库操作";
     if (currentShipmentPaperid()) {
         let url = `/shipment/main/findOneData.shtml`;
         gf.ajax(url, { paperid: currentShipmentPaperid() }, "json", function (s) {
@@ -51,12 +52,12 @@ var initShipment = function () {
                 setCurrentShipmentPaperid("");
                 return;
             } else {
-                $(container).find("h2").each(function () {
-                    $(this).html("正在出库" + currentShipmentPaperid());
-                });
+                title = "正在出库" + currentShipmentPaperid();
             }
         });
     }
+    $(container).find("h2").html(title);
+    $(document).attr("title", title);
 }
 
 var initRf = function () {
@@ -73,18 +74,15 @@ var initRf = function () {
                 $(container).append(`<iframe class="frame" id="frame" style="width: 100%; height: 75%;"></iframe>`);
                 $("#frame").attr("src", "/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED");
             } else {
-                $(container).find("h2").each(function () {
-                    $(this).html("正在出库" + currentShipmentPaperid());
-                    $(container).find("table").show();
-                    $(container).find("#sub").on("click", function () { sub(); });
-                    initPaperOp("shipment");
-                    $(container).find("#over").on("click", function () {
-                        if (currentShipmentPaperid()) {
-                            overPaper(currentShipmentPaperid());
-                        }
-                    });
-                    $("#su").focus();
+                $(container).find("table").show();
+                $(container).find("#sub").on("click", function () { sub(); });
+                initPaperOp("shipment");
+                $(container).find("#over").on("click", function () {
+                    if (currentShipmentPaperid()) {
+                        overPaper(currentShipmentPaperid());
+                    }
                 });
+                $("#su").focus();
             }
 
             $(container).find("#layout").on("click", function () {

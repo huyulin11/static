@@ -46,6 +46,9 @@ export var initRf = function () {
         },
         methods: {
             initMain: function () {
+                let title = "RF主界面";
+                $(container).find("h2").html(title);
+                $(document).attr("title", title);
                 $("#rootContainer").find("#logout").on("click", function () {
                     window.location.href = "/logout.shtml";
                 });

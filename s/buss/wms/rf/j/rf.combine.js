@@ -41,13 +41,15 @@ var sub = function () {
 }
 
 var initCombine = function () {
-    $(container).find("h2").each(function () {
+    let title = function () {
         if (_warehouse) {
-            $(this).html(`正在组盘-${gv.get("WAREHOUSE", _warehouse)}`);
+            return `正在组盘-${gv.get("WAREHOUSE", _warehouse)}`;
         } else {
-            $(this).html(`未找到组盘识别数据`);
+            return `未找到组盘识别数据`;
         }
-    });
+    };
+    $(container).find("h2").html(title);
+    $(document).attr("title", title);
 }
 
 var getCombinedList = function () {

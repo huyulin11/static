@@ -22,6 +22,7 @@ var initReceipt = function () {
     $(container).find("#send").on("click", function () { send(); });
     $(container).find("#execute").on("click", function () { execute(); });
 
+    let title = "冷库入库";
     if (_paperid) {
         let url = `/receipt/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
@@ -38,10 +39,12 @@ var initReceipt = function () {
                 setCurrentReceiptPaperid("");
                 return;
             } else {
-                $(container).find("h2").html(`正在${main.receipttype == '2' ? "返料入库" : "入库"}` + _paperid);
+                title = `正在${main.receipttype == '2' ? "返料入库" : "入库"}` + _paperid;
             }
         });
     }
+    $(container).find("h2").html(title);
+    $(document).attr("title", title);
     $("#tu").focus();
 }, start = function () {
     if (_paperid) {

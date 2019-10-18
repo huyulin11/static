@@ -30,7 +30,7 @@ var sub = function () {
     });
 }
 
-var initShipment = function () {
+var initPick = function () {
     if (_paperid) {
         let url = `/shipment/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
@@ -46,15 +46,17 @@ var initShipment = function () {
         });
     }
 
-    $(container).find("h2").each(function () {
+    let title = function () {
         if (_paperid) {
-            $(this).html("正在拣货-" + _paperid);
+            return ("正在拣货-" + _paperid);
         } else if (_warehouse) {
-            $(this).html(`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
+            return (`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
         } else {
-            $(this).html(`未找到拣货识别数据`);
+            return (`未找到拣货识别数据`);
         }
-    });
+    };
+    $(container).find("h2").html(title);
+    $(document).attr("title", title);
 }
 
 var initRf = function () {
@@ -64,7 +66,7 @@ var initRf = function () {
         created: function () {
         },
         mounted: function () {
-            initShipment();
+            initPick();
             if (_paperid) {
                 $(container).find("#over").on("click", function () {
                     if (_paperid) {
