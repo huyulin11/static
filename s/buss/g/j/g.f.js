@@ -1,5 +1,17 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 
+var defaultSucFun = function (data) {
+    if (typeof data == "string") data = JSON.parse(data);
+    if (data.code >= 0) {
+        layer.msg("保存成功！");
+        if (window.datagrid && window.datagrid.loadData) {
+            window.datagrid.loadData();
+        }
+    } else {
+        layer.msg(data.msg);
+    }
+};
+
 class GF {
     layerOpen(confs) {
         if ($(window).width() < 960) {
@@ -112,14 +124,7 @@ class GF {
                     content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
                 });
             },
-            success: function (data) {
-                if (typeof data == "string") data = JSON.parse(data);
-                if (data.code >= 0) {
-                    layer.msg("保存成功！");
-                } else {
-                    layer.msg(data.msg);
-                }
-            }
+            success: defaultSucFun
         };
         $.extend(pp, params);
         $.ajax(pp);
@@ -163,7 +168,7 @@ class GF {
             timeout: 3000,
             success: function (data) {
                 html = data;
-                if (callback) { callback(data); }
+                if (callback) { callback(data); } else { defaultSucFun(data); }
             }
         });
         return html;

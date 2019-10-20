@@ -2,6 +2,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
+import "./shipment.main.detail.edit.seq.js";
 
 let params = {
 	pagId: 'paging',
@@ -43,7 +44,11 @@ let params = {
 		colkey: "sequence",
 		name: "执行序列",
 		renderData: function (rowindex, data, rowdata, column) {
-			return data;
+			if (rowdata.delflag == "1") {
+				return data;
+			}
+			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "<a class='editSeq'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}, {
 		colkey: "updatetime",
