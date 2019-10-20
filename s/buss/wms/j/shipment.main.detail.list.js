@@ -40,6 +40,12 @@ let params = {
 			return gf.getStatusDesc(rowindex, data, rowdata, column);
 		}
 	}, {
+		colkey: "sequence",
+		name: "执行序列",
+		renderData: function (rowindex, data, rowdata, column) {
+			return data;
+		}
+	}, {
 		colkey: "updatetime",
 		name: "时间",
 		renderData: function (rowindex, data, rowdata, column) {
