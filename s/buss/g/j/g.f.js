@@ -163,7 +163,7 @@ class GF {
             data: params,
             url: targetUrl,
             dataType: dataType,// 这里的dataType就是返回回来的数据格式了html,xml,json
-            async: false,
+            async: true,
             cache: false,// 设置是否缓存，默认设置成为true，当需要每次刷新都需要执行数据库操作的话，需要设置成为false
             timeout: 3000,
             success: function (data) {

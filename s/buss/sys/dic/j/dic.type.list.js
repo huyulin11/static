@@ -84,7 +84,7 @@ function mgr(dictype) {
 		title: "明细",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/sys/dic/h/sysDicAddUI.html?dictype=' + dictype
+		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html?dictype=' + dictype
 	});
 }
 
@@ -93,7 +93,7 @@ function detail(dictype) {
 		title: "明细",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/sys/dic/h/sysDicEditUI.html?dictype=' + dictype
+		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype
 	});
 }
 
@@ -102,7 +102,7 @@ function view(dictype) {
 		title: "明细",
 		type: 2,
 		area: ["600px", "80%"],
-		content: '/s/buss/sys/dic/h/sysDicEditUI.html?dictype=' + dictype + '&model=VIEW'
+		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype + '&model=VIEW'
 	});
 }
 
@@ -111,7 +111,7 @@ function add() {
 		title: "新增",
 		type: 2,
 		area: localStorage.layerArea.split(","),
-		content: '/s/buss/sys/dic/h/sysDicAddUI.html'
+		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html'
 	});
 }
 function del() {
@@ -122,14 +122,6 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/sys/dic/type/deleteEntity.shtml';
-		var s = gf.ajax(url, {
-			ids: cbox.join(",")
-		}, "json");
-		if (s.code >= 0) {
-			layer.msg('删除成功');
-			window.datagrid.loadData();
-		} else {
-			layer.msg('删除失败' + s.msg);
-		}
+		gf.ajax(url, { ids: cbox.join(",") }, "json");
 	});
 }

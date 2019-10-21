@@ -33,17 +33,18 @@ var whenEditInputEnter = function (that) {
     var data = td.find("input").val();
     var taskexesid = tr.children('td').eq(2).html();
     var url = '/agvImmediateTask/editEntity.shtml';
-    var s = gf.ajax(url, {
+    gf.ajax(url, {
         "ImmediateTaskFormMap.taskexesid": taskexesid,
         "ImmediateTaskFormMap.json": data
-    }, "json");
-    if (s.code >= 0) {
-        layer.msg('修改成功！');
-        window.datagrid.loadData();
-    } else {
-        layer.msg('修改失败：' + s.msg);
-        td.find("input").focus();
-    }
+    }, "json", function (s) {
+        if (s.code >= 0) {
+            layer.msg('修改成功！');
+            window.datagrid.loadData();
+        } else {
+            layer.msg('修改失败：' + s.msg);
+            td.find("input").focus();
+        }
+    });
 
     var td = $(that).parents("td");
     var data = td.find("input").data("orivalue");

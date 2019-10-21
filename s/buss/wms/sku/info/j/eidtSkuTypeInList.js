@@ -48,20 +48,21 @@ var whenEditInputEnter = function () {
     var data = $currentTd.find("input").val();
     var currentid = tr.find("input:checkbox").val();
     var url = '/sku/info/editEntity.shtml';
-    var s = gf.ajax(url, {
+    gf.ajax(url, {
         "skuInfoFormMap.id": currentid,
         "skuInfoFormMap.type": data
-    }, "json");
-    localStorage.setItem("refreshSkuInfo", 1);
-    if (s.code >= 0) {
-        layer.msg('修改成功！');
-        $currentTd.find("div.changable").find("span").html(data);
-        _toggle();
-        window.datagrid.loadData();
-    } else {
-        layer.msg('修改失败：' + s.msg);
-        $currentTd.find("input").focus();
-    }
+    }, "json", function (s) {
+        localStorage.setItem("refreshSkuInfo", 1);
+        if (s.code >= 0) {
+            layer.msg('修改成功！');
+            $currentTd.find("div.changable").find("span").html(data);
+            _toggle();
+            window.datagrid.loadData();
+        } else {
+            layer.msg('修改失败：' + s.msg);
+            $currentTd.find("input").focus();
+        }
+    });
 }
 
 var _toggle = function () {

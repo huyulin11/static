@@ -76,14 +76,6 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/armact/deleteEntity.shtml';
-		var s = gf.ajax(url, {
-			ids: cbox.join(",")
-		}, "json");
-		if (s.code >= 0) {
-			layer.msg('删除成功');
-			window.datagrid.loadData();
-		} else {
-			layer.msg(s.msg);
-		}
+		gf.ajax(url, { ids: cbox.join(",") }, "json");
 	});
 }

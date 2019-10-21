@@ -58,26 +58,37 @@ let cols = [{
 
 if (localStorage.projectKey == "BJJK_HUIRUI") {
 	cols = cols.concat({
-		colkey: "status",
+		colkey: "targetAlloc",
 		name: "目标货位",
 		renderData: function (rowindex, data, rowdata, column) {
-			let s = gf.ajax('/bd/conf.shtml?table=RECEIPT_ALLOC_ITEM', { key: rowdata.paperid }, "json");
-			var info = "";
-			for (var item of s) {
-				info = info + item.value + "<br/>";
-			}
-			if (!info) { info = "未找到执行信息！"; }
-			return info;
+			return `<span class='targetAlloc' data-paperid='${rowdata.paperid}'></span>`;
 		}
 	});
 }
+
+var findAllocs = function (that) {
+	gf.ajax('/bd/conf.shtml?table=RECEIPT_ALLOC_ITEM', { key: $(that).data("paperid") }, "json", function (s) {
+		var info = "";
+		for (var item of s) {
+			info = info + item.value + "<br/>";
+		}
+		if (!info) { info = "未找到执行信息！"; }
+		$(that).html(info);
+		return info;
+	});
+};
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: cols,
 	jsonUrl: `/receipt/main/find.shtml?receipttype=${_receipttype}`,
 	checkbox: true,
-	serNumber: true
+	serNumber: true,
+	callback: function () {
+		$(".targetAlloc").each(function () {
+			findAllocs(this);
+		});
+	}
 });
 $("#search").on("click", function () {
 	var searchParams = $("#searchForm").serialize();

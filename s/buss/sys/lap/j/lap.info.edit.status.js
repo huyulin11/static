@@ -33,17 +33,10 @@ var whenEditInputEnter = function (that) {
     var data = td.find("input").val();
     var currentid = tr.find("input:checkbox").val();
     var url = '/sys/lap/editEntity.shtml';
-    var s = gf.ajax(url, {
+    gf.ajax(url, {
         "lapInfoFormMap.id": currentid,
         "lapInfoFormMap.name": data
     }, "json");
-    if (s.code >= 0) {
-        layer.msg('修改成功！');
-        window.datagrid.loadData();
-    } else {
-        layer.msg('修改失败：' + s.msg);
-        td.find("input").focus();
-    }
 
     var td = $(that).parents("td");
     var data = td.find("input").data("orivalue");

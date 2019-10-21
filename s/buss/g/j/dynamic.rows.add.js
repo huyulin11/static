@@ -1,7 +1,7 @@
 $("#sub").on("click", function () {
     submitForm();
 });
-
+debugger
 var submitForm = function () {
     var hasNull = false;
     $("#form").find("input,select").each(function () {

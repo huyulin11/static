@@ -1,6 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { dictype } from "/s/buss/sys/dic/j/dic.type.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import "/s/buss/sys/dic/j/dic.type.add.js";
 
 var _conf = {
     container: "div#rows",

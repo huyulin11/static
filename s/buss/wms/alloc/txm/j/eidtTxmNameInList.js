@@ -33,18 +33,19 @@ var whenEditInputEnter = function (that) {
     var data = td.find("input").val();
     var currentid = tr.find("input:checkbox").val();
     var url = '/sku/txm/editEntity.shtml';
-    var s = gf.ajax(url, {
+    gf.ajax(url, {
         "skuInfoFormMap.id": currentid,
         "skuInfoFormMap.name": data
-    }, "json");
-    localStorage.setItem("refreshSkuInfo", 1);
-    if (s.code >= 0) {
-        layer.msg('修改成功！');
-        window.datagrid.loadData();
-    } else {
-        layer.msg('修改失败：' + s.msg);
-        td.find("input").focus();
-    }
+    }, "json", function (s) {
+        localStorage.setItem("refreshSkuInfo", 1);
+        if (s.code >= 0) {
+            layer.msg('修改成功！');
+            window.datagrid.loadData();
+        } else {
+            layer.msg('修改失败：' + s.msg);
+            td.find("input").focus();
+        }
+    });
 
     var td = $(that).parents("td");
     var data = td.find("input").data("orivalue");

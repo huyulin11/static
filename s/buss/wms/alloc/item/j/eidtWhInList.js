@@ -53,21 +53,21 @@ var doEditInputEnter = function () {
     }
     var currentid = tr.find("input:checkbox").val();
     var url = '/alloc/item/editEntity.shtml';
-    var s = gf.ajax(url, {
+    gf.ajax(url, {
         "allocItemFormMap.id": currentid,
         "allocItemFormMap.whId": data
-    }, "json");
-    if (s.code >= 0) {
-        layer.msg('修改成功！');
-        $currentTd.find("div.changable").find("span").html(data);
-        _toggle();
-        window.datagrid.loadData();
-    } else {
-        layer.msg('修改失败：' + s.msg);
-        $currentTd.find("input").focus();
-    }
+    }, "json", function (s) {
+        if (s.code >= 0) {
+            layer.msg('修改成功！');
+            $currentTd.find("div.changable").find("span").html(data);
+            _toggle();
+            window.datagrid.loadData();
+        } else {
+            layer.msg('修改失败：' + s.msg);
+            $currentTd.find("input").focus();
+        }
+    });
 }
-
 
 var _toggle = function () {
     $("html").find("div.editable").each(function () {

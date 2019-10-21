@@ -88,14 +88,15 @@ function toBut(b) {
 function showBut() {
 	$("#divbut").css("display", "block");
 	var url = '/resources/findByButtom.shtml';
-	var data = gf.ajax(url, null, "json");
-	if (data != null) {
-		var bb = $("#but");
-		bb.html('');
-		for (var i = 0; i < data.length; i++) {
-			bb.append("<span onclick=\"toBut(this)\" id=\"span_" + data[i].id + "\">" + data[i].buttom + "</span>");
+	gf.ajax(url, null, "json", function (data) {
+		if (data != null) {
+			var bb = $("#but");
+			bb.html('');
+			for (var i = 0; i < data.length; i++) {
+				bb.append("<span onclick=\"toBut(this)\" id=\"span_" + data[i].id + "\">" + data[i].buttom + "</span>");
+			}
+		} else {
+			layer.msg("获取按扭列表失败！");
 		}
-	} else {
-		layer.msg("获取按扭列表失败！");
-	}
+	});
 }
