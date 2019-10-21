@@ -1,0 +1,32 @@
+.wrap {
+    margin: 20px auto;
+    width: 403px;
+    height: 600px;
+    position: relative;
+}
+
+label:nth-of-type(4) {
+    border-right: none;
+}
+
+label span {
+    cursor: pointer;
+}
+
+label div {
+    width: 403px;
+    height: 568px;
+    position: absolute;
+    left: 0;
+    top: 31px;
+    /* background: #eeeeee; */
+    display: none;
+}
+
+label input {
+    width: 0;
+}
+
+input:checked+div {
+    display: block;
+}

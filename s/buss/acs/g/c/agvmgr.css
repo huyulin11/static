@@ -161,6 +161,14 @@ select {
 	background-image: url(/s//i/icon/windowCenterOpen.png);
 }
 
+#settingHideDiv.close {
+	background-image: url(/s//i/icon/settingClose.png);
+}
+
+#settingHideDiv.open {
+	background-image: url(/s//i/icon/settingOpen.png);
+}
+
 .withBorder {
 	border: 1px dotted #f7f7f7;
 }
@@ -202,6 +210,10 @@ input.bigSearch {
 	width: 100%;
 }
 
+#settingContainer {
+	width: 100%;
+}
+
 @media screen and (min-width:920px) {
 	#rootContainer {
 		width: 900px;
@@ -213,6 +225,10 @@ input.bigSearch {
 
 	.fixed {
 		width: 300px;
+	}
+
+	#settingContainer {
+		width: 600px;
 	}
 
 	#liftContainer {

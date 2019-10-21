@@ -338,7 +338,42 @@ class GF {
             }
         }
         return dataStr;
-    }
+    };
+    getButtonsHtml(targets) {
+        var index = 1;
+        var numInLine = 7;
+        var tmpStr = "";
+        var buttons = ``;
+        for (var target of targets) {
+            var tmpItemStr;
+            if (typeof (target) == "number" || typeof (target) == "string") {
+                tmpItemStr = `<td><button data-id='${target}'>${target}</button></td>`;
+            } else {
+                tmpItemStr = `<td><button data-id='${target.id}'>${target.name}-${target.id}</button></td>`;
+            }
+            tmpStr = tmpStr + tmpItemStr;
+            if (index >= numInLine) {
+                buttons = `${buttons}<tr>${tmpStr}</tr>`;
+                index = 1;
+                tmpStr = "";
+            } else {
+                index++;
+            }
+        }
+        if (tmpStr) {
+            buttons = `${buttons}<tr>${tmpStr}</tr>`;
+        }
+        var rtn = `<div id='targets'><table>${buttons}</table></div>`;
+        return rtn;
+    };
+    getTargets() {
+        var arr = [];
+        $("div#targets button.choosed").each(function () {
+            var id = $(this).data("id");
+            arr.push(id);
+        });
+        return arr;
+    };
 }
 
 var gf = new GF();

@@ -1,6 +1,7 @@
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import "./rf.picking.setting.js";
 
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
@@ -57,6 +58,40 @@ var initPick = function () {
     };
     $(container).find("h2").html(title);
     $(document).attr("title", title);
+
+    $("#topCtrlContainer").prepend("<div id='settingHideDiv' class='close hideToggle' data-target='div#settingContainer'></div>");
+    var showCtrl = function (that) {
+        var thatTarget = $(that).data("target");
+        $(thatTarget).show(100);
+        $(that).removeClass("close");
+        $(that).addClass("open");
+    }
+
+    var hideCtrl = function (that) {
+        var thatTarget = $(that).data("target");
+        $(thatTarget).hide(100);
+        $(that).removeClass("open");
+        $(that).addClass("close");
+    }
+
+    var hideAllCtrl = function (thatTarget) {
+        $("#topCtrlContainer").find("div.hideToggle").each(function () {
+            var target = $(this).data("target");
+            if (target != thatTarget) {
+                hideCtrl(this);
+            }
+        });
+    }
+
+    $("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
+        hideAllCtrl($(this).data("target"));
+        if ($(this).hasClass("open")) {
+            hideCtrl(this);
+        } else {
+            showCtrl(this);
+        }
+    });
+
 }
 
 var initRf = function () {
