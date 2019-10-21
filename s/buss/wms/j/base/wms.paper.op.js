@@ -32,8 +32,7 @@ var initPaperOp = function (tasktype, model) {
 
     let tempBtns = [];
     if (localStorage.projectKey == "CSY_DAJ") {
-        tempBtns = [btns.add, btns.detail, btns.edit, btns.send,
-        btns.cancel, btns.del, btns.refresh,];
+        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.cancel, btns.del, btns.refresh,];
         if (_tasktype == "inventory") {
             tempBtns = tempBtns.concat(btns.whichAgv);
         }
@@ -49,6 +48,10 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = [btns.refresh,];
                 tempBtns = tempBtns.concat(btns.combineVNA);
                 tempBtns = tempBtns.concat(btns.combineCold);
+            } else if (model == "PICKED") {
+                tempBtns = [btns.refresh,];
+                tempBtns = tempBtns.concat(btns.pickVNA);
+                tempBtns = tempBtns.concat(btns.pickCold);
             } else {
                 tempBtns = tempBtns.concat(btns.taked);
                 tempBtns = tempBtns.concat(btns.pickOne);

@@ -42,12 +42,12 @@ let params = {
 		}
 	}, {
 		colkey: "sequence",
-		name: "执行序列",
+		name: "执行优先级",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
+			if (rowdata.delflag == "1" || rowdata.status == "1" || rowdata.status == "4") {
 				return data;
 			}
-			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;"
 				+ "<a class='editSeq'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}, {
