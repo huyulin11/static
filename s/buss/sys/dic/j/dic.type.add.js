@@ -1,4 +1,8 @@
-import "/s/buss/g/j/dynamic.rows.add.js";
+import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
+
+$("#sub").on("click", function () {
+    submitForm();
+});
 
 $("input#dictype0").on("change", function () {
     var data = $(this).data("vvvv-" + "remark");

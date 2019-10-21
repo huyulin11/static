@@ -1,5 +1,5 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
-import "/s/buss/g/j/dynamic.rows.add.js";
+import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
 
 var _conf;
 
@@ -27,5 +27,9 @@ _conf = {
         notnull: true,
     },]
 }
+
+$("#sub").on("click", function () {
+    submitForm();
+});
 
 initRows(_conf);

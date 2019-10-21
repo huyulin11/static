@@ -1,8 +1,4 @@
-$("#sub").on("click", function () {
-    submitForm();
-});
-debugger
-var submitForm = function () {
+export var submitForm = function () {
     var hasNull = false;
     $("#form").find("input,select").each(function () {
         if ($(this).data("notnull") && !$(this).val()) {
