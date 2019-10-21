@@ -270,60 +270,32 @@ var deleverStereotypeHandler = function () {
 	allDisabled();
 	var targetSite = 0;
 	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
-		btn: ['袜机1号', '袜机2号', '袜机3号', '袜机4号', '袜机5号', '袜机6号', '袜机7号', '袜机8号', '袜机9号', '袜机10号', '定型1号', '定型2号', '定型3号', '定型4号'],
+		btn: ['袜机线尾1号-4001', '袜机线尾2号-4002', '袜机线尾3号-4003', '定型1号-2054', '定型2号-2055', '定型3号-2056', '定型4号-2057'],
 		btn1: function () {
-			targetSite = 2001;
+			targetSite = 4001;
 			doTask(agvId, "DELIVER", targetSite);
 		},
 		btn2: function () {
-			targetSite = 2002;
+			targetSite = 4002;
 			doTask(agvId, "DELIVER", targetSite);
 		},
 		btn3: function () {
-			targetSite = 2003;
+			targetSite = 4003;
 			doTask(agvId, "DELIVER", targetSite);
 		},
 		btn4: function () {
-			targetSite = 2004;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn5: function () {
-			targetSite = 2005;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn6: function () {
-			targetSite = 2006;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn7: function () {
-			targetSite = 2007;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn8: function () {
-			targetSite = 2008;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn9: function () {
-			targetSite = 2009;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn10: function () {
-			targetSite = 2010;
-			doTask(agvId, "DELIVER", targetSite);
-		},
-		btn11: function () {
 			targetSite = 2054;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn12: function () {
+		btn5: function () {
 			targetSite = 2055;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn13: function () {
+		btn6: function () {
 			targetSite = 2056;
 			doTask(agvId, "DELIVER", targetSite);
 		},
-		btn14: function () {
+		btn7: function () {
 			targetSite = 2057;
 			doTask(agvId, "DELIVER", targetSite);
 		}
@@ -402,13 +374,17 @@ var gotoInitsHandler = function () {
 	allDisabled();
 	var targetSite = 0;
 	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
-		btn: ['原料库1号-3054', '原料库2号-3055'],
+		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056'],
 		btn1: function () {
 			targetSite = 3054;
 			doTask(agvId, "TRANSPORT", targetSite);
 		},
 		btn2: function () {
 			targetSite = 3055;
+			doTask(agvId, "TRANSPORT", targetSite);
+		},
+		btn3: function () {
+			targetSite = 3056;
 			doTask(agvId, "TRANSPORT", targetSite);
 		}
 	});
@@ -417,9 +393,9 @@ var gotoInitsHandler = function () {
 var gotoStereotypeHandler = function () {
 	allDisabled();
 	var targets = [];
-	for (var i = 2011; i <= 2053; i++) {
-		if (i == 2041) continue;
-		targets.push({ id: i, name: i - 2010 + "号" });
+	for (var i = 2006; i <= 2053; i++) {
+		if (i == 2042) continue;
+		targets.push({ id: i, name: i - 2005 + "号" });
 	}
 	var buttons = getButtonsHtml(targets);
 	var indexOfTips = layer.confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
