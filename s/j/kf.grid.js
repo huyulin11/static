@@ -48,18 +48,26 @@ var jsonRequest = function (conf, callback) {
 	});
 };
 
-var restoreBgColor = function (tr) {// 不勾选设置背景色
+var renderFun = function (obj, rowindex, data, rowdata, clm) {
+	if (obj.renderData) {
+		return obj.renderData(rowindex, data, rowdata, clm);
+	} else {
+		return data;
+	}
+}
+
+var restoreBgColor = function (tr) {
 	for (var i = 0; i < tr.childNodes.length; i++) {
 		tr.childNodes[i].style.backgroundColor = "";
 	}
 };
-var setBgColor = function (tr) { // 设置背景色
+var setBgColor = function (tr) {
 	for (var i = 0; i < tr.childNodes.length; i++) {
 		tr.childNodes[i].style.backgroundColor = "#D4D4D4";
 	}
 };
 
-var highlight = function () { // 设置行的背景色
+var highlight = function () {
 	var evt = arguments[0] || window.event;
 	var chkbox = evt.srcElement || evt.target;
 	var tr = chkbox.parentNode.parentNode;
@@ -70,6 +78,10 @@ var fixhead = function () {
 	for (var i = 0; i <= $('.t_table .pp-list tr:last').find('td:last').index(); i++) {
 		$('.pp-list th').eq(i).css('width', ($('.t_table .pp-list tr:last').find('td').eq(i).width()) + 2);
 	}
+};
+
+var tag = function (tag) {
+	return document.createElement(tag);
 };
 
 var _fieldModel = {
@@ -89,16 +101,14 @@ var _columns;
 var _tee = "1-0";
 var _nb = '20';
 var _img;
-var _params;
 
 var dataGrid = function (params) {
-	_params = params;
-	_conf = $.extend(_defaultConf, _params);
+	_conf = $.extend(_defaultConf, params);
 	_confTreeGrid = _conf.treeGrid;
 	_columns = _conf.columns;
 
-	for (var oneColumn of _columns) {
-		for (var p in _fieldModel)
+	for (let oneColumn of _columns) {
+		for (let p in _fieldModel)
 			if (_fieldModel.hasOwnProperty(p) && (!oneColumn.hasOwnProperty(p)))
 				oneColumn[p] = _fieldModel[p];
 	}
@@ -124,53 +134,53 @@ var dataGrid = function (params) {
 
 	var renderHead = function (divid) {
 		if (!_conf.isFixed) { return; }
-		var table = document.createElement("table");
+		var table = tag("table");
 		table.id = "table_head";
 		table.className = "pp-list table table-striped table-bordered";
 		table.setAttribute("style", "margin-bottom: -3px;");
 		divid.appendChild(table);
-		var thead = document.createElement('thead');
+		var thead = tag('thead');
 		table.appendChild(thead);
-		var tr = document.createElement('tr');
+		var tr = tag('tr');
 		tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 		thead.appendChild(tr);
 		var cn = "";
 		if (!_conf.serNumber) {
 			cn = "none";
 		}
-		var th = document.createElement('th');
+		var th = tag('th');
 		th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
 		tr.appendChild(th);
 		var cbk = "";
 		if (!_conf.checkbox) {
 			cbk = "none";
 		}
-		var cth = document.createElement('th');
+		var cth = tag('th');
 		cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
-		var chkbox = document.createElement("INPUT");
+		var chkbox = tag("INPUT");
 		chkbox.type = "checkbox";
 		chkbox.setAttribute("pagId", _conf.pagId);
-		chkbox.onclick = checkboxbind.bind();
+		$(chkbox).on("click", checkboxbind);
 		cth.appendChild(chkbox);
 		tr.appendChild(cth);
-		$.each(_columns, function (o) {
+		for (let oneColumn of _columns) {
 			var isHide;
-			if (typeof (_columns[o].hide) == "function") {
-				isHide = _columns[o].hide();
+			if (typeof (oneColumn.hide) == "function") {
+				isHide = oneColumn.hide();
 			} else {
-				isHide = _columns[o].hide;
+				isHide = oneColumn.hide;
 			}
 			if (!isHide) {
-				var th = document.createElement('th');
-				th.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
-				th.innerHTML = _columns[o].name;
+				var th = tag('th');
+				th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
+				th.innerHTML = oneColumn.name;
 				tr.appendChild(th);
 			}
-		});
+		};
 	};
 
 	var renderBody = function (divid, jsonData) {
-		var tdiv = document.createElement("div");
+		var tdiv = tag("div");
 		var h = '';
 		var xy = "hidden";
 		if (_conf.height == "100%") {
@@ -190,58 +200,58 @@ var dataGrid = function (params) {
 		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;background: white;');
 		tdiv.className = "t_table";
 		divid.appendChild(tdiv);
-		var table2 = document.createElement("table");
+		var table2 = tag("table");
 		table2.id = "mytable";
 		table2.className = "pp-list table table-striped table-bordered";
 		table2.setAttribute("style", "margin-bottom: -3px;");
 
 		tdiv.appendChild(table2);
-		var tbody = document.createElement("tbody");
+		var tbody = tag("tbody");
 		table2.appendChild(tbody);
 		var json = _getValueByName(jsonData, _conf.records);
 
 		if (!_conf.isFixed) {
-			var tr = document.createElement('tr');
+			var tr = tag('tr');
 			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 			tbody.appendChild(tr);
 			var cn = "";
 			if (!_conf.serNumber) {
 				cn = "none";
 			}
-			var th = document.createElement('th');
+			var th = tag('th');
 			th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
 			tr.appendChild(th);
 			var cbk = "";
 			if (!_conf.checkbox) {
 				cbk = "none";
 			}
-			var cth = document.createElement('th');
+			var cth = tag('th');
 			cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
-			var chkbox = document.createElement("INPUT");
+			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 			chkbox.setAttribute("pagId", _conf.pagId);
-			chkbox.onclick = checkboxbind.bind();
+			$(chkbox).on("click", checkboxbind);
 			cth.appendChild(chkbox);
 			tr.appendChild(cth);
-			$.each(_columns, function (o) {
+			for (let oneColumn of _columns) {
 				var isHide;
-				if (typeof (_columns[o].hide) == "function") {
-					isHide = _columns[o].hide();
+				if (typeof (oneColumn.hide) == "function") {
+					isHide = oneColumn.hide();
 				} else {
-					isHide = _columns[o].hide;
+					isHide = oneColumn.hide;
 				}
 				if (!isHide) {
-					var th = document.createElement('th');
-					th.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
-					th.innerHTML = _columns[o].name;
+					var th = tag('th');
+					th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
+					th.innerHTML = oneColumn.name;
 					tr.appendChild(th);
 				}
-			});
+			};
 		}
 
 		$.each(json, function (d) {
 			if (gf.notNull(json[d])) {
-				var tr = document.createElement('tr');
+				var tr = tag('tr');
 				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 				_tee = _tee.substring(0, _tee.length - 2);
@@ -263,71 +273,58 @@ var dataGrid = function (params) {
 				}
 				var td_d = tr.insertCell(-1);
 				td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
-				var chkbox = document.createElement("INPUT");
+				var chkbox = tag("INPUT");
 				chkbox.type = "checkbox";
 				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
 				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], _confTreeGrid.id));
 				chkbox.setAttribute("pid", _getValueByName(json[d], _confTreeGrid.pid));
 				chkbox.setAttribute("_l_key", "checkbox");
 				chkbox.value = _getValueByName(json[d], _conf.checkValue);
-				chkbox.onclick = highlight.bind(this);
+				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
-				$.each(_columns, function (o) {
+				for (let oneColumn of _columns) {
 					var isHide;
-					if (typeof (_columns[o].hide) == "function") {
-						isHide = _columns[o].hide();
+					if (typeof (oneColumn.hide) == "function") {
+						isHide = oneColumn.hide();
 					} else {
-						isHide = _columns[o].hide;
+						isHide = oneColumn.hide;
 					}
 					if (!isHide) {
 						var td_o = tr.insertCell(-1);
-						td_o.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";vertical-align: middle;");
+						td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
 
 						var rowdata = json[d];
 						var dtee = _tee;
 						rowdata.dtee = dtee;
-						var clm = _columns[o].colkey;
-						var data = gf.notEmpty(_getValueByName(rowdata, clm));
+						var colKey = oneColumn.colkey;
+						var data = gf.notEmpty(_getValueByName(rowdata, colKey));
 
 						if (_confTreeGrid.tree) {
 							var lt = _confTreeGrid.name.split(",");
-							if (gf.inArray(lt, clm)) {
-								var divtree = document.createElement("div");
+							if (gf.inArray(lt, colKey)) {
+								var divtree = tag("div");
 								divtree.className = "ly_tree";
-								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + _columns[o].align + ";");
-								var img = document.createElement('img');
+								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + oneColumn.align + ";");
+								var img = tag('img');
 								img.src = "/s/i/tree/nolines_minus.gif";
-								img.onclick = datatree.bind();
+								$(img).on("click", datatree);
 								divtree.appendChild(img);
 								td_o.appendChild(divtree);
-								var divspan = document.createElement("span");
+								var divspan = tag("span");
 								divspan.className = "l_test";
 								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 
-								if (_columns[o].renderData) {
-									divspan.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-								} else {
-									divspan.innerHTML = data;
-								}
+								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
 								td_o.appendChild(divspan);
 							} else {
-								if (_columns[o].renderData) {
-									td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-								} else {
-									td_o.innerHTML = data;
-								}
+								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
 							}
 							;
 						} else {
-							if (_columns[o].renderData) {
-								td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-							} else {
-								td_o.innerHTML = data;
-							}
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
 						}
-						;
 					}
-				});
+				};
 				if (_confTreeGrid.tree) {
 					if (_confTreeGrid.type == 1) {
 						_tee = _tee + "-0";
@@ -347,53 +344,53 @@ var dataGrid = function (params) {
 		var totalRecords = _getValueByName(jsonData, _conf.totalRecords);
 		var totalPages = _getValueByName(jsonData, _conf.totalPages);
 		var pageNow = _getValueByName(jsonData, _conf.pageNow);
-		var bdiv = document.createElement("div");
+		var bdiv = tag("div");
 		bdiv.setAttribute("style", "vertical-align: middle;");
 
 		bdiv.className = "span12 center";
 		divid.appendChild(bdiv);
-		var btable = document.createElement("table");
+		var btable = tag("table");
 		btable.width = "100%";
 		bdiv.appendChild(btable);
-		var btr = document.createElement("tr");
+		var btr = tag("tr");
 		btable.appendChild(btr);
-		var btd_1 = document.createElement("td");
+		var btd_1 = tag("td");
 		btd_1.style.textAlign = "left";
 		btr.appendChild(btd_1);
-		var btddiv = document.createElement("div");
+		var btddiv = tag("div");
 		btddiv.className = "pagination";
 		btd_1.appendChild(btddiv);
-		var divul = document.createElement("ul");
+		var divul = tag("ul");
 		btddiv.appendChild(divul);
-		var ulli = document.createElement("li");
+		var ulli = tag("li");
 		ulli.className = "prev";
 		divul.appendChild(ulli);
-		var lia = document.createElement("a");
+		var lia = tag("a");
 		lia.href = "javascript:void(0);";
 		ulli.appendChild(lia);
 		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;每页&nbsp;' + _conf.pageSize + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
 
-		var btd_1 = document.createElement("td");
+		var btd_1 = tag("td");
 		btd_1.style.textAlign = "right";
 		btr.appendChild(btd_1);
-		var divul_2 = document.createElement("ul");
+		var divul_2 = tag("ul");
 		divul_2.className = "dataTables_paginate paging_bootstrap pagination";
 		btd_1.appendChild(divul_2);
 
 		if (pageNow > 1) {
-			var ulli_2 = document.createElement("li");
+			var ulli_2 = tag("li");
 			divul_2.appendChild(ulli_2);
-			var lia_2 = document.createElement("a");
-			lia_2.onclick = pageBind.bind();
+			var lia_2 = tag("a");
+			$(lia_2).on("click", pageBind);
 			lia_2.id = "pagNum_" + (pageNow - 1);
 			lia_2.href = "javascript:void(0);";
 			lia_2.innerHTML = '← prev';
 			ulli_2.appendChild(lia_2);
 		} else {
-			var ulli_2 = document.createElement("li");
+			var ulli_2 = tag("li");
 			ulli_2.className = "prev disabled";
 			divul_2.appendChild(ulli_2);
-			var lia_2 = document.createElement("a");
+			var lia_2 = tag("a");
 			lia_2.href = "javascript:void(0);";
 			lia_2.innerHTML = '← prev';
 			ulli_2.appendChild(lia_2);
@@ -402,38 +399,38 @@ var dataGrid = function (params) {
 		var startpage = pg.start;
 		var endpage = pg.end;
 		if (startpage != 1) {
-			var ulli_3 = document.createElement("li");
+			var ulli_3 = tag("li");
 			divul_2.appendChild(ulli_3);
-			var lia_3 = document.createElement("a");
-			lia_3.onclick = pageBind.bind();
+			var lia_3 = tag("a");
+			$(lia_3).on("click", pageBind);
 			lia_3.href = "javascript:void(0);";
 			lia_3.id = "pagNum_1";
 			lia_3.innerHTML = '1...';
 			ulli_3.appendChild(lia_3);
 		}
 		/*if (endpage - startpage <= 0) {
-			var ulli_4 = document.createElement("li");
+			var ulli_4 = tag("li");
 			ulli_4.className = "active";
 			divul_2.appendChild(ulli_4);
-			var lia_4 = document.createElement("a");
+			var lia_4 = tag("a");
 			lia_4.href = "javascript:void(0);";
 			lia_4.innerHTML = '1';
 			ulli_4.appendChild(lia_4);
 		}*/
 		for (var i = startpage; i <= endpage; i++) {
 			if (i == pageNow) {
-				var ulli_5 = document.createElement("li");
+				var ulli_5 = tag("li");
 				ulli_5.className = "active";
 				divul_2.appendChild(ulli_5);
-				var lia_5 = document.createElement("a");
+				var lia_5 = tag("a");
 				lia_5.href = "javascript:void(0);";
 				lia_5.innerHTML = i;
 				ulli_5.appendChild(lia_5);
 			} else {
-				var ulli_5 = document.createElement("li");
+				var ulli_5 = tag("li");
 				divul_2.appendChild(ulli_5);
-				var lia_5 = document.createElement("a");
-				lia_5.onclick = pageBind.bind();
+				var lia_5 = tag("a");
+				$(lia_5).on("click", pageBind);
 				lia_5.href = "javascript:void(0);";
 				lia_5.id = "pagNum_" + i;
 				lia_5.innerHTML = i;
@@ -443,29 +440,29 @@ var dataGrid = function (params) {
 
 		}
 		if (endpage != totalPages) {
-			var ulli_6 = document.createElement("li");
+			var ulli_6 = tag("li");
 			divul_2.appendChild(ulli_6);
-			var lia_6 = document.createElement("a");
-			lia_6.onclick = pageBind.bind();
+			var lia_6 = tag("a");
+			$(lia_6).on("click", pageBind);
 			lia_6.href = "javascript:void(0);";
 			lia_6.id = "pagNum_" + totalPages;
 			lia_6.innerHTML = '...' + totalPages;
 			ulli_6.appendChild(lia_6);
 		}
 		if (pageNow >= totalPages) {
-			var ulli_7 = document.createElement("li");
+			var ulli_7 = tag("li");
 			ulli_7.className = "prev disabled";
 			divul_2.appendChild(ulli_7);
-			var lia_7 = document.createElement("a");
+			var lia_7 = tag("a");
 			lia_7.href = "javascript:void(0);";
 			lia_7.innerHTML = 'next → ';
 			ulli_7.appendChild(lia_7);
 		} else {
-			var ulli_7 = document.createElement("li");
+			var ulli_7 = tag("li");
 			ulli_7.className = "next";
 			divul_2.appendChild(ulli_7);
-			var lia_7 = document.createElement("a");
-			lia_7.onclick = pageBind.bind();
+			var lia_7 = tag("a");
+			$(lia_7).on("click", pageBind);
 			lia_7.href = "javascript:void(0);";
 			lia_7.id = "pagNum_" + (pageNow + 1);
 			lia_7.innerHTML = 'next → ';
@@ -474,125 +471,110 @@ var dataGrid = function (params) {
 		;
 	};
 	var treeHtml = function (tbody, data) {
-		if (!data)
-			return;
+		if (!data) return;
 		var jsonTree = data.children;
-		if (jsonTree) {
-			$.each(jsonTree, function (jt) {
-				var tte = false;
-				if (jsonTree[jt].children) {
-					tte = true;
-				}
-				var tr = document.createElement('tr');
-				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
-				_tee = _tee.substring(0, _tee.length - 2);
-				_tee = _tee + "-" + sm;
-				tr.setAttribute("d-tree", _tee);
-				tbody.appendChild(tr);
-				var cn = "";
-				if (!_conf.serNumber) {
-					cn = "none";
-				}
-				var ntd_d = tr.insertCell(-1);
-				ntd_d.setAttribute("style", "text-align:center;width: 15px;display: " + cn + ";");
-				var rowindex = tr.rowIndex;
-				ntd_d.innerHTML = rowindex;
-				var cbk = "";
-				if (!_conf.checkbox) {
-					cbk = "none";
-				}
-				var td_d = tr.insertCell(-1);
-				td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
-				var chkbox = document.createElement("INPUT");
-				chkbox.type = "checkbox";
-
-				for (let v in jsonTree[jt]) { if (jsonTree[jt][v]) chkbox.setAttribute("data-" + v, jsonTree[jt][v]); };
-				chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], "id"));
-				chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
-
-				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
-				chkbox.onclick = highlight.bind(this);
-				td_d.appendChild(chkbox);
-				$.each(_columns, function (o) {
-					var isHide;
-					if (typeof (_columns[o].hide) == "function") {
-						isHide = _columns[o].hide();
-					} else {
-						isHide = _columns[o].hide;
-					}
-					if (!isHide) {
-						var td_o = tr.insertCell(-1);
-						td_o.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";vertical-align: middle;");
-						var rowdata = jsonTree[jt];
-						var dtee = _tee;
-						rowdata.dtee = dtee;
-						var clm = _columns[o].colkey;
-						var data = gf.notEmpty(_getValueByName(rowdata, clm));
-
-						if (_confTreeGrid.tree) {
-							var lt = _confTreeGrid.name.split(",");
-							if (gf.inArray(lt, _columns[o].colkey)) {
-								var divtree = document.createElement("div");
-								divtree.className = "ly_tree";
-								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + _columns[o].align + ";margin-left: " + _nb + "px;");
-								if (tte) {
-									var img = document.createElement('img');
-									img.src = "/s/i/tree/nolines_minus.gif";
-									img.onclick = datatree.bind();
-									divtree.appendChild(img);
-								}
-								td_o.appendChild(divtree);
-								var divspan = document.createElement("span");
-								divspan.className = "l_test";
-								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-								if (_columns[o].renderData) {
-									divspan.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-								} else {
-									divspan.innerHTML = data;
-								}
-								td_o.appendChild(divspan);
-							} else {
-								if (_columns[o].renderData) {
-									td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-								} else {
-									td_o.innerHTML = data;
-								}
-							}
-							;
-						} else {
-							if (_columns[o].renderData) {
-								td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-							} else {
-								td_o.innerHTML = data;
-							}
-						}
-						;
-					}
-				});
-				if (tte) {
-					//1-1
-					_tee = _tee + "-0";
-					_nb = parseInt(_nb, 10) + 20;
-					treeHtml(tbody, jsonTree[jt]);
-				}
-
-			});
+		if (!jsonTree) return;
+		$.each(jsonTree, function (jt) {
+			var tte = false;
+			if (jsonTree[jt].children) {
+				tte = true;
+			}
+			var tr = tag('tr');
+			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+			var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 			_tee = _tee.substring(0, _tee.length - 2);
-			_nb = 20;
-		}
+			_tee = _tee + "-" + sm;
+			tr.setAttribute("d-tree", _tee);
+			tbody.appendChild(tr);
+			var cn = "";
+			if (!_conf.serNumber) {
+				cn = "none";
+			}
+			var ntd_d = tr.insertCell(-1);
+			ntd_d.setAttribute("style", "text-align:center;width: 15px;display: " + cn + ";");
+			var rowindex = tr.rowIndex;
+			ntd_d.innerHTML = rowindex;
+			var cbk = "";
+			if (!_conf.checkbox) {
+				cbk = "none";
+			}
+			var td_d = tr.insertCell(-1);
+			td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
+			var chkbox = tag("INPUT");
+			chkbox.type = "checkbox";
+
+			for (let v in jsonTree[jt]) { if (jsonTree[jt][v]) chkbox.setAttribute("data-" + v, jsonTree[jt][v]); };
+			chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], "id"));
+			chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
+
+			chkbox.setAttribute("_l_key", "checkbox");
+			chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
+			$(chkbox).on("click", highlight);
+			td_d.appendChild(chkbox);
+			for (let oneColumn of _columns) {
+				var isHide;
+				if (typeof (oneColumn.hide) == "function") {
+					isHide = oneColumn.hide();
+				} else {
+					isHide = oneColumn.hide;
+				}
+				if (!isHide) {
+					var td_o = tr.insertCell(-1);
+					td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
+					var rowdata = jsonTree[jt];
+					var dtee = _tee;
+					rowdata.dtee = dtee;
+					var colKey = oneColumn.colkey;
+					var data = gf.notEmpty(_getValueByName(rowdata, colKey));
+
+					if (_confTreeGrid.tree) {
+						var lt = _confTreeGrid.name.split(",");
+						if (gf.inArray(lt, colKey)) {
+							var divtree = tag("div");
+							divtree.className = "ly_tree";
+							divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + oneColumn.align + ";margin-left: " + _nb + "px;");
+							if (tte) {
+								var img = tag('img');
+								img.src = "/s/i/tree/nolines_minus.gif";
+								$(img).on("click", datatree);
+								divtree.appendChild(img);
+							}
+							td_o.appendChild(divtree);
+							var divspan = tag("span");
+							divspan.className = "l_test";
+							divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+							td_o.appendChild(divspan);
+						} else {
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+						}
+					} else {
+						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+					}
+				}
+			};
+			if (tte) {
+				//1-1
+				_tee = _tee + "-0";
+				_nb = parseInt(_nb, 10) + 20;
+				treeHtml(tbody, jsonTree[jt]);
+			}
+
+		});
+		_tee = _tee.substring(0, _tee.length - 2);
+		_nb = 20;
 	};
+
 	var treeSimpleHtml = function (tbody, jsonTree, obj) {
 		var tte = false;
-		_tee = _tee + "-0"
+		_tee = _tee + "-0";
 		$.each(jsonTree, function (jt) {
 			if (gf.notNull(jsonTree[jt])) {
 				var jsb = _getValueByName(jsonTree[jt], _confTreeGrid.pid);
 				var ob = _getValueByName(obj, _confTreeGrid.id);
 				if (jsb == ob) {
 					tte = true;
-					var tr = document.createElement('tr');
+					var tr = tag('tr');
 					tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 					var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 					_tee = _tee.substring(0, _tee.length - 2);
@@ -613,69 +595,55 @@ var dataGrid = function (params) {
 					}
 					var td_d = tr.insertCell(-1);
 					td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
-					var chkbox = document.createElement("INPUT");
+					var chkbox = tag("INPUT");
 					chkbox.type = "checkbox";
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
 					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], _confTreeGrid.id));
 					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], _confTreeGrid.pid));
 					chkbox.setAttribute("_l_key", "checkbox");
 					chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
-					chkbox.onclick = highlight.bind(this);
+					$(chkbox).on("click", highlight);
 					td_d.appendChild(chkbox);
-					$.each(_columns, function (o) {
+					for (let oneColumn of _columns) {
 						var isHide;
-						if (typeof (_columns[o].hide) == "function") {
-							isHide = _columns[o].hide();
+						if (typeof (oneColumn.hide) == "function") {
+							isHide = oneColumn.hide();
 						} else {
-							isHide = _columns[o].hide;
+							isHide = oneColumn.hide;
 						}
 						if (!isHide) {
 							var td_o = tr.insertCell(-1);
-							td_o.setAttribute("style", "text-align:" + _columns[o].align + ";width: " + _columns[o].width + ";vertical-align: middle;");
+							td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
 							var rowdata = jsonTree[jt];
 							var dtee = _tee;
 							rowdata.dtee = dtee;
-							var clm = _columns[o].colkey;
-							var data = gf.notEmpty(_getValueByName(rowdata, clm));
+							var colKey = oneColumn.colkey;
+							var data = gf.notEmpty(_getValueByName(rowdata, colKey));
 
 							if (_confTreeGrid.tree) {
 								var lt = _confTreeGrid.name.split(",");
-								if (gf.inArray(lt, _columns[o].colkey)) {
-									var divtree = document.createElement("div");
+								if (gf.inArray(lt, colKey)) {
+									var divtree = tag("div");
 									divtree.className = "ly_tree";
-									divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + _columns[o].align + ";margin-left: " + _nb + "px;");
-									_img = document.createElement('img');
+									divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + oneColumn.align + ";margin-left: " + _nb + "px;");
+									_img = tag('img');
 									_img.src = "/s/i/tree/nolines_minus.gif";
-									_img.onclick = datatree.bind();
+									$(_img).on("click", datatree);
 									divtree.appendChild(_img);
 									td_o.appendChild(divtree);
-									var divspan = document.createElement("span");
+									var divspan = tag("span");
 									divspan.className = "l_test";
 									divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-									if (_columns[o].renderData) {
-										divspan.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-									} else {
-										divspan.innerHTML = data;
-									}
+									divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
 									td_o.appendChild(divspan);
 								} else {
-									if (_columns[o].renderData) {
-										td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-									} else {
-										td_o.innerHTML = data;
-									}
+									td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
 								}
-								;
 							} else {
-								if (_columns[o].renderData) {
-									td_o.innerHTML = _columns[o].renderData(rowindex, data, rowdata, clm);
-								} else {
-									td_o.innerHTML = data;
-								}
+								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
 							}
-							;
 						}
-					});
+					}
 					var o = jsonTree[jt];
 					delete jsonTree[jt];
 					_nb = parseInt(_nb, 10) + 20;
@@ -692,10 +660,6 @@ var dataGrid = function (params) {
 		_tee = _tee.substring(0, _tee.length - 2);
 		_nb = parseInt(_nb, 10) - 20;;
 	};
-	Array.prototype.ly_each = function (f) {
-		for (var i = 0; i < this.length; i++)
-			f(this[i], i, this);
-	};
 	var dataGridUp = function (jsonUrl) {
 		var upOne = function (tr) {
 			if (tr.rowIndex > 0) {
@@ -704,7 +668,7 @@ var dataGrid = function (params) {
 				getChkBox(tr).checked = true;
 			}
 		};
-		var arr = $A(_container.children[0].children.mytable.rows).reverse(); // 反选
+		var arr = [].concat(_container.children[0].children.mytable.rows).reverse();
 		if (arr.length > 0 && getChkBox(arr[arr.length - 1]).checked) {
 			for (var i = arr.length - 1; i >= 0; i--) {
 				if (getChkBox(arr[i]).checked) {
@@ -714,14 +678,14 @@ var dataGrid = function (params) {
 				}
 			}
 		}
-		arr.reverse().ly_each(function (tr) {
+		for (let tr of arr.reverse()) {
 			var ck = getChkBox(tr);
 			if (ck.checked) {
 				var cd = ck.getAttribute("data-" + "cid");
-				$("input:checkbox[pid='" + cd + "']").attr('checked', 'true');// 让子类选中
+				$("input:checkbox[pid='" + cd + "']").attr('checked', 'true');
 				upOne(tr);
 			}
-		});
+		};
 		var row = grid.rowline();
 		var data = [];
 		$.each(row, function (i) {
@@ -742,7 +706,7 @@ var dataGrid = function (params) {
 				getChkBox(tr).checked = true;
 			}
 		};
-		var arr = $A(_container.children[0].children.mytable.rows);
+		var arr = [].concat(_container.children[0].children.mytable.rows);
 		if (arr.length > 0 && getChkBox(arr[arr.length - 1]).checked) {
 			for (var i = arr.length - 1; i >= 0; i--) {
 				if (getChkBox(arr[i]).checked) {
@@ -752,27 +716,26 @@ var dataGrid = function (params) {
 				}
 			}
 		}
-		arr.ly_each(function (tr) {
+		for (let tr of arr) {
 			var ck = getChkBox(tr);
 			if (ck.checked) {
 				var cd = ck.getAttribute("data-" + "cid");
-				$("input:checkbox[pid='" + cd + "']").attr('checked', 'true');// 让子类选中
+				$("input:checkbox[pid='" + cd + "']").attr('checked', 'true');
 			}
-		});
-		arr.reverse().ly_each(function (tr) {
+		};
+		for (let tr of arr.reverse()) {
 			if (getChkBox(tr).checked)
 				downOne(tr);
-		});
+		};
 		var row = grid.rowline();
 		var data = [];
 		$.each(row, function (i) {
 			if (!isNaN(row[i].rowId)) {
 				data.push(_conf.checkValue + "[" + i + "]=" + row[i].rowId);
-				data.push("rowId[" + i + "]=" + row[i].rowNum);
 			} else {
 				data.push(_conf.checkValue + "[" + i + "]=" + i);
-				data.push("rowId[" + i + "]=" + row[i].rowNum);
 			}
+			data.push("rowId[" + i + "]=" + row[i].rowNum);
 		});
 		$.ajax({
 			type: 'POST',
@@ -841,15 +804,10 @@ var dataGrid = function (params) {
 		return tr.cells[1].firstChild;
 
 	};
-	function $A(arrayLike) {
-		for (var i = 0, ret = []; i < arrayLike.length; i++)
-			ret.push(arrayLike[i]);
-		return ret;
-	};
 	Function.prototype.bind = function () {
-		var __method = this, args = $A(arguments), object = args.shift();
+		var __method = this, args = [].concat(arguments), object = args.shift();
 		return function () {
-			return __method.apply(object, args.concat($A(arguments)));
+			return __method.apply(object, args.concat(arguments));
 		};
 	};
 
@@ -869,7 +827,7 @@ var dataGrid = function (params) {
 	var rowline = function () {
 		var cb = [];
 
-		var arr = $A(_container.children[0].children.mytable.rows);
+		var arr = [].concat(_container.children[0].children.mytable.rows);
 		for (var i = arr.length - 1; i > 0; i--) {
 			var cbox = getChkBox(arr[i]).value;
 			var row = arr[i].rowIndex;
@@ -878,7 +836,6 @@ var dataGrid = function (params) {
 			sort.rowId = cbox;
 			cb.push(sort);
 		}
-		;
 		return cb.reverse();
 	};
 	var pagesIndex = function (pagecode, pageNow, pageCount) {
@@ -908,7 +865,6 @@ var dataGrid = function (params) {
 		return se;
 	};
 	var loadData = function () {
-		$.extend(_conf, _params);
 		initGrid(_conf);
 	};
 	var setOptions = function (params) {
