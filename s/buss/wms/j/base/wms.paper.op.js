@@ -50,6 +50,7 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = tempBtns.concat(btns.combineCold);
             } else if (model == "PICKED") {
                 tempBtns = [btns.refresh,];
+                tempBtns = tempBtns.concat(btns.taked);
                 tempBtns = tempBtns.concat(btns.pickVNA);
                 tempBtns = tempBtns.concat(btns.pickCold);
             } else {
