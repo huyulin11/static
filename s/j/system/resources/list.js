@@ -16,6 +16,9 @@ window.datagrid = dataGrid({
 		colkey: "type",
 		name: "菜单类型",
 		width: "70px",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.get("MENU_TYPE", data);
+		}
 	}, {
 		colkey: "resKey",
 		name: "唯一KEY"

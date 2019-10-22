@@ -17,6 +17,7 @@ div.op {
 
 div.addOne {
 	background-image: url(/s/i/addplus.png);
+	position: fixed;
 }
 
 div.delOne {
