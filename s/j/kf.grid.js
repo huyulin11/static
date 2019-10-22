@@ -146,17 +146,17 @@ var dataGrid = function (params) {
 		thead.appendChild(tr);
 		var cn = "";
 		if (!_conf.serNumber) {
-			cn = "none";
+			cn = "display: none";
 		}
 		var th = tag('th');
-		th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
+		th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;" + cn + ";");
 		tr.appendChild(th);
 		var cbk = "";
 		if (!_conf.checkbox) {
-			cbk = "none";
+			cbk = "display: none";
 		}
 		var cth = tag('th');
-		cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
+		cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;" + cbk + ";");
 		var chkbox = tag("INPUT");
 		chkbox.type = "checkbox";
 		chkbox.setAttribute("pagId", _conf.pagId);
@@ -216,17 +216,17 @@ var dataGrid = function (params) {
 			tbody.appendChild(tr);
 			var cn = "";
 			if (!_conf.serNumber) {
-				cn = "none";
+				cn = "display: none";
 			}
 			var th = tag('th');
-			th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;display: " + cn + ";");
+			th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;" + cn + ";");
 			tr.appendChild(th);
 			var cbk = "";
 			if (!_conf.checkbox) {
-				cbk = "none";
+				cbk = "display: none";
 			}
 			var cth = tag('th');
-			cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;display: " + cbk + ";");
+			cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;" + cbk + ";");
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 			chkbox.setAttribute("pagId", _conf.pagId);
@@ -260,19 +260,19 @@ var dataGrid = function (params) {
 				tbody.appendChild(tr);
 				var cn = "";
 				if (!_conf.serNumber) {
-					cn = "none";
+					cn = "display: none";
 				}
 				var ntd_d = tr.insertCell(-1);
-				ntd_d.setAttribute("style", "text-align:center;width: 15px;display: " + cn + ";");
+				ntd_d.setAttribute("style", "text-align:center;width: 15px;" + cn + ";");
 				var rowindex = tr.rowIndex;
 
 				ntd_d.innerHTML = rowindex;
 				var cbk = "";
 				if (!_conf.checkbox) {
-					cbk = "none";
+					cbk = "display: none";
 				}
 				var td_d = tr.insertCell(-1);
-				td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
+				td_d.setAttribute("style", "text-align:center;width: 28px;" + cbk + ";");
 				var chkbox = tag("INPUT");
 				chkbox.type = "checkbox";
 				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
@@ -488,18 +488,18 @@ var dataGrid = function (params) {
 			tbody.appendChild(tr);
 			var cn = "";
 			if (!_conf.serNumber) {
-				cn = "none";
+				cn = "display: none";
 			}
 			var ntd_d = tr.insertCell(-1);
-			ntd_d.setAttribute("style", "text-align:center;width: 15px;display: " + cn + ";");
+			ntd_d.setAttribute("style", "text-align:center;width: 15px;" + cn + ";");
 			var rowindex = tr.rowIndex;
 			ntd_d.innerHTML = rowindex;
 			var cbk = "";
 			if (!_conf.checkbox) {
-				cbk = "none";
+				cbk = "display: none";
 			}
 			var td_d = tr.insertCell(-1);
-			td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
+			td_d.setAttribute("style", "text-align:center;width: 28px;" + cbk + ";");
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 
@@ -583,18 +583,18 @@ var dataGrid = function (params) {
 					tbody.appendChild(tr);
 					var cn = "";
 					if (!_conf.serNumber) {
-						cn = "none";
+						cn = "display: none";
 					}
 					var ntd_d = tr.insertCell(-1);
-					ntd_d.setAttribute("style", "text-align:center;width: 15px;display: " + cn + ";");
+					ntd_d.setAttribute("style", "text-align:center;width: 15px;" + cn + ";");
 					var rowindex = tr.rowIndex;
 					ntd_d.innerHTML = rowindex;
 					var cbk = "";
 					if (!_conf.checkbox) {
-						cbk = "none";
+						cbk = "display: none";
 					}
 					var td_d = tr.insertCell(-1);
-					td_d.setAttribute("style", "text-align:center;width: 28px;display: " + cbk + ";");
+					td_d.setAttribute("style", "text-align:center;width: 28px;" + cbk + ";");
 					var chkbox = tag("INPUT");
 					chkbox.type = "checkbox";
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
