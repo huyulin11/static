@@ -34,6 +34,17 @@ var agvOk = function () {
     }
 };
 
+var btns = [
+    { srcid: "rf_priority", id: "priority", name: "优先级" },
+    { srcid: "rf_receipt", id: "receipt", name: "冷库入库" },
+    { srcid: "rf_picking", id: "picking", name: "拣配" },
+    { srcid: "rf_shipment", id: "stockOut", name: "冷库出库" },
+    { srcid: "rf_combine", id: "combine", name: "组盘" },
+    { srcid: "rf_fail", id: "failure", name: "机台故障" },
+    { srcid: "rf_alloc", id: "alloc", name: "查看库存" },
+    { id: "logout", name: "退出" },
+];
+
 export var initRf = function () {
     var vm = new Vue({
         data: {},
@@ -49,7 +60,20 @@ export var initRf = function () {
                 let title = "RF主界面";
                 $(container).find("h2").html(title);
                 $(document).attr("title", title);
-                $("#rootContainer").find("#logout").on("click", function () {
+
+                let btnsStr = gf.getButtonsTable({
+                    values: btns, numInLine: 2, style: `cellspacing="10px" cellspadding="1px"`,
+                    choose: function (value) {
+                        if (value.choosed == "ON") { return true; }
+                        return false;
+                    }, display: function (value) {
+                        if (value.choosed == "ON") { return true; }
+                        return false;
+                    },
+                });
+                $("#rootContainer").append(btnsStr);
+
+                $("#rootContainer").delegate("#logout", "click", function () {
                     window.location.href = "/logout.shtml";
                 });
                 $("#rootContainer").find("#priority,#failure").on("click", function () {

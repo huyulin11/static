@@ -333,25 +333,31 @@ class GF {
         }
         return dataStr;
     };
-    getButtonsHtml(targets, chooseCondition) {
-        var index = 1;
-        var numInLine = 7;
+    getButtonsTable(conf) {
+        var _numInLine = conf.numInLine ? conf.numInLine : 7;
+
         var tmpStr = "";
         var buttons = ``;
-        for (var target of targets) {
+        var index = 1;
+        for (var value of conf.values) {
             var tmpItemStr;
             var isChoosed = false;
-            if (chooseCondition) {
-                isChoosed = typeof chooseCondition == 'function' ? (chooseCondition(target)) : chooseCondition;
+            var isDisplay = true;
+            if (conf.choose) {
+                isChoosed = typeof conf.choose == 'function' ? (conf.choose(value)) : conf.choose;
             }
+            if (conf.display) {
+                isDisplay = typeof conf.display == 'function' ? (conf.display(value)) : conf.display;
+            }
+            if (!isDisplay) { continue; }
             let choosedStr = isChoosed ? ("class='choosed'") : "";
-            if (typeof (target) == "number" || typeof (target) == "string") {
-                tmpItemStr = `<td><button data-id='${target}' ${choosedStr}>${target}</button></td>`;
+            if (typeof (value) == "number" || typeof (value) == "string") {
+                tmpItemStr = `<td><button data-id='${value}' id='${value}' ${choosedStr}>${value}</button></td>`;
             } else {
-                tmpItemStr = `<td><button data-id='${target.id}' ${choosedStr}>${target.name}-${target.id}</button></td>`;
+                tmpItemStr = `<td><button data-id='${value.id}' id='${value.id}' ${choosedStr}>${value.name}${conf.showId ? "-" + value.id : ""}</button></td>`;
             }
             tmpStr = tmpStr + tmpItemStr;
-            if (index >= numInLine) {
+            if (index >= _numInLine) {
                 buttons = `${buttons}<tr>${tmpStr}</tr>`;
                 index = 1;
                 tmpStr = "";
@@ -362,7 +368,7 @@ class GF {
         if (tmpStr) {
             buttons = `${buttons}<tr>${tmpStr}</tr>`;
         }
-        var rtn = `<div id='targets'><table>${buttons}</table></div>`;
+        var rtn = `<div id='targets'><table ${conf.style ? conf.style : ""}>${buttons}</table></div>`;
         return rtn;
     };
     getTargets() {

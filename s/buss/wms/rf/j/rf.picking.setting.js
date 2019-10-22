@@ -31,11 +31,14 @@ var doInit = function (callback) {
             }
             for (let m of tabs) {
                 let obj = m[1];
-                let isChoosed = function (target) {
-                    if (target.choosed == "ON") { return true; }
-                    return false;
-                }
-                tabStrs += (`<div class='chooseDiv hidden' data-id='${obj.key}'>${gf.getButtonsHtml(obj.value, isChoosed)}</div>`);
+                let btnsStr = gf.getButtonsTable({
+                    values: obj.value,
+                    choose: function (value) {
+                        if (value.choosed == "ON") { return true; }
+                        return false;
+                    },
+                });
+                tabStrs += (`<div class='chooseDiv hidden' data-id='${obj.key}'>${btnsStr}</div>`);
             }
             var tables = "";
             tables = `<div class="wrap">${tabStrs}</div>`;
@@ -59,7 +62,7 @@ var container = function () {
     return $("div#settingMgr");
 }
 
-container().delegate("div[id='targets'] button", "click", function () {
+container().delegate("button", "click", function () {
     var that = $(this);
     if (that.hasClass("choosed")) {
         that.removeClass("choosed");
