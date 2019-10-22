@@ -92,9 +92,7 @@ $("html").delegate("button#save", "click", function () {
                 });
                 gf.ajax("/sys/lap/editEntity.shtml", { arr: JSON.stringify(arr) }, "json", function () {
                     if (data.code >= 0) {
-                        layer.msg("保存成功！", null, function () {
-                            location.reload();
-                        });
+                        layer.msg("保存成功！");
                     } else {
                         layer.msg(data.msg);
                     }
