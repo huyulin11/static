@@ -10,6 +10,13 @@ var defaultSucFun = function (data) {
     } else {
         layer.msg(data.msg);
     }
+}, defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
+    layer.open({
+        type: 1,
+        title: "出错啦！",
+        area: ['95%', '95%'],
+        content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
+    });
 };
 
 class GF {
@@ -116,14 +123,7 @@ class GF {
     };
     doAjax(params) {
         var pp = {
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                layer.open({
-                    type: 1,
-                    title: "出错啦！",
-                    area: ['95%', '95%'],
-                    content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
-                });
-            },
+            error: defaultErr,
             success: defaultSucFun
         };
         $.extend(pp, params);
@@ -131,14 +131,8 @@ class GF {
     };
     doAjaxSubmit(form, params) {
         var pp = {
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                layer.open({
-                    type: 1,
-                    title: "出错啦！",
-                    area: ['95%', '95%'],
-                    content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
-                });
-            }
+            error: defaultErr,
+            success: defaultSucFun
         };
         $.extend(pp, params);
         $(form).ajaxSubmit(pp);
@@ -339,17 +333,22 @@ class GF {
         }
         return dataStr;
     };
-    getButtonsHtml(targets) {
+    getButtonsHtml(targets, chooseCondition) {
         var index = 1;
         var numInLine = 7;
         var tmpStr = "";
         var buttons = ``;
         for (var target of targets) {
             var tmpItemStr;
+            var isChoosed = false;
+            if (chooseCondition) {
+                isChoosed = typeof chooseCondition == 'function' ? (chooseCondition(target)) : chooseCondition;
+            }
+            let choosedStr = isChoosed ? ("class='choosed'") : "";
             if (typeof (target) == "number" || typeof (target) == "string") {
-                tmpItemStr = `<td><button data-id='${target}'>${target}</button></td>`;
+                tmpItemStr = `<td><button data-id='${target}' ${choosedStr}>${target}</button></td>`;
             } else {
-                tmpItemStr = `<td><button data-id='${target.id}'>${target.name}-${target.id}</button></td>`;
+                tmpItemStr = `<td><button data-id='${target.id}' ${choosedStr}>${target.name}-${target.id}</button></td>`;
             }
             tmpStr = tmpStr + tmpItemStr;
             if (index >= numInLine) {
