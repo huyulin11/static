@@ -90,7 +90,7 @@ $("html").delegate("button#save", "click", function () {
                 container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
                     arr.push({ id: $(this).data("id"), choosed: $(this).hasClass("choosed") ? "ON" : "OFF" });
                 });
-                gf.ajax("/sys/lap/pickedWork.shtml", { arr: JSON.stringify(arr) }, "json", function () {
+                gf.ajax("/sys/lap/pickedSetting.shtml", { arr: JSON.stringify(arr) }, "json", function () {
                     if (data.code >= 0) {
                         layer.msg("保存成功！");
                     } else {
