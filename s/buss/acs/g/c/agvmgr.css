@@ -198,7 +198,7 @@ input.bigSearch {
 .fixed {
 	position: fixed;
 	display: none;
-	right: 10px;
+	right: 1%;
 	bottom: 65px;
 	background: #fff;
 	width: 70%;
@@ -207,11 +207,11 @@ input.bigSearch {
 }
 
 #liftContainer {
-	width: 100%;
+	width: 98%;
 }
 
 #settingContainer {
-	width: 100%;
+	width: 98%;
 }
 
 @media screen and (min-width:920px) {
