@@ -84,8 +84,18 @@ $("html").delegate("button#save", "click", function () {
         function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             if (data.code >= 0) {
-                layer.msg("保存成功！", null, function () {
-                    location.reload();
+                let arr = [];
+                container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
+                    arr.push({ id: $(this).data("id"), choosed: $(this).hasClass("choosed") ? "ON" : "OFF" });
+                });
+                gf.ajax("/sys/lap/editEntity.shtml", { arr: JSON.stringify(arr) }, "json", function () {
+                    if (data.code >= 0) {
+                        layer.msg("保存成功！", null, function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg(data.msg);
+                    }
                 });
             } else {
                 layer.msg(data.msg);
