@@ -35,15 +35,59 @@ var agvOk = function () {
 };
 
 var btns = [
-    { srcid: "rf_priority", id: "priority", name: "优先级" },
-    { srcid: "rf_receipt", id: "receipt", name: "冷库入库" },
-    { srcid: "rf_picking", id: "picking", name: "拣配" },
-    { srcid: "rf_shipment", id: "stockOut", name: "冷库出库" },
-    { srcid: "rf_combine", id: "combine", name: "组盘" },
-    { srcid: "rf_fail", id: "failure", name: "机台故障" },
-    { srcid: "rf_alloc", id: "alloc", name: "查看库存" },
+    { resKey: "rf_priority", id: "priority", name: "优先级" },
+    { resKey: "rf_receipt", id: "receipt", name: "冷库入库" },
+    { resKey: "rf_picking", id: "picking", name: "拣配" },
+    { resKey: "rf_shipment", id: "stockOut", name: "冷库出库" },
+    { resKey: "rf_combine", id: "combine", name: "组盘" },
+    { resKey: "rf_fail", id: "failure", name: "机台故障" },
+    { resKey: "rf_alloc", id: "alloc", name: "查看库存" },
     { id: "logout", name: "退出" },
 ];
+var initMain = function () {
+    let title = "RF主界面";
+    $(container).find("h2").html(title);
+    $(document).attr("title", title);
+
+    let btnsStr = gf.getButtonsTable({
+        values: btns, numInLine: 2, style: `cellspacing="10px" cellspadding="1px"`,
+        choose: function (value) {
+            if (value.choosed == "ON") { return true; }
+            return false;
+        }, display: function (value) {
+            if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
+                return true;
+            }
+            return false;
+        },
+    });
+    $("#rootContainer").append(btnsStr);
+
+    $("#rootContainer").delegate("#logout", "click", function () {
+        window.location.href = "/logout.shtml";
+    });
+    $("#rootContainer").find("#priority,#failure").on("click", function () {
+        layer.msg("尚未开通！");
+    });
+    $("#rootContainer").find("#picking").on("click", function () {
+        window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
+    });
+    $("#rootContainer").find("#combine").on("click", function () {
+        window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
+    });
+    $("#rootContainer").find("#receipt").on("click", function () {
+        window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
+    });
+    $("#rootContainer").find("#stockOut").on("click", function () {
+        window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=${escape("冷库出库")}&warehouse=2`;
+    });
+    $("#rootContainer").find("#alloc").on("click", function () {
+        window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
+    });
+    $(container).find("#agvOk").on("click", function () { agvOk(); });
+};
+
+let myRes;
 
 export var initRf = function () {
     var vm = new Vue({
@@ -52,50 +96,18 @@ export var initRf = function () {
         created: function () {
         },
         mounted: function () {
-            this.initMain();
-            gf.resizeTable();
+            $.ajax({
+                type: "POST",
+                url: '/resources/findMyRes.shtml',
+                dataType: 'json',
+                success: function (json) {
+                    myRes = json;
+                    initMain();
+                    gf.resizeTable();
+                }
+            });
         },
         methods: {
-            initMain: function () {
-                let title = "RF主界面";
-                $(container).find("h2").html(title);
-                $(document).attr("title", title);
-
-                let btnsStr = gf.getButtonsTable({
-                    values: btns, numInLine: 2, style: `cellspacing="10px" cellspadding="1px"`,
-                    choose: function (value) {
-                        if (value.choosed == "ON") { return true; }
-                        return false;
-                    }, display: function (value) {
-                        if (value.choosed == "ON") { return true; }
-                        return false;
-                    },
-                });
-                $("#rootContainer").append(btnsStr);
-
-                $("#rootContainer").delegate("#logout", "click", function () {
-                    window.location.href = "/logout.shtml";
-                });
-                $("#rootContainer").find("#priority,#failure").on("click", function () {
-                    layer.msg("尚未开通！");
-                });
-                $("#rootContainer").find("#picking").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
-                });
-                $("#rootContainer").find("#combine").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
-                });
-                $("#rootContainer").find("#receipt").on("click", function () {
-                    window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
-                });
-                $("#rootContainer").find("#stockOut").on("click", function () {
-                    window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=${escape("冷库出库")}&warehouse=2`;
-                });
-                $("#rootContainer").find("#alloc").on("click", function () {
-                    window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
-                });
-                $(container).find("#agvOk").on("click", function () { agvOk(); });
-            },
         },
     });
 }

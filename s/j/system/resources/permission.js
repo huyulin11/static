@@ -10,9 +10,7 @@ $.ajax({
 	dataType: 'json',
 	success: function (json) {
 		for (let index in json) {
-			$(
-				"input[name='resId']:checkbox[value='" + json[index].id
-				+ "']").prop('checked', 'true');
+			$("input[name='resId']:checkbox[value='" + json[index].id + "']").prop('checked', 'true');
 		}
 	}
 });
