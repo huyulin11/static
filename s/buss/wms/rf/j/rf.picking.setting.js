@@ -50,7 +50,9 @@ var container = function () {
     if ($("div#settingMgr").length == 0) {
         $("#settingContainer").append(
             `<fieldset>
-                <legend>过滤筛选操作<button id='save' style="min-height: 30px;width: 45px;">保存</button></legend>
+                <legend>过滤筛选操作（红色为选中）
+                <button id='save' style="min-height: 30px;width: 45px;">保存</button>
+                </legend>
                 <div id='settingMgr' class='withBorder'></div>
             </fieldset>`);
     }
