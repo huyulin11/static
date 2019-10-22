@@ -9,6 +9,7 @@ var doInit = function () {
 
             let tabs = new Map();
             for (var a of data) {
+                if (a.type != 'PICK' && a.type != 'PROD_LINE') { continue; }
                 let tab = tabs.get(a.type);
                 if (!tab) {
                     tab = {};
@@ -22,11 +23,12 @@ var doInit = function () {
             let tabStrs = "";
             for (let m of tabs) {
                 let obj = m[1];
-                tabStrs += (`<label>
-                    <span>${obj.key}</span>
-                    <input type="radio" name="tab">
-                    <div>${gf.getButtonsHtml(obj.value)}</div>
-                </label>`);
+                tabStrs += (
+                    `<label>
+                        <input type="radio" name="tab">
+                        <span>${obj.key == 'PICK' ? "按拣货点" : "按生产线"}</span>
+                        <div>${gf.getButtonsHtml(obj.value)}</div>
+                    </label>`);
             }
             var tables = "";
             tables = `<div class="wrap">${tabStrs}</div>`;
@@ -40,20 +42,21 @@ var container = function () {
     if ($("div#settingMgr").length == 0) {
         $("#settingContainer").append(
             `<fieldset>
-                <legend>过滤筛选操作</legend>
+                <legend>过滤筛选操作<button id='save' style="min-height: 30px;width: 45px;">保存</button></legend>
                 <div id='settingMgr' class='withBorder'>
                 </tr></table></div>
-                </fieldset>`);
+            </fieldset>`);
     }
     return $("div#settingMgr");
 }
 
-container().delegate("button", "click", function () {
-    $("div#settingMgr button").attr("disabled", "disabled");
-    setTimeout(() => {
-        if (!confirm('是否确认执行该操作?')) { return; }
-        doWork($(this).data("devid"), $(this).attr("id"));
-    }, 500);
+container().delegate("div[id='targets'] button", "click", function () {
+    var that = $(this);
+    if (that.hasClass("choosed")) {
+        that.removeClass("choosed");
+    } else {
+        that.addClass("choosed");
+    }
 });
 
 var doWork = function (devid, taskname) {
