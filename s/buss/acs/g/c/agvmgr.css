@@ -462,3 +462,8 @@ button.small {
 	width: 45px;
 	min-height: 30px;
 }
+
+#rootContainer h2 {
+	font-weight: bold;
+	font-size: 30px;
+}
