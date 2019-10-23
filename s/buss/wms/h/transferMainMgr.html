@@ -54,5 +54,8 @@
 <div class="table-responsive" id="info">
     <div id="paging" class="pagclass"></div>
 </div>
-<script type="module" src="/s/buss/wms/j/transfer.main.list.js"></script>
-<script src="/s/buss/g/j/jquery/jquery.jsSelect.js"></script>
+<script type="module">
+    import "/s/buss/wms/j/transfer.main.list.js";
+    import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+    renderAll();
+</script>

@@ -18,10 +18,10 @@ let _conf = {
 export var init = function (tasktype) {
     _tasktype = tasktype;
     initUdf(_tasktype, _conf);
-    _initPage();
+    _initRows();
 }
 
-var _initPage = function () {
+var _initRows = function () {
     _paperid = gf.urlParam("paperid");
 
     if (!_paperid) {

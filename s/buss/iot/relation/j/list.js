@@ -1,5 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -30,7 +31,7 @@ window.datagrid = dataGrid({
 	checkbox: false,
 	serNumber: true,
 	callback: function () {
-		$.getScript("/s/buss/g/j/jquery/jquery.jsSelect.js");
+		renderAll();
 	}
 });
 $("#search").on("click", function () {// 绑定查询按扭

@@ -1,4 +1,39 @@
-export var initUdf = function (_tasktype, _conf) {
+import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+
+let _tasktype;
+var _initCols = function () {
+    let _cols;
+    if (_tasktype == 'inventory') {
+        _cols = [
+            { label: "盘点类型", name: "inventorytype", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, id: "inventorytype" },
+        ];
+    } else if (_tasktype == 'receipt') {
+        _cols = [
+            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
+            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetPlace", alias: "name" },
+        ];
+    } else if (_tasktype == 'shipment') {
+        _cols = [
+            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
+            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetPlace", alias: "name" },
+        ];
+    }
+
+    let html = "";
+    for (let col of _cols) {
+        html += `<div class="col">
+            <label>${col.label}</label>
+            <select class="form-control ${col.type}" data-patten="${col.patten}" name="${col.name}"
+                autocomplete="off" data-notnull="${col.notnull}" data-alias="${col.alias}" id="${col.id}"></select>
+        </div>`;
+    }
+    $("#cols").html(html);
+    renderAll();
+}
+
+export var initUdf = function (tasktype, _conf) {
+    _tasktype = tasktype;
+    _initCols();
     if (_tasktype == 'inventory') {
         _conf.items = [{
             key: "allocItem",
