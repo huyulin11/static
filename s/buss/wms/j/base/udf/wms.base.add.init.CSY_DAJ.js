@@ -5,17 +5,17 @@ var _initCols = function () {
     let _cols;
     if (_tasktype == 'inventory') {
         _cols = [
-            { label: "盘点类型", name: "inventorytype", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, id: "inventorytype" },
+            { label: "盘点类型", name: "inventorytype", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype" },
         ];
     } else if (_tasktype == 'receipt') {
         _cols = [
-            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
-            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetPlace", alias: "name" },
+            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
+            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "targetPlace", alias: "name" },
         ];
     } else if (_tasktype == 'shipment') {
         _cols = [
-            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
-            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetPlace", alias: "name" },
+            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
+            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "targetPlace", alias: "name" },
         ];
     }
 

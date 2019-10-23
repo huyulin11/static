@@ -1,34 +1,51 @@
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+import { getInputHtml } from "/s/buss/g/j/g.input.render.js";
 
 let _tasktype;
 var _initCols = function () {
     let _cols;
     if (_tasktype == 'inventory') {
         _cols = [
-            { label: "盘点类型", name: "inventorytype", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, id: "inventorytype" },
+            { name: "盘点类型", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype" },
         ];
     } else if (_tasktype == 'receipt') {
         _cols = [
-            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
+            { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
         ];
     } else if (_tasktype == 'shipment') {
         _cols = [
-            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
-            { label: "产线", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
+            { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
+            {
+                name: "拣货点",
+                key: "company",
+                notnull: true,
+                type: "associating-input",
+                searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=",
+                containerofinput: "#panelBody",
+                showcol: 'name'
+            },
+            {
+                name: "产线",
+                key: "name",
+                notnull: true,
+                type: "associating-input",
+                searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
+                containerofinput: "#panelBody",
+                showcol: 'name'
+            },
         ];
     } else if (_tasktype == "transfer") {
         _cols = [
-            { label: "源仓库", name: "sourcewh", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "sourcewh" },
-            { label: "目标仓库", name: "targetwh", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetwh" },
+            { name: "源仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "sourcewh" },
+            { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "targetwh" },
         ];
     }
 
     let html = "";
     for (let col of _cols) {
+        let selectStr = getInputHtml(col);
         html += `<div class="col">
-            <label>${col.label}</label>
-            <select class="form-control ${col.type}" data-patten="${col.patten}" name="${col.name}"
-                autocomplete="off" data-notnull="${col.notnull}" data-alias="${col.alias}" id="${col.id}"></select>
+            <label>${col.name}</label>${selectStr}
         </div>`;
     }
     $("#cols").html(html);
