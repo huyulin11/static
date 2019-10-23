@@ -1,8 +1,10 @@
 import { gv } from "/s/buss/g/j/g.v.js";
+import { getInputHtml } from "/s/buss/g/j/g.input.render.js";
 
 var _conf, _initData;
 
-var getItem = (data) => {
+
+export var getItem = (data) => {
     var ss = "";
     let serial = _conf.serial++;
     for (let item of _conf.items) {
@@ -23,28 +25,7 @@ var getItem = (data) => {
             }
             itemDesc = `${item.name + ':' + value}`;
         } else {
-            if ("select" == item.type) {
-                let dics = gv.getT(item.dic);
-                itemDesc += `<option value="">----选择【${item.name}】----</option>`;
-                for (let dic of dics) {
-                    let selectFlag = (data && dic.key == data[item.key]) ? "selected" : "";
-                    itemDesc += `<option ${selectFlag} value="${dic.key}">${dic.value}</option>`;
-                }
-                itemDesc = `<select id="${item.key}${serial}" name="${item.key}[${serial}]"
-            data-notnull='${item.notnull}'>${itemDesc}</select>`;
-            } else if ("associating-input" == item.type) {
-                itemDesc = `
-            <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
-                class="form-control associating-input" value="${value}"
-                data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
-                data-showcol='${item.showcol}' placeholder="输入:${item.name}" 
-                data-notnull='${item.notnull}' autocomplete="off">`;
-            } else {
-                itemDesc = `
-            <input type="text" id="${item.key}${serial}" name="${item.key}[${serial}]" 
-                class="form-control" value="${value}"
-                placeholder="输入:${item.name}" data-notnull='${item.notnull}' autocomplete="off">`;
-            }
+            itemDesc += getInputHtml(item, value, serial);
         }
         ss += `<div class="col">${itemDesc}</div>`;
     }

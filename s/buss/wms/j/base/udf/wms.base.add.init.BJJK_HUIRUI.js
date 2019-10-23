@@ -14,6 +14,7 @@ var _initCols = function () {
     } else if (_tasktype == 'shipment') {
         _cols = [
             { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
+            { label: "产线", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "warehouse" },
         ];
     } else if (_tasktype == "transfer") {
         _cols = [
