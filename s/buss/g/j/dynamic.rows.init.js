@@ -2,11 +2,11 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { getInputHtml } from "/s/buss/g/j/g.input.render.js";
 
 var _conf, _initData;
-
+let _serial = 0;
 
 export var getItem = (data) => {
     var ss = "";
-    let serial = _conf.serial++;
+    _serial++;
     for (let item of _conf.items) {
         var itemDesc = "";
         var value = "";
@@ -25,17 +25,17 @@ export var getItem = (data) => {
             }
             itemDesc = `${item.name + ':' + value}`;
         } else {
-            itemDesc += getInputHtml(item, value, serial);
+            itemDesc += getInputHtml(item, value, _serial);
         }
         ss += `<div class="col">${itemDesc}</div>`;
     }
     let _status = (data) ? "UPDATE" : "NEW";
     ss += `<div class="col" style="display:none;">
-    <input type="text" id="_status${serial}" name="_status[${serial}]" 
-    value="${_status}" data-value="${_status}" autocomplete="off"></div>`;
+        <input type="text" id="_status${_serial}" name="_status[${_serial}]" 
+        value="${_status}" data-value="${_status}" autocomplete="off"></div>`;
     let delOp = `<div title="删除" class="delOne op item-op"></div>`;
     return `
-    <div class="${_conf.targetClass}" id="${_conf.targetClass}-${serial}">
+    <div class="${_conf.targetClass}" id="${_conf.targetClass}-${_serial}">
     ${ss}${_conf.model == 'VIEW' ? '' : delOp}
     </div>`;
 }

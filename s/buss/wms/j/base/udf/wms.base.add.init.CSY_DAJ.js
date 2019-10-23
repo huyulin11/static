@@ -1,31 +1,29 @@
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+import { getInputHtml } from "/s/buss/g/j/g.input.render.js";
 
 let _tasktype;
 var _initCols = function () {
     let _cols;
     if (_tasktype == 'inventory') {
         _cols = [
-            { label: "盘点类型", name: "inventorytype", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype" },
+            { name: "盘点类型", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype" },
         ];
     } else if (_tasktype == 'receipt') {
         _cols = [
-            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
-            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "targetPlace", alias: "name" },
+            { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
+            { name: "出入口", type: "jsSelect", patten: "ACS_CACHE_CABLE", notnull: true, key: "targetPlace", alias: "name" },
         ];
     } else if (_tasktype == 'shipment') {
         _cols = [
-            { label: "目标仓库", name: "warehouse", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
-            { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "targetPlace", alias: "name" },
+            { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
+            { name: "出入口", type: "jsSelect", patten: "ACS_CACHE_CABLE", notnull: true, key: "targetPlace", alias: "name" },
         ];
     }
 
     let html = "";
     for (let col of _cols) {
-        html += `<div class="col">
-            <label>${col.label}</label>
-            <select class="form-control ${col.type}" data-patten="${col.patten}" name="${col.name}"
-                autocomplete="off" data-notnull="${col.notnull}" data-alias="${col.alias}" id="${col.id}"></select>
-        </div>`;
+        let selectStr = getInputHtml(col);
+        html += `<div class="col"><label>${col.name}</label>${selectStr}</div>`;
     }
     $("#cols").html(html);
     renderAll();

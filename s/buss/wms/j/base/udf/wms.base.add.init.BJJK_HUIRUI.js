@@ -44,9 +44,7 @@ var _initCols = function () {
     let html = "";
     for (let col of _cols) {
         let selectStr = getInputHtml(col);
-        html += `<div class="col">
-            <label>${col.name}</label>${selectStr}
-        </div>`;
+        html += `<div class="col"><label>${col.name}</label>${selectStr}</div>`;
     }
     $("#cols").html(html);
     renderAll();
