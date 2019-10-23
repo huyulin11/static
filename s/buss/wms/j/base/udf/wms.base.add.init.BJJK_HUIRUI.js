@@ -19,7 +19,6 @@ var _initCols = function () {
         _cols = [
             { label: "源仓库", name: "sourcewh", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "sourcewh" },
             { label: "目标仓库", name: "targetwh", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetwh" },
-            //  { label: "出入口", name: "targetPlace", type: "jsSelect", patten: "WAREHOUSE", notnull: true, id: "targetPlace", alias: "name" },
         ];
     }
 
