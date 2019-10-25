@@ -29,12 +29,15 @@ var doInit = function (callback) {
                         <span>${obj.key == 'PICK' ? "按拣货点" : "按生产线"}</span>
                     </label>`);
             }
+
+            let chooseInfo = localStorage.pickedSetting;
+            if (chooseInfo) chooseInfo = JSON.parse(chooseInfo);
             for (let m of tabs) {
                 let obj = m[1];
                 let btnsStr = gf.getButtonsTable({
                     values: obj.value,
                     choose: function (value) {
-                        if (value.choosed == "ON") { return true; }
+                        if (chooseInfo) if (chooseInfo[value.id] == "ON") { return true; }
                         return false;
                     },
                 });
@@ -85,54 +88,18 @@ container().delegate("input.chooseRadio", "change", function () {
 $("html").delegate("button#save", "click", function () {
     let _value = $("html").find(`input.chooseRadio:checked`).data("id");
     if (!_value) { return; }
-    gf.ajax("/bd/setConf.shtml?table=conf_key", { key: "PICKED_TYPE", value: _value }, "json",
-        function (data) {
-            if (typeof data == "string") data = JSON.parse(data);
-            if (data.code >= 0) {
-                let arr = [];
-                container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
-                    arr.push({ id: $(this).data("id"), choosed: $(this).hasClass("choosed") ? "ON" : "OFF" });
-                });
-                gf.ajax("/sys/lap/pickedSetting.shtml", { arr: JSON.stringify(arr) }, "json", function () {
-                    if (data.code >= 0) {
-                        layer.msg("保存成功！");
-                    } else {
-                        layer.msg(data.msg);
-                    }
-                });
-            } else {
-                layer.msg(data.msg);
-            }
-        });
+    localStorage.PICKED_TYPE = _value;
+    let obj = {};
+    container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
+        obj[$(this).data("id")] = $(this).hasClass("choosed") ? "ON" : "OFF";
+    });
+    localStorage.pickedSetting = JSON.stringify(obj);
+    layer.msg("保存到客户端本地成功！（清除缓存后配置清空）");
 });
 
-var doWork = function (devid, taskname) {
-    jQuery.ajax({
-        url: "/de/acs/test.shtml",
-        type: "post",
-        dataType: "json",
-        data: {
-            "type": taskname,
-            "devid": devid,
-            "testtype": "setting"
-        },
-        error: function (e) {
-            layer.msg("数据中断，请刷新界面或重新登录！");
-        },
-        success: function (data) {
-            alert(data);
-            $("div#settingMgr button").removeAttr("disabled");
-        }
-    });
-}
-
 var findChoosedType = function () {
-    gf.ajax("/bd/conf.shtml?table=conf_key", { key: "PICKED_TYPE" }, "json", function (s) {
-        if (!s || s.length == 0) { return; }
-        if (s.length > 1) { layer.msg("配置数据异常！"); }
-        var item = s[0];
-        $("html").find(`input.chooseRadio[data-id='${item.value}']`).trigger("click");
-    });
+    let s = localStorage.PICKED_TYPE;
+    if (s) { $("html").find(`input.chooseRadio[data-id='${s}']`).trigger("click"); }
 }
 
 doInit(findChoosedType);

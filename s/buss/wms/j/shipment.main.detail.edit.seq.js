@@ -39,17 +39,17 @@ var whenEditInputEnter = function (that) {
     json.paperid = tr.find("input:checkbox").data("paperid");
     json.su = tr.find("input:checkbox").data("userdef4");
     layer.confirm('选择修改的类型', {
-        btn: ['按单号', '按SU', '取消'],
+        btn: ['取消', '按单号', '按SU'],
         btn1: function () {
+            return;
+        },
+        btn2: function () {
             json.type = "BY_PAPER";
             gf.ajax(url, json, "json");
         },
-        btn2: function () {
+        btn3: function () {
             json.type = "BY_SU";
             gf.ajax(url, json, "json");
-        },
-        btn3: function () {
-            return;
         },
     });
 
