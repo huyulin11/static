@@ -1,5 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { doInitPaperOp, btns } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
+import { doInitPaperOp, paperOp, btns } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { submit } from "/s/buss/g/j/g.xlsx.js";
 
 var _tasktype = null;
@@ -63,10 +63,26 @@ var initPaperOp = function (tasktype, model) {
                     submit(e, function (workbook) {
                         for (var sheetName in workbook.Sheets) {
                             if (workbook.Sheets.hasOwnProperty(sheetName)) {
-                                debugger
                                 let sheet = workbook.Sheets[sheetName];
-                                let json = XLSX.utils.sheet_to_json(sheet);
-                                console.log(json);
+                                // let json = XLSX.utils.sheet_to_json(sheet);
+                                let _paper = {};
+                                _paper.warehouse = sheet.A3.v;
+                                _paper.company = sheet.B3.v;
+                                _paper.name = sheet.C3.v;
+                                _paper.items = [];
+                                for (let i = 5; i > 0; i++) {
+                                    if (i > 20) {
+                                        alert("单次最多仅能导入20条明细！");
+                                        break;
+                                    }
+                                    if (sheet["B" + i] && sheet["C" + i]) {
+                                        _paper.items.push({ item: sheet["B" + i].v, userdef3: sheet["C" + i].v });
+                                    } else { break; }
+                                }
+                                console.log(JSON.stringify(_paper));
+                                $('#upload').val("");
+                                sessionStorage.paper = JSON.stringify(_paper);
+                                paperOp.add(btns.add);
                             }
                         }
                     });

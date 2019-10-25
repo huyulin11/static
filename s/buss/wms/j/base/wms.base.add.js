@@ -7,6 +7,8 @@ let _receipttype = gf.urlParam("receipttype");
 
 let _tasktype = null;
 let _paperid = null;
+let _paper = null;
+
 let _conf = {
     container: "div#rows",
     targetClass: "item-group",
@@ -21,16 +23,44 @@ export var init = function (tasktype) {
     _initRows();
 }
 
+var _initPage = function (obj) {
+    $("#panelBody").find("select,input").each(function () {
+        let v = obj[$(this).attr("name")];
+        if (v) {
+            if (this.nodeName == 'SELECT') {
+                $(this).find('option').each(function () {
+                    if ($(this).text() == v) {
+                        $(this).attr("selected", true);
+                    }
+                });
+            } else {
+                $(this).val(v);
+            }
+        }
+        else if (obj[$(this).data("alias")]) {
+            $(this).val(obj[$(this).data("alias")]);
+        }
+    });
+}
+
 var _initRows = function () {
     _paperid = gf.urlParam("paperid");
+    _paper = sessionStorage.paper;
 
     if (!_paperid) {
         $("#form").attr("action", `/${_tasktype}/detail/addEntity.shtml?receipttype=${_receipttype}`);
-        initRows(_conf);
-        return;
+        if (_paper) {
+            _paper = JSON.parse(_paper);
+            _initPage(_paper);
+            initRows(_conf, _paper.items);
+            return;
+        } else {
+            initRows(_conf);
+            return;
+        }
     }
-    $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
 
+    $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: _paperid, receipttype: _receipttype }, "json", function (s) {
         let main = s.object.main;
@@ -40,11 +70,7 @@ var _initRows = function () {
             parent.layer.close(parent.pageii);
             return;
         }
-        $("#panelBody").find("select,input").each(function () {
-            let v = main[$(this).attr("name")];
-            if (v) { $(this).val(v); }
-            else if (main[$(this).data("alias")]) { $(this).val(main[$(this).data("alias")]); }
-        });
+        _initPage(main);
         initRows(_conf, details);
     });
 }
