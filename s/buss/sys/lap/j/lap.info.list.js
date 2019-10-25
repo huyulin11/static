@@ -1,7 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
-import "/s/buss/sys/lap/j/lap.info.edit.status.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 
 let _type = gf.urlParam("type");
