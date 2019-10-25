@@ -51,6 +51,14 @@ let params = {
 			return gf.getStatusDesc(rowindex, data, rowdata, column);
 		}
 	}, {
+		colkey: "userdef4",
+		name: "组盘托盘",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (rowdata.detailstatus == "COMBINED")
+				return data;
+			return "";
+		}
+	}, {
 		colkey: "sequence",
 		name: "执行优先级",
 		renderData: function (rowindex, data, rowdata, column) {
