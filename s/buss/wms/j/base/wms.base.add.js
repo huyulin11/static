@@ -42,6 +42,7 @@ var _initRows = function () {
     if (!_paperid) {
         $("#form").attr("action", `/${_tasktype}/detail/addEntity.shtml?receipttype=${_receipttype}`);
         if (_paper) {
+            sessionStorage.paper = "";
             _paper = JSON.parse(_paper);
             _initPage(_paper);
             initRows(_conf, _paper.list);
