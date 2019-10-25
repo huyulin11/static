@@ -18,7 +18,11 @@ let params = {
 			data = JSON.parse(data);
 			let items = data.items;
 			if (items) {
-				return items;
+				let itemArr = [];
+				for (let item of items) {
+					itemArr.push(item.su);
+				}
+				return itemArr.join(',');
 			}
 			return "--空--";
 		}

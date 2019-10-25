@@ -28,17 +28,21 @@ let params = {
 			return gv.get("WAREHOUSE", data);
 		}
 	}, {
+		colkey: "company",
+		name: "拣货点"
+	}, {
+		colkey: "name",
+		name: "产线",
+		// name: "交接点",
+		// renderData: function (rowindex, data, rowdata, column) {
+		// 	return gv.get("ACS_CACHE_CABLE", data);
+		// }
+	}, {
 		colkey: "totallines",
 		name: "明细数"
 	}, {
 		colkey: "totalqty",
 		name: "货物数"
-	}, {
-		colkey: "name",
-		name: "交接点",
-		renderData: function (rowindex, data, rowdata, column) {
-			return gv.get("ACS_CACHE_CABLE", data);
-		}
 	}, {
 		colkey: "status",
 		name: "状态",

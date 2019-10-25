@@ -23,6 +23,16 @@ let params = {
 		colkey: "paperid",
 		name: "单号"
 	}, {
+		colkey: "company",
+		name: "拣货点"
+	}, {
+		colkey: "name",
+		name: "产线",
+		// name: "交接点",
+		// renderData: function (rowindex, data, rowdata, column) {
+		// 	return gv.get("ACS_CACHE_CABLE", data);
+		// }
+	}, {
 		colkey: "status",
 		name: "单据状态",
 		renderData: function (rowindex, data, rowdata, column) {
