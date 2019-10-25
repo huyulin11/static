@@ -58,7 +58,15 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = tempBtns.concat(btns.pickOne);
                 tempBtns = tempBtns.concat(chooseByWarehouse(tempBtns));
                 tempBtns = tempBtns.concat(btns.stockOut);
-                $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input type="file" id="upload" style="display: none;" /></label>`);
+                $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input type="file" id="upload" style="display: none;" />
+                <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
+                $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
+                    if (this.checked) {
+                        localStorage.importThenEdit = true;
+                    } else {
+                        localStorage.importThenEdit = "";
+                    }
+                });
                 $('#upload').on("change", function (e) {
                     submit(e, function (workbook) {
                         for (var sheetName in workbook.Sheets) {
@@ -67,22 +75,42 @@ var initPaperOp = function (tasktype, model) {
                                 // let json = XLSX.utils.sheet_to_json(sheet);
                                 let _paper = {};
                                 _paper.warehouse = sheet.A3.v;
+                                let wares = gv.getT("WAREHOUSE");
+                                for (let ware of wares) {
+                                    if (ware.value == _paper.warehouse) {
+                                        _paper.warehouse = ware.key;
+                                    }
+                                }
+
                                 _paper.company = sheet.B3.v;
                                 _paper.name = sheet.C3.v;
-                                _paper.items = [];
+
                                 for (let i = 5; i > 0; i++) {
                                     if (i > 20) {
                                         alert("单次最多仅能导入20条明细！");
                                         break;
                                     }
                                     if (sheet["B" + i] && sheet["C" + i]) {
-                                        _paper.items.push({ item: sheet["B" + i].v, userdef3: sheet["C" + i].v });
+                                        if (localStorage.importThenEdit) {
+                                            if (!_paper.list) _paper.list = [];
+                                            _paper.list.push({ item: sheet["B" + i].v, userdef3: sheet["C" + i].v });
+                                        }
+                                        else {
+                                            _paper[`item[${i}]`] = sheet["B" + i].v
+                                            _paper[`userdef3[${i}]`] = sheet["C" + i].v;
+                                        }
                                     } else { break; }
                                 }
-                                console.log(JSON.stringify(_paper));
                                 $('#upload').val("");
-                                sessionStorage.paper = JSON.stringify(_paper);
-                                paperOp.add(btns.add);
+                                if (localStorage.importThenEdit) {
+                                    sessionStorage.paper = JSON.stringify(_paper);
+                                    paperOp.add(btns.add);
+                                } else {
+                                    gf.doAjax({
+                                        url: `/${_tasktype}/detail/addEntity.shtml`,
+                                        data: _paper, dataType: "json"
+                                    });
+                                }
                             }
                         }
                     });

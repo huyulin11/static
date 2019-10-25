@@ -27,15 +27,7 @@ var _initPage = function (obj) {
     $("#panelBody").find("select,input").each(function () {
         let v = obj[$(this).attr("name")];
         if (v) {
-            if (this.nodeName == 'SELECT') {
-                $(this).find('option').each(function () {
-                    if ($(this).text() == v) {
-                        $(this).attr("selected", true);
-                    }
-                });
-            } else {
-                $(this).val(v);
-            }
+            $(this).val(v);
         }
         else if (obj[$(this).data("alias")]) {
             $(this).val(obj[$(this).data("alias")]);
@@ -52,7 +44,7 @@ var _initRows = function () {
         if (_paper) {
             _paper = JSON.parse(_paper);
             _initPage(_paper);
-            initRows(_conf, _paper.items);
+            initRows(_conf, _paper.list);
             return;
         } else {
             initRows(_conf);
