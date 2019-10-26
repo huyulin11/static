@@ -34,8 +34,14 @@ var doInit = function (callback) {
             if (chooseInfo) chooseInfo = JSON.parse(chooseInfo);
             for (let m of tabs) {
                 let obj = m[1];
+                if (obj.key == 'PICK') {
+                    obj.value.push({ id: "SIMPLE", name: "常温库" });
+                    obj.value.push({ id: "IRON", name: "钢平台" });
+                    obj.value.push({ id: "NORMAL", name: "恒温恒湿库" });
+                }
                 let btnsStr = gf.getButtonsTable({
                     values: obj.value,
+                    numInLine: 4,
                     choose: function (value) {
                         if (chooseInfo) if (chooseInfo[value.id] == "ON") { return true; }
                         return false;

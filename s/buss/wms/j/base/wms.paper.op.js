@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 import { doInitPaperOp, paperOp, btns } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { submit } from "/s/buss/g/j/g.xlsx.js";
 
@@ -9,18 +10,14 @@ let _warehouse = gf.urlParam("warehouse");
 let chooseByWarehouse = function (model) {
     let temp = [];
     if (!_warehouse) {
-        temp = temp.concat(btns.pickVNA);
-        temp = temp.concat(btns.pickCold);
-        temp = temp.concat(btns.combineVNA);
-        temp = temp.concat(btns.combineCold);
-    } else {
-        if (_warehouse == '1') {
-            temp = temp.concat(btns.pickVNA);
-            temp = temp.concat(btns.combineVNA);
+        for (let ware of gv.getT("WAREHOUSE")) {
+            temp = temp.concat(btns[`pick${ware.key}`]);
+            temp = temp.concat(btns[`combine${ware.key}`]);
         }
-        if (_warehouse == '2') {
-            temp = temp.concat(btns.pickCold);
-            temp = temp.concat(btns.combineCold);
+    } else {
+        if (_warehouse) {
+            temp = temp.concat(btns[`pick${_warehouse}`]);
+            temp = temp.concat(btns[`combine${_warehouse}`]);
         }
     }
     return temp;
@@ -46,13 +43,15 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = [btns.refresh,];
             } else if (model == "COMBINED") {
                 tempBtns = [btns.refresh,];
-                tempBtns = tempBtns.concat(btns.combineVNA);
-                tempBtns = tempBtns.concat(btns.combineCold);
+                for (let ware of gv.getT("WAREHOUSE")) {
+                    tempBtns = tempBtns.concat(btns[`combine${ware.key}`]);
+                }
             } else if (model == "PICKED") {
                 tempBtns = [btns.refresh,];
                 tempBtns = tempBtns.concat(btns.taked);
-                tempBtns = tempBtns.concat(btns.pickVNA);
-                tempBtns = tempBtns.concat(btns.pickCold);
+                for (let ware of gv.getT("WAREHOUSE")) {
+                    tempBtns = tempBtns.concat(btns[`pick${ware.key}`]);
+                }
             } else {
                 tempBtns = tempBtns.concat(btns.taked);
                 tempBtns = tempBtns.concat(btns.pickOne);
@@ -75,8 +74,7 @@ var initPaperOp = function (tasktype, model) {
                                 // let json = XLSX.utils.sheet_to_json(sheet);
                                 let _paper = {};
                                 _paper.warehouse = sheet.A3.v;
-                                let wares = gv.getT("WAREHOUSE");
-                                for (let ware of wares) {
+                                for (let ware of gv.getT("WAREHOUSE")) {
                                     if (ware.value == _paper.warehouse) {
                                         _paper.warehouse = ware.key;
                                     }

@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 import { currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 
 var _tasktype = null;
@@ -126,36 +127,28 @@ var initBtns = function () {
         bind: function () {
             paperOp.pickOne(this);
         },
-    }; btns.pickVNA = {
-        url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=1`,
-        id: "pickVNA", name: "RF-VNA拣货", class: "btn-warning",
-        bind: function () {
-            window.location.href = this.url;
-        },
-    }; btns.pickCold = {
-        url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=2`,
-        id: "pickCold", name: "RF-冷库拣货", class: "btn-warning",
-        bind: function () {
-            window.location.href = this.url;
-        },
-    }; btns.combineVNA = {
-        url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=1`,
-        id: "combineVNA", name: "RF-VNA组盘", class: "btn-warning",
-        bind: function () {
-            window.location.href = this.url;
-        },
-    }; btns.combineCold = {
-        url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=2`,
-        id: "combineCold", name: "RF-冷库组盘", class: "btn-warning",
-        bind: function () {
-            window.location.href = this.url;
-        },
     }; btns.back = {
         id: "back", name: "返回", class: "btn-info",
         bind: function () {
             window.history.back();
         },
     };
+
+    for (let ware of gv.getT("WAREHOUSE")) {
+        btns[`pick${ware.key}`] = {
+            url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=${ware.key}`,
+            id: `pick${ware.key}`, name: `RF-${ware.value}拣货`, class: "btn-default",
+            bind: function () {
+                window.location.href = this.url;
+            },
+        }; btns[`combine${ware.key}`] = {
+            url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=${ware.key}`,
+            id: `combine${ware.key}`, name: `RF-${ware.value}组盘`, class: "btn-default",
+            bind: function () {
+                window.location.href = this.url;
+            },
+        };
+    }
 }
 
 class PaperOp {
