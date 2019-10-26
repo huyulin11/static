@@ -64,7 +64,15 @@ $("#search").on("click", function () {
 });
 let tempBtns = [{
 	url: `/shipment/main/startTransfer.shtml`,
-	id: "add", name: "开始运输", class: "btn-primary",
+	id: "startTransfer", name: "开始运输", class: "btn-primary",
+	bind: function () {
+		var cbox = gf.checkOnlyOne("key");
+		if (!cbox) { return; }
+		gf.ajax(this.url, { tu: cbox }, "json");
+	},
+}, {
+	url: `/shipment/main/overTransfer.shtml`,
+	id: "overTransfer", name: "结束运输", class: "btn-primary",
 	bind: function () {
 		var cbox = gf.checkOnlyOne("key");
 		if (!cbox) { return; }
