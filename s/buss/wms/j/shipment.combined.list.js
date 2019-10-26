@@ -10,6 +10,20 @@ let params = {
 		name: "托盘号",
 	}, {
 		colkey: "value",
+		name: "状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (!data) {
+				return "--空--";
+			}
+			data = JSON.parse(data);
+			let status = data.status;
+			if (status) {
+				return gv.get("ACS_STATUS", status);
+			}
+			return "--空--";
+		}
+	}, {
+		colkey: "value",
 		name: "货物",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) {
