@@ -25,7 +25,7 @@ export var getItem = (data) => {
             }
             itemDesc = `${item.name + ':' + value}`;
         } else {
-            itemDesc += getInputHtml(item, value, _serial);
+            itemDesc += getInputHtml(item, data, value, _serial);
         }
         ss += `<div class="col">${itemDesc}</div>`;
     }

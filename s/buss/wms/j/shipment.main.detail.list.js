@@ -54,7 +54,7 @@ let params = {
 		colkey: "userdef4",
 		name: "组盘托盘",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.detailstatus == "COMBINED")
+			if (rowdata.detailstatus == "COMBINED" || rowdata.detailstatus == "START_TRANS")
 				return data;
 			return "";
 		}

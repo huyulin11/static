@@ -49,10 +49,12 @@ $("#search").on("click", function () {
 	});
 });
 let tempBtns = [{
-	url: `/app/conf/send.shtml`,
-	id: "add", name: "下达任务", class: "btn-primary",
+	url: `/shipment/main/startTransfer.shtml`,
+	id: "add", name: "开始运输", class: "btn-primary",
 	bind: function () {
-		layer.msg("待完善");
+		var cbox = gf.checkOnlyOne("key");
+		if (!cbox) { return; }
+		gf.ajax(this.url, { tu: cbox }, "json");
 	},
 }];
 gf.bindBtns("div.doc-buttons", tempBtns);

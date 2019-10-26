@@ -1,7 +1,7 @@
 
 import { gv } from "/s/buss/g/j/g.v.js";
 
-export var getInputHtml = (item, _defaultValue, _serial) => {
+export var getInputHtml = (item, _data, _defaultValue, _serial) => {
     let id, name, label = item.name;
     if (!_serial) {
         id = item.key, name = item.key;
@@ -13,7 +13,7 @@ export var getInputHtml = (item, _defaultValue, _serial) => {
         let dics = gv.getT(item.dic);
         itemDesc += `<option value="">----选择【${label}】----</option>`;
         for (let dic of dics) {
-            let selectFlag = (data && dic.key == data[item.key]) ? "selected" : "";
+            let selectFlag = (_data && dic.key == _data[item.key]) ? "selected" : "";
             itemDesc += `<option ${selectFlag} value="${dic.key}">${dic.value}</option>`;
         }
         itemDesc = `<select id="${id}" name="${name}" data-notnull='${item.notnull}'>${itemDesc}</select>`;
