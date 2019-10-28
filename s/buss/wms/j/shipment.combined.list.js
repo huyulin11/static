@@ -12,9 +12,7 @@ let params = {
 		colkey: "value",
 		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) {
-				return "--空--";
-			}
+			if (!data) return "--空--";
 			data = JSON.parse(data);
 			let status = data.status;
 			if (status) {
@@ -26,9 +24,7 @@ let params = {
 		colkey: "value",
 		name: "货物",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) {
-				return "--空--";
-			}
+			if (!data) return "--空--";
 			data = JSON.parse(data);
 			let items = data.items;
 			if (items) {

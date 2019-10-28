@@ -12,9 +12,7 @@ let _columns = [{
 	colkey: "warehouse",
 	name: "仓库",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (!data) {
-			return "--空--";
-		}
+		if (!data) return "--空--";
 		return gv.get("WAREHOUSE", data);
 	}
 }, {

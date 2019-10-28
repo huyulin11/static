@@ -15,18 +15,14 @@ window.datagrid = dataGrid({
 		colkey: "sourcewh",
 		name: "源仓库",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) {
-				return "--空--";
-			}
+			if (!data) return "--空--";
 			return gv.get("WAREHOUSE", data);
 		}
 	}, {
 		colkey: "targetwh",
 		name: "目标仓库",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) {
-				return "--空--";
-			}
+			if (!data) return "--空--";
 			return gv.get("WAREHOUSE", data);
 		}
 	}, {
