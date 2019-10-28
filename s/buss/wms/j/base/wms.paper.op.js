@@ -37,7 +37,7 @@ var initPaperOp = function (tasktype, model) {
         tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.cancel, btns.refresh, btns.whichOne,];
         if (_tasktype == "shipment") {
             if (model == "RF") {
-                tempBtns = [btns.detail, btns.taked, btns.pickOne, btns.cancel, btns.refresh, btns.back,];
+                tempBtns = [btns.detail, btns.pickOne, btns.cancel, btns.refresh, btns.back,];
                 tempBtns = tempBtns.concat(chooseByWarehouse(tempBtns));
             } else if (model == "DETAIL") {
                 tempBtns = [btns.refresh,];
@@ -48,12 +48,10 @@ var initPaperOp = function (tasktype, model) {
                 }
             } else if (model == "PICKED") {
                 tempBtns = [btns.refresh,];
-                tempBtns = tempBtns.concat(btns.taked);
                 for (let ware of gv.getT("WAREHOUSE")) {
                     tempBtns = tempBtns.concat(btns[`pick${ware.key}`]);
                 }
             } else {
-                tempBtns = tempBtns.concat(btns.taked);
                 tempBtns = tempBtns.concat(btns.pickOne);
                 tempBtns = tempBtns.concat(chooseByWarehouse(tempBtns));
                 tempBtns = tempBtns.concat(btns.stockOut);

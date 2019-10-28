@@ -194,7 +194,7 @@ class PaperOp {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "TAKED" && main["status"] != "PICKED") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
                 layer.msg(`该单无法${that.name}！`);
                 return;
             }

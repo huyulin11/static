@@ -40,7 +40,7 @@ var initPick = function () {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "TAKED" && main["status"] != "PICKED") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
                 layer.msg(_paperid + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 return;
             }
