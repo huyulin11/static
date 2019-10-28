@@ -56,6 +56,13 @@ var initPick = function () {
             return ("正在拣货-" + _paperid);
         } else if (_warehouse) {
             return (`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
+        } else if (localStorage.PICKED_SETTING) {
+            let json = JSON.parse(localStorage.PICKED_SETTING);
+            let str = (localStorage.PICKED_TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
+            let items = [];
+            for (let item of json) { items.push(item.name); }
+            str += items.join("、");
+            return (`正在拣货-${str}`);
         } else {
             return (`未找到拣货识别数据`);
         }

@@ -106,7 +106,11 @@ $("html").delegate("button#save", "click", function () {
         }
     });
     localStorage.PICKED_SETTING = JSON.stringify(obj);
-    layer.msg("保存配置到客户端本地成功！");
+    layer.msg("保存配置到客户端本地成功！", {
+        timeout: 1000, end: function () {
+            location.reload();
+        }
+    });
 });
 
 var findChoosedType = function () {
