@@ -103,6 +103,10 @@ export var initRf = function () {
                 type: "POST",
                 url: '/resources/findMyRes.shtml',
                 dataType: 'json',
+                timeout: 3000,
+                error: function () {
+                    location.assign("/s/buss/g/h/login.html");
+                },
                 success: function (json) {
                     myRes = json;
                     initMain();

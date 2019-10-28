@@ -1,4 +1,5 @@
 import "/s/j/vue/vue.min.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 var data = { shortname: "凯钒科技" }
 var login = function () {
@@ -11,7 +12,11 @@ var login = function () {
         },
         success: function (data) {
             if (data.code >= 0) {
-                window.location.href = "/manager.shtml";
+                if (!gf.isPc() && localStorage.projectKey == "BJJK_HUIRUI") {
+                    location.assign("/s/buss/wms/rf/h/rf.mgr.html");
+                } else {
+                    location.assign("/manager.shtml");
+                }
             } else {
                 layer.msg(data.msg);
                 $("#username").focus();
