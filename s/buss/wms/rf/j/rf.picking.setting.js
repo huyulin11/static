@@ -39,15 +39,15 @@ var doInit = function (callback) {
             for (let m of tabs) {
                 let obj = m[1];
                 if (obj.key == 'PICK') {
-                    obj.value.push({ id: "SIMPLE", name: "常温库" });
-                    obj.value.push({ id: "IRON", name: "钢平台" });
-                    obj.value.push({ id: "NORMAL", name: "恒温恒湿库" });
+                    obj.value.push({ id: "NORMAL", name: "恒温恒湿库", type: "WAREHOUSE", whid: 3 });
+                    obj.value.push({ id: "SIMPLE", name: "阴凉库", type: "WAREHOUSE", whid: 4 });
+                    obj.value.push({ id: "IRON", name: "钢平台", type: "WAREHOUSE", whid: 5 });
                 }
                 let btnsStr = gf.getButtonsTable({
                     values: obj.value,
                     numInLine: 4,
                     choose: function (value) {
-                        if (chooseInfo) if (chooseInfo[value.id] == "ON") { return true; }
+                        if (chooseInfo) if (chooseInfo.filter((d) => { return d.id == value.id; }).length) { return true; }
                         return false;
                     },
                 });
@@ -99,9 +99,11 @@ $("html").delegate("button#save", "click", function () {
     let _value = $("html").find(`input.chooseRadio:checked`).data("id");
     if (!_value) { return; }
     localStorage.PICKED_TYPE = _value;
-    let obj = {};
+    let obj = [];
     container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
-        if ($(this).hasClass("choosed")) obj[$(this).data("id")] = "ON";
+        if ($(this).hasClass("choosed")) {
+            obj.push({ id: $(this).data("id"), name: $(this).data("name"), type: $(this).data("type"), whid: $(this).data("whid") });
+        }
     });
     localStorage.PICKED_SETTING = JSON.stringify(obj);
     layer.msg("保存配置到客户端本地成功！");

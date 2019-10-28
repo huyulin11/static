@@ -354,7 +354,11 @@ class GF {
             if (typeof (value) == "number" || typeof (value) == "string") {
                 tmpItemStr = `<td><button data-id='${value}' id='${value}' ${choosedStr}>${value}</button></td>`;
             } else {
-                tmpItemStr = `<td><button data-id='${value.id}' id='${value.id}' ${choosedStr}>${value.name}${conf.showId ? "-" + value.id : ""}</button></td>`;
+                let datas = "";
+                for (let ii in value) {
+                    datas += ` data-${ii}='${value[ii]}' `;
+                }
+                tmpItemStr = `<td><button ${datas} id='${value.id}' ${choosedStr}>${value.name}${conf.showId ? "-" + value.id : ""}</button></td>`;
             }
             tmpStr = tmpStr + tmpItemStr;
             if (index >= _numInLine) {
