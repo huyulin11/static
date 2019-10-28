@@ -20,7 +20,7 @@ var sub = function () {
 
     gf.doAjax({
         url: `/shipment/detail/addPickingItem.shtml`,
-        data: { userdef3: tu, paperid: _paperid, warehouse: _warehouse },
+        data: { userdef3: tu, paperid: _paperid, warehouse: _warehouse, setting: localStorage.PICKED_SETTING },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             layer.msg(data.msg + "tu:" + tu);

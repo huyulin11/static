@@ -34,7 +34,7 @@ var doInit = function (callback) {
                     </label>`);
             }
 
-            let chooseInfo = localStorage.pickedSetting;
+            let chooseInfo = localStorage.PICKED_SETTING;
             if (chooseInfo) chooseInfo = JSON.parse(chooseInfo);
             for (let m of tabs) {
                 let obj = m[1];
@@ -101,9 +101,9 @@ $("html").delegate("button#save", "click", function () {
     localStorage.PICKED_TYPE = _value;
     let obj = {};
     container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
-        obj[$(this).data("id")] = $(this).hasClass("choosed") ? "ON" : "OFF";
+        if ($(this).hasClass("choosed")) obj[$(this).data("id")] = "ON";
     });
-    localStorage.pickedSetting = JSON.stringify(obj);
+    localStorage.PICKED_SETTING = JSON.stringify(obj);
     layer.msg("保存配置到客户端本地成功！");
 });
 
