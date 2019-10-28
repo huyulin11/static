@@ -7,7 +7,7 @@ var _tasktype = null;
 
 let _warehouse = gf.urlParam("warehouse");
 
-let chooseByWarehouse = function (model) {
+let chooseByWarehouse = function () {
     let temp = [];
     if (!_warehouse) {
         for (let ware of gv.getT("WAREHOUSE")) {
@@ -38,8 +38,10 @@ var initPaperOp = function (tasktype, model) {
         if (_tasktype == "shipment") {
             if (model == "RF") {
                 tempBtns = [btns.detail, btns.pickOne, btns.cancel, btns.refresh, btns.back,];
-                tempBtns = tempBtns.concat(chooseByWarehouse(tempBtns));
+                tempBtns = tempBtns.concat(chooseByWarehouse());
             } else if (model == "DETAIL") {
+                tempBtns = [btns.refresh,];
+            } else if (model == "PRIORITY") {
                 tempBtns = [btns.refresh,];
             } else if (model == "COMBINED") {
                 tempBtns = [btns.refresh,];
@@ -53,8 +55,8 @@ var initPaperOp = function (tasktype, model) {
                 }
             } else {
                 tempBtns = tempBtns.concat(btns.pickOne);
-                tempBtns = tempBtns.concat(chooseByWarehouse(tempBtns));
                 tempBtns = tempBtns.concat(btns.stockOut);
+                tempBtns = tempBtns.concat(chooseByWarehouse());
                 $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input type="file" id="upload" style="display: none;" />
                 <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
                 $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {

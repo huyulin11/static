@@ -97,5 +97,7 @@ $(_frame).on("load", function (params) {
     let paddingTop = $(this).contents().find(".doc-buttons").height();
     if (paddingTop) {
         $(this).contents().find("html>body").css("padding-top", paddingTop + 10);
+    } else {
+        $(this).contents().find("html>body").css("padding-top", 0);
     }
 });

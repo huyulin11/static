@@ -66,8 +66,11 @@ var initMain = function () {
     $("#rootContainer").delegate("#logout", "click", function () {
         window.location.href = "/logout.shtml";
     });
-    $("#rootContainer").find("#priority,#failure").on("click", function () {
+    $("#rootContainer").find("#failure").on("click", function () {
         layer.msg("尚未开通！");
+    });
+    $("#rootContainer").find("#priority").on("click", function () {
+        window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=1:2:SCANED:COMBINED:COMB_OVER:START_TRANS`;
     });
     $("#rootContainer").find("#picking").on("click", function () {
         window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
