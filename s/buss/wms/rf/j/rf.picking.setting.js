@@ -1,3 +1,7 @@
+export var initSetting = function () {
+    doInit(findChoosedType);
+}
+
 var doInit = function (callback) {
     jQuery.ajax({
         url: "/sys/lap/findJsonList.shtml",
@@ -100,12 +104,10 @@ $("html").delegate("button#save", "click", function () {
         obj[$(this).data("id")] = $(this).hasClass("choosed") ? "ON" : "OFF";
     });
     localStorage.pickedSetting = JSON.stringify(obj);
-    layer.msg("保存到客户端本地成功！（清除缓存后配置清空）");
+    layer.msg("保存配置到客户端本地成功！");
 });
 
 var findChoosedType = function () {
     let s = localStorage.PICKED_TYPE;
     if (s) { $("html").find(`input.chooseRadio[data-id='${s}']`).trigger("click"); }
 }
-
-doInit(findChoosedType);

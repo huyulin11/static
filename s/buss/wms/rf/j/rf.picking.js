@@ -1,8 +1,9 @@
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import "./rf.picking.setting.js";
+import { initSetting } from "/s/buss/wms/rf/j/rf.picking.setting.js";
 
+initSetting();
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
 let _warehouse = gf.urlParam("warehouse");
@@ -32,6 +33,9 @@ var sub = function () {
 }
 
 var initPick = function () {
+    if (!$("#topCtrlContainer")) return;
+    $("#topCtrlContainer").prepend("<div id='settingHideDiv' class='close hideToggle' data-target='div#settingContainer'></div>");
+
     if (_paperid) {
         let url = `/shipment/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
@@ -59,7 +63,6 @@ var initPick = function () {
     $(container).find("h2").html(title);
     $(document).attr("title", title);
 
-    $("#topCtrlContainer").prepend("<div id='settingHideDiv' class='close hideToggle' data-target='div#settingContainer'></div>");
     var showCtrl = function (that) {
         var thatTarget = $(that).data("target");
         $(thatTarget).show(100);
