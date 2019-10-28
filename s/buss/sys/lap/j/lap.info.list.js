@@ -81,7 +81,7 @@ $("#paging").delegate(".edit", "click", function (e) {
 	let target = $(this).parent("td").find("select").find("option:selected").text();
 	if (window.confirm(`是否要改变${name}的状态为${target}？`)) {
 		gf.doAjax({
-			url: `/sys/lap/editEntity.shtml`,
+			url: `/sys/lap/bjjk/huirui/editStatus.shtml`,
 			data: { id: id, status: targetVal }
 		});
 	}
