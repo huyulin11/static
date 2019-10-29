@@ -2,8 +2,7 @@ html {
 	background-color: #fff;
 }
 
-.hidden,
-.hiddenThis {
+.hidden {
 	display: none;
 }
 

@@ -8,10 +8,6 @@ div,input[type=text],input[type=reset],textarea,button,a,ul,li,span,td,th,select
 	font-family: "Microsoft YaHei";
 }
 
-.hiddenThis {
-	display: none;
-}
-
 table caption {
 	color: black;
 	text-align: left;

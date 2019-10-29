@@ -42,7 +42,7 @@
 		var $th = document.createElement("th");
 		var $td = document.createElement("td");
 		if (object.columnname === 'id'){
-			$tr.className  = 'hiddenThis' ;
+			$tr.className  = 'hidden' ;
 		}
 		// create title for desciption
 		$th.innerHTML = object.chncolname ;
