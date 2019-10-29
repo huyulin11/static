@@ -26,12 +26,10 @@ export var init = function (tasktype) {
 var _initPage = function (obj) {
     $("#panelBody").find("select,input").each(function () {
         let v = obj[$(this).attr("name")];
-        if (v) {
-            $(this).val(v);
-        }
-        else if (obj[$(this).data("alias")]) {
-            $(this).val(obj[$(this).data("alias")]);
-        }
+        let a = obj[$(this).data("alias")];
+        if (v) { $(this).val(v); }
+        else if (a) { $(this).val(a); }
+        if (a || v) { $(this).trigger("init"); }
     });
 }
 

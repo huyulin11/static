@@ -13,6 +13,10 @@ var _initCols = function () {
             { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
         ];
     } else if (_tasktype == 'shipment') {
+        let isHide = function (a) {
+            if ($("#warehouse").val() != "1") { $(a).parents("div.col").addClass("hidden"); }
+            else { $(a).parents("div.col").removeClass("hidden"); }
+        }
         _cols = [
             {
                 name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse",
@@ -25,26 +29,14 @@ var _initCols = function () {
                 }
             },
             {
-                name: "拣货点",
-                key: "company",
-                notnull: true,
-                type: "associating-input",
-                searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=",
-                containerofinput: "#panelBody",
-                showcol: 'name',
-                hide: true,
-                defaultValue: "--",
+                name: "拣货点", key: "company", notnull: true, type: "associating-input", defaultValue: "--",
+                searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=", hide: true,
+                containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
             },
             {
-                name: "产线",
-                key: "name",
-                notnull: true,
-                type: "associating-input",
-                searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
-                containerofinput: "#panelBody",
-                showcol: 'name',
-                hide: true,
-                defaultValue: "--",
+                name: "产线", key: "name", notnull: true, type: "associating-input", defaultValue: "--",
+                searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=", hide: true,
+                containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
             },
         ];
     } else if (_tasktype == "transfer") {
@@ -57,7 +49,8 @@ var _initCols = function () {
     for (let col of _cols) {
         let obj = $(`<div class="col"><label>${col.name}</label></div>`);
         obj.append(getInput(col));
-        if (col.hide) { obj.addClass("hidden"); }
+        if (typeof col.hide == "boolean" && col.hide) { obj.addClass("hidden"); }
+        if (typeof col.hide == "function" && col.hide()) { obj.addClass("hidden"); }
         $("#cols").append(obj);
     }
     renderAll();
@@ -75,7 +68,6 @@ export var initUdf = function (tasktype, _conf) {
             type: "input",
         },];
     } else if (_tasktype == 'receipt') {
-        $("#targetPlace").parents("div.col").remove();
         let obj = {
             max: 20,
             items: [{
@@ -90,7 +82,6 @@ export var initUdf = function (tasktype, _conf) {
         }
         Object.assign(_conf, obj);
     } else if (_tasktype == 'shipment') {
-        $("#targetPlace").parents("div.col").remove();
         let obj = {
             max: 20,
             items: [{
