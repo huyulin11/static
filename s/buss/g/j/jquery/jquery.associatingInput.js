@@ -169,7 +169,7 @@
 })(jQuery);
 
 var getStatus = function (status) {
-    var _tl = jQuery.parseJSON(localStorage.getItem("dic")).filter(function (e) { return e.type == "ALLOC_ITEM_STATUS"; })
+    var _tl = jQuery.parseJSON(localStorage.dic).filter(function (e) { return e.type == "ALLOC_ITEM_STATUS"; })
         .filter(function (e) { return e.key == status; });
     return _tl[0].value;
 }

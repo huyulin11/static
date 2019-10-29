@@ -502,7 +502,7 @@ export var init = function (target) {
 		layer.msg(taskexe.addCtrlTask(agvId, $(this).attr("id")));
 	});
 
-	var initBtns = jQuery.parseJSON(localStorage.getItem("agvControl"));
+	var initBtns = jQuery.parseJSON(localStorage.agvControl);
 	for (var btn of initBtns) {
 		$(_target).append(`<td><div><button id='${btn.id}'`
 			+ ((btn.color) ? (`data-backcolor='${btn.color}'`) : "")

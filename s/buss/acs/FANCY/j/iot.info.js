@@ -2,7 +2,7 @@ var iots = {};
 
 var getAgvList = function () {
     jQuery.ajax({
-        url: "/s/jsons/" + localStorage.getItem("projectKey") + "/iot/iots.json",
+        url: "/s/jsons/" + localStorage.projectKey + "/iot/iots.json",
         type: "GET",
         dataType: "json",
         cache: false,

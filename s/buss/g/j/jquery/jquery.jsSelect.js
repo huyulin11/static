@@ -11,7 +11,7 @@ export var renderSelect = function (that) {
             _tl = gv.getT(type);
         }
     } catch (error) {
-        _tl = jQuery.parseJSON(localStorage.getItem("dic")).filter(function (e) { return e.type == type; });
+        _tl = jQuery.parseJSON(localStorage.dic).filter(function (e) { return e.type == type; });
     }
     if (!initval) {
         $(that).append("<option value=" + ">" + "----请选择----" + "</option>");

@@ -1,5 +1,5 @@
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
-import { getInputHtml } from "/s/buss/g/j/g.input.render.js";
+import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let _tasktype;
 var _initCols = function () {
@@ -22,7 +22,8 @@ var _initCols = function () {
                 type: "associating-input",
                 searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=",
                 containerofinput: "#panelBody",
-                showcol: 'name'
+                showcol: 'name',
+                hide: true
             },
             {
                 name: "产线",
@@ -31,7 +32,8 @@ var _initCols = function () {
                 type: "associating-input",
                 searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
                 containerofinput: "#panelBody",
-                showcol: 'name'
+                showcol: 'name',
+                hide: true
             },
         ];
     } else if (_tasktype == "transfer") {
@@ -41,12 +43,12 @@ var _initCols = function () {
         ];
     }
 
-    let html = "";
     for (let col of _cols) {
-        let selectStr = getInputHtml(col);
-        html += `<div class="col"><label>${col.name}</label>${selectStr}</div>`;
+        let obj = $(`<div class="col"><label>${col.name}</label></div>`);
+        obj.append(getInput(col));
+        if (col.hide) { obj.addClass("hidden"); }
+        $("#cols").append(obj);
     }
-    $("#cols").html(html);
     renderAll();
 }
 

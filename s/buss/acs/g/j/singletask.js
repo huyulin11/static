@@ -7,7 +7,7 @@ export var getSingleTask = function (allocid) {
 
 var init = function () {
     jQuery.ajax({
-        url: "/s/jsons/" + localStorage.getItem("projectKey") + "/singletasks/singletasks.json?fv=" + localStorage.timeStamp,
+        url: "/s/jsons/" + localStorage.projectKey + "/singletasks/singletasks.json?fv=" + localStorage.timeStamp,
         async: false,
         dataType: "json",
         success: function (data) {

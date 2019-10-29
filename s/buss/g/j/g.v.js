@@ -33,7 +33,7 @@ class GV {
 	}
 
 	__getTS = (type) => {
-		if (!this._dic) { this._dic = jQuery.parseJSON(localStorage.getItem("dic")); }
+		if (!this._dic) { this._dic = jQuery.parseJSON(localStorage.dic); }
 		return this._dic.filter(function (e) { return e.type == type; });
 	};
 
@@ -59,7 +59,7 @@ class GV {
 	};
 
 	getRole(key) {
-		if (!this._role) { this._role = jQuery.parseJSON(localStorage.getItem("role")); }
+		if (!this._role) { this._role = jQuery.parseJSON(localStorage.role); }
 		var o = this._role.find((v) => { return v.id == key });
 		return (!o) ? "" : o.rolename;
 	};
@@ -79,7 +79,7 @@ class GV {
 	};
 
 	getRes(key) {
-		if (!this._res) { this._res = jQuery.parseJSON(localStorage.getItem("res")); }
+		if (!this._res) { this._res = jQuery.parseJSON(localStorage.res); }
 		var o = this._res.find((v) => { return v.id == key });
 		return (!o) ? "" : o.name;
 	};

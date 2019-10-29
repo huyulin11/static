@@ -21,7 +21,7 @@ export var showTaskexe = function (currentTask) {
 			if (val == "OVER") { return "-过"; }
 		}
 		var arrivedact = function (val) {
-			var data = jQuery.parseJSON(localStorage.getItem("dic"))
+			var data = jQuery.parseJSON(localStorage.dic)
 				.filter(function (e) { return e.type == "ARRIVED_SITE_ACT_TYPE"; })
 				.filter(function (e) { return e.key == val; });
 			return data[0].value;

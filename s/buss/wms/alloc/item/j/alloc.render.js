@@ -6,7 +6,7 @@ export var initAlloc = function () {
     $(".black_overlay").show();
     $("table.alloc").html("");
     jQuery.ajax({
-        //url: "/s/jsons/" + localStorage.getItem("projectKey") + "/allocs/allocs.json?fv=" + localStorage.timeStamp,
+        //url: "/s/jsons/" + localStorage.projectKey + "/allocs/allocs.json?fv=" + localStorage.timeStamp,
         url: "/alloc/item/findByPage.shtml",
         data: { "allocItemFormMap.text": $("#kw").val() },
         type: "POST",

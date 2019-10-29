@@ -42,7 +42,7 @@
 
     var agvsinfo = function () {
         jQuery.ajax({
-            url: "/s/jsons/" + localStorage.getItem("projectKey") + "/agv/agvInfo0.json",
+            url: "/s/jsons/" + localStorage.projectKey + "/agv/agvInfo0.json",
             type: "GET",
             dataType: "json",
             cache: false,

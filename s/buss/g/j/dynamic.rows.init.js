@@ -1,5 +1,5 @@
 import { gv } from "/s/buss/g/j/g.v.js";
-import { getInputHtml } from "/s/buss/g/j/g.input.render.js";
+import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 var _conf, _initData;
 let _serial = 0;
@@ -25,7 +25,7 @@ export var getItem = (data) => {
             }
             itemDesc = `${item.name + ':' + value}`;
         } else {
-            itemDesc += getInputHtml(item, data, value, _serial);
+            itemDesc += getInput(item, { data: data, value: value, serial: _serial })[0].outerHTML;
         }
         ss += `<div class="col">${itemDesc}</div>`;
     }

@@ -120,7 +120,7 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
 
     var showVal = getShowVal(agvinfo);
 
-    var relativeHD = localStorage.getItem("projectKey") == 'CSY_DAJ' ?
+    var relativeHD = localStorage.projectKey == 'CSY_DAJ' ?
         ("<tr><td colspan='2'>" + "关联硬件状态:" + (agvinfo.plcstatus ? agvinfo.plcstatus : "正常") + "</td></tr>") : "";
     var tmpStr = "<td class='agv'>" + "<div>"
         + "<button id='" + agvinfo.id + "'" + showVal.colorStyle + ">" + "<table cellspacing='0px' cellspadding='2px'>"

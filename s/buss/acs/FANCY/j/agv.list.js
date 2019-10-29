@@ -17,7 +17,7 @@ var agvDiv = function () {
 
 var getAgvList = function () {
     jQuery.ajax({
-        url: "/s/jsons/" + localStorage.getItem("projectKey") + "/agv/agvList.json",
+        url: "/s/jsons/" + localStorage.projectKey + "/agv/agvList.json",
         type: "GET",
         dataType: "json",
         cache: false,
@@ -50,7 +50,7 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         var height = "300px";
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         localStorage.setItem("currentAgvId", tmpAgvId);
-        $("#oneAgv").css("height", height).attr("src", "/s/buss/acs/" + localStorage.getItem("projectKey") + "/h/agv/agv.html?agvId=" + tmpAgvId);
+        $("#oneAgv").css("height", height).attr("src", "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId);
         return;
     }
     if (tmpAgvId == 1) {
@@ -64,7 +64,7 @@ var init = function () {
     getAgvList();
     intervalVal = setInterval(getAgvList, 3000);
 
-    var currentAgvId = localStorage.getItem("currentAgvId");
+    var currentAgvId = localStorage.currentAgvId;
     if (currentAgvId) {
         openAGVMGR(currentAgvId);
     }

@@ -72,7 +72,7 @@ class GF {
         return null;
     };
     getTimeStamp() {
-        var timeStamp = localStorage.getItem("timeStamp");
+        var timeStamp = localStorage.timeStamp;
         if (!timeStamp) {
             console.error("后台设定的时间戳为空，使用前端时间戳");
             timeStamp = new Date();
