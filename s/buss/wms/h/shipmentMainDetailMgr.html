@@ -21,45 +21,34 @@
 
 <header class="panel-heading">
     <form class="form-inline" role="form" id="searchForm" name="searchForm" style="display: none;">
-        <div class="form-group">
-            <table>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">出库单号:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <input class="input-medium ui-autocomplete-input" id="paperid"
-                            name="shipmentMainFormMap.paperid">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">状态:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status"
-                            name="shipmentMainFormMap.status"></select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">交接点:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_CACHE_CABLE"
-                            id="name" name="shipmentMainFormMap.name"></select>
-                    </td>
-                    <td>
-                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
-                    </td>
-                </tr>
-            </table>
+        <div class="search-group">
+            <label>
+                <span>出库单号:</span>
+                <input id="paperid" name="shipmentMainFormMap.paperid">
+            </label>
+            <label>
+                <span>状态:</span>
+                <select class="jsSelect" data-patten="ACS_STATUS" id="status"
+                    name="shipmentMainFormMap.status"></select>
+            </label>
+            <label>
+                <span>交接点:</span>
+                <select class=" jsSelect" data-patten="ACS_CACHE_CABLE" id="name"
+                    name="shipmentMainFormMap.name"></select>
+            </label>
+            <label>
+                <span>SU:</span>
+                <input id="su" name="shipmentMainFormMap.su">
+            </label>
+            <label>
+                <span>TU:</span>
+                <input id="tu" name="shipmentMainFormMap.tu">
+            </label>
+            <label>
+                <span>组盘托盘:</span>
+                <input id="combined" name="shipmentMainFormMap.combined">
+            </label>
+            <a class="btn btn-default" id="search">查询</a>
         </div>
     </form>
 </header>

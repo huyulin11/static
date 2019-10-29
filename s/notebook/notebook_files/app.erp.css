@@ -118,3 +118,7 @@ div#rows {
 	border-width: 1px;
 	border-color: #ececec;
 }
+
+.search-group {
+    display: -webkit-box;
+}

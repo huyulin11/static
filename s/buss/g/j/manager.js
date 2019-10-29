@@ -51,6 +51,7 @@ var loadPage = function (url, openType, sn) {
 
     $(_frame).hide();
     gf.quoteModule(url, _frame);
+    if (localStorage.remember) localStorage.index = url;
     $("#nav").removeClass("nav-off-screen");
 }
 
