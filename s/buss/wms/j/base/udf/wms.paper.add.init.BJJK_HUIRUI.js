@@ -18,11 +18,9 @@ var _initCols = function () {
                 name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse",
                 bind: function (a) {
                     if ($(a).val() == "1") {
-                        $("#company").parents("div.col").removeClass("hidden");
-                        $("#name").parents("div.col").removeClass("hidden");
+                        $("#company,#name").val("").parents("div.col").removeClass("hidden");
                     } else {
-                        $("#company").parents("div.col").addClass("hidden");
-                        $("#name").parents("div.col").addClass("hidden");
+                        $("#company,#name").val("--").parents("div.col").addClass("hidden");
                     }
                 }
             },
@@ -34,7 +32,8 @@ var _initCols = function () {
                 searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=",
                 containerofinput: "#panelBody",
                 showcol: 'name',
-                hide: true
+                hide: true,
+                defaultValue: "--",
             },
             {
                 name: "产线",
@@ -44,7 +43,8 @@ var _initCols = function () {
                 searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
                 containerofinput: "#panelBody",
                 showcol: 'name',
-                hide: true
+                hide: true,
+                defaultValue: "--",
             },
         ];
     } else if (_tasktype == "transfer") {

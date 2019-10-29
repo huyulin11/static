@@ -3,7 +3,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 
 export var getInput = (item, option) => {
     let _data, _defaultValue, _serial;
-    if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial; }
+    if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial; } else { _defaultValue = item.defaultValue; }
     let id, name, label = item.name;
     if (!_serial) {
         id = item.key, name = item.key;
