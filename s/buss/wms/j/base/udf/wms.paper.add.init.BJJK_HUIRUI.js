@@ -14,7 +14,18 @@ var _initCols = function () {
         ];
     } else if (_tasktype == 'shipment') {
         _cols = [
-            { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse" },
+            {
+                name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse",
+                bind: function (a) {
+                    if ($(a).val() == "1") {
+                        $("#company").parents("div.col").removeClass("hidden");
+                        $("#name").parents("div.col").removeClass("hidden");
+                    } else {
+                        $("#company").parents("div.col").addClass("hidden");
+                        $("#name").parents("div.col").addClass("hidden");
+                    }
+                }
+            },
             {
                 name: "拣货点",
                 key: "company",

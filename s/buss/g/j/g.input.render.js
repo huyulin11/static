@@ -38,5 +38,16 @@ export var getInput = (item, option) => {
             class="form-control" value="${_defaultValue ? _defaultValue : ""}"
             placeholder="输入:${label}" data-notnull='${item.notnull}' autocomplete="off">`);
     }
+    let binds = item.bind; if (binds) {
+        if (typeof binds == "function") {
+            $(obj).bind("change", function () { binds(obj); });
+        } else if (Array.isArray(binds)) {
+            for (let eve of binds) {
+                $(obj).bind(eve.event, function () { eve.work(obj); });
+            }
+        } else {
+            $(obj).bind(binds.event, function () { binds.work(obj); });
+        }
+    }
     return obj;
 }
