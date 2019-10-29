@@ -34,7 +34,7 @@ var _initCols = function () {
                 containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
             },
             {
-                name: "产线", key: "name", notnull: true, type: "associating-input", defaultValue: "--",
+                name: "目的地", key: "name", notnull: true, type: "associating-input", defaultValue: "--",
                 searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=", hide: true,
                 containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
             },

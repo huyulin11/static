@@ -30,7 +30,7 @@ let params = {
 		name: "拣货点"
 	}, {
 		colkey: "name",
-		name: "产线",
+		name: "目的地",
 		// name: "交接点",
 		// renderData: function (rowindex, data, rowdata, column) {
 		// 	return gv.get("ACS_CACHE_CABLE", data);

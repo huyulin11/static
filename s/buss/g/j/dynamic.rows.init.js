@@ -27,10 +27,10 @@ export var getItem = (data) => {
         } else {
             itemDesc += getInput(item, { data: data, value: value, serial: _serial })[0].outerHTML;
         }
-        ss += `<div class="col">${itemDesc}</div>`;
+        ss += `<div class="row">${itemDesc}</div>`;
     }
     let _status = (data) ? "UPDATE" : "NEW";
-    ss += `<div class="col" style="display:none;">
+    ss += `<div class="row" style="display:none;">
         <input type="text" id="_status${_serial}" name="_status[${_serial}]" 
         value="${_status}" data-value="${_status}" autocomplete="off"></div>`;
     let delOp = `<div title="删除" class="delOne op item-op"></div>`;
