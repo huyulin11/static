@@ -24,15 +24,15 @@ export var getInputHtml = (item, _data, _defaultValue, _serial) => {
     } else if ("associating-input" == item.type) {
         itemDesc = `
         <input type="text" id="${id}" name="${name}" 
-        class="form-control associating-input" value="${_defaultValue ? _defaultValue : ""}"
-        data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
-        data-showcol='${item.showcol}' placeholder="输入:${label}" 
-        data-notnull='${item.notnull}' autocomplete="off">`;
+            class="form-control associating-input" value="${_defaultValue ? _defaultValue : ""}"
+            data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
+            data-showcol='${item.showcol}' placeholder="输入:${label}" 
+            data-notnull='${item.notnull}' autocomplete="off">`;
     } else {
         itemDesc = `
-    <input type="text" id="${id}" name="${name}" 
-        class="form-control" value="${_defaultValue ? _defaultValue : ""}"
-        placeholder="输入:${label}" data-notnull='${item.notnull}' autocomplete="off">`;
+        <input type="text" id="${id}" name="${name}" 
+            class="form-control" value="${_defaultValue ? _defaultValue : ""}"
+            placeholder="输入:${label}" data-notnull='${item.notnull}' autocomplete="off">`;
     }
     return itemDesc;
 }
