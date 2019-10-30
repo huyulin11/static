@@ -67,6 +67,12 @@ var initPaperOp = function (tasktype, model) {
                     }
                 });
                 $('#upload').on("change", function (e) {
+                    var files = e.target.files;
+                    if (files.length > 1 && localStorage.importThenEdit) {
+                        layer.msg("编辑模式下仅能单个导入");
+                        $('#upload').val("");
+                        return;
+                    }
                     submit(e, function (workbook) {
                         for (var sheetName in workbook.Sheets) {
                             if (workbook.Sheets.hasOwnProperty(sheetName)) {
