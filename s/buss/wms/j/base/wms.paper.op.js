@@ -42,7 +42,7 @@ var initPaperOp = function (tasktype, model) {
             } else if (model == "DETAIL") {
                 tempBtns = [btns.refresh,];
             } else if (model == "PRIORITY") {
-                tempBtns = [btns.refresh,];
+                tempBtns = [btns.refresh, btns.back,];
             } else if (model == "COMBINED") {
                 tempBtns = [btns.refresh,];
                 for (let ware of gv.getT("WAREHOUSE")) {
