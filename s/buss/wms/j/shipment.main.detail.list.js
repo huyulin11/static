@@ -113,3 +113,7 @@ $("#search").on("click", function () {
 		data: searchParams
 	});
 });
+
+$("#export").on("click", function () {
+	window.location.href = '/shipment/main/download.shtml' + '?' + $("#searchForm").serialize();
+});
