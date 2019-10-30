@@ -30,9 +30,9 @@ var submit = function (e, callback) {
         readWorkbookFromLocalFile(file, function (workbook) {
             if (callback) {
                 callback(workbook);
-                return;
+            } else {
+                dealDemo(workbook);
             }
-            dealDemo(workbook);
         });
     }
 };
