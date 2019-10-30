@@ -6,25 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>AGV即时位置</title>
-    <link rel="stylesheet" href="/s/buss/acs/c/agvmgr.css">
+    <link rel="stylesheet" href="/s/c/agvmgr.css">
 </head>
 
 <style>
-    html{
+    html {
         /* background-color: #0b659a!important; */
-        background-image: url('/s/i/back/timg.jpg')!important;
+        background-image: url('/s/i/back/timg.jpg') !important;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
         /* background: #ccc!important; */
     }
-    .axis{
+
+    .axis {
         /* background: url('/s/i/back/timg.jpg') no-repeat; */
-        background-size:cover;
+        background-size: cover;
         padding-bottom: 44%;
 
     }
+
     #tipsOper {
         position: fixed;
         top: 0%;
@@ -59,10 +61,13 @@
         bottom: 20px;
         box-shadow: 0px 1px 29px 0px gainsboro;
     }
-    .main{
+
+    .main {
         display: flex;
     }
-    .main div:first-child,.main div:last-child{
+
+    .main div:first-child,
+    .main div:last-child {
         width: 10%;
         max-width: 100px;
         min-width: 50px;
@@ -71,16 +76,18 @@
         color: #fff;
         text-align: center;
     }
-    #coordinate{
+
+    #coordinate {
         flex: 1;
         margin-top: 70px;
     }
-    #monitor{
+
+    #monitor {
         display: none;
         position: absolute;
         width: 500px;
         height: 300px;
-        top:  50%;
+        top: 50%;
         margin-top: -150px;
         left: 50%;
         margin-left: -250px;
@@ -91,13 +98,14 @@
         text-align: right;
         border-radius: 3px;
     }
-    #monitor span{
+
+    #monitor span {
         cursor: pointer;
     }
-    #monitorVideo{
+
+    #monitorVideo {
         width: 100%;
     }
-
 </style>
 
 <body>
@@ -115,11 +123,12 @@
     </div>
     <div id="monitor">
         <span>×</span>
-        <video id="monitorVideo" controls preload="auto" width="620" height="256" data-setup="{}" x-webkit-airplay="allow">
-            <source src="" type='video/mp4'/>
+        <video id="monitorVideo" controls preload="auto" width="620" height="256" data-setup="{}"
+            x-webkit-airplay="allow">
+            <source src="" type='video/mp4' />
         </video>
     </div>
-    
+
     <!-- <div id="toggleColor">
         <span>切换背景色</span>
     </div> -->
