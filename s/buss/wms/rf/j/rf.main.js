@@ -67,7 +67,7 @@ var initMain = function () {
         window.location.href = "/logout.shtml";
     });
     $("#rootContainer").find("#failure").on("click", function () {
-        layer.msg("尚未开通！");
+        window.location.href = `/s/buss/sys/lap/h/lapInfoMgr.html?type=PROD_LINE`;
     });
     $("#rootContainer").find("#priority").on("click", function () {
         window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=1:2:SCANED:COMBINED:COMB_OVER:START_TRANS`;

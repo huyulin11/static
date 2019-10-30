@@ -12,11 +12,9 @@ let _columns = [{
 	colkey: "name",
 	name: "名称",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (rowdata.delflag == "1") {
-			return data;
-		}
-		return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-			+ "<a class='editLapName'><img src='/s/i/edit.png'/></a>" + "</div>";
+		return data;
+		// return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+		// 	+ "<a class='editLapName'><img src='/s/i/edit.png'/></a>" + "</div>";
 	}
 }, {
 	colkey: "type",
