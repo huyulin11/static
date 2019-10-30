@@ -57,7 +57,7 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = tempBtns.concat(btns.pickOne);
                 tempBtns = tempBtns.concat(btns.stockOut);
                 tempBtns = tempBtns.concat(chooseByWarehouse());
-                $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input type="file" id="upload" style="display: none;" />
+                $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input multiple type="file" id="upload" style="display: none;" />
                 <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
                 $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
                     if (this.checked) {
@@ -84,7 +84,7 @@ var initPaperOp = function (tasktype, model) {
                                 _paper.name = sheet.C3.v;
 
                                 for (let i = 5; i > 0; i++) {
-                                    if (i > 20) {
+                                    if (i > 25) {
                                         alert("单次最多仅能导入20条明细！");
                                         break;
                                     }
