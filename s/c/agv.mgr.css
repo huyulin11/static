@@ -24,7 +24,7 @@ button {
 	min-height: 60px;
 	font-size: 13px;
 	background: transparent;
-	border-radius: 3px;
+	border-radius: 10px;
 	background-color: #84AF9B;
 	color: #fff;
 	cursor: pointer;
