@@ -27,9 +27,19 @@ let cols = [{
 	name: "货物数"
 }, {
 	colkey: "name",
-	name: "交接点",
+	name: function (rowindex, data, rowdata, column) {
+		switch (localStorage.projectKey) {
+			case "CSY_DAJ": return "出入口";
+			case "BJJK_HUIRUI": return "目的地";
+			default: return "name";
+		}
+	},
 	renderData: function (rowindex, data, rowdata, column) {
-		return gv.get("ACS_CACHE_CABLE", data);
+		switch (localStorage.projectKey) {
+			case "CSY_DAJ": return gv.get("ACS_CACHE_CABLE", data);
+			case "BJJK_HUIRUI": return data;
+			default: return "name";
+		}
 	}
 }, {
 	colkey: "status",

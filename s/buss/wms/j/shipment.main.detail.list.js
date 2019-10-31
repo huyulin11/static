@@ -23,11 +23,20 @@ let _columns = [{
 	name: "拣货点"
 }, {
 	colkey: "name",
-	name: "目的地",
-	// name: "交接点",
-	// renderData: function (rowindex, data, rowdata, column) {
-	// 	return gv.get("ACS_CACHE_CABLE", data);
-	// }
+	name: function (rowindex, data, rowdata, column) {
+		switch (localStorage.projectKey) {
+			case "CSY_DAJ": return "出入口";
+			case "BJJK_HUIRUI": return "目的地";
+			default: return "name";
+		}
+	},
+	renderData: function (rowindex, data, rowdata, column) {
+		switch (localStorage.projectKey) {
+			case "CSY_DAJ": return gv.get("ACS_CACHE_CABLE", data);
+			case "BJJK_HUIRUI": return data;
+			default: return "name";
+		}
+	}
 }, {
 	colkey: "status",
 	name: "单据状态",

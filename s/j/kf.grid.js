@@ -84,6 +84,12 @@ var tag = function (tag) {
 	return document.createElement(tag);
 };
 
+var name = function (oneColumn) {
+	if (typeof oneColumn.name == "string") return oneColumn.name;
+	if (typeof oneColumn.name == "function") return oneColumn.name();
+	return "";
+}
+
 var _fieldModel = {
 	colkey: null,
 	name: null,
@@ -173,7 +179,7 @@ var dataGrid = function (params) {
 			if (!isHide) {
 				var th = tag('th');
 				th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
-				th.innerHTML = oneColumn.name;
+				th.innerHTML = name(oneColumn);
 				tr.appendChild(th);
 			}
 		};
@@ -243,7 +249,7 @@ var dataGrid = function (params) {
 				if (!isHide) {
 					var th = tag('th');
 					th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
-					th.innerHTML = oneColumn.name;
+					th.innerHTML = name(oneColumn);
 					tr.appendChild(th);
 				}
 			};
