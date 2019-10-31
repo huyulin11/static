@@ -27,6 +27,13 @@ let cols = [{
 	name: "货物数"
 }, {
 	colkey: "name",
+	hide: function () {
+		switch (localStorage.projectKey) {
+			case "CSY_DAJ": return false;
+			case "BJJK_HUIRUI": return true;
+			default: return true;
+		}
+	},
 	name: function (rowindex, data, rowdata, column) {
 		switch (localStorage.projectKey) {
 			case "CSY_DAJ": return "出入口";

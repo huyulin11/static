@@ -90,6 +90,12 @@ var name = function (oneColumn) {
 	return "";
 }
 
+var hide = function (oneColumn) {
+	if (typeof oneColumn.hide == "boolean") return oneColumn.hide;
+	if (typeof oneColumn.hide == "function") return oneColumn.hide();
+	return "";
+}
+
 var _fieldModel = {
 	colkey: null,
 	name: null,
@@ -170,13 +176,7 @@ var dataGrid = function (params) {
 		cth.appendChild(chkbox);
 		tr.appendChild(cth);
 		for (let oneColumn of _columns) {
-			var isHide;
-			if (typeof (oneColumn.hide) == "function") {
-				isHide = oneColumn.hide();
-			} else {
-				isHide = oneColumn.hide;
-			}
-			if (!isHide) {
+			if (!hide(oneColumn)) {
 				var th = tag('th');
 				th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
 				th.innerHTML = name(oneColumn);
@@ -240,13 +240,7 @@ var dataGrid = function (params) {
 			cth.appendChild(chkbox);
 			tr.appendChild(cth);
 			for (let oneColumn of _columns) {
-				var isHide;
-				if (typeof (oneColumn.hide) == "function") {
-					isHide = oneColumn.hide();
-				} else {
-					isHide = oneColumn.hide;
-				}
-				if (!isHide) {
+				if (!hide(oneColumn)) {
 					var th = tag('th');
 					th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
 					th.innerHTML = name(oneColumn);
@@ -289,13 +283,7 @@ var dataGrid = function (params) {
 				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
 				for (let oneColumn of _columns) {
-					var isHide;
-					if (typeof (oneColumn.hide) == "function") {
-						isHide = oneColumn.hide();
-					} else {
-						isHide = oneColumn.hide;
-					}
-					if (!isHide) {
+					if (!hide(oneColumn)) {
 						var td_o = tr.insertCell(-1);
 						td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
 
@@ -518,13 +506,7 @@ var dataGrid = function (params) {
 			$(chkbox).on("click", highlight);
 			td_d.appendChild(chkbox);
 			for (let oneColumn of _columns) {
-				var isHide;
-				if (typeof (oneColumn.hide) == "function") {
-					isHide = oneColumn.hide();
-				} else {
-					isHide = oneColumn.hide;
-				}
-				if (!isHide) {
+				if (!hide(oneColumn)) {
 					var td_o = tr.insertCell(-1);
 					td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
 					var rowdata = jsonTree[jt];
@@ -611,13 +593,7 @@ var dataGrid = function (params) {
 					$(chkbox).on("click", highlight);
 					td_d.appendChild(chkbox);
 					for (let oneColumn of _columns) {
-						var isHide;
-						if (typeof (oneColumn.hide) == "function") {
-							isHide = oneColumn.hide();
-						} else {
-							isHide = oneColumn.hide;
-						}
-						if (!isHide) {
+						if (!hide(oneColumn)) {
 							var td_o = tr.insertCell(-1);
 							td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
 							var rowdata = jsonTree[jt];
