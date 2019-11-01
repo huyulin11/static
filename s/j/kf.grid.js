@@ -118,6 +118,18 @@ var _tee = "1-0";
 var _nb = '20';
 var _img;
 
+let _focusCss = "text-align:center; vertical-align: middle;";
+let _HideCss = "display: none;";
+let defaultItemCss = function (oneColumn) {
+	return "padding-top:5px;margin-left:5px;vertical-align: middle;text-align:" + oneColumn.align + ";height:" + _conf.theadHeight + ";";
+}
+let chooseHideNumber = function (th) {
+	th.setAttribute("style", _focusCss + ((!_conf.serNumber) ? _HideCss : ""));
+}
+let chooseHideCheckbox = function (th) {
+	th.setAttribute("style", _focusCss + ((!_conf.checkbox) ? _HideCss : ""));
+}
+
 var dataGrid = function (params) {
 	_conf = $.extend(_defaultConf, params);
 	_confTreeGrid = _conf.treeGrid;
@@ -148,11 +160,6 @@ var dataGrid = function (params) {
 		fixhead();
 	};
 
-	let _focusCss = "text-align:center; vertical-align: middle;";
-	let defaultItemCss = function (oneColumn) {
-		return "padding-top:5px;margin-left:5px;vertical-align: middle;text-align:" + oneColumn.align + ";height:" + _conf.theadHeight + ";";
-	}
-
 	var renderHead = function (divid) {
 		if (!_conf.isFixed) { return; }
 		var table = tag("table");
@@ -165,19 +172,9 @@ var dataGrid = function (params) {
 		var tr = tag('tr');
 		tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 		thead.appendChild(tr);
-		var cn = "";
-		if (!_conf.serNumber) {
-			cn = "display: none";
-		}
-		var th = tag('th');
-		th.setAttribute("style", _focusCss + cn + ";");
+		var th = tag('th'); chooseHideNumber(th);
 		tr.appendChild(th);
-		var cbk = "";
-		if (!_conf.checkbox) {
-			cbk = "display: none";
-		}
-		var cth = tag('th');
-		cth.setAttribute("style", _focusCss + cbk + ";");
+		var cth = tag('th'); chooseHideCheckbox(cth);
 		var chkbox = tag("INPUT");
 		chkbox.type = "checkbox";
 		chkbox.setAttribute("pagId", _conf.pagId);
@@ -229,19 +226,9 @@ var dataGrid = function (params) {
 			var tr = tag('tr');
 			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 			tbody.appendChild(tr);
-			var cn = "";
-			if (!_conf.serNumber) {
-				cn = "display: none";
-			}
-			var th = tag('th');
-			th.setAttribute("style", _focusCss + cn + ";");
+			var th = tag('th'); chooseHideNumber(th);
 			tr.appendChild(th);
-			var cbk = "";
-			if (!_conf.checkbox) {
-				cbk = "display: none";
-			}
-			var cth = tag('th');
-			cth.setAttribute("style", _focusCss + cbk + ";");
+			var cth = tag('th'); chooseHideCheckbox(cth);
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 			chkbox.setAttribute("pagId", _conf.pagId);
@@ -267,21 +254,11 @@ var dataGrid = function (params) {
 				_tee = _tee + "-" + sm;
 				tr.setAttribute("d-tree", _tee);
 				tbody.appendChild(tr);
-				var cn = "";
-				if (!_conf.serNumber) {
-					cn = "display: none";
-				}
-				var ntd_d = tr.insertCell(-1);
-				ntd_d.setAttribute("style", _focusCss + cn + ";");
+				var ntd_d = tr.insertCell(-1); chooseHideNumber(ntd_d);
 				var rowindex = tr.rowIndex;
 
 				ntd_d.innerHTML = rowindex;
-				var cbk = "";
-				if (!_conf.checkbox) {
-					cbk = "display: none";
-				}
-				var td_d = tr.insertCell(-1);
-				td_d.setAttribute("style", _focusCss + cbk + ";");
+				var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
 				var chkbox = tag("INPUT");
 				chkbox.type = "checkbox";
 				for (let v in json[indexNum]) { if (json[indexNum][v]) chkbox.setAttribute("data-" + v, json[indexNum][v]); };
@@ -489,20 +466,10 @@ var dataGrid = function (params) {
 			_tee = _tee + "-" + sm;
 			tr.setAttribute("d-tree", _tee);
 			tbody.appendChild(tr);
-			var cn = "";
-			if (!_conf.serNumber) {
-				cn = "display: none";
-			}
-			var ntd_d = tr.insertCell(-1);
-			ntd_d.setAttribute("style", _focusCss + cn + ";");
+			var ntd_d = tr.insertCell(-1); chooseHideNumber(ntd_d);
 			var rowindex = tr.rowIndex;
 			ntd_d.innerHTML = rowindex;
-			var cbk = "";
-			if (!_conf.checkbox) {
-				cbk = "display: none";
-			}
-			var td_d = tr.insertCell(-1);
-			td_d.setAttribute("style", _focusCss + cbk + ";");
+			var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 
@@ -578,20 +545,10 @@ var dataGrid = function (params) {
 					_tee = _tee + "-" + sm;
 					tr.setAttribute("d-tree", _tee);
 					tbody.appendChild(tr);
-					var cn = "";
-					if (!_conf.serNumber) {
-						cn = "display: none";
-					}
-					var ntd_d = tr.insertCell(-1);
-					ntd_d.setAttribute("style", _focusCss + cn + ";");
+					var ntd_d = tr.insertCell(-1); chooseHideNumber(ntd_d);
 					var rowindex = tr.rowIndex;
 					ntd_d.innerHTML = rowindex;
-					var cbk = "";
-					if (!_conf.checkbox) {
-						cbk = "display: none";
-					}
-					var td_d = tr.insertCell(-1);
-					td_d.setAttribute("style", _focusCss + cbk + ";");
+					var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
 					var chkbox = tag("INPUT");
 					chkbox.type = "checkbox";
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
