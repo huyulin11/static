@@ -40,11 +40,14 @@ var initReceipt = function () {
                 return;
             } else {
                 title = `正在${main.receipttype == '2' ? "返料入库" : "入库"}` + _paperid;
+                $(container).find("h2").html(title);
+                $(document).attr("title", title);
             }
         });
+    } else {
+        $(container).find("h2").html(title);
+        $(document).attr("title", title);
     }
-    $(container).find("h2").html(title);
-    $(document).attr("title", title);
     $("#tu").focus();
 }, start = function () {
     if (_paperid) {
@@ -160,7 +163,7 @@ export var initRf = function () {
                 sub();
             },
             tuEnter: function () {
-                $("#tu").focus();
+                $("#su").focus();
             },
         }
     });
