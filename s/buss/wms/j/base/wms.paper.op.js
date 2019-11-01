@@ -85,9 +85,13 @@ var initPaperOp = function (tasktype, model) {
                                         _paper.warehouse = ware.key;
                                     }
                                 }
-
-                                _paper.company = sheet.B3.v;
-                                _paper.name = sheet.C3.v;
+                                if (_paper.warehouse == '1') {
+                                    _paper.company = sheet.B3.v;
+                                    _paper.name = sheet.C3.v;
+                                } else {
+                                    _paper.company = "--";
+                                    _paper.name = "--";
+                                }
 
                                 for (let i = 5; i > 0; i++) {
                                     if (i > 25) {
