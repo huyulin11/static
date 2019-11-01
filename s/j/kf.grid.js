@@ -104,7 +104,6 @@ var hide = function (oneColumn) {
 var _fieldModel = {
 	colkey: null,
 	name: null,
-	width: 'auto',
 	height: 'auto',
 	align: 'center',
 	hide: false,
@@ -149,6 +148,11 @@ var dataGrid = function (params) {
 		fixhead();
 	};
 
+	let _focusCss = "text-align:center; vertical-align: middle;";
+	let defaultItemCss = function (oneColumn) {
+		return "padding-top:5px;margin-left:5px;vertical-align: middle;text-align:" + oneColumn.align + ";height:" + _conf.theadHeight + ";";
+	}
+
 	var renderHead = function (divid) {
 		if (!_conf.isFixed) { return; }
 		var table = tag("table");
@@ -166,14 +170,14 @@ var dataGrid = function (params) {
 			cn = "display: none";
 		}
 		var th = tag('th');
-		th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;" + cn + ";");
+		th.setAttribute("style", _focusCss + cn + ";");
 		tr.appendChild(th);
 		var cbk = "";
 		if (!_conf.checkbox) {
 			cbk = "display: none";
 		}
 		var cth = tag('th');
-		cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;" + cbk + ";");
+		cth.setAttribute("style", _focusCss + cbk + ";");
 		var chkbox = tag("INPUT");
 		chkbox.type = "checkbox";
 		chkbox.setAttribute("pagId", _conf.pagId);
@@ -183,7 +187,7 @@ var dataGrid = function (params) {
 		for (let oneColumn of _columns) {
 			if (!hide(oneColumn)) {
 				var th = tag('th');
-				th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
+				th.setAttribute("style", defaultItemCss(oneColumn));
 				th.innerHTML = name(oneColumn);
 				tr.appendChild(th);
 			}
@@ -230,14 +234,14 @@ var dataGrid = function (params) {
 				cn = "display: none";
 			}
 			var th = tag('th');
-			th.setAttribute("style", "text-align:center;width: 15px;vertical-align: middle;" + cn + ";");
+			th.setAttribute("style", _focusCss + cn + ";");
 			tr.appendChild(th);
 			var cbk = "";
 			if (!_conf.checkbox) {
 				cbk = "display: none";
 			}
 			var cth = tag('th');
-			cth.setAttribute("style", "text-align:center;width: 28px;vertical-align: middle;text-align:center;" + cbk + ";");
+			cth.setAttribute("style", _focusCss + cbk + ";");
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 			chkbox.setAttribute("pagId", _conf.pagId);
@@ -247,15 +251,15 @@ var dataGrid = function (params) {
 			for (let oneColumn of _columns) {
 				if (!hide(oneColumn)) {
 					var th = tag('th');
-					th.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";height:" + _conf.theadHeight + ";vertical-align: middle;");
+					th.setAttribute("style", defaultItemCss(oneColumn));
 					th.innerHTML = name(oneColumn);
 					tr.appendChild(th);
 				}
 			};
 		}
 
-		$.each(json, function (d) {
-			if (gf.notNull(json[d])) {
+		$.each(json, function (indexNum) {
+			if (gf.notNull(json[indexNum])) {
 				var tr = tag('tr');
 				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
@@ -268,7 +272,7 @@ var dataGrid = function (params) {
 					cn = "display: none";
 				}
 				var ntd_d = tr.insertCell(-1);
-				ntd_d.setAttribute("style", "text-align:center;width: 15px;" + cn + ";");
+				ntd_d.setAttribute("style", _focusCss + cn + ";");
 				var rowindex = tr.rowIndex;
 
 				ntd_d.innerHTML = rowindex;
@@ -277,22 +281,22 @@ var dataGrid = function (params) {
 					cbk = "display: none";
 				}
 				var td_d = tr.insertCell(-1);
-				td_d.setAttribute("style", "text-align:center;width: 28px;" + cbk + ";");
+				td_d.setAttribute("style", _focusCss + cbk + ";");
 				var chkbox = tag("INPUT");
 				chkbox.type = "checkbox";
-				for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-				chkbox.setAttribute("data-" + "cid", _getValueByName(json[d], _confTreeGrid.id));
-				chkbox.setAttribute("pid", _getValueByName(json[d], _confTreeGrid.pid));
+				for (let v in json[indexNum]) { if (json[indexNum][v]) chkbox.setAttribute("data-" + v, json[indexNum][v]); };
+				chkbox.setAttribute("data-" + "cid", _getValueByName(json[indexNum], _confTreeGrid.id));
+				chkbox.setAttribute("pid", _getValueByName(json[indexNum], _confTreeGrid.pid));
 				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(json[d], _conf.checkValue);
+				chkbox.value = _getValueByName(json[indexNum], _conf.checkValue);
 				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
 				for (let oneColumn of _columns) {
 					if (!hide(oneColumn)) {
 						var td_o = tr.insertCell(-1);
-						td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
+						td_o.setAttribute("style", defaultItemCss(oneColumn));
 
-						var rowdata = json[d];
+						var rowdata = json[indexNum];
 						var dtee = _tee;
 						rowdata.dtee = dtee;
 						var colKey = oneColumn.colkey;
@@ -303,7 +307,7 @@ var dataGrid = function (params) {
 							if (gf.inArray(lt, colKey)) {
 								var divtree = tag("div");
 								divtree.className = "ly_tree";
-								divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + oneColumn.align + ";");
+								divtree.setAttribute("style", defaultItemCss(oneColumn));
 								var img = tag('img');
 								img.src = "/s/i/tree/nolines_minus.gif";
 								$(img).on("click", datatree);
@@ -327,10 +331,10 @@ var dataGrid = function (params) {
 				if (_confTreeGrid.tree) {
 					if (_confTreeGrid.type == 1) {
 						_tee = _tee + "-0";
-						treeHtml(tbody, json[d]);
+						treeHtml(tbody, json[indexNum]);
 					} else {
-						var obj = json[d];
-						delete json[d];
+						var obj = json[indexNum];
+						delete json[indexNum];
 						_nb = 20;
 						treeSimpleHtml(tbody, json, obj);
 					}
@@ -344,7 +348,7 @@ var dataGrid = function (params) {
 		var totalPages = _getValueByName(jsonData, _conf.totalPages);
 		var pageNow = _getValueByName(jsonData, _conf.pageNow);
 		var bdiv = tag("div");
-		bdiv.setAttribute("style", "vertical-align: middle;");
+		bdiv.setAttribute("style", _focusCss);
 
 		bdiv.className = "span12 center";
 		divid.appendChild(bdiv);
@@ -490,7 +494,7 @@ var dataGrid = function (params) {
 				cn = "display: none";
 			}
 			var ntd_d = tr.insertCell(-1);
-			ntd_d.setAttribute("style", "text-align:center;width: 15px;" + cn + ";");
+			ntd_d.setAttribute("style", _focusCss + cn + ";");
 			var rowindex = tr.rowIndex;
 			ntd_d.innerHTML = rowindex;
 			var cbk = "";
@@ -498,7 +502,7 @@ var dataGrid = function (params) {
 				cbk = "display: none";
 			}
 			var td_d = tr.insertCell(-1);
-			td_d.setAttribute("style", "text-align:center;width: 28px;" + cbk + ";");
+			td_d.setAttribute("style", _focusCss + cbk + ";");
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 
@@ -513,7 +517,7 @@ var dataGrid = function (params) {
 			for (let oneColumn of _columns) {
 				if (!hide(oneColumn)) {
 					var td_o = tr.insertCell(-1);
-					td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
+					td_o.setAttribute("style", defaultItemCss(oneColumn));
 					var rowdata = jsonTree[jt];
 					var dtee = _tee;
 					rowdata.dtee = dtee;
@@ -525,7 +529,7 @@ var dataGrid = function (params) {
 						if (gf.inArray(lt, colKey)) {
 							var divtree = tag("div");
 							divtree.className = "ly_tree";
-							divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + oneColumn.align + ";margin-left: " + _nb + "px;");
+							divtree.setAttribute("style", defaultItemCss(oneColumn));
 							if (tte) {
 								var img = tag('img');
 								img.src = "/s/i/tree/nolines_minus.gif";
@@ -579,7 +583,7 @@ var dataGrid = function (params) {
 						cn = "display: none";
 					}
 					var ntd_d = tr.insertCell(-1);
-					ntd_d.setAttribute("style", "text-align:center;width: 15px;" + cn + ";");
+					ntd_d.setAttribute("style", _focusCss + cn + ";");
 					var rowindex = tr.rowIndex;
 					ntd_d.innerHTML = rowindex;
 					var cbk = "";
@@ -587,7 +591,7 @@ var dataGrid = function (params) {
 						cbk = "display: none";
 					}
 					var td_d = tr.insertCell(-1);
-					td_d.setAttribute("style", "text-align:center;width: 28px;" + cbk + ";");
+					td_d.setAttribute("style", _focusCss + cbk + ";");
 					var chkbox = tag("INPUT");
 					chkbox.type = "checkbox";
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
@@ -600,7 +604,7 @@ var dataGrid = function (params) {
 					for (let oneColumn of _columns) {
 						if (!hide(oneColumn)) {
 							var td_o = tr.insertCell(-1);
-							td_o.setAttribute("style", "text-align:" + oneColumn.align + ";width: " + oneColumn.width + ";vertical-align: middle;");
+							td_o.setAttribute("style", defaultItemCss(oneColumn));
 							var rowdata = jsonTree[jt];
 							var dtee = _tee;
 							rowdata.dtee = dtee;
@@ -612,7 +616,7 @@ var dataGrid = function (params) {
 								if (gf.inArray(lt, colKey)) {
 									var divtree = tag("div");
 									divtree.className = "ly_tree";
-									divtree.setAttribute("style", "padding-top:5px;margin-left:5px;text-align:" + oneColumn.align + ";margin-left: " + _nb + "px;");
+									divtree.setAttribute("style", defaultItemCss(oneColumn));
 									_img = tag('img');
 									_img.src = "/s/i/tree/nolines_minus.gif";
 									$(_img).on("click", datatree);
