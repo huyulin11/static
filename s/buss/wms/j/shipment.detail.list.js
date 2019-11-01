@@ -14,7 +14,14 @@ window.datagrid = dataGrid({
 		name: "单号"
 	}, {
 		colkey: "userdef1",
-		name: "货位"
+		name: "货位",
+		hide: function () {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return false;
+				case "BJJK_HUIRUI": return true;
+				default: return true;
+			}
+		},
 	}, {
 		colkey: "item",
 		name: "SU"
