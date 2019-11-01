@@ -31,7 +31,10 @@ var _defaultConf = {
 	callback: function () { }
 };
 
+let _flag = false;
 var jsonRequest = function (conf, callback) {
+	if (_flag) return;
+	_flag = true;
 	$.ajax({
 		type: 'POST',
 		async: conf.async,
@@ -40,9 +43,11 @@ var jsonRequest = function (conf, callback) {
 		dataType: 'json',
 		success: function (data) {
 			if (data) { callback(data); }
+			_flag = false;
 		},
 		error: function (msg) {
 			console.log(msg);
+			_flag = false;
 			layer.msg("数据错误！请检查网络或权限配置！");
 		}
 	});
