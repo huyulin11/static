@@ -10,14 +10,11 @@ let _warehouse = gf.urlParam("warehouse");
 let chooseByWarehouse = function () {
     let temp = [];
     if (!_warehouse) {
-        for (let ware of gv.getT("WAREHOUSE")) {
-            temp = temp.concat(btns[`pick${ware.key}`]);
-            temp = temp.concat(btns[`combine${ware.key}`]);
-        }
+        temp = temp.concat(btns[`pick`]);
+        temp = temp.concat(btns[`combine`]);
     } else {
         if (_warehouse) {
             temp = temp.concat(btns[`pick${_warehouse}`]);
-            temp = temp.concat(btns[`combine${_warehouse}`]);
         }
     }
     return temp;
@@ -37,7 +34,7 @@ var initPaperOp = function (tasktype, model) {
         tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.cancel, btns.refresh, btns.whichOne,];
         if (_tasktype == "shipment") {
             if (model == "RF") {
-                tempBtns = [btns.detail, btns.pickOne, btns.cancel, btns.refresh, btns.back,];
+                tempBtns = [btns.detail, btns.cancel, btns.refresh, btns.back,];
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             } else if (model == "DETAIL") {
                 tempBtns = [btns.refresh,];
@@ -45,17 +42,11 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = [btns.refresh, btns.back,];
             } else if (model == "COMBINED") {
                 tempBtns = [btns.refresh,];
-                for (let ware of gv.getT("WAREHOUSE")) {
-                    tempBtns = tempBtns.concat(btns[`combine${ware.key}`]);
-                }
+                tempBtns = tempBtns.concat(btns[`combine`]);
             } else if (model == "PICKED") {
                 tempBtns = [btns.refresh,];
-                for (let ware of gv.getT("WAREHOUSE")) {
-                    tempBtns = tempBtns.concat(btns[`pick${ware.key}`]);
-                }
+                tempBtns = tempBtns.concat(btns[`pick`]);
             } else {
-                tempBtns = tempBtns.concat(btns.pickOne);
-                tempBtns = tempBtns.concat(btns.stockOut);
                 tempBtns = tempBtns.concat(chooseByWarehouse());
                 $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input multiple type="file" id="upload" style="display: none;" />
                 <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
@@ -80,18 +71,8 @@ var initPaperOp = function (tasktype, model) {
                                 // let json = XLSX.utils.sheet_to_json(sheet);
                                 let _paper = {};
                                 _paper.warehouse = sheet.A3.v;
-                                for (let ware of gv.getT("WAREHOUSE")) {
-                                    if (ware.value == _paper.warehouse) {
-                                        _paper.warehouse = ware.key;
-                                    }
-                                }
-                                if (_paper.warehouse == '1') {
-                                    _paper.company = sheet.B3.v;
-                                    _paper.name = sheet.C3.v;
-                                } else {
-                                    _paper.company = "--";
-                                    _paper.name = "--";
-                                }
+                                _paper.company = sheet.B3.v;
+                                _paper.name = sheet.C3.v;
 
                                 for (let i = 5; i > 0; i++) {
                                     if (i > 25) {
@@ -126,7 +107,6 @@ var initPaperOp = function (tasktype, model) {
             }
         } else if (_tasktype == "receipt") {
             tempBtns = tempBtns.concat(btns.execute);
-            tempBtns = tempBtns.concat(btns.receiptColdOne);
             tempBtns = tempBtns.concat(btns.receiptColdMore);
         }
     }

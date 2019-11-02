@@ -45,7 +45,7 @@ var initCombine = function () {
         if (_warehouse) {
             return `正在组盘-${gv.get("WAREHOUSE", _warehouse)}`;
         } else {
-            return `未找到组盘识别数据`;
+            return `全库匹配组盘`;
         }
     };
     $(container).find("h2").html(title);

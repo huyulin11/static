@@ -134,16 +134,24 @@ var initBtns = function () {
         },
     };
 
+    btns[`pick`] = {
+        url: `/s/buss/wms/rf/h/rf.picking.html`,
+        id: `pick`, name: `RF-拣货`, class: "btn-default",
+        bind: function () {
+            window.location.href = this.url;
+        },
+    }; btns[`combine`] = {
+        url: `/s/buss/wms/rf/h/rf.combine.html`,
+        id: `combine`, name: `RF-组盘`, class: "btn-default",
+        bind: function () {
+            window.location.href = this.url;
+        },
+    };
+
     for (let ware of gv.getT("WAREHOUSE")) {
         btns[`pick${ware.key}`] = {
             url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=${ware.key}`,
             id: `pick${ware.key}`, name: `RF-${ware.value}拣货`, class: "btn-default",
-            bind: function () {
-                window.location.href = this.url;
-            },
-        }; btns[`combine${ware.key}`] = {
-            url: `/s/buss/wms/rf/h/rf.combine.html?warehouse=${ware.key}`,
-            id: `combine${ware.key}`, name: `RF-${ware.value}组盘`, class: "btn-default",
             bind: function () {
                 window.location.href = this.url;
             },

@@ -40,22 +40,10 @@ var _initCols = function () {
                 _cols = [
                     {
                         name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse",
-                        bind: function (a) {
-                            if ($(a).val() == "1") {
-                                $("#company,#name").val("").parents("div.col").removeClass("hidden");
-                            } else {
-                                $("#company,#name").val("--").parents("div.col").addClass("hidden");
-                            }
-                        }
                     },
                     {
-                        name: "拣货点", key: "company", notnull: true, type: "associating-input", defaultValue: "--",
-                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=", hide: true,
-                        containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
-                    },
-                    {
-                        name: "目的地", key: "name", notnull: true, type: "associating-input", defaultValue: "--",
-                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=", hide: true,
+                        name: "目的地", key: "name", notnull: true, type: "associating-input",
+                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
                         containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
                     },
                 ];
@@ -84,22 +72,10 @@ var _initCols = function () {
                 _cols = [
                     {
                         name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse",
-                        bind: function (a) {
-                            if ($(a).val() == "1") {
-                                $("#company,#name").val("").parents("div.col").removeClass("hidden");
-                            } else {
-                                $("#company,#name").val("--").parents("div.col").addClass("hidden");
-                            }
-                        }
                     },
                     {
-                        name: "拣货点", key: "company", notnull: true, type: "associating-input", defaultValue: "--",
-                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PICK&name=", hide: true,
-                        containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
-                    },
-                    {
-                        name: "目的地", key: "name", notnull: true, type: "associating-input", defaultValue: "--",
-                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=", hide: true,
+                        name: "目的地", key: "name", notnull: true, type: "associating-input",
+                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
                         containerofinput: "#panelBody", showcol: 'name', bind: { event: "init", work: isHide },
                     },
                 ];

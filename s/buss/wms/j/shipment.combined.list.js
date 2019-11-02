@@ -6,18 +6,6 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 let params = {
 	pagId: 'paging',
 	columns: [{
-		colkey: "value",
-		name: "仓库",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) return "--空--";
-			data = JSON.parse(data);
-			let warehouse = data.warehouse;
-			if (warehouse) {
-				return gv.get("WAREHOUSE", warehouse);
-			}
-			return "--空--";
-		}
-	}, {
 		colkey: "key",
 		name: "托盘号",
 	}, {
