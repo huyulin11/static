@@ -27,7 +27,7 @@ let params = {
 		}
 	}, {
 		colkey: "company",
-		name: "拣货点"
+		name: "转移订单号"
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {

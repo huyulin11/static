@@ -98,6 +98,16 @@ let params = {
 export var init = function () {
 	let _status = gf.urlParam("status");
 	let _type = gf.urlParam("type");
+	let _pick = gf.urlParam("PICK");
+	if (_pick) {
+		params = Object.assign(params, {
+			data: {
+				"shipmentMainFormMap.PICK": _pick,
+				setting: localStorage.PICKED_SETTING,
+				settingType: localStorage.PICKED_TYPE
+			}
+		});
+	}
 	if (_type) {
 		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
@@ -108,7 +118,9 @@ export var init = function () {
 			}
 		});
 	} else {
-		$("#searchForm").show();
+		if (!_pick) {
+			$("#searchForm").show();
+		}
 		initPaperOp("shipment", "DETAIL");
 	}
 

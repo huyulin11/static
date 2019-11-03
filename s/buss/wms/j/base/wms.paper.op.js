@@ -10,8 +10,8 @@ let _warehouse = gf.urlParam("warehouse");
 let chooseByWarehouse = function () {
     let temp = [];
     if (!_warehouse) {
-        temp = temp.concat(btns[`pick`]);
-        temp = temp.concat(btns[`combine`]);
+        // temp = temp.concat(btns[`pick`]);
+        // temp = temp.concat(btns[`combine`]);
     } else {
         if (_warehouse) {
             temp = temp.concat(btns[`pick${_warehouse}`]);
@@ -42,10 +42,8 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = [btns.refresh, btns.back,];
             } else if (model == "COMBINED") {
                 tempBtns = [btns.refresh,];
-                tempBtns = tempBtns.concat(btns[`combine`]);
             } else if (model == "PICKED") {
                 tempBtns = [btns.refresh,];
-                tempBtns = tempBtns.concat(btns[`pick`]);
             } else {
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             }
@@ -53,6 +51,8 @@ var initPaperOp = function (tasktype, model) {
             tempBtns = tempBtns.concat(btns.execute);
             tempBtns = tempBtns.concat(btns.receiptColdMore);
         } else if (_tasktype == "transfer") {
+            tempBtns = tempBtns.concat(btns[`combine`]);
+            tempBtns = tempBtns.concat(btns[`pick`]);
             $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input multiple type="file" id="upload" style="display: none;" />
             <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
             $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
@@ -73,10 +73,8 @@ var initPaperOp = function (tasktype, model) {
                     for (var sheetName in workbook.Sheets) {
                         if (workbook.Sheets.hasOwnProperty(sheetName)) {
                             let sheet = workbook.Sheets[sheetName];
-                            // let json = XLSX.utils.sheet_to_json(sheet);
                             let _paper = {};
-                            _paper.warehouse = sheet.A3.v;
-                            _paper.company = sheet.B3.v;
+                            _paper.paperid = sheet.B3.v;
                             _paper.name = sheet.C3.v;
 
                             for (let i = 5; i > 0; i++) {

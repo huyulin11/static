@@ -110,6 +110,12 @@ var initRf = function () {
                     getCombinedList();
                 }, 3000);
             },
+            paperEnter: function () {
+                sub();
+                setTimeout(() => {
+                    getCombinedList();
+                }, 3000);
+            },
         }
     });
 }

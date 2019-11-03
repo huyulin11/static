@@ -26,10 +26,15 @@ var sub = function () {
             layer.msg(data.msg + "tu:" + tu);
             if (data.code >= 0) {
                 $("#tu").val("");
+                initDatas();
             }
             $("#tu").focus();
         }
     });
+}
+
+let initDatas = function () {
+    $("#datas iframe").attr("src", "/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=PICK");
 }
 
 var initPick = function () {
@@ -69,6 +74,7 @@ var initPick = function () {
     };
     $(container).find("h2").html(title);
     $(document).attr("title", title);
+    initDatas();
 
     var showCtrl = function (that) {
         var thatTarget = $(that).data("target");

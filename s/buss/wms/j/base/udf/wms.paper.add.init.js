@@ -50,6 +50,9 @@ var _initCols = function () {
             } else if (_tasktype == "transfer") {
                 _cols = [
                     {
+                        name: "订单号", key: "paperid", notnull: true, type: "input",
+                    },
+                    {
                         name: "目的地", key: "name", notnull: true, type: "associating-input",
                         searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
                         containerofinput: "#panelBody", showcol: 'name',

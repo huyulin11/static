@@ -51,7 +51,9 @@ var _initRows = function () {
         }
     }
 
-    $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
+    if (_tasktype == "transfer" && localStorage.projectKey == "BJJK_HUIRUI")
+        $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml`);
+    else $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: _paperid, receipttype: _receipttype }, "json", function (s) {
         let main = s.object.main;
