@@ -48,7 +48,7 @@ let _columns = [{
 	name: "SU"
 }, {
 	colkey: "userdef3",
-	name: "TU"
+	name: "货位号"
 }, {
 	colkey: "detailstatus",
 	name: "明细状态",
@@ -57,7 +57,7 @@ let _columns = [{
 	}
 }, {
 	colkey: "userdef4",
-	name: "组盘托盘",
+	name: "TU",
 	renderData: function (rowindex, data, rowdata, column) {
 		if (rowdata.detailstatus == "COMBINED" || rowdata.detailstatus == "START_TRANS" || rowdata.detailstatus == "4")
 			return data;

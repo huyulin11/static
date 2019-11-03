@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/s/i/ico/calculatedfun.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" href="/s/c/agv.mgr.css">
+    <link rel="stylesheet" href="/s/buss/acs/g/c/datas.css">
 </head>
 
 <body>
@@ -21,7 +22,7 @@
         <table cellspacing="10px" cellspadding="1px" style="display: none;">
             <tbody>
                 <tr>
-                    <td><label>组盘货架号</label></td>
+                    <td><label>TU</label></td>
                     <td><input id="tu" @keyup.enter="tuEnter" @blur="getCombinedList" autocomplete="off" /></td>
                 </tr>
                 <tr>
@@ -39,6 +40,7 @@
             </tbody>
         </table>
     </div>
+    <div id='datas'><iframe></iframe></div>
     <script src="/s/j/jquery-1.12.2.min.js"></script>
     <script src="/s/j/layer/v3.1.3/layer.js"></script>
     <script type="module">

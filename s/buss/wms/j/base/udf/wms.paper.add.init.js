@@ -144,7 +144,7 @@ export var initUdf = function (tasktype, _conf) {
                         notnull: true,
                     }, {
                         key: "userdef3",
-                        name: "TU",
+                        name: "货位号",
                         notnull: true,
                     },]
                 }
@@ -158,7 +158,7 @@ export var initUdf = function (tasktype, _conf) {
                         notnull: true,
                     }, {
                         key: "userdef3",
-                        name: "TU",
+                        name: "货位号",
                         notnull: true,
                     },]
                 }

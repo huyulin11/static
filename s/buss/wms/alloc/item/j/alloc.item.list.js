@@ -21,6 +21,7 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "sitename",
 		name: "对应站点",
+		hide: true,
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return data;

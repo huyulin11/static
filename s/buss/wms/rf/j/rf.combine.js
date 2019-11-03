@@ -30,6 +30,7 @@ var sub = function () {
                 $("#paperid").val("");
                 $("#paperTr").addClass("hidden");
                 $("#su").focus();
+                initDatas();
             } else if (data.code == -100) {
                 $("#paperTr").removeClass("hidden");
                 $("#paperid").focus();
@@ -38,6 +39,10 @@ var sub = function () {
             }
         }
     });
+}
+
+let initDatas = function () {
+    $("#datas iframe").attr("src", "/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=COMBINE");
 }
 
 var initCombine = function () {
@@ -50,6 +55,7 @@ var initCombine = function () {
     };
     $(container).find("h2").html(title);
     $(document).attr("title", title);
+    initDatas();
 }
 
 var getCombinedList = function () {
