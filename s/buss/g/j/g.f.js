@@ -315,6 +315,9 @@ class GF {
         if (rowdata.delflag == 1) {
             $(`tr[d-tree='${rowdata.dtee}']`).css("color", "#dedede");
             btns = "-已删除";
+        } else if (rowdata.delflag == 2) {
+            $("tr[d-tree='" + rowdata.dtee + "']").css("color", "red");
+            btns = "-请求撤销";
         }
         btns = gv.get("ACS_STATUS", data) + btns;
         return btns;

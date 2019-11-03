@@ -63,11 +63,17 @@ var initBtns = function () {
         bind: function () {
             paperOp.del(this);
         },
-    }; btns.cancel = {
-        url: `/${_tasktype}/main/cancel.shtml`,
-        id: "cancel", name: "撤销", class: "btn-danger",
+    }; btns.deleteSub = {
+        url: `/${_tasktype}/main/deleteBySub.shtml`,
+        id: "deleteSub", name: "提请撤销", class: "btn-danger",
         bind: function () {
-            paperOp.doJob("cancel", this);
+            paperOp.doJob("deleteSub", this);
+        },
+    }; btns.deleteSure = {
+        url: `/${_tasktype}/main/deleteBySure.shtml`,
+        id: "deleteSure", name: "确定撤销", class: "btn-danger",
+        bind: function () {
+            paperOp.doJob("deleteSure", this);
         },
     }; btns.refresh = {
         id: "refresh", name: "刷新", class: "btn-info",

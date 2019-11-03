@@ -65,15 +65,7 @@ window.datagrid = dataGrid({
 		colkey: "status",
 		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == 1) {
-				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dedede");
-				return "已删除";
-			} else {
-				if (data == 3) {
-					$("tr[d-tree='" + rowdata.dtee + "']").css("color", "red");
-				}
-			}
-			return gv.get("ACS_STATUS", data);
+			return gf.getStatusDesc(rowindex, data, rowdata, column);
 		}
 	}, {
 		colkey: "updatetime",

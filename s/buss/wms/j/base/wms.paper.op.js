@@ -26,15 +26,15 @@ var initPaperOp = function (tasktype, model) {
 
     let tempBtns = [];
     if (localStorage.projectKey == "CSY_DAJ") {
-        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.cancel, btns.del, btns.refresh,];
+        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.del, btns.refresh,];
         if (_tasktype == "inventory") {
             tempBtns = tempBtns.concat(btns.whichAgv);
         }
     } else {
-        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.cancel, btns.refresh, btns.whichOne,];
+        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.refresh, btns.whichOne,];
         if (_tasktype == "shipment") {
             if (model == "RF") {
-                tempBtns = [btns.detail, btns.cancel, btns.refresh, btns.back,];
+                tempBtns = [btns.detail, btns.refresh, btns.back,];
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             } else if (model == "DETAIL") {
                 tempBtns = [btns.refresh,];
@@ -53,6 +53,8 @@ var initPaperOp = function (tasktype, model) {
         } else if (_tasktype == "transfer") {
             tempBtns = tempBtns.concat(btns[`combine`]);
             tempBtns = tempBtns.concat(btns[`pick`]);
+            tempBtns = tempBtns.concat(btns.deleteSub);
+            tempBtns = tempBtns.concat(btns.deleteSure);
             $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input multiple type="file" id="upload" style="display: none;" />
             <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
             $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
