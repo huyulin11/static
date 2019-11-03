@@ -17,14 +17,28 @@ window.datagrid = dataGrid({
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) return "--空--";
 			return gv.get("WAREHOUSE", data);
-		}
+		},
+		hide: function (rowindex, data, rowdata, column) {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return false;
+				case "BJJK_HUIRUI": return true;
+				default: return true;
+			}
+		},
 	}, {
 		colkey: "targetwh",
 		name: "目标仓库",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) return "--空--";
 			return gv.get("WAREHOUSE", data);
-		}
+		},
+		hide: function (rowindex, data, rowdata, column) {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return false;
+				case "BJJK_HUIRUI": return true;
+				default: return true;
+			}
+		},
 	}, {
 		colkey: "totallines",
 		name: "明细数"
@@ -33,10 +47,20 @@ window.datagrid = dataGrid({
 		name: "货物数"
 	}, {
 		colkey: "name",
-		name: "出入口",
+		name: function (rowindex, data, rowdata, column) {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return "出入口";
+				case "BJJK_HUIRUI": return "目的地";
+				default: return "name";
+			}
+		},
 		renderData: function (rowindex, data, rowdata, column) {
-			return gv.get("ACS_CACHE_CABLE", data);
-		}
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return gv.get("ACS_CACHE_CABLE", data);
+				case "BJJK_HUIRUI": return data;
+				default: return "name";
+			}
+		},
 	}, {
 		colkey: "status",
 		name: "状态",

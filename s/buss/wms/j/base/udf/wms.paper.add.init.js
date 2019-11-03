@@ -49,8 +49,11 @@ var _initCols = function () {
                 ];
             } else if (_tasktype == "transfer") {
                 _cols = [
-                    { name: "源仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "sourcewh" },
-                    { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "targetwh" },
+                    {
+                        name: "目的地", key: "name", notnull: true, type: "associating-input",
+                        searchurl: "/sys/lap/findFirstPage.shtml?lapInfoFormMap.type=PROD_LINE&name=",
+                        containerofinput: "#panelBody", showcol: 'name',
+                    },
                 ];
             }
             break;
@@ -153,6 +156,20 @@ export var initUdf = function (tasktype, _conf) {
                     }, {
                         key: "userdef3",
                         name: "TU",
+                        notnull: true,
+                    },]
+                }
+                Object.assign(_conf, obj);
+            } else if (_tasktype == 'transfer') {
+                let obj = {
+                    max: 20,
+                    items: [{
+                        key: "item",
+                        name: "SU",
+                        notnull: true,
+                    }, {
+                        key: "userdef3",
+                        name: "货位（FROM）",
                         notnull: true,
                     },]
                 }

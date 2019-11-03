@@ -48,66 +48,67 @@ var initPaperOp = function (tasktype, model) {
                 tempBtns = tempBtns.concat(btns[`pick`]);
             } else {
                 tempBtns = tempBtns.concat(chooseByWarehouse());
-                $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input multiple type="file" id="upload" style="display: none;" />
-                <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
-                $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
-                    if (this.checked) {
-                        localStorage.importThenEdit = true;
-                    } else {
-                        localStorage.importThenEdit = "";
-                    }
-                });
-                $('#upload').on("change", function (e) {
-                    var files = e.target.files;
-                    if (files.length > 1 && localStorage.importThenEdit) {
-                        layer.msg("编辑模式下仅能单个导入");
-                        $('#upload').val("");
-                        return;
-                    }
-                    submit(e, function (workbook) {
-                        for (var sheetName in workbook.Sheets) {
-                            if (workbook.Sheets.hasOwnProperty(sheetName)) {
-                                let sheet = workbook.Sheets[sheetName];
-                                // let json = XLSX.utils.sheet_to_json(sheet);
-                                let _paper = {};
-                                _paper.warehouse = sheet.A3.v;
-                                _paper.company = sheet.B3.v;
-                                _paper.name = sheet.C3.v;
-
-                                for (let i = 5; i > 0; i++) {
-                                    if (i > 25) {
-                                        alert("单次最多仅能导入20条明细！");
-                                        break;
-                                    }
-                                    if (sheet["B" + i] && sheet["C" + i]) {
-                                        if (localStorage.importThenEdit) {
-                                            if (!_paper.list) _paper.list = [];
-                                            _paper.list.push({ item: sheet["B" + i].v, userdef3: sheet["C" + i].v });
-                                        }
-                                        else {
-                                            _paper[`item[${i}]`] = sheet["B" + i].v
-                                            _paper[`userdef3[${i}]`] = sheet["C" + i].v;
-                                        }
-                                    } else { break; }
-                                }
-                                $('#upload').val("");
-                                if (localStorage.importThenEdit) {
-                                    sessionStorage.paper = JSON.stringify(_paper);
-                                    paperOp.add(btns.add);
-                                } else {
-                                    gf.doAjax({
-                                        url: `/${_tasktype}/detail/addEntity.shtml`,
-                                        data: _paper, dataType: "json"
-                                    });
-                                }
-                            }
-                        }
-                    });
-                });
             }
         } else if (_tasktype == "receipt") {
             tempBtns = tempBtns.concat(btns.execute);
             tempBtns = tempBtns.concat(btns.receiptColdMore);
+        } else if (_tasktype == "transfer") {
+            $("div.doc-buttons").append(`<label class="ui-upload">导入出库单<input multiple type="file" id="upload" style="display: none;" />
+            <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
+            $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
+                if (this.checked) {
+                    localStorage.importThenEdit = true;
+                } else {
+                    localStorage.importThenEdit = "";
+                }
+            });
+            $('#upload').on("change", function (e) {
+                var files = e.target.files;
+                if (files.length > 1 && localStorage.importThenEdit) {
+                    layer.msg("编辑模式下仅能单个导入");
+                    $('#upload').val("");
+                    return;
+                }
+                submit(e, function (workbook) {
+                    for (var sheetName in workbook.Sheets) {
+                        if (workbook.Sheets.hasOwnProperty(sheetName)) {
+                            let sheet = workbook.Sheets[sheetName];
+                            // let json = XLSX.utils.sheet_to_json(sheet);
+                            let _paper = {};
+                            _paper.warehouse = sheet.A3.v;
+                            _paper.company = sheet.B3.v;
+                            _paper.name = sheet.C3.v;
+
+                            for (let i = 5; i > 0; i++) {
+                                if (i > 25) {
+                                    alert("单次最多仅能导入20条明细！");
+                                    break;
+                                }
+                                if (sheet["B" + i] && sheet["C" + i]) {
+                                    if (localStorage.importThenEdit) {
+                                        if (!_paper.list) _paper.list = [];
+                                        _paper.list.push({ item: sheet["B" + i].v, userdef3: sheet["C" + i].v });
+                                    }
+                                    else {
+                                        _paper[`item[${i}]`] = sheet["B" + i].v
+                                        _paper[`userdef3[${i}]`] = sheet["C" + i].v;
+                                    }
+                                } else { break; }
+                            }
+                            $('#upload').val("");
+                            if (localStorage.importThenEdit) {
+                                sessionStorage.paper = JSON.stringify(_paper);
+                                paperOp.add(btns.add);
+                            } else {
+                                gf.doAjax({
+                                    url: `/${_tasktype}/detail/addEntity.shtml`,
+                                    data: _paper, dataType: "json"
+                                });
+                            }
+                        }
+                    }
+                });
+            });
         }
     }
     gf.bindBtns("div.doc-buttons", tempBtns);
