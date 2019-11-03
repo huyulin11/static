@@ -2,6 +2,41 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { sku } from "/s/buss/wms/sku/wms.sku.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
+let _type = gf.urlParam("type");
+let _jsonUrl = '/alloc/txm/findByPage.shtml';
+let _alloc = gf.urlParam("alloc");
+if (_type) {
+	_jsonUrl += `?allocTxmFormMap.alloc=${_alloc}`;
+} else {
+	$(".panel-heading").removeClass("hidden");
+}
+let tempBtns = [{
+	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html?alloc=${_alloc}`,
+	id: "add", name: `增加`, class: "btn-primary",
+	bind: function () {
+		layer.open({
+			title: `${this.name}条码（货位:${_alloc}）`,
+			type: 2,
+			area: localStorage.layerArea.split(","),
+			content: this.url
+		});
+	},
+}, {
+	id: "del", name: "删除", class: "btn-danger",
+	bind: function () {
+		var txm = gf.checkOnlyOne("txm");
+		var alloc = gf.checkOnlyOne("alloc");
+		if (!txm) { return; }
+		layer.confirm(`是否${this.name}${txm}？`, function (index) {
+			gf.ajax(`/alloc/txm/deleteEntity.shtml`, { txm: txm, alloc: alloc }, "json", function (s) {
+				layer.msg(s.msg);
+				window.datagrid.loadData();
+			});
+		});
+	},
+}];
+gf.bindBtns("div.doc-buttons", tempBtns);
+
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: [{
@@ -15,7 +50,7 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "place",
 		name: "位置",
-		hide: false,
+		hide: true,
 	}, {
 		colkey: "name",
 		name: "货物名称",
@@ -25,7 +60,8 @@ window.datagrid = dataGrid({
 				return data + "-已删除";
 			}
 			return data;
-		}
+		},
+		hide: true,
 	}, {
 		colkey: "skuid",
 		name: "SKU（货物类型）",
@@ -33,32 +69,27 @@ window.datagrid = dataGrid({
 			let val = sku.value(data);
 			if (!val) return "无对应值" + data;
 			return val;
-		}
+		},
+		hide: true,
 	}, {
 		colkey: "num",
 		name: "数量",
-		hide: false,
+		hide: true,
 	}],
-	jsonUrl: '/alloc/txm/findByPage.shtml',
+	jsonUrl: _jsonUrl,
 	checkbox: true,
 	serNumber: true
 });
-$("#search").on("click", function () {// 绑定查询按扭
-	var searchParams = $("#searchForm").serialize();// 初始化传参数
+$("#search").on("click", function () {
+	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
-});
-$("#add").click("click", function () {
-	add();
 });
 $("#edit").click("click", function () {
 	edit();
 });
 
-$("#del").click("click", function () {
-	del();
-});
 $("#permissions").click("click", function () {
 	permissions();
 });
@@ -74,26 +105,5 @@ function edit() {
 		type: 2,
 		area: ["600px", "80%"],
 		content: '/s/buss/wms/alloc/txm/editUI.html?id=' + cbox
-	});
-}
-function add() {
-	window.pageii = layer.open({
-		title: "新增",
-		type: 2,
-		area: localStorage.layerArea.split(","),
-		content: '/s/buss/wms/alloc/txm/h/allocTxmAddUI.html'
-	});
-}
-function del() {
-	var cbox = gf.checkNotNull({ dataType: 'json' });
-	if (!cbox) {
-		return;
-	}
-	layer.confirm('是否删除？', function (index) {
-		var url = '/alloc/txm/deleteEntity.shtml';
-		gf.ajax(url, {
-			data: JSON.stringify(cbox),
-			datatype: 'json'
-		}, "json");
 	});
 }

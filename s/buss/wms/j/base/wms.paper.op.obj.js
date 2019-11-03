@@ -80,6 +80,16 @@ var initBtns = function () {
         bind: function () {
             window.datagrid.loadData();
         },
+    }; btns.callAgv = {
+        id: "callAgv", name: "呼叫AGV", class: "btn-info",
+        bind: function () {
+            window.datagrid.loadData();
+        },
+    }; btns.backAgv = {
+        id: "backAgv", name: "AGV返库", class: "btn-info",
+        bind: function () {
+            window.datagrid.loadData();
+        },
     }; btns.whichAgv = {
         url: `/bd/conf.shtml?table=task_agv`,
         id: "whichAgv", name: "执行AGV", class: "btn-info",

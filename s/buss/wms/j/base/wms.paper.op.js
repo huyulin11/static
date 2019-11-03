@@ -20,7 +20,7 @@ let chooseByWarehouse = function () {
     return temp;
 }
 
-var initPaperOp = function (tasktype, model) {
+var initPaperOp = function (tasktype, optype) {
     _tasktype = tasktype;
     doInitPaperOp(_tasktype);
 
@@ -33,17 +33,19 @@ var initPaperOp = function (tasktype, model) {
     } else {
         tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.refresh, btns.whichOne,];
         if (_tasktype == "shipment") {
-            if (model == "RF") {
+            if (optype == "RF") {
                 tempBtns = [btns.detail, btns.refresh, btns.back,];
                 tempBtns = tempBtns.concat(chooseByWarehouse());
-            } else if (model == "DETAIL") {
+            } else if (optype == "DETAIL") {
                 tempBtns = [btns.refresh,];
-            } else if (model == "PRIORITY") {
+            } else if (optype == "PRIORITY") {
                 tempBtns = [btns.refresh, btns.back,];
-            } else if (model == "COMBINED") {
+            } else if (optype == "COMBINED") {
                 tempBtns = [btns.refresh,];
-            } else if (model == "PICKED") {
+            } else if (optype == "PICKED") {
                 tempBtns = [btns.refresh,];
+            } else if (optype == "STOCK_OUT_COLD") {
+                tempBtns = [btns.refresh, btns.back, btns.callAgv, btns.backAgv,];
             } else {
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             }

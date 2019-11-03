@@ -73,7 +73,7 @@ var initMain = function () {
         window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=1:2:SCANED:COMBINED:COMB_OVER:START_TRANS`;
     });
     $("#rootContainer").find("#picking").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
+        window.location.href = `/s/buss/wms/rf/h/rf.picking.html`;
     });
     $("#rootContainer").find("#combine").on("click", function () {
         window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
@@ -82,7 +82,7 @@ var initMain = function () {
         window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
     });
     $("#rootContainer").find("#stockOut").on("click", function () {
-        window.location.href = `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=${escape("冷库出库")}&warehouse=2`;
+        window.location.href = `/s/buss/wms/h/shipmentMainDetailMgr.html?status=2:TAKED:PICKED&type=STOCK_OUT_COLD&warehouse=2`;
     });
     $("#rootContainer").find("#alloc").on("click", function () {
         window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;

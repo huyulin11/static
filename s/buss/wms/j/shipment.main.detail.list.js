@@ -4,6 +4,10 @@ import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import "./shipment.main.detail.edit.seq.js";
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+let _status = gf.urlParam("status");
+let _type = gf.urlParam("type");
+let _pick = gf.urlParam("PICK");
+
 let _columns = [{
 	colkey: "id",
 	name: "id",
@@ -20,7 +24,7 @@ let _columns = [{
 	name: "单号"
 }, {
 	colkey: "company",
-	name: "拣货点"
+	name: "订单号（TO）"
 }, {
 	colkey: "name",
 	name: function (rowindex, data, rowdata, column) {
@@ -75,8 +79,44 @@ let _columns = [{
 	}
 }];
 
-let _type = gf.urlParam("type");
-if (_type != "PRIORITY")
+if (_type == "STOCK_OUT_COLD") {
+	_columns = [{
+		colkey: "id",
+		name: "id",
+		hide: true,
+	}, {
+		colkey: "company",
+		name: "订单号（TO）"
+	}, {
+		colkey: "name",
+		name: function (rowindex, data, rowdata, column) {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return "出入口";
+				case "BJJK_HUIRUI": return "目的地";
+				default: return "name";
+			}
+		},
+		renderData: function (rowindex, data, rowdata, column) {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ": return gv.get("ACS_CACHE_CABLE", data);
+				case "BJJK_HUIRUI": return data;
+				default: return "name";
+			}
+		}
+	}, {
+		colkey: "item",
+		name: "SU"
+	}, {
+		colkey: "item",
+		name: "出库",
+		renderData: function (rowindex, data, rowdata, column) {
+			return `<button type="button" class="stockout btn marR10 btn-info" data-company='${rowdata.company}' 
+		data-item='${rowdata.item}'>登记出库</button>`;
+		}
+	}];
+}
+
+if (_type != "PRIORITY" && _type != "STOCK_OUT_COLD")
 	_columns.push({
 		colkey: "updatetime",
 		name: "时间",
@@ -96,9 +136,6 @@ let params = {
 }
 
 export var init = function () {
-	let _status = gf.urlParam("status");
-	let _type = gf.urlParam("type");
-	let _pick = gf.urlParam("PICK");
 	if (_pick) {
 		params = Object.assign(params, {
 			data: {
@@ -137,4 +174,9 @@ $("#search").on("click", function () {
 
 $("#export").on("click", function () {
 	window.location.href = '/shipment/main/download.shtml' + '?' + $("#searchForm").serialize();
+});
+
+$("html").delegate(".stockout", "click", function () {
+	let company = $(this).data("company"), item = $(this).data("item");
+	window.location.href = `/s/buss/wms/rf/h/rf.picking.html?warehouse=2&company=${company}&item=${item}`;
 });
