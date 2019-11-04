@@ -10,6 +10,14 @@ let params = {
 		name: "托盘号",
 	}, {
 		colkey: "value",
+		name: "目的地",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (!data) return "--空--";
+			data = JSON.parse(data);
+			return data.name;
+		}
+	}, {
+		colkey: "value",
 		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (!data) return "--空--";
