@@ -147,7 +147,6 @@ let params = {
 
 export var init = function () {
 	if (!params.data) params.data = {};
-	params.data["shipmentMainFormMap.delflag"] = 0;
 	if (_status) {
 		params.data["shipmentMainFormMap.status"] = _status;
 	}
