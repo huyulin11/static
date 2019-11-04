@@ -50,7 +50,7 @@ var sub = function () {
 }
 
 let initDatas = function () {
-    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?status=2:SCANED&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
+    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?status=2:SCANED&detailstatus=1:2&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
 }
 
 var initPick = function () {

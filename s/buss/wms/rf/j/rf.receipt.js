@@ -19,6 +19,7 @@ var initReceipt = function () {
     $(container).find("#start").on("click", function () { start(); });
     $(container).find("#sub").on("click", function () { sub(); });
     $(container).find("#cancel").on("click", function () { cancel(); });
+    $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); });
     $(container).find("#back").on("click", function () { window.history.back(); });
     $(container).find("#send").on("click", function () { send(); });
     $(container).find("#execute").on("click", function () { execute(); });

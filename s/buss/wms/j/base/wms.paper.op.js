@@ -49,7 +49,7 @@ var initPaperOp = function (tasktype, optype) {
             } else if (optype == "PICKED_NORMAL") {
                 tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
             } else if (optype == "COMBINE") {
-                tempBtns = [btns.refresh, btns.back,];
+                tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
             } else {
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             }

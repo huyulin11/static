@@ -5,6 +5,7 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import "./shipment.main.detail.edit.seq.js";
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 let _status = gf.urlParam("status");
+let _detailstatus = gf.urlParam("detailstatus");
 let _type = gf.urlParam("type");
 let _pick = gf.urlParam("PICK");
 let _warehouse = gf.urlParam("warehouse");
@@ -149,6 +150,9 @@ export var init = function () {
 	if (!params.data) params.data = {};
 	if (_status) {
 		params.data["shipmentMainFormMap.status"] = _status;
+	}
+	if (_detailstatus) {
+		params.data["shipmentMainFormMap.detailstatus"] = _detailstatus;
 	}
 	if (_warehouse) {
 		params.data["shipmentMainFormMap.warehouse"] = _warehouse;
