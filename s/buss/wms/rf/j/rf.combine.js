@@ -67,14 +67,16 @@ var getCombinedList = function () {
         success: function (data) {
             data = JSON.parse(data);
             if (data && data[0]) {
-                let items = data[0].value;
-                items = JSON.parse(items).items;
+                let value = JSON.parse(data[0].value);
+                let items = value.items;
+                let target = value.name;
+                target = target ? ("目的地：" + target) : "";
                 if (items) {
                     let itemArr = [];
                     for (let item of items) {
                         itemArr.push(item.su);
                     }
-                    layer.msg(tuVal + "托盘已组盘货物有：" + itemArr.join(','));
+                    layer.msg(tuVal + "托盘已组盘货物有：" + itemArr.join(',') + "!" + target);
                 }
             }
         }
