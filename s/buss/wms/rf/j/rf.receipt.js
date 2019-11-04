@@ -49,6 +49,9 @@ var initReceipt = function () {
         $(container).find("h2").html(title);
         $(document).attr("title", title);
     }
+    if (_alloc) {
+        start(_alloc);
+    }
     $("#tu").focus();
 }, start = function (alloc) {
     if (_paperid) {
@@ -116,7 +119,11 @@ var initReceipt = function () {
                 if (data.code >= 0) {
                     _paperid = "";
                     setCurrentReceiptPaperid("");
-                    window.location.reload();
+                    if (parent) {
+                        parent.layer.close(parent.pageii);
+                    } else {
+                        window.location.reload();
+                    }
                 }
             }
         });
@@ -156,9 +163,6 @@ export var initRf = function () {
         created: function () {
         },
         mounted: function () {
-            if (_alloc) {
-                start(_alloc);
-            }
             initReceipt();
             gf.resizeTable();
         },
