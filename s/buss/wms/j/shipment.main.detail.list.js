@@ -25,7 +25,7 @@ let _columns = [{
 	name: "单号"
 }, {
 	colkey: "company",
-	name: "订单号（TO）"
+	name: "TO"
 }, {
 	colkey: "name",
 	name: function (rowindex, data, rowdata, column) {
@@ -80,14 +80,20 @@ let _columns = [{
 	}
 }];
 
-if (["PICKED_COLD", "PICKED_NORMAL"].includes(_type)) {
+if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 	_columns = [{
 		colkey: "id",
 		name: "id",
 		hide: true,
 	}, {
 		colkey: "company",
-		name: "订单号（TO）"
+		name: "任务信息",
+		renderData: function (rowindex, data, rowdata, column) {
+			return `状态：${gf.getStatusDesc(rowindex, rowdata.detailstatus, rowdata, column)}<br/>
+			TO：${rowdata.company}<br/>
+			出库单：${rowdata.paperid}<br/>
+			货位号：${rowdata.userdef3}`;
+		}
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {
@@ -117,7 +123,7 @@ if (["PICKED_COLD", "PICKED_NORMAL"].includes(_type)) {
 	}];
 }
 
-if (_type != "PRIORITY" && _type != "PICKED_COLD" && _type != "PICKED_NORMAL")
+if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].find((a) => { return a == _type; }))
 	_columns.push({
 		colkey: "updatetime",
 		name: "时间",
@@ -138,6 +144,10 @@ let params = {
 
 export var init = function () {
 	if (!params.data) params.data = {};
+	params.data["shipmentMainFormMap.delflag"] = 0;
+	if (_status) {
+		params.data["shipmentMainFormMap.status"] = _status;
+	}
 	if (_warehouse) {
 		params.data["shipmentMainFormMap.warehouse"] = _warehouse;
 	} else if (_pick) {
@@ -148,8 +158,6 @@ export var init = function () {
 	if (_type) {
 		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
-		params.data["shipmentMainFormMap.status"] = _status;
-		params.data["shipmentMainFormMap.delflag"] = 0;
 	} else {
 		if (!_pick) {
 			$("#searchForm").show();

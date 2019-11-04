@@ -9,30 +9,39 @@ let _warehouse = gf.urlParam("warehouse");
 let _type = gf.urlParam("type");
 if (_type == "PICKED_COLD") {
     _warehouse = 2;
+    $("#suTr").removeClass("hidden");
     $("#topCtrlContainer").hide();
 } else {
+    $("#suTr").addClass("hidden");
     _warehouse = "";
     initSetting();
 }
 
 var sub = function () {
     let tu = $("#tu").val();
+    let su = $("#su").val();
+
     if (!tu) {
-        layer.msg("tu不能为空！");
-        if (!tu) {
-            $("#tu").focus();
-        }
+        $("#tu").focus();
         return;
+    }
+
+    if (_type == "PICKED_COLD") {
+        if (!su) {
+            $("#su").focus();
+            return;
+        }
     }
 
     gf.doAjax({
         url: `/shipment/detail/addPickingItem.shtml`,
-        data: { userdef3: tu, paperid: _paperid, warehouse: _warehouse, setting: localStorage.PICKED_SETTING, settingType: localStorage.PICKED_TYPE },
+        data: { userdef3: tu, item: su, paperid: _paperid, warehouse: _warehouse, setting: localStorage.PICKED_SETTING, settingType: localStorage.PICKED_TYPE },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             layer.msg(data.msg + "tu:" + tu);
             if (data.code >= 0) {
                 $("#tu").val("");
+                $("#su").val("");
                 initDatas();
             }
             $("#tu").focus();
@@ -41,7 +50,7 @@ var sub = function () {
 }
 
 let initDatas = function () {
-    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
+    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?status=2:SCANED&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
 }
 
 var initPick = function () {
@@ -147,6 +156,9 @@ var initRf = function () {
         },
         methods: {
             tuEnter: function () {
+                sub();
+            },
+            suEnter: function () {
                 sub();
             },
         }

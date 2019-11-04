@@ -46,6 +46,10 @@ var initPaperOp = function (tasktype, optype) {
                 tempBtns = [btns.refresh, btns.back,];
             } else if (optype == "PICKED_COLD") {
                 tempBtns = [btns.refresh, btns.back, btns.callAgv, btns.backAgv,];
+            } else if (optype == "PICKED_NORMAL") {
+                tempBtns = [btns.refresh, btns.back,];
+            } else if (optype == "COMBINE") {
+                tempBtns = [btns.refresh, btns.back,];
             } else {
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             }
