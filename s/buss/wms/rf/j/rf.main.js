@@ -80,10 +80,10 @@ var initMain = function () {
         window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_NORMAL`;
     });
     $("#rootContainer").find("#combine").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
+        window.location.href = `/s/buss/wms/rf/h/rf.combine.html`;
     });
     $("#rootContainer").find("#receipt").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
+        window.location.href = `/s/buss/wms/rf/h/rf.receipt.html`;
     });
     $("#rootContainer").find("#stockOut").on("click", function () {
         window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD`;

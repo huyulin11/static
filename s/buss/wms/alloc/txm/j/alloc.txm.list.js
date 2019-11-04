@@ -22,6 +22,12 @@ let tempBtns = [{
 		});
 	},
 }, {
+	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html?alloc=${_alloc}`,
+	id: "toReceipt", name: `增加`, class: "btn-primary",
+	bind: function () {
+		window.location.href = this.url;
+	},
+}, {
 	id: "del", name: "删除", class: "btn-danger",
 	bind: function () {
 		var txm = gf.checkOnlyOne("txm");
