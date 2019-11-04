@@ -72,6 +72,9 @@ let _columns = [{
 	colkey: "sequence",
 	name: "执行优先级",
 	renderData: function (rowindex, data, rowdata, column) {
+		if (data > 1) {
+			$(`tr[d-tree='${rowdata.dtee}']`).css("color", "red");
+		}
 		if (rowdata.delflag != "1" && (rowdata.detailstatus != "4")) {
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;"
 				+ "<a class='editSeq'><img src='/s/i/edit.png'/></a>" + "</div>";
