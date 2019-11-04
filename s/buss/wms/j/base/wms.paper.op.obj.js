@@ -81,14 +81,16 @@ var initBtns = function () {
             window.datagrid.loadData();
         },
     }; btns.callAgv = {
+        url: `/agv/huirui/callAgv.shtml`,
         id: "callAgv", name: "呼叫AGV", class: "btn-info",
         bind: function () {
-            window.datagrid.loadData();
+            gf.ajax(this.url, { key: null }, "json");
         },
     }; btns.backAgv = {
+        url: `/agv/huirui/backAgv.shtml`,
         id: "backAgv", name: "AGV返库", class: "btn-info",
         bind: function () {
-            window.datagrid.loadData();
+            gf.ajax(this.url, { key: null }, "json");
         },
     }; btns.whichAgv = {
         url: `/bd/conf.shtml?table=task_agv`,

@@ -86,7 +86,7 @@ var initMain = function () {
         window.location.href = `/s/buss/wms/rf/h/rf.receipt.html`;
     });
     $("#rootContainer").find("#stockOut").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD&detailstatus=1:2`;
+        window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD`;
     });
     $("#rootContainer").find("#alloc").on("click", function () {
         window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;

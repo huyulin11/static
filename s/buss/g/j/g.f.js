@@ -14,7 +14,7 @@ var defaultSucFun = function (data) {
     layer.open({
         type: 1,
         title: "出错啦！",
-        area: ['95%', '95%'],
+        area: ['50%', '500px'],
         content: `<div id='layerError' style='color:red'>${XMLHttpRequest.responseText}</div>`
     });
 };

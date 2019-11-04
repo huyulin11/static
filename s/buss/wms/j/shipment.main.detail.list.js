@@ -96,6 +96,7 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 			return `状态：${gf.getStatusDesc(rowindex, rowdata.detailstatus, rowdata, column)}<br/>
 			TO：${rowdata.company}<br/>
 			出库单：${rowdata.paperid}<br/>
+			仓库：${gv.get("WAREHOUSE", rowdata.warehouse)}<br/>
 			货位号：${rowdata.userdef3}`;
 		}
 	}, {
