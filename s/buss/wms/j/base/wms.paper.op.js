@@ -43,8 +43,8 @@ var initPaperOp = function (tasktype, optype) {
             } else if (optype == "COMBINED") {
                 tempBtns = [btns.refresh,];
             } else if (optype == "PICKED") {
-                tempBtns = [btns.refresh,];
-            } else if (optype == "STOCK_OUT_COLD") {
+                tempBtns = [btns.refresh, btns.back,];
+            } else if (optype == "PICKED_COLD") {
                 tempBtns = [btns.refresh, btns.back, btns.callAgv, btns.backAgv,];
             } else {
                 tempBtns = tempBtns.concat(chooseByWarehouse());

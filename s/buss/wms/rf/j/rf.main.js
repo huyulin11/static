@@ -42,6 +42,7 @@ var btns = [
     { resKey: "rf_combine", id: "combine", name: "组盘" },
     { resKey: "rf_fail", id: "failure", name: "产线状态" },
     { resKey: "rf_alloc", id: "alloc", name: "查看库存" },
+    { resKey: "rf_trans", id: "trans", name: "送货" },
     { id: "logout", name: "退出" },
 ];
 var initMain = function () {
@@ -69,11 +70,14 @@ var initMain = function () {
     $("#rootContainer").find("#failure").on("click", function () {
         window.location.href = `/s/buss/sys/lap/h/lapInfoMgr.html?type=PROD_LINE`;
     });
+    $("#rootContainer").find("#trans").on("click", function () {
+        window.location.href = `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR`;
+    });
     $("#rootContainer").find("#priority").on("click", function () {
         window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=1:2:SCANED:COMBINED:COMB_OVER:START_TRANS`;
     });
     $("#rootContainer").find("#picking").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.picking.html`;
+        window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_NORMAL`;
     });
     $("#rootContainer").find("#combine").on("click", function () {
         window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
@@ -82,7 +86,7 @@ var initMain = function () {
         window.location.href = `/s/buss/wms/rf/h/rf.${$(this).attr('id')}.html`;
     });
     $("#rootContainer").find("#stockOut").on("click", function () {
-        window.location.href = `/s/buss/wms/h/shipmentMainDetailMgr.html?status=2:TAKED:PICKED&type=STOCK_OUT_COLD&warehouse=2`;
+        window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD`;
     });
     $("#rootContainer").find("#alloc").on("click", function () {
         window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;

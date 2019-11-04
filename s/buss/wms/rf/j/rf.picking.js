@@ -3,10 +3,17 @@ import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { initSetting } from "/s/buss/wms/rf/j/rf.picking.setting.js";
 
-initSetting();
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
 let _warehouse = gf.urlParam("warehouse");
+let _type = gf.urlParam("type");
+if (_type == "PICKED_COLD") {
+    _warehouse = 2;
+    $("#topCtrlContainer").hide();
+} else {
+    _warehouse = "";
+    initSetting();
+}
 
 var sub = function () {
     let tu = $("#tu").val();
@@ -34,7 +41,7 @@ var sub = function () {
 }
 
 let initDatas = function () {
-    $("#datas iframe").attr("src", "/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=PICK");
+    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
 }
 
 var initPick = function () {

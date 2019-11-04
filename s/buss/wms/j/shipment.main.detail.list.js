@@ -7,6 +7,7 @@ import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 let _status = gf.urlParam("status");
 let _type = gf.urlParam("type");
 let _pick = gf.urlParam("PICK");
+let _warehouse = gf.urlParam("warehouse");
 
 let _columns = [{
 	colkey: "id",
@@ -79,7 +80,7 @@ let _columns = [{
 	}
 }];
 
-if (_type == "STOCK_OUT_COLD") {
+if (["PICKED_COLD", "PICKED_NORMAL"].includes(_type)) {
 	_columns = [{
 		colkey: "id",
 		name: "id",
@@ -106,17 +107,17 @@ if (_type == "STOCK_OUT_COLD") {
 	}, {
 		colkey: "item",
 		name: "SU"
-	}, {
-		colkey: "item",
-		name: "出库",
-		renderData: function (rowindex, data, rowdata, column) {
-			return `<button type="button" class="stockout btn marR10 btn-info" data-company='${rowdata.company}' 
-		data-item='${rowdata.item}'>登记出库</button>`;
-		}
+		// }, {
+		// 	colkey: "item",
+		// 	name: "出库",
+		// 	renderData: function (rowindex, data, rowdata, column) {
+		// 		return `<button type="button" class="stockout btn marR10 btn-info" data-company='${rowdata.company}' 
+		// 	data-item='${rowdata.item}'>登记出库</button>`;
+		// 	}
 	}];
 }
 
-if (_type != "PRIORITY" && _type != "STOCK_OUT_COLD")
+if (_type != "PRIORITY" && _type != "PICKED_COLD" && _type != "PICKED_NORMAL")
 	_columns.push({
 		colkey: "updatetime",
 		name: "时间",
@@ -136,24 +137,19 @@ let params = {
 }
 
 export var init = function () {
-	if (_pick) {
-		params = Object.assign(params, {
-			data: {
-				"shipmentMainFormMap.PICK": _pick,
-				setting: localStorage.PICKED_SETTING,
-				settingType: localStorage.PICKED_TYPE
-			}
-		});
+	if (!params.data) params.data = {};
+	if (_warehouse) {
+		params.data["shipmentMainFormMap.warehouse"] = _warehouse;
+	} else if (_pick) {
+		params.data["shipmentMainFormMap.PICK"] = _pick;
+		params.data["setting"] = localStorage.PICKED_SETTING;
+		params.data["settingType"] = localStorage.PICKED_TYPE;
 	}
 	if (_type) {
 		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
-		params = Object.assign(params, {
-			data: {
-				"shipmentMainFormMap.status": _status,
-				"shipmentMainFormMap.delflag": 0
-			}
-		});
+		params.data["shipmentMainFormMap.status"] = _status;
+		params.data["shipmentMainFormMap.delflag"] = 0;
 	} else {
 		if (!_pick) {
 			$("#searchForm").show();
