@@ -70,10 +70,10 @@ var initBtns = function () {
             paperOp.doJob("deleteSub", this);
         },
     }; btns.deleteSure = {
-        url: `/${_tasktype}/main/deleteBySure.shtml`,
+        url: `/transfer/main/deleteBySure.shtml`,
         id: "deleteSure", name: "确定撤销", class: "btn-danger",
         bind: function () {
-            paperOp.doJob("deleteSure", this);
+            paperOp.doDeleteSure(this);
         },
     }; btns.refresh = {
         id: "refresh", name: "刷新", class: "btn-info",
@@ -276,6 +276,17 @@ class PaperOp {
                     layer.msg(`${that.name}失败！` + s.msg);
                 }
             });
+        });
+    }; doDeleteSure(that) {
+        var company;
+        if (that.company) {
+            company = that.company;
+        } else {
+            company = gf.checkOnlyOne("company");
+        }
+        if (!company) { return; }
+        layer.confirm(`是否${that.name}${company}？`, function (index) {
+            gf.ajax(that.url, { paperid: company }, "json");
         });
     }
 }
