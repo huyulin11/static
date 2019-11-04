@@ -36,8 +36,9 @@ var whenEditInputEnter = function (that) {
     var json = {
         "sequence": data
     };
-    json.paperid = tr.find("input:checkbox").data("paperid");
-    json.su = tr.find("input:checkbox").data("userdef4");
+    json.company = tr.find("input:checkbox").data("company");
+    json.item = tr.find("input:checkbox").data("item");
+    json.userdef4 = tr.find("input:checkbox").data("userdef4");
     layer.confirm('选择修改的类型', {
         btn: ['取消', '按单号', '按SU'],
         btn1: function () {
