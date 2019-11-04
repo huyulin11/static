@@ -22,8 +22,8 @@ let tempBtns = [{
 		});
 	},
 }, {
-	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html?alloc=${_alloc}`,
-	id: "toReceipt", name: `增加`, class: "btn-primary",
+	url: `/s/buss/wms/rf/h/rf.receipt.html?alloc=${_alloc}`,
+	id: "toReceipt", name: `发起入库`, class: "btn-primary",
 	bind: function () {
 		window.location.href = this.url;
 	},

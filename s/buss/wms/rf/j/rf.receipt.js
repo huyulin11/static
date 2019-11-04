@@ -4,6 +4,7 @@ import "/s/j/vue/vue.min.js";
 
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
+let _alloc = gf.urlParam("alloc");
 if (_paperid) {
     setCurrentReceiptPaperid(_paperid);
 } else {
@@ -49,13 +50,13 @@ var initReceipt = function () {
         $(document).attr("title", title);
     }
     $("#tu").focus();
-}, start = function () {
+}, start = function (alloc) {
     if (_paperid) {
         layer.msg("当前入库单尚未处理完成，不能再呼叫空车！");
         return;
     }
     gf.doAjax({
-        url: "/receipt/detail/addEntity.shtml",
+        url: "/receipt/detail/addEntity.shtml?alloc=" + (alloc ? alloc : ""),
         data: { warehouse: 2 },
         success: function (data) {
             data = JSON.parse(data);
@@ -155,6 +156,9 @@ export var initRf = function () {
         created: function () {
         },
         mounted: function () {
+            if (_alloc) {
+                start(_alloc);
+            }
             initReceipt();
             gf.resizeTable();
         },
