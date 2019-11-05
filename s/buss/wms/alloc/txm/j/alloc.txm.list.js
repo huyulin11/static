@@ -15,7 +15,7 @@ let tempBtns = [{
 	id: "add", name: `增加`, class: "btn-primary",
 	bind: function () {
 		layer.open({
-			title: `${this.name}条码（货位:${_alloc}）`,
+			title: `${this.name}SU（货位:${_alloc}）`,
 			type: 2,
 			area: localStorage.layerArea.split(","),
 			content: this.url
@@ -47,7 +47,7 @@ window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: [{
 		colkey: "txm",
-		name: "条码",
+		name: "SU",
 		hide: false,
 	}, {
 		colkey: "alloc",
