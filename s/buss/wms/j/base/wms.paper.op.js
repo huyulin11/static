@@ -1,5 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { gv } from "/s/buss/g/j/g.v.js";
+import { gu } from "/s/buss/g/j/g.u.js";
 import { doInitPaperOp, paperOp, btns } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { submit } from "/s/buss/g/j/g.xlsx.js";
 
@@ -77,40 +77,44 @@ var initPaperOp = function (tasktype, optype) {
                     return;
                 }
                 submit(e, function (workbook) {
-                    for (var sheetName in workbook.Sheets) {
-                        if (workbook.Sheets.hasOwnProperty(sheetName)) {
-                            let sheet = workbook.Sheets[sheetName];
-                            let _paper = {};
-                            _paper.paperid = sheet.B3.v;
-                            _paper.name = sheet.C3.v;
+                    let sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    let _paper = {};
+                    _paper.paperid = sheet.C8.v;
+                    _paper.name = sheet.E8.v;
 
-                            for (let i = 5; i > 0; i++) {
-                                if (i > 25) {
-                                    alert("单次最多仅能导入20条明细！");
-                                    break;
-                                }
-                                if (sheet["B" + i] && sheet["C" + i]) {
-                                    if (localStorage.importThenEdit) {
-                                        if (!_paper.list) _paper.list = [];
-                                        _paper.list.push({ item: sheet["B" + i].v, userdef3: sheet["C" + i].v });
-                                    }
-                                    else {
-                                        _paper[`item[${i}]`] = sheet["B" + i].v
-                                        _paper[`userdef3[${i}]`] = sheet["C" + i].v;
-                                    }
-                                } else { break; }
-                            }
-                            $('#upload').val("");
-                            if (localStorage.importThenEdit) {
-                                sessionStorage.paper = JSON.stringify(_paper);
-                                paperOp.add(btns.add);
-                            } else {
-                                gf.doAjax({
-                                    url: `/${_tasktype}/detail/addEntity.shtml`,
-                                    data: _paper, dataType: "json"
-                                });
-                            }
+                    let index = 50;
+                    for (let i = 12; i > 0; i++) {
+                        if (i > index + 12) {
+                            alert("单次最多仅能导入" + index + "条明细！");
+                            break;
                         }
+                        if (sheet["E" + i] && sheet["G" + i]) {
+                            if (localStorage.importThenEdit) {
+                                if (!_paper.list) _paper.list = [];
+                                _paper.list.push({ item: sheet["E" + i].v, userdef3: sheet["G" + i].v });
+                            }
+                            else {
+                                _paper[`item[${i}]`] = sheet["E" + i].v
+                                _paper[`userdef3[${i}]`] = sheet["G" + i].v;
+
+                                let jsonObj = {};
+                                for (let seq in gu.huiruiImportExcelCols()) {
+                                    let t = sheet[seq + i];
+                                    jsonObj[seq] = t ? t.v : "";
+                                }
+                                _paper[`json[${i}]`] = JSON.stringify(jsonObj);
+                            }
+                        } else { break; }
+                    }
+                    $('#upload').val("");
+                    if (localStorage.importThenEdit) {
+                        sessionStorage.paper = JSON.stringify(_paper);
+                        paperOp.add(btns.add);
+                    } else {
+                        gf.doAjax({
+                            url: `/${_tasktype}/detail/addEntity.shtml`,
+                            data: _paper, dataType: "json", type: "POST"
+                        });
                     }
                 });
             });

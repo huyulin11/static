@@ -68,6 +68,14 @@ window.datagrid = dataGrid({
 			return gf.getStatusDesc(rowindex, data, rowdata, column);
 		}
 	}, {
+		colkey: "json",
+		name: "导入人",
+		renderData: function (rowindex, data, rowdata, column) {
+			let json = JSON.parse(rowdata.json);
+			if (json) return json["CRETATE_OPERATOR"];
+			return "";
+		}
+	}, {
 		colkey: "updatetime",
 		name: "时间",
 		renderData: function (rowindex, data, rowdata, column) {
