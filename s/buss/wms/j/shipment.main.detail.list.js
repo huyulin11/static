@@ -152,6 +152,9 @@ export var init = function () {
 	if (_status) {
 		params.data["shipmentMainFormMap.status"] = _status;
 	}
+	if (_type) {
+		params.data["shipmentMainFormMap.type"] = _type;
+	}
 	if (_detailstatus) {
 		params.data["shipmentMainFormMap.detailstatus"] = _detailstatus;
 	}
