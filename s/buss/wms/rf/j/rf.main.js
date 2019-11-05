@@ -41,7 +41,7 @@ var btns = [
     { resKey: "rf_shipment", id: "stockOut", name: "冷库出库" },
     { resKey: "rf_combine", id: "combine", name: "组盘" },
     { resKey: "rf_fail", id: "failure", name: "产线状态" },
-    { resKey: "rf_alloc", id: "alloc", name: "查看库存" },
+    { resKey: "rf_alloc", id: "alloc", name: "冷库库位" },
     { resKey: "rf_trans", id: "trans", name: "发货" },
     { id: "logout", name: "退出" },
 ];

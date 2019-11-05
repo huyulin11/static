@@ -101,7 +101,7 @@ var doAllocOpHonffu = function (that) {
     }
     var allowedskuid = $("table.allocCol tr.allocColTr").find("td button[data-colid='" + $(that).data("colid") + "']").data("allowedskuid");
     var allowedskutype = $("table.allocCol tr.allocColTr").find("td button[data-colid='" + $(that).data("colid") + "']").data("allowedskutype");
-    var changeNumForm = "<div id='doChangeDiv'>修改当前货位库存"
+    var changeNumForm = "<div id='doChangeDiv'>修改当前货位库位"
         + "<div class='hidden'>种类为：" + sku.select($(that).data("skuid"), allowedskutype, allowedskuid) + "</div>"
         + "数量为：<input type='text' class='doChange' name='num' value='" + num + "'/></div>";
     var changeNumBtn = "<button class='tck doChange' data-id='" + $(that).data("id") + "' "

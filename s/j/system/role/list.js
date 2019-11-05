@@ -21,7 +21,7 @@ window.datagrid = dataGrid({
 		},
 	}, {
 		colkey: "roleKey",
-		name: "roleKey"
+		name: "角色键值"
 	}, {
 		colkey: "description",
 		name: "描述"

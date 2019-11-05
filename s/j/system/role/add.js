@@ -6,7 +6,6 @@ jQuery.validator.addMethod("checkRole", function (value, element) {
 
 $("form").validate({
 	submitHandler: function (form) {//必须写在验证前面，否则无法ajax提交
-		debugger;
 		gf.doAjaxSubmit(form, {//验证新增是否成功
 			type: "post",
 			dataType: "json",

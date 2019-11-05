@@ -11,7 +11,7 @@ export var allocOp = function (that) {
         }
     } else {
         if (!window.confirm('更换品种将修改该区域该列所有的货位内容为对应品种，' + '你确定要' + '修改' + $(that).data("text")
-            + '货位的品种种类为' + selectSkuName + '，库存数量为' + num + '吗？')) {
+            + '货位的品种种类为' + selectSkuName + '，库位数量为' + num + '吗？')) {
             return;
         }
     }

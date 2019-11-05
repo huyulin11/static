@@ -23,7 +23,7 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "num",
-		name: "库存数量",
+		name: "库位数量",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return "--";
