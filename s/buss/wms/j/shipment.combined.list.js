@@ -1,7 +1,6 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
-import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 
 let params = {
 	pagId: 'paging',
@@ -65,9 +64,7 @@ let params = {
 
 export var init = function () {
 	params = Object.assign(params, {
-		data: {
-			"TABLE_KEY": "COMBINED_TU_INFO"
-		}
+		data: { "TABLE_KEY": "COMBINED_TU_INFO" }
 	});
 
 	window.datagrid = dataGrid(params);
@@ -94,6 +91,14 @@ let tempBtns = [{
 		var cbox = gf.checkOnlyOne("key");
 		if (!cbox) { return; }
 		gf.ajax(this.url, { tu: cbox }, "json");
+	},
+}, {
+	url: `/app/conf/deleteBySure.shtml`,
+	id: "deleteSure", name: "确认撤销", class: "btn-danger",
+	bind: function () {
+		var cbox = gf.checkOnlyOne("key");
+		if (!cbox) { return; }
+		gf.ajax(this.url, { key: cbox, TABLE_KEY: "COMBINED_TU_INFO" }, "json");
 	},
 }];
 gf.bindBtns("div.doc-buttons", tempBtns);
