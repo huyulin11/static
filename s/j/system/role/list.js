@@ -19,9 +19,9 @@ window.datagrid = dataGrid({
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("ISOK", data);
 		},
-	}, {
-		colkey: "roleKey",
-		name: "角色键值"
+		// }, {
+		// 	colkey: "roleKey",
+		// 	name: "角色键值"
 	}, {
 		colkey: "description",
 		name: "描述"
