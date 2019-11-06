@@ -73,8 +73,10 @@ let _columns = [{
 	colkey: "sequence",
 	name: "执行优先级",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (data > 1) {
-			$(`tr[d-tree='${rowdata.dtee}']`).css("color", "red");
+		if (data >= 3) {
+			$(`tr[d-tree='${rowdata.dtee}']`).css("color", "orange");
+		} else if (data >= 2) {
+			$(`tr[d-tree='${rowdata.dtee}']`).css("color", "blue");
 		}
 		if (rowdata.delflag != "1" && (rowdata.detailstatus != "4")) {
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;"
@@ -109,6 +111,11 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 			}
 		},
 		renderData: function (rowindex, data, rowdata, column) {
+			if (rowdata.sequence >= 3) {
+				$(`tr[d-tree='${rowdata.dtee}']`).css("color", "orange");
+			} else if (rowdata.sequence >= 2) {
+				$(`tr[d-tree='${rowdata.dtee}']`).css("color", "blue");
+			}
 			switch (localStorage.projectKey) {
 				case "CSY_DAJ": return gv.get("ACS_CACHE_CABLE", data);
 				case "BJJK_HUIRUI": return data;

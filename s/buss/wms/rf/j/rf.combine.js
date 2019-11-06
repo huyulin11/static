@@ -26,10 +26,11 @@ var sub = function () {
             if (typeof data == "string") data = JSON.parse(data);
             layer.msg(data.msg + ":su:" + _su + ",tu:" + _tu);
             if (data.code >= 0) {
+                $("#tu").val("");
                 $("#su").val("");
                 $("#paperid").val("");
                 $("#paperTr").addClass("hidden");
-                $("#su").focus();
+                $("#tu").focus();
                 initDatas();
             } else if (data.code == -100) {
                 $("#paperTr").removeClass("hidden");
