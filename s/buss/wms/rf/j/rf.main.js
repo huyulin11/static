@@ -36,14 +36,14 @@ var agvOk = function () {
 };
 
 var btns = [
-    { resKey: "rf_priority", id: "priority", name: "优先级" },
+    { resKey: "rf_picking", id: "picking", name: "发料拣配" },
     { resKey: "rf_receipt", id: "receipt", name: "冷库入库" },
-    { resKey: "rf_picking", id: "picking", name: "拣配" },
+    { resKey: "rf_combine", id: "combine", name: "发料组盘" },
     { resKey: "rf_shipment", id: "stockOut", name: "冷库出库" },
-    { resKey: "rf_combine", id: "combine", name: "组盘" },
-    { resKey: "rf_fail", id: "failure", name: "产线状态" },
+    { resKey: "rf_trans", id: "trans", name: "发料撤回" },
     { resKey: "rf_alloc", id: "alloc", name: "冷库库位" },
-    { resKey: "rf_trans", id: "trans", name: "发货" },
+    { resKey: "rf_fail", id: "failure", name: "产线设置" },
+    { resKey: "rf_priority", id: "priority", name: "优先等级" },
     { id: "logout", name: "退出" },
 ];
 var initMain = function () {
