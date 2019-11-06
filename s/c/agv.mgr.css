@@ -347,7 +347,7 @@ table.alloc tr td button[data-status='2'] {
 }
 
 table.alloc tr td button[data-status='3'] {
-	background-color: #D24D57;
+	background-color: #EB7347;
 }
 
 table.alloc tr td button[data-status='4'] {
@@ -428,7 +428,7 @@ div#doChangeDiv {
 }
 
 div[id='targets'] button.choosed {
-	background-color: #D24D57;
+	background-color: #00CCFF;
 }
 
 .rf-op input {
