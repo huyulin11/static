@@ -157,7 +157,7 @@ var initReceipt = function () {
             }
         });
     } else {
-        gf.layerMsg("无有效入库单，请先呼叫空架生成入库单！");
+        gf.layerMsg("无有效入库单，请先呼叫料架生成入库单！");
         return;
     }
 }
