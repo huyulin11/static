@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { currentReceiptPaperid, setCurrentReceiptPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 import "/s/j/vue/vue.min.js";
+import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
 
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
@@ -41,9 +42,12 @@ var initReceipt = function () {
                 setCurrentReceiptPaperid("");
                 return;
             } else {
-                title = `正在${main.receipttype == '2' ? "返料入库" : "入库"}` + _paperid;
-                $(container).find("h2").html(title);
-                $(document).attr("title", title);
+                findAlloc(_paperid, function (info) {
+                    info = info ? ("-" + info) : "";
+                    title = `正在${main.receipttype == '2' ? "返料入库" : "入库"}` + info;
+                    $(container).find("h2").html(title);
+                    $(document).attr("title", title);
+                });
             }
         });
     } else {
@@ -120,7 +124,7 @@ var initReceipt = function () {
                 if (data.code >= 0) {
                     _paperid = "";
                     setCurrentReceiptPaperid("");
-                    if (parent) {
+                    if (_alloc) {
                         parent.layer.close(parent.pageii);
                     } else {
                         window.location.reload();

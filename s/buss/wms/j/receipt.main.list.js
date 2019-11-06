@@ -2,6 +2,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
+import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
 
 let _receipttype = gf.urlParam("receipttype");
 
@@ -81,18 +82,6 @@ if (localStorage.projectKey == "BJJK_HUIRUI") {
 	});
 }
 
-var findAllocs = function (that) {
-	gf.ajax('/bd/conf.shtml?table=RECEIPT_ALLOC_ITEM', { key: $(that).data("paperid") }, "json", function (s) {
-		var info = "";
-		for (var item of s) {
-			info = info + item.value + "<br/>";
-		}
-		if (!info) { info = "未找到执行信息！"; }
-		$(that).html(info);
-		return info;
-	});
-};
-
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: cols,
@@ -101,7 +90,10 @@ window.datagrid = dataGrid({
 	serNumber: true,
 	callback: function () {
 		$(".targetAlloc").each(function () {
-			findAllocs(this);
+			let that = this;
+			findAlloc($(that).data("paperid"), function (info) {
+				$(that).html(info);
+			});
 		});
 	}
 });
