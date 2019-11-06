@@ -86,7 +86,7 @@ select {
 #topCtrlContainer {
 	position: fixed;
 	right: 10px;
-	bottom: 10px;
+	top: 10px;
 	background: white;
 	border-radius: 10px;
 }
@@ -200,7 +200,7 @@ input.bigSearch {
 	position: fixed;
 	display: none;
 	right: 1%;
-	bottom: 65px;
+	top: 65px;
 	background: #fff;
 	width: 70%;
 	box-shadow: gray 10px 10px 30px 5px;
