@@ -38,7 +38,7 @@ var sub = function () {
         data: { userdef3: tu, item: su, paperid: _paperid, warehouse: _warehouse, setting: localStorage.PICKED_SETTING, settingType: localStorage.PICKED_TYPE },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            layer.msg(data.msg + "tu:" + tu);
+            layer.msg(data.msg);
             if (data.code >= 0) {
                 $("#tu").val("");
                 $("#su").val("");

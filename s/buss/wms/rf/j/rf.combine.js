@@ -11,7 +11,7 @@ var sub = function () {
     let _tu = $("#tu").val();
     let _paperid = $("#paperid").val();
     if (!_su || !_tu) {
-        layer.msg("tu与su均不能为空！");
+        layer.msg("TU与SU均不能为空！");
         if (!_su) {
             $("#su").focus();
         } else if (!_tu) {
@@ -24,7 +24,7 @@ var sub = function () {
         data: { item: _su, userdef4: _tu, warehouse: _warehouse, paperid: _paperid },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            layer.msg(data.msg + ":su:" + _su + ",tu:" + _tu);
+            layer.msg(data.msg);
             if (data.code >= 0) {
                 $("#tu").val("");
                 $("#su").val("");
@@ -61,7 +61,7 @@ var initCombine = function () {
 
 var getCombinedList = function () {
     var tuVal = $("#tu").val();
-    if (!tuVal) { layer.msg("组盘货架号不能为空！"); $("#tu").focus(); return; }
+    if (!tuVal) { $("#tu").focus(); return; }
     gf.doAjax({
         url: `/app/conf/findJsonList.shtml`,
         data: { TABLE_KEY: "COMBINED_TU_INFO", key: tuVal },
@@ -71,7 +71,7 @@ var getCombinedList = function () {
                 let value = JSON.parse(data[0].value);
                 let items = value.items;
                 let target = value.name;
-                target = target ? ("目的地：" + target) : "";
+                target = target ? ("<br/>目的地：" + target) : "";
                 if (items) {
                     let itemArr = [];
                     for (let item of items) {

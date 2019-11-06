@@ -23,7 +23,7 @@ var sub = function () {
             data: { item: su, userdef3: tu },
             success: function (data) {
                 if (typeof data == "string") data = JSON.parse(data);
-                layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
+                layer.msg(data.msg);
                 if (data.code >= 0) {
                     $("#su").val("");
                     $("#tu").val("");

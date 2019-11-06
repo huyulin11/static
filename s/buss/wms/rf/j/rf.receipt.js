@@ -137,7 +137,7 @@ var initReceipt = function () {
     let su = $("#su").val();
     let tu = $("#tu").val();
     if (!su || !tu) {
-        layer.msg("tu与su均不能为空！");
+        layer.msg("货位号与SU均不能为空！");
         if (!su) {
             $("#su").focus();
         } else if (!tu) {
@@ -151,7 +151,7 @@ var initReceipt = function () {
             data: { item: su, userdef3: tu },
             success: function (data) {
                 if (typeof data == "string") data = JSON.parse(data);
-                layer.msg(data.msg + ":su:" + su + ",tu:" + tu);
+                layer.msg(data.msg);
                 $("#su").val("");
                 $("#su").focus();
             }
