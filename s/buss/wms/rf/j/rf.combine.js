@@ -11,7 +11,7 @@ var sub = function () {
     let _tu = $("#tu").val();
     let _paperid = $("#paperid").val();
     if (!_su || !_tu) {
-        layer.msg("TU与SU均不能为空！");
+        gf.layerMsg("TU与SU均不能为空！");
         if (!_su) {
             $("#su").focus();
         } else if (!_tu) {
@@ -24,7 +24,7 @@ var sub = function () {
         data: { item: _su, userdef4: _tu, warehouse: _warehouse, paperid: _paperid },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            layer.msg(data.msg);
+            gf.layerMsg(data.msg);
             if (data.code >= 0) {
                 $("#tu").val("");
                 $("#su").val("");
@@ -77,7 +77,7 @@ var getCombinedList = function () {
                     for (let item of items) {
                         itemArr.push(item.su);
                     }
-                    layer.msg(tuVal + "托盘已组盘货物有：" + itemArr.join(',') + "!" + target);
+                    gf.layerMsg(tuVal + "托盘已组盘货物有：" + itemArr.join(',') + "!" + target);
                 }
             }
         }

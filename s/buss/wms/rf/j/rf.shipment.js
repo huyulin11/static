@@ -9,7 +9,7 @@ var sub = function () {
     let su = $("#su").val();
     let tu = $("#tu").val();
     if (!su || !tu) {
-        layer.msg("tu与su均不能为空！");
+        gf.layerMsg("tu与su均不能为空！");
         if (!su) {
             $("#su").focus();
         } else if (!tu) {
@@ -23,7 +23,7 @@ var sub = function () {
             data: { item: su, userdef3: tu },
             success: function (data) {
                 if (typeof data == "string") data = JSON.parse(data);
-                layer.msg(data.msg);
+                gf.layerMsg(data.msg);
                 if (data.code >= 0) {
                     $("#su").val("");
                     $("#tu").val("");
@@ -42,13 +42,13 @@ var initShipment = function () {
         let url = `/shipment/main/findOneData.shtml`;
         gf.ajax(url, { paperid: currentShipmentPaperid() }, "json", function (s) {
             if (s.code < 0) {
-                layer.msg(currentShipmentPaperid() + s.msg);
+                gf.layerMsg(currentShipmentPaperid() + s.msg);
                 setCurrentShipmentPaperid("");
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
-                layer.msg(currentShipmentPaperid() + "该单无法继续操作，如需查看详情，请移步出库管理！");
+                gf.layerMsg(currentShipmentPaperid() + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 setCurrentShipmentPaperid("");
                 return;
             } else {

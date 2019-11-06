@@ -56,7 +56,7 @@ $("#permissions").click("click", function () {
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
-		layer.msg("只能选中一个");
+		gf.layerMsg("只能选中一个");
 		return;
 	}
 	window.pageii = layer.open({
@@ -77,7 +77,7 @@ function add() {
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
-		layer.msg("请选择删除项！！");
+		gf.layerMsg("请选择删除项！！");
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {

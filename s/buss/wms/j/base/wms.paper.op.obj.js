@@ -104,7 +104,7 @@ var initBtns = function () {
                     info = info + item.key + ":" + item.value + "<br/>";
                 }
                 if (!info) { info = "未找到执行信息！"; }
-                layer.msg(info);
+                gf.layerMsg(info);
             });
         },
     }; btns.whichOne = {
@@ -119,7 +119,7 @@ var initBtns = function () {
                 });
             }
             if (!info) { info = "未找到相关信息！"; }
-            layer.msg(info);
+            gf.layerMsg(info);
         },
     }; btns.stockOut = {
         url: `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=RF${escape("出库")}`,
@@ -183,7 +183,7 @@ class PaperOp {
         if (!cbox) { return; }
         layer.confirm(`是否${that.name}${cbox}？`, function (index) {
             gf.ajax(that.url, { paperids: cbox.join(",") }, "json", function (s) {
-                layer.msg(s.msg);
+                gf.layerMsg(s.msg);
                 window.datagrid.loadData();
             });
         });
@@ -194,12 +194,12 @@ class PaperOp {
         let url = `/${_tasktype}/main/findOneData.shtml`;
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (!s.object) {
-                layer.msg(`该单无法${that.name}！`);
+                gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "1") || main["delflag"] != "0") {
-                layer.msg(`该单无法${that.name}！`);
+                gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
             window.pageii = layer.open({
@@ -216,12 +216,12 @@ class PaperOp {
         let url = `/${_tasktype}/main/findOneData.shtml`;
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (!s.object) {
-                layer.msg(`该单无法${that.name}！`);
+                gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
-                layer.msg(`该单无法${that.name}！`);
+                gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
             window.location.href = that.url + "?paperid=" + cbox
@@ -233,12 +233,12 @@ class PaperOp {
         let url = `/${_tasktype}/main/findOneData.shtml`;
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (!s.object) {
-                layer.msg(`该单无法${that.name}！`);
+                gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "1") || main["delflag"] != "0") {
-                layer.msg(`该单无法${that.name}！`);
+                gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
             window.location.href = that.url + "&paperid=" + cbox
@@ -270,12 +270,12 @@ class PaperOp {
         layer.confirm(`是否${that.name}${paperid}？`, function (index) {
             gf.ajax(that.url, { paperid: paperid }, "json", function (s) {
                 if (s.code >= 0) {
-                    layer.msg(`成功${that.name}！`);
+                    gf.layerMsg(`成功${that.name}！`);
                     if (window.datagrid) window.datagrid.loadData();
                     else if (parent.datagrid) parent.datagrid.loadData();
                     if (callback) { callback(paperid); }
                 } else {
-                    layer.msg(`${that.name}失败！` + s.msg);
+                    gf.layerMsg(`${that.name}失败！` + s.msg);
                 }
             });
         });

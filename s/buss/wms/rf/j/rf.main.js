@@ -24,7 +24,7 @@ var agvOk = function () {
             url: `/receipt/main/agvOk.shtml`,
             success: function (data) {
                 data = JSON.parse(data);
-                layer.msg(data.msg);
+                gf.layerMsg(data.msg);
                 if (data.code >= 0) {
                     setCurrentReceiptPaperid("");
                     setCurrentShipmentPaperid("");

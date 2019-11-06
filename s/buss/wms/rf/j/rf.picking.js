@@ -38,7 +38,7 @@ var sub = function () {
         data: { userdef3: tu, item: su, paperid: _paperid, warehouse: _warehouse, setting: localStorage.PICKED_SETTING, settingType: localStorage.PICKED_TYPE },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            layer.msg(data.msg);
+            gf.layerMsg(data.msg);
             if (data.code >= 0) {
                 $("#tu").val("");
                 $("#su").val("");
@@ -61,12 +61,12 @@ var initPick = function () {
         let url = `/shipment/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
             if (s.code < 0) {
-                layer.msg(_paperid + s.msg);
+                gf.layerMsg(_paperid + s.msg);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
-                layer.msg(_paperid + "该单无法继续操作，如需查看详情，请移步出库管理！");
+                gf.layerMsg(_paperid + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 return;
             }
         });

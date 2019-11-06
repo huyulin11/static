@@ -41,10 +41,11 @@ window.datagrid = dataGrid({
 		},
 	}, {
 		colkey: "totallines",
-		name: "明细数"
+		name: "明细行数"
 	}, {
 		colkey: "totalqty",
-		name: "货物数"
+		name: "货物数",
+		hide: true,
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {

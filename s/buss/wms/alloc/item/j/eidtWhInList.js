@@ -47,7 +47,7 @@ var doEditInputEnter = function () {
     var tr = $currentTd.parents("tr");
     var data = $currentTd.find("input").data("vvvvDickey");
     if (!data) {
-        layer.msg("数据需从下拉列表中选取！");
+        gf.layerMsg("数据需从下拉列表中选取！");
         $currentTd.find("input").focus();
         return;
     }
@@ -58,12 +58,12 @@ var doEditInputEnter = function () {
         "allocItemFormMap.whId": data
     }, "json", function (s) {
         if (s.code >= 0) {
-            layer.msg('修改成功！');
+            gf.layerMsg('修改成功！');
             $currentTd.find("div.changable").find("span").html(data);
             _toggle();
             window.datagrid.loadData();
         } else {
-            layer.msg('修改失败：' + s.msg);
+            gf.layerMsg('修改失败：' + s.msg);
             $currentTd.find("input").focus();
         }
     });

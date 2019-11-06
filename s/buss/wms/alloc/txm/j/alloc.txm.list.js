@@ -35,7 +35,7 @@ let tempBtns = [{
 		if (!txm) { return; }
 		layer.confirm(`是否${this.name}${txm}？`, function (index) {
 			gf.ajax(`/alloc/txm/deleteEntity.shtml`, { txm: txm, alloc: alloc }, "json", function (s) {
-				layer.msg(s.msg);
+				gf.layerMsg(s.msg);
 				window.datagrid.loadData();
 			});
 		});
@@ -103,7 +103,7 @@ $("#permissions").click("click", function () {
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
-		layer.msg("只能选中一个");
+		gf.layerMsg("只能选中一个");
 		return;
 	}
 	window.pageii = layer.open({

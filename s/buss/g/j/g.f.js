@@ -395,6 +395,9 @@ class GF {
         }
         return flag;
     };
+    layerMsg(content, options, end) {
+        layer.alert(content, options, end);
+    }
 }
 
 var gf = new GF();

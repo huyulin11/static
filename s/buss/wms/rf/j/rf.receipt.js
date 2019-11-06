@@ -30,14 +30,14 @@ var initReceipt = function () {
         let url = `/receipt/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
             if (s.code < 0) {
-                layer.msg(_paperid + s.msg);
+                gf.layerMsg(_paperid + s.msg);
                 _paperid = "";
                 setCurrentReceiptPaperid("");
                 return;
             }
             let main = s.object.main;
             if (!main || main["status"] != "1" || main["delflag"] != "0") {
-                layer.msg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！");
+                gf.layerMsg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！");
                 _paperid = "";
                 setCurrentReceiptPaperid("");
                 return;
@@ -60,7 +60,7 @@ var initReceipt = function () {
     $("#tu").focus();
 }, start = function (alloc) {
     if (_paperid) {
-        layer.msg("当前入库单尚未处理完成，不能再呼叫空车！");
+        gf.layerMsg("当前入库单尚未处理完成，不能再呼叫空车！");
         return;
     }
     gf.doAjax({
@@ -68,7 +68,7 @@ var initReceipt = function () {
         data: { warehouse: 2 },
         success: function (data) {
             data = JSON.parse(data);
-            layer.msg(data.msg);
+            gf.layerMsg(data.msg);
             if (data.code >= 0) {
                 _paperid = data.object;
                 setCurrentReceiptPaperid(_paperid);
@@ -78,14 +78,14 @@ var initReceipt = function () {
     });
 }, send = function () {
     if (!_paperid) {
-        layer.msg("没有生成对应入库单，不能进行执行操作！");
+        gf.layerMsg("没有生成对应入库单，不能进行执行操作！");
         return;
     }
     gf.doAjax({
         url: `/receipt/main/send.shtml?paperid=${_paperid}`,
         success: function (data) {
             data = JSON.parse(data);
-            layer.msg(data.msg);
+            gf.layerMsg(data.msg);
             if (data.code >= 0) {
                 _paperid = "";
                 setCurrentReceiptPaperid("");
@@ -95,14 +95,14 @@ var initReceipt = function () {
     });
 }, execute = function () {
     if (!_paperid) {
-        layer.msg("没有生成对应入库单，不能进行执行操作！");
+        gf.layerMsg("没有生成对应入库单，不能进行执行操作！");
         return;
     }
     gf.doAjax({
         url: `/receipt/main/execute.shtml?paperid=${_paperid}`,
         success: function (data) {
             data = JSON.parse(data);
-            layer.msg(data.msg);
+            gf.layerMsg(data.msg);
             if (data.code >= 0) {
                 _paperid = "";
                 setCurrentReceiptPaperid("");
@@ -112,7 +112,7 @@ var initReceipt = function () {
     });
 }, cancel = function () {
     if (!_paperid) {
-        layer.msg("没有生成对应入库单，不能进行取消操作！");
+        gf.layerMsg("没有生成对应入库单，不能进行取消操作！");
         return;
     }
     if (window.confirm("取消操作将删除当前正在操作的入库单，是否继续？")) {
@@ -120,7 +120,7 @@ var initReceipt = function () {
             url: `/receipt/main/deleteEntity.shtml?paperid=${_paperid}`,
             success: function (data) {
                 data = JSON.parse(data);
-                layer.msg(data.msg);
+                gf.layerMsg(data.msg);
                 if (data.code >= 0) {
                     _paperid = "";
                     setCurrentReceiptPaperid("");
@@ -137,7 +137,7 @@ var initReceipt = function () {
     let su = $("#su").val();
     let tu = $("#tu").val();
     if (!su || !tu) {
-        layer.msg("货位号与SU均不能为空！");
+        gf.layerMsg("货位号与SU均不能为空！");
         if (!su) {
             $("#su").focus();
         } else if (!tu) {
@@ -151,13 +151,13 @@ var initReceipt = function () {
             data: { item: su, userdef3: tu },
             success: function (data) {
                 if (typeof data == "string") data = JSON.parse(data);
-                layer.msg(data.msg);
+                gf.layerMsg(data.msg);
                 $("#su").val("");
                 $("#su").focus();
             }
         });
     } else {
-        layer.msg("无有效入库单，请先呼叫空架生成入库单！");
+        gf.layerMsg("无有效入库单，请先呼叫空架生成入库单！");
         return;
     }
 }
