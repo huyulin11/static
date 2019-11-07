@@ -75,7 +75,7 @@ var initPick = function () {
             let items = [];
             for (let item of json) { items.push(item.name); }
             str += items.join("、");
-            return (`正在拣货-${str}`);
+            return (`正在拣货<br/>${str}`);
         } else {
             return (`全库匹配拣货`);
         }
@@ -148,6 +148,7 @@ var initRf = function () {
                 _warehouse = 2;
                 $("#suTr").removeClass("hidden");
                 $("#topCtrlContainer").hide();
+                initPick();
             } else {
                 $("#suTr").addClass("hidden");
                 _warehouse = "";
@@ -155,6 +156,7 @@ var initRf = function () {
                     url: `/app/conf/getByUser.shtml`,
                     data: { TABLE_KEY: "PICKING_SETTING" },
                     dataType: "json",
+                    timeout: 2000,
                     success: function (setting) {
                         _setting = setting;
                         initSetting(_setting);
