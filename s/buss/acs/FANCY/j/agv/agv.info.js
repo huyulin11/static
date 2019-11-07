@@ -374,7 +374,7 @@ var gotoInitsHandler = function () {
 	allDisabled();
 	var targetSite = 0;
 	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
-		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056'],
+		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056', '原料库4号-3057', '原料库5号-3058', '原料库6号-3059'],
 		btn1: function () {
 			targetSite = 3054;
 			doTask(agvId, "TRANSPORT", targetSite);
@@ -385,6 +385,18 @@ var gotoInitsHandler = function () {
 		},
 		btn3: function () {
 			targetSite = 3056;
+			doTask(agvId, "TRANSPORT", targetSite);
+		},
+		btn4: function () {
+			targetSite = 3057;
+			doTask(agvId, "TRANSPORT", targetSite);
+		},
+		btn5: function () {
+			targetSite = 3058;
+			doTask(agvId, "TRANSPORT", targetSite);
+		},
+		btn6: function () {
+			targetSite = 3059;
 			doTask(agvId, "TRANSPORT", targetSite);
 		}
 	});
