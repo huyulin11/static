@@ -6,29 +6,11 @@ import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 var _frame = "#loadhtml";
-localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
-gv.init();
-$('body').fadeIn();
 
-var loadPage = function (url, openType, sn) {
-    if (sn) {
-        var snul = document.getElementById("topli");
-        snul.innerHTML = '<li><i class="fa fa-home"></i> <a href="index.shtml">Home</a></li>';
-        for (var i = 0; i < 2; i++) {
-            var li = document.createElement("LI");
-            var a = document.createElement("A");
-            a.href = "#";
-            a.innerHTML = sn[i].name || "";
-            if (sn[i].url) {
-                $(a).click(function () {
-                    loadPage(sn[i].url);
-                });
-            }
-            li.appendChild(a);
-            snul.appendChild(li);
-        }
-    }
-
+var loadPage = function (tip) {
+    var sn = tip.split(",");
+    if (localStorage.remember) localStorage.index = sn;
+    let url = sn[2], openType = sn[3];
     if (openType) {
         if (url.indexOf("?", (url.indexOf("?") + 1)) > 0) {
             url = url.replace(/(.*)\?/, "$1&");
@@ -51,23 +33,18 @@ var loadPage = function (url, openType, sn) {
 
     $(_frame).hide();
     gf.quoteModule(url, _frame);
-    if (localStorage.remember) localStorage.index = url;
     $("#nav").removeClass("nav-off-screen");
-}
-
-gf.quoteModule((localStorage.index ? localStorage.index : "/s/buss/g/h/welcome.html"), _frame);
-$("[data-tip]").on("click", function () {
-    var parentLi = $(this).parent("li");
-    var nav = $(this).data("tip");
-    var sn = nav.split(",");
-    $(this).parents("nav").find("li").removeClass("current");
-    parentLi.addClass("current");
-    var html = '<li><i class="fa fa-home"></i>' + '<a href="index.shtml">Home</a></li>';
+    var html = '<li><i class="fa fa-home"></i><a href="manager.shtml">Home</a></li>';
     for (var i = 0; i < 2; i++) {
         html += '<li><a>' + sn[i] + '</a></li>';
     }
     $("#topli").html(html);
-    loadPage(sn[2], sn[3]);
+}
+
+$("[data-tip]").on("click", function () {
+    $(this).parents("nav").find("li").removeClass("current");
+    $(this).parent("li").addClass("current");
+    loadPage($(this).data("tip"));
 });
 
 $("a#editUI").on("click", function () {
@@ -92,9 +69,10 @@ $(_frame).on("load", function (params) {
     }
 
     let paddingTop = $(this).contents().find(".doc-buttons").height();
-    if (paddingTop) {
-        $(this).contents().find("html>body").css("padding-top", paddingTop + 10);
-    } else {
-        $(this).contents().find("html>body").css("padding-top", 0);
-    }
+    $(this).contents().find("html>body").css("padding-top", paddingTop ? (paddingTop + 10) : 0);
 });
+
+localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
+gv.init();
+$("body").fadeIn();
+loadPage(localStorage.index ? localStorage.index : "首页,首页,/s/buss/g/h/welcome.html");
