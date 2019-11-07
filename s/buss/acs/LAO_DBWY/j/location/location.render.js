@@ -59,6 +59,37 @@
         }
     }
 
+    var siteCode = function (locations) {
+        var text = function () {
+            return svg.append("text")
+                .style("stroke", "black")
+                .style("font-size", "8px")
+                .style("stroke-width", "0.6px")
+                .text(location.id);
+        }
+        for (var location of locations) {
+            var locationid = location.id;
+            if (locationid > 2005) {
+                if (4000 < locationid && locationid < 4004) {
+                    text().attr("x", padding.left + xScale(location.x) - 9)
+                        .attr("y", height - padding.bottom - yScale(location.y) - 5);
+                } else if ((2010 < locationid && locationid < 2016) || (2025 < locationid && locationid < 2037) || (2077 < locationid && locationid < 2088)) {
+                    text().attr("x", padding.left + xScale(location.x) - 5)
+                        .attr("y", height - padding.bottom - yScale(location.y) + 9);
+                } else if ((2015 < locationid && locationid < 2026) || (2036 < locationid && locationid < 2048) || (2067 < locationid && locationid < 2078) || (2087 < locationid && locationid < 2098)) {
+                    text().attr("x", padding.left + xScale(location.x) - 13)
+                        .attr("y", height - padding.bottom - yScale(location.y) + 9);
+                } else if (2107 < locationid && locationid < 2119 && locationid % 2 == 1) {
+                    text().attr("x", padding.left + xScale(location.x) - 9)
+                        .attr("y", height - padding.bottom - yScale(location.y) - 5);
+                } else {
+                    text().attr("x", padding.left + xScale(location.x) - 9)
+                        .attr("y", height - padding.bottom - yScale(location.y) + 10);
+                }
+            }
+        }
+    }
+
     var rectPath = function (yfc) {
         var line = function () {
             return svg.append("line")
@@ -100,11 +131,16 @@
         }
     }
 
+    var siteCode = false;
     function rect() {
         $(".clashLine").remove();
         $(".mainRoad").remove();
 
         rectPath(yfc);
+        if (!siteCode && isLocations) {
+            siteCode(locations);
+            siteCode = true;
+        }
         rectPath(yfcs);
         rectAspect(yfcs);
 
@@ -299,29 +335,6 @@
         //drawAxis();
         drawAgvs();
     }
-
-    var equals = function (arr1, arr2) {
-        if (arr1 == null || arr2 == null) {
-            return false;
-        }
-        if (arr1.length != arr2.length) {
-            return false;
-        }
-        for (var i = 0; i < arr1.length; i++) {
-            if (arr1 != arr2) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    var randomColor = function () {
-        return '#' +
-            (function (color) {
-                return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
-                    && (color.length == 6) ? color : arguments.callee(color);
-            })('');
-    };
 
     renderSvg();
     setInterval(renderSvg, 3000);
