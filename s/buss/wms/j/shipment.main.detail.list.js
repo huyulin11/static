@@ -171,8 +171,6 @@ export var init = function () {
 		params.data["shipmentMainFormMap.warehouse"] = _warehouse;
 	} else if (_pick) {
 		params.data["shipmentMainFormMap.PICK"] = _pick;
-		params.data["setting"] = localStorage.PICKED_SETTING;
-		params.data["settingType"] = localStorage.PICKED_TYPE;
 	}
 	if (_type) {
 		initPaperOp("shipment", _type);

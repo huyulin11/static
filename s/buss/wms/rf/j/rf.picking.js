@@ -7,15 +7,7 @@ let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
 let _warehouse = gf.urlParam("warehouse");
 let _type = gf.urlParam("type");
-if (_type == "PICKED_COLD") {
-    _warehouse = 2;
-    $("#suTr").removeClass("hidden");
-    $("#topCtrlContainer").hide();
-} else {
-    $("#suTr").addClass("hidden");
-    _warehouse = "";
-    initSetting();
-}
+let _setting;
 
 var sub = function () {
     let tu = $("#tu").val();
@@ -35,7 +27,7 @@ var sub = function () {
 
     gf.doAjax({
         url: `/shipment/detail/addPickingItem.shtml`,
-        data: { userdef3: tu, item: su, paperid: _paperid, warehouse: _warehouse, setting: localStorage.PICKED_SETTING, settingType: localStorage.PICKED_TYPE },
+        data: { userdef3: tu, item: su, paperid: _paperid, warehouse: _warehouse, },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             gf.layerMsg(data.msg);
@@ -77,9 +69,9 @@ var initPick = function () {
             return ("正在拣货-" + _paperid);
         } else if (_warehouse) {
             return (`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
-        } else if (localStorage.PICKED_SETTING && localStorage.PICKED_SETTING != "[]") {
-            let json = JSON.parse(localStorage.PICKED_SETTING);
-            let str = (localStorage.PICKED_TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
+        } else if (_setting && _setting.SETTING && _setting.SETTING != "[]") {
+            let json = _setting.SETTING;
+            let str = (_setting.TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
             let items = [];
             for (let item of json) { items.push(item.name); }
             str += items.join("、");
@@ -124,6 +116,25 @@ var initPick = function () {
         }
     });
 
+    if (_paperid) {
+        $(container).find("#over").on("click", function () {
+            if (_paperid) {
+                overPaper(_paperid);
+            }
+        });
+    }
+    $(container).find("table").show();
+    $(container).find("#sub").on("click", function () { sub(); });
+    initPaperOp("shipment");
+    $("#tu").focus();
+
+    $(container).find("#layout").on("click", function () {
+        window.location.href = "/logout.shtml";
+    });
+    $(container).find("#back").on("click", function () {
+        window.history.back();
+    });
+    gf.resizeTable();
 }
 
 var initRf = function () {
@@ -133,26 +144,24 @@ var initRf = function () {
         created: function () {
         },
         mounted: function () {
-            initPick();
-            if (_paperid) {
-                $(container).find("#over").on("click", function () {
-                    if (_paperid) {
-                        overPaper(_paperid);
+            if (_type == "PICKED_COLD") {
+                _warehouse = 2;
+                $("#suTr").removeClass("hidden");
+                $("#topCtrlContainer").hide();
+            } else {
+                $("#suTr").addClass("hidden");
+                _warehouse = "";
+                gf.doAjax({
+                    url: `/app/conf/getByUser.shtml`,
+                    data: { TABLE_KEY: "PICKING_SETTING" },
+                    dataType: "json",
+                    success: function (setting) {
+                        _setting = setting;
+                        initSetting(_setting);
+                        initPick();
                     }
                 });
             }
-            $(container).find("table").show();
-            $(container).find("#sub").on("click", function () { sub(); });
-            initPaperOp("shipment");
-            $("#tu").focus();
-
-            $(container).find("#layout").on("click", function () {
-                window.location.href = "/logout.shtml";
-            });
-            $(container).find("#back").on("click", function () {
-                window.history.back();
-            });
-            gf.resizeTable();
         },
         methods: {
             tuEnter: function () {

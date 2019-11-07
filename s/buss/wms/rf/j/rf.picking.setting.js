@@ -1,8 +1,11 @@
-export var initSetting = function () {
+let _setting;
+
+export var initSetting = function (setting) {
+    _setting = setting;
     doInit(findChoosedType);
 }
 
-var render = function (laps, callback) {
+var render = function (laps, setting, callback) {
     container().html("");
 
     let tabs = new Map();
@@ -28,8 +31,6 @@ var render = function (laps, callback) {
             </label>`);
     }
 
-    let chooseInfo = localStorage.PICKED_SETTING;
-    if (chooseInfo) chooseInfo = JSON.parse(chooseInfo);
     for (let m of tabs) {
         let obj = m[1];
         if (obj.key == 'PICK') {
@@ -41,7 +42,7 @@ var render = function (laps, callback) {
             values: obj.value,
             numInLine: 4,
             choose: function (value) {
-                if (chooseInfo) if (chooseInfo.filter((d) => { return d.id == value.id; }).length) { return true; }
+                if (setting && setting.SETTING) if (setting.SETTING.filter((d) => { return d.id == value.id; }).length) { return true; }
                 return false;
             },
         });
@@ -50,7 +51,7 @@ var render = function (laps, callback) {
     var tables = `<div class="wrap">${tabStrs}</div>`;
     container().append(tables);
     gf.resizeTable();
-    if (callback) { callback(); }
+    if (callback) { callback(setting ? setting.TYPE : ""); }
 }
 
 var doInit = function (callback) {
@@ -60,7 +61,7 @@ var doInit = function (callback) {
         dataType: "json",
         cache: false,
         success: function (laps) {
-            render(laps, callback);
+            render(laps, _setting, callback);
         }
     });
 }
@@ -101,24 +102,24 @@ container().delegate("input.chooseRadio", "change", function () {
 $("html").delegate("button#save", "click", function () {
     let _value = $("html").find(`input.chooseRadio:checked`).data("id");
     if (!_value) { return; }
-    localStorage.PICKED_TYPE = _value;
     let obj = [];
     container().find(`div.chooseDiv[data-id='${_value}']`).find("button").each(function () {
         if ($(this).hasClass("choosed")) {
             obj.push({ id: $(this).data("id"), name: $(this).data("name"), type: $(this).data("type"), whid: $(this).data("whid") });
         }
     });
-    localStorage.PICKED_SETTING = JSON.stringify(obj);
+    let setting = {};
+    setting.TYPE = _value;
+    setting.SETTING = obj;
     gf.doAjax({
         url: `/app/conf/setByUser.shtml`,
-        data: { TABLE_KEY: "PICKING_SETTING", value: localStorage.PICKED_SETTING },
+        data: { TABLE_KEY: "PICKING_SETTING", value: JSON.stringify(setting) },
         success: function (data) {
             location.reload();
         }
     });
 });
 
-var findChoosedType = function () {
-    let s = localStorage.PICKED_TYPE;
+var findChoosedType = function (s) {
     if (s) { $("html").find(`input.chooseRadio[data-id='${s}']`).trigger("click"); }
 }
