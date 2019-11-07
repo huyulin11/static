@@ -8,8 +8,8 @@ import "/s/buss/g/j/jquery/jquery.autofill.js";
 var _frame = "#loadhtml";
 localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
 gv.init();
-
 $('body').fadeIn();
+
 var loadPage = function (url, openType, sn) {
     if (sn) {
         var snul = document.getElementById("topli");
@@ -17,7 +17,7 @@ var loadPage = function (url, openType, sn) {
         for (var i = 0; i < 2; i++) {
             var li = document.createElement("LI");
             var a = document.createElement("A");
-            a.href = "#"; // href="#"：跳转到页首
+            a.href = "#";
             a.innerHTML = sn[i].name || "";
             if (sn[i].url) {
                 $(a).click(function () {
@@ -55,23 +55,19 @@ var loadPage = function (url, openType, sn) {
     $("#nav").removeClass("nav-off-screen");
 }
 
-// tb.load("/s/buss/wms/h/shipmentMainMgr.html");
-// tb.attr("src","/s/buss/wms/h/shipmentMainMgr.html");
 gf.quoteModule((localStorage.index ? localStorage.index : "/s/buss/g/h/welcome.html"), _frame);
-$("[data-tip]").each(function () {
-    $(this).bind("click", function () {
-        var parentLi = $(this).parent("li");
-        var nav = $(this).data("tip");
-        var sn = nav.split(",");
-        $(this).parents("nav").find("li").removeClass("current");
-        parentLi.addClass("current");
-        var html = '<li><i class="fa fa-home"></i>' + '<a href="index.shtml">Home</a></li>';
-        for (var i = 0; i < 2; i++) {
-            html += '<li><a>' + sn[i] + '</a></li>';
-        }
-        $("#topli").html(html);
-        loadPage(sn[2], sn[3]);
-    });
+$("[data-tip]").on("click", function () {
+    var parentLi = $(this).parent("li");
+    var nav = $(this).data("tip");
+    var sn = nav.split(",");
+    $(this).parents("nav").find("li").removeClass("current");
+    parentLi.addClass("current");
+    var html = '<li><i class="fa fa-home"></i>' + '<a href="index.shtml">Home</a></li>';
+    for (var i = 0; i < 2; i++) {
+        html += '<li><a>' + sn[i] + '</a></li>';
+    }
+    $("#topli").html(html);
+    loadPage(sn[2], sn[3]);
 });
 
 $("a#editUI").on("click", function () {
