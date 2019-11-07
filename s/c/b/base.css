@@ -94,7 +94,7 @@ html.aui-dialog-iframe-root-node {
 
 body {
   /* background: #FFF; */
-  font: 62.5%/1.4 Arial, Helvetica, Verdana, sans-serif;
+  /* font: 62.5%/1.4 Arial, Helvetica, Verdana, sans-serif; */
 }
 
 body.portal-popup {
@@ -319,10 +319,10 @@ form#searchForm input {
 }
 
 form#searchForm label {
-  text-align: right;
+  /* text-align: right; */
 }
 
-form#searchForm label>span {
+form#searchForm label {
   text-align: right;
 }
 
