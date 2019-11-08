@@ -76,7 +76,7 @@ var initMain = function () {
         window.location.href = `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR`;
     });
     $("#rootContainer").find("#priority").on("click", function () {
-        window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=1:2:SCANED:COMBINED:COMB_OVER:START_TRANS`;
+        window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=NEW:TOSEND:PICKING:PICKOVER:COMBINING:COMBOVER:TRANSSTART`;
     });
     $("#rootContainer").find("#picking").on("click", function () {
         window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_NORMAL`;

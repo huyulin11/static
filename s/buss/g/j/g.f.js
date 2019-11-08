@@ -313,7 +313,7 @@ class GF {
     rowDisplay(rowdata) {
         let btns = "";
         let target = `tr[d-tree='${rowdata.dtee}']`;
-        if (rowdata.status == 3 || rowdata.detailstatus == 3) {
+        if ([rowdata.status, rowdata.detailstatus].includes("EXECUTING")) {
             $(target).css("color", "red");
         }
         if (rowdata.sequence >= 3) {
@@ -404,6 +404,7 @@ class GF {
         return flag;
     };
     layerMsg(content, options, end) {
+        if (!options || !options.btns) options = $.extend({ btns: "关闭" }, options);
         layer.alert(content, options, end);
     }
 }

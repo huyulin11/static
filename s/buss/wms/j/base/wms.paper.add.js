@@ -58,7 +58,7 @@ var _initRows = function () {
     gf.ajax(url, { paperid: _paperid, receipttype: _receipttype }, "json", function (s) {
         let main = s.object.main;
         let details = s.object.detail;
-        if (main["status"] != "1" || main["delflag"] != "0") {
+        if (main["status"] != "NEW" || main["delflag"] != "0") {
             gf.layerMsg("该单无法修改！");
             parent.layer.close(parent.pageii);
             return;

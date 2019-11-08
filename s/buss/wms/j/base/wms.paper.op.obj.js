@@ -198,7 +198,7 @@ class PaperOp {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "1") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "NEW") || main["delflag"] != "0") {
                 gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
@@ -220,7 +220,7 @@ class PaperOp {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "TOSEND" && main["status"] != "PICKING") || main["delflag"] != "0") {
                 gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
@@ -237,7 +237,7 @@ class PaperOp {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "1") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "NEW") || main["delflag"] != "0") {
                 gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }

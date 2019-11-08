@@ -42,7 +42,7 @@ var sub = function () {
 }
 
 let initDatas = function () {
-    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?status=2:SCANED&detailstatus=1:2&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
+    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?status=TOSEND:PICKING&detailstatus=NEW:TOSEND&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
 }
 
 var initPick = function () {
@@ -57,7 +57,7 @@ var initPick = function () {
                 return;
             }
             let main = s.object.main;
-            if (!main || (main["status"] != "2" && main["status"] != "PICKED") || main["delflag"] != "0") {
+            if (!main || (main["status"] != "TOSEND" && main["status"] != "PICKING") || main["delflag"] != "0") {
                 gf.layerMsg(_paperid + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 return;
             }

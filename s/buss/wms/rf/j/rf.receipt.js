@@ -36,7 +36,7 @@ var initReceipt = function () {
                 return;
             }
             let main = s.object.main;
-            if (!main || main["status"] != "1" || main["delflag"] != "0") {
+            if (!main || main["status"] != "NEW" || main["delflag"] != "0") {
                 gf.layerMsg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！");
                 _paperid = "";
                 setCurrentReceiptPaperid("");
