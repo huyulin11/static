@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import "/s/j/vue/vue.min.js";
-import "/s/buss/g/j/manager.js"
+import { gv } from "/s/buss/g/j/g.v.js";
+gv.init();
 
 let container = "#rootContainer";
 

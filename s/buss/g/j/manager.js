@@ -9,7 +9,6 @@ var _frame = "#loadhtml";
 
 var loadPage = function (tip) {
     var sn = tip.split(",");
-    if (localStorage.remember) localStorage.index = sn;
     let url = sn[2], openType = sn[3];
     if (openType) {
         if (url.indexOf("?", (url.indexOf("?") + 1)) > 0) {
@@ -19,6 +18,7 @@ var loadPage = function (tip) {
             url = url.replace("{PROJECT_KEY}", localStorage.projectKey);
         }
         if (openType == "1") {
+            debugger
             gf.appOpen(url);
             return;
         } else if (openType == "2") {
@@ -39,6 +39,7 @@ var loadPage = function (tip) {
         html += '<li><a>' + sn[i] + '</a></li>';
     }
     $("#topli").html(html);
+    if (localStorage.remember) localStorage.index = sn;
 }
 
 $("[data-tip]").on("click", function () {

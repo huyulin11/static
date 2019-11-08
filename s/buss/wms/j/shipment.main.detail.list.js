@@ -23,7 +23,8 @@ let _columns = [{
 	}
 }, {
 	colkey: "paperid",
-	name: "单号"
+	name: "单号",
+	hide: function () { return !gf.isPc() }
 }, {
 	colkey: "company",
 	name: "TO"
@@ -46,9 +47,10 @@ let _columns = [{
 }, {
 	colkey: "status",
 	name: "单据状态",
+	hide: function () { return !gf.isPc() },
 	renderData: function (rowindex, data, rowdata, column) {
 		return gf.getStatusDesc(rowindex, data, rowdata, column);
-	}
+	},
 }, {
 	colkey: "item",
 	name: "SU"
@@ -93,16 +95,19 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 		hide: true,
 	}, {
 		colkey: "company",
+		name: "货位号",
+		renderData: function (rowindex, data, rowdata, column) {
+			return `${rowdata.userdef3}`;
+		}
+	}, {
+		colkey: "company",
 		name: "TO",
 		renderData: function (rowindex, data, rowdata, column) {
 			return `${rowdata.company}`;
 		}
 	}, {
-		colkey: "company",
-		name: "货位号",
-		renderData: function (rowindex, data, rowdata, column) {
-			return `${rowdata.userdef3}`;
-		}
+		colkey: "paperid",
+		name: "单号",
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {

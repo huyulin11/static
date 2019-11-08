@@ -312,7 +312,12 @@ class GF {
     };
     getStatusDesc(rowindex, data, rowdata, column) {
         var btns = "";
-        if (data == 3) {
+        btns = gv.get("ACS_STATUS", data) + rowDisplay(rowdata);
+        return btns;
+    };
+    rowDisplay(rowdata) {
+        var btns = "";
+        if (rowdata.status == 3 || rowdata.detailstatus == 3) {
             $(`tr[d-tree='${rowdata.dtee}]`).css("color", "red");
         }
         if (rowdata.delflag == 1) {
@@ -322,7 +327,6 @@ class GF {
             $("tr[d-tree='" + rowdata.dtee + "']").css("color", "red");
             btns = "-请求撤销";
         }
-        btns = gv.get("ACS_STATUS", data) + btns;
         return btns;
     };
     ifThen(flag, callback) {
