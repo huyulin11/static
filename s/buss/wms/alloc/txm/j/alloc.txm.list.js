@@ -61,11 +61,7 @@ window.datagrid = dataGrid({
 		colkey: "name",
 		name: "货物名称",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
-				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dedede");
-				return data + "-已删除";
-			}
-			return data;
+			return data + gf.rowDisplay(rowdata);
 		},
 		hide: true,
 	}, {

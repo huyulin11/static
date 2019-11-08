@@ -54,7 +54,7 @@ let params = {
 		colkey: "status",
 		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
-			return gf.getStatusDesc(rowindex, data, rowdata, column);
+			return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
 		}
 	}, {
 		colkey: "updatetime",

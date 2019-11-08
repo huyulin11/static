@@ -65,7 +65,7 @@ var initBtns = function () {
         },
     }; btns.deleteSub = {
         url: `/${_tasktype}/main/deleteBySub.shtml`,
-        id: "deleteSub", name: "提请撤销", class: "btn-danger",
+        id: "deleteSub", name: "提交撤销", class: "btn-danger",
         bind: function () {
             paperOp.doJob("deleteSub", this);
         },

@@ -310,22 +310,23 @@ class GF {
             return unescape(r[2]);
         return null;
     };
-    getStatusDesc(rowindex, data, rowdata, column) {
-        var btns = "";
-        btns = gv.get("ACS_STATUS", data) + rowDisplay(rowdata);
-        return btns;
-    };
     rowDisplay(rowdata) {
-        var btns = "";
+        let btns = "";
+        let target = `tr[d-tree='${rowdata.dtee}']`;
         if (rowdata.status == 3 || rowdata.detailstatus == 3) {
-            $(`tr[d-tree='${rowdata.dtee}]`).css("color", "red");
+            $(target).css("color", "red");
+        }
+        if (rowdata.sequence >= 3) {
+            $(target).css("color", "orange");
+        } else if (rowdata.sequence >= 2) {
+            $(target).css("color", "blue");
         }
         if (rowdata.delflag == 1) {
-            $(`tr[d-tree='${rowdata.dtee}']`).css("color", "#dedede");
-            btns = "-已删除";
+            $(target).css("color", "#dedede");
+            btns = "<br>已删除";
         } else if (rowdata.delflag == 2) {
-            $("tr[d-tree='" + rowdata.dtee + "']").css("color", "red");
-            btns = "-请求撤销";
+            $(target).css("color", "red");
+            btns = "<br>已请交撤销";
         }
         return btns;
     };

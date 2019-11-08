@@ -27,16 +27,11 @@ let params = {
 		colkey: "value",
 		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
-			let delflag = "";
-			if (rowdata.delflag == 2) {
-				delflag = "-已提请撤销";
-				$(`tr[d-tree='${rowdata.dtee}']`).css("color", "red");
-			}
 			if (!data) return "--空--";
 			data = JSON.parse(data);
 			let status = data.status;
 			if (status) {
-				return gv.get("ACS_STATUS", status) + delflag;
+				return gv.get("ACS_STATUS", status) + gf.rowDisplay(rowdata);
 			}
 			return "--空--";
 		}

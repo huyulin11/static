@@ -49,7 +49,7 @@ let _columns = [{
 	name: "单据状态",
 	hide: function () { return !gf.isPc() },
 	renderData: function (rowindex, data, rowdata, column) {
-		return gf.getStatusDesc(rowindex, data, rowdata, column);
+		return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
 	},
 }, {
 	colkey: "item",
@@ -61,7 +61,7 @@ let _columns = [{
 	colkey: "detailstatus",
 	name: "明细状态",
 	renderData: function (rowindex, data, rowdata, column) {
-		return gf.getStatusDesc(rowindex, data, rowdata, column);
+		return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
 	}
 }, {
 	colkey: "userdef4",
@@ -75,11 +75,7 @@ let _columns = [{
 	colkey: "sequence",
 	name: "执行优先级",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (data >= 3) {
-			$(`tr[d-tree='${rowdata.dtee}']`).css("color", "orange");
-		} else if (data >= 2) {
-			$(`tr[d-tree='${rowdata.dtee}']`).css("color", "blue");
-		}
+		gf.rowDisplay(rowdata);
 		if (rowdata.delflag != "1" && (rowdata.detailstatus != "4")) {
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;"
 				+ "<a class='editSeq'><img src='/s/i/edit.png'/></a>" + "</div>";
@@ -118,14 +114,9 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 			}
 		},
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.sequence >= 3) {
-				$(`tr[d-tree='${rowdata.dtee}']`).css("color", "orange");
-			} else if (rowdata.sequence >= 2) {
-				$(`tr[d-tree='${rowdata.dtee}']`).css("color", "blue");
-			}
 			switch (localStorage.projectKey) {
 				case "CSY_DAJ": return gv.get("ACS_CACHE_CABLE", data);
-				case "BJJK_HUIRUI": return data;
+				case "BJJK_HUIRUI": return data + gf.rowDisplay(rowdata);
 				default: return "name";
 			}
 		}
