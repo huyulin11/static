@@ -67,7 +67,7 @@ let _columns = [{
 	colkey: "userdef4",
 	name: "TU",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (rowdata.detailstatus == "COMBINED" || rowdata.detailstatus == "START_TRANS" || rowdata.detailstatus == "4")
+		if (rowdata.detailstatus == "COMBINING" || rowdata.detailstatus == "TRANSSTART" || rowdata.detailstatus == "OVER")
 			return data;
 		return "";
 	}

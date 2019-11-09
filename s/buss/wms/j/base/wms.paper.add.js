@@ -14,7 +14,7 @@ let _conf = {
     targetClass: "item-group",
     addBtn: "div.addOne",
     serial: 0,
-    max: 20,
+    max: 200,
 };
 
 export var init = function (tasktype) {

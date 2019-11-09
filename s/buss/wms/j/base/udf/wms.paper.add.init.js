@@ -137,7 +137,7 @@ export var initUdf = function (tasktype, _conf) {
                 },];
             } else if (_tasktype == 'receipt') {
                 let obj = {
-                    max: 20,
+                    max: 200,
                     items: [{
                         key: "item",
                         name: "SU",
@@ -151,7 +151,7 @@ export var initUdf = function (tasktype, _conf) {
                 Object.assign(_conf, obj);
             } else if (_tasktype == 'shipment') {
                 let obj = {
-                    max: 20,
+                    max: 200,
                     items: [{
                         key: "item",
                         name: "SU",
@@ -165,7 +165,7 @@ export var initUdf = function (tasktype, _conf) {
                 Object.assign(_conf, obj);
             } else if (_tasktype == 'transfer') {
                 let obj = {
-                    max: 20,
+                    max: 200,
                     items: [{
                         key: "item",
                         name: "SU",

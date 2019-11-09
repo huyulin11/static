@@ -69,7 +69,7 @@ var initPick = function () {
             return ("正在拣货-" + _paperid);
         } else if (_warehouse) {
             return (`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
-        } else if (_setting && _setting.SETTING && _setting.SETTING != "[]") {
+        } else if (_setting && _setting.SETTING && _setting.SETTING != "[]" && _setting.SETTING.length > 0) {
             let json = _setting.SETTING;
             let str = (_setting.TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
             let items = [];
