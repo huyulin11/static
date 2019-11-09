@@ -53,9 +53,7 @@ var jsonRequest = function (conf, callback) {
 	});
 };
 
-var renderFun = function (obj, rowindex, data, rowdata, clm) {
-	let json;
-	if (rowdata.json) json = JSON.parse(rowdata.json); else json = {};
+var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
 		return obj.renderData(rowindex, data, rowdata, clm, json);
 	} else if (obj.jsonData) {
@@ -225,7 +223,7 @@ var dataGrid = function (params) {
 		tdiv.appendChild(table2);
 		var tbody = tag("tbody");
 		table2.appendChild(tbody);
-		var json = _getValueByName(jsonData, _conf.records);
+		var jsonItems = _getValueByName(jsonData, _conf.records);
 
 		if (!_conf.isFixed) {
 			var tr = tag('tr');
@@ -250,8 +248,11 @@ var dataGrid = function (params) {
 			};
 		}
 
-		$.each(json, function (indexNum) {
-			if (gf.notNull(json[indexNum])) {
+		$.each(jsonItems, function (indexNum) {
+			var rowdata = jsonItems[indexNum];
+			let jsonCol;
+			if (rowdata && rowdata.json) jsonCol = JSON.parse(rowdata.json); else jsonCol = {};
+			if (gf.notNull(rowdata)) {
 				var tr = tag('tr');
 				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
@@ -266,19 +267,17 @@ var dataGrid = function (params) {
 				var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
 				var chkbox = tag("INPUT");
 				chkbox.type = "checkbox";
-				for (let v in json[indexNum]) { if (json[indexNum][v]) chkbox.setAttribute("data-" + v, json[indexNum][v]); };
-				chkbox.setAttribute("data-" + "cid", _getValueByName(json[indexNum], _confTreeGrid.id));
-				chkbox.setAttribute("pid", _getValueByName(json[indexNum], _confTreeGrid.pid));
+				for (let v in rowdata) { if (rowdata[v]) chkbox.setAttribute("data-" + v, rowdata[v]); };
+				chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, _confTreeGrid.id));
+				chkbox.setAttribute("pid", _getValueByName(rowdata, _confTreeGrid.pid));
 				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(json[indexNum], _conf.checkValue);
+				chkbox.value = _getValueByName(rowdata, _conf.checkValue);
 				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
 				for (let oneColumn of _columns) {
 					if (!hide(oneColumn)) {
 						var td_o = tr.insertCell(-1);
 						td_o.setAttribute("style", defaultItemCss(oneColumn));
-
-						var rowdata = json[indexNum];
 						var dtee = _tee;
 						rowdata.dtee = dtee;
 						var colKey = oneColumn.colkey;
@@ -299,26 +298,26 @@ var dataGrid = function (params) {
 								divspan.className = "l_test";
 								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 
-								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 								td_o.appendChild(divspan);
 							} else {
-								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 							}
 							;
 						} else {
-							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 						}
 					}
 				};
 				if (_confTreeGrid.tree) {
 					if (_confTreeGrid.type == 1) {
 						_tee = _tee + "-0";
-						treeHtml(tbody, json[indexNum]);
+						treeHtml(tbody, rowdata);
 					} else {
-						var obj = json[indexNum];
-						delete json[indexNum];
+						var obj = rowdata;
+						delete jsonItems[jt];
 						_nb = 20;
-						treeSimpleHtml(tbody, json, obj);
+						treeSimpleHtml(tbody, jsonItems, obj);
 					}
 				}
 			}
@@ -457,11 +456,14 @@ var dataGrid = function (params) {
 	};
 	var treeHtml = function (tbody, data) {
 		if (!data) return;
-		var jsonTree = data.children;
-		if (!jsonTree) return;
-		$.each(jsonTree, function (jt) {
+		var jsonItems = data.children;
+		if (!jsonItems) return;
+		$.each(jsonItems, function (jt) {
+			var rowdata = jsonItems[jt];
+			let jsonCol;
+			if (rowdata && rowdata.json) jsonCol = JSON.parse(rowdata.json); else jsonCol = {};
 			var tte = false;
-			if (jsonTree[jt].children) {
+			if (rowdata.children) {
 				tte = true;
 			}
 			var tr = tag('tr');
@@ -478,19 +480,18 @@ var dataGrid = function (params) {
 			var chkbox = tag("INPUT");
 			chkbox.type = "checkbox";
 
-			for (let v in jsonTree[jt]) { if (jsonTree[jt][v]) chkbox.setAttribute("data-" + v, jsonTree[jt][v]); };
-			chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], "id"));
-			chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], "parentId"));
+			for (let v in rowdata) { if (rowdata[v]) chkbox.setAttribute("data-" + v, rowdata[v]); };
+			chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, "id"));
+			chkbox.setAttribute("pid", _getValueByName(rowdata, "parentId"));
 
 			chkbox.setAttribute("_l_key", "checkbox");
-			chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
+			chkbox.value = _getValueByName(rowdata, _conf.checkValue);
 			$(chkbox).on("click", highlight);
 			td_d.appendChild(chkbox);
 			for (let oneColumn of _columns) {
 				if (!hide(oneColumn)) {
 					var td_o = tr.insertCell(-1);
 					td_o.setAttribute("style", defaultItemCss(oneColumn));
-					var rowdata = jsonTree[jt];
 					var dtee = _tee;
 					rowdata.dtee = dtee;
 					var colKey = oneColumn.colkey;
@@ -512,13 +513,13 @@ var dataGrid = function (params) {
 							var divspan = tag("span");
 							divspan.className = "l_test";
 							divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 							td_o.appendChild(divspan);
 						} else {
-							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 						}
 					} else {
-						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 					}
 				}
 			};
@@ -526,7 +527,7 @@ var dataGrid = function (params) {
 				//1-1
 				_tee = _tee + "-0";
 				_nb = parseInt(_nb, 10) + 20;
-				treeHtml(tbody, jsonTree[jt]);
+				treeHtml(tbody, rowdata);
 			}
 
 		});
@@ -534,12 +535,15 @@ var dataGrid = function (params) {
 		_nb = 20;
 	};
 
-	var treeSimpleHtml = function (tbody, jsonTree, obj) {
+	var treeSimpleHtml = function (tbody, jsonItems, obj) {
 		var tte = false;
 		_tee = _tee + "-0";
-		$.each(jsonTree, function (jt) {
-			if (gf.notNull(jsonTree[jt])) {
-				var jsb = _getValueByName(jsonTree[jt], _confTreeGrid.pid);
+		$.each(jsonItems, function (jt) {
+			var rowdata = jsonItems[jt];
+			let jsonCol;
+			if (rowdata && rowdata.json) jsonCol = JSON.parse(rowdata.json); else jsonCol = {};
+			if (gf.notNull(rowdata)) {
+				var jsb = _getValueByName(rowdata, _confTreeGrid.pid);
 				var ob = _getValueByName(obj, _confTreeGrid.id);
 				if (jsb == ob) {
 					tte = true;
@@ -557,17 +561,16 @@ var dataGrid = function (params) {
 					var chkbox = tag("INPUT");
 					chkbox.type = "checkbox";
 					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-					chkbox.setAttribute("data-" + "cid", _getValueByName(jsonTree[jt], _confTreeGrid.id));
-					chkbox.setAttribute("pid", _getValueByName(jsonTree[jt], _confTreeGrid.pid));
+					chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, _confTreeGrid.id));
+					chkbox.setAttribute("pid", _getValueByName(rowdata, _confTreeGrid.pid));
 					chkbox.setAttribute("_l_key", "checkbox");
-					chkbox.value = _getValueByName(jsonTree[jt], _conf.checkValue);
+					chkbox.value = _getValueByName(rowdata, _conf.checkValue);
 					$(chkbox).on("click", highlight);
 					td_d.appendChild(chkbox);
 					for (let oneColumn of _columns) {
 						if (!hide(oneColumn)) {
 							var td_o = tr.insertCell(-1);
 							td_o.setAttribute("style", defaultItemCss(oneColumn));
-							var rowdata = jsonTree[jt];
 							var dtee = _tee;
 							rowdata.dtee = dtee;
 							var colKey = oneColumn.colkey;
@@ -587,20 +590,20 @@ var dataGrid = function (params) {
 									var divspan = tag("span");
 									divspan.className = "l_test";
 									divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-									divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+									divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 									td_o.appendChild(divspan);
 								} else {
-									td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+									td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 								}
 							} else {
-								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey);
+								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
 							}
 						}
 					}
-					var o = jsonTree[jt];
-					delete jsonTree[jt];
+					var o = rowdata;
+					delete jsonItems[jt];
 					_nb = parseInt(_nb, 10) + 20;
-					treeSimpleHtml(tbody, jsonTree, o)
+					treeSimpleHtml(tbody, jsonItems, o)
 				}
 			}
 		});
