@@ -313,7 +313,7 @@ class GF {
     rowDisplay(rowdata) {
         let btns = "";
         let target = `tr[d-tree='${rowdata.dtee}']`;
-        if ([rowdata.status, rowdata.detailstatus].includes("EXECUTING")) {
+        if ([rowdata.status, rowdata.mainstatus, rowdata.detailstatus].includes("EXECUTING")) {
             $(target).css("color", "red");
         }
         if (rowdata.sequence >= 3) {

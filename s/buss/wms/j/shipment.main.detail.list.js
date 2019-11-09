@@ -45,7 +45,7 @@ let _columns = [{
 		}
 	}
 }, {
-	colkey: "status",
+	colkey: "mainstatus",
 	name: "单据状态",
 	hide: function () { return !gf.isPc() },
 	renderData: function (rowindex, data, rowdata, column) {
@@ -58,7 +58,7 @@ let _columns = [{
 	colkey: "userdef3",
 	name: "货位号"
 }, {
-	colkey: "detailstatus",
+	colkey: "status",
 	name: "明细状态",
 	renderData: function (rowindex, data, rowdata, column) {
 		return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
@@ -67,7 +67,7 @@ let _columns = [{
 	colkey: "userdef4",
 	name: "TU",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (rowdata.detailstatus == "COMBINING" || rowdata.detailstatus == "TRANSSTART" || rowdata.detailstatus == "OVER")
+		if (["COMBINING", "TRANSSTART", "OVER"].includes(rowdata.status))
 			return data;
 		return "";
 	}
@@ -76,7 +76,7 @@ let _columns = [{
 	name: "执行优先级",
 	renderData: function (rowindex, data, rowdata, column) {
 		gf.rowDisplay(rowdata);
-		if (rowdata.delflag != "1" && (rowdata.detailstatus != "4")) {
+		if (rowdata.delflag != "1" && (rowdata.status != "4")) {
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;"
 				+ "<a class='editSeq'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
