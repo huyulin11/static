@@ -26,6 +26,15 @@ let _columns = [{
 	name: "单号",
 	hide: function () { return !gf.isPc() }
 }, {
+	name: "转移单号",
+	jsonData: "A",
+}, {
+	name: "物料号",
+	jsonData: "B",
+}, {
+	name: "批号",
+	jsonData: "D",
+}, {
 	colkey: "company",
 	name: "TO"
 }, {
@@ -104,6 +113,9 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 	}, {
 		colkey: "paperid",
 		name: "单号",
+	}, {
+		name: "转移单号",
+		jsonData: "A",
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {

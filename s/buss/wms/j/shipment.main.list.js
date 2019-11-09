@@ -19,6 +19,9 @@ let params = {
 		colkey: "paperid",
 		name: "单号"
 	}, {
+		colkey: "orderid",
+		name: "订单"
+	}, {
 		colkey: "warehouse",
 		name: "仓库",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -27,7 +30,7 @@ let params = {
 		}
 	}, {
 		colkey: "company",
-		name: "转移订单号"
+		name: "转移单"
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {

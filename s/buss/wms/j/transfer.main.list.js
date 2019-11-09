@@ -12,6 +12,9 @@ window.datagrid = dataGrid({
 		colkey: "paperid",
 		name: "单号"
 	}, {
+		colkey: "orderid",
+		name: "订单号"
+	}, {
 		colkey: "sourcewh",
 		name: "源仓库",
 		renderData: function (rowindex, data, rowdata, column) {

@@ -54,8 +54,12 @@ var jsonRequest = function (conf, callback) {
 };
 
 var renderFun = function (obj, rowindex, data, rowdata, clm) {
+	let json;
+	if (rowdata.json) json = JSON.parse(rowdata.json); else json = {};
 	if (obj.renderData) {
-		return obj.renderData(rowindex, data, rowdata, clm);
+		return obj.renderData(rowindex, data, rowdata, clm, json);
+	} else if (obj.jsonData) {
+		return json[obj.jsonData];
 	} else {
 		return data;
 	}
@@ -107,7 +111,8 @@ var _fieldModel = {
 	height: 'auto',
 	align: 'center',
 	hide: false,
-	renderData: null
+	renderData: null,
+	jsonData: null,
 };
 
 var _container;

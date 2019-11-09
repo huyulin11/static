@@ -79,7 +79,7 @@ var initPaperOp = function (tasktype, optype) {
                 submit(e, function (workbook) {
                     let sheet = workbook.Sheets[workbook.SheetNames[0]];
                     let _paper = {};
-                    _paper.paperid = sheet.C8.v;
+                    _paper.orderid = sheet.C8.v;
                     _paper.name = sheet.E8.v;
 
                     let index = 50;
