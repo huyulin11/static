@@ -98,9 +98,9 @@ var initPaperOp = function (tasktype, optype) {
                                 _paper[`userdef3[${i}]`] = sheet["G" + i].v;
 
                                 let jsonObj = {};
-                                for (let seq in gu.huiruiImportExcelCols()) {
-                                    let t = sheet[seq + i];
-                                    jsonObj[seq] = t ? t.v : "";
+                                for (let seq of gu.huiruiImportExcelCols()) {
+                                    let t = sheet[seq.index + i];
+                                    jsonObj[seq.index] = t ? t.v : "";
                                 }
                                 _paper[`json[${i}]`] = JSON.stringify(jsonObj);
                             }

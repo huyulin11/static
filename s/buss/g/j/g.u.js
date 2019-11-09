@@ -2,12 +2,18 @@ import { gv } from "/s/buss/g/j/g.v.js";
 
 class GU {
     huiruiImportExcelCols() {
-        let excelCols = {
-            "A": "转移单号", "B": "物料号", "C": "物料名称",
-            "D": "批号", "E": "存储号", "F": "单位",
-            "G": "货位号（FROM）", "H": "货位号（TO）",
-            "I": "转移量（PLANNING）", "J": "转移量（ACTUAL）", "K": "确认"
-        };
+        let excelCols = [
+            { index: "A", name: "转移单号" },
+            { index: "B", name: "物料号" },
+            { index: "C", name: "物料名称" },
+            { index: "D", name: "批号" },
+            { index: "E", name: "存储号" },
+            { index: "F", name: "单位" },
+            { index: "G", name: "货位号（FROM）" },
+            { index: "H", name: "货位号（TO）" },
+            { index: "I", name: "转移量（PLANNING）" },
+            { index: "J", name: "转移量（ACTUAL）", hide: true },
+            { index: "K", name: "确认", hide: true }];
         return excelCols;
     }
 }

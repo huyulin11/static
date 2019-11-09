@@ -404,7 +404,6 @@ class GF {
         return flag;
     };
     layerMsg(content, options, end) {
-        if (!options || !options.btns) options = $.extend({ btns: "关闭" }, options);
         layer.alert(content, options, end);
     }
 }
