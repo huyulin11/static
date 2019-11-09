@@ -56,8 +56,8 @@ var jsonRequest = function (conf, callback) {
 var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
 		return obj.renderData(rowindex, data, rowdata, clm, json);
-	} else if (obj.jsonData) {
-		return json[obj.jsonData];
+	} else if (obj.json) {
+		return json[obj.json];
 	} else {
 		return data;
 	}

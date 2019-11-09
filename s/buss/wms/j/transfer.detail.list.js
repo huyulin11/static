@@ -17,16 +17,9 @@ _columns.push({
 let tt = gu.huiruiImportExcelCols();
 for (let seq of tt) {
 	_columns.push({
-		colkey: seq.index,
+		json: seq.index,
 		name: seq.name,
 		hide: seq.hide,
-		renderData: function (rowindex, data, rowdata, column) {
-			let json = JSON.parse(rowdata.json);
-			if (json) {
-				return json[seq.index];
-			}
-			return "";
-		}
 	});
 }
 
