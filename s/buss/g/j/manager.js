@@ -18,7 +18,6 @@ var loadPage = function (tip) {
             url = url.replace("{PROJECT_KEY}", localStorage.projectKey);
         }
         if (openType == "1") {
-            debugger
             gf.appOpen(url);
             return;
         } else if (openType == "2") {
