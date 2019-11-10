@@ -7,45 +7,24 @@
 
 <header class="panel-heading">
     <form class="form-inline" role="form" id="searchForm" name="searchForm">
-        <div class="form-group">
-            <table>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">单号:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <input class="input-medium ui-autocomplete-input" id="paperid"
-                            name="receiptMainFormMap.paperid">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">状态:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_STATUS" id="status"
-                            name="receiptMainFormMap.status"></select>
-                    </td>
-                    <td>
-                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
-                    </td>
-                </tr>
-                <tr class="hidden">
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">出入口:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <select class="input-medium ui-autocomplete-input jsSelect" data-patten="ACS_CACHE_CABLE"
-                            id="name" name="receiptMainFormMap.name"></select>
-                    </td>
-                </tr>
-            </table>
+        <div class="search-group">
+            <label>
+                <span>单号:</span>
+                <input id="paperid" name="receiptMainFormMap.paperid">
+            </label>
+            <label>
+                <span>状态:</span>
+                <select class="jsSelect" data-patten="ACS_STATUS" data-patten-gather="NEW,TOSEND,EXECUTING,OVER"
+                    id="status" name="receiptMainFormMap.status"></select>
+            </label>
+            <label class="hidden">
+                <span>出入口:</span>
+                <select class="jsSelect" data-patten="ACS_CACHE_CABLE" id="name"
+                    name="receiptMainFormMap.name"></select>
+            </label>
+            <label>
+                <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+            </label>
         </div>
     </form>
 </header>

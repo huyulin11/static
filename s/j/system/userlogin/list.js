@@ -11,6 +11,9 @@ window.datagrid = dataGrid({
 		colkey: "accountName",
 		name: "账号"
 	}, {
+		colkey: "result",
+		name: "是否成功"
+	}, {
 		colkey: "loginTime",
 		name: "登入时间",
 		renderData: function (rowindex, data, rowdata, column) {

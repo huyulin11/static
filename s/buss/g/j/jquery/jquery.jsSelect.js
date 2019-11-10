@@ -1,26 +1,29 @@
 export var renderSelect = function (that) {
     var type = $(that).data("patten");
+    var gather = $(that).data("patten-gather");
+    gather = gather ? gather.split(",") : "";
     var initval = $(that).data("initval");
-    var _tl;
+    var _items;
     try {
         if (type.indexOf(".") > 0) {
             var ll = type.split('.');
-            _tl = gv;
-            _tl = gv[ll[0]].getT(ll[1]);
+            _items = gv;
+            _items = gv[ll[0]].getT(ll[1]);
         } else {
-            _tl = gv.getT(type);
+            _items = gv.getT(type);
         }
     } catch (error) {
-        _tl = jQuery.parseJSON(localStorage.dic).filter(function (e) { return e.type == type; });
+        _items = jQuery.parseJSON(localStorage.dic).filter(function (e) { return e.type == type; });
     }
     if (!initval) {
         $(that).append("<option value=" + ">" + "----请选择----" + "</option>");
     }
-    for (var ii of _tl) {
-        var value = ii.value;
-        if (!value) { value = ii.ip + ":" + ii.port; }
-        $(that).append("<option value='" + ii.key + "' "
-            + ((ii.key == initval) ? "selected" : "")
+    for (var item of _items) {
+        var value = item.value;
+        if (gather && !gather.includes(item.key)) continue;
+        if (!value) { value = item.ip + ":" + item.port; }
+        $(that).append("<option value='" + item.key + "' "
+            + ((item.key == initval) ? "selected" : "")
             + ">" + value + "</option>");
     }
 }
