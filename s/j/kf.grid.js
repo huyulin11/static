@@ -119,15 +119,18 @@ var _nb = '20';
 var _img;
 
 let _focusCss = "text-align:center; vertical-align: middle;";
-let _HideCss = "display: none;";
+let _hideCss = "display: none;";
 let defaultItemCss = function (oneColumn) {
+	if (hide(oneColumn)) {
+		return _hideCss;
+	}
 	return "padding-top:5px;margin-left:5px;vertical-align: middle;text-align:" + oneColumn.align + ";height:" + _conf.theadHeight + ";";
 }
 let chooseHideNumber = function (th) {
-	th.setAttribute("style", _focusCss + ((!_conf.serNumber) ? _HideCss : ""));
+	th.setAttribute("style", _focusCss + ((!_conf.serNumber) ? _hideCss : ""));
 }
 let chooseHideCheckbox = function (th) {
-	th.setAttribute("style", _focusCss + ((!_conf.checkbox) ? _HideCss : ""));
+	th.setAttribute("style", _focusCss + ((!_conf.checkbox) ? _hideCss : ""));
 }
 
 var dataGrid = function (params) {
@@ -182,12 +185,10 @@ var dataGrid = function (params) {
 		cth.appendChild(chkbox);
 		tr.appendChild(cth);
 		for (let oneColumn of _columns) {
-			if (!hide(oneColumn)) {
-				var th = tag('th');
-				th.setAttribute("style", defaultItemCss(oneColumn));
-				th.innerHTML = name(oneColumn);
-				tr.appendChild(th);
-			}
+			var th = tag('th');
+			th.setAttribute("style", defaultItemCss(oneColumn));
+			th.innerHTML = name(oneColumn);
+			tr.appendChild(th);
 		};
 	};
 
@@ -236,12 +237,10 @@ var dataGrid = function (params) {
 			cth.appendChild(chkbox);
 			tr.appendChild(cth);
 			for (let oneColumn of _columns) {
-				if (!hide(oneColumn)) {
-					var th = tag('th');
-					th.setAttribute("style", defaultItemCss(oneColumn));
-					th.innerHTML = name(oneColumn);
-					tr.appendChild(th);
-				}
+				var th = tag('th');
+				th.setAttribute("style", defaultItemCss(oneColumn));
+				th.innerHTML = name(oneColumn);
+				tr.appendChild(th);
 			};
 		}
 
@@ -273,51 +272,49 @@ var dataGrid = function (params) {
 				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
 				for (let oneColumn of _columns) {
-					if (!hide(oneColumn)) {
-						var td_o = tr.insertCell(-1);
-						var colkey = oneColumn.colkey;
-						td_o.setAttribute("style", defaultItemCss(oneColumn));
-						td_o.setAttribute("class", colkey);
-						var dtee = _tee;
-						rowdata.dtee = dtee;
-						var data = gf.notEmpty(_getValueByName(rowdata, colkey));
+					var td_o = tr.insertCell(-1);
+					var colkey = oneColumn.colkey;
+					td_o.setAttribute("style", defaultItemCss(oneColumn));
+					td_o.setAttribute("class", colkey);
+					var dtee = _tee;
+					rowdata.dtee = dtee;
+					var data = gf.notEmpty(_getValueByName(rowdata, colkey));
 
-						if (_confTreeGrid.tree) {
-							var lt = _confTreeGrid.name.split(",");
-							if (gf.inArray(lt, colkey)) {
-								var divtree = tag("div");
-								divtree.className = "ly_tree";
-								divtree.setAttribute("style", defaultItemCss(oneColumn));
-								var img = tag('img');
-								img.src = "/s/i/tree/nolines_minus.gif";
-								$(img).on("click", datatree);
-								divtree.appendChild(img);
-								td_o.appendChild(divtree);
-								var divspan = tag("span");
-								divspan.className = "l_test";
-								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+					if (_confTreeGrid.tree) {
+						var lt = _confTreeGrid.name.split(",");
+						if (gf.inArray(lt, colkey)) {
+							var divtree = tag("div");
+							divtree.className = "ly_tree";
+							divtree.setAttribute("style", defaultItemCss(oneColumn));
+							var img = tag('img');
+							img.src = "/s/i/tree/nolines_minus.gif";
+							$(img).on("click", datatree);
+							divtree.appendChild(img);
+							td_o.appendChild(divtree);
+							var divspan = tag("span");
+							divspan.className = "l_test";
+							divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 
-								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
-								td_o.appendChild(divspan);
-							} else {
-								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
-							}
-							;
+							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
+							td_o.appendChild(divspan);
 						} else {
 							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 						}
-					}
-				};
-				if (_confTreeGrid.tree) {
-					if (_confTreeGrid.type == 1) {
-						_tee = _tee + "-0";
-						treeHtml(tbody, rowdata);
+						;
 					} else {
-						var obj = rowdata;
-						delete jsonItems[jt];
-						_nb = 20;
-						treeSimpleHtml(tbody, jsonItems, obj);
+						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 					}
+				}
+			};
+			if (_confTreeGrid.tree) {
+				if (_confTreeGrid.type == 1) {
+					_tee = _tee + "-0";
+					treeHtml(tbody, rowdata);
+				} else {
+					var obj = rowdata;
+					delete jsonItems[jt];
+					_nb = 20;
+					treeSimpleHtml(tbody, jsonItems, obj);
 				}
 			}
 		});
@@ -489,39 +486,37 @@ var dataGrid = function (params) {
 			$(chkbox).on("click", highlight);
 			td_d.appendChild(chkbox);
 			for (let oneColumn of _columns) {
-				if (!hide(oneColumn)) {
-					var td_o = tr.insertCell(-1);
-					var colkey = oneColumn.colkey;
-					td_o.setAttribute("style", defaultItemCss(oneColumn));
-					td_o.setAttribute("class", colkey);
-					var dtee = _tee;
-					rowdata.dtee = dtee;
-					var data = gf.notEmpty(_getValueByName(rowdata, colkey));
+				var td_o = tr.insertCell(-1);
+				var colkey = oneColumn.colkey;
+				td_o.setAttribute("style", defaultItemCss(oneColumn));
+				td_o.setAttribute("class", colkey);
+				var dtee = _tee;
+				rowdata.dtee = dtee;
+				var data = gf.notEmpty(_getValueByName(rowdata, colkey));
 
-					if (_confTreeGrid.tree) {
-						var lt = _confTreeGrid.name.split(",");
-						if (gf.inArray(lt, colkey)) {
-							var divtree = tag("div");
-							divtree.className = "ly_tree";
-							divtree.setAttribute("style", defaultItemCss(oneColumn));
-							if (tte) {
-								var img = tag('img');
-								img.src = "/s/i/tree/nolines_minus.gif";
-								$(img).on("click", datatree);
-								divtree.appendChild(img);
-							}
-							td_o.appendChild(divtree);
-							var divspan = tag("span");
-							divspan.className = "l_test";
-							divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
-							td_o.appendChild(divspan);
-						} else {
-							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
+				if (_confTreeGrid.tree) {
+					var lt = _confTreeGrid.name.split(",");
+					if (gf.inArray(lt, colkey)) {
+						var divtree = tag("div");
+						divtree.className = "ly_tree";
+						divtree.setAttribute("style", defaultItemCss(oneColumn));
+						if (tte) {
+							var img = tag('img');
+							img.src = "/s/i/tree/nolines_minus.gif";
+							$(img).on("click", datatree);
+							divtree.appendChild(img);
 						}
+						td_o.appendChild(divtree);
+						var divspan = tag("span");
+						divspan.className = "l_test";
+						divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+						divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
+						td_o.appendChild(divspan);
 					} else {
 						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 					}
+				} else {
+					td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 				}
 			};
 			if (tte) {
@@ -570,44 +565,42 @@ var dataGrid = function (params) {
 					$(chkbox).on("click", highlight);
 					td_d.appendChild(chkbox);
 					for (let oneColumn of _columns) {
-						if (!hide(oneColumn)) {
-							var td_o = tr.insertCell(-1);
-							var colkey = oneColumn.colkey;
-							td_o.setAttribute("style", defaultItemCss(oneColumn));
-							td_o.setAttribute("class", colkey);
-							var dtee = _tee;
-							rowdata.dtee = dtee;
-							var data = gf.notEmpty(_getValueByName(rowdata, colkey));
+						var td_o = tr.insertCell(-1);
+						var colkey = oneColumn.colkey;
+						td_o.setAttribute("style", defaultItemCss(oneColumn));
+						td_o.setAttribute("class", colkey);
+						var dtee = _tee;
+						rowdata.dtee = dtee;
+						var data = gf.notEmpty(_getValueByName(rowdata, colkey));
 
-							if (_confTreeGrid.tree) {
-								var lt = _confTreeGrid.name.split(",");
-								if (gf.inArray(lt, colkey)) {
-									var divtree = tag("div");
-									divtree.className = "ly_tree";
-									divtree.setAttribute("style", defaultItemCss(oneColumn));
-									_img = tag('img');
-									_img.src = "/s/i/tree/nolines_minus.gif";
-									$(_img).on("click", datatree);
-									divtree.appendChild(_img);
-									td_o.appendChild(divtree);
-									var divspan = tag("span");
-									divspan.className = "l_test";
-									divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-									divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
-									td_o.appendChild(divspan);
-								} else {
-									td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
-								}
+						if (_confTreeGrid.tree) {
+							var lt = _confTreeGrid.name.split(",");
+							if (gf.inArray(lt, colkey)) {
+								var divtree = tag("div");
+								divtree.className = "ly_tree";
+								divtree.setAttribute("style", defaultItemCss(oneColumn));
+								_img = tag('img');
+								_img.src = "/s/i/tree/nolines_minus.gif";
+								$(_img).on("click", datatree);
+								divtree.appendChild(_img);
+								td_o.appendChild(divtree);
+								var divspan = tag("span");
+								divspan.className = "l_test";
+								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
+								td_o.appendChild(divspan);
 							} else {
 								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 							}
+						} else {
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 						}
 					}
-					var o = rowdata;
-					delete jsonItems[jt];
-					_nb = parseInt(_nb, 10) + 20;
-					treeSimpleHtml(tbody, jsonItems, o)
 				}
+				var o = rowdata;
+				delete jsonItems[jt];
+				_nb = parseInt(_nb, 10) + 20;
+				treeSimpleHtml(tbody, jsonItems, o)
 			}
 		});
 		if (!tte) {

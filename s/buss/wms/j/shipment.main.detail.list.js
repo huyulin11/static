@@ -4,6 +4,8 @@ import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import "./shipment.main.detail.edit.seq.js";
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+import { findTransferDetailObj } from "/s/buss/wms/j/transfer.main.fun.js";
+
 let _status = gf.urlParam("status");
 let _detailstatus = gf.urlParam("detailstatus");
 let _type = gf.urlParam("type");
@@ -13,6 +15,10 @@ let _warehouse = gf.urlParam("warehouse");
 let _columns = [{
 	colkey: "id",
 	name: "id",
+	hide: true,
+}, {
+	colkey: "relationid",
+	name: "relationid",
 	hide: true,
 }, {
 	colkey: "warehouse",
@@ -167,16 +173,13 @@ let params = {
 	checkbox: true,
 	serNumber: true,
 	callback: function () {
-		let keys = $(".targetAlloc").map(function () { return $(this).data("paperid") }).get().join(":");
-		findAllocObj(keys, function (info) {
-			$(".targetAlloc").each(function () {
-				let that = this;
-				info.some(function (item) {
-					if (item.key == $(that).data("paperid")) {
-						$(that).html(item.value);
-						return true;
-					}
-				});
+		let keys = $(".relationid").map(function () { return $(this).html() }).get().join(":");
+		findTransferDetailObj(keys, function (info) {
+			info.some(function (item) {
+				let json = JSON.parse(item.value);
+				for (let col in json) {
+					$(`tr[data-key='${item.key}']`).find(`.${col}`).html(json[col]);
+				}
 			});
 		});
 	}
