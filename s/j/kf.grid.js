@@ -250,7 +250,7 @@ var dataGrid = function (params) {
 			if (rowdata && rowdata.json) jsonCol = JSON.parse(rowdata.json); else jsonCol = {};
 			if (gf.notNull(rowdata)) {
 				var tr = tag('tr');
-				tr.setAttribute("data-" + "key", _getValueByName(rowdata, _confTreeGrid.id));
+				if (_conf.id) tr.setAttribute("data-" + "key", _getValueByName(rowdata, _conf.id));
 				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 				_tee = _tee.substring(0, _tee.length - 2);
@@ -463,7 +463,7 @@ var dataGrid = function (params) {
 				tte = true;
 			}
 			var tr = tag('tr');
-			tr.setAttribute("data-" + "key", _getValueByName(rowdata, _confTreeGrid.id));
+			if (_conf.id) tr.setAttribute("data-" + "key", _getValueByName(rowdata, _conf.id));
 			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 			var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 			_tee = _tee.substring(0, _tee.length - 2);
@@ -544,7 +544,7 @@ var dataGrid = function (params) {
 				if (jsb == ob) {
 					tte = true;
 					var tr = tag('tr');
-					tr.setAttribute("data-" + "key", _getValueByName(rowdata, _confTreeGrid.id));
+					if (_conf.id) tr.setAttribute("data-" + "key", _getValueByName(rowdata, _conf.id));
 					tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 					var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 					_tee = _tee.substring(0, _tee.length - 2);

@@ -168,6 +168,7 @@ if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].find((a) => { retur
 
 let params = {
 	pagId: 'paging',
+	id: "relationid",
 	columns: _columns,
 	jsonUrl: '/shipment/main/findWithDetail.shtml',
 	checkbox: true,
@@ -178,7 +179,7 @@ let params = {
 			info.some(function (item) {
 				let json = JSON.parse(item.value);
 				for (let col in json) {
-					$(`tr[data-key='${item.key}']`).find(`.${col}`).html(json[col]);
+					$(`tr[data-key='${item.key}']`).find(`td.${col}`).html(json[col]);
 				}
 			});
 		});
