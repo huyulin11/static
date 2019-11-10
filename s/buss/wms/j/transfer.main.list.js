@@ -72,13 +72,8 @@ window.datagrid = dataGrid({
 			return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
 		}
 	}, {
-		colkey: "json",
+		json: "CRETATE_OPERATOR",
 		name: "导入人",
-		renderData: function (rowindex, data, rowdata, column) {
-			let json = JSON.parse(rowdata.json);
-			if (json) return json["CRETATE_OPERATOR"];
-			return "";
-		}
 	}, {
 		colkey: "updatetime",
 		name: "时间",

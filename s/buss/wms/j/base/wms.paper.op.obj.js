@@ -93,7 +93,7 @@ var initBtns = function () {
             gf.ajax(this.url, { key: null }, "json");
         },
     }; btns.whichAgv = {
-        url: `/bd/conf.shtml?table=task_agv`,
+        url: `/app/conf/get.shtml?table=task_agv`,
         id: "whichAgv", name: "执行AGV", class: "btn-info",
         bind: function () {
             var cbox = gf.checkOnlyOne("paperid");

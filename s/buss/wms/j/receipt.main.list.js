@@ -2,7 +2,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
-import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
+import { findAllocObj } from "/s/buss/wms/j/receipt.main.fun.js";
 
 let _receipttype = gf.urlParam("receipttype");
 
@@ -82,10 +82,13 @@ window.datagrid = dataGrid({
 	checkbox: true,
 	serNumber: true,
 	callback: function () {
-		$(".targetAlloc").each(function () {
-			let that = this;
-			findAlloc($(that).data("paperid"), function (info) {
-				$(that).html(info);
+		let keys = $(".targetAlloc").map(function () { return $(this).data("paperid") }).get().join(":");
+		findAllocObj(keys, function (info) {
+			$(".targetAlloc").each(function () {
+				let that = this;
+				info.forEach(function (item) {
+					if (item.key == $(that).data("paperid")) $(that).html(item.value);
+				});
 			});
 		});
 	}

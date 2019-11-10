@@ -57,7 +57,7 @@ var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
 		return obj.renderData(rowindex, data, rowdata, clm, json);
 	} else if (obj.json) {
-		return json[obj.json];
+		return json[obj.json] ? json[obj.json] : "";
 	} else {
 		return data;
 	}
