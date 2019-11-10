@@ -17,7 +17,7 @@ _columns.push({
 let tt = gu.huiruiImportExcelCols();
 for (let seq of tt) {
 	_columns.push({
-		json: seq.index,
+		colkey: seq.index,
 		name: seq.name,
 		hide: seq.hide,
 	});

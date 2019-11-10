@@ -27,13 +27,13 @@ let _columns = [{
 	hide: function () { return !gf.isPc() }
 }, {
 	name: "转移单号",
-	json: "A",
+	colkey: "A",
 }, {
 	name: "物料号",
-	json: "B",
+	colkey: "B",
 }, {
 	name: "批号",
-	json: "D",
+	colkey: "D",
 }, {
 	colkey: "company",
 	name: "TO"
@@ -99,6 +99,10 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 		name: "id",
 		hide: true,
 	}, {
+		colkey: "relationid",
+		name: "relationid",
+		hide: true,
+	}, {
 		colkey: "company",
 		name: "货位号",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -115,7 +119,7 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 		name: "单号",
 	}, {
 		name: "转移单号",
-		json: "A",
+		colkey: "A",
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {
@@ -161,7 +165,21 @@ let params = {
 	columns: _columns,
 	jsonUrl: '/shipment/main/findWithDetail.shtml',
 	checkbox: true,
-	serNumber: true
+	serNumber: true,
+	callback: function () {
+		let keys = $(".targetAlloc").map(function () { return $(this).data("paperid") }).get().join(":");
+		findAllocObj(keys, function (info) {
+			$(".targetAlloc").each(function () {
+				let that = this;
+				info.some(function (item) {
+					if (item.key == $(that).data("paperid")) {
+						$(that).html(item.value);
+						return true;
+					}
+				});
+			});
+		});
+	}
 }
 
 export var init = function () {

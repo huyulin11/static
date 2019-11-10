@@ -41,8 +41,8 @@ var jsonRequest = function (conf, callback) {
 		data: conf.data,
 		url: conf.jsonUrl,
 		dataType: 'json',
-		success: function (data) {
-			if (data) { callback(data); }
+		success: function (jsonDatas) {
+			if (jsonDatas) { callback(jsonDatas); }
 			_flag = false;
 		},
 		error: function (msg) {
@@ -56,10 +56,8 @@ var jsonRequest = function (conf, callback) {
 var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
 		return obj.renderData(rowindex, data, rowdata, clm, json);
-	} else if (obj.json) {
-		return json[obj.json] ? json[obj.json] : "";
 	} else {
-		return data;
+		return json[obj.colkey] ? json[obj.colkey] : data;
 	}
 }
 
@@ -110,7 +108,6 @@ var _fieldModel = {
 	align: 'center',
 	hide: false,
 	renderData: null,
-	jsonData: null,
 };
 
 var _container;
@@ -154,10 +151,10 @@ var dataGrid = function (params) {
 		jsonRequest(conf, render);
 	};
 
-	var render = function (jsonData) {
+	var render = function (jsonDatas) {
 		renderHead(_container);
-		renderBody(_container, jsonData);
-		renderFenye(_container, jsonData);
+		renderBody(_container, jsonDatas);
+		renderFenye(_container, jsonDatas);
 
 		if (_conf.callback) { _conf.callback(); }
 		fixhead();
@@ -194,7 +191,7 @@ var dataGrid = function (params) {
 		};
 	};
 
-	var renderBody = function (divid, jsonData) {
+	var renderBody = function (divid, jsonDatas) {
 		var tdiv = tag("div");
 		var h = '';
 		var xy = "hidden";
@@ -223,7 +220,7 @@ var dataGrid = function (params) {
 		tdiv.appendChild(table2);
 		var tbody = tag("tbody");
 		table2.appendChild(tbody);
-		var jsonItems = _getValueByName(jsonData, _conf.records);
+		var jsonItems = _getValueByName(jsonDatas, _conf.records);
 
 		if (!_conf.isFixed) {
 			var tr = tag('tr');
@@ -254,6 +251,7 @@ var dataGrid = function (params) {
 			if (rowdata && rowdata.json) jsonCol = JSON.parse(rowdata.json); else jsonCol = {};
 			if (gf.notNull(rowdata)) {
 				var tr = tag('tr');
+				tr.setAttribute("data-" + "key", _getValueByName(rowdata, _confTreeGrid.id));
 				tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 				var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 				_tee = _tee.substring(0, _tee.length - 2);
@@ -277,15 +275,16 @@ var dataGrid = function (params) {
 				for (let oneColumn of _columns) {
 					if (!hide(oneColumn)) {
 						var td_o = tr.insertCell(-1);
+						var colkey = oneColumn.colkey;
 						td_o.setAttribute("style", defaultItemCss(oneColumn));
+						td_o.setAttribute("class", colkey);
 						var dtee = _tee;
 						rowdata.dtee = dtee;
-						var colKey = oneColumn.colkey;
-						var data = gf.notEmpty(_getValueByName(rowdata, colKey));
+						var data = gf.notEmpty(_getValueByName(rowdata, colkey));
 
 						if (_confTreeGrid.tree) {
 							var lt = _confTreeGrid.name.split(",");
-							if (gf.inArray(lt, colKey)) {
+							if (gf.inArray(lt, colkey)) {
 								var divtree = tag("div");
 								divtree.className = "ly_tree";
 								divtree.setAttribute("style", defaultItemCss(oneColumn));
@@ -298,14 +297,14 @@ var dataGrid = function (params) {
 								divspan.className = "l_test";
 								divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 
-								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+								divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 								td_o.appendChild(divspan);
 							} else {
-								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 							}
 							;
 						} else {
-							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 						}
 					}
 				};
@@ -323,11 +322,11 @@ var dataGrid = function (params) {
 			}
 		});
 	};
-	var renderFenye = function (divid, jsonData) {
+	var renderFenye = function (divid, jsonDatas) {
 		if (!_conf.usePage) { return; }
-		var totalRecords = _getValueByName(jsonData, _conf.totalRecords);
-		var totalPages = _getValueByName(jsonData, _conf.totalPages);
-		var pageNow = _getValueByName(jsonData, _conf.pageNow);
+		var totalRecords = _getValueByName(jsonDatas, _conf.totalRecords);
+		var totalPages = _getValueByName(jsonDatas, _conf.totalPages);
+		var pageNow = _getValueByName(jsonDatas, _conf.pageNow);
 		var bdiv = tag("div");
 		bdiv.setAttribute("style", _focusCss);
 
@@ -467,6 +466,7 @@ var dataGrid = function (params) {
 				tte = true;
 			}
 			var tr = tag('tr');
+			tr.setAttribute("data-" + "key", _getValueByName(rowdata, _confTreeGrid.id));
 			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 			var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 			_tee = _tee.substring(0, _tee.length - 2);
@@ -491,15 +491,16 @@ var dataGrid = function (params) {
 			for (let oneColumn of _columns) {
 				if (!hide(oneColumn)) {
 					var td_o = tr.insertCell(-1);
+					var colkey = oneColumn.colkey;
 					td_o.setAttribute("style", defaultItemCss(oneColumn));
+					td_o.setAttribute("class", colkey);
 					var dtee = _tee;
 					rowdata.dtee = dtee;
-					var colKey = oneColumn.colkey;
-					var data = gf.notEmpty(_getValueByName(rowdata, colKey));
+					var data = gf.notEmpty(_getValueByName(rowdata, colkey));
 
 					if (_confTreeGrid.tree) {
 						var lt = _confTreeGrid.name.split(",");
-						if (gf.inArray(lt, colKey)) {
+						if (gf.inArray(lt, colkey)) {
 							var divtree = tag("div");
 							divtree.className = "ly_tree";
 							divtree.setAttribute("style", defaultItemCss(oneColumn));
@@ -513,13 +514,13 @@ var dataGrid = function (params) {
 							var divspan = tag("span");
 							divspan.className = "l_test";
 							divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+							divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 							td_o.appendChild(divspan);
 						} else {
-							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+							td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 						}
 					} else {
-						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+						td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 					}
 				}
 			};
@@ -548,6 +549,7 @@ var dataGrid = function (params) {
 				if (jsb == ob) {
 					tte = true;
 					var tr = tag('tr');
+					tr.setAttribute("data-" + "key", _getValueByName(rowdata, _confTreeGrid.id));
 					tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
 					var sm = parseInt(_tee.substring(_tee.length - 1), 10) + 1;
 					_tee = _tee.substring(0, _tee.length - 2);
@@ -570,15 +572,16 @@ var dataGrid = function (params) {
 					for (let oneColumn of _columns) {
 						if (!hide(oneColumn)) {
 							var td_o = tr.insertCell(-1);
+							var colkey = oneColumn.colkey;
 							td_o.setAttribute("style", defaultItemCss(oneColumn));
+							td_o.setAttribute("class", colkey);
 							var dtee = _tee;
 							rowdata.dtee = dtee;
-							var colKey = oneColumn.colkey;
-							var data = gf.notEmpty(_getValueByName(rowdata, colKey));
+							var data = gf.notEmpty(_getValueByName(rowdata, colkey));
 
 							if (_confTreeGrid.tree) {
 								var lt = _confTreeGrid.name.split(",");
-								if (gf.inArray(lt, colKey)) {
+								if (gf.inArray(lt, colkey)) {
 									var divtree = tag("div");
 									divtree.className = "ly_tree";
 									divtree.setAttribute("style", defaultItemCss(oneColumn));
@@ -590,13 +593,13 @@ var dataGrid = function (params) {
 									var divspan = tag("span");
 									divspan.className = "l_test";
 									divspan.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-									divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+									divspan.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 									td_o.appendChild(divspan);
 								} else {
-									td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+									td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 								}
 							} else {
-								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colKey, jsonCol);
+								td_o.innerHTML = renderFun(oneColumn, rowindex, data, rowdata, colkey, jsonCol);
 							}
 						}
 					}
