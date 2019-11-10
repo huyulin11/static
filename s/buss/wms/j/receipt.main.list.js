@@ -86,8 +86,11 @@ window.datagrid = dataGrid({
 		findAllocObj(keys, function (info) {
 			$(".targetAlloc").each(function () {
 				let that = this;
-				info.forEach(function (item) {
-					if (item.key == $(that).data("paperid")) $(that).html(item.value);
+				info.some(function (item) {
+					if (item.key == $(that).data("paperid")) {
+						$(that).html(item.value);
+						return true;
+					}
 				});
 			});
 		});
