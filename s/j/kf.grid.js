@@ -8,6 +8,7 @@ var _defaultConf = {
 	theadHeight: '28px', // 表格的thead高度
 	tbodyHeight: '27px',// 表格body的每一行高度
 	jsonUrl: '', // 访问后台地址
+	jsonColumn: 'json',
 	isFixed: false,//是否固定表头
 	usePage: true,
 	serNumber: false,// 是否显示序号
@@ -247,7 +248,8 @@ var dataGrid = function (params) {
 		$.each(jsonItems, function (indexNum) {
 			var rowdata = jsonItems[indexNum];
 			let jsonCol;
-			if (rowdata && rowdata.json) jsonCol = JSON.parse(rowdata.json); else jsonCol = {};
+			let jsonColumn = _conf.jsonColumn ? _conf.jsonColumn : "json";
+			if (rowdata && rowdata[jsonColumn]) jsonCol = JSON.parse(rowdata[jsonColumn]); else jsonCol = {};
 			if (gf.notNull(rowdata)) {
 				var tr = tag('tr');
 				if (_conf.id) tr.setAttribute("data-" + "key", _getValueByName(rowdata, _conf.id));

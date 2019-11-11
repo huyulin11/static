@@ -4,32 +4,21 @@ import { dataGrid } from "/s/j/kf.grid.js";
 
 let params = {
 	pagId: 'paging',
+	jsonColumn: 'value',
 	columns: [{
 		colkey: "key",
 		name: "托盘号",
 	}, {
-		colkey: "value",
+		colkey: "name",
 		name: "目的地",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) return "--空--";
-			data = JSON.parse(data);
-			return data.name;
-		}
 	}, {
-		colkey: "value",
+		colkey: "company",
 		name: "订单号",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) return "--空--";
-			data = JSON.parse(data);
-			return data.company ? data.company : "";
-		}
 	}, {
 		colkey: "value",
 		name: "状态",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) return "--空--";
-			data = JSON.parse(data);
-			let status = data.status;
+		renderData: function (rowindex, data, rowdata, column, json) {
+			let status = json.status;
 			if (status) {
 				return gv.get("ACS_STATUS", status) + gf.rowDisplay(rowdata);
 			}
@@ -38,10 +27,8 @@ let params = {
 	}, {
 		colkey: "value",
 		name: "货物",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (!data) return "--空--";
-			data = JSON.parse(data);
-			let items = data.items;
+		renderData: function (rowindex, data, rowdata, column, json) {
+			let items = json.items;
 			if (items) {
 				let itemArr = [];
 				for (let item of items) {
