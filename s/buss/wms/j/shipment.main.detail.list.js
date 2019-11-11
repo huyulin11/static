@@ -32,8 +32,8 @@ let _columns = [{
 	name: "单号",
 	hide: function () { return !gf.isPc() }
 }, {
-	name: "转移单号",
 	colkey: "A",
+	name: "TO",
 }, {
 	name: "物料号",
 	colkey: "B",
@@ -42,7 +42,7 @@ let _columns = [{
 	colkey: "D",
 }, {
 	colkey: "company",
-	name: "TO"
+	name: "转移单号"
 }, {
 	colkey: "name",
 	name: function (rowindex, data, rowdata, column) {
@@ -115,16 +115,7 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 			return `${rowdata.userdef3}`;
 		}
 	}, {
-		colkey: "company",
 		name: "TO",
-		renderData: function (rowindex, data, rowdata, column) {
-			return `${rowdata.company}`;
-		}
-	}, {
-		colkey: "paperid",
-		name: "单号",
-	}, {
-		name: "转移单号",
 		colkey: "A",
 	}, {
 		colkey: "name",

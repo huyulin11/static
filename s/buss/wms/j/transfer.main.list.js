@@ -1,6 +1,8 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
+import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+renderAll();
 
 window.datagrid = dataGrid({
 	pagId: 'paging',

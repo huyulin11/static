@@ -31,8 +31,8 @@ var initPaperOp = function (tasktype, optype) {
             tempBtns = tempBtns.concat(btns.whichAgv);
         }
     } else {
-        tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.over, btns.del, btns.refresh, btns.whichOne,];
         if (_tasktype == "shipment") {
+            tempBtns = [btns.detail, btns.refresh,];
             if (optype == "RF") {
                 tempBtns = [btns.detail, btns.refresh, btns.back,];
                 tempBtns = tempBtns.concat(chooseByWarehouse());
@@ -54,11 +54,13 @@ var initPaperOp = function (tasktype, optype) {
                 tempBtns = tempBtns.concat(chooseByWarehouse());
             }
         } else if (_tasktype == "receipt") {
+            tempBtns = [btns.detail, btns.send, btns.over, btns.refresh, btns.whichOne,];
             tempBtns = tempBtns.concat(btns.execute);
             tempBtns = tempBtns.concat(btns.receiptColdMore);
         } else if (_tasktype == "transfer") {
-            tempBtns = tempBtns.concat(btns[`combine`]);
-            tempBtns = tempBtns.concat(btns[`pick`]);
+            tempBtns = [btns.detail, btns.send, btns.over, btns.refresh,];
+            // tempBtns = tempBtns.concat(btns[`combine`]);
+            // tempBtns = tempBtns.concat(btns[`pick`]);
             tempBtns = tempBtns.concat(btns.deleteSub);
             $("div.doc-buttons").append(`<label class="ui-upload">导入转移单<input multiple type="file" id="upload" style="display: none;" />
             <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
