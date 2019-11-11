@@ -27,7 +27,7 @@ var sub = function () {
 
     gf.doAjax({
         url: `/shipment/detail/addPickingItem.shtml`,
-        data: { userdef3: tu, item: su, paperid: _paperid, warehouse: _warehouse, },
+        data: { userdef3: tu.trim(), item: su.trim(), paperid: _paperid, warehouse: _warehouse, },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             gf.layerMsg(data.msg);

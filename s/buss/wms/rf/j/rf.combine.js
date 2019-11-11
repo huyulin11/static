@@ -9,7 +9,7 @@ let _warehouse = gf.urlParam("warehouse");
 var sub = function () {
     let _su = $("#su").val();
     let _tu = $("#tu").val();
-    let _paperid = $("#paperid").val();
+    let _to = $("#to").val();
     if (!_su || !_tu) {
         gf.layerMsg("TU与SU均不能为空！");
         if (!_su) {
@@ -21,20 +21,20 @@ var sub = function () {
     }
     gf.doAjax({
         url: `/shipment/detail/addCombinedItem.shtml`,
-        data: { item: _su, userdef4: _tu, warehouse: _warehouse, paperid: _paperid },
+        data: { item: _su.trim(), userdef4: _tu.trim(), warehouse: _warehouse, to: _to },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             gf.layerMsg(data.msg);
             if (data.code >= 0) {
                 $("#tu").val("");
                 $("#su").val("");
-                $("#paperid").val("");
-                $("#paperTr").addClass("hidden");
+                $("#to").val("");
+                $("#toTr").addClass("hidden");
                 $("#tu").focus();
                 initDatas();
             } else if (data.code == -100) {
-                $("#paperTr").removeClass("hidden");
-                $("#paperid").focus();
+                $("#toTr").removeClass("hidden");
+                $("#to").focus();
             } else {
                 $("#su").focus();
             }
@@ -77,7 +77,7 @@ var getCombinedList = function () {
                     for (let item of items) {
                         itemArr.push(item.su);
                     }
-                    gf.layerMsg(tuVal + "托盘已组盘货物有：" + itemArr.join(',') + "!" + target);
+                    layer.msg(tuVal + "托盘已组盘货物有：" + itemArr.join(',') + "!" + target);
                 }
             }
         }
@@ -119,7 +119,7 @@ var initRf = function () {
                     getCombinedList();
                 }, 3000);
             },
-            paperEnter: function () {
+            toEnter: function () {
                 sub();
                 setTimeout(() => {
                     getCombinedList();
