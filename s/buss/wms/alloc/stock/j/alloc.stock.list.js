@@ -23,13 +23,16 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "num",
-		name: "库位数量",
+		name: "数量",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return "--";
 			}
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "</div>";
 		}
+	}, {
+		colkey: "txm",
+		name: "SU",
 	}, {
 		colkey: "skuId",
 		name: "货物种类",
@@ -63,7 +66,7 @@ window.datagrid = dataGrid({
 		// 		return details;
 		// 	}
 	}],
-	jsonUrl: '/alloc/item/findByPage.shtml?allocItemFormMap.inStock=true',
+	jsonUrl: '/alloc/item/findWithTxm.shtml?allocItemFormMap.inStock=true',
 	checkbox: false,
 	serNumber: true
 });
