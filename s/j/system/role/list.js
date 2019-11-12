@@ -29,12 +29,23 @@ window.datagrid = dataGrid({
 	jsonUrl: '/role/findByPage.shtml',
 	checkbox: true
 });
-$("#search").click("click", function () {// 绑定查询按扭
-	var searchParams = $("#searchForm").serializeObject();// 初始化传参数
+
+let doSearch = function () {
+	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
+}
+
+$("#search").on("click", function () {
+	doSearch();
 });
+
+$("#searchForm").on("submit", function () {
+	doSearch();
+	return false;
+});
+
 $("#addRole").click("click", function () {
 	addRole();
 });

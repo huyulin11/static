@@ -23,22 +23,14 @@
 <body>
     <header class="panel-heading">
         <form class="form-inline" role="form" id="searchForm" name="searchForm">
-            <div class="form-group">
-                <table>
-                    <tr>
-                        <td>
-                            <label class="control-label">
-                                <span class="font-thin v-middle">地点名称:</span>
-                            </label>
-                        </td>
-                        <td>
-                            <input class="input-medium ui-autocomplete-input" id="name" name="lapInfoFormMap.name">
-                        </td>
-                        <td>
-                            <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
-                        </td>
-                    </tr>
-                </table>
+            <div class="search-group">
+                <label>
+                    <span>地点名称:</span>
+                    <input id="name" name="lapInfoFormMap.name">
+                </label>
+                <label>
+                    <a class="btn btn-default" id="search">查询</a>
+                </label>
             </div>
         </form>
     </header>

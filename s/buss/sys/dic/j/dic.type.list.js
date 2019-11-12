@@ -44,12 +44,23 @@ window.datagrid = dataGrid({
 	checkValue: "dictype",
 	serNumber: true
 });
-$("#search").on("click", function () {// 绑定查询按扭
-	var searchParams = $("#searchForm").serialize();// 初始化传参数
+
+let doSearch = function () {
+	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
+}
+
+$("#search").on("click", function () {
+	doSearch();
 });
+
+$("#searchForm").on("submit", function () {
+	doSearch();
+	return false;
+});
+
 $("#add").on("click", function () {
 	add();
 });

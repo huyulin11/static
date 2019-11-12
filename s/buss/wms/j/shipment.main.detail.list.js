@@ -207,11 +207,20 @@ export var init = function () {
 	renderAll();
 }
 
-$("#search").on("click", function () {
+let doSearch = function () {
 	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
+}
+
+$("#search").on("click", function () {
+	doSearch();
+});
+
+$("#searchForm").on("submit", function () {
+	doSearch();
+	return false;
 });
 
 $("#export").on("click", function () {

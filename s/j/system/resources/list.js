@@ -52,12 +52,23 @@ window.datagrid = dataGrid({
 		pid: "parentId"
 	}
 });
-$("#seach").click("click", function () {// 绑定查询按扭
-	var searchParams = $("#searchForm").serializeObject();
+
+let doSearch = function () {
+	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
+}
+
+$("#search").on("click", function () {
+	doSearch();
 });
+
+$("#searchForm").on("submit", function () {
+	doSearch();
+	return false;
+});
+
 $("#addFun").click("click", function () {
 	addFun();
 });
