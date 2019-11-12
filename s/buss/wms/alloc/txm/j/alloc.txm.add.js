@@ -4,7 +4,8 @@ import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
 var _conf;
 
 let _alloc = gf.urlParam("alloc");
-$("#alloc").val(_alloc);
+if (_alloc)
+    $("#alloc").val(_alloc);
 _conf = {
     container: "div#rows",
     targetClass: "item-group",
@@ -22,6 +23,8 @@ _conf = {
     }, {
         key: "name",
         name: "货物名称",
+        type: "associating-input",
+        searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
         notnull: true,
     }, {
         key: "num",
@@ -44,6 +47,8 @@ if (localStorage.projectKey == "BJJK_HUIRUI") {
         }, {
             key: "alloc",
             name: "货位",
+            type: "associating-input",
+            searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
             notnull: true,
             hide: true,
             default: _alloc,

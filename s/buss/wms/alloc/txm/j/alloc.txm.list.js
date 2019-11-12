@@ -5,24 +5,24 @@ import { dataGrid } from "/s/j/kf.grid.js";
 let _type = gf.urlParam("type");
 let _jsonUrl = '/alloc/txm/findByPage.shtml';
 let _alloc = gf.urlParam("alloc");
-if (_type) {
+if (_alloc) {
 	_jsonUrl += `?allocTxmFormMap.alloc=${_alloc}`;
 } else {
 	$(".panel-heading").removeClass("hidden");
 }
 let tempBtns = [{
-	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html?alloc=${_alloc}`,
+	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html${_alloc ? "alloc=" + _alloc : ""}`,
 	id: "add", name: `增加`, class: "btn-primary",
 	bind: function () {
 		layer.open({
-			title: `${this.name}SU（货位:${_alloc}）`,
+			title: `${this.name}SU${_alloc ? "（货位:" + _alloc + "）" : ""}`,
 			type: 2,
 			area: localStorage.layerArea.split(","),
 			content: this.url
 		});
 	},
 }, {
-	url: `/s/buss/wms/rf/h/rf.receipt.html?alloc=${_alloc}`,
+	url: `/s/buss/wms/rf/h/rf.receipt.html${_alloc ? "alloc=" + _alloc : ""}`,
 	id: "toReceipt", name: `发起入库`, class: "btn-primary",
 	bind: function () {
 		window.location.href = this.url;

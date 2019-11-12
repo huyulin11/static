@@ -1,7 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { initUdf } from "./udf/wms.paper.add.init.js";
+import { initUdf } from "./wms.paper.add.init.js";
 
 let _receipttype = gf.urlParam("receipttype");
 
