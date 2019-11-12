@@ -1,5 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 
+renderAll();
 var checkDel = function () {
     if ($("div.item-group").length <= 1) {
         $("a.delOne").hide();
@@ -31,38 +33,23 @@ $("form").on("click", "a.delOne", function () {
     checkDel();
 });
 
-var demo = $("#form").Validform({
-    tiptype: 3,
-    label: ".label",
-    showAllError: true,
-    datatype: {
-        "zh1-6": /^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
+$("#form").validate({
+    submitHandler: function (form) {// 必须写在验证前面，否则无法ajax提交
+        gf.doAjaxSubmit(form, {// 验证新增是否成功
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.code >= 0) {
+                    layer.confirm('添加成功!是否关闭窗口?', function (index) {
+                        parent.datagrid.loadData();
+                        parent.layer.close(parent.pageii);
+                        return false;
+                    });
+                    $("#form")[0].reset();
+                } else {
+                    layer.alert('添加失败！' + data.msg, 3);
+                }
+            }
+        });
     },
-    ajaxPost: true,
-    callback: function (json) {
-        if (json.code >= 0) {
-            $.Hidemsg();
-            parent.datagrid.loadData();
-
-            var to = setTimeout(() => {
-                parent.layer.close(parent.pageii);
-            }, 2000);
-
-            layer.confirm('新增成功！是否继续添加？（两秒钟后自动关闭）', {
-                btn: ['继续', '关闭']
-            }, function () {
-                clearTimeout(to);
-                gf.layerMsg('继续添加！');
-                window.location.reload();
-            }, function () {
-                parent.layer.close(parent.pageii);
-            });
-        } else {
-            layer.alert("新增失败！！" + json.msg, {
-                icon: 3,
-                offset: 'auto'
-            });
-        }
-        ;
-    }
 });
