@@ -284,7 +284,7 @@ class PaperOp {
         if (that.detailid) {
             detailid = that.detailid;
         } else {
-            detailid = gf.checkOnlyOne("detailid");
+            detailid = gf.checkOnlyOne("id");
         }
         if (!detailid) { return; }
         layer.confirm(`是否${that.name}${detailid}？`, function (index) {
