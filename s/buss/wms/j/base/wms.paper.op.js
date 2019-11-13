@@ -20,6 +20,47 @@ let chooseByWarehouse = function () {
     return temp;
 }
 
+var dealSheet = function (sheet) {
+    let _paper = {};
+    _paper.orderid = sheet.C8.v;
+    _paper.name = sheet.E8.v;
+
+    let index = 50;
+    for (let i = 12; i > 0; i++) {
+        if (i > index + 12) {
+            alert("单次最多仅能导入" + index + "条明细！");
+            break;
+        }
+        if (sheet["E" + i] && sheet["G" + i]) {
+            if (localStorage.importThenEdit) {
+                if (!_paper.list) _paper.list = [];
+                _paper.list.push({ item: sheet["E" + i].v, userdef3: sheet["G" + i].v });
+            }
+            else {
+                _paper[`item[${i}]`] = sheet["E" + i].v
+                _paper[`userdef3[${i}]`] = sheet["G" + i].v;
+
+                let jsonObj = {};
+                for (let seq of gu.huiruiImportExcelCols()) {
+                    let t = sheet[seq.index + i];
+                    jsonObj[seq.index] = t ? t.v : "";
+                }
+                _paper[`json[${i}]`] = JSON.stringify(jsonObj);
+            }
+        } else { break; }
+    }
+    $('#upload').val("");
+    if (localStorage.importThenEdit) {
+        sessionStorage.paper = JSON.stringify(_paper);
+        paperOp.add(btns.add);
+    } else {
+        gf.doAjax({
+            url: `/${_tasktype}/detail/addEntity.shtml`,
+            data: _paper, dataType: "json", type: "POST"
+        });
+    }
+}
+
 var initPaperOp = function (tasktype, optype) {
     _tasktype = tasktype;
     doInitPaperOp(_tasktype);
@@ -84,44 +125,7 @@ var initPaperOp = function (tasktype, optype) {
                     }
                     submit(e, function (workbook) {
                         let sheet = workbook.Sheets[workbook.SheetNames[0]];
-                        let _paper = {};
-                        _paper.orderid = sheet.C8.v;
-                        _paper.name = sheet.E8.v;
-
-                        let index = 50;
-                        for (let i = 12; i > 0; i++) {
-                            if (i > index + 12) {
-                                alert("单次最多仅能导入" + index + "条明细！");
-                                break;
-                            }
-                            if (sheet["E" + i] && sheet["G" + i]) {
-                                if (localStorage.importThenEdit) {
-                                    if (!_paper.list) _paper.list = [];
-                                    _paper.list.push({ item: sheet["E" + i].v, userdef3: sheet["G" + i].v });
-                                }
-                                else {
-                                    _paper[`item[${i}]`] = sheet["E" + i].v
-                                    _paper[`userdef3[${i}]`] = sheet["G" + i].v;
-
-                                    let jsonObj = {};
-                                    for (let seq of gu.huiruiImportExcelCols()) {
-                                        let t = sheet[seq.index + i];
-                                        jsonObj[seq.index] = t ? t.v : "";
-                                    }
-                                    _paper[`json[${i}]`] = JSON.stringify(jsonObj);
-                                }
-                            } else { break; }
-                        }
-                        $('#upload').val("");
-                        if (localStorage.importThenEdit) {
-                            sessionStorage.paper = JSON.stringify(_paper);
-                            paperOp.add(btns.add);
-                        } else {
-                            gf.doAjax({
-                                url: `/${_tasktype}/detail/addEntity.shtml`,
-                                data: _paper, dataType: "json", type: "POST"
-                            });
-                        }
+                        dealSheet(sheet);
                     });
                 });
             }
