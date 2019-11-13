@@ -89,17 +89,9 @@ let _columns = [{
 }, {
 	colkey: "sequence",
 	name: "执行优先级",
-	renderData: function (rowindex, data, rowdata, column) {
-		gf.rowDisplay(rowdata);
-		if (rowdata.delflag != "1" && (rowdata.status != "4")) {
-			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;"
-				+ "<a class='editSeq'><img src='/s/i/edit.png'/></a>" + "</div>";
-		}
-		return data;
-	}
 }];
 
-if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
+if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 	_columns = [{
 		colkey: "id",
 		name: "id",
@@ -144,6 +136,12 @@ if (["PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 		// 	data-item='${rowdata.item}'>登记出库</button>`;
 		// 	}
 	}];
+}
+if (["PRIORITY",].includes(_type)) {
+	_columns.push({
+		colkey: "sequence",
+		name: "执行优先级",
+	});
 }
 
 if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].find((a) => { return a == _type; }))

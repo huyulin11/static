@@ -66,8 +66,9 @@ var initPaperOp = function (tasktype, optype) {
                 // tempBtns = tempBtns.concat(btns[`pick`]);
                 tempBtns = tempBtns.concat(btns.deleteSub);
                 $("div.doc-buttons").append(`<label class="ui-upload">导入转移单<input multiple type="file" id="upload" style="display: none;" />
-                <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}></label>`);
+                </label>`);
                 $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
+                    // <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}>
                     if (this.checked) {
                         localStorage.importThenEdit = true;
                     } else {
