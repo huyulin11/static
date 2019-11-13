@@ -12,7 +12,7 @@ if (_alloc) {
 }
 let tempBtns = [{
 	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html${_alloc ? "?alloc=" + _alloc : ""}`,
-	id: "add", name: `增加`, class: "btn-primary",
+	id: "add", name: `增加`, class: "btn-primary", hide: true,
 	bind: function () {
 		layer.open({
 			title: `${this.name}SU${_alloc ? "（货位:" + _alloc + "）" : ""}`,
@@ -28,7 +28,7 @@ let tempBtns = [{
 		window.location.href = this.url;
 	},
 }, {
-	id: "del", name: "删除", class: "btn-danger",
+	id: "del", name: "删除", class: "btn-danger", hide: true,
 	bind: function () {
 		var txm = gf.checkOnlyOne("txm");
 		var alloc = gf.checkOnlyOne("alloc");

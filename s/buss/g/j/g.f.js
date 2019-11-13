@@ -297,7 +297,7 @@ class GF {
     };
     bindBtns(target, btns) {
         $.each(btns, function (i, btn) {
-            $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class}">${btn.name}</button> `);
+            $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${btn.hide ? "hidden" : ""}">${btn.name}</button> `);
             $(target).find(`#${btn.id}`).click("click", function () {
                 btn.bind();
             });
