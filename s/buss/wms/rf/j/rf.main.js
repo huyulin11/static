@@ -52,51 +52,43 @@ var initMain = function () {
     $(container).find("h2").html(title);
     $(document).attr("title", title);
 
-    let btnsStr = gf.getButtonsTable({
+    gf.getButtonByRes({
         values: btns, numInLine: 2, style: `cellspacing="10px" cellspadding="1px"`,
         choose: function (value) {
             if (value.choosed == "ON") { return true; }
             return false;
-        }, display: function (value) {
-            if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
-                return true;
-            }
-            return false;
         },
+    }, function (btnsStr) {
+        $(container).append(btnsStr);
+        $(container).delegate("#logout", "click", function () {
+            window.location.href = "/logout.shtml";
+        });
+        $(container).find("#failure").on("click", function () {
+            window.location.href = `/s/buss/sys/lap/h/lapInfoMgr.html?type=PROD_LINE`;
+        });
+            window.location.href = `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR`;
+        });
+        $(container).find("#priority").on("click", function () {
+            window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=NEW:TOSEND:PICKING:PICKOVER:COMBINING:COMBOVER:TRANSSTART`;
+        });
+        $(container).find("#picking").on("click", function () {
+            window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_NORMAL`;
+        });
+        $(container).find("#combine").on("click", function () {
+            window.location.href = `/s/buss/wms/rf/h/rf.combine.html`;
+        });
+        $(container).find("#receipt").on("click", function () {
+            window.location.href = `/s/buss/wms/rf/h/rf.receipt.html`;
+        });
+        $(container).find("#stockOut").on("click", function () {
+            window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD`;
+        });
+        $(container).find("#alloc").on("click", function () {
+            window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
+        });
+        $(container).find("#agvOk").on("click", function () { agvOk(); });
     });
-    $("#rootContainer").append(btnsStr);
-
-    $("#rootContainer").delegate("#logout", "click", function () {
-        window.location.href = "/logout.shtml";
-    });
-    $("#rootContainer").find("#failure").on("click", function () {
-        window.location.href = `/s/buss/sys/lap/h/lapInfoMgr.html?type=PROD_LINE`;
-    });
-    $("#rootContainer").find("#trans").on("click", function () {
-        window.location.href = `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR`;
-    });
-    $("#rootContainer").find("#priority").on("click", function () {
-        window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=NEW:TOSEND:PICKING:PICKOVER:COMBINING:COMBOVER:TRANSSTART`;
-    });
-    $("#rootContainer").find("#picking").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_NORMAL`;
-    });
-    $("#rootContainer").find("#combine").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.combine.html`;
-    });
-    $("#rootContainer").find("#receipt").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.receipt.html`;
-    });
-    $("#rootContainer").find("#stockOut").on("click", function () {
-        window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD`;
-    });
-    $("#rootContainer").find("#alloc").on("click", function () {
-        window.location.href = `/s/buss/wms/alloc/item/h/alloc.html`;
-    });
-    $(container).find("#agvOk").on("click", function () { agvOk(); });
 };
-
-let myRes;
 
 export var initRf = function () {
     var vm = new Vue({
@@ -105,20 +97,8 @@ export var initRf = function () {
         created: function () {
         },
         mounted: function () {
-            $.ajax({
-                type: "POST",
-                url: '/resources/findMyRes.shtml',
-                dataType: 'json',
-                timeout: 3000,
-                error: function () {
-                    location.assign("/s/buss/g/h/login.html");
-                },
-                success: function (json) {
-                    myRes = json;
-                    initMain();
-                    gf.resizeTable();
-                }
-            });
+            initMain();
+            gf.resizeTable();
         },
         methods: {
         },

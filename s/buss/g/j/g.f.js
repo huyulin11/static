@@ -344,6 +344,28 @@ class GF {
         }
         return dataStr;
     };
+    getButtonByRes(conf, callback) {
+        $.ajax({
+            type: "POST",
+            url: '/resources/findMyRes.shtml',
+            dataType: 'json',
+            timeout: 3000,
+            error: function () {
+                location.assign("/s/buss/g/h/login.html");
+            },
+            success: function (myRes) {
+                let _conf = $.extend(conf, {
+                    display: function (value) {
+                        if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
+                            return true;
+                        }
+                        return false;
+                    },
+                });
+                callback(gf.getButtonsTable(_conf));
+            }
+        });
+    }
     getButtonsTable(conf) {
         var _numInLine = conf.numInLine ? conf.numInLine : 7;
 
