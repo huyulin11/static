@@ -11,7 +11,7 @@ if (_alloc) {
 	$(".panel-heading").removeClass("hidden");
 }
 let tempBtns = [{
-	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html${_alloc ? "alloc=" + _alloc : ""}`,
+	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html${_alloc ? "?alloc=" + _alloc : ""}`,
 	id: "add", name: `增加`, class: "btn-primary",
 	bind: function () {
 		layer.open({
@@ -22,7 +22,7 @@ let tempBtns = [{
 		});
 	},
 }, {
-	url: `/s/buss/wms/rf/h/rf.receipt.html${_alloc ? "alloc=" + _alloc : ""}`,
+	url: `/s/buss/wms/rf/h/rf.receipt.html${_alloc ? "?alloc=" + _alloc : ""}`,
 	id: "toReceipt", name: `发起入库`, class: "btn-primary",
 	bind: function () {
 		window.location.href = this.url;
@@ -52,6 +52,10 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "alloc",
 		name: "货位",
+		hide: false,
+	}, {
+		colkey: "num",
+		name: "数量",
 		hide: false,
 	}, {
 		colkey: "place",

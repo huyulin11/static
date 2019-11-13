@@ -5,10 +5,12 @@ import { gf } from "/s/buss/g/j/g.f.js";
 export var initAlloc = function () {
     $(".black_overlay").show();
     $("table.alloc").html("");
+    let serach = { "allocItemFormMap.text": $("#kw").val() };
+    if (localStorage.projectKey == "BJJK_HUIRUI") { serach['allocItemFormMap.whid'] = 2; }
     jQuery.ajax({
         //url: "/s/jsons/" + localStorage.projectKey + "/allocs/allocs.json?fv=" + localStorage.timeStamp,
         url: "/alloc/item/findByPage.shtml",
-        data: { "allocItemFormMap.text": $("#kw").val() },
+        data: serach,
         type: "POST",
         dataType: "json",
         success: function (data) {

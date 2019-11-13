@@ -89,7 +89,11 @@ var initReceipt = function () {
             if (data.code >= 0) {
                 _paperid = "";
                 setCurrentReceiptPaperid("");
-                window.location.reload();
+                if (_alloc) {
+                    parent.layer.close(parent.pageii);
+                } else {
+                    window.location.reload();
+                }
             }
         }
     });
@@ -106,7 +110,11 @@ var initReceipt = function () {
             if (data.code >= 0) {
                 _paperid = "";
                 setCurrentReceiptPaperid("");
-                window.location.reload();
+                if (_alloc) {
+                    parent.layer.close(parent.pageii);
+                } else {
+                    window.location.reload();
+                }
             }
         }
     });
