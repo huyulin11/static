@@ -67,9 +67,6 @@ $(_frame).on("load", function (params) {
     } else {
         $(this).fadeIn();
     }
-
-    let paddingTop = $(this).contents().find(".doc-buttons").height();
-    $(this).contents().find("html>body").css("padding-top", paddingTop ? (paddingTop + 10) : 0);
 });
 
 localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];

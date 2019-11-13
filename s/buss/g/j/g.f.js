@@ -287,21 +287,13 @@ class GF {
         }
         return cbox;
     };
-    checkOnlyOne(conf) {
+    checkOnlyOne(conf, notshowtips) {
         var cbox = this.getCheckedVal(conf);
         if (cbox.length > 1 || cbox == "") {
-            layer.msg("当且仅能选择一个");
+            if (!notshowtips) layer.msg("当且仅能选择一个");
             return null;
         }
         return cbox[0];
-    };
-    bindBtns(target, btns) {
-        $.each(btns, function (i, btn) {
-            $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${btn.hide ? "hidden" : ""}">${btn.name}</button> `);
-            $(target).find(`#${btn.id}`).click("click", function () {
-                btn.bind();
-            });
-        });
     };
     urlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -344,7 +336,19 @@ class GF {
         }
         return dataStr;
     };
-    getButtonByRes(conf, callback) {
+    bindBtns(target, btns) {
+        gf.getMyRes(function (myRes) {
+            $.each(btns, function (i, btn) {
+                if (!btn.resKey || myRes.filter(function (res) { return res.resKey == btn.resKey; }).length > 0) {
+                    $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${btn.hide ? "hidden" : ""}">${btn.name}</button> `);
+                    $(target).find(`#${btn.id}`).click("click", function () {
+                        btn.bind();
+                    });
+                }
+            });
+        });
+    };
+    getMyRes(callback) {
         $.ajax({
             type: "POST",
             url: '/resources/findMyRes.shtml',
@@ -354,16 +358,20 @@ class GF {
                 location.assign("/s/buss/g/h/login.html");
             },
             success: function (myRes) {
-                let _conf = $.extend(conf, {
-                    display: function (value) {
-                        if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
-                            return true;
-                        }
-                        return false;
-                    },
-                });
-                callback(gf.getButtonsTable(_conf));
+                callback(myRes);
             }
+        });
+    }; getButtonByRes(conf, callback) {
+        gf.getMyRes(function (myRes) {
+            let _conf = $.extend(conf, {
+                display: function (value) {
+                    if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
+                        return true;
+                    }
+                    return false;
+                },
+            });
+            callback(gf.getButtonsTable(_conf));
         });
     }
     getButtonsTable(conf) {
