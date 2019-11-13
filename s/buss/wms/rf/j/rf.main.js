@@ -66,6 +66,7 @@ var initMain = function () {
         $(container).find("#failure").on("click", function () {
             window.location.href = `/s/buss/sys/lap/h/lapInfoMgr.html?type=PROD_LINE`;
         });
+        $(container).find("#trans").on("click", function () {
             window.location.href = `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR`;
         });
         $(container).find("#priority").on("click", function () {
