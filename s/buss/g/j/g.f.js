@@ -434,7 +434,16 @@ class GF {
         return flag;
     };
     layerMsg(content, options, end) {
-        layer.msg(content, options, end);
+        // layer.msg(content, options, end);
+        layer.open({
+            type: 1
+            , content: content
+            , btn: '关闭'
+            , shade: 0.1
+            , yes: function () {
+                layer.closeAll();
+            }
+        });
     }
 }
 
