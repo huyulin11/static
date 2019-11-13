@@ -289,15 +289,18 @@ class PaperOp {
             });
         });
     }; doDeleteSure(that) {
-        var detailid;
-        if (that.detailid) {
-            detailid = that.detailid;
-        } else {
-            detailid = gf.checkOnlyOne("id");
-        }
-        if (!detailid) { return; }
-        layer.confirm(`是否${that.name}${detailid}？`, function (index) {
-            gf.ajax(that.url, { detailid: detailid }, "json");
+        var detailid = gf.checkOnlyOne("id");
+        var item = gf.checkOnlyOne("item");
+        if (!detailid || !item) { return; }
+        layer.prompt(function (val, index) {
+            layer.close(index);
+            if (item == val) {
+                layer.confirm(`是否${that.name}？`, function (index) {
+                    gf.ajax(that.url, { detailid: detailid }, "json");
+                });
+            } else {
+                layer.msg('SU校验失败！');
+            }
         });
     }; editSeq(that, seq) {
         var json = {

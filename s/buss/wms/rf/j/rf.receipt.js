@@ -153,6 +153,11 @@ var initReceipt = function () {
         }
         return;
     }
+    if (su.trim().length != 9) {
+        gf.layerMsg("SU格式错误！");
+        $("#su").focus();
+        return;
+    }
     if (_paperid) {
         gf.doAjax({
             url: `/receipt/detail/addItem.shtml?paperid=${_paperid}`,
