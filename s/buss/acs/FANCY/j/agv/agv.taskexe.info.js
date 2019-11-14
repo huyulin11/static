@@ -48,7 +48,7 @@ export var showTaskexe = function (currentTask) {
 			return "";
 		}
 
-		var jointFun = function (detail) {
+		var nodeFun = function (detail) {
 			var val = detail.siteid + opflag(detail.opflag) + "-" + arrivedact(detail.arrivedact);
 			if (val.indexOf("扫描") > 0 || val.indexOf("窗口") > 0 || val.indexOf("货位") > 0 || val.indexOf("放货") > 0 || val.indexOf("取货") > 0) {
 				val = "<br/>" + val;
@@ -56,10 +56,11 @@ export var showTaskexe = function (currentTask) {
 			return val;
 		}
 		$("div#path").html("");
+		let joint = "<font style='font-size:10px;color:#CCC;'>" + "=>" + "</font>";
 		for (var detail of details) {
-			var joint = jointFun(detail);
-			$("div#path").append("<font style='font-size:10px;color:" + color(joint) + ";'>"
-				+ joint + addedinfo(joint, detail.addedinfo) + "-></font>");
+			var node = nodeFun(detail);
+			$("div#path").append("<font style='font-size:10px;color:" + color(node) + ";'>"
+				+ node + addedinfo(node, detail.addedinfo) + "</font>" + joint);
 			if (i++ % 6 == 0) { $("div#path").append("<br/>"); }
 		}
 	} else {
