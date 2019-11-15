@@ -16,6 +16,13 @@ class GU {
             { index: "K", name: "确认", hide: true }];
         return excelCols;
     }
+    importAllocExcelCols() {
+        let excelCols = [
+            { index: "A", name: "货位名称" },
+            { index: "B", name: "仓库" },
+        ];
+        return excelCols;
+    }
 }
 
 var gu = new GU();

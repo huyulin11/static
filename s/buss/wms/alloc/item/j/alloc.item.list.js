@@ -1,6 +1,8 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
+import { gu } from "/s/buss/g/j/g.u.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { submit } from "/s/buss/g/j/g.xlsx.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -116,3 +118,39 @@ function del() {
 		gf.ajax(url, { ids: cbox.join(",") }, "json");
 	});
 }
+
+var dealSheet = function (sheet) {
+	let _paper = {};
+	let index = 50;
+	for (let i = 1; i > 0; i++) {
+		if (i > index + 12) {
+			alert("单次最多仅能导入" + index + "条明细！");
+			break;
+		}
+		if (sheet["A" + i] && sheet["B" + i]) {
+			_paper[`allocItem[${i}]`] = sheet["A" + i].v
+			_paper[`warehouse[${i}]`] = sheet["B" + i].v;
+		} else { break; }
+	}
+	$('#upload').val("");
+	gf.doAjax({
+		url: `/alloc/item/addEntity.shtml`,
+		data: _paper, dataType: "json", type: "POST"
+	});
+}
+
+$("div.doc-buttons").append(`<label class="ui-upload">
+导入转移单<input multiple type="file" id="upload" style="display: none;" />
+</label>`);
+$('#upload').on("change", function (e) {
+	var files = e.target.files;
+	if (files.length > 1 && localStorage.importThenEdit) {
+		gf.layerMsg("编辑模式下仅能单个导入");
+		$('#upload').val("");
+		return;
+	}
+	submit(e, function (workbook) {
+		let sheet = workbook.Sheets[workbook.SheetNames[0]];
+		dealSheet(sheet);
+	});
+});
