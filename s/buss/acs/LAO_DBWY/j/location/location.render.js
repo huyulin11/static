@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
     var arrow = function (arrow) {
         var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
         return arrow.attr("markerUnits", "strokeWidth")
@@ -63,8 +63,8 @@
         var text = function () {
             return svg.append("text")
                 .style("stroke", "black")
-                .style("font-size", "8px")
-                .style("stroke-width", "0.6px")
+                .style("font-size", "10px")
+                .style("stroke-width", "0.7px")
                 .text(location.id);
         }
         for (var location of locations) {
@@ -75,16 +75,16 @@
                         .attr("y", height - padding.bottom - yScale(location.y) - 5);
                 } else if ((2010 < locationid && locationid < 2016) || (2025 < locationid && locationid < 2037) || (2077 < locationid && locationid < 2088)) {
                     text().attr("x", padding.left + xScale(location.x) - 5)
-                        .attr("y", height - padding.bottom - yScale(location.y) + 9);
+                        .attr("y", height - padding.bottom - yScale(location.y) + 13);
                 } else if ((2015 < locationid && locationid < 2026) || (2036 < locationid && locationid < 2048) || (2067 < locationid && locationid < 2078) || (2087 < locationid && locationid < 2098)) {
                     text().attr("x", padding.left + xScale(location.x) - 13)
-                        .attr("y", height - padding.bottom - yScale(location.y) + 9);
+                        .attr("y", height - padding.bottom - yScale(location.y) + 13);
                 } else if (2107 < locationid && locationid < 2119 && locationid % 2 == 1) {
                     text().attr("x", padding.left + xScale(location.x) - 9)
                         .attr("y", height - padding.bottom - yScale(location.y) - 5);
                 } else {
                     text().attr("x", padding.left + xScale(location.x) - 9)
-                        .attr("y", height - padding.bottom - yScale(location.y) + 10);
+                        .attr("y", height - padding.bottom - yScale(location.y) + 13);
                 }
             }
         }
@@ -131,15 +131,15 @@
         }
     }
 
-    var siteCode = false;
+    var isSiteCode= false;
     function rect() {
         $(".clashLine").remove();
         $(".mainRoad").remove();
 
         rectPath(yfc);
-        if (!siteCode && isLocations) {
+        if (!isSiteCode&& isLocations) {
             siteCode(locations);
-            siteCode = true;
+            isSiteCode= true;
         }
         rectPath(yfcs);
         rectAspect(yfcs);
