@@ -14,7 +14,7 @@ window.datagrid = dataGrid({
 		colkey: "text",
 		name: "货位名称",
 		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
+			if (rowdata.delflag != null) {
 				return data;
 			}
 			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
@@ -140,7 +140,7 @@ var dealSheet = function (sheet) {
 }
 
 $("div.doc-buttons").append(`<label class="ui-upload">
-导入转移单<input multiple type="file" id="upload" style="display: none;" />
+导入货位<input multiple type="file" id="upload" style="display: none;" />
 </label>`);
 $('#upload').on("change", function (e) {
 	var files = e.target.files;
