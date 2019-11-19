@@ -26,10 +26,20 @@ var dealSheet = function (sheet) {
     _paper.name = sheet.E8.v;
 
     let index = 50;
+    let checkRepeat = [];
     for (let i = 12; i > 0; i++) {
         if (i > index + 12) {
             alert("单次最多仅能导入" + index + "条明细！");
             break;
+        }
+        if (sheet["A" + i] && sheet["E" + i]) {
+            let key = sheet["A" + i].v + "-" + sheet["E" + i].v;
+            if (checkRepeat.includes(key)) {
+                alert("存在重复数据！转移单号、SU：" + key);
+                return;
+            } else {
+                checkRepeat.push(key);
+            }
         }
         if (sheet["E" + i] && sheet["G" + i]) {
             if (localStorage.importThenEdit) {
