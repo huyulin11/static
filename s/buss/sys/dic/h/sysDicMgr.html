@@ -1,36 +1,47 @@
-<link type="text/css" rel="stylesheet" href="/s/c/app.all.css" />
-<script src="/s/j/jquery-1.12.2.min.js"></script>
-<script src="/s/j/jquery/jquery.form.js"></script>
-<script src="/s/j/layer/v3.1.3/layer.js"></script>
-<script src="/s/j/jquery.toJSON.js"></script>
-<script src="/s/j/jquery.format.js"></script>
+<html lang="en"
+    class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad">
 
-<script type="module" src="/s/buss/sys/dic/j/dic.type.list.js"></script>
-<header class="panel-heading">
-    <form class="form-inline" role="form" id="searchForm" name="searchForm">
-        <div class="form-group">
-            <table>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">类型:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <input class="input-medium ui-autocomplete-input" id="dictype" name="sysDicDataFormMap.dictype">
-                    </td>
-                    <td>
-                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </form>
-</header>
-<div class="doc-buttons">
-    <button type="button" id="add" class="btn btn-primary marR10">新增</button>
-    <button type="button" id="del" class="btn btn-danger marR10">删除</button>
-</div>
-<div class="table-responsive">
-    <div id="paging" class="pagclass"></div>
-</div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="/s/c/app.all.css" />
+    <script src="/s/j/jquery-1.12.2.min.js"></script>
+    <script src="/s/j/jquery/jquery.form.js"></script>
+    <script src="/s/j/layer/v3.1.3/layer.js"></script>
+    <script src="/s/j/jquery.toJSON.js"></script>
+    <script src="/s/j/jquery.format.js"></script>
+</head>
+
+<body>
+    <header class="panel-heading">
+        <form class="form-inline" role="form" id="searchForm" name="searchForm">
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td>
+                            <label class="control-label">
+                                <span class="font-thin v-middle">类型:</span>
+                            </label>
+                        </td>
+                        <td>
+                            <input class="input-medium ui-autocomplete-input" id="dictype"
+                                name="sysDicDataFormMap.dictype">
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </header>
+    <div class="doc-buttons">
+        <button type="button" id="add" class="btn btn-primary marR10">新增</button>
+        <button type="button" id="del" class="btn btn-danger marR10">删除</button>
+    </div>
+    <div class="table-responsive">
+        <div id="paging" class="pagclass"></div>
+    </div>
+    <script type="module" src="/s/buss/sys/dic/j/dic.type.list.js"></script>
+</body>
+
+</html>
