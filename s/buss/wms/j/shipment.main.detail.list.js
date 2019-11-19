@@ -82,7 +82,7 @@ let _columns = [{
 	colkey: "userdef4",
 	name: "TU",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (["COMBINING", "TRANSSTART", "OVER"].includes(rowdata.status))
+		if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
 			return data;
 		return "";
 	}

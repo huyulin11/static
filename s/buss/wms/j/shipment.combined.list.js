@@ -59,16 +59,24 @@ $("#search").on("click", function () {
 	});
 });
 let tempBtns = [{
-	url: `/shipment/main/startTransfer.shtml`,
-	id: "startTransfer", name: "开始运输", class: "btn-primary",
+	url: `/shipment/main/startPcs.shtml`,
+	id: "startPcs", name: "上PCS", class: "btn-primary",
 	bind: function () {
 		var cbox = gf.checkOnlyOne("key");
 		if (!cbox) { return; }
 		gf.ajax(this.url, { tu: cbox }, "json");
 	},
 }, {
-	url: `/shipment/main/overTransfer.shtml`,
-	id: "overTransfer", name: "结束运输", class: "btn-primary",
+	url: `/shipment/main/overPcs.shtml`,
+	id: "overPcs", name: "出PCS", class: "btn-primary",
+	bind: function () {
+		var cbox = gf.checkOnlyOne("key");
+		if (!cbox) { return; }
+		gf.ajax(this.url, { tu: cbox }, "json");
+	},
+}, {
+	url: `/shipment/main/overAll.shtml`,
+	id: "overAll", name: "结束运输", class: "btn-primary",
 	bind: function () {
 		var cbox = gf.checkOnlyOne("key");
 		if (!cbox) { return; }
