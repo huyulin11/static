@@ -23,7 +23,7 @@ let tempBtns = [{
 	},
 }, {
 	url: `/s/buss/wms/rf/h/rf.receipt.html${_alloc ? "?alloc=" + _alloc : ""}`,
-	id: "toReceipt", name: `发起入库`, class: "btn-primary",
+	id: "toReceipt", name: `发起入库`, class: "btn-primary", hide: true,
 	bind: function () {
 		window.location.href = this.url;
 	},
