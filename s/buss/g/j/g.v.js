@@ -16,6 +16,11 @@ class GV {
 				localStorage.setItem("dic", str);
 				str = JSON.stringify(data.res);
 				localStorage.setItem("res", str);
+				try {
+					str = JSON.stringify(data.lap);
+					localStorage.setItem("lap", str);
+				} catch (error) {
+				}
 			}
 		});
 	}
@@ -62,6 +67,12 @@ class GV {
 		if (!this._role) { this._role = jQuery.parseJSON(localStorage.role); }
 		var o = this._role.find((v) => { return v.id == key });
 		return (!o) ? "" : o.rolename;
+	};
+
+	getLap(key) {
+		if (!this._lap) { this._lap = jQuery.parseJSON(localStorage.lap); }
+		var o = this._lap.find((v) => { return v.id == key });
+		return o;
 	};
 
 	getCurrentRole() {

@@ -41,6 +41,14 @@ window.datagrid = dataGrid({
 			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
 		}
 	}, {
+		colkey: "userdef1",
+		name: "巷道",
+		hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; },
+		renderData: function (rowindex, data, rowdata, column) {
+			var lap = gv.getLap(data);
+			return lap ? lap.name : "";
+		}
+	}, {
 		colkey: "status",
 		name: "货位状态",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -122,19 +130,20 @@ function del() {
 var dealSheet = function (sheet) {
 	let _paper = {};
 	let index = 50;
-	for (let i = 1; i > 0; i++) {
+	for (let i = 2; i > 0; i++) {
 		if (i > index + 12) {
 			alert("单次最多仅能导入" + index + "条明细！");
 			break;
 		}
 		if (sheet["A" + i] && sheet["B" + i]) {
-			_paper[`allocItem[${i}]`] = sheet["A" + i].v
+			_paper[`allocItem[${i}]`] = sheet["A" + i].v;
 			_paper[`warehouse[${i}]`] = sheet["B" + i].v;
+			_paper[`name[${i}]`] = sheet["C" + i] ? sheet["C" + i].v : "";
 		} else { break; }
 	}
 	$('#upload').val("");
 	gf.doAjax({
-		url: `/alloc/item/addEntity.shtml`,
+		url: `/alloc/item/import.shtml`,
 		data: _paper, dataType: "json", type: "POST"
 	});
 }
