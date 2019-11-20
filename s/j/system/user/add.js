@@ -27,12 +27,24 @@ $("form").validate({
 	rules: {
 		"userFormMap.accountName": {
 			required: true,
-			remote: { // 异步验证是否存在
+			remote: {
 				type: "POST",
 				url: '/user/isExist.shtml',
 				data: {
-					name: function () {
+					accountName: function () {
 						return $("#accountName").val();
+					}
+				}
+			}
+		},
+		"userFormMap.userName": {
+			required: true,
+			remote: {
+				type: "POST",
+				url: '/user/isExist.shtml',
+				data: {
+					userName: function () {
+						return $("#userName").val();
 					}
 				}
 			}
@@ -42,14 +54,21 @@ $("form").validate({
 		"userFormMap.accountName": {
 			required: "请输入账号",
 			remote: "该账号已经存在"
+		},
+		"userFormMap.userName": {
+			required: "请输入用户名",
+			remote: "该用户名已经存在"
 		}
 	},
 	errorPlacement: function (error, element) {// 自定义提示错误位置
-		$(".l_err").css('display', 'block');
+		// $(".l_err").css('display', 'block');
 		// element.css('border','3px solid #FFCCCC');
-		$(".l_err").html(error.html());
+		// $(".l_err").html(error.html());
+		layer.msg(error.html());
 	},
 	success: function (label) {// 验证通过后
-		$(".l_err").css('display', 'none');
+		// $(".l_err").css('display', 'none');
 	}
 });
+gf.onloadurl();
+$("#password").val(gf.randomString(9));
