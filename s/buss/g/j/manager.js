@@ -69,7 +69,7 @@ $(_frame).on("load", function (params) {
     }
 });
 
-localStorage.layerArea = ($(window).width() < 960) ? ["95%", "90%"] : ["720px", "80%"];
+localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
 gv.init();
 $("body").fadeIn();
 loadPage(localStorage.index ? localStorage.index : "首页,首页,/s/buss/g/h/welcome.html");
