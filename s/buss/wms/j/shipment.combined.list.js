@@ -14,6 +14,7 @@ let params = {
 	}, {
 		colkey: "company",
 		name: "订单号",
+		hide: true,
 	}, {
 		colkey: "value",
 		name: "状态",
@@ -83,7 +84,7 @@ let tempBtns = [{
 		gf.ajax(this.url, { tu: cbox }, "json");
 	},
 }, {
-	url: `/app/conf/deleteBySure.shtml`,
+	url: `/app/conf/bjjkhuirui/deleteBySure.shtml`,
 	id: "deleteSure", name: "确认撤销", class: "btn-danger",
 	bind: function () {
 		var cbox = gf.checkOnlyOne("key");
