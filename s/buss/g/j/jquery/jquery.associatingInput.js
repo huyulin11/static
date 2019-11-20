@@ -28,7 +28,7 @@
             $target.focus();
 
             var myEvent = new CustomEvent('ASSOCIATING_VAL_CHOOSED', {
-                detail: { val: $target.val() },
+                detail: { val: $target.val(), data: dataset.data(), },
             });
             if (window.dispatchEvent) { window.dispatchEvent(myEvent); } else { window.fireEvent(myEvent); }
         });

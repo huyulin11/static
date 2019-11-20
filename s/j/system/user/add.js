@@ -64,11 +64,32 @@ $("form").validate({
 		// $(".l_err").css('display', 'block');
 		// element.css('border','3px solid #FFCCCC');
 		// $(".l_err").html(error.html());
-		layer.msg(error.html());
+		if (error.html()) layer.msg(error.html());
 	},
 	success: function (label) {// 验证通过后
 		// $(".l_err").css('display', 'none');
 	}
 });
+
+window.addEventListener('ASSOCIATING_VAL_CHOOSED', function (event) {
+	let datas = event.detail.data;
+	console.log('选择的数据为：', datas);
+	if (datas.accountname) $("#accountName").val(datas.accountname);
+});
+
+$("#userName").on("input", function () {
+	$("#accountName").val("");
+});
+
+if (localStorage.projectKey == "BJJK_HUIRUI") {
+	$("#accountName").attr("readonly", "readonly");
+	$("#userName").data("searchurl", '/user/src/findFirstPage.shtml?userName=');
+	$("#userName").data("showcol", 'userName,accountName');
+	$("#userName").data("keycol", 'userName');
+	$("#userName").data("containerofinput", '.panel-body');
+
+	gf.quote("/s/buss/g/j/jquery/jquery.associatingInput.js");
+}
+
 gf.onloadurl();
 $("#password").val(gf.randomString(9));
