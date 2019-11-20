@@ -43,7 +43,7 @@ var sub = function () {
 }
 
 let initDatas = function () {
-    $("#datas iframe").attr("src", "/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=COMBINE&type=COMBINE&status=PICKING:PICKOVER:COMBINING&detailstatus=PICKING");
+    $("#datas iframe").attr("src", "/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=COMBINE&type=COMBINE&detailstatus=PICKING");
 }
 
 var initCombine = function () {
