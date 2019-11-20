@@ -24,6 +24,7 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "num",
 		name: "数量",
+		hide: true,
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return "--";
@@ -85,4 +86,8 @@ $("#search").on("click", function () {
 $("#searchForm").on("submit", function () {
 	doSearch();
 	return false;
+});
+
+$("#export").on("click", function () {
+	window.location.href = '/alloc/item/download.shtml?allocItemFormMap.inStock=true' + '&' + $("#searchForm").serialize();
 });

@@ -11319,7 +11319,7 @@ a:hover .caret-white {
 @media (min-width : 1800px) {
 	#loadhtml {
 		margin: 0 auto;
-		width: 1500px;
+		/* width: 1500px; */
 	}
 }
 
