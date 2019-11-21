@@ -7,7 +7,19 @@ import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 var _container = "#frames";
 let _seq = 0;
-let _num = 1;
+let _num = 3;
+
+var frameLoad = function (params) {
+    $(this).contents().find("html").addClass("frame");
+    let key = Math.random(0, 1);
+    if (key > 0.7) {
+        $(this).show();
+    } else if (key > 0.4) {
+        $(this).slideDown();
+    } else {
+        $(this).fadeIn();
+    }
+}
 
 var loadPage = function (tip) {
     var sn = tip.split(",");
@@ -32,22 +44,15 @@ var loadPage = function (tip) {
         }
     }
 
-    let _frame = `iframe.loadhtml[data-seq='${_seq}']`;
+    let _frame = `iframe.loadhtml[src='${url}']`;
+    $(_container).find("iframe.loadhtml").hide();
     if ($(_frame).length == 0) {
-        _frame = $(`<iframe class="loadhtml" data-seq="${_seq++}" data-autofill></iframe>`);
-        $(_frame).on("load", function (params) {
-            $(this).contents().find("html").addClass("frame");
-            let key = Math.random(0, 1);
-            if (key > 0.7) {
-                $(this).show();
-            } else if (key > 0.4) {
-                $(this).slideDown();
-            } else {
-                $(this).fadeIn();
-            }
-        });
+        _frame = $(`<iframe class="loadhtml" data-autofill></iframe>`);
+        $(_frame).on("load", frameLoad);
         $(_container).append(_frame);
     }
+    $(_frame).show();
+    $(_frame).data("seq", _seq++);
     if ($(".loadhtml").length > _num) {
         let a = $(".loadhtml").sort(function (a, b) { return $(a).data("seq") - $(b).data("seq"); }).filter(":eq(0)");
         a.remove();

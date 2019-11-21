@@ -1770,7 +1770,7 @@ pre code {
 		width: 1170px;
 	}
 
-	iframe#loadhtml>html {
+	iframe.loadhtml>html {
 		width: 1170px;
 	}
 }
@@ -11317,7 +11317,7 @@ a:hover .caret-white {
 }
 
 @media (min-width : 1800px) {
-	#loadhtml {
+	.loadhtml {
 		margin: 0 auto;
 		/* width: 1500px; */
 	}
