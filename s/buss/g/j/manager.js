@@ -5,7 +5,9 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
-var _frame = "#loadhtml";
+var _container = "#frames";
+let _seq = 0;
+let _num = 1;
 
 var loadPage = function (tip) {
     var sn = tip.split(",");
@@ -30,7 +32,26 @@ var loadPage = function (tip) {
         }
     }
 
-    $(_frame).hide();
+    let _frame = `iframe.loadhtml[data-seq='${_seq}']`;
+    if ($(_frame).length == 0) {
+        _frame = $(`<iframe class="loadhtml" data-seq="${_seq++}" data-autofill></iframe>`);
+        $(_frame).on("load", function (params) {
+            $(this).contents().find("html").addClass("frame");
+            let key = Math.random(0, 1);
+            if (key > 0.7) {
+                $(this).show();
+            } else if (key > 0.4) {
+                $(this).slideDown();
+            } else {
+                $(this).fadeIn();
+            }
+        });
+        $(_container).append(_frame);
+    }
+    if ($(".loadhtml").length > _num) {
+        let a = $(".loadhtml").sort(function (a, b) { return $(a).data("seq") - $(b).data("seq"); }).filter(":eq(0)");
+        a.remove();
+    }
     gf.quoteModule(url, _frame);
     $("#nav").removeClass("nav-off-screen");
     var html = '<li><i class="fa fa-home"></i><a href="manager.shtml">Home</a></li>';
@@ -55,18 +76,6 @@ $("a#editUI").on("click", function () {
         offset: "auto",
         content: '/user/selfInfo.shtml'
     });
-});
-
-$(_frame).on("load", function (params) {
-    $(this).contents().find("html").addClass("frame");
-    let key = Math.random(0, 1);
-    if (key > 0.7) {
-        $(this).show();
-    } else if (key > 0.4) {
-        $(this).slideDown();
-    } else {
-        $(this).fadeIn();
-    }
 });
 
 localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
