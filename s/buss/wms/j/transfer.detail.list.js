@@ -16,7 +16,6 @@ let tempBtns = [{
 					gf.layerMsg(`成功${that.name}！`);
 					if (window.datagrid) window.datagrid.loadData();
 					else if (parent.datagrid) parent.datagrid.loadData();
-					if (callback) { callback(detailid); }
 				} else {
 					gf.layerMsg(`${that.name}失败！` + s.msg);
 				}
