@@ -69,9 +69,6 @@ if (localStorage.projectKey == "BJJK_HUIRUI") {
 	cols = cols.concat({
 		colkey: "targetAlloc",
 		name: "目标货位",
-		renderData: function (rowindex, data, rowdata, column) {
-			return `<span class='targetAlloc' data-paperid='${rowdata.paperid}'></span>`;
-		}
 	});
 }
 
@@ -82,12 +79,12 @@ window.datagrid = dataGrid({
 	checkbox: true,
 	serNumber: true,
 	callback: function () {
-		let keys = $(".targetAlloc").map(function () { return $(this).data("paperid") }).get().join(":");
+		let keys = $(".targetAlloc").map(function () { return $(this).parents("tr").find(".paperid").html() }).get().join(":");
 		findAllocObj(keys, function (info) {
 			$(".targetAlloc").each(function () {
 				let that = this;
 				info.some(function (item) {
-					if (item.key == $(that).data("paperid")) {
+					if (item.key == $(that).parents("tr").find(".paperid").html()) {
 						$(that).html(item.value);
 						return true;
 					}

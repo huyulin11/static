@@ -2,6 +2,12 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
+var findAllocObj = function (keys, callback) {
+	gf.ajax('/app/conf/get.shtml?table=RECEIPT_ALLOC_ITEM', { key: keys }, "json", function (s) {
+		callback(s);
+	});
+};
+
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: [{
@@ -40,7 +46,21 @@ window.datagrid = dataGrid({
 	}],
 	jsonUrl: '/user/findByPage.shtml',
 	checkbox: true,
-	serNumber: true
+	serNumber: true,
+	callback: function () {
+		let keys = $(".roleName").map(function () { return $(this).parents("tr").find(".id").html() }).get().join(":");
+		findAllocObj(keys, function (info) {
+			$(".roleName").each(function () {
+				let that = this;
+				info.some(function (item) {
+					if (item.key == $(that).parents("tr").find(".id").html()) {
+						$(that).html(item.value);
+						return true;
+					}
+				});
+			});
+		});
+	}
 });
 $("#search").click("click", function () {// 绑定查询按扭
 	var searchParams = $("#searchForm").serialize();// 初始化传参数
