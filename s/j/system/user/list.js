@@ -3,7 +3,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 var findAllocObj = function (keys, callback) {
-	gf.ajax('/app/conf/get.shtml?table=RECEIPT_ALLOC_ITEM', { key: keys }, "json", function (s) {
+	gf.ajax('/bd/userRole.shtml?', { userid: keys }, "json", function (s) {
 		callback(s);
 	});
 };
@@ -53,9 +53,8 @@ window.datagrid = dataGrid({
 			$(".roleName").each(function () {
 				let that = this;
 				info.some(function (item) {
-					if (item.key == $(that).parents("tr").find(".id").html()) {
-						$(that).html(item.value);
-						return true;
+					if (item.userId == $(that).parents("tr").find(".id").html()) {
+						$(that).append(gv.getRole(item.roleId) + ";");
 					}
 				});
 			});
