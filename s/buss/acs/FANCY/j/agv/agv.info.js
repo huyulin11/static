@@ -101,7 +101,6 @@ var auth = (agvInfo) => {
 		$(_target).find("button#CONTINUE").removeAttr("disabled");
 		$(_target).find("button#CONFIRM").removeAttr("disabled");
 		$(_target).find("button#GOTO_INIT").removeAttr("disabled");
-		$(_target).find("button#GOTO_INITS").removeAttr("disabled");
 		$(_target).find("button#RE_PATH").removeAttr("disabled");
 	} else {
 		$(_target).find("button#PAUSE_USER").removeAttr("disabled");
@@ -122,7 +121,6 @@ var auth = (agvInfo) => {
 	}
 	$(_target).find("button#CONFIRM").removeAttr("disabled");
 	$(_target).find("button#GOTO_INIT").removeAttr("disabled");
-	$(_target).find("button#GOTO_INITS").removeAttr("disabled");
 	$(_target).find("button#RE_PATH").removeAttr("disabled");
 	$(_target).find("button#SHUTDOWN").removeAttr("disabled");
 	$(_target).find("button:enabled").each(function () {
@@ -190,8 +188,8 @@ var deliverHandler = function (that) {
 var deleverTaskLaoFoxconn = function (that) {
 	var targetSite = 0;
 	var task = $(that).attr("id");
-	var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)', {
-		btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B08 3F'],
+	var indexOfTips = layer.confirm('请选择送货任务的目的地', {
+		btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B07 3F', 'B08 2F', 'B08 3F'],
 		btn1: function () {
 			targetSite = 53;
 			doTask(agvId, task, targetSite);
@@ -205,6 +203,14 @@ var deleverTaskLaoFoxconn = function (that) {
 			doTask(agvId, task, targetSite);
 		},
 		btn4: function () {
+			targetSite = 137;
+			doTask(agvId, task, targetSite);
+		},
+		btn5: function () {
+			targetSite = 144;
+			doTask(agvId, task, targetSite);
+		},
+		btn6: function () {
 			targetSite = 105;
 			doTask(agvId, task, targetSite);
 		}
@@ -370,8 +376,43 @@ var deleverPackHandler = function () {
 	});
 }
 
-var gotoInitsHandler = function () {
+var gotoInitHandler = function (that) {
 	allDisabled();
+	if (localStorage.projectKey == 'LAO_FOXCONN') {
+		gotoInitLaoFoxconn(that);
+	} else if (localStorage.projectKey == 'LAO_DBWY') {
+		gotoInitLaoDbwy(that);
+	} else {
+		if (!confirm('是否确认执行该操作?')) { return; }
+		layer.msg(taskexe.addCtrlTask(agvId, $(this).attr("id")));
+	}
+}
+
+var gotoInitLaoFoxconn = function (that) {
+	var targetSite = 0;
+	var task = $(that).attr("id");
+	var indexOfTips = layer.confirm('请选择返回初始位置', {
+		btn: ['B05 1号', 'B05 2号', 'B05 3号', 'B05 4号'],
+		btn1: function () {
+			targetSite = 162;
+			doTask(agvId, task, targetSite);
+		},
+		btn2: function () {
+			targetSite = 28;
+			doTask(agvId, task, targetSite);
+		},
+		btn3: function () {
+			targetSite = 158;
+			doTask(agvId, task, targetSite);
+		},
+		btn4: function () {
+			targetSite = 172;
+			doTask(agvId, task, targetSite);
+		}
+	});
+}
+
+var gotoInitLaoDbwy = function () {
 	var targetSite = 0;
 	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
 		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056', '原料库4号-3057', '原料库5号-3058', '原料库6号-3059'],
@@ -487,8 +528,8 @@ export var init = function (target) {
 			deleverPackHandler();
 		}
 	}, {
-		id: 'GOTO_INITS', handler: function () {
-			gotoInitsHandler();
+		id: 'GOTO_INIT', handler: function () {
+			gotoInitHandler(this);
 		}
 	}, {
 		id: 'GOTO_STEREOTYPE', handler: function () {
