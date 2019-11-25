@@ -1,6 +1,5 @@
 import { dataGrid } from "/s/j/kf.grid.js";
 
-var dialog;
 window.datagrid = dataGrid({
 	id: 'paging',
 	columns: [{
@@ -9,7 +8,11 @@ window.datagrid = dataGrid({
 		hide: true
 	}, {
 		colkey: "accountName",
-		name: "账号"
+		name: "账号",
+		hide: true
+	}, {
+		colkey: "userName",
+		name: "用户名"
 	}, {
 		colkey: "module",
 		name: "模块"
@@ -37,8 +40,8 @@ window.datagrid = dataGrid({
 	jsonUrl: '/log/findByPage.shtml',
 	checkbox: false
 });
-$("#searchForm").click("click", function () {//绑定查询按扭
-	var searchParams = $("#fenye").serializeObject();
+$("#searchForm").click("click", function () {
+	var searchParams = $("#searchForm").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});

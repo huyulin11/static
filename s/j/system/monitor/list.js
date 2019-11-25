@@ -44,8 +44,8 @@ window.datagrid = dataGrid({
 	jsonUrl: '/monitor/findByPage.shtml',
 	checkbox: true
 });
-$("#searchForm").click("click", function () {//绑定查询按扭
-	var searchParams = $("#fenye").serializeObject();
+$("#searchForm").click("click", function () {
+	var searchParams = $("#searchForm").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
