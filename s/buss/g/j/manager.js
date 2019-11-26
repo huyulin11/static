@@ -90,7 +90,15 @@ var loadPage = function (tip) {
 $("[data-tip]").on("click", function () {
     $(this).parents("nav").find("li").removeClass("current");
     $(this).parent("li").addClass("current");
-    loadPage($(this).data("tip"));
+    let that = this;
+    gf.doAjax({
+        url: "/checkLogin.shtml",
+        success: function () {
+            loadPage($(that).data("tip"));
+        }, error: function () {
+            window.location.href = "/s/buss/g/h/login.html";
+        }
+    });
 });
 
 $("a#editUI").on("click", function () {

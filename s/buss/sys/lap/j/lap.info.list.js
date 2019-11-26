@@ -76,7 +76,7 @@ window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: _columns,
 	jsonUrl: `/sys/lap/findByPage.shtml?type=${_type}`,
-	checkbox: true,
+	checkbox: false,
 	serNumber: true
 });
 
