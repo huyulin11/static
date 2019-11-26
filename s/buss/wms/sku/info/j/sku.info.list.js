@@ -94,7 +94,7 @@ function del() {
 	layer.confirm('是否删除？', function (index) {
 		var url = '/sku/info/deleteEntity.shtml';
 		gf.ajax(url, {
-			ids: cbox.join(",")
+			ids: cbox.join(":")
 		}, "json");
 	});
 }

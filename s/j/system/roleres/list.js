@@ -94,7 +94,7 @@ function delRole() {
 	layer.confirm('是否删除？', function (index) {
 		var url = '/roleres/deleteEntity.shtml';
 		gf.ajax(url, {
-			ids: cbox.join(",")
+			ids: cbox.join(":")
 		}, "json");
 	});
 }

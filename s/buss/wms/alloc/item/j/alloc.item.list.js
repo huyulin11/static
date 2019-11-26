@@ -123,7 +123,7 @@ function del() {
 	}
 	layer.confirm('是否删除？', function (index) {
 		var url = '/alloc/item/deleteEntity.shtml';
-		gf.ajax(url, { ids: cbox.join(",") }, "json");
+		gf.ajax(url, { ids: cbox.join(":") }, "json");
 	});
 }
 

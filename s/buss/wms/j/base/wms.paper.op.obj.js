@@ -191,7 +191,7 @@ class PaperOp {
         var cbox = gf.checkNotNull("paperid");
         if (!cbox) { return; }
         layer.confirm(`是否${that.name}${cbox}？`, function (index) {
-            gf.ajax(that.url, { paperids: cbox.join(",") }, "json", function (s) {
+            gf.ajax(that.url, { paperids: cbox.join(":") }, "json", function (s) {
                 gf.layerMsg(s.msg);
                 window.datagrid.loadData();
             });

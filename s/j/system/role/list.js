@@ -103,7 +103,7 @@ function delRole() {
 	layer.confirm('是否删除？', function (index) {
 		var url = '/role/deleteEntity.shtml';
 		gf.ajax(url, {
-			ids: cbox.join(",")
+			ids: cbox.join(":")
 		}, "json");
 	});
 }
