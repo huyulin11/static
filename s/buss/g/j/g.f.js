@@ -340,7 +340,9 @@ class GF {
         gf.getMyRes(function (myRes) {
             $.each(btns, function (i, btn) {
                 if (!btn.resKey || myRes.filter(function (res) { return res.resKey == btn.resKey; }).length > 0) {
-                    $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${btn.hide ? "hidden" : ""}">${btn.name}</button> `);
+                    let style = `${btn.style ? "style='" + btn.style + "'" : ""}`;
+                    $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${btn.hide ? "hidden" : ""}" 
+                    ${style}>${btn.name}</button> `);
                     $(target).find(`#${btn.id}`).click("click", function () {
                         btn.bind();
                     });

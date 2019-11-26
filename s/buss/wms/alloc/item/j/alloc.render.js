@@ -2,6 +2,14 @@ import { render } from "/s/buss/wms/alloc/item/j/alloc.render.honfu.zhenmu.js";
 import "/s/buss/wms/alloc/item/j/alloc.event.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
+let tempBtns = [{
+    id: "back", name: "返回", class: "btn-info",
+    bind: function () {
+        window.history.back();
+    }, style: "min-height:21px;"
+}];
+gf.bindBtns("div.doc-buttons", tempBtns);
+
 export var initAlloc = function () {
     $(".black_overlay").show();
     $("table.alloc").html("");

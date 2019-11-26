@@ -3,6 +3,14 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 
+let tempBtns = [{
+	id: "back", name: "返回", class: "btn-info",
+	bind: function () {
+		window.history.back();
+	}
+}];
+gf.bindBtns("div.doc-buttons", tempBtns);
+
 let _type = gf.urlParam("type");
 let _columns = [{
 	colkey: "id",

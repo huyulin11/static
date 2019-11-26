@@ -60,6 +60,11 @@ $("#search").on("click", function () {
 	});
 });
 let tempBtns = [{
+	id: "back", name: "返回", class: "btn-info",
+	bind: function () {
+		window.history.back();
+	}
+}, {
 	url: `/shipment/main/startPcs.shtml`,
 	id: "startPcs", name: "上PCS", class: "btn-primary",
 	bind: function () {
