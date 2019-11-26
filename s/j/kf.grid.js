@@ -274,6 +274,7 @@ var dataGrid = function (params) {
 				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
 				for (let oneColumn of _columns) {
+					if (oneColumn.jsonColumn && rowdata && rowdata[oneColumn.jsonColumn]) jsonCol = JSON.parse(rowdata[oneColumn.jsonColumn]);
 					var td_o = tr.insertCell(-1);
 					var colkey = oneColumn.colkey;
 					td_o.setAttribute("style", defaultItemCss(oneColumn));
@@ -488,6 +489,7 @@ var dataGrid = function (params) {
 			$(chkbox).on("click", highlight);
 			td_d.appendChild(chkbox);
 			for (let oneColumn of _columns) {
+				if (oneColumn.jsonColumn && rowdata && rowdata[oneColumn.jsonColumn]) jsonCol = JSON.parse(rowdata[oneColumn.jsonColumn]);
 				var td_o = tr.insertCell(-1);
 				var colkey = oneColumn.colkey;
 				td_o.setAttribute("style", defaultItemCss(oneColumn));
@@ -567,6 +569,7 @@ var dataGrid = function (params) {
 					$(chkbox).on("click", highlight);
 					td_d.appendChild(chkbox);
 					for (let oneColumn of _columns) {
+						if (oneColumn.jsonColumn && rowdata && rowdata[oneColumn.jsonColumn]) jsonCol = JSON.parse(rowdata[oneColumn.jsonColumn]);
 						var td_o = tr.insertCell(-1);
 						var colkey = oneColumn.colkey;
 						td_o.setAttribute("style", defaultItemCss(oneColumn));

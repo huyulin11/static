@@ -75,6 +75,7 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "CRETATE_OPERATOR",
+		jsonColumn: "operator",
 		name: "导入人",
 	}, {
 		colkey: "updatetime",
