@@ -292,7 +292,7 @@ class PaperOp {
         var detailid = gf.checkOnlyOne("id");
         var item = gf.checkOnlyOne("item");
         if (!detailid || !item) { return; }
-        layer.prompt(function (val, index) {
+        layer.prompt({ title: "请输入需撤销的SU信息" }, function (val, index) {
             layer.close(index);
             if (item == val) {
                 layer.confirm(`是否${that.name}？`, function (index) {
