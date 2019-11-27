@@ -3,7 +3,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 var defaultSucFun = function (data) {
     if (typeof data == "string") data = JSON.parse(data);
     if (data.code >= 0) {
-        layer.msg("保存成功！");
+        gf.layerMsg(data.msg ? data.msg : "保存成功！");
         if (window.datagrid && window.datagrid.loadData) {
             window.datagrid.loadData();
         }
