@@ -6,7 +6,7 @@ let tempBtns = [{
     id: "back", name: "返回", class: "btn-info",
     bind: function () {
         window.history.back();
-    }, style: "min-height:25px;width:60px;"
+    }, style: "min-height:25px;width:60px;float:right;"
 }];
 gf.bindBtns("div.doc-buttons", tempBtns);
 
