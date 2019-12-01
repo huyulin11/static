@@ -88,16 +88,13 @@ var loadPage = function (tip) {
 }
 
 $("[data-tip]").on("click", function () {
-    $(this).parents("nav").find("li").removeClass("current");
-    $(this).parent("li").addClass("current");
     let that = this;
-    gf.doAjax({
-        url: "/checkLogin.shtml",
-        success: function () {
-            loadPage($(that).data("tip"));
-        }, error: function () {
-            window.location.href = "/s/buss/g/h/login.html";
-        }
+    gf.checkLogin(function () {
+        $(that).parents("nav").find("li").removeClass("current");
+        $(that).parent("li").addClass("current");
+        loadPage($(that).data("tip"));
+    }, function () {
+        window.location.href = "/s/buss/g/h/login.html";
     });
 });
 

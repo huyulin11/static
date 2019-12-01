@@ -446,6 +446,16 @@ class GF {
                 layer.closeAll();
             }
         });
+    };
+    checkLogin(yes, no) {
+        gf.doAjax({
+            url: "/checkLogin.shtml",
+            success: function () {
+                if (yes) { yes(); }
+            }, error: function () {
+                if (no) { no(); }
+            }
+        });
     }
 }
 
