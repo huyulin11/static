@@ -3,6 +3,10 @@ import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { initSetting } from "/s/buss/wms/rf/j/rf.picking.setting.js";
 
+gf.checkLoginError(function () {
+    window.location.href = "/s/buss/g/h/login.html";
+});
+
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
 let _warehouse = gf.urlParam("warehouse");

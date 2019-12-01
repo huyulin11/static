@@ -456,6 +456,12 @@ class GF {
                 if (no) { no(); }
             }
         });
+    };
+    checkLoginSuccess(yes) {
+        gf.checkLogin(yes, null);
+    };
+    checkLoginError(no) {
+        gf.checkLogin(null, no);
     }
 }
 

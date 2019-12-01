@@ -3,6 +3,10 @@ import { currentReceiptPaperid, setCurrentReceiptPaperid } from "/s/buss/wms/rf/
 import "/s/j/vue/vue.min.js";
 import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
 
+gf.checkLoginError(function () {
+    window.location.href = "/s/buss/g/h/login.html";
+});
+
 let container = "#rootContainer";
 let _paperid = gf.urlParam("paperid");
 let _alloc = gf.urlParam("alloc");
