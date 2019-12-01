@@ -34,7 +34,7 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "description",
-		name: "执行描述",
+		name: "备注",
 		align: "left",
 		hide: function () { return localStorage.projectKey == 'BJJK_HUIRUI'; }
 	}],

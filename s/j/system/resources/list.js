@@ -38,7 +38,7 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "description",
 		width: "100px",
-		name: "描述"
+		name: "备注"
 	}],
 	jsonUrl: '/resources/treelists.shtml',
 	checkbox: true,

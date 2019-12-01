@@ -24,7 +24,7 @@ window.datagrid = dataGrid({
 		// 	name: "角色键值"
 	}, {
 		colkey: "description",
-		name: "描述"
+		name: "备注"
 	}],
 	jsonUrl: '/role/findByPage.shtml',
 	checkbox: true

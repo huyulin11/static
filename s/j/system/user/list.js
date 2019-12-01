@@ -31,7 +31,7 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "description",
-		name: "描述"
+		name: "备注"
 	}, {
 		colkey: "createTime",
 		name: "时间",
@@ -42,7 +42,7 @@ window.datagrid = dataGrid({
 		name: "操作",
 		renderData: function (data, rowdata, rowindex, column) {
 			return "测试渲染函数";
-		}
+		}, hide: true
 	}],
 	jsonUrl: '/user/findByPage.shtml',
 	checkbox: true,
