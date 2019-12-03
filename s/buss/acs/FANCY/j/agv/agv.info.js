@@ -191,7 +191,7 @@ var deleverTaskLaoFoxconn = function (that) {
 	var indexOfTips = layer.confirm('请选择送货任务的目的地', {
 		btn: ['B04 1F', 'B04 2F', 'B04 3F', 'B07 3F', 'B08 2F', 'B08 3F'],
 		btn1: function () {
-			targetSite = 53;
+			targetSite = 56;
 			doTask(agvId, task, targetSite);
 		},
 		btn2: function () {
@@ -207,11 +207,11 @@ var deleverTaskLaoFoxconn = function (that) {
 			doTask(agvId, task, targetSite);
 		},
 		btn5: function () {
-			targetSite = 144;
+			targetSite = 145;
 			doTask(agvId, task, targetSite);
 		},
 		btn6: function () {
-			targetSite = 105;
+			targetSite = 106;
 			doTask(agvId, task, targetSite);
 		}
 	});
@@ -392,7 +392,7 @@ var gotoInitLaoFoxconn = function (that) {
 	var targetSite = 0;
 	var task = $(that).attr("id");
 	var indexOfTips = layer.confirm('请选择返回初始位置', {
-		btn: ['B05 1号', 'B05 2号', 'B05 3号', 'B05 4号'],
+		btn: ['B05 1号', 'B05 2号', 'B05 3号', 'B05 4号', 'B05 5号', 'B05 6号'],
 		btn1: function () {
 			targetSite = 162;
 			doTask(agvId, task, targetSite);
@@ -406,7 +406,15 @@ var gotoInitLaoFoxconn = function (that) {
 			doTask(agvId, task, targetSite);
 		},
 		btn4: function () {
-			targetSite = 172;
+			targetSite = 174;
+			doTask(agvId, task, targetSite);
+		},
+		btn5: function () {
+			targetSite = 175;
+			doTask(agvId, task, targetSite);
+		},
+		btn6: function () {
+			targetSite = 176;
 			doTask(agvId, task, targetSite);
 		}
 	});
