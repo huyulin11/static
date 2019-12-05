@@ -336,12 +336,17 @@ class GF {
         }
         return dataStr;
     };
+    yesOrNo(key) {
+        if (typeof key == "boolean") return key;
+        if (typeof key == "function") return key();
+        return "";
+    };
     bindBtns(target, btns) {
         gf.getMyRes(function (myRes) {
             $.each(btns, function (i, btn) {
                 if (!btn.resKey || myRes.filter(function (res) { return res.resKey == btn.resKey; }).length > 0) {
                     let style = `${btn.style ? "style='" + btn.style + "'" : ""}`;
-                    $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${btn.hide ? "hidden" : ""}" 
+                    $(target).append(`<button type="button" id="${btn.id}" class="btn marR10 ${btn.class} ${gf.yesOrNo(btn.hide) ? "hidden" : ""}" 
                     ${style}>${btn.name}</button> `);
                     $(target).find(`#${btn.id}`).click("click", function () {
                         btn.bind();

@@ -3,7 +3,7 @@ import "/s/buss/wms/alloc/item/j/alloc.event.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
 let tempBtns = [{
-    id: "back", name: "返回", class: "btn-info", hide: function () { return !localStorage.projectKey == 'BJJK_HUIRUI'; },
+    id: "back", name: "返回", class: "btn-info", hide: function () { return localStorage.projectKey != 'BJJK_HUIRUI'; },
     bind: function () {
         window.history.back();
     }, style: "min-height:25px;width:60px;float:right;"
