@@ -97,9 +97,7 @@ var name = function (oneColumn) {
 }
 
 var hide = function (oneColumn) {
-	if (typeof oneColumn.hide == "boolean") return oneColumn.hide;
-	if (typeof oneColumn.hide == "function") return oneColumn.hide();
-	return "";
+	return gf.yesOrNo(oneColumn.hide);
 }
 
 var _fieldModel = {
