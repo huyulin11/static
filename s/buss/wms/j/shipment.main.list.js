@@ -20,7 +20,8 @@ let params = {
 		name: "单号"
 	}, {
 		colkey: "orderid",
-		name: "订单"
+		name: "订单",
+		hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; }
 	}, {
 		colkey: "warehouse",
 		name: "仓库",
@@ -30,7 +31,8 @@ let params = {
 		}
 	}, {
 		colkey: "company",
-		name: "转移单"
+		name: "转移单",
+		hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; }
 	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {
