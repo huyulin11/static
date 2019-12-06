@@ -243,7 +243,7 @@ var gotoInitHandler = function (that) {
 		gotoInitLaoDbwy(that);
 	} else {
 		if (!confirm('是否确认执行该操作?')) { return; }
-		layer.msg(taskexe.addCtrlTask(agvId, $(this).attr("id")));
+		layer.msg(taskexe.addCtrlTask(agvId, $(that).attr("id")));
 	}
 }
 
@@ -358,11 +358,11 @@ var gotoPackHandler = function () {
 export var init = function (target) {
 	_target = target;
 	$("html").delegate("div[id='targets'] button", "click", function () {
-		var that = $(this);
-		if (that.hasClass("choosed")) {
-			that.removeClass("choosed");
+		var that = this;
+		if ($(that).hasClass("choosed")) {
+			$(that).removeClass("choosed");
 		} else {
-			that.addClass("choosed");
+			$(that).addClass("choosed");
 		}
 	});
 
