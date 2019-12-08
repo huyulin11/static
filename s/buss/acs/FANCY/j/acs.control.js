@@ -139,20 +139,20 @@ var init = function () {
 		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");
 	});
 
-	var agvsHideDivTipsTimes = localStorage.agvsHideDivTipsTimes;
-	if (!agvsHideDivTipsTimes || agvsHideDivTipsTimes == 'NaN') {
-		layer.tips('从此处切换AGV视图或查看所有AGV状态', '#agvsHideDiv', {
-			tips: [1, '#3595CC'],
-			time: 4000
-		});
-		localStorage.setItem("agvsHideDivTipsTimes", 1);
-	} else if (agvsHideDivTipsTimes < 10) {
-		layer.tips('从此处切换AGV视图或查看所有AGV状态', '#agvsHideDiv', {
-			tips: [1, '#3595CC'],
-			time: 4000
-		});
-		localStorage.setItem("agvsHideDivTipsTimes", 1 + parseInt(localStorage.agvsHideDivTipsTimes));
-	}
+	// var agvsHideDivTipsTimes = localStorage.agvsHideDivTipsTimes;
+	// if (!agvsHideDivTipsTimes || agvsHideDivTipsTimes == 'NaN') {
+	// 	layer.tips('从此处切换AGV视图或查看所有AGV状态', '#agvsHideDiv', {
+	// 		tips: [1, '#3595CC'],
+	// 		time: 4000
+	// 	});
+	// 	localStorage.setItem("agvsHideDivTipsTimes", 1);
+	// } else if (agvsHideDivTipsTimes < 10) {
+	// 	layer.tips('从此处切换AGV视图或查看所有AGV状态', '#agvsHideDiv', {
+	// 		tips: [1, '#3595CC'],
+	// 		time: 4000
+	// 	});
+	// 	localStorage.setItem("agvsHideDivTipsTimes", 1 + parseInt(localStorage.agvsHideDivTipsTimes));
+	// }
 	//$("div#robotic").load("/s/buss/acs/h/lap.html");
 
 
