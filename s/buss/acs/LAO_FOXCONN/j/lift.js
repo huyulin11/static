@@ -11,12 +11,12 @@ var doInit = function () {
             for (var a of data) {
                 var trs = "";
                 trs = trs + "<tr><td><button id='close' data-devid='" + a.id + "'>关门</button></td></tr>";
-                trs = trs + "<tr><td><button id='layer1' data-devid='" + a.id + "'>到一楼开门</button></td></tr>";
-                trs = trs + "<tr><td><button id='layer2' data-devid='" + a.id + "'>到二楼开门</button></td></tr>";
-                trs = trs + "<tr><td><button id='layer3' data-devid='" + a.id + "'>到三楼开门</button></td></tr>";
+                trs = trs + "<tr><td><button id='layer1' data-devid='" + a.id + "'>一楼开门</button></td></tr>";
+                trs = trs + "<tr><td><button id='layer2' data-devid='" + a.id + "'>二楼开门</button></td></tr>";
+                trs = trs + "<tr><td><button id='layer3' data-devid='" + a.id + "'>三楼开门</button></td></tr>";
                 trs = trs + "<tr><td><button id='search' data-devid='" + a.id + "'>询问</button></td></tr>";
                 trs = "<table>" + trs + "</table>";
-                trs = "<fieldset><legend>" + a.id + "-" + a.name + "-" + a.ip + "<br/>" + a.info + "</legend>" + trs + "</fieldset>";
+                trs = "<fieldset><legend>" + a.name + "<br/>" + a.info + "</legend>" + trs + "</fieldset>";
                 tables += "<td>" + trs + "</td>";
             }
             container().append("<table><tr>" + tables + "</tr></table>");
