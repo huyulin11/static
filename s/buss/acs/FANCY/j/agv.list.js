@@ -60,9 +60,15 @@ var openAGVMGR = function (tmpAgvId, layerName) {
     }
 }
 
+var checkLogin = function () {
+    gf.checkLogin();
+}
+
 var init = function () {
     getAgvList();
     intervalVal = setInterval(getAgvList, 3000);
+    if (localStorage.projectKey == 'TAIKAI_JY')
+        setInterval(checkLogin, 5 * 60 * 1000);
 
     var currentAgvId = localStorage.currentAgvId;
     if (currentAgvId) {
