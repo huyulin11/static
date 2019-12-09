@@ -6,6 +6,7 @@ import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 var _container = "#frames";
+var _menuContainer = "#menuContainer";
 let _seq = 0;
 let _num = 3;
 
@@ -87,17 +88,6 @@ var loadPage = function (tip) {
     if (localStorage.remember) localStorage.index = sn;
 }
 
-$("[data-tip]").on("click", function () {
-    let that = this;
-    gf.checkLogin(function () {
-        $(that).parents("nav").find("li").removeClass("current");
-        $(that).parent("li").addClass("current");
-        loadPage($(that).data("tip"));
-    }, function () {
-        window.location.href = "/s/buss/g/h/login.html";
-    });
-});
-
 $("a#editUI").on("click", function () {
     window.pageii = layer.open({
         title: "编辑",
@@ -112,3 +102,58 @@ localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", 
 gv.init();
 $("body").fadeIn();
 loadPage(localStorage.index ? localStorage.index : "首页,首页,/s/buss/g/h/welcome.html");
+
+gf.doAjax({
+    url: "/resources/menuTree.shtml",
+    success: function (data) {
+        data = JSON.parse(data);
+        for (let index = 0; index < data.length; index++) {
+            let key = data[index];
+            let tip = `${key.name},${key.name},${key.resUrl}?id=${key.id},${key.openType}`;
+
+            let tagLi = $("<li></li>");
+            if (index == 0) { tagLi.addClass("active"); }
+            let tagA = $("<a></a>");
+            if (index == 0) { tagA.addClass("active"); }
+            let ul = $('<ul class="nav lt"></ul>');
+            if (key.children && key.children.length > 0) {
+                let info = $("<i class='fa icon'></i>");
+                if (index == 0) { info.addClass("bg-danger"); }
+                else if (index == 1) { info.addClass("bg-warning"); }
+                else if (index == 2) { info.addClass("bg-primary"); }
+                else if (index == 3) { info.addClass("bg-info"); }
+                else if (index == 4) { info.addClass("bg-success"); }
+                $(tagA).append(info);
+                $(tagA).append(`<span class="pull-right"> <i class="fa fa-angle-down text"></i>
+                    <i class="fa fa-angle-up text-active"></i></span>`);
+
+                for (let child of key.children) {
+                    tip = `${key.name},${child.name},${child.resUrl}?id=${child.id},${child.openType}`;
+                    $(ul).append(`<li class="active"><a class="active"
+                        data-tip="${tip}"><i class="fa fa-angle-right"></i> 
+                        <span>${child.name}</span></a></li>`);
+                }
+            } else {
+                $(tagA).data("tip", tip);
+            }
+            $(tagA).append(`<span>${key.name}</span>`);
+            $(tagLi).append(tagA);
+            $(tagLi).append(ul);
+            $(_menuContainer).append(tagLi);
+        }
+
+        $(_menuContainer).delegate("a", "click", function () {
+            let that = this;
+            if (!$(that).data("tip")) { return; }
+            gf.checkLogin(function () {
+                $(that).parents("nav").find("li").removeClass("current");
+                $(that).parent("li").addClass("current");
+                loadPage($(that).data("tip"));
+            }, function () {
+                window.location.href = "/s/buss/g/h/login.html";
+            });
+        });
+    }, error: function () {
+        alert("获取菜单资源失败！");
+    }
+});
