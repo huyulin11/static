@@ -5,6 +5,11 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
+gf.checkLoginError(function () {
+    window.location.href = "/s/buss/g/h/login.html";
+});
+gf.currentUser(function (data) { $("#currentUser").html(data) });
+
 var _container = "#frames";
 var _menuContainer = "#menuContainer";
 let _seq = 0;
@@ -154,6 +159,6 @@ gf.doAjax({
             });
         });
     }, error: function () {
-        alert("获取菜单资源失败！");
+        window.location.href = "/s/buss/g/h/login.html";
     }
 });

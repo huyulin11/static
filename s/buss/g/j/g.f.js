@@ -127,7 +127,8 @@ class GF {
     doAjax(params) {
         var pp = {
             error: defaultErr,
-            success: defaultSucFun
+            success: defaultSucFun,
+            timeout: 3000
         };
         $.extend(pp, params);
         $.ajax(pp);
@@ -135,7 +136,8 @@ class GF {
     doAjaxSubmit(form, params) {
         var pp = {
             error: defaultErr,
-            success: defaultSucFun
+            success: defaultSucFun,
+            timeout: 3000
         };
         $.extend(pp, params);
         $(form).ajaxSubmit(pp);
@@ -455,6 +457,7 @@ class GF {
     checkLogin(yes, no) {
         gf.doAjax({
             url: "/checkLogin.shtml",
+            timeout: 1000,
             success: function () {
                 if (yes) { yes(); }
             }, error: function () {
@@ -467,7 +470,31 @@ class GF {
     };
     checkLoginError(no) {
         gf.checkLogin(null, no);
-    }
+    };
+    currentRole(callback) {
+        var role = '';
+        jQuery.ajax({
+            url: "/getRole.shtml",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                callback(data);
+            }
+        });
+        return role;
+    };
+    currentUser(callback) {
+        var role = '';
+        jQuery.ajax({
+            url: "/currentUser.shtml",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                callback(data);
+            }
+        });
+        return role;
+    };
 }
 
 var gf = new GF();

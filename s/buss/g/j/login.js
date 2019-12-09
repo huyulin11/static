@@ -15,7 +15,7 @@ var login = function () {
                 if (!gf.isPc() && localStorage.projectKey == "BJJK_HUIRUI") {
                     location.assign("/s/buss/wms/rf/h/rf.mgr.html");
                 } else {
-                    location.assign("/manager.shtml");
+                    location.assign("/s/buss/g/h/manager.html");
                 }
             } else {
                 layer.msg(data.msg);

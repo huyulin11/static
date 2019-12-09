@@ -29,7 +29,7 @@ var init = function () {
 		alert(taskexe.addCtrlTask(0, "PAUSE_USER"));
 	});
 	container().delegate("button#manager", "click", function () {
-		window.open('/manager.shtml');
+		window.open('/s/buss/g/h/manager.html');
 	});
 	container().delegate("button#CONTINUE", "click", function () {
 		alert(taskexe.addCtrlTask(0, "CONTINUE"));

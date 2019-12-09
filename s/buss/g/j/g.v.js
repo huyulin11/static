@@ -75,20 +75,6 @@ class GV {
 		return o;
 	};
 
-	getCurrentRole() {
-		var role = '';
-		jQuery.ajax({
-			url: "/getRole.shtml",
-			type: "post",
-			dataType: "json",
-			async: false,
-			success: function (data) {
-				role = data;
-			}
-		});
-		return role;
-	};
-
 	getRes(key) {
 		if (!this._res) { this._res = jQuery.parseJSON(localStorage.res); }
 		var o = this._res.find((v) => { return v.id == key });
