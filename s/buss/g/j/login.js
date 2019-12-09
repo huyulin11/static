@@ -29,6 +29,14 @@ var vm = new Vue({
     el: "#loginbox",
     created: function () {
         console.log('App is power by: ' + this.shortname);
+        switch (localStorage.projectKey) {
+            case "BJJK_HUIRUI":
+                $("title").html("MFA");
+                break;
+            default:
+                $("title").html("AGV调度系统");
+                break;
+        }
     },
     mounted: function () {
         console.log('App is power by: ' + this.shortname);
