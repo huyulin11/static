@@ -37,6 +37,7 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "skuId",
 		name: "货物种类",
+		hide: function () { return localStorage.projectKey == 'BJJK_HUIRUI'; },
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
 				return "--";
