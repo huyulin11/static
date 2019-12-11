@@ -1,4 +1,6 @@
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
+import { agvNum } from "/s/buss/acs/FANCY/j/agv.list.js";
+
 var numInLine = 1;
 
 var getShowVal = function (agvinfo) {
@@ -137,8 +139,8 @@ var getShowVal = function (agvinfo) {
 }
 
 export var renderList = function (agvs, agvDiv) {
-    var dl = agvs.length;
-    var numOfRow = dl >= numInLine ? numInLine : dl;
+    if (agvNum >= 6) numInLine = 3;
+    var numOfRow = agvNum >= numInLine ? numInLine : agvNum;
     $.each(agvs, function (n, agvinfo) {
         renderOne(numOfRow, agvinfo, agvDiv);
     });

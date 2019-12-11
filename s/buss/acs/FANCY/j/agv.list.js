@@ -4,14 +4,15 @@ import { gf } from "/s/buss/g/j/g.f.js";
 
 var reloadFlag = 0;
 var intervalVal;
+export var agvNum = 0;
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
-        $("#rootContainer").prepend(`<div id='agvDiv' class='fixed'>
-                <fieldset><legend>运输工具</legend>
-                <div id='agvDiv' class='withBorder'>
-                </div></fieldset></div>`);
+        let agvDiv = $(`<div id='agvDiv' class='fixed'><fieldset><legend>运输工具</legend>
+        <div id='agvDiv' class='withBorder'></div></fieldset></div>`);
+        $("#rootContainer").prepend(agvDiv);
     }
+    if (agvNum >= 2) { $("div#agvDiv").addClass("big"); }
     return $("div#agvDiv");
 }
 
@@ -35,6 +36,7 @@ var getAgvList = function () {
 
 var whenSuccess = function (data) {
     overlay.show();
+    agvNum = data.length;
     doWhenSuccess(data);
 }
 

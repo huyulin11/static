@@ -207,6 +207,14 @@ input.bigSearch {
 	border-radius: 10px;
 }
 
+.fixed.big {
+	width: 95%;
+}
+
+.fixed.big td {
+	font-size: 12px;
+}
+
 #liftContainer {
 	width: 98%;
 }
@@ -226,6 +234,10 @@ input.bigSearch {
 
 	.fixed {
 		width: 300px;
+	}
+
+	.fixed.big {
+		width: 600px;
 	}
 
 	#settingContainer {
