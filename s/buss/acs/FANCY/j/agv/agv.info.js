@@ -138,14 +138,14 @@ var transportHandler = function (that) {
 	doTask(agvId, $(that).attr("id"), targetSite);
 }
 
-var fetchHandler = function (that) {
+var fetchTaskTaikaiJy = function (that) {
 	allDisabled();
 	var agvbusstype = findIotInfo(agvId, "agvbusstype");
 	if (agvbusstype == 'TON_1') {
 		layer.msg("小车不支持取料任务");
 	} else if (agvbusstype == 'TON_2') {
 		var task = $(that).attr("id");
-		var indexOfTips = layer.confirm('请选择送货任务的目的地', {
+		var indexOfTips = layer.confirm('请选择取货任务的目的地', {
 			btn: ['22号 (呼叫1)', '21号 (呼叫2)', '20号 (呼叫3)', '19号 (呼叫4)', '18号 (呼叫5)', '17号 (呼叫6)'],
 			btn1: function () { doTask(agvId, task, 83); },
 			btn2: function () { doTask(agvId, task, 84); },
@@ -187,6 +187,18 @@ var deleverTaskTaikaiJy = function () {
 	});
 }
 
+var fetchTaskLaoFoxconn = function (that) {
+	var task = $(that).attr("id");
+	var indexOfTips = layer.confirm('请选择取货任务的发料处', {
+		btn: ['B05 1号', 'B05 2号', 'B05 3号', 'B05 4号', 'B05 5号'],
+		btn1: function () { doTask(agvId, task, 162); },
+		btn2: function () { doTask(agvId, task, 28); },
+		btn3: function () { doTask(agvId, task, 158); },
+		btn4: function () { doTask(agvId, task, 175); },
+		btn5: function () { doTask(agvId, task, 176); }
+	});
+}
+
 var deleverTaskLaoFoxconn = function (that) {
 	var task = $(that).attr("id");
 	var indexOfTips = layer.confirm('请选择送货任务的目的地', {
@@ -200,30 +212,13 @@ var deleverTaskLaoFoxconn = function (that) {
 	});
 }
 
-var gotoInitLaoFoxconn = function (that) {
-	var task = $(that).attr("id");
-	var indexOfTips = layer.confirm('请选择返回初始位置', {
-		btn: ['B05 1号', 'B05 2号', 'B05 3号', 'B05 4号', 'B05 5号', 'B05 6号'],
-		btn1: function () { doTask(agvId, task, 162); },
-		btn2: function () { doTask(agvId, task, 28); },
-		btn3: function () { doTask(agvId, task, 158); },
-		btn4: function () { doTask(agvId, task, 174); },
-		btn5: function () { doTask(agvId, task, 175); },
-		btn6: function () { doTask(agvId, task, 176); }
-	});
-}
-
-var gotoInitLaoDbwy = function () {
-	var task = "TRANSPORT";
-	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
-		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056', '原料库4号-3057', '原料库5号-3058', '原料库6号-3059'],
-		btn1: function () { doTask(agvId, task, 3054); },
-		btn2: function () { doTask(agvId, task, 3055); },
-		btn3: function () { doTask(agvId, task, 3056); },
-		btn4: function () { doTask(agvId, task, 3057); },
-		btn5: function () { doTask(agvId, task, 3058); },
-		btn6: function () { doTask(agvId, task, 3059); }
-	});
+var fetchHandler = function (that) {
+	allDisabled();
+	if (localStorage.projectKey == 'TAIKAI_JY') {
+		fetchTaskTaikaiJy(that);
+	} else if (localStorage.projectKey == 'LAO_FOXCONN') {
+		fetchTaskLaoFoxconn(that);
+	}
 }
 
 var deliverHandler = function (that) {
@@ -237,14 +232,25 @@ var deliverHandler = function (that) {
 
 var gotoInitHandler = function (that) {
 	allDisabled();
-	if (localStorage.projectKey == 'LAO_FOXCONN') {
-		gotoInitLaoFoxconn(that);
-	} else if (localStorage.projectKey == 'LAO_DBWY') {
+	if (localStorage.projectKey == 'LAO_DBWY') {
 		gotoInitLaoDbwy(that);
 	} else {
 		if (!confirm('是否确认执行该操作?')) { return; }
 		layer.msg(taskexe.addCtrlTask(agvId, $(that).attr("id")));
 	}
+}
+
+var gotoInitLaoDbwy = function () {
+	var task = "TRANSPORT";
+	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
+		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056', '原料库4号-3057', '原料库5号-3058', '原料库6号-3059'],
+		btn1: function () { doTask(agvId, task, 3054); },
+		btn2: function () { doTask(agvId, task, 3055); },
+		btn3: function () { doTask(agvId, task, 3056); },
+		btn4: function () { doTask(agvId, task, 3057); },
+		btn5: function () { doTask(agvId, task, 3058); },
+		btn6: function () { doTask(agvId, task, 3059); }
+	});
 }
 
 var deleverInitHandler = function () {
