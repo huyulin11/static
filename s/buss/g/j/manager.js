@@ -112,7 +112,12 @@ gf.doAjax({
     url: "/resources/menuTree.shtml",
     datatype: "JSON",
     success: function (data) {
-        data = JSON.parse(data);
+        try {
+            data = JSON.parse(data);
+        } catch (error) {
+            window.location.href = "/s/buss/g/h/login.html";
+            return;
+        }
         for (let index = 0; index < data.length; index++) {
             let key = data[index];
             let tip = `${key.name},${key.name},${key.resUrl}?id=${key.id},${key.openType}`;
