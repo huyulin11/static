@@ -110,6 +110,7 @@ loadPage(localStorage.index ? localStorage.index : "首页,首页,/s/buss/g/h/we
 
 gf.doAjax({
     url: "/resources/menuTree.shtml",
+    datatype: "JSON",
     success: function (data) {
         data = JSON.parse(data);
         for (let index = 0; index < data.length; index++) {
