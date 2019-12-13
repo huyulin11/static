@@ -12,7 +12,7 @@ var agvDiv = function () {
         <div id='agvDiv' class='withBorder'></div></fieldset></div>`);
         $("#rootContainer").prepend(agvDiv);
     }
-    if (agvNum >= 2) { $("div#agvDiv").addClass("big"); }
+    if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     return $("div#agvDiv");
 }
 
