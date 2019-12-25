@@ -99,7 +99,7 @@ var initPaperOp = function (tasktype, optype) {
                 } else if (optype == "PICKED") {
                     tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
                 } else if (optype == "PICKED_COLD") {
-                    tempBtns = [btns.refresh, btns.back, btns.callAgv, btns.backAgv, btns.deleteSure,];
+                    tempBtns = [btns.refresh, btns.back, btns.callShipmentFromCold, btns.backShipmentToCold, btns.deleteSure,];
                 } else if (optype == "PICKED_NORMAL") {
                     tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
                 } else if (optype == "COMBINE") {

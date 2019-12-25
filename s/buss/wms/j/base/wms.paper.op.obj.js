@@ -80,15 +80,15 @@ var initBtns = function () {
         bind: function () {
             window.datagrid.loadData();
         },
-    }; btns.callAgv = {
-        url: `/agv/huirui/callAgv.shtml`,
-        id: "callAgv", name: "呼叫AGV", class: "btn-info",
+    }; btns.callShipmentFromCold = {
+        url: `/agv/huirui/callShipmentFromCold.shtml`,
+        id: "callShipmentFromCold", name: "呼叫AGV", class: "btn-info",
         bind: function () {
             gf.ajax(this.url, { key: null }, "json");
         },
-    }; btns.backAgv = {
-        url: `/agv/huirui/backAgv.shtml`,
-        id: "backAgv", name: "AGV返库", class: "btn-info",
+    }; btns.backShipmentToCold = {
+        url: `/agv/huirui/backShipmentToCold.shtml`,
+        id: "backShipmentToCold", name: "AGV返库", class: "btn-info",
         bind: function () {
             gf.ajax(this.url, { key: null }, "json");
         },

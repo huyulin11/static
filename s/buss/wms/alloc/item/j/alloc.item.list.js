@@ -129,7 +129,7 @@ function del() {
 
 var dealSheet = function (sheet) {
 	let _paper = {};
-	let index = 50;
+	let index = 500;
 	for (let i = 2; i > 0; i++) {
 		if (i > index + 12) {
 			alert("单次最多仅能导入" + index + "条明细！");
