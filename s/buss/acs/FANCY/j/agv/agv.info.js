@@ -36,7 +36,10 @@ var getButtonsHtml = (targets) => {
 		if (typeof (target) == "number" || typeof (target) == "string") {
 			tmpItemStr = `<td><button data-id='${target}'>${target}</button></td>`;
 		} else {
-			tmpItemStr = `<td><button data-id='${target.id}'>${target.name}-${target.id}</button></td>`;
+			if (target.name)
+				tmpItemStr = `<td><button id=button data-id='${target.id}'>${target.name}-${target.id}</button></td>`;
+			else
+				tmpItemStr = `<td><button id=button data-id='${target.id}'>${target.id}</button></td>`;
 		}
 		tmpStr = tmpStr + tmpItemStr;
 		if (index >= numInLine) {
@@ -257,11 +260,12 @@ var deleverInitHandler = function () {
 	allDisabled();
 	var targets = [];
 	for (var i = 3012; i <= 3053; i++) {
-		targets.push({ id: i, name: i - 3011 + "号" });
+		targets.push({ id: i });
 	}
 	var buttons = getButtonsHtml(targets);
 	var indexOfTips = layer.confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
 		btn: ['确定送料'],
+		area: '386px',
 		btn1: function () {
 			var arr = getTargets();
 			if (!arr || arr.length == 0) {
@@ -317,11 +321,12 @@ var gotoStereotypeHandler = function () {
 	var targets = [];
 	for (var i = 2006; i <= 2053; i++) {
 		if (i == 2042) continue;
-		targets.push({ id: i, name: i - 2005 + "号" });
+		targets.push({ id: i });
 	}
 	var buttons = getButtonsHtml(targets);
 	var indexOfTips = layer.confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
 		btn: ['确定前往'],
+		area: '386px',
 		btn1: function () {
 			var arr = getTargets();
 			if (!arr || arr.length == 0) {
@@ -341,11 +346,12 @@ var gotoPackHandler = function () {
 	allDisabled();
 	var targets = [];
 	for (var i = 2062; i <= 2107; i++) {
-		targets.push({ id: i, name: i - 2061 + "号" });
+		targets.push({ id: i });
 	}
 	var buttons = getButtonsHtml(targets);
 	var indexOfTips = layer.confirm('请选择前往包装暂存区的目的地' + '<br/>' + buttons, {
 		btn: ['确定前往'],
+		area: '386px',
 		btn1: function () {
 			var arr = getTargets();
 			if (!arr || arr.length == 0) {
