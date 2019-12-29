@@ -457,7 +457,7 @@ class GF {
     checkLogin(yes, no) {
         gf.doAjax({
             url: "/checkLogin.shtml",
-            timeout: 1000,
+            timeout: 2000,
             success: function () {
                 if (yes) { yes(); }
             }, error: function () {
