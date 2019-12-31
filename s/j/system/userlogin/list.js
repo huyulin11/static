@@ -26,9 +26,19 @@ window.datagrid = dataGrid({
 	jsonUrl: '/userlogin/findByPage.shtml',
 	checkbox: true
 });
-$("#searchForm").click("click", function () {
-	var searchParams = $("#searchForm").serializeObject();
+
+let doSearch = function () {
+	var searchParams = $("#searchForm").serialize();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
+}
+
+$("#search").on("click", function () {
+	doSearch();
+});
+
+$("#searchForm").on("submit", function () {
+	doSearch();
+	return false;
 });
