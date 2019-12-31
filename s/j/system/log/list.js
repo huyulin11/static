@@ -9,7 +9,6 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "accountName",
 		name: "账号",
-		hide: true
 	}, {
 		colkey: "userName",
 		name: "用户名"
