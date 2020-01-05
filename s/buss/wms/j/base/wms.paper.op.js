@@ -110,9 +110,8 @@ var initPaperOp = function (tasktype, optype) {
             } else if (_tasktype == "receipt") {
                 tempBtns = [btns.detail, btns.send, btns.del, btns.over, btns.refresh, btns.whichOne,];
                 tempBtns = tempBtns.concat(btns.execute);
-                tempBtns = tempBtns.concat(btns.receiptColdMore);
             } else if (_tasktype == "transfer") {
-                tempBtns = [btns.detail, btns.send, btns.over, btns.refresh,];
+                tempBtns = [btns.detail, btns.send, btns.refresh,];
                 tempBtns = tempBtns.concat(btns.deleteSub);
                 // tempBtns = tempBtns.concat(btns[`combine`]);
                 // tempBtns = tempBtns.concat(btns[`pick`]);

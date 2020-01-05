@@ -458,8 +458,14 @@ class GF {
         gf.doAjax({
             url: "/checkLogin.shtml",
             timeout: 2000,
-            success: function () {
-                if (yes) { yes(); }
+            dataType: "JSON",
+            success: function (json) {
+                if (json) {
+                    if (json.success) { if (yes) { yes(); } }
+                    else { if (no) { no(); } }
+                } else {
+                    if (yes) { yes(); }
+                }
             }, error: function () {
                 if (no) { no(); }
             }
