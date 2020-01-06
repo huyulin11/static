@@ -1,4 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+
+renderAll();
 
 jQuery.validator.addMethod("checkacc", function (value, element) {
 	return this.optional(element)

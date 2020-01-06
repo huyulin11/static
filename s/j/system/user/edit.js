@@ -1,5 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 
+renderAll();
 $("form").validate({
 	submitHandler: function (form) {// 必须写在验证前面，否则无法ajax提交
 		gf.doAjaxSubmit(form, {// 验证新增是否成功
