@@ -40,7 +40,7 @@ $("html").delegate("button.clr", "click", function () {
     });
 });
 
-if (['HONGFU_ZHENMU', 'BJJK_HUIRUI'].includes(localStorage.projectKey)) {
+if (['HONGFU_ZHENMU', "CSY_CDBP", 'BJJK_HUIRUI'].includes(localStorage.projectKey)) {
     $("html").delegate("button.doChange", "click", function () {
         allocOp(this);
     });
@@ -48,7 +48,11 @@ if (['HONGFU_ZHENMU', 'BJJK_HUIRUI'].includes(localStorage.projectKey)) {
     $("table.alloc").delegate("button", "click", function () {
         switch (localStorage.projectKey) {
             case "HONGFU_ZHENMU": {
-                doAllocOpHonffu(this);
+                doAllocOpHongfu(this);
+                return;
+            }
+            case "CSY_CDBP": {
+                doAllocOpHongfu(this);
                 return;
             }
             case "BJJK_HUIRUI": {
@@ -79,7 +83,7 @@ $("html").delegate("button.doTask", "click", function () {
     }
 });
 
-var doAllocOpHonffu = function (that) {
+var doAllocOpHongfu = function (that) {
     var singletasks = getSingleTask($(that).data("id"));
     var num = $(that).data("num");
     if (!num) { num = 0; }
