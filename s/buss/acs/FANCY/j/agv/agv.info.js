@@ -10,7 +10,11 @@ var currentTask = new Array();
 var _target;
 
 var doTask = (agvId, task, targetSite) => {
-	if (!targetSite || (isNaN(Number(targetSite)) && isNaN(Number(targetSite.replace(/#/g, ""))))) {
+	let checkSite = function () {
+		if (localStorage.projectKey == "CSY_CDBP") { return false; }
+		return (isNaN(Number(targetSite)) && isNaN(Number(targetSite.replace(/#/g, ""))));
+	}
+	if (!targetSite || checkSite()) {
 		layer.msg("请输入有效的目标站点编号！");
 		return;
 	}
