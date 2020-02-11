@@ -14,6 +14,8 @@ var container = function () {
 			$("#topCtrlContainer").prepend("<div id='windowCenterHideDiv' class='close hideToggle' data-target='div#windowCenterContainer'></div>");
 			$("#topCtrlContainer").prepend("<div id='windowHideDiv' class='close hideToggle' data-target='div#windowContainer'></div>");
 			$("#topCtrlContainer").prepend("<div id='wmsHideDiv' class='close hideToggle' data-target='div#wmsContainer'></div>");
+		} else if (localStorage.projectKey == 'CSY_CDBP') {
+			$("#topCtrlContainer").prepend("<div id='wmsHideDiv' class='close hideToggle' data-target='div#wmsContainer'></div>");
 		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
 		}
 	}
