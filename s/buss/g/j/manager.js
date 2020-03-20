@@ -93,6 +93,8 @@ var loadPage = function (tip) {
     if (localStorage.remember) localStorage.index = sn;
 }
 
+gf.loadPage = loadPage;
+
 $("a#editUI").on("click", function () {
     window.pageii = layer.open({
         title: "编辑",
