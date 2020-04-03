@@ -58,7 +58,14 @@ var vm = new Vue({
             if (times == "0") {
                 deadline = "永久";
             } else {
-                deadline = new Date(0 + Number(times)).toLocaleDateString() + "(测试授权)";
+                let deadtime = new Date(0 + Number(times));
+                let leftDays = (deadtime - new Date()) / (24 * 3600 * 1000);
+                if (leftDays >= 0 && leftDays < 7) {
+                    layer.msg("授权日期不足七天，请提前与技术提供商联系，防止授权到期影响您的使用！");
+                } else if (leftDays < 0) {
+                    layer.msg("当前授权已过期！");
+                }
+                deadline = deadtime.toLocaleDateString() + "(测试授权)";
             }
             this.expireTime = "授权有效期至:" + deadline;
         }
