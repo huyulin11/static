@@ -1,7 +1,8 @@
 import "/s/j/vue/vue.min.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gp } from "/s/buss/g/j/g.p.js";
 
-var data = { shortname: "凯钒科技" }
+var data = { shortname: "凯钒科技", expireTime: "" }
 var login = function () {
     $("#loginform").ajaxSubmit({
         type: "post",
@@ -24,10 +25,12 @@ var login = function () {
         }
     });
 };
+
 var vm = new Vue({
     data: data,
     el: "#loginbox",
     created: function () {
+        this.calExpireTime();
         console.log('App is power by: ' + this.shortname);
         switch (localStorage.projectKey) {
             case "BJJK_HUIRUI":
@@ -48,21 +51,21 @@ var vm = new Vue({
         },
         doLogin: function () {
             login();
-        }
-    },
-    computed: {
-        powerInfo: function () {
-            return "power by" + this.shortname;
         },
-        expireTime: function () {
-            var times = localStorage.expireTime;
+        calExpireTime: function () {
+            var times = gp.expireTime;
             var deadline;
             if (times == "0") {
                 deadline = "永久";
             } else {
                 deadline = new Date(0 + Number(times)).toLocaleDateString() + "(测试授权)";
             }
-            return "授权有效期至:" + deadline;
+            this.expireTime = "授权有效期至:" + deadline;
         }
+    },
+    computed: {
+        powerInfo: function () {
+            return "power by" + this.shortname;
+        },
     }
 });
