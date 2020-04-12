@@ -64,30 +64,6 @@ let tempBtns = [{
 	bind: function () {
 		window.history.back();
 	}
-	// }, {
-	// 	url: `/shipment/main/startPcs.shtml`,
-	// 	id: "startPcs", name: "上PCS", class: "btn-primary",
-	// 	bind: function () {
-	// 		var cbox = gf.checkOnlyOne("key");
-	// 		if (!cbox) { return; }
-	// 		gf.ajax(this.url, { tu: cbox }, "json");
-	// 	},
-	// }, {
-	// 	url: `/shipment/main/overPcs.shtml`,
-	// 	id: "overPcs", name: "出PCS", class: "btn-primary",
-	// 	bind: function () {
-	// 		var cbox = gf.checkOnlyOne("key");
-	// 		if (!cbox) { return; }
-	// 		gf.ajax(this.url, { tu: cbox }, "json");
-	// 	},
-	// }, {
-	// 	url: `/shipment/main/overAll.shtml`,
-	// 	id: "overAll", name: "结束运输", class: "btn-primary",
-	// 	bind: function () {
-	// 		var cbox = gf.checkOnlyOne("key");
-	// 		if (!cbox) { return; }
-	// 		gf.ajax(this.url, { tu: cbox }, "json");
-	// 	},
 }, {
 	url: `/app/conf/bjjkhuirui/deleteBySure.shtml`,
 	id: "deleteSure", name: "确认撤销", class: "btn-danger",
@@ -97,4 +73,32 @@ let tempBtns = [{
 		gf.ajax(this.url, { key: cbox, TABLE_KEY: "COMBINED_TU_INFO" }, "json");
 	},
 }];
+if (sessionStorage.isTest) {
+	tempBtns = tempBtns.concat(
+		[{
+			url: `/shipment/main/startPcs.shtml`,
+			id: "startPcs", name: "上PCS", class: "btn-primary",
+			bind: function () {
+				var cbox = gf.checkOnlyOne("key");
+				if (!cbox) { return; }
+				gf.ajax(this.url, { tu: cbox }, "json");
+			},
+		}, {
+			url: `/shipment/main/overPcs.shtml`,
+			id: "overPcs", name: "出PCS", class: "btn-primary",
+			bind: function () {
+				var cbox = gf.checkOnlyOne("key");
+				if (!cbox) { return; }
+				gf.ajax(this.url, { tu: cbox }, "json");
+			},
+		}, {
+			url: `/shipment/main/overAll.shtml`,
+			id: "overAll", name: "结束运输", class: "btn-primary",
+			bind: function () {
+				var cbox = gf.checkOnlyOne("key");
+				if (!cbox) { return; }
+				gf.ajax(this.url, { tu: cbox }, "json");
+			}
+		}]);
+}
 gf.bindBtns("div.doc-buttons", tempBtns);
