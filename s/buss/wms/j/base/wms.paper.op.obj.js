@@ -84,7 +84,9 @@ var initBtns = function () {
         url: `/agv/huirui/callShipmentFromCold.shtml`,
         id: "callShipmentFromCold", name: "呼叫AGV", class: "btn-info",
         bind: function () {
-            gf.ajax(this.url, { key: null }, "json", function (s) {
+            var cbox = gf.checkOnlyOne("userdef3");
+            if (!cbox) { return; }
+            gf.ajax(this.url, { key: cbox }, "json", function (s) {
                 gf.layerMsg("下发呼叫指令成功！");
             });
         },
@@ -92,7 +94,9 @@ var initBtns = function () {
         url: `/agv/huirui/backShipmentToCold.shtml`,
         id: "backShipmentToCold", name: "AGV返库", class: "btn-info",
         bind: function () {
-            gf.ajax(this.url, { key: null }, "json", function (s) {
+            var cbox = gf.checkOnlyOne("userdef3");
+            if (!cbox) { return; }
+            gf.ajax(this.url, { key: cbox }, "json", function (s) {
                 gf.layerMsg("下发返库指令成功！");
             });
         },
