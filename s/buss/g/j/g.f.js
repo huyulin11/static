@@ -442,17 +442,21 @@ class GF {
         }
         return flag;
     };
-    layerMsg(content, options, end) {
+    layerMsg(content) {
         // layer.msg(content, options, end);
-        layer.open({
-            type: 1
-            , content: content
-            , btn: '关闭'
-            , shade: 0.1
-            , yes: function () {
-                layer.closeAll();
-            }
+        layer.msg(content, {
+            time: 0, //20s后自动关闭
+            btn: ['关闭']
         });
+        // layer.open({
+        //     type: 1
+        //     , content: content
+        //     , btn: '关闭'
+        //     , shade: 0.1
+        //     , yes: function () {
+        //         layer.closeAll();
+        //     }
+        // });
     };
     checkLogin(yes, no) {
         gf.doAjax({
