@@ -110,6 +110,12 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 		name: "TO",
 		colkey: "A",
 	}, {
+		name: "转移量",
+		colkey: "I",
+	}, {
+		name: "单位",
+		colkey: "F",
+	}, {
 		colkey: "name",
 		name: function (rowindex, data, rowdata, column) {
 			switch (localStorage.projectKey) {
