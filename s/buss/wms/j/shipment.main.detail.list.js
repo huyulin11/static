@@ -141,6 +141,14 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 		// 		return `<button type="button" class="stockout btn marR10 btn-info" data-company='${rowdata.company}' 
 		// 	data-item='${rowdata.item}'>登记出库</button>`;
 		// 	}
+	}, {
+		colkey: "userdef4",
+		name: "TU",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
+				return data;
+			return "";
+		}
 	}];
 }
 if (["PRIORITY",].includes(_type)) {
