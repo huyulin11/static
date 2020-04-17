@@ -30,7 +30,7 @@ let _columns = [{
 }, {
 	colkey: "paperid",
 	name: "单号",
-	hide: function () { return !gf.isPc() }
+	hide: true,
 }, {
 	colkey: "A",
 	name: "TO",
@@ -134,14 +134,11 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 	}, {
 		colkey: "item",
 		name: "SU"
-		// }, {
-		// 	colkey: "item",
-		// 	name: "出库",
-		// 	renderData: function (rowindex, data, rowdata, column) {
-		// 		return `<button type="button" class="stockout btn marR10 btn-info" data-company='${rowdata.company}' 
-		// 	data-item='${rowdata.item}'>登记出库</button>`;
-		// 	}
-	}, {
+	},];
+}
+
+if (["PRIORITY"].includes(_type)) {
+	_columns.push({
 		colkey: "userdef4",
 		name: "TU",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -149,16 +146,14 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 				return data;
 			return "";
 		}
-	}];
-}
-if (["PRIORITY",].includes(_type)) {
+	});
 	_columns.push({
 		colkey: "sequence",
 		name: "执行优先级",
 	});
 }
 
-if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].find((a) => { return a == _type; }))
+if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type))
 	_columns.push({
 		colkey: "updatetime",
 		name: "时间",
