@@ -12,6 +12,16 @@ let params = {
 		colkey: "name",
 		name: "目的地",
 	}, {
+		colkey: "seq",
+		name: "优先级",
+		renderData: function (rowindex, data, rowdata, column, json) {
+			let sequence = json.sequence;
+			if (!sequence) {
+				sequence = 1;
+			}
+			return sequence;
+		}
+	}, {
 		colkey: "company",
 		name: "订单号",
 		hide: true,
@@ -21,7 +31,7 @@ let params = {
 		renderData: function (rowindex, data, rowdata, column, json) {
 			let status = json.status;
 			if (status) {
-				return gv.get("ACS_STATUS", status) + gf.rowDisplay(rowdata);
+				return gv.get("ACS_STATUS", status) + gf.rowDisplay(rowdata, json);
 			}
 			return "--空--";
 		}

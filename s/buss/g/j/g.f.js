@@ -304,7 +304,7 @@ class GF {
             return unescape(r[2]);
         return null;
     };
-    rowDisplay(rowdata) {
+    rowDisplay(rowdata, json) {
         let btns = "";
         let target = `tr[d-tree='${rowdata.dtee}']`;
         if ([rowdata.status, rowdata.mainstatus, rowdata.detailstatus].includes("EXECUTING")) {
@@ -314,6 +314,12 @@ class GF {
             $(target).css("color", "orange");
         } else if (rowdata.sequence >= 2) {
             $(target).css("color", "blue");
+        } else if (json) {
+            if (json.sequence >= 3) {
+                $(target).css("color", "orange");
+            } else if (json.sequence >= 2) {
+                $(target).css("color", "blue");
+            }
         }
         if (rowdata.delflag == 1) {
             $(target).css("color", "#dedede");
