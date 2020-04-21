@@ -134,6 +134,12 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 	}, {
 		colkey: "item",
 		name: "SU"
+	}, {
+		colkey: "status",
+		name: "状态",
+		renderData: function (rowindex, data, rowdata, column) {
+			return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
+		}
 	},];
 }
 

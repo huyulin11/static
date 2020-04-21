@@ -2,8 +2,8 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 
 export var getInput = (item, option) => {
-    let _data, _defaultValue, _serial;
-    if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial; } else { _defaultValue = item.defaultValue; }
+    let _data, _defaultValue, _serial, _width;
+    if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial, _width = option.width; } else { _defaultValue = item.defaultValue; }
     _defaultValue = _defaultValue ? _defaultValue : "";
     let id, name, label = item.name, readonly = item.readonly;
     if (!_serial) {
@@ -38,7 +38,9 @@ export var getInput = (item, option) => {
         obj = $(`
         <input type="text" id="${id}" name="${name}" 
             class="form-control" value="${_defaultValue}"
-            placeholder="输入:${label}" data-notnull='${item.notnull}' autocomplete="off" ${readonly}>`);
+            placeholder="输入:${label}" data-notnull='${item.notnull}' 
+            style="${_width ? 'width:' + _width + '' : ''}"
+            autocomplete="off" ${readonly}>`);
     }
     let binds = item.bind; if (binds) {
         if (typeof binds == "function") {
