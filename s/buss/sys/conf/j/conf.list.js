@@ -66,7 +66,7 @@ window.datagrid = dataGrid({
     jsonUrl: `/app/conf/findByPage.shtml`,
     checkbox: false,
     serNumber: true,
-    data: { "TABLE_KEY": "CONF_KEY", "key": "EXPIRE_TIME" }
+    data: { "TABLE_KEY": "CONF_KEY", "key": "EXPIRE_TIME:DISTANCE_WAITING" }
 });
 
 $("#paging").delegate(".edit", "click", function (e) {

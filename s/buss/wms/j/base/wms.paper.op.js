@@ -69,6 +69,7 @@ var dealSheet = function (sheet) {
             data: _paper, dataType: "json", type: "POST"
         });
     }
+    alert("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
 }
 
 var initPaperOp = function (tasktype, optype) {
