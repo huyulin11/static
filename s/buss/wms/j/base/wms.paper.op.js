@@ -25,7 +25,7 @@ var dealSheet = function (sheet) {
     _paper.orderid = sheet.C8.v;
     _paper.name = sheet.E8.v;
 
-    let index = 50;
+    let index = 200;
     let checkRepeat = [];
     for (let i = 12; i > 0; i++) {
         if (i > index + 12) {

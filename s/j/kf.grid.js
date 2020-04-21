@@ -49,7 +49,7 @@ var jsonRequest = function (conf, callback) {
 		error: function (msg) {
 			console.log(msg);
 			_flag = false;
-			layer.msg("数据错误！请检查网络或权限配置！");
+			gf.layerMsg("数据错误！请检查网络或权限配置！");
 		}
 	});
 };
