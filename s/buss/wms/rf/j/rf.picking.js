@@ -46,7 +46,7 @@ var sub = function () {
 }
 
 let initDatas = function () {
-    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?status=TOSEND:PICKING&detailstatus=NEW:TOSEND&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
+    $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?detailstatus=NEW:TOSEND&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
 }
 
 var initPick = function () {
