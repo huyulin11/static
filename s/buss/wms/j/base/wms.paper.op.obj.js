@@ -222,7 +222,7 @@ class PaperOp {
             window.pageii = layer.open({
                 title: `${that.name}：` + cbox,
                 type: 2,
-                area: localStorage.layerArea.split(","),
+                area: gf.layerArea(),
                 content: that.url + "?paperid=" + cbox
             });
         });
@@ -264,7 +264,7 @@ class PaperOp {
         window.pageii = layer.open({
             title: `${that.name}`,
             type: 2,
-            area: localStorage.layerArea.split(","),
+            area: gf.layerArea(),
             content: that.url
         });
     }; detail(that) {
@@ -273,7 +273,7 @@ class PaperOp {
         window.pageii = layer.open({
             title: `${that.name}：` + cbox,
             type: 2,
-            area: localStorage.layerArea.split(","),
+            area: gf.layerArea(),
             content: that.url + cbox
         });
     }; doJob(param, that, callback) {

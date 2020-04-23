@@ -36,7 +36,7 @@ class GF {
             type: 2,
             shade: 0,
             maxmin: true,
-            area: localStorage.layerArea.split(","),
+            area: gf.layerArea(),
             zIndex: layer.zIndex,
             success: function (layero) {
                 layer.setTop(layero);
@@ -510,6 +510,11 @@ class GF {
             }
         });
         return role;
+    };
+    layerArea() {
+        if (!localStorage.layerArea)
+            localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
+        return localStorage.layerArea.split(",");
     };
 }
 

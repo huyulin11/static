@@ -99,13 +99,12 @@ $("a#editUI").on("click", function () {
     window.pageii = layer.open({
         title: "编辑",
         type: 2,
-        area: localStorage.layerArea.split(","),
+        area: gf.layerArea(),
         offset: "auto",
         content: '/user/selfInfo.shtml'
     });
 });
 
-localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
 gv.init();
 $("body").fadeIn();
 loadPage(localStorage.index ? localStorage.index : "首页,首页,/s/buss/g/h/welcome.html");

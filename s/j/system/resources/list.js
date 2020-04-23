@@ -96,7 +96,7 @@ function editFun() {
 	window.pageii = layer.open({
 		title: "编辑",
 		type: 2,
-		area: localStorage.layerArea.split(","),
+		area: gf.layerArea(),
 		content: '/resources/editUI.shtml?id=' + cbox
 	});
 }
@@ -104,7 +104,7 @@ function addFun() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: localStorage.layerArea.split(","),
+		area: gf.layerArea(),
 		content: '/resources/addUI.shtml'
 	});
 }

@@ -17,7 +17,7 @@ let tempBtns = [{
 		layer.open({
 			title: `${this.name}SU${_alloc ? "（货位:" + _alloc + "）" : ""}`,
 			type: 2,
-			area: localStorage.layerArea.split(","),
+			area: gf.layerArea(),
 			content: this.url
 		});
 	},

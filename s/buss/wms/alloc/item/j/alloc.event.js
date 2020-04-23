@@ -130,7 +130,7 @@ var doAllocOpBjjkHuirui = function (that) {
     window.pageii = layer.open({
         title: `SU明细`,
         type: 2,
-        area: localStorage.layerArea.split(","),
+        area: gf.layerArea(),
         content: `/s/buss/wms/alloc/txm/h/allocTxmMgr.html?type=alloc&alloc=${$(that).data("text")}`
     });
 }

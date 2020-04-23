@@ -86,7 +86,7 @@ function addTask() {
 	window.pageii = layer.open({
 		title: "新增",
 		type: 2,
-		area: localStorage.layerArea.split(","),
+		area: gf.layerArea(),
 		content: '/s/agvtasks/h/addDairyTaskUI.html'
 	});
 }
