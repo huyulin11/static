@@ -146,7 +146,7 @@ var dealSheet = function (sheet) {
 		url: `/alloc/item/import.shtml`,
 		data: _paper, dataType: "json", type: "POST", timeout: 0
 	});
-	alert("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
+	gf.layerMsg("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
 }
 
 $("div.doc-buttons").append(`<label class="ui-upload">
