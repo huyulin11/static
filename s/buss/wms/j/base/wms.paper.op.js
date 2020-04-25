@@ -59,7 +59,6 @@ var dealSheet = function (sheet) {
             }
         } else { break; }
     }
-    $('#upload').val("");
     if (localStorage.importThenEdit) {
         sessionStorage.paper = JSON.stringify(_paper);
         paperOp.add(btns.add);
@@ -137,6 +136,7 @@ var initPaperOp = function (tasktype, optype) {
                     submit(e, function (workbook) {
                         let sheet = workbook.Sheets[workbook.SheetNames[0]];
                         dealSheet(sheet);
+                        $('#upload').val("");
                     });
                 });
             }
