@@ -57,7 +57,7 @@ let params = {
 
 export var init = function () {
 	params = Object.assign(params, {
-		data: { "TABLE_KEY": "COMBINED_TU_INFO" }
+		data: { "TABLE_KEY": "COMBINED_TU_INFO", "ORDER_BY_KEY": "UPDATETIME DESC" }
 	});
 
 	window.datagrid = dataGrid(params);
@@ -80,10 +80,14 @@ let tempBtns = [{
 	bind: function () {
 		var cbox = gf.checkOnlyOne("key");
 		if (!cbox) { return; }
-		gf.ajax(this.url, { key: cbox, TABLE_KEY: "COMBINED_TU_INFO" }, "json");
+		let that = this;
+		let work = function (index) {
+			gf.ajax(that.url, { key: cbox, TABLE_KEY: "COMBINED_TU_INFO" }, "json");
+		}
+		layer.confirm(`是否确定撤销托盘${cbox}？`, function (index) { work(index); });
 	},
 }];
-if (sessionStorage.isTest) {
+if (localStorage.isTest) {
 	tempBtns = tempBtns.concat(
 		[{
 			url: `/shipment/main/startPcs.shtml`,

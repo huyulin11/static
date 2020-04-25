@@ -86,9 +86,13 @@ var initBtns = function () {
         bind: function () {
             var cbox = gf.checkOnlyOne("userdef3");
             if (!cbox) { return; }
-            gf.ajax(this.url, { key: cbox }, "json", function (s) {
-                gf.layerMsg("下发呼叫指令成功！");
-            });
+            let that = this;
+            let work = function (index) {
+                gf.ajax(that.url, { key: cbox }, "json", function (s) {
+                    gf.layerMsg("下发呼叫指令成功！");
+                });
+            }
+            layer.confirm(`对${cbox}，确定呼叫AGV？`, function (index) { work(index); });
         },
     }; btns.backShipmentToCold = {
         url: `/agv/huirui/backShipmentToCold.shtml`,
@@ -96,9 +100,13 @@ var initBtns = function () {
         bind: function () {
             var cbox = gf.checkOnlyOne("userdef3");
             if (!cbox) { return; }
-            gf.ajax(this.url, { key: cbox }, "json", function (s) {
-                gf.layerMsg("下发返库指令成功！");
-            });
+            let that = this;
+            let work = function (index) {
+                gf.ajax(that.url, { key: cbox }, "json", function (s) {
+                    gf.layerMsg("下发呼叫指令成功！");
+                });
+            }
+            layer.confirm(`对${cbox}，确定让AGV返库？`, function (index) { work(index); });
         },
     }; btns.whichAgv = {
         url: `/app/conf/get.shtml?table=task_agv`,
