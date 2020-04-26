@@ -7,7 +7,7 @@ var login = function () {
     $("#loginform").ajaxSubmit({
         type: "post",
         dataType: "json",
-        timeout: 2000,
+        timeout: 5000,
         error: function (data) {
             layer.msg("连接错误！");
         },
