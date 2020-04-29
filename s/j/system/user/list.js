@@ -37,7 +37,8 @@ window.datagrid = dataGrid({
 		name: "时间",
 		renderData: function (rowindex, data, rowdata, column) {
 			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
-		}
+		},
+		hide: true
 	}, {
 		name: "操作",
 		renderData: function (data, rowdata, rowindex, column) {
