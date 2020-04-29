@@ -85,7 +85,7 @@ $("#userName").on("input", function () {
 });
 
 if (localStorage.projectKey == "BJJK_HUIRUI") {
-	$("#accountName").attr("readonly", "readonly");
+	//$("#accountName").attr("readonly", "readonly");
 	$("#userName").data("searchurl", '/user/src/findFirstPage.shtml?userName=');
 	$("#userName").data("showcol", 'userName,accountName');
 	$("#userName").data("keycol", 'userName');
