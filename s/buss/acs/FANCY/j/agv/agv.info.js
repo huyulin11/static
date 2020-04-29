@@ -213,7 +213,7 @@ var deleverTaskLaoFoxconn = function (that) {
 		btn1: function () { doTask(agvId, task, 56); },
 		btn2: function () { doTask(agvId, task, 89); },
 		btn3: function () { doTask(agvId, task, 62); },
-		btn4: function () { doTask(agvId, task, 137); },
+		btn4: function () { doTask(agvId, task, 148); },
 		btn5: function () { doTask(agvId, task, 145); },
 		btn6: function () { doTask(agvId, task, 106); }
 	});
