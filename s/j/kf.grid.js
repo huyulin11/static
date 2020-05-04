@@ -21,6 +21,7 @@ var _defaultConf = {
 	data: '', // 发送给后台的数据 是json数据 例如{nama:"a",age:"100"}....
 	pageSize: 40, // 每页显示多少条数据
 	checkbox: false,// 是否显示复选框
+	searchInInit: true,// 是否显示复选框
 	checkValue: 'id', // 当checkbox为true时，需要设置存放checkbox的值字段 默认存放字段id的值
 	treeGrid: {
 		type: 1, //1 表示后台已经处理好父类带children集合 2 表示没有处理,由前端处理树形式
@@ -841,7 +842,7 @@ var dataGrid = function (params) {
 		});
 		return arr;
 	};
-	initGrid(_conf);
+	if (_conf.searchInInit) initGrid(_conf);
 	return {
 		setOptions: setOptions,
 		loadData: loadData,

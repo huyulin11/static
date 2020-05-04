@@ -91,7 +91,7 @@ let _columns = [{
 	name: "执行优先级",
 }];
 
-if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
+if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type)) {
 	_columns = [{
 		colkey: "id",
 		name: "id",
@@ -143,7 +143,7 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type)) {
 	},];
 }
 
-if (["PRIORITY"].includes(_type)) {
+if (["PRIORITY", "PRODUCT"].includes(_type)) {
 	_columns.push({
 		colkey: "userdef4",
 		name: "TU",
@@ -159,7 +159,7 @@ if (["PRIORITY"].includes(_type)) {
 	});
 }
 
-if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE"].includes(_type))
+if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type))
 	_columns.push({
 		colkey: "updatetime",
 		name: "时间",
@@ -176,6 +176,7 @@ let params = {
 	columns: _columns,
 	jsonUrl: '/shipment/main/findWithDetail.shtml',
 	checkbox: true,
+	searchInInit: !["PRODUCT"].includes(_type),
 	serNumber: true,
 	callback: function () {
 		let keys = $(".relationid").map(function () { return $(this).html() }).get().join(":");
@@ -188,6 +189,23 @@ let params = {
 			});
 		});
 	}
+}
+
+var initSearch = function () {
+	let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
+	let exportHtml = '<a class="btn btn-default" id="export">导出</a>';
+	if (["PRODUCT"].includes(_type)) {
+		$("#searchForm").find("div.search-group").html(
+			`<label>
+                <span>产线名称:</span>
+                <input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
+            </label>`
+		);
+		$("#searchForm").find("div.search-group").append(searchHtml);
+	} else {
+		$("#searchForm").find("div.search-group").append(searchHtml).append(exportHtml);
+	}
+	$("#searchForm").show();
 }
 
 export var init = function () {
@@ -209,25 +227,40 @@ export var init = function () {
 	if (_type) {
 		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
+		if (["PRODUCT"].includes(_type)) {
+			initSearch();
+		}
 	} else {
 		if (!_pick) {
-			$("#searchForm").show();
+			initSearch();
 		}
 		initPaperOp("shipment", "DETAIL");
 	}
 
 	window.datagrid = dataGrid(params);
 	renderAll();
+	if (["PRODUCT"].includes(_type)) {
+		if (localStorage.currentSearchProduct) doSearch();
+	}
 }
 
 let doSearch = function () {
 	var searchParams = $("#searchForm").serialize();
+
+	if (["PRODUCT"].includes(_type)) {
+		let product = $("#product").val();
+		if (!product) {
+			gf.layerMsg("需指定查询数据的产线名称！");
+			return;
+		}
+		localStorage.currentSearchProduct = product;
+	}
+
 	window.datagrid.setOptions({
 		data: searchParams
 	});
 }
-
-$("#search").on("click", function () {
+$("#searchForm").delegate("#search", "click", function () {
 	doSearch();
 });
 
@@ -236,7 +269,7 @@ $("#searchForm").on("submit", function () {
 	return false;
 });
 
-$("#export").on("click", function () {
+$("#searchForm").delegate("#export", "click", function () {
 	window.location.href = '/shipment/main/download.shtml' + '?' + $("#searchForm").serialize();
 });
 
