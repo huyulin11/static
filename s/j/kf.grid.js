@@ -101,6 +101,11 @@ var hide = function (oneColumn) {
 	return gf.yesOrNo(oneColumn.hide);
 }
 
+var checkItem = function (rowdata) {
+	if (_conf.checkItem) return _conf.checkItem(rowdata);
+	return _conf.checkbox;
+}
+
 var _fieldModel = {
 	colkey: null,
 	name: null,
@@ -263,15 +268,17 @@ var dataGrid = function (params) {
 
 				ntd_d.innerHTML = rowindex;
 				var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
-				var chkbox = tag("INPUT");
-				chkbox.type = "checkbox";
-				for (let v in rowdata) { if (rowdata[v]) chkbox.setAttribute("data-" + v, rowdata[v]); };
-				chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, _confTreeGrid.id));
-				chkbox.setAttribute("pid", _getValueByName(rowdata, _confTreeGrid.pid));
-				chkbox.setAttribute("_l_key", "checkbox");
-				chkbox.value = _getValueByName(rowdata, _conf.checkValue);
-				$(chkbox).on("click", highlight);
-				td_d.appendChild(chkbox);
+				if (checkItem(rowdata)) {
+					var chkbox = tag("INPUT");
+					chkbox.type = "checkbox";
+					for (let v in rowdata) { if (rowdata[v]) chkbox.setAttribute("data-" + v, rowdata[v]); };
+					chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, _confTreeGrid.id));
+					chkbox.setAttribute("pid", _getValueByName(rowdata, _confTreeGrid.pid));
+					chkbox.setAttribute("_l_key", "checkbox");
+					chkbox.value = _getValueByName(rowdata, _conf.checkValue);
+					$(chkbox).on("click", highlight);
+					td_d.appendChild(chkbox);
+				}
 				for (let oneColumn of _columns) {
 					if (oneColumn.jsonColumn && rowdata && rowdata[oneColumn.jsonColumn]) jsonCol = JSON.parse(rowdata[oneColumn.jsonColumn]);
 					var td_o = tr.insertCell(-1);
@@ -476,17 +483,20 @@ var dataGrid = function (params) {
 			var rowindex = tr.rowIndex;
 			ntd_d.innerHTML = rowindex;
 			var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
-			var chkbox = tag("INPUT");
-			chkbox.type = "checkbox";
 
-			for (let v in rowdata) { if (rowdata[v]) chkbox.setAttribute("data-" + v, rowdata[v]); };
-			chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, "id"));
-			chkbox.setAttribute("pid", _getValueByName(rowdata, "parentId"));
+			if (checkItem(rowdata)) {
+				var chkbox = tag("INPUT");
+				chkbox.type = "checkbox";
 
-			chkbox.setAttribute("_l_key", "checkbox");
-			chkbox.value = _getValueByName(rowdata, _conf.checkValue);
-			$(chkbox).on("click", highlight);
-			td_d.appendChild(chkbox);
+				for (let v in rowdata) { if (rowdata[v]) chkbox.setAttribute("data-" + v, rowdata[v]); };
+				chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, "id"));
+				chkbox.setAttribute("pid", _getValueByName(rowdata, "parentId"));
+
+				chkbox.setAttribute("_l_key", "checkbox");
+				chkbox.value = _getValueByName(rowdata, _conf.checkValue);
+				$(chkbox).on("click", highlight);
+				td_d.appendChild(chkbox);
+			}
 			for (let oneColumn of _columns) {
 				if (oneColumn.jsonColumn && rowdata && rowdata[oneColumn.jsonColumn]) jsonCol = JSON.parse(rowdata[oneColumn.jsonColumn]);
 				var td_o = tr.insertCell(-1);
@@ -558,15 +568,18 @@ var dataGrid = function (params) {
 					var rowindex = tr.rowIndex;
 					ntd_d.innerHTML = rowindex;
 					var td_d = tr.insertCell(-1); chooseHideCheckbox(td_d);
-					var chkbox = tag("INPUT");
-					chkbox.type = "checkbox";
-					for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
-					chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, _confTreeGrid.id));
-					chkbox.setAttribute("pid", _getValueByName(rowdata, _confTreeGrid.pid));
-					chkbox.setAttribute("_l_key", "checkbox");
-					chkbox.value = _getValueByName(rowdata, _conf.checkValue);
-					$(chkbox).on("click", highlight);
-					td_d.appendChild(chkbox);
+
+					if (checkItem(rowdata)) {
+						var chkbox = tag("INPUT");
+						chkbox.type = "checkbox";
+						for (let v in json[d]) { if (json[d][v]) chkbox.setAttribute("data-" + v, json[d][v]); };
+						chkbox.setAttribute("data-" + "cid", _getValueByName(rowdata, _confTreeGrid.id));
+						chkbox.setAttribute("pid", _getValueByName(rowdata, _confTreeGrid.pid));
+						chkbox.setAttribute("_l_key", "checkbox");
+						chkbox.value = _getValueByName(rowdata, _conf.checkValue);
+						$(chkbox).on("click", highlight);
+						td_d.appendChild(chkbox);
+					}
 					for (let oneColumn of _columns) {
 						if (oneColumn.jsonColumn && rowdata && rowdata[oneColumn.jsonColumn]) jsonCol = JSON.parse(rowdata[oneColumn.jsonColumn]);
 						var td_o = tr.insertCell(-1);

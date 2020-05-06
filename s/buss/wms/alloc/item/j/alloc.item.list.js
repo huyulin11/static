@@ -61,6 +61,9 @@ window.datagrid = dataGrid({
 	}],
 	jsonUrl: '/alloc/item/findByPage.shtml',
 	checkbox: true,
+	checkItem: function (rowdata) {
+		return rowdata.whid != 2;
+	},
 	serNumber: true
 });
 
