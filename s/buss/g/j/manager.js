@@ -90,7 +90,7 @@ var loadPage = function (tip) {
         li.append(a);
         $("#topli").append(li);
     });
-    if (localStorage.remember) localStorage.index = sn;
+    if (localStorage.remember) localStorage.index = sn; else localStorage.index = '';
 }
 
 gf.loadPage = loadPage;
