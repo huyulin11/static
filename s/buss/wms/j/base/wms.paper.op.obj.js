@@ -82,7 +82,7 @@ var initBtns = function () {
         },
     }; btns.callShipmentFromCold = {
         url: `/agv/huirui/callShipmentFromCold.shtml`,
-        id: "callShipmentFromCold", name: "呼叫AGV", class: "btn-info",
+        id: "callShipmentFromCold", name: "呼叫料架", class: "btn-info",
         bind: function () {
             var cbox = gf.checkOnlyOne("userdef3");
             if (!cbox) { return; }
@@ -92,11 +92,11 @@ var initBtns = function () {
                     gf.layerMsg("下发呼叫指令成功！");
                 });
             }
-            layer.confirm(`对${cbox}，确定呼叫AGV？`, function (index) { work(index); });
+            layer.confirm(`对${cbox}，确定呼叫AGV送出料架？`, function (index) { work(index); });
         },
     }; btns.backShipmentToCold = {
         url: `/agv/huirui/backShipmentToCold.shtml`,
-        id: "backShipmentToCold", name: "AGV返库", class: "btn-info",
+        id: "backShipmentToCold", name: "料架返库", class: "btn-info",
         bind: function () {
             var cbox = gf.checkOnlyOne("userdef3");
             if (!cbox) { return; }
@@ -106,7 +106,7 @@ var initBtns = function () {
                     gf.layerMsg("下发呼叫指令成功！");
                 });
             }
-            layer.confirm(`对${cbox}，确定让AGV返库？`, function (index) { work(index); });
+            layer.confirm(`对${cbox}，确定让AGV送料架返库？`, function (index) { work(index); });
         },
     }; btns.whichAgv = {
         url: `/app/conf/get.shtml?table=task_agv`,
