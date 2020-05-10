@@ -47,6 +47,7 @@ var btns = [
     { resKey: "rf_alloc", id: "alloc", name: "冷库库位" },
     { resKey: "rf_fail", id: "failure", name: "产线设置" },
     { resKey: "rf_priority", id: "priority", name: "优先等级" },
+    { resKey: "rf_sequence", id: "sequence", name: "优先顺序" },
     { id: "logout", name: "退出" },
 ];
 var initMain = function () {
@@ -73,6 +74,9 @@ var initMain = function () {
         });
         $(container).find("#priority").on("click", function () {
             window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=NEW:TOSEND:PICKING:PICKOVER:COMBINING:COMBOVER:ON_PCS:OVER_PCS`;
+        });
+        $(container).find("#sequence").on("click", function () {
+            window.location.href = ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRODUCT`;
         });
         $(container).find("#picking").on("click", function () {
             window.location.href = `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_NORMAL`;

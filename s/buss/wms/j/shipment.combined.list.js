@@ -1,6 +1,7 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let params = {
 	pagId: 'paging',
@@ -12,7 +13,7 @@ let params = {
 		colkey: "name",
 		name: "目的地",
 	}, {
-		colkey: "seq",
+		colkey: "sequence",
 		name: "优先级",
 		renderData: function (rowindex, data, rowdata, column, json) {
 			let sequence = json.sequence;
@@ -20,6 +21,26 @@ let params = {
 				sequence = 1;
 			}
 			return sequence;
+		}
+	}, {
+		colkey: "detailsequence",
+		name: "顺序",
+		hide: true,
+		renderData: function (rowindex, data, rowdata, column, json) {
+			let detailsequence = json.detailsequence;
+			return detailsequence;
+		}
+	}, {
+		colkey: "detailsequence",
+		name: "顺序",
+		renderData: function (rowindex, data, rowdata, column, json) {
+			let col = {
+				name: "顺序", key: "detailsequence", notnull: true, type: "input",
+			};
+			let json2 = { id: rowdata.key };
+			let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json2)}>保存</button>`;
+			let html = getInput(col, { value: json.detailsequence, width: '50%' });
+			return html[0].outerHTML + btnStr;
 		}
 	}, {
 		colkey: "company",
@@ -40,10 +61,16 @@ let params = {
 		name: "货物",
 		renderData: function (rowindex, data, rowdata, column, json) {
 			let items = json.items;
+			let i = 0;
 			if (items) {
 				let itemArr = [];
 				for (let item of items) {
 					itemArr.push(item.su);
+					i++;
+					if (i == 3) {
+						itemArr.push('<br/>');
+						i = 0;
+					}
 				}
 				return itemArr.join(',');
 			}
@@ -62,6 +89,21 @@ export var init = function () {
 
 	window.datagrid = dataGrid(params);
 }
+
+$("#paging").delegate(".edit", "click", function (e) {
+	let id = $(this).data("id");
+	let target = $(this).parent("td").find("input").val();
+	if (!target || isNaN(target) || target < 0 || target >= 100) {
+		gf.layerMsg("提交内容应为大于0小于100的数值！");
+		return;
+	}
+	if (window.confirm(`是否要将该数据的顺序值改为${target}？`)) {
+		gf.doAjax({
+			url: `/shipment/main/editSeqDetail.shtml`,
+			data: { id: id, sequence: target }
+		});
+	}
+});
 
 $("#search").on("click", function () {
 	var searchParams = $("#searchForm").serialize();
