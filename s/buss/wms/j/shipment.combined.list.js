@@ -79,15 +79,17 @@ let params = {
 	}],
 	jsonUrl: '/app/conf/findByPage.shtml',
 	checkbox: true,
+	searchInInit: false,
 	serNumber: true
 }
 
 export var init = function () {
 	params = Object.assign(params, {
-		data: { "TABLE_KEY": "COMBINED_TU_INFO", "ORDER_BY_KEY": "UPDATETIME DESC" }
+		data: { "TABLE_KEY": "COMBINED_TU_INFO" }
 	});
 
 	window.datagrid = dataGrid(params);
+	if (localStorage.currentSearchProduct) doSearch();
 }
 
 $("#paging").delegate(".edit", "click", function (e) {
@@ -105,12 +107,23 @@ $("#paging").delegate(".edit", "click", function (e) {
 	}
 });
 
-$("#search").on("click", function () {
-	var searchParams = $("#searchForm").serialize();
-	window.datagrid.setOptions({
-		data: searchParams
-	});
+$("#searchForm").delegate("#search", "click", function () {
+	doSearch();
 });
+
+let doSearch = function () {
+	var searchParams = $("#searchForm").serializeObject();
+	let product = $("#product").val();
+	if (!product) {
+		gf.layerMsg("需指定查询数据的产线名称！");
+		return;
+	}
+	localStorage.currentSearchProduct = product;
+	window.datagrid.setOptions({
+		data: Object.assign(searchParams, { "TABLE_KEY": "COMBINED_TU_INFO" })
+	});
+}
+
 let tempBtns = [{
 	id: "back", name: "返回", class: "btn-info",
 	bind: function () {
@@ -157,4 +170,14 @@ if (localStorage.isTest) {
 			}
 		}]);
 }
+
+let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
+$("#searchForm").find("div.search-group").html(
+	`<label>
+                <span>产线名称:</span>
+                <input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
+            </label>`
+);
+$("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
+
 gf.bindBtns("div.doc-buttons", tempBtns);
