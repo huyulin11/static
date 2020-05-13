@@ -25,7 +25,6 @@ let params = {
 	}, {
 		colkey: "detailsequence",
 		name: "顺序",
-		hide: true,
 		renderData: function (rowindex, data, rowdata, column, json) {
 			let detailsequence = json.detailsequence;
 			return detailsequence;
@@ -33,6 +32,7 @@ let params = {
 	}, {
 		colkey: "detailsequence",
 		name: "顺序",
+		hide: true,
 		renderData: function (rowindex, data, rowdata, column, json) {
 			let col = {
 				name: "顺序", key: "detailsequence", notnull: true, type: "input",

@@ -161,10 +161,11 @@ if (["PRIORITY", "PRODUCT"].includes(_type)) {
 	_columns.push({
 		colkey: "userdef1",
 		name: "顺序",
+		defaultVal: 0
 	});
 }
 
-if (["PRODUCT"].includes(_type)) {
+if (["UDF"].includes(_type)) {
 	_columns.push({
 		colkey: "userdef1",
 		name: "顺序",
@@ -212,7 +213,7 @@ let params = {
 	columns: _columns,
 	jsonUrl: '/shipment/main/findWithDetail.shtml',
 	checkbox: true,
-	searchInInit: !["PRODUCT"].includes(_type),
+	searchInInit: !["PRIORITY", "PRODUCT"].includes(_type),
 	serNumber: true,
 	callback: function () {
 		let keys = $(".relationid").map(function () { return $(this).html() }).get().join(":");
@@ -230,7 +231,7 @@ let params = {
 var initSearch = function () {
 	let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
 	let exportHtml = '<a class="btn btn-default" id="export">导出</a>';
-	if (["PRODUCT"].includes(_type)) {
+	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		$("#searchForm").find("div.search-group").html(
 			`<label>
                 <span>产线名称:</span>
@@ -263,7 +264,7 @@ export var init = function () {
 	if (_type) {
 		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
-		if (["PRODUCT"].includes(_type)) {
+		if (["PRIORITY", "PRODUCT"].includes(_type)) {
 			initSearch();
 		}
 	} else {
@@ -275,7 +276,7 @@ export var init = function () {
 
 	window.datagrid = dataGrid(params);
 	renderAll();
-	if (["PRODUCT"].includes(_type)) {
+	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		if (localStorage.currentSearchProduct) doSearch();
 	}
 }
@@ -283,7 +284,7 @@ export var init = function () {
 let doSearch = function () {
 	var searchParams = $("#searchForm").serialize();
 
-	if (["PRODUCT"].includes(_type)) {
+	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		let product = $("#product").val();
 		if (!product) {
 			gf.layerMsg("需指定查询数据的产线名称！");

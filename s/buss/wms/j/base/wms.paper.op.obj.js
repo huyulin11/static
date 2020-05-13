@@ -169,13 +169,24 @@ var initBtns = function () {
     };
     let editSeq = function (seq) {
         return {
-            resKey: "editSeq" + seq, id: "editSeq" + seq, name: "设优先级为" + seq, class: "btn-info", url: '/shipment/main/editSeq.shtml',
+            resKey: "editSeq" + seq, id: "editSeq" + seq, name: seq == 1 ? "取消优先级" : "设优先级为" + seq,
+            class: "btn-info", url: '/shipment/main/editSeq.shtml',
             bind: function () {
                 paperOp.editSeq(this, seq);
             }
         }
     }
+    let editSeqDetail = function (seq) {
+        return {
+            resKey: "editSeqDetail", id: "editSeqDetail", name: "设置顺序",
+            class: "btn-info", url: '/shipment/main/editSeq.shtml',
+            bind: function () {
+                paperOp.editSeq(this, seq, true);
+            }
+        }
+    }
     btns.editSeq1 = editSeq(1); btns.editSeq2 = editSeq(2); btns.editSeq3 = editSeq(3);
+    btns.editSeqDetail = editSeqDetail(1);
 
     btns[`pick`] = {
         url: `/s/buss/wms/rf/h/rf.picking.html`,
@@ -318,7 +329,7 @@ class PaperOp {
                 layer.msg('SU校验失败！');
             }
         });
-    }; editSeq(that, seq) {
+    }; editSeq(that, seq, detailFlag) {
         var json = {
             "sequence": seq
         };
@@ -326,17 +337,30 @@ class PaperOp {
         json.item = gf.checkOnlyOne("item", true);
         json.userdef4 = gf.checkOnlyOne("userdef4", true);
         if (!json.company) { return; }
-        layer.confirm('选择修改的类型', {
-            btn: ['按单号', '按SU'],
-            btn1: function () {
-                json.type = "BY_PAPER";
-                gf.ajax(that.url, json, "json");
-            },
-            btn2: function () {
+        if (detailFlag) {
+            layer.prompt({ title: "请输入需要调整的顺序" }, function (target, index) {
+                if (!target || isNaN(target) || target < 0 || target >= 100) {
+                    gf.layerMsg("提交内容应为大于0小于100的数值！");
+                    return;
+                }
+                json.detailSeq = target;
                 json.type = "BY_SU";
                 gf.ajax(that.url, json, "json");
-            },
-        });
+                layer.close(index);
+            });
+        } else {
+            layer.confirm('选择修改的类型', {
+                btn: ['按单号', '按SU'],
+                btn1: function () {
+                    json.type = "BY_PAPER";
+                    gf.ajax(that.url, json, "json");
+                },
+                btn2: function () {
+                    json.type = "BY_SU";
+                    gf.ajax(that.url, json, "json");
+                },
+            });
+        }
     }
 }
 

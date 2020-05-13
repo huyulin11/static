@@ -93,7 +93,7 @@ var initPaperOp = function (tasktype, optype) {
                 } else if (optype == "DETAIL") {
                     tempBtns = [btns.refresh,];
                 } else if (optype == "PRIORITY") {
-                    tempBtns = [btns.editSeq1, btns.editSeq2, btns.editSeq3, btns.refresh, btns.back,];
+                    tempBtns = [btns.editSeqDetail, btns.editSeq1, btns.editSeq2, btns.editSeq3, btns.refresh, btns.back,];
                 } else if (optype == "COMBINED") {
                     tempBtns = [btns.refresh, btns.deleteSure,];
                 } else if (optype == "PICKED") {
