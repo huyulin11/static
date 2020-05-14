@@ -158,43 +158,13 @@ if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		colkey: "sequence",
 		name: "执行优先级",
 	});
-	_columns.push({
-		colkey: "userdef1",
-		name: "顺序",
-		defaultVal: 0
-	});
 }
 
-if (["UDF"].includes(_type)) {
-	_columns.push({
-		colkey: "userdef1",
-		name: "顺序",
-		renderData: function (rowindex, data, rowdata, column) {
-			let col = {
-				name: "顺序", key: "userdef1", notnull: true, type: "input",
-			};
-			let json = { id: rowdata.id };
-			let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
-			let html = getInput(col, { value: data, width: '50%' });
-			return html[0].outerHTML + btnStr;
-		}
-	});
-
-	$("#paging").delegate(".edit", "click", function (e) {
-		let id = $(this).data("id");
-		let target = $(this).parent("td").find("input").val();
-		if (!target || isNaN(target) || target < 0 || target >= 100) {
-			gf.layerMsg("提交内容应为大于0小于100的数值！");
-			return;
-		}
-		if (window.confirm(`是否要将该数据的顺序值改为${target}？`)) {
-			gf.doAjax({
-				url: `/shipment/main/editSeqDetail.shtml`,
-				data: { id: id, sequence: target }
-			});
-		}
-	});
-}
+_columns.push({
+	colkey: "userdef1",
+	name: "顺序",
+	defaultVal: 0
+});
 
 if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type))
 	_columns.push({
