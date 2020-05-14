@@ -34,13 +34,15 @@ var sub = function () {
         data: { userdef3: tu.trim(), item: su.trim(), paperid: _paperid, warehouse: _warehouse, },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            gf.layerMsg(data.msg);
-            if (data.code >= 0) {
+            gf.layerMsg(data.msg, function () {
+                if (data.code >= 0) {
+                    $("#tu").val("");
+                    $("#su").val("");
+                    initDatas();
+                }
                 $("#tu").val("");
-                $("#su").val("");
-                initDatas();
-            }
-            $("#tu").focus();
+                $("#tu").focus();
+            });
         }
     });
 }
