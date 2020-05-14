@@ -27,6 +27,8 @@ let params = {
 		name: "顺序",
 		renderData: function (rowindex, data, rowdata, column, json) {
 			let detailsequence = json.detailsequence;
+			if (!detailsequence)
+				detailsequence = 0;
 			return detailsequence;
 		}
 	}, {
