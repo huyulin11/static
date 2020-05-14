@@ -161,8 +161,8 @@ var dataGrid = function (params) {
 
 	var render = function (jsonDatas) {
 		renderHead(_container);
-		renderBody(_container, jsonDatas);
 		renderFenye(_container, jsonDatas);
+		renderBody(_container, jsonDatas);
 
 		if (_conf.callback) { _conf.callback(); }
 		fixhead();
