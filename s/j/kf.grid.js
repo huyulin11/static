@@ -366,24 +366,20 @@ var dataGrid = function (params) {
 		divul_2.className = "dataTables_paginate paging_bootstrap pagination";
 		btd_1.appendChild(divul_2);
 
+		var ulli_2 = tag("li");
 		if (pageNow > 1) {
-			var ulli_2 = tag("li");
 			divul_2.appendChild(ulli_2);
 			var lia_2 = tag("a");
 			$(lia_2).on("click", pageBind);
 			lia_2.id = "pagNum_" + (pageNow - 1);
-			lia_2.href = "javascript:void(0);";
-			lia_2.innerHTML = '← 上一页';
-			ulli_2.appendChild(lia_2);
 		} else {
-			var ulli_2 = tag("li");
 			ulli_2.className = "prev disabled";
 			divul_2.appendChild(ulli_2);
 			var lia_2 = tag("a");
-			lia_2.href = "javascript:void(0);";
-			lia_2.innerHTML = '← 上一页';
-			ulli_2.appendChild(lia_2);
 		}
+		lia_2.href = "javascript:void(0);";
+		lia_2.innerHTML = '← 上一页';
+		ulli_2.appendChild(lia_2);
 		var pg = pagesIndex(_conf.pagecode, pageNow, totalPages);
 		var startpage = pg.start;
 		var endpage = pg.end;
@@ -407,26 +403,20 @@ var dataGrid = function (params) {
 			ulli_4.appendChild(lia_4);
 		}*/
 		for (var i = startpage; i <= endpage; i++) {
+			var ulli_5 = tag("li");
 			if (i == pageNow) {
-				var ulli_5 = tag("li");
 				ulli_5.className = "active";
 				divul_2.appendChild(ulli_5);
 				var lia_5 = tag("a");
-				lia_5.href = "javascript:void(0);";
-				lia_5.innerHTML = i;
-				ulli_5.appendChild(lia_5);
 			} else {
-				var ulli_5 = tag("li");
 				divul_2.appendChild(ulli_5);
 				var lia_5 = tag("a");
 				$(lia_5).on("click", pageBind);
-				lia_5.href = "javascript:void(0);";
 				lia_5.id = "pagNum_" + i;
-				lia_5.innerHTML = i;
-				ulli_5.appendChild(lia_5);
 			}
-			;
-
+			lia_5.href = "javascript:void(0);";
+			lia_5.innerHTML = i;
+			ulli_5.appendChild(lia_5);
 		}
 		if (endpage != totalPages) {
 			var ulli_6 = tag("li");
@@ -438,26 +428,21 @@ var dataGrid = function (params) {
 			lia_6.innerHTML = '...' + totalPages;
 			ulli_6.appendChild(lia_6);
 		}
+		var ulli_7 = tag("li");
 		if (pageNow >= totalPages) {
-			var ulli_7 = tag("li");
 			ulli_7.className = "prev disabled";
 			divul_2.appendChild(ulli_7);
 			var lia_7 = tag("a");
-			lia_7.href = "javascript:void(0);";
-			lia_7.innerHTML = '下一页 → ';
-			ulli_7.appendChild(lia_7);
 		} else {
-			var ulli_7 = tag("li");
 			ulli_7.className = "next";
 			divul_2.appendChild(ulli_7);
 			var lia_7 = tag("a");
 			$(lia_7).on("click", pageBind);
-			lia_7.href = "javascript:void(0);";
 			lia_7.id = "pagNum_" + (pageNow + 1);
-			lia_7.innerHTML = '下一页 → ';
-			ulli_7.appendChild(lia_7);
 		}
-		;
+		lia_7.href = "javascript:void(0);";
+		lia_7.innerHTML = '下一页 → ';
+		ulli_7.appendChild(lia_7);
 	};
 	var treeHtml = function (tbody, data) {
 		if (!data) return;
