@@ -373,7 +373,7 @@ var dataGrid = function (params) {
 			$(lia_2).on("click", pageBind);
 			lia_2.id = "pagNum_" + (pageNow - 1);
 			lia_2.href = "javascript:void(0);";
-			lia_2.innerHTML = '← 下一页';
+			lia_2.innerHTML = '← 上一页';
 			ulli_2.appendChild(lia_2);
 		} else {
 			var ulli_2 = tag("li");
@@ -381,7 +381,7 @@ var dataGrid = function (params) {
 			divul_2.appendChild(ulli_2);
 			var lia_2 = tag("a");
 			lia_2.href = "javascript:void(0);";
-			lia_2.innerHTML = '← 下一页';
+			lia_2.innerHTML = '← 上一页';
 			ulli_2.appendChild(lia_2);
 		}
 		var pg = pagesIndex(_conf.pagecode, pageNow, totalPages);
