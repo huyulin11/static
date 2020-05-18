@@ -21,25 +21,32 @@
 <script type="module">
     import { gf } from "/s/buss/g/j/g.f.js";
     let _alloc = gf.urlParam("alloc");
-    $.ajax({
-        url: '/s/jsons/BJJK_HUIRUI/alloc/cache/allocCacheStock.json',
-        async: true,
-        type: 'GET',
-        dataType: 'json',
-        timeout: 5000,
-        cache: false,
-        success: function (data) {
-            for (let item of data) {
-                let json = JSON.parse(item.value);
-                if (_alloc == item.key) {
-                    $("#show").html("该货位目的地" + json.name);
-                    return;
+
+    let doSearch = function () {
+        $.ajax({
+            url: '/s/jsons/BJJK_HUIRUI/alloc/cache/allocCacheStock.json',
+            async: true,
+            type: 'GET',
+            dataType: 'json',
+            timeout: 5000,
+            cache: false,
+            success: function (data) {
+                for (let item of data) {
+                    let json = JSON.parse(item.value);
+                    if (_alloc == item.key) {
+                        $("#show").html("该站台货物目的地" + json.name);
+                        return;
+                    }
                 }
-            }
-            $("#show").html("无数据！");
-        },
-        error: function (e) { console.log(e); }
-    });
+                $("#show").html("该站台无货物！");
+            },
+            error: function (e) { console.log(e); }
+        });
+    }
+
+    setInterval(() => {
+        doSearch();
+    }, 1000);
 </script>
 
 </html>
