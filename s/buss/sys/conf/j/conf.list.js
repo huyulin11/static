@@ -4,15 +4,6 @@ import { dataGrid } from "/s/j/kf.grid.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 
-let tempBtns = [{
-    id: "back", name: "返回", class: "btn-info",
-    bind: function () {
-        window.history.back();
-    }
-}];
-gf.bindBtns("div.doc-buttons", tempBtns);
-
-let _type = gf.urlParam("type");
 let _columns = [{
     colkey: "id",
     name: "id",
@@ -29,13 +20,27 @@ let _columns = [{
     colkey: "value",
     name: "值",
     renderData: function (rowindex, data, rowdata, column) {
-        let col = {
-            name: "键值", key: "key", notnull: true, type: "input",
-        };
-        let json = { key: rowdata.key };
-        let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
-        let html = getInput(col, { value: data, width: '50%' });
-        return html[0].outerHTML + btnStr;
+        try {
+            let json = JSON.parse(data);
+            if (json instanceof Array) {
+                for (let item of json) {
+                    console.log(item);
+                }
+            } else {
+                for (let item in json) {
+                    console.log(item);
+                }
+            }
+            return "json配置";
+        } catch (error) {
+            let col = {
+                name: "键值", key: "key", notnull: true, type: "input",
+            };
+            let json = { key: rowdata.key };
+            let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
+            let html = getInput(col, { value: data, width: '50%' });
+            return html[0].outerHTML + btnStr;
+        }
     }
 }, {
     colkey: "delflag",
