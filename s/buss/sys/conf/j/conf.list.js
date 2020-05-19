@@ -26,21 +26,22 @@ let _columns = [{
                 for (let item of json) {
                     console.log(item);
                 }
-            } else {
+                return "json_Array配置";
+            } else if (json instanceof Object) {
                 for (let item in json) {
                     console.log(item);
                 }
+                return "json_Object配置";
             }
-            return "json配置";
         } catch (error) {
-            let col = {
-                name: "键值", key: "key", notnull: true, type: "input",
-            };
-            let json = { key: rowdata.key };
-            let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
-            let html = getInput(col, { value: data, width: '50%' });
-            return html[0].outerHTML + btnStr;
         }
+        let col = {
+            name: "键值", key: "key", notnull: true, type: "input",
+        };
+        let json = { key: rowdata.key };
+        let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
+        let html = getInput(col, { value: data, width: '50%' });
+        return html[0].outerHTML + btnStr;
     }
 }, {
     colkey: "delflag",
