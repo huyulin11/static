@@ -215,22 +215,26 @@ var initSearch = function () {
 	$("#searchForm").show();
 }
 
-export var init = function () {
-	if (!params.data) params.data = {};
+var initParams = function (tempParams) {
+	if (!tempParams) tempParams = {};
 	if (_status) {
-		params.data["shipmentMainFormMap.status"] = _status;
+		tempParams["shipmentMainFormMap.status"] = _status;
 	}
 	if (_type) {
-		params.data["shipmentMainFormMap.type"] = _type;
+		tempParams["shipmentMainFormMap.type"] = _type;
 	}
 	if (_detailstatus) {
-		params.data["shipmentMainFormMap.detailstatus"] = _detailstatus;
+		tempParams["shipmentMainFormMap.detailstatus"] = _detailstatus;
 	}
 	if (_warehouse) {
-		params.data["shipmentMainFormMap.warehouse"] = _warehouse;
+		tempParams["shipmentMainFormMap.warehouse"] = _warehouse;
 	} else if (_pick) {
-		params.data["shipmentMainFormMap.PICK"] = _pick;
+		tempParams["shipmentMainFormMap.PICK"] = _pick;
 	}
+}
+
+export var init = function () {
+	initParams(params.data);
 	if (_type) {
 		initPaperOp("shipment", _type);
 		$("html").addClass("frame");
@@ -252,8 +256,8 @@ export var init = function () {
 }
 
 let doSearch = function () {
-	var searchParams = $("#searchForm").serialize();
-
+	var searchParams = $("#searchForm").serializeObject();
+	initParams(searchParams);
 	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		let product = $("#product").val();
 		if (!product) {
