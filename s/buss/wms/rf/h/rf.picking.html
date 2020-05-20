@@ -30,15 +30,19 @@
                     <td>SU</td>
                     <td><input id="su" @keyup.enter="suEnter" autocomplete="off" /></td>
                 </tr>
+            </tbody>
+        </table>
+        <table cellspacing="10px" cellspadding="1px" style="display: none;">
+            <tbody>
                 <tr>
                     <td><button id="sub">确认</button></td>
                     <td><button id="back">返回</button></td>
+                    <td><button id="clean">清空</button></td>
                 </tr>
             </tbody>
         </table>
         <div id='datas'><iframe></iframe></div>
         <div id="topCtrlContainer"></div>
-        <div style="position: fixed;right: 10px;top: 100px;width: 80px;"><button id="clean">清空</button> </div>
     </div>
     <div id='settingContainer' class="fixed"></div>
     <script src="/s/j/jquery-1.12.2.min.js"></script>
