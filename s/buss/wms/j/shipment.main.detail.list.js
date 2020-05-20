@@ -247,7 +247,7 @@ export var init = function () {
 	window.datagrid = dataGrid(params);
 	renderAll();
 	if (["PRIORITY", "PRODUCT"].includes(_type)) {
-		if (localStorage.currentSearchProduct) doSearch();
+		doSearch();
 	}
 }
 
@@ -257,8 +257,8 @@ let doSearch = function () {
 	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		let product = $("#product").val();
 		if (!product) {
-			gf.layerMsg("需指定查询数据的产线名称！");
-			return;
+			// gf.layerMsg("需指定查询数据的产线名称！");
+			// return;
 		}
 		localStorage.currentSearchProduct = product;
 	}
