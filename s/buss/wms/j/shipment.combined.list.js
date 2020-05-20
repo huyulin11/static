@@ -91,7 +91,7 @@ export var init = function () {
 	});
 
 	window.datagrid = dataGrid(params);
-	if (localStorage.currentSearchProduct) doSearch();
+	doSearch();
 }
 
 $("#paging").delegate(".edit", "click", function (e) {
@@ -117,8 +117,8 @@ let doSearch = function () {
 	var searchParams = $("#searchForm").serializeObject();
 	let product = $("#product").val();
 	if (!product) {
-		gf.layerMsg("需指定查询数据的产线名称！");
-		return;
+		// gf.layerMsg("需指定查询数据的产线名称！");
+		// return;
 	}
 	localStorage.currentSearchProduct = product;
 	window.datagrid.setOptions({
