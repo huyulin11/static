@@ -183,7 +183,7 @@ let params = {
 	columns: _columns,
 	jsonUrl: '/shipment/main/findWithDetail.shtml',
 	checkbox: true,
-	searchInInit: !["PRIORITY", "PRODUCT"].includes(_type),
+	searchInInit: false,
 	serNumber: true,
 	callback: function () {
 		let keys = $(".relationid").map(function () { return $(this).html() }).get().join(":");
@@ -250,9 +250,7 @@ export var init = function () {
 
 	window.datagrid = dataGrid(params);
 	renderAll();
-	if (["PRIORITY", "PRODUCT"].includes(_type)) {
-		doSearch();
-	}
+	doSearch();
 }
 
 let doSearch = function () {
