@@ -59,7 +59,28 @@ var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
 		return obj.renderData(rowindex, data, rowdata, clm, json);
 	} else {
-		return json[obj.colkey] ? json[obj.colkey] : (data ? data : (obj.defaultVal == undefined ? "" : obj.defaultVal));
+		if (json[obj.colkey]) {
+			return json[obj.colkey];
+		} else {
+			let keys = obj.colkey.split(".");
+			if (keys) {
+				let item = json;
+				let target;
+				keys.forEach(function (i, y) {
+					item = item[i];
+					if (item) {
+						if (i = keys.length - 1) {
+							target = item;
+							return;
+						}
+					} else {
+						return;
+					}
+				});
+				if (target) return target;
+			}
+		}
+		return (data ? data : (obj.defaultVal == undefined ? "" : obj.defaultVal));
 	}
 }
 
