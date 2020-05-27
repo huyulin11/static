@@ -89,7 +89,10 @@ var initBtns = function () {
             let that = this;
             let work = function (index) {
                 gf.ajax(that.url, { key: cbox }, "json", function (s) {
-                    gf.layerMsg("下发呼叫指令成功！");
+                    var layerMsg = "下发呼叫指令成功！"
+                    if (s.msg)
+                        layerMsg = s.msg;
+                    gf.layerMsg(layerMsg);
                 });
             }
             layer.confirm(`对${cbox}，确定呼叫AGV送出料架？`, function (index) { work(index); });
@@ -103,7 +106,10 @@ var initBtns = function () {
             let that = this;
             let work = function (index) {
                 gf.ajax(that.url, { key: cbox }, "json", function (s) {
-                    gf.layerMsg("下发呼叫指令成功！");
+                    var layerMsg = "下发呼叫指令成功！"
+                    if (s.msg)
+                        layerMsg = s.msg;
+                    gf.layerMsg(layerMsg);
                 });
             }
             layer.confirm(`对${cbox}，确定让AGV送料架返库？`, function (index) { work(index); });
