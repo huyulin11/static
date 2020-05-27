@@ -69,7 +69,8 @@ var agvinfo = function () {
 		cache: false,
 		success: refresh,
 		complete: function (data) {
-			$("#title").html(agvId + "号AGV控制");
+			let name = findIotInfo(agvId, "name");
+			$("#title").html(name + "控制");
 			$(".black_overlay").hide();
 		},
 		error: function (e) { console.log(e); },
@@ -449,10 +450,12 @@ export var init = function (target) {
 
 	var initBtns = jQuery.parseJSON(localStorage.agvControl);
 	for (var btn of initBtns) {
-		$(_target).append(`<td><div><button id='${btn.id}'`
-			+ ((btn.color) ? (`data-backcolor='${btn.color}'`) : "")
-			+ ((btn.to) ? (`data-to='${btn.to}'`) : "")
-			+ `>${btn.name}</button></div></td>`);
+		if (!btn.hide) {
+			$(_target).append(`<td><div><button id='${btn.id}'`
+				+ ((btn.color) ? (`data-backcolor='${btn.color}'`) : "")
+				+ ((btn.to) ? (`data-to='${btn.to}'`) : "")
+				+ `>${btn.name}</button></div></td>`);
+		}
 	}
 
 	allDisabled();

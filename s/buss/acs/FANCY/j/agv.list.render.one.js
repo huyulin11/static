@@ -163,10 +163,11 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
     var siteStatusVal = ['CSY_DAJ', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].indexOf(localStorage.projectKey) >= 0 ?
         `<tr><td>${showVal.siteStatusVal}</td><td>${showVal.currentsite}</td></tr>` : ``;
 
+    let name = findIotInfo(agvinfo.id, "name");
     var tmpStr = `<td class='agv'><div>
         <button id='${agvinfo.id}' style='background-color:${showVal.colorStyle};'>
         <table cellspacing='0px' cellspadding='2px'>
-        <tr><td>${agvinfo.id}号AGV</td>
+        <tr><td>${name}</td>
         <td>${showVal.moveStatusVal}</td></tr>${siteStatusVal}
         <tr><td>${showVal.battery}</td><td>${showVal.speed}</td></tr>
         <tr><td colspan='2'>${showVal.taskStatusVal}</td></tr>
