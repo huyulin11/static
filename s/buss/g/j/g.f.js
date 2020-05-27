@@ -508,8 +508,8 @@ class GF {
             localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
         return localStorage.layerArea.split(",");
     };
-    renderBtnTable(conf) {
-        var datas = conf.data, renderOne = conf.render, numInLine = conf.numInLine ? 4 : conf.numInLine;
+    renderBtnTable(conf, callback) {
+        var datas = conf.data, renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4;
         var target = conf.target;
         var index = 1;
         var tmpStr = "";
@@ -528,6 +528,7 @@ class GF {
         if (tmpStr) {
             $(target).append(`<tr>${tmpStr}</tr>`);
         }
+        if (callback) callback();
     }
 }
 
