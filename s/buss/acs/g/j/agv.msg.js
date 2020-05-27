@@ -13,7 +13,7 @@
         var w = "";
         if (agvId) {
             if (agvId > 0) {
-                w = "<span class='redFont tips'>" + agvId + "号AGV：</span>";
+                w = "<span class='redFont tips'>" + agvId + "号车：</span>";
             } else {
                 w = "<span class='redFont tips'>系统消息：</span>";
             }

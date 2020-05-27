@@ -508,6 +508,27 @@ class GF {
             localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
         return localStorage.layerArea.split(",");
     };
+    renderBtnTable(conf) {
+        var datas = conf.data, renderOne = conf.render, numInLine = conf.numInLine ? 4 : conf.numInLine;
+        var target = conf.target;
+        var index = 1;
+        var tmpStr = "";
+        for (var item of datas) {
+            var tmpItemStr = renderOne(item);
+            if (!tmpItemStr) continue;
+            tmpStr = tmpStr + tmpItemStr;
+            if (index >= numInLine) {
+                $(target).append(`<tr>${tmpStr}</tr>`);
+                index = 1;
+                tmpStr = "";
+            } else {
+                index++;
+            }
+        }
+        if (tmpStr) {
+            $(target).append(`<tr>${tmpStr}</tr>`);
+        }
+    }
 }
 
 var gf = new GF();

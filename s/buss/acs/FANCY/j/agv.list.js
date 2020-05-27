@@ -52,7 +52,17 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         var height = "300px";
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         localStorage.setItem("currentAgvId", tmpAgvId);
-        $("#oneAgv").css("height", height).attr("src", "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId);
+        let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
+        // $("#oneAgv").css("height", height).attr("src", url);
+        layer.open({
+            type: 2,
+            title: '单车管理',
+            shadeClose: false,
+            shade: 0.5,
+            maxmin: true,
+            area: gf.layerArea(),
+            content: url
+        });
         return;
     }
     if (tmpAgvId == 1) {
@@ -71,11 +81,6 @@ var init = function () {
     intervalVal = setInterval(getAgvList, 3000);
     if (localStorage.projectKey == 'TAIKAI_JY')
         setInterval(checkLogin, 5 * 60 * 1000);
-
-    var currentAgvId = localStorage.currentAgvId;
-    if (currentAgvId) {
-        openAGVMGR(currentAgvId);
-    }
 
     agvDiv().delegate("button", "click", function () {
         openAGVMGR($(this).attr("id"), $(this).html());

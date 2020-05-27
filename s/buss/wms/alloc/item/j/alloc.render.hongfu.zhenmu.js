@@ -31,27 +31,6 @@ var renderOne = function (allocationInfo) {
     return tmpStr;
 }
 
-var doRender = function (allAlloc) {
-    var index = 1;
-    var numInLine = 4;
-    var tmpStr = "";
-    for (var allocationInfo of allAlloc) {
-        var tmpItemStr = renderOne(allocationInfo);
-        if (!tmpItemStr) continue;
-        tmpStr = tmpStr + tmpItemStr;
-        if (index >= numInLine) {
-            $("table.alloc").append("<tr class='allocTr'>" + tmpStr + "</tr>");
-            index = 1;
-            tmpStr = "";
-        } else {
-            index++;
-        }
-    }
-    if (tmpStr) {
-        $("table.alloc").append("<tr class='allocTr'>" + tmpStr + "</tr>");
-    }
-}
-
 var dealData = function (data) {
     if (data.length > 1000) {
         return data.slice(0, 1000);
@@ -74,6 +53,7 @@ export var render = function (data) {
 var toRender = function (data) {
     if (!data || data.length == 0) return;
     var filterData = dealData(data);
-    doRender(filterData);
+    let conf = { data: filterData, numInLine: 4, render: renderOne, target: "table.alloc" };
+    gf.renderBtnTable(conf);
     gf.resizeTable();
 }
