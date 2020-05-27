@@ -516,7 +516,7 @@ class GF {
         for (var item of datas) {
             var tmpItemStr = renderOne(item);
             if (!tmpItemStr) continue;
-            tmpStr = tmpStr + tmpItemStr;
+            tmpStr = tmpStr + "<td>" + tmpItemStr + "</td>";
             if (index >= numInLine) {
                 $(target).append(`<tr>${tmpStr}</tr>`);
                 index = 1;
@@ -529,6 +529,13 @@ class GF {
             $(target).append(`<tr>${tmpStr}</tr>`);
         }
         if (callback) callback();
+    }
+    getArray(target) {
+        var arr = [];
+        $(target).each(function () {
+            arr.push(this);
+        });
+        return arr;
     }
 }
 

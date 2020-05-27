@@ -442,7 +442,7 @@ div#doChangeDiv {
 	font-size: 12px;
 }
 
-div[id='targets'] button.choosed {
+button.choosed {
 	background-color: #EB7347;
 }
 

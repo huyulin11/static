@@ -16,7 +16,7 @@ var renderOne = function (allocationInfo) {
         var skuInfo = "<font style='font-size: 10px;'>" + skuTypeName + "</font>";
         var weightNum = "<font style='font-weight: bolder;'>" + ((allocationInfo.status != 1) ? allocationInfo.num : "0") + "</font>";
         showInfo = skuInfo + "<hr/>" + weightNum + "<hr/>" + showInfo;
-        tmpStr = "<td><div><button "
+        tmpStr = "<div><button "
             + "data-id='" + allocationInfo.id + "'"
             + " data-rowId='" + allocationInfo.rowId + "'"
             + " data-colId='" + allocationInfo.colId + "'"
@@ -26,7 +26,7 @@ var renderOne = function (allocationInfo) {
             + " data-status='" + allocationInfo.status + "'"
             + " data-skuid='" + allocationInfo.skuId + "'"
             + disabled + ">" + showInfo
-            + "</button></div></td>";
+            + "</button></div>";
     }
     return tmpStr;
 }
