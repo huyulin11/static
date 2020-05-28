@@ -51,7 +51,7 @@
                     addMsg(value.systemWarning, 1, n);
                     if (n > 0) {
                         if (value.currentTask != null && value.currentTask.length > 0) {
-                            var msg = (value.currentTask[0].opflag == "Over" ? "执行结束：" : "正在执行：") + value.currentTask[0].taskText;
+                            var msg = (value.currentTask[0].opflag == "OVER" ? "执行结束：" : "正在执行：") + value.currentTask[0].taskText;
                             addMsg(msg, 3, n);
                         }
                     } else {
