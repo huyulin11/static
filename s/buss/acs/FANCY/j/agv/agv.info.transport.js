@@ -2,6 +2,7 @@ import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 
 var agvId = currentAgvId;
 let container, _target;
@@ -82,9 +83,11 @@ export var init = function (target) {
 		}
 		let nameArr = [];
 		for (let item of targetArr) {
-			nameArr.push($(item).html());
+			nameArr.push(`<span data-id='${$(item).data("id")}'>
+			${$(item).html()}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
+			</span>`);
 		}
-		chooedBtns.html("选中的站点：" + nameArr.join("、"));
+		chooedBtns.html(nameArr.join("-->"));
 	});
 
 	var transportHandler = function (that) {
@@ -92,7 +95,11 @@ export var init = function (target) {
 		let arrSub = [];
 		for (let item of targetArr) {
 			let json = $(item).data("json");
-			arrSub.push({ flag: $(item).data("flag"), site: json.name || $(item).html(), id: $(item).data("id"), arriveact: 'WAITING', name: $(item).html() });
+			let arriveact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
+			arrSub.push({
+				arriveact: arriveact, site: json.name || $(item).html(),
+				id: $(item).data("id"), arriveact: 'WAITING', name: $(item).html()
+			});
 		}
 		if (window.confirm("确定下达此任务？")) {
 			layer.msg(taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub)));
