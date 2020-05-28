@@ -96,10 +96,10 @@ export var init = function (target) {
 		let arrSub = [];
 		for (let item of targetArr) {
 			let json = $(item).data("json");
-			let arriveact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
+			let arrivedact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
 			arrSub.push({
-				arriveact: arriveact, site: json.name || $(item).html(),
-				id: $(item).data("id"), arriveact: 'WAITING', name: $(item).html()
+				arrivedact: arrivedact, site: json.name || $(item).html(),
+				id: $(item).data("id"), name: $(item).html()
 			});
 		}
 		if (window.confirm("确定下达此任务？")) {
