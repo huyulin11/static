@@ -68,6 +68,19 @@ var getShowVal = function (agvinfo) {
         json = JSON.parse(agvinfo.json);
         if (json) {
             target = json.TO;
+            try {
+                let targetJson = JSON.parse(target);
+                if (targetJson instanceof Array) {
+                    let showTarget = [];
+                    for (let i of targetJson) {
+                        showTarget.push(i.site);
+                    }
+                    target = showTarget.join("、");
+                } else if (targetJson instanceof Object) {
+                    target = targetJson.site;
+                }
+            } catch (error) {
+            }
             remark = json.REMARK;
         }
     }

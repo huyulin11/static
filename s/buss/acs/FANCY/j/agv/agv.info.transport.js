@@ -7,7 +7,7 @@ var agvId = currentAgvId;
 let container, _target;
 
 var renderLap = function (item) {
-	var tmpStr = ` class='flag' data-flag='lap' `;
+	var tmpStr = ` class='flag' data-name='${item.lapName}' `;
 	var disabled = "";
 	for (let i in item) {
 		tmpStr += ` data-${i}='${item[i]}' `;
@@ -17,7 +17,7 @@ var renderLap = function (item) {
 }
 
 var renderSite = function (item) {
-	var tmpStr = ` class='flag' data-flag='site' `;
+	var tmpStr = ` class='flag' data-name='${item.sitename}' `;
 	var disabled = "";
 	for (let i in item) {
 		tmpStr += ` data-${i}='${item[i]}' `;
@@ -68,31 +68,31 @@ export var init = function (target) {
 	let ops = $(`<div id='ops'><button>下达任务</button></div>`);
 	container.append(ops);
 
-	let targets = new Array();
+	let targetArr = new Array();
 	container.delegate("button.flag", "click", function () {
 		var that = this;
 		var data = that;//$(that).data();
 		if ($(that).hasClass("choosed")) {
 			$(that).removeClass("choosed");
-			let a = target.indexOf(data);
-			targets.splice(a);
+			let a = targetArr.indexOf(data);
+			targetArr.splice(a, 1);
 		} else {
 			$(that).addClass("choosed");
-			targets.push(data);
+			targetArr.push(data);
 		}
 		let nameArr = [];
-		for (let item of targets) {
+		for (let item of targetArr) {
 			nameArr.push($(item).html());
 		}
 		chooedBtns.html("选中的站点：" + nameArr.join("、"));
 	});
 
 	var transportHandler = function (that) {
-		if (targets.length <= 0) { gf.layerMsg("没有选中需要操作的站点！"); return; }
+		if (targetArr.length <= 0) { gf.layerMsg("没有选中需要操作的站点！"); return; }
 		let arrSub = [];
-		for (let item of targets) {
+		for (let item of targetArr) {
 			let json = $(item).data("json");
-			arrSub.push({ flag: $(item).data("flag"), site: json.name, id: $(item).data("id"), arriveact: 'WAITING', name: $(item).html() });
+			arrSub.push({ flag: $(item).data("flag"), site: json.name || $(item).html(), id: $(item).data("id"), arriveact: 'WAITING', name: $(item).html() });
 		}
 		if (window.confirm("确定下达此任务？")) {
 			layer.msg(taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub)));
