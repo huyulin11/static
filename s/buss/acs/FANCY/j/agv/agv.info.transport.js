@@ -92,6 +92,7 @@ export var init = function (target) {
 
 	var transportHandler = function (that) {
 		if (targetArr.length <= 0) { gf.layerMsg("没有选中需要操作的站点！"); return; }
+		if (targetArr.length > 10) { gf.layerMsg("选中需要操作的站点数不能超过10个！"); return; }
 		let arrSub = [];
 		for (let item of targetArr) {
 			let json = $(item).data("json");
