@@ -49,6 +49,12 @@ var doWhenSuccess = function (data) {
 
 var openAGVMGR = function (tmpAgvId, layerName) {
     let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
+    if (localStorage.projectKey == "CSY_DAJ") {
+        var height = "300px";
+        if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
+        $("#mainPage").css("height", height).attr("src", url); return;
+    }
+    console.log(url);
     layer.open({
         type: 2,
         title: '单车管理',
@@ -75,10 +81,12 @@ var init = function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
 
-    // var currentAgvId = localStorage.currentAgvId;
-    // if (currentAgvId) {
-    //     openAGVMGR(currentAgvId);
-    // }
+    if (localStorage.projectKey == "CSY_DAJ") {
+        var currentAgvId = localStorage.currentAgvId;
+        if (currentAgvId) {
+            openAGVMGR(currentAgvId);
+        }
+    }
 
     var height = "300px";
     if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
