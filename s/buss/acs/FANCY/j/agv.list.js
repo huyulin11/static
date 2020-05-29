@@ -48,28 +48,17 @@ var doWhenSuccess = function (data) {
 }
 
 var openAGVMGR = function (tmpAgvId, layerName) {
-    {
-        var height = "300px";
-        if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
-        localStorage.setItem("currentAgvId", tmpAgvId);
-        let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
-        $("#mainPage").css("height", height).attr("src", url); return;
-        layer.open({
-            type: 2,
-            title: '单车管理',
-            shadeClose: false,
-            shade: 0.5,
-            maxmin: true,
-            area: gf.layerArea(),
-            content: url
-        });
-        return;
-    }
-    if (tmpAgvId == 1) {
-        gf.layerOpen({ content: '/s/buss/acs/h/agv.one.html?agvId=' + tmpAgvId, title: layerName, offset: 'rb' });
-    } else {
-        gf.layerOpen({ content: '/s/buss/acs/h/agv.one.html?agvId=' + tmpAgvId, title: layerName, offset: 'rb' });
-    }
+    let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
+    layer.open({
+        type: 2,
+        title: '单车管理',
+        shadeClose: false,
+        shade: 0.5,
+        maxmin: true,
+        area: gf.layerArea(),
+        content: url
+    });
+    return;
 }
 
 var checkLogin = function () {
@@ -82,14 +71,18 @@ var init = function () {
     if (localStorage.projectKey == 'TAIKAI_JY')
         setInterval(checkLogin, 5 * 60 * 1000);
 
-    var currentAgvId = localStorage.currentAgvId;
-    if (currentAgvId) {
-        openAGVMGR(currentAgvId);
-    }
-
     agvDiv().delegate("button", "click", function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
+
+    // var currentAgvId = localStorage.currentAgvId;
+    // if (currentAgvId) {
+    //     openAGVMGR(currentAgvId);
+    // }
+
+    var height = "300px";
+    if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
+    // $("#mainPage").css("height", height).attr("src", url);
 }
 
 init();
