@@ -82,7 +82,6 @@ var init = function () {
 
     var height = "300px";
     if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
-    // $("#mainPage").css("height", height).attr("src", url);
 }
 
 init();

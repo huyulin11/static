@@ -20,6 +20,12 @@
 		<fieldset>
 			<legend>主控台</legend>
 			<iframe id="mainPage" frameborder="no" style="width:100%;height:4px;"></iframe>
+			<fieldset>
+				<legend>运输任务</legend>
+				<div id="transport">
+				</div>
+				<p></p>
+			</fieldset>
 		</fieldset>
 		<div id='controlContainer' class="fixed"></div>
 	</div>
@@ -39,6 +45,8 @@
 	import "/s/buss/acs/FANCY/j/agv.list.js";
 	import "/s/buss/acs/g/j/agv.g.js";
 	import "/s/buss/acs/g/j/agv.msg.js";
+	import { init as initTransport } from '/s/buss/acs/FANCY/j/agv/agv.info.transport.js';
+	initTransport('div#transport');
 </script>
 
 </html>
