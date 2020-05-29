@@ -21,6 +21,7 @@ var find = (id) => {
 
 export var findIotInfo = (id, item) => {
     var obj = find(id);
+    if (!obj) return "";
     if (obj[item]) return obj[item];
     var json = JSON.parse(obj.json);
     return json[item];

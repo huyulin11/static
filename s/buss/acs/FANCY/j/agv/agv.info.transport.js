@@ -5,49 +5,33 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 
 var agvId = currentAgvId;
-let container, _target;
-
-var renderLap = function (item) {
-	var tmpStr = ` class='flag' data-name='${item.lapName}' `;
-	var disabled = "";
-	for (let i in item) {
-		tmpStr += ` data-${i}='${item[i]}' `;
-	}
-	tmpStr = `<div><button ${tmpStr} ${disabled}>${item.lapName}</button></div>`;
-	return tmpStr;
-}
+let targetArr = new Array();
+let container, _target, _currentSite = localStorage.currentSite;
+if (_currentSite) console.log("currentSite:" + _currentSite);
 
 var renderSite = function (item) {
-	var tmpStr = ` class='flag' data-name='${item.sitename}' `;
+	let currentFlag = item.id == _currentSite;
+	var tmpStr = ` class='flag ${currentFlag ? "choosed" : ""}' data-name='${item.sitename}' `;
 	var disabled = "";
 	for (let i in item) {
 		tmpStr += ` data-${i}='${item[i]}' `;
 	}
-	tmpStr = `<div><button ${tmpStr} ${disabled}>${item.sitename}</button></div>`;
+	let btn = `<button ${tmpStr} ${disabled}>${item.sitename}<br/>${currentFlag ? "当前站点" : ""}</button>`;
+	if (currentFlag) { targetArr.push($(btn)); }
+	tmpStr = `<div>${btn}</div>`;
 	return tmpStr;
 }
 
 export var init = function (target) {
 	_target = target;
 	container = $(target);
-	let tableLap = $("<table id='laps'></table>");
-	container.append("<span>依次选择站点</span>");
-	container.append(tableLap);
-	// $.ajax({
-	// 	url: '/s/jsons/' + localStorage.projectKey + '/laps.json',
-	// 	async: false,
-	// 	type: 'GET',
-	// 	dataType: 'json',
-	// 	timeout: 5000,
-	// 	cache: false,
-	// 	success: function (data) {
-	// 		let conf = { data: data, numInLine: 4, render: renderLap, target: tableLap };
-	// 		gf.renderBtnTable(conf);
-	// 	},
-	// 	error: function (e) { console.log(e); }
-	// });
 	let tableSite = $("<table id='sites'></table>");
 	container.append(tableSite);
+	let chooedBtns = $(`<span id='chooedBtns'></span>`);
+	container.append(chooedBtns);
+	let ops = $(`<div id='ops'><button>呼叫车辆</button></div>`);
+	container.append(ops);
+
 	$.ajax({
 		url: '/s/jsons/' + localStorage.projectKey + '/sites.json',
 		async: false,
@@ -63,28 +47,27 @@ export var init = function (target) {
 		},
 		error: function (e) { console.log(e); }
 	});
-	let chooedBtns = $(`<span id='chooedBtns'></span>`);
-	container.append(chooedBtns);
 
-	let ops = $(`<div id='ops'><button>下达任务</button></div>`);
-	container.append(ops);
-
-	let targetArr = new Array();
 	container.delegate("button.flag", "click", function () {
 		var that = this;
 		var data = that;//$(that).data();
 		if ($(that).hasClass("choosed")) {
+			if ($(that).data("id") == _currentSite) {
+				layer.msg("当前站点无法选则！");
+				return;
+			}
 			$(that).removeClass("choosed");
 			let a = targetArr.indexOf(data);
 			targetArr.splice(a, 1);
 		} else {
+			if (localStorage.projectKey == "CSY_CDBP" && targetArr.length >= 2) { gf.layerMsg("选中需要操作的站点数不能超过2个！"); return; }
 			$(that).addClass("choosed");
 			targetArr.push(data);
 		}
 		let nameArr = [];
 		for (let item of targetArr) {
 			nameArr.push(`<span data-id='${$(item).data("id")}'>
-			${$(item).html()}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
+			${$(item).data("name")}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
 			</span>`);
 		}
 		chooedBtns.html(nameArr.join("-->"));
@@ -98,11 +81,11 @@ export var init = function (target) {
 			let json = $(item).data("json");
 			let arrivedact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
 			arrSub.push({
-				arrivedact: arrivedact, site: json.name || $(item).html(),
-				id: $(item).data("id"), name: $(item).html()
+				arrivedact: arrivedact, site: json.name || $(item).data("name"),
+				id: $(item).data("id"), name: $(item).data("name")
 			});
-		}
-		if (window.confirm("确定下达此任务？")) {
+		} console.log(JSON.stringify(arrSub));
+		if (window.confirm("确定呼叫车辆？")) {
 			layer.msg(taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub)));
 		}
 	}
