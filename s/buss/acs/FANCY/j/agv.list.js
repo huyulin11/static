@@ -53,7 +53,7 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         localStorage.setItem("currentAgvId", tmpAgvId);
         let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
-        $("#oneAgv").css("height", height).attr("src", url); return;
+        $("#mainPage").css("height", height).attr("src", url); return;
         layer.open({
             type: 2,
             title: '单车管理',
