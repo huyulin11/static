@@ -9,19 +9,6 @@ let targetArr = new Array();
 let container, _target, _currentSite = localStorage.currentSite;
 if (_currentSite) console.log("currentSite:" + _currentSite);
 
-var renderSite = function (item) {
-	let currentFlag = item.id == _currentSite;
-	var tmpStr = ` class='flag ${currentFlag ? "choosed" : ""}' data-name='${item.sitename}' `;
-	var disabled = "";
-	for (let i in item) {
-		tmpStr += ` data-${i}='${item[i]}' `;
-	}
-	let btn = `<button ${tmpStr} ${disabled}>${item.sitename}<br/>${currentFlag ? "当前站点" : ""}</button>`;
-	if (currentFlag) { targetArr.push($(btn)); }
-	tmpStr = `<div>${btn}</div>`;
-	return tmpStr;
-}
-
 export var init = function (target) {
 	_target = target;
 	container = $(target);
@@ -31,6 +18,29 @@ export var init = function (target) {
 	container.append(chooedBtns);
 	let ops = $(`<div id='ops'><button>呼叫车辆</button></div>`);
 	container.append(ops);
+
+	let showPath = () => {
+		let nameArr = [];
+		for (let item of targetArr) {
+			nameArr.push(`<span data-id='${$(item).data("id")}'>
+			${$(item).data("name")}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
+			</span>`);
+		}
+		chooedBtns.html(nameArr.join("-->"));
+	}
+
+	var renderSite = function (item) {
+		let currentFlag = item.id == _currentSite;
+		var tmpStr = ` class='flag ${currentFlag ? "choosed" : ""}' data-name='${item.sitename}' `;
+		var disabled = "";
+		for (let i in item) {
+			tmpStr += ` data-${i}='${item[i]}' `;
+		}
+		let btn = `<button ${tmpStr} ${disabled}>${item.sitename}<br/>${currentFlag ? "当前站点" : ""}</button>`;
+		if (currentFlag) { targetArr.push($(btn)); showPath(); }
+		tmpStr = `<div>${btn}</div>`;
+		return tmpStr;
+	}
 
 	$.ajax({
 		url: '/s/jsons/' + localStorage.projectKey + '/sites.json',
@@ -53,7 +63,7 @@ export var init = function (target) {
 		var data = that;//$(that).data();
 		if ($(that).hasClass("choosed")) {
 			if ($(that).data("id") == _currentSite) {
-				layer.msg("当前站点无法选则！");
+				layer.msg("当前站点无法选择！");
 				return;
 			}
 			$(that).removeClass("choosed");
@@ -64,13 +74,7 @@ export var init = function (target) {
 			$(that).addClass("choosed");
 			targetArr.push(data);
 		}
-		let nameArr = [];
-		for (let item of targetArr) {
-			nameArr.push(`<span data-id='${$(item).data("id")}'>
-			${$(item).data("name")}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
-			</span>`);
-		}
-		chooedBtns.html(nameArr.join("-->"));
+		showPath();
 	});
 
 	var transportHandler = function (that) {

@@ -48,7 +48,7 @@
             cache: false,
             success: function (data) {
                 $.each(data, function (n, value) {
-                    addMsg(value.systemWarning, 1, n);
+                    if (value.systemWarning) addMsg(value.systemWarning, 1, n);
                     if (n > 0) {
                         if (value.currentTask != null && value.currentTask.length > 0) {
                             var msg = (value.currentTask[0].opflag == "OVER" ? "执行结束：" : "正在执行：") + value.currentTask[0].taskText;
