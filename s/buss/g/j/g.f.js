@@ -451,7 +451,8 @@ class GF {
     layerMsg(content, end) {
         layer.msg(content, {
             time: 0, //...s后自动关闭
-            btn: ['关闭']
+            btn: ['关闭'],
+            shade: 0.1,
         }, function () {
             if (end && typeof end == 'function') { end(); }
         });
