@@ -165,13 +165,9 @@ var taskPath = function () {
     });
 }
 
-if ("AHYF2" == "AHYF") {
-    udp = [];
-} else {
-    taskSiteLogic();
-    taskSiteLocation();
-    taskPath();
-}
+taskSiteLogic();
+taskSiteLocation();
+taskPath();
 
 var rectPoint = [
     [-21650, 3500], [-21650, -4600], [-3650, -4600], [-3650, 3500]
