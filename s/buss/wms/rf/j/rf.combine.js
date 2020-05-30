@@ -14,18 +14,25 @@ var sub = function () {
     let _su = $("#su").val();
     let _tu = $("#tu").val();
     let _to = $("#to").val();
-    if (!_su || !_tu) {
-        gf.layerMsg("TU与SU均不能为空！");
-        if (!_su) {
-            $("#su").focus();
-        } else if (!_tu) {
-            $("#tu").focus();
-        }
+    let _line = $("#line").val();
+    if (!_tu) {
+        gf.layerMsg("TU不能为空！");
+        $("#tu").focus();
         return;
+    }
+    if (!_su) {
+        if (!_line) {
+            if (!window.confirm("SU为空时提交，会组成空托盘上PCS，是否继续？")) {
+                $("#su").focus();
+                return;
+            }
+            $("#lineTr").removeClass("hidden");
+            return;
+        }
     }
     gf.doAjax({
         url: `/shipment/detail/addCombinedItem.shtml`,
-        data: { item: _su.trim(), userdef4: _tu.trim(), warehouse: _warehouse, to: _to },
+        data: { item: _su.trim(), userdef4: _tu.trim(), warehouse: _warehouse, to: _to, line: _line },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             gf.layerMsg(data.msg);
@@ -115,6 +122,11 @@ var initRf = function () {
             tuEnter: function () {
                 $("#su").focus();
             },
+            suInput: function () {
+                if (!$("#lineTr").hasClass("hidden")) {
+                    $("#lineTr").addClass("hidden");
+                }
+            },
             getCombinedList: function () {
                 getCombinedList();
             },
@@ -129,6 +141,9 @@ var initRf = function () {
                 setTimeout(() => {
                     getCombinedList();
                 }, 3000);
+            },
+            lineEnter: function () {
+                sub();
             },
         }
     });
