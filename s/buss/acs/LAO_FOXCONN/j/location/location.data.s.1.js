@@ -27,6 +27,12 @@ var agvsColor = {
     agv8: "#483D8B",
     agv9: "#2EEB57",
     agv10: "#FFCB20",
+    agv11: "#FFCB20",
+    agv12: "#FFCB20",
+    agv13: "#FFCB20",
+    agv14: "#FFCB20",
+    agv15: "#FFCB20",
+    agv16: "#FFCB20",
     path: "gray"
 };
 
@@ -179,44 +185,8 @@ var testInitPoint = {
     "10": [-54000, -12000]
 }
 
-var inAgv1 = function (d) {
-    return inArr(d, datasetMap[1]);
-}
-
-var inAgv2 = function (d) {
-    return inArr(d, datasetMap[2]);
-}
-
-var inAgv3 = function (d) {
-    return inArr(d, datasetMap[3]);
-}
-
-var inAgv4 = function (d) {
-    return inArr(d, datasetMap[4]);
-}
-
-var inAgv5 = function (d) {
-    return inArr(d, datasetMap[5]);
-}
-
-var inAgv6 = function (d) {
-    return inArr(d, datasetMap[6]);
-}
-
-var inAgv7 = function (d) {
-    return inArr(d, datasetMap[7]);
-}
-
-var inAgv8 = function (d) {
-    return inArr(d, datasetMap[8]);
-}
-
-var inAgv9 = function (d) {
-    return inArr(d, datasetMap[9]);
-}
-
-var inAgv10 = function (d) {
-    return inArr(d, datasetMap[10]);
+var inAgv = function (d, num) {
+    return inArr(d, datasetMap[num]);
 }
 
 var inTaskPath = function (d) {
@@ -240,26 +210,11 @@ var inArr = function (d, arr) {
 var getColor = function (d) {
     if (inUdp(d)) {
         return agvsColor.point;
-    } else if (inAgv1(d)) {
-        return agvsColor.agv1;
-    } else if (inAgv2(d)) {
-        return agvsColor.agv2;
-    } else if (inAgv3(d)) {
-        return agvsColor.agv3;
-    } else if (inAgv4(d)) {
-        return agvsColor.agv4;
-    } else if (inAgv5(d)) {
-        return agvsColor.agv5;
-    } else if (inAgv6(d)) {
-        return agvsColor.agv6;
-    } else if (inAgv7(d)) {
-        return agvsColor.agv7;
-    } else if (inAgv8(d)) {
-        return agvsColor.agv8;
-    } else if (inAgv9(d)) {
-        return agvsColor.agv9;
-    } else if (inAgv10(d)) {
-        return agvsColor.agv10;
+    }
+    for (let i = 1; i <= 10; i++) {
+        if (inAgv(d, i)) {
+            return agvsColor["agv" + i];
+        }
     }
     if (inTaskPath(d)) { return agvsColor.path; }
     return "#000";

@@ -45,17 +45,17 @@
 <script src="/s/j/jquery-1.12.2.min.js"></script>
 <script src="/s/j/d3/d3.min.js"></script>
 <script src="/s/j/layer/v3.1.3/layer.js"></script>
-<script type="moudle" src="/s/buss/g/j/g.p.js"></script>
 <script src="/s/buss/acs/LAO_FOXCONN/j/location/location.data.s.1.js"></script>
 <script src="/s/buss/acs/LAO_FOXCONN/j/location/location.data.s.2.js"></script>
-<script src="/s/buss/acs/LAO_FOXCONN/j/location/location.data.js"></script>
-<script src="/s/buss/acs/LAO_FOXCONN/j/location/location.render.js"></script>
-<script src="/s/buss/acs/LAO_FOXCONN/j/location/location.init.js"></script>
-<!-- <script src="/s/buss/acs/j/agv.msg.js"></script> -->
 
-<script>
+<script type="module">
     import { gf } from "/s/buss/g/j/g.f.js";
-    gf.quote("/s/buss/acs/FANCY/j/acs.control.js");
+    import { gp } from "/s/buss/g/j/g.p.js";
+    import "/s/buss/acs/FANCY/j/acs.control.js";
+    import "/s/buss/acs/LAO_FOXCONN/j/location/location.init.js";
+    import { renderSvg } from "/s/buss/acs/LAO_FOXCONN/j/location/location.render.js";
+    renderSvg();
+    setInterval(renderSvg, 3000);
 </script>
 
 </html>
