@@ -47,9 +47,12 @@ var doWhenSuccess = function (data) {
     gf.resizeTable();
 }
 
+let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN"].includes(localStorage.projectKey);
+
 var openAGVMGR = function (tmpAgvId, layerName) {
     let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
-    if (localStorage.projectKey == "CSY_DAJ") {
+    if (innerAgvDetail) {
+        localStorage.currentAgvId = tmpAgvId;
         var height = "300px";
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         $("#mainPage").css("height", height).attr("src", url); return;
@@ -81,7 +84,7 @@ var init = function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
 
-    if (localStorage.projectKey == "CSY_DAJ") {
+    if (innerAgvDetail) {
         var currentAgvId = localStorage.currentAgvId;
         if (currentAgvId) {
             openAGVMGR(currentAgvId);
