@@ -21,26 +21,6 @@
     <div id="rootContainer" class="hidden">
         <div id="agvDetail"></div>
     </div>
-    <!-- <div id="toggleColor" class="toggleColor">
-        <span>切换背景色</span>
-    </div>
-    <div id="watchDiv" class="toggleColor">
-        <div data-id="1" class="watch">
-            <span>调看监控1</span>
-        </div>
-        <p></p>
-        <div data-id="2" class="watch">
-            <span>调看监控2</span>
-        </div>
-        <p></p> 
-        <div data-id="3" class="watch">
-            <span>启动</span>
-        </div>
-        <p></p>
-        <div data-id="4" class="watch">
-            <span>停止</span>
-        </div> -->
-    </div>
 </body>
 <script src="/s/j/jquery-1.12.2.min.js"></script>
 <script src="/s/j/d3/d3.min.js"></script>
@@ -52,7 +32,7 @@
     import { gf } from "/s/buss/g/j/g.f.js";
     import { gp } from "/s/buss/g/j/g.p.js";
     import "/s/buss/acs/FANCY/j/acs.control.js";
-    import "/s/buss/acs/location/LAO_FOXCONN/location.init.js";
+    import "/s/buss/acs/location/BASE/location.init.js";
     import { renderSvg } from "/s/buss/acs/location/LAO_FOXCONN/location.render.js";
     renderSvg();
     setInterval(renderSvg, 3000);

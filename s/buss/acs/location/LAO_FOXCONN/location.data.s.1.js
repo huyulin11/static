@@ -15,27 +15,6 @@ var currentTasks;
 var currentAgvs;
 var initColor = "#ddd";
 
-var agvsColor = {
-    point: "red",
-    agv1: "blue",
-    agv2: "brown",
-    agv3: "green",
-    agv4: "#F0F",
-    agv5: "#0BF",
-    agv6: "#C4B661",
-    agv7: "#C71585",
-    agv8: "#483D8B",
-    agv9: "#2EEB57",
-    agv10: "#FFCB20",
-    agv11: "#FFCB20",
-    agv12: "#FFCB20",
-    agv13: "#FFCB20",
-    agv14: "#FFCB20",
-    agv15: "#FFCB20",
-    agv16: "#FFCB20",
-    path: "gray"
-};
-
 var logicSuccess = function (data) {
     for (var val of data) {
         logic.push({ "siteid": val.siteid, "nextid": val.nextid });
@@ -136,10 +115,6 @@ var pathSuccess = function (data) {
     }
 }
 
-var color = function (val, object) {
-    if (val.opflag == "OVER") { return agvsColor.path };
-    return agvsColor["agv" + object.agvId];
-}
 
 var taskSiteLogic = function () {
     $.ajax({
@@ -183,41 +158,6 @@ var testInitPoint = {
     "6": [-46000, -12000], "7": [-48000, -12000],
     "8": [-50000, -12000], "9": [-52000, -12000],
     "10": [-54000, -12000]
-}
-
-var inAgv = function (d, num) {
-    return inArr(d, datasetMap[num]);
-}
-
-var inTaskPath = function (d) {
-    return inArr(d, lastTaskPath);
-}
-
-var inUdp = function (d) {
-    return inArr(d, udp);
-}
-
-var inArr = function (d, arr) {
-    if (arr == null || arr.length == 0) { return false; }
-    for (var a in arr) {
-        if (arr[a][0] == d[0] && arr[a][1] == d[1]) {
-            return true;
-        }
-    }
-    return false;
-}
-
-var getColor = function (d) {
-    if (inUdp(d)) {
-        return agvsColor.point;
-    }
-    for (let i = 1; i <= 10; i++) {
-        if (inAgv(d, i)) {
-            return agvsColor["agv" + i];
-        }
-    }
-    if (inTaskPath(d)) { return agvsColor.path; }
-    return "#000";
 }
 
 var domainYVal = [-1700, 100];
