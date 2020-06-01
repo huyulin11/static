@@ -106,7 +106,7 @@
             .attr("fill", "red")
             .attr("r", 20).transition().duration(500)
             .attr("class", function (d) {
-                return inAgv1(d) ? "agv1" : "agv2";
+                return inAgv(d, 1) ? "agv1" : "agv2";
             })
             .attr("cx", function (d) {
                 return padding.left + xScale(d[0]);
@@ -192,29 +192,5 @@
         drawCircle(datasss);
         // drawAxis();
     }
-
-    var equals = function (arr1, arr2) {
-        if (arr1 == null || arr2 == null) {
-            return false;
-        }
-        if (arr1.length != arr2.length) {
-            return false;
-        }
-        for (var i = 0; i < arr1.length; i++) {
-            if (arr1 != arr2) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    var randomColor = function () {
-        return '#' +
-            (function (color) {
-                return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
-                    && (color.length == 6) ? color : arguments.callee(color);
-            })('');
-    };
-
     setInterval(renderSvg, 1000);
 })(jQuery);

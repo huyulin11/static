@@ -1,3 +1,6 @@
+import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
+import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
+
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
     return arrow.attr("markerUnits", "strokeWidth")
@@ -18,8 +21,7 @@ var rectAspect = function (aspect) {
     if (aspect.length == 0) { return; }
 
     var defs = function () {
-        return svg.append("defs")
-            .append("marker")
+        return conf.svg.append("defs").append("marker");
     }
 
     var arrowMarkerGray = defs().attr("id", "gray");
@@ -30,11 +32,12 @@ var rectAspect = function (aspect) {
     arrow(arrowMarkerHere).attr("fill", agvsColor.point);
 
     var line = function () {
-        return svg.append("line")
-            .attr("x1", padding.left + xScale(aspect[a].leftXaxis))
-            .attr("y1", height - padding.bottom - yScale(aspect[a].downYaxis))
-            .attr("x2", padding.left + xScale(aspect[a].aspectXaxis))
-            .attr("y2", height - padding.bottom - yScale(aspect[a].aspectYaxis))
+        return conf.svg.append("line")
+            .attr("x1", conf.padding.left + conf.xScale(aspect[a].leftXaxis))
+            .attr("y1", conf.height - conf.padding.bottom - conf.yScale(aspect[a].downYaxis))
+            .attr("x2", conf.padding.left + xScale(aspect[a].aspectXaxis))
+            .attr("y2", conf.height - conf.padding.bottom - yconf.Scale(aspect[a].aspectYaxis))
+            .attr("y2", conf.height - conf.padding.bottom - yScale(aspect[a].aspectYaxis))
             .attr("class", "aspect")
             .style("stroke-width", "2px");
     }
@@ -45,9 +48,9 @@ var rectAspect = function (aspect) {
             line().style("stroke", aspect[parseInt(a) + 1].color)
                 .attr("marker-end", "url(#gray)");
         } else if (aspect[a].color == aspect[0].color && aspect[a].color != aspect[parseInt(a) + 1].color) {
-            svg.append("image")
-                .attr("x", padding.left + xScale(aspect[a].aspectXaxis) - 15)
-                .attr("y", height - padding.bottom - yScale(aspect[a].aspectYaxis) - 15)
+            conf.svg.append("image")
+                .attr("x", conf.padding.left + conf.xScale(aspect[a].aspectXaxis) - 15)
+                .attr("y", height - conf.padding.bottom - conf.yScale(aspect[a].aspectYaxis) - 15)
                 .attr("width", 30)
                 .attr("height", 30)
                 .attr("xlink:href", "/s/i/agv.png")
@@ -60,11 +63,11 @@ var rectAspect = function (aspect) {
 
 var rectPath = function (yfc) {
     var line = function () {
-        return svg.append("line")
-            .attr("x1", padding.left + xScale(point1[0]))
-            .attr("y1", height - padding.bottom - yScale(point1[1]))
-            .attr("x2", padding.left + xScale(point2[0]))
-            .attr("y2", height - padding.bottom - yScale(point2[1]))
+        return conf.svg.append("line")
+            .attr("x1", conf.padding.left + conf.xScale(point1[0]))
+            .attr("y1", conf.height - conf.padding.bottom - conf.yScale(point1[1]))
+            .attr("x2", conf.padding.left + conf.xScale(point2[0]))
+            .attr("y2", conf.height - conf.padding.bottom - conf.yScale(point2[1]))
             .attr("class", "clashLine")
             .style("stroke-width", "2px");
     }
@@ -88,9 +91,9 @@ var rectPath = function (yfc) {
                 line().style("stroke", area.color);
             }
         }
-        svg.append("text")
-            .attr("x", padding.left + xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
-            .attr("y", height - padding.bottom - yScale((area.downYaxis + area.upYaxis) / 2) + 10)
+        conf.svg.append("text")
+            .attr("x", conf.padding.left + xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
+            .attr("y", height - conf.padding.bottom - yScale((area.downYaxis + area.upYaxis) / 2) + 10)
             .attr("class", "clashLine")
             .style("stroke", "red")
             .style("font-size", "22px")
@@ -120,7 +123,7 @@ function rect() {
     //         var point1 = points[i];
     //         var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
 
-    //         svg.append("line")
+    //         conf.svg.append("line")
     //             .attr("x1", padding.left + xScale(point1[0]))
     //             .attr("y1", height - padding.bottom - yScale(point1[1]))
     //             .attr("x2", padding.left + xScale(point2[0]))
@@ -131,20 +134,20 @@ function rect() {
     //     }
     // }
 
-    svg.append("line")
-        .attr("x1", padding.left + xScale(-90000))
-        .attr("y1", height - padding.bottom - yScale(-2600))
-        .attr("x2", padding.left + xScale(20000))
-        .attr("y2", height - padding.bottom - yScale(-2600))
+    conf.svg.append("line")
+        .attr("x1", conf.padding.left + xScale(-90000))
+        .attr("y1", conf.height - conf.padding.bottom - yScale(-2600))
+        .attr("x2", conf.padding.left + xScale(20000))
+        .attr("y2", conf.height - conf.padding.bottom - yScale(-2600))
         .style("stroke", "#333")
         .attr("class", "mainRoad")
         .style("stroke-width", "1px");
 
-    svg.append("line")
-        .attr("x1", padding.left + xScale(-90000))
-        .attr("y1", height - padding.bottom - yScale(1500))
-        .attr("x2", padding.left + xScale(20000))
-        .attr("y2", height - padding.bottom - yScale(1500))
+    conf.svg.append("line")
+        .attr("x1", conf.padding.left + xScale(-90000))
+        .attr("y1", conf.height - conf.padding.bottom - yScale(1500))
+        .attr("x2", conf.padding.left + xScale(20000))
+        .attr("y2", conf.height - conf.padding.bottom - yScale(1500))
         .style("stroke", "#333")
         .attr("class", "mainRoad")
         .style("stroke-width", "1px");
@@ -154,36 +157,36 @@ function drawCircle(dataset) {
     xScale = d3.scale.linear().domain(domainXVal).range([0, xAxisWidth]);
     yScale = d3.scale.linear().domain(domainYVal).range([0, yAxisWidth]);
 
-    var circleUpdate = svg.selectAll("circle").data(dataset);
+    var circleUpdate = conf.svg.selectAll("circle").data(dataset);
 
     var circleEnter = circleUpdate.enter();
     var circleExit = circleUpdate.exit();
     //update部分的处理方法  
     circleUpdate.transition()//更新数据时启动过渡  
         .duration(500).attr("cx", function (d) {
-            return padding.left + xScale(d[0]);
+            return conf.padding.left + xScale(d[0]);
         }).attr("cy", function (d) {
-            return height - padding.bottom - yScale(d[1]);
+            return height - conf.padding.bottom - yScale(d[1]);
         }).attr("fill", function (d) {
-            return getColor(d);
+            return tool.getColor(d);
         }).attr("r", function (d) {
-            return (inUdp(d)) ? 3 : (inTaskPath(d) ? 4 : 2);
+            return (tool.inUdp(d)) ? 3 : (tool.inTaskPath(d) ? 4 : 2);
         });
 
     circleEnter.append("circle")
         .attr("fill", "red")
         .attr("r", 20).transition().duration(500)
         .attr("class", function (d) {
-            return inAgv(d, 1) ? "agv1" : "agv2";
+            return tool.inAgv(d, 1) ? "agv1" : "agv2";
         })
         .attr("cx", function (d) {
-            return padding.left + xScale(d[0]);
+            return conf.padding.left + xScale(d[0]);
         }).attr("cy", function (d) {
-            return height - padding.bottom - yScale(d[1]);
+            return conf.height - conf.padding.bottom - yScale(d[1]);
         }).attr("fill", function (d) {
-            return getColor(d);
+            return tool.getColor(d);
         }).attr("r", function (d) {
-            return (inUdp(d)) ? 3 : 5;
+            return (tool.inUdp(d)) ? 3 : 5;
         });
 
     circleExit.transition().duration(500).attr("fill", "white").remove();
@@ -201,15 +204,15 @@ function drawAxis() {
     //绘制x轴  
     var svggx;
     var svggy;
-    if (svg.selectAll("g").size() > 0) {
-        svggx = svg.selectAll("g.xaxis");
-        svggy = svg.selectAll("g.yaxis");
+    if (conf.svg.selectAll("g").size() > 0) {
+        svggx = conf.svg.selectAll("g.xaxis");
+        svggy = conf.svg.selectAll("g.yaxis");
     } else {
-        svggx = svg.append("g").attr("class", "xaxis");
-        svggy = svg.append("g").attr("class", "yaxis");
+        svggx = conf.svg.append("g").attr("class", "xaxis");
+        svggy = conf.svg.append("g").attr("class", "yaxis");
     }
-    svggx.attr("transform", "translate(" + padding.left + "," + (height - padding.bottom) + ")").call(xAxis);
-    svggy.attr("transform", "translate(" + padding.left + "," + (height - padding.bottom - yAxisWidth) + ")").call(yAxis);
+    svggx.attr("transform", "translate(" + conf.padding.left + "," + (conf.height - conf.padding.bottom) + ")").call(xAxis);
+    svggy.attr("transform", "translate(" + conf.padding.left + "," + (conf.height - conf.padding.bottom - conf.yAxisWidth) + ")").call(yAxis);
 
     //绘制完坐标轴将值域变回去  
     yScale.range([0, yAxisWidth]);
@@ -232,7 +235,7 @@ var renderSvgFunc = function () {
 
     for (var i in datasetMap) {
         if (i != 9999) {
-            if ((i != 9999 && datasetMap[i] && datasetMap[i].length > 5000) || svg.selectAll("circle").size() == 0) {
+            if ((i != 9999 && datasetMap[i] && datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
                 datasss = [].concat(udp);
                 datasetDetaMap = {};
                 datasetMap[i] = [];
@@ -265,18 +268,18 @@ var drawAgvs = function () {
         var line = function () {
             return svgFixed.append("line")
                 .attr("x1", widthFixed / 5)
-                .attr("y1", heightFixed * i / (currentTasks + 1))
+                .attr("y1", conf.heightFixed * i / (currentTasks + 1))
                 .attr("x2", widthFixed * 4 / 5)
-                .attr("y2", heightFixed * i / (currentTasks + 1))
+                .attr("y2", conf.heightFixed * i / (currentTasks + 1))
                 .attr("class", "agvLine")
                 .style("stroke-width", "2px")
-                .style("stroke", agvsColor["agv" + agv]);
+                .style("stroke", tool.agvsColor["agv" + agv]);
         }
 
         var arrowMarker = svgFixed.append("defs")
             .append("marker")
             .attr("id", agv);
-        arrow(arrowMarker).attr("fill", agvsColor["agv" + agv]);
+        arrow(arrowMarker).attr("fill", tool.agvsColor["agv" + agv]);
         line().attr("x2", widthFixed * 4 / 5);
         line().attr("x2", widthFixed / 2)
             .attr("marker-end", "url(#" + agv + ")");
@@ -284,11 +287,11 @@ var drawAgvs = function () {
         if (i === 1) {
             $("#agvs").append("<div class='agvs' style='width:" + (widthAgvs - widthFixed)
                 + "px" + "; height:100%; float:right'>");
-            $(".agvs").append("<div style='width:100%; height:" + heightFixed / (currentTasks + 1) / 2
+            $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (currentTasks + 1) / 2
                 + "px" + "'>" + "</div>");
         }
-        $(".agvs").append("<div style='width:100%; height:" + heightFixed / (currentTasks + 1)
-            + "; line-height:" + heightFixed / (currentTasks + 1) + "px" + "; color:" + agvsColor["agv" + agv] + "'>"
+        $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (currentTasks + 1)
+            + "; line-height:" + conf.heightFixed / (currentTasks + 1) + "px" + "; color:" + tool.agvsColor["agv" + agv] + "'>"
             + agv + "号AGV" + "</div>");
     }
 }
@@ -298,26 +301,3 @@ var render = function (datasss) {
     //drawAxis();
     drawAgvs();
 }
-
-var equals = function (arr1, arr2) {
-    if (arr1 == null || arr2 == null) {
-        return false;
-    }
-    if (arr1.length != arr2.length) {
-        return false;
-    }
-    for (var i = 0; i < arr1.length; i++) {
-        if (arr1 != arr2) {
-            return false;
-        }
-    }
-    return true;
-}
-
-var randomColor = function () {
-    return '#' +
-        (function (color) {
-            return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
-                && (color.length == 6) ? color : arguments.callee(color);
-        })('');
-};

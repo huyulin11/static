@@ -7,7 +7,20 @@ var heightFixed = $("#agvs").height();
 var svgFixed = d3.select("body").select("#agvs").append("svg").attr("width", widthFixed).attr("fill", "white").attr("height", heightFixed);
 
 var padding = { left: 80, right: 30, top: 50, bottom: 100 };
-var xScale; var yScale;
 var xAxisWidth = width - (padding.left + padding.right) * 2;
 var yAxisWidth = height - (padding.bottom + padding.top) * 2;
 var rectHeight = 200;
+
+export var conf = {
+    width: width,
+    height: height,
+    svg: svg,
+    widthAgvs: widthAgvs,
+    widthFixed: widthFixed,
+    heightFixed: heightFixed,
+    svgFixed: svgFixed,
+    padding: padding,
+    xAxisWidth: xAxisWidth,
+    yAxisWidth: yAxisWidth,
+    rectHeight: rectHeight
+}

@@ -1,4 +1,7 @@
-﻿var lastTaskPath = [];
+﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
+import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
+
+var lastTaskPath = [];
 var datasetMap = {};
 var datasetDetaMap = {};
 var receivedTaskData = "false";
@@ -62,7 +65,7 @@ var pathSuccess = function (data) {
                         yfcs = [];
                         for (var val of object.detail) {
                             if (val.siteid === object.detail[object.detail.length - 1].siteid) {
-                                yfcs.push({ color: color(val, object) });
+                                yfcs.push({ color: tool.color(val, object) });
                                 break;
                             }
                             for (var loca of locations) {
@@ -88,7 +91,7 @@ var pathSuccess = function (data) {
                                                                 "upYaxis": next.y,
                                                                 "aspectXaxis": (loca.x + next.x) / 2,
                                                                 "aspectYaxis": (loca.y + next.y) / 2,
-                                                                color: color(val, object)
+                                                                color: tool.color(val, object)
                                                             });
                                                             break;
                                                         }

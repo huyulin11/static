@@ -1,4 +1,7 @@
-﻿var lastTaskPath = [];
+﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
+import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
+
+var lastTaskPath = [];
 var datasetMap = {};
 var datasetDetaMap = {};
 var receivedTaskData = "false";
