@@ -133,7 +133,7 @@ var init = function () {
 	});
 
 	container().delegate("button#sysLocation", "click", function () {
-		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/location.html");
+		window.open("/s/buss/acs/location/" + localStorage.projectKey + "/location.html");
 	});
 
 	container().delegate("button#taskQuantityBtn", "click", function () {
