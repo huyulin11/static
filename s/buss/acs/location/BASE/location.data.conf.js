@@ -22,5 +22,9 @@ export var conf = {
     padding: padding,
     xAxisWidth: xAxisWidth,
     yAxisWidth: yAxisWidth,
-    rectHeight: rectHeight
+    rectHeight: rectHeight,
+    initColor: "#ddd",
+    currentAgvs: [],
+    yfc: [],
+    yfcs: [],
 }

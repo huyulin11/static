@@ -29,15 +29,15 @@ var rectAspect = function (aspect) {
     var arrowMarkerHere = defs().attr("id", "here");
     arrow(arrowMarkerGray).attr("fill", aspect[0].color);
     arrow(arrowMarkerMultiple).attr("fill", aspect[aspect.length - 1].color);
-    arrow(arrowMarkerHere).attr("fill", agvsColor.point);
+    arrow(arrowMarkerHere).attr("fill", tool.agvsColor.point);
 
     var line = function () {
         return conf.svg.append("line")
             .attr("x1", conf.padding.left + conf.xScale(aspect[a].leftXaxis))
             .attr("y1", conf.height - conf.padding.bottom - conf.yScale(aspect[a].downYaxis))
-            .attr("x2", conf.padding.left + xScale(aspect[a].aspectXaxis))
+            .attr("x2", conf.padding.left + conf.xScale(aspect[a].aspectXaxis))
             .attr("y2", conf.height - conf.padding.bottom - yconf.Scale(aspect[a].aspectYaxis))
-            .attr("y2", conf.height - conf.padding.bottom - yScale(aspect[a].aspectYaxis))
+            .attr("y2", conf.height - conf.padding.bottom - conf.yScale(aspect[a].aspectYaxis))
             .attr("class", "aspect")
             .style("stroke-width", "2px");
     }
@@ -61,7 +61,7 @@ var rectAspect = function (aspect) {
     }
 }
 
-var rectPath = function (yfc) {
+var rectPath = function (yempYfc) {
     var line = function () {
         return conf.svg.append("line")
             .attr("x1", conf.padding.left + conf.xScale(point1[0]))
@@ -72,10 +72,10 @@ var rectPath = function (yfc) {
             .style("stroke-width", "2px");
     }
 
-    for (var a in yfc) {
-        if (a == yfc.length - 1 && yfc[a].color != initColor) { break; }
-        var area = yfc[a];
-        var nextarea = yfc[parseInt(a) + 1];
+    for (var a in yempYfc) {
+        if (a == yempYfc.length - 1 && yempYfc[a].color != conf.initColor) { break; }
+        var area = yempYfc[a];
+        var nextarea = yempYfc[parseInt(a) + 1];
         var points = [[area.rightXaxis, area.upYaxis], [area.leftXaxis, area.downYaxis]];
 
         for (var i = 0; i < points.length; i++) {
@@ -83,17 +83,17 @@ var rectPath = function (yfc) {
             var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
 
             if (nextarea && area.color != nextarea.color) {
-                line().style("stroke", agvsColor.point);
-            } else if (area.color == initColor) {
+                line().style("stroke", conf.agvsColor.point);
+            } else if (area.color == conf.initColor) {
                 line().style("stroke", area.color)
                     .style("stroke-dasharray", "4, 7");
-            } else if (area.color != initColor) {
+            } else if (area.color != conf.initColor) {
                 line().style("stroke", area.color);
             }
         }
         conf.svg.append("text")
-            .attr("x", conf.padding.left + xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
-            .attr("y", height - conf.padding.bottom - yScale((area.downYaxis + area.upYaxis) / 2) + 10)
+            .attr("x", conf.padding.left + conf.xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
+            .attr("y", height - conf.padding.bottom - conf.yScale((area.downYaxis + area.upYaxis) / 2) + 10)
             .attr("class", "clashLine")
             .style("stroke", "red")
             .style("font-size", "22px")
@@ -106,9 +106,9 @@ function rect() {
     $(".clashLine").remove();
     $(".mainRoad").remove();
 
-    rectPath(yfc);
-    rectPath(yfcs);
-    rectAspect(yfcs);
+    rectPath(conf.yfc);
+    rectPath(conf.yfcs);
+    rectAspect(conf.yfcs);
 
     // for (var a in clashArea) {
     //     var area = clashArea[a];
@@ -124,10 +124,10 @@ function rect() {
     //         var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
 
     //         conf.svg.append("line")
-    //             .attr("x1", padding.left + xScale(point1[0]))
-    //             .attr("y1", height - padding.bottom - yScale(point1[1]))
-    //             .attr("x2", padding.left + xScale(point2[0]))
-    //             .attr("y2", height - padding.bottom - yScale(point2[1]))
+    //             .attr("x1", padding.left + conf.xScale(point1[0]))
+    //             .attr("y1", height - padding.bottom - conf.yScale(point1[1]))
+    //             .attr("x2", padding.left + conf.xScale(point2[0]))
+    //             .attr("y2", height - padding.bottom - conf.yScale(point2[1]))
     //             .attr("class", "clashLine")
     //             .style("stroke", "red")
     //             .style("stroke-width", "2px");
@@ -135,27 +135,27 @@ function rect() {
     // }
 
     conf.svg.append("line")
-        .attr("x1", conf.padding.left + xScale(-90000))
-        .attr("y1", conf.height - conf.padding.bottom - yScale(-2600))
-        .attr("x2", conf.padding.left + xScale(20000))
-        .attr("y2", conf.height - conf.padding.bottom - yScale(-2600))
+        .attr("x1", conf.padding.left + conf.xScale(-90000))
+        .attr("y1", conf.height - conf.padding.bottom - conf.yScale(-2600))
+        .attr("x2", conf.padding.left + conf.xScale(20000))
+        .attr("y2", conf.height - conf.padding.bottom - conf.yScale(-2600))
         .style("stroke", "#333")
         .attr("class", "mainRoad")
         .style("stroke-width", "1px");
 
     conf.svg.append("line")
-        .attr("x1", conf.padding.left + xScale(-90000))
-        .attr("y1", conf.height - conf.padding.bottom - yScale(1500))
-        .attr("x2", conf.padding.left + xScale(20000))
-        .attr("y2", conf.height - conf.padding.bottom - yScale(1500))
+        .attr("x1", conf.padding.left + conf.xScale(-90000))
+        .attr("y1", conf.height - conf.padding.bottom - conf.yScale(1500))
+        .attr("x2", conf.padding.left + conf.xScale(20000))
+        .attr("y2", conf.height - conf.padding.bottom - conf.yScale(1500))
         .style("stroke", "#333")
         .attr("class", "mainRoad")
         .style("stroke-width", "1px");
 }
 
 function drawCircle(dataset) {
-    xScale = d3.scale.linear().domain(domainXVal).range([0, xAxisWidth]);
-    yScale = d3.scale.linear().domain(domainYVal).range([0, yAxisWidth]);
+    conf.xScale = d3.scale.linear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
+    conf.yScale = d3.scale.linear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
 
     var circleUpdate = conf.svg.selectAll("circle").data(dataset);
 
@@ -164,9 +164,9 @@ function drawCircle(dataset) {
     //update部分的处理方法  
     circleUpdate.transition()//更新数据时启动过渡  
         .duration(500).attr("cx", function (d) {
-            return conf.padding.left + xScale(d[0]);
+            return conf.padding.left + conf.xScale(d[0]);
         }).attr("cy", function (d) {
-            return height - conf.padding.bottom - yScale(d[1]);
+            return height - conf.padding.bottom - conf.yScale(d[1]);
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
@@ -180,9 +180,9 @@ function drawCircle(dataset) {
             return tool.inAgv(d, 1) ? "agv1" : "agv2";
         })
         .attr("cx", function (d) {
-            return conf.padding.left + xScale(d[0]);
+            return conf.padding.left + conf.xScale(d[0]);
         }).attr("cy", function (d) {
-            return conf.height - conf.padding.bottom - yScale(d[1]);
+            return conf.height - conf.padding.bottom - conf.yScale(d[1]);
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
@@ -196,10 +196,10 @@ function drawCircle(dataset) {
 
 //绘制坐标轴  
 function drawAxis() {
-    var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5);
-    var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5);
+    var xAxis = d3.svg.axis().scale(conf.xScale).orient("bottom").ticks(5);
+    var yAxis = d3.svg.axis().scale(conf.yScale).orient("left").ticks(5);
 
-    yScale.range([yAxisWidth, 0]);
+    conf.yScale.range([yAxisWidth, 0]);
 
     //绘制x轴  
     var svggx;
@@ -215,7 +215,7 @@ function drawAxis() {
     svggy.attr("transform", "translate(" + conf.padding.left + "," + (conf.height - conf.padding.bottom - conf.yAxisWidth) + ")").call(yAxis);
 
     //绘制完坐标轴将值域变回去  
-    yScale.range([0, yAxisWidth]);
+    conf.yScale.range([0, yAxisWidth]);
 
 }
 
@@ -226,36 +226,36 @@ export var renderSvg = function () {
 
 var isRunning = false;
 
-var datasss = [].concat(udp);
+var datasss = [].concat(tool.udfPoints);
 
 var renderSvgFunc = function () {
     if (isRunning) { return; }
 
     isRunning = true;
 
-    for (var i in datasetMap) {
+    for (var i in tool.datasetMap) {
         if (i != 9999) {
-            if ((i != 9999 && datasetMap[i] && datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
-                datasss = [].concat(udp);
-                datasetDetaMap = {};
-                datasetMap[i] = [];
+            if ((i != 9999 && tool.datasetMap[i] && tool.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
+                datasss = [].concat(tool.udfPoints);
+                conf.datasetDetaMap = {};
+                tool.datasetMap[i] = [];
             }
         }
     }
 
-    for (var currentAgvNum in datasetMap) {
+    for (var currentAgvNum in tool.datasetMap) {
 
         if (currentAgvNum == 9999) {
-            lastTaskPath = datasetMap[9999];
+            tool.lastTaskPath = tool.datasetMap[9999];
         } else {
-            if (datasetDetaMap[currentAgvNum] && datasetDetaMap[currentAgvNum].length > 0) {
-                datasss = datasss.concat(datasetDetaMap[currentAgvNum]);
-                datasetDetaMap[currentAgvNum] = [];
+            if (conf.datasetDetaMap[currentAgvNum] && conf.datasetDetaMap[currentAgvNum].length > 0) {
+                datasss = datasss.concat(conf.datasetDetaMap[currentAgvNum]);
+                conf.datasetDetaMap[currentAgvNum] = [];
             }
         }
     }
 
-    render(lastTaskPath.concat(datasss));
+    render(tool.lastTaskPath.concat(datasss));
     isRunning = false;
 }
 
@@ -263,35 +263,35 @@ var drawAgvs = function () {
     $(".agvLine").remove();
     $(".agvs").remove();
 
-    for (var i = 1; i <= currentTasks; i++) {
-        var agv = currentAgvs[i - 1];
+    for (var i = 1; i <= conf.currentTasks; i++) {
+        var agv = conf.currentAgvs[i - 1];
         var line = function () {
-            return svgFixed.append("line")
-                .attr("x1", widthFixed / 5)
-                .attr("y1", conf.heightFixed * i / (currentTasks + 1))
-                .attr("x2", widthFixed * 4 / 5)
-                .attr("y2", conf.heightFixed * i / (currentTasks + 1))
+            return conf.svgFixed.append("line")
+                .attr("x1", conf.widthFixed / 5)
+                .attr("y1", conf.heightFixed * i / (conf.currentTasks + 1))
+                .attr("x2", conf.widthFixed * 4 / 5)
+                .attr("y2", conf.heightFixed * i / (conf.currentTasks + 1))
                 .attr("class", "agvLine")
                 .style("stroke-width", "2px")
                 .style("stroke", tool.agvsColor["agv" + agv]);
         }
 
-        var arrowMarker = svgFixed.append("defs")
+        var arrowMarker = conf.svgFixed.append("defs")
             .append("marker")
             .attr("id", agv);
         arrow(arrowMarker).attr("fill", tool.agvsColor["agv" + agv]);
-        line().attr("x2", widthFixed * 4 / 5);
-        line().attr("x2", widthFixed / 2)
+        line().attr("x2", conf.widthFixed * 4 / 5);
+        line().attr("x2", conf.widthFixed / 2)
             .attr("marker-end", "url(#" + agv + ")");
 
         if (i === 1) {
-            $("#agvs").append("<div class='agvs' style='width:" + (widthAgvs - widthFixed)
+            $("#agvs").append("<div class='agvs' style='width:" + (conf.widthAgvs - conf.widthFixed)
                 + "px" + "; height:100%; float:right'>");
-            $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (currentTasks + 1) / 2
+            $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (conf.currentTasks + 1) / 2
                 + "px" + "'>" + "</div>");
         }
-        $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (currentTasks + 1)
-            + "; line-height:" + conf.heightFixed / (currentTasks + 1) + "px" + "; color:" + tool.agvsColor["agv" + agv] + "'>"
+        $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (conf.currentTasks + 1)
+            + "; line-height:" + conf.heightFixed / (conf.currentTasks + 1) + "px" + "; color:" + tool.agvsColor["agv" + agv] + "'>"
             + agv + "号AGV" + "</div>");
     }
 }

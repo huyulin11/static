@@ -29,7 +29,7 @@ var rectAspect = function (aspect) {
     var arrowMarkerHere = defs().attr("id", "here");
     arrow(arrowMarkerGray).attr("fill", aspect[0].color);
     arrow(arrowMarkerMultiple).attr("fill", aspect[aspect.length - 1].color);
-    arrow(arrowMarkerHere).attr("fill", agvsColor.point);
+    arrow(arrowMarkerHere).attr("fill", conf.agvsColor.point);
 
     var line = function () {
         return conf.svg.append("line")
@@ -91,7 +91,7 @@ var siteCode = function (locations) {
     }
 }
 
-var rectPath = function (yfc) {
+var rectPath = function (tempYfc) {
     var line = function () {
         return conf.svg.append("line")
             .attr("x1", conf.padding.left + conf.xScale(point1[0]))
@@ -102,10 +102,10 @@ var rectPath = function (yfc) {
             .style("stroke-width", "2px");
     }
 
-    for (var a in yfc) {
-        if (a == yfc.length - 1 && yfc[a].color != initColor) { break; }
-        var area = yfc[a];
-        var nextarea = yfc[parseInt(a) + 1];
+    for (var a in tempYfc) {
+        if (a == tempYfc.length - 1 && tempYfc[a].color != conf.initColor) { break; }
+        var area = tempYfc[a];
+        var nextarea = tempYfc[parseInt(a) + 1];
         var points = [[area.rightXaxis, area.upYaxis], [area.leftXaxis, area.downYaxis]];
 
         for (var i = 0; i < points.length; i++) {
@@ -113,11 +113,11 @@ var rectPath = function (yfc) {
             var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
 
             if (nextarea && area.color != nextarea.color) {
-                line().style("stroke", agvsColor.point);
-            } else if (area.color == initColor) {
+                line().style("stroke", conf.agvsColor.point);
+            } else if (area.color == conf.initColor) {
                 line().style("stroke", area.color)
                     .style("stroke-dasharray", "4, 7");
-            } else if (area.color != initColor) {
+            } else if (area.color != conf.initColor) {
                 line().style("stroke", area.color);
             }
         }
@@ -137,13 +137,13 @@ function rect() {
     $(".clashLine").remove();
     $(".mainRoad").remove();
 
-    rectPath(yfc);
+    rectPath(conf.yfc);
     if (!isSiteCode && isLocations) {
         siteCode(locations);
         isSiteCode = true;
     }
-    rectPath(yfcs);
-    rectAspect(yfcs);
+    rectPath(conf.yfcs);
+    rectAspect(conf.yfcs);
 
     // for (var a in clashArea) {
     //     var area = clashArea[a];
@@ -189,8 +189,8 @@ function rect() {
 }
 
 function drawCircle(dataset) {
-    conf.xScale = d3.scale.linear().domain(domainXVal).range([0, conf.xAxisWidth]);
-    conf.yScale = d3.scale.linear().domain(domainYVal).range([0, conf.yAxisWidth]);
+    conf.xScale = d3.scale.linear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
+    conf.yScale = d3.scale.linear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
 
     var circleUpdate = conf.svg.selectAll("circle").data(dataset);
 
@@ -261,36 +261,36 @@ export var renderSvg = function () {
 
 var isRunning = false;
 
-var datasss = [].concat(udp);
+var datasss = [].concat(tool.udfPoints);
 
 var renderSvgFunc = function () {
     if (isRunning) { return; }
 
     isRunning = true;
 
-    for (var i in datasetMap) {
+    for (var i in tool.datasetMap) {
         if (i != 9999) {
-            if ((i != 9999 && datasetMap[i] && datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
-                datasss = [].concat(udp);
-                datasetDetaMap = {};
-                datasetMap[i] = [];
+            if ((i != 9999 && tool.datasetMap[i] && tool.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
+                datasss = [].concat(tool.udfPoints);
+                conf.datasetDetaMap = {};
+                tool.datasetMap[i] = [];
             }
         }
     }
 
-    for (var currentAgvNum in datasetMap) {
+    for (var currentAgvNum in tool.datasetMap) {
 
         if (currentAgvNum == 9999) {
-            lastTaskPath = datasetMap[9999];
+            tool.lastTaskPath = tool.datasetMap[9999];
         } else {
-            if (datasetDetaMap[currentAgvNum] && datasetDetaMap[currentAgvNum].length > 0) {
-                datasss = datasss.concat(datasetDetaMap[currentAgvNum]);
-                datasetDetaMap[currentAgvNum] = [];
+            if (conf.datasetDetaMap[currentAgvNum] && conf.datasetDetaMap[currentAgvNum].length > 0) {
+                datasss = datasss.concat(conf.datasetDetaMap[currentAgvNum]);
+                conf.datasetDetaMap[currentAgvNum] = [];
             }
         }
     }
 
-    render(lastTaskPath.concat(datasss));
+    render(tool.lastTaskPath.concat(datasss));
     isRunning = false;
 }
 
@@ -298,35 +298,35 @@ var drawAgvs = function () {
     $(".agvLine").remove();
     $(".agvs").remove();
 
-    for (var i = 1; i <= currentTasks; i++) {
-        var agv = currentAgvs[i - 1];
+    for (var i = 1; i <= conf.currentTasks; i++) {
+        var agv = conf.currentAgvs[i - 1];
         var line = function () {
-            return svgFixed.append("line")
-                .attr("x1", widthFixed / 5)
-                .attr("y1", conf.heightFixed * i / (currentTasks + 1))
-                .attr("x2", widthFixed * 4 / 5)
-                .attr("y2", conf.heightFixed * i / (currentTasks + 1))
+            return conf.svgFixed.append("line")
+                .attr("x1", conf.widthFixed / 5)
+                .attr("y1", conf.heightFixed * i / (conf.currentTasks + 1))
+                .attr("x2", conf.widthFixed * 4 / 5)
+                .attr("y2", conf.heightFixed * i / (conf.currentTasks + 1))
                 .attr("class", "agvLine")
                 .style("stroke-width", "2px")
                 .style("stroke", tool.agvsColor["agv" + agv]);
         }
 
-        var arrowMarker = svgFixed.append("defs")
+        var arrowMarker = conf.svgFixed.append("defs")
             .append("marker")
             .attr("id", agv);
         arrow(arrowMarker).attr("fill", tool.agvsColor["agv" + agv]);
-        line().attr("x2", widthFixed * 4 / 5);
-        line().attr("x2", widthFixed / 2)
+        line().attr("x2", conf.widthFixed * 4 / 5);
+        line().attr("x2", conf.widthFixed / 2)
             .attr("marker-end", "url(#" + agv + ")");
 
         if (i === 1) {
-            $("#agvs").append("<div class='agvs' style='width:" + (widthAgvs - widthFixed)
+            $("#agvs").append("<div class='agvs' style='width:" + (conf.widthAgvs - conf.widthFixed)
                 + "px" + "; height:100%; float:right'>");
-            $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (currentTasks + 1) / 2
+            $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (conf.currentTasks + 1) / 2
                 + "px" + "'>" + "</div>");
         }
-        $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (currentTasks + 1)
-            + "; line-height:" + conf.heightFixed / (currentTasks + 1) + "px" + "; color:" + tool.agvsColor["agv" + agv] + "'>"
+        $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (conf.currentTasks + 1)
+            + "; line-height:" + conf.heightFixed / (conf.currentTasks + 1) + "px" + "; color:" + tool.agvsColor["agv" + agv] + "'>"
             + agv + "号AGV" + "</div>");
     }
 }

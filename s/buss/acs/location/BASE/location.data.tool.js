@@ -1,4 +1,6 @@
 ﻿export var tool = {};
+tool.udfPoints = [];
+tool.lastTaskPath = [];
 
 tool.agvsColor = {
     point: "red",
@@ -32,15 +34,15 @@ var inArr = function (d, arr) {
 }
 
 tool.inAgv = function (d, num) {
-    return inArr(d, datasetMap[num]);
+    return inArr(d, tool.datasetMap[num]);
 }
 
 tool.inTaskPath = function (d) {
-    return inArr(d, lastTaskPath);
+    return inArr(d, tool.lastTaskPath);
 }
 
 tool.inUdp = function (d) {
-    return inArr(d, udp);
+    return inArr(d, tool.udfPoints);
 }
 
 tool.color = function (val, object) {

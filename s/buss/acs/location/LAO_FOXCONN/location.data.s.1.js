@@ -1,22 +1,13 @@
 ﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
 
-var lastTaskPath = [];
-var datasetMap = {};
-var datasetDetaMap = {};
 var receivedTaskData = "false";
 var clashArea;
-var udp = [];
-var yfc = [];
-var yfcs = [];
 var logic = [];
 var locations = [];
 var isLogic = false;
 var isLocations = false;
 var taskDetails = [];
-var currentTasks;
-var currentAgvs;
-var initColor = "#ddd";
 
 var logicSuccess = function (data) {
     for (var val of data) {
@@ -27,18 +18,18 @@ var logicSuccess = function (data) {
 
 var locationSuccess = function (data) {
     for (var val of data) {
-        udp.push([val.x, val.y]);
+        tool.udfPoints.push([val.x, val.y]);
         locations.push({ "id": val.id, "x": val.x, "y": val.y });
         for (var value of logic) {
             if (val.id === value.siteid) {
                 for (var next of data) {
                     if (value.nextid === next.id) {
-                        yfc.push({
+                        conf.yfc.push({
                             "leftXaxis": val.x,
                             "rightXaxis": next.x,
                             "downYaxis": val.y,
                             "upYaxis": next.y,
-                            color: initColor
+                            color: conf.initColor
                         });
                         break;
                     }
@@ -51,21 +42,20 @@ var locationSuccess = function (data) {
 
 var pathSuccess = function (data) {
     if (isLogic && isLocations) {
-        currentTasks = 0;
-        currentAgvs = [];
-        yfcs = [];
+        conf.currentTasks = 0;
+        conf.yfcs = [];
         taskDetails = Object.keys(data);
         for (var i = 1; i < taskDetails.length; i++) {
             var object = data[taskDetails[i]].currentTask.object;
             if (object) {
-                currentTasks++;
-                currentAgvs.push(taskDetails[i]);
+                conf.currentTasks++;
+                conf.currentAgvs.push(taskDetails[i]);
                 (function (object, currentTasks) {
                     setTimeout(function () {
-                        yfcs = [];
+                        conf.yfcs = [];
                         for (var val of object.detail) {
                             if (val.siteid === object.detail[object.detail.length - 1].siteid) {
-                                yfcs.push({ color: tool.color(val, object) });
+                                conf.yfcs.push({ color: tool.color(val, object) });
                                 break;
                             }
                             for (var loca of locations) {
@@ -77,14 +67,14 @@ var pathSuccess = function (data) {
                                                     for (var next of locations) {
                                                         if (value.nextid === next.id) {
                                                             var yfcsRepeat = false;
-                                                            yfcs.some(function (tasks) {
+                                                            conf.yfcs.some(function (tasks) {
                                                                 if (tasks.leftXaxis === next.x && tasks.downYaxis === next.y) {
                                                                     yfcsRepeat = true;
                                                                     return true;
                                                                 }
                                                             });
                                                             if (yfcsRepeat) { break; }
-                                                            yfcs.push({
+                                                            conf.yfcs.push({
                                                                 "leftXaxis": loca.x,
                                                                 "rightXaxis": next.x,
                                                                 "downYaxis": loca.y,
@@ -106,15 +96,15 @@ var pathSuccess = function (data) {
                             }
                         }
                     }, (currentTasks - 1) * 3000);
-                })(object, currentTasks);
+                })(object, conf.currentTasks);
             }
         }
     }
 
-    if (currentTasks == 0) {
+    if (conf.currentTasks == 0) {
         setTimeout(taskPath, 3000);
     } else {
-        setTimeout(taskPath, currentTasks * 3000);
+        setTimeout(taskPath, conf.currentTasks * 3000);
     }
 }
 
@@ -163,8 +153,8 @@ var testInitPoint = {
     "10": [-54000, -12000]
 }
 
-var domainYVal = [-1700, 100];
-var domainXVal = [-100, 3000];
+conf.domainYVal = [-1700, 100];
+conf.domainXVal = [-100, 3000];
 
 
 // var yfc = [
