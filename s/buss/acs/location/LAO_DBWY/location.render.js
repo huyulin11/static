@@ -21,8 +21,7 @@ var rectAspect = function (aspect) {
     if (aspect.length == 0) { return; }
 
     var defs = function () {
-        return conf.svg.append("defs")
-            .append("marker")
+        return conf.svg.append("defs").append("marker");
     }
 
     var arrowMarkerGray = defs().attr("id", "gray");
