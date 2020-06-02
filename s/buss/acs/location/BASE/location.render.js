@@ -1,5 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
@@ -138,13 +139,13 @@ function rect() {
     $(".clashLine").remove();
     $(".mainRoad").remove();
 
-    rectPath(conf.yfc);
-    if (!isSiteCode && conf.isLocations) {
-        siteCode(conf.locations);
+    rectPath(datas.yfc);
+    if (!isSiteCode && datas.locations) {
+        siteCode(datas.locations);
         isSiteCode = true;
     }
-    rectPath(conf.yfcs);
-    rectAspect(conf.yfcs);
+    rectPath(datas.yfcs);
+    rectAspect(datas.yfcs);
 
     // for (var a in clashArea) {
     //     var area = clashArea[a];
@@ -206,14 +207,14 @@ function drawCircle(dataset) {
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
-            return (tool.inUdp(d)) ? 3 : (tool.inTaskPath(d) ? 4 : 2);
+            return (datas.inUdp(d)) ? 3 : (datas.inTaskPath(d) ? 4 : 2);
         });
 
     circleEnter.append("circle")
         .attr("fill", "red")
         .attr("r", 20).transition().duration(500)
         .attr("class", function (d) {
-            return tool.inAgv(d, 1) ? "agv1" : "agv2";
+            return datas.inAgv(d, 1) ? "agv1" : "agv2";
         })
         .attr("cx", function (d) {
             return conf.padding.left + conf.xScale(d[0]);
@@ -222,7 +223,7 @@ function drawCircle(dataset) {
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
-            return (tool.inUdp(d)) ? 3 : 5;
+            return (datas.inUdp(d)) ? 3 : 5;
         });
 
     circleExit.transition().duration(500).attr("fill", "white").remove();
@@ -262,27 +263,27 @@ export var renderSvg = function () {
 
 var isRunning = false;
 
-var datasss = [].concat(conf.udfPoints);
+var datasss = [].concat(datas.udfPoints);
 
 var renderSvgFunc = function () {
     if (isRunning) { return; }
 
     isRunning = true;
 
-    for (var i in conf.datasetMap) {
+    for (var i in datas.datasetMap) {
         if (i != 9999) {
-            if ((i != 9999 && conf.datasetMap[i] && conf.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
-                datasss = [].concat(conf.udfPoints);
+            if ((i != 9999 && datas.datasetMap[i] && datas.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
+                datasss = [].concat(datas.udfPoints);
                 conf.datasetDetaMap = {};
-                conf.datasetMap[i] = [];
+                datas.datasetMap[i] = [];
             }
         }
     }
 
-    for (var currentAgvNum in conf.datasetMap) {
+    for (var currentAgvNum in datas.datasetMap) {
 
         if (currentAgvNum == 9999) {
-            conf.lastTaskPath = conf.datasetMap[9999];
+            datas.lastTaskPath = datas.datasetMap[9999];
         } else {
             if (conf.datasetDetaMap[currentAgvNum] && conf.datasetDetaMap[currentAgvNum].length > 0) {
                 datasss = datasss.concat(conf.datasetDetaMap[currentAgvNum]);
@@ -291,7 +292,7 @@ var renderSvgFunc = function () {
         }
     }
 
-    render(conf.lastTaskPath.concat(datasss));
+    render(datas.lastTaskPath.concat(datasss));
     isRunning = false;
 }
 
@@ -300,7 +301,7 @@ var drawAgvs = function () {
     $(".agvs").remove();
 
     for (var i = 1; i <= conf.currentTasks; i++) {
-        var agv = conf.currentAgvs[i - 1];
+        var agv = datas.currentAgvs[i - 1];
         var line = function () {
             return conf.svgFixed.append("line")
                 .attr("x1", conf.widthFixed / 5)

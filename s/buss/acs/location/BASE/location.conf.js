@@ -24,23 +24,7 @@ export var conf = {
     yAxisWidth: yAxisWidth,
     rectHeight: rectHeight,
     initColor: "#ddd",
-    currentAgvs: [],
-    locations: [],
-    yfc: [],
-    yfcs: [],
-
-    receivedTaskData: "false",
-    clashArea: null,
-
-    logic: [],
-    locations: [],
-    isLogic: false,
-    taskDetails: [],
-    datasetMap: []
 }
-
-conf.udfPoints = [];
-conf.lastTaskPath = [];
 
 conf.agvsColor = {
     point: "red",

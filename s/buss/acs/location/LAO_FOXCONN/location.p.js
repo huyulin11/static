@@ -1,10 +1,8 @@
 ﻿import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
-import { taskSiteLogic, taskSiteLocation, taskPath } from "/s/buss/acs/location/BASE/location.deal.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
-taskSiteLogic();
-taskSiteLocation();
-taskPath();
+datas.init();
 
 conf.domainYVal = [-1700, 100];
 conf.domainXVal = [-100, 3000];

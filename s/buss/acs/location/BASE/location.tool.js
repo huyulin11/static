@@ -1,28 +1,7 @@
 ﻿import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 export var tool = {};
-
-var inArr = function (d, arr) {
-    if (arr == null || arr.length == 0) { return false; }
-    for (var a in arr) {
-        if (arr[a][0] == d[0] && arr[a][1] == d[1]) {
-            return true;
-        }
-    }
-    return false;
-}
-
-tool.inAgv = function (d, num) {
-    return inArr(d, conf.datasetMap[num]);
-}
-
-tool.inTaskPath = function (d) {
-    return inArr(d, conf.lastTaskPath);
-}
-
-tool.inUdp = function (d) {
-    return inArr(d, conf.udfPoints);
-}
 
 tool.color = function (val, object) {
     if (val.opflag == "OVER") { return conf.agvsColor.path };
@@ -30,7 +9,7 @@ tool.color = function (val, object) {
 }
 
 tool.getColor = function (d) {
-    if (tool.inUdp(d)) {
+    if (datas.inUdp(d)) {
         return conf.agvsColor.point;
     }
     for (let i = 1; i <= 10; i++) {
