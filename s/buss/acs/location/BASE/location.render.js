@@ -334,6 +334,8 @@ var drawAgvs = function () {
 
 var render = function (datasss) {
     drawCircle(datasss);
-    drawAxis();
+    if (conf.withAxis) {
+        drawAxis();
+    }
     drawAgvs();
 }
