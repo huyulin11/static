@@ -1,6 +1,6 @@
-﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
-import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
-import { taskSiteLogic, taskSiteLocation, taskPath } from "/s/buss/acs/location/BASE/location.data.deal.js";
+﻿import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
+import { taskSiteLogic, taskSiteLocation, taskPath } from "/s/buss/acs/location/BASE/location.deal.js";
 
 taskSiteLogic();
 taskSiteLocation();

@@ -1,29 +1,6 @@
-﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
+﻿import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 
 export var tool = {};
-tool.udfPoints = [];
-tool.lastTaskPath = [];
-
-tool.agvsColor = {
-    point: "red",
-    agv1: "blue",
-    agv2: "brown",
-    agv3: "green",
-    agv4: "#F0F",
-    agv5: "#0BF",
-    agv6: "#C4B661",
-    agv7: "#C71585",
-    agv8: "#483D8B",
-    agv9: "#2EEB57",
-    agv10: "#FFCB20",
-    agv11: "#FFCB20",
-    agv12: "#FFCB20",
-    agv13: "#FFCB20",
-    agv14: "#FFCB20",
-    agv15: "#FFCB20",
-    agv16: "#FFCB20",
-    path: "gray"
-};
 
 var inArr = function (d, arr) {
     if (arr == null || arr.length == 0) { return false; }
@@ -40,28 +17,28 @@ tool.inAgv = function (d, num) {
 }
 
 tool.inTaskPath = function (d) {
-    return inArr(d, tool.lastTaskPath);
+    return inArr(d, conf.lastTaskPath);
 }
 
 tool.inUdp = function (d) {
-    return inArr(d, tool.udfPoints);
+    return inArr(d, conf.udfPoints);
 }
 
 tool.color = function (val, object) {
-    if (val.opflag == "OVER") { return tool.agvsColor.path };
-    return tool.agvsColor["agv" + object.agvId];
+    if (val.opflag == "OVER") { return conf.agvsColor.path };
+    return conf.agvsColor["agv" + object.agvId];
 }
 
 tool.getColor = function (d) {
     if (tool.inUdp(d)) {
-        return tool.agvsColor.point;
+        return conf.agvsColor.point;
     }
     for (let i = 1; i <= 10; i++) {
         if (inAgv(d, i)) {
-            return tool.agvsColor["agv" + i];
+            return conf.agvsColor["agv" + i];
         }
     }
-    if (inTaskPath(d)) { return tool.agvsColor.path; }
+    if (inTaskPath(d)) { return conf.agvsColor.path; }
     return "#000";
 }
 
@@ -89,8 +66,8 @@ tool.randomColor = function () {
 };
 
 $("body").append("<div id='msgOfAgv' style='display:none;color:white;position:fixed;right:2%;top:20%;'></div>");
-for (let i in tool.agvsColor) {
+for (let i in conf.agvsColor) {
     if (i.startsWith("agv")) {
-        $("div#msgOfAgv").append("<span style='color:" + tool.agvsColor[i] + ";'>" + i + "----" + "</span><br/>");
+        $("div#msgOfAgv").append("<span style='color:" + conf.agvsColor[i] + ";'>" + i + "----" + "</span><br/>");
     }
 }

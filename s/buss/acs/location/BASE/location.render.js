@@ -1,5 +1,5 @@
-import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
-import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
+import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
@@ -29,7 +29,7 @@ var rectAspect = function (aspect) {
     var arrowMarkerHere = defs().attr("id", "here");
     arrow(arrowMarkerGray).attr("fill", aspect[0].color);
     arrow(arrowMarkerMultiple).attr("fill", aspect[aspect.length - 1].color);
-    arrow(arrowMarkerHere).attr("fill", tool.agvsColor.point);
+    arrow(arrowMarkerHere).attr("fill", conf.agvsColor.point);
 
     var line = function () {
         return conf.svg.append("line")
@@ -262,7 +262,7 @@ export var renderSvg = function () {
 
 var isRunning = false;
 
-var datasss = [].concat(tool.udfPoints);
+var datasss = [].concat(conf.udfPoints);
 
 var renderSvgFunc = function () {
     if (isRunning) { return; }
@@ -272,7 +272,7 @@ var renderSvgFunc = function () {
     for (var i in conf.datasetMap) {
         if (i != 9999) {
             if ((i != 9999 && conf.datasetMap[i] && conf.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
-                datasss = [].concat(tool.udfPoints);
+                datasss = [].concat(conf.udfPoints);
                 conf.datasetDetaMap = {};
                 conf.datasetMap[i] = [];
             }
@@ -282,7 +282,7 @@ var renderSvgFunc = function () {
     for (var currentAgvNum in conf.datasetMap) {
 
         if (currentAgvNum == 9999) {
-            tool.lastTaskPath = conf.datasetMap[9999];
+            conf.lastTaskPath = conf.datasetMap[9999];
         } else {
             if (conf.datasetDetaMap[currentAgvNum] && conf.datasetDetaMap[currentAgvNum].length > 0) {
                 datasss = datasss.concat(conf.datasetDetaMap[currentAgvNum]);
@@ -291,7 +291,7 @@ var renderSvgFunc = function () {
         }
     }
 
-    render(tool.lastTaskPath.concat(datasss));
+    render(conf.lastTaskPath.concat(datasss));
     isRunning = false;
 }
 
@@ -309,13 +309,13 @@ var drawAgvs = function () {
                 .attr("y2", conf.heightFixed * i / (conf.currentTasks + 1))
                 .attr("class", "agvLine")
                 .style("stroke-width", "2px")
-                .style("stroke", tool.agvsColor["agv" + agv]);
+                .style("stroke", conf.agvsColor["agv" + agv]);
         }
 
         var arrowMarker = conf.svgFixed.append("defs")
             .append("marker")
             .attr("id", agv);
-        arrow(arrowMarker).attr("fill", tool.agvsColor["agv" + agv]);
+        arrow(arrowMarker).attr("fill", conf.agvsColor["agv" + agv]);
         line().attr("x2", conf.widthFixed * 4 / 5);
         line().attr("x2", conf.widthFixed / 2)
             .attr("marker-end", "url(#" + agv + ")");
@@ -327,7 +327,7 @@ var drawAgvs = function () {
                 + "px" + "'>" + "</div>");
         }
         $(".agvs").append("<div style='width:100%; height:" + conf.heightFixed / (conf.currentTasks + 1)
-            + "; line-height:" + conf.heightFixed / (conf.currentTasks + 1) + "px" + "; color:" + tool.agvsColor["agv" + agv] + "'>"
+            + "; line-height:" + conf.heightFixed / (conf.currentTasks + 1) + "px" + "; color:" + conf.agvsColor["agv" + agv] + "'>"
             + agv + "号AGV" + "</div>");
     }
 }

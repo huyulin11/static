@@ -39,7 +39,29 @@ export var conf = {
     datasetMap: []
 }
 
+conf.udfPoints = [];
+conf.lastTaskPath = [];
 
+conf.agvsColor = {
+    point: "red",
+    agv1: "blue",
+    agv2: "brown",
+    agv3: "green",
+    agv4: "#F0F",
+    agv5: "#0BF",
+    agv6: "#C4B661",
+    agv7: "#C71585",
+    agv8: "#483D8B",
+    agv9: "#2EEB57",
+    agv10: "#FFCB20",
+    agv11: "#FFCB20",
+    agv12: "#FFCB20",
+    agv13: "#FFCB20",
+    agv14: "#FFCB20",
+    agv15: "#FFCB20",
+    agv16: "#FFCB20",
+    path: "gray"
+};
 
 var rectPoint = [
     [-21650, 3500], [-21650, -4600], [-3650, -4600], [-3650, 3500]

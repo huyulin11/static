@@ -1,5 +1,5 @@
-import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
-import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
+import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 
 var logicSuccess = function (data) {
     for (var val of data) {
@@ -10,7 +10,7 @@ var logicSuccess = function (data) {
 
 var locationSuccess = function (data) {
     for (var val of data) {
-        tool.udfPoints.push([val.x, val.y]);
+        conf.udfPoints.push([val.x, val.y]);
         conf.locations.push({ "id": val.id, "x": val.x, "y": val.y });
         for (var value of conf.logic) {
             if (val.id === value.siteid) {
