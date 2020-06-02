@@ -59,7 +59,7 @@ var initBtns = function () {
         },
     }; btns.del = {
         url: `/${_tasktype}/main/deleteEntity.shtml`,
-        id: "del", name: "删除", class: "btn-danger",
+        id: "del", name: "撤销", class: "btn-danger",
         bind: function () {
             paperOp.del(this);
         },
