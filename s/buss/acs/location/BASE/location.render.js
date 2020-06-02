@@ -1,4 +1,4 @@
-﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
+import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.data.tool.js";
 
 var arrow = function (arrow) {
@@ -29,13 +29,14 @@ var rectAspect = function (aspect) {
     var arrowMarkerHere = defs().attr("id", "here");
     arrow(arrowMarkerGray).attr("fill", aspect[0].color);
     arrow(arrowMarkerMultiple).attr("fill", aspect[aspect.length - 1].color);
-    arrow(arrowMarkerHere).attr("fill", conf.agvsColor.point);
+    arrow(arrowMarkerHere).attr("fill", tool.agvsColor.point);
 
     var line = function () {
         return conf.svg.append("line")
             .attr("x1", conf.padding.left + conf.xScale(aspect[a].leftXaxis))
             .attr("y1", conf.height - conf.padding.bottom - conf.yScale(aspect[a].downYaxis))
             .attr("x2", conf.padding.left + conf.xScale(aspect[a].aspectXaxis))
+            .attr("y2", conf.height - conf.padding.bottom - yconf.Scale(aspect[a].aspectYaxis))
             .attr("y2", conf.height - conf.padding.bottom - conf.yScale(aspect[a].aspectYaxis))
             .attr("class", "aspect")
             .style("stroke-width", "2px");
@@ -138,8 +139,8 @@ function rect() {
     $(".mainRoad").remove();
 
     rectPath(conf.yfc);
-    if (!isSiteCode && isLocations) {
-        siteCode(locations);
+    if (!isSiteCode && conf.isLocations) {
+        siteCode(conf.locations);
         isSiteCode = true;
     }
     rectPath(conf.yfcs);
@@ -239,15 +240,15 @@ function drawAxis() {
     //绘制x轴  
     var svggx;
     var svggy;
-    if (svg.selectAll("g").size() > 0) {
+    if (conf.svg.selectAll("g").size() > 0) {
         svggx = conf.svg.selectAll("g.xaxis");
         svggy = conf.svg.selectAll("g.yaxis");
     } else {
         svggx = conf.svg.append("g").attr("class", "xaxis");
         svggy = conf.svg.append("g").attr("class", "yaxis");
     }
-    svggx.attr("transform", "translate(" + conf.padding.left + "," + (height - conf.padding.bottom) + ")").call(xAxis);
-    svggy.attr("transform", "translate(" + conf.padding.left + "," + (height - conf.padding.bottom - yAxisWidth) + ")").call(yAxis);
+    svggx.attr("transform", "translate(" + conf.padding.left + "," + (conf.height - conf.padding.bottom) + ")").call(xAxis);
+    svggy.attr("transform", "translate(" + conf.padding.left + "," + (conf.height - conf.padding.bottom - conf.yAxisWidth) + ")").call(yAxis);
 
     //绘制完坐标轴将值域变回去  
     conf.yScale.range([0, yAxisWidth]);
@@ -268,20 +269,20 @@ var renderSvgFunc = function () {
 
     isRunning = true;
 
-    for (var i in tool.datasetMap) {
+    for (var i in conf.datasetMap) {
         if (i != 9999) {
-            if ((i != 9999 && tool.datasetMap[i] && tool.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
+            if ((i != 9999 && conf.datasetMap[i] && conf.datasetMap[i].length > 5000) || conf.svg.selectAll("circle").size() == 0) {
                 datasss = [].concat(tool.udfPoints);
                 conf.datasetDetaMap = {};
-                tool.datasetMap[i] = [];
+                conf.datasetMap[i] = [];
             }
         }
     }
 
-    for (var currentAgvNum in tool.datasetMap) {
+    for (var currentAgvNum in conf.datasetMap) {
 
         if (currentAgvNum == 9999) {
-            tool.lastTaskPath = tool.datasetMap[9999];
+            tool.lastTaskPath = conf.datasetMap[9999];
         } else {
             if (conf.datasetDetaMap[currentAgvNum] && conf.datasetDetaMap[currentAgvNum].length > 0) {
                 datasss = datasss.concat(conf.datasetDetaMap[currentAgvNum]);

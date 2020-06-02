@@ -1,4 +1,6 @@
-﻿export var tool = {};
+﻿import { conf } from "/s/buss/acs/location/BASE/location.data.conf.js";
+
+export var tool = {};
 tool.udfPoints = [];
 tool.lastTaskPath = [];
 
@@ -34,7 +36,7 @@ var inArr = function (d, arr) {
 }
 
 tool.inAgv = function (d, num) {
-    return inArr(d, tool.datasetMap[num]);
+    return inArr(d, conf.datasetMap[num]);
 }
 
 tool.inTaskPath = function (d) {
