@@ -36,7 +36,7 @@ var rectAspect = function (aspect) {
             .attr("x1", conf.padding.left + conf.xScale(aspect[a].leftXaxis))
             .attr("y1", conf.height - conf.padding.bottom - conf.yScale(aspect[a].downYaxis))
             .attr("x2", conf.padding.left + conf.xScale(aspect[a].aspectXaxis))
-            .attr("y2", conf.height - conf.padding.bottom - yconf.Scale(aspect[a].aspectYaxis))
+            .attr("y2", conf.height - conf.padding.bottom - conf.yScale(aspect[a].aspectYaxis))
             .attr("y2", conf.height - conf.padding.bottom - conf.yScale(aspect[a].aspectYaxis))
             .attr("class", "aspect")
             .style("stroke-width", "2px");
