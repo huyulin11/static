@@ -124,10 +124,10 @@ var initReceipt = function () {
     });
 }, cancel = function () {
     if (!_paperid) {
-        gf.layerMsg("没有生成对应入库单，不能进行取消操作！");
+        gf.layerMsg("没有生成对应入库单，不能进行撤销操作！");
         return;
     }
-    if (window.confirm("取消操作将删除当前正在操作的入库单，是否继续？")) {
+    if (window.confirm("撤销操作将清除当前正在操作的入库单，是否继续？")) {
         gf.doAjax({
             url: `/receipt/main/deleteEntity.shtml?paperid=${_paperid}`,
             success: function (data) {
