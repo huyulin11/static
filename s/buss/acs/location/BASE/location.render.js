@@ -235,7 +235,7 @@ function drawAxis() {
     var xAxis = d3.svg.axis().scale(conf.xScale).orient("bottom").ticks(5);
     var yAxis = d3.svg.axis().scale(conf.yScale).orient("left").ticks(5);
 
-    conf.yScale.range([yAxisWidth, 0]);
+    conf.yScale.range([conf.yAxisWidth, 0]);
 
     //绘制x轴  
     var svggx;
@@ -251,7 +251,7 @@ function drawAxis() {
     svggy.attr("transform", "translate(" + conf.padding.left + "," + (conf.height - conf.padding.bottom - conf.yAxisWidth) + ")").call(yAxis);
 
     //绘制完坐标轴将值域变回去  
-    conf.yScale.range([0, yAxisWidth]);
+    conf.yScale.range([0, conf.yAxisWidth]);
 
 }
 
@@ -334,6 +334,6 @@ var drawAgvs = function () {
 
 var render = function (datasss) {
     drawCircle(datasss);
-    //drawAxis();
+    drawAxis();
     drawAgvs();
 }
