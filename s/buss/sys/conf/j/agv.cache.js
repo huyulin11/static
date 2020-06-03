@@ -20,23 +20,19 @@ let _columns = [{
     renderData: function (rowindex, data, rowdata, column) {
         try {
             let json = JSON.parse(data);
-            if (json instanceof Array) {
-                for (let item of json) {
-                    console.log(item);
-                }
-                return "json_Array配置";
-            } else if (json instanceof Object) {
-                let info = "";
-                info += "类型：" + json.tasktype + ";";
-                let jsonTo = json.to;
-                info += "路线:";
-                let path = [];
-                for (let item of jsonTo) {
-                    path.push(item.name + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
-                }
-                info += path.join("->");
-                return info;
+            let info = "";
+            if (json.agvId) {
+                info += "指定执行车辆：" + json.agvId + ";";
             }
+            info += "类型：" + json.tasktype + ";";
+            let jsonTo = json.to;
+            info += "路线:";
+            let path = [];
+            for (let item of jsonTo) {
+                path.push(item.name + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
+            }
+            info += path.join("->");
+            return info;
         } catch (error) {
         }
     }
