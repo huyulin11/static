@@ -862,6 +862,13 @@ var dataGrid = function (params) {
 		return arr;
 	};
 	if (_conf.searchInInit) initGrid(_conf);
+
+	if (_conf.refreshTime) {
+		setInterval(() => {
+			loadData();
+		}, _conf.refreshTime);
+	}
+
 	return {
 		setOptions: setOptions,
 		loadData: loadData,
