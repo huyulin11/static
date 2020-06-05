@@ -217,8 +217,10 @@ var deleverTaskLaoFoxconn = function (that) {
 	var task = $(that).attr("id");
 	if (agvbusstype == 'TON_2') {
 		var indexOfTips = layer.confirm('请选择送货任务的目的地', {
-			btn: ['B01 1F'],
-			btn1: function () { doTask(agvId, task, 2013); }
+			btn: ['B01 1F', '人工取货点', '叉车取货点'],
+			btn1: function () { doTask(agvId, task, 2013); },
+			btn2: function () { doTask(agvId, task, 2017); },
+			btn3: function () { doTask(agvId, task, 1); }
 		});
 	} else if (agvbusstype == 'TON_1') {
 		var indexOfTips = layer.confirm('请选择送货任务的目的地', {

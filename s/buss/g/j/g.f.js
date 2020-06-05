@@ -326,7 +326,7 @@ class GF {
             btns = "<br>已删除";
         } else if (rowdata.delflag == 2) {
             $(target).css("color", "red");
-            btns = "<br>已请交撤销";
+            btns = "<br>已提交撤销";
         }
         return btns;
     };
