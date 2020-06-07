@@ -103,7 +103,7 @@ $("#paging").delegate(".edit", "click", function (e) {
 	}
 	if (window.confirm(`是否要将该数据的顺序值改为${target}？`)) {
 		gf.doAjax({
-			url: `/shipment/main/editSeqDetail.shtml`,
+			url: `/shipment/util/editSeqDetail.shtml`,
 			data: { id: id, sequence: target }
 		});
 	}
