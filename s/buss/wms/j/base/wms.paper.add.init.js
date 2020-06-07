@@ -23,6 +23,22 @@ var _initCols = function () {
             }
             break;
         }
+        case "YZBD_NRDW": {
+            if (_tasktype == 'inventory') {
+                _cols = [
+                    { name: "盘点类型", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype" },
+                ];
+            } else if (_tasktype == 'receipt') {
+                _cols = [
+                    { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse", defaultValue: '1', },
+                ];
+            } else if (_tasktype == 'shipment') {
+                _cols = [
+                    { name: "目标仓库", type: "jsSelect", patten: "WAREHOUSE", notnull: true, key: "warehouse", defaultValue: '1', },
+                ];
+            }
+            break;
+        }
         case "BJJK_HUIRUI": {
             if (_tasktype == 'inventory') {
                 _cols = [
@@ -109,6 +125,24 @@ export var initUdf = function (tasktype, _conf) {
 
     switch (localStorage.projectKey) {
         case "CSY_DAJ": {
+            $("#warehouse").data("notnull", false);
+            let obj = {
+                max: 6,
+                items: [{
+                    key: "allocItem",
+                    alias: "userdef1",
+                    name: "货位名称",
+                    notnull: true,
+                    type: "associating-input",
+                    searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
+                    containerofinput: "#panelBody",
+                    showcol: 'text,getStatus(status)'
+                },]
+            }
+            Object.assign(_conf, obj);
+            break;
+        }
+        case "YZBD_NRDW": {
             $("#warehouse").data("notnull", false);
             let obj = {
                 max: 6,
