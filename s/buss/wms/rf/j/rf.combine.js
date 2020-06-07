@@ -31,7 +31,7 @@ var sub = function () {
         }
     }
     gf.doAjax({
-        url: `/shipment/detail/addCombinedItem.shtml`,
+        url: `/shipment/util/addCombinedItem.shtml`,
         data: { item: _su.trim(), userdef4: _tu.trim(), warehouse: _warehouse, to: _to, line: _line },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
