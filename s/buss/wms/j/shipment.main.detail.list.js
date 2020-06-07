@@ -181,7 +181,7 @@ let params = {
 	pagId: 'paging',
 	id: "relationid",
 	columns: _columns,
-	jsonUrl: '/shipment/main/findWithDetail.shtml',
+	jsonUrl: '/shipment/util/findWithDetail.shtml',
 	checkbox: true,
 	searchInInit: false,
 	serNumber: true,

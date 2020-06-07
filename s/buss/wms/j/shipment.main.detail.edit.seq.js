@@ -32,7 +32,7 @@ var whenEditInputEnter = function (that) {
     var tr = $(that).parents("tr");
     var data = td.find("input").val();
     var currentid = tr.find("input:checkbox").val();
-    var url = '/shipment/main/editSeq.shtml';
+    var url = '/shipment/util/editSeq.shtml';
     var json = {
         "sequence": data
     };
