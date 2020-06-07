@@ -84,6 +84,13 @@ var initPaperOp = function (tasktype, optype) {
             }
             break;
         }
+        case "YZBD_NRDW": {
+            tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.del, btns.refresh,];
+            if (_tasktype == "inventory") {
+                tempBtns = tempBtns.concat(btns.whichAgv);
+            }
+            break;
+        }
         case "BJJK_HUIRUI": {
             if (_tasktype == "shipment") {
                 tempBtns = [btns.detail, btns.refresh,];
