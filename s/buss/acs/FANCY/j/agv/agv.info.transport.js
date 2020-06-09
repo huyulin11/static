@@ -8,6 +8,7 @@ var agvId = currentAgvId;
 let targetArr = new Array();
 let container, _target, _currentSite = localStorage.currentSite;
 if (_currentSite) console.log("currentSite:" + _currentSite);
+let limit = 3;
 
 export var init = function (target) {
 	_target = target;
@@ -70,7 +71,7 @@ export var init = function (target) {
 			let a = targetArr.indexOf(data);
 			targetArr.splice(a, 1);
 		} else {
-			if (localStorage.projectKey == "CSY_CDBP" && targetArr.length >= 2) { gf.layerMsg("选中需要操作的站点数不能超过2个！"); return; }
+			if (localStorage.projectKey == "CSY_CDBP" && targetArr.length >= limit) { gf.layerMsg(`选中需要操作的站点数不能超过${limit}个！`); return; }
 			$(that).addClass("choosed");
 			targetArr.push(data);
 		}
@@ -79,7 +80,7 @@ export var init = function (target) {
 
 	var transportHandler = function (that) {
 		if (targetArr.length <= 0) { gf.layerMsg("没有选中需要操作的站点！"); return; }
-		if (targetArr.length > 10) { gf.layerMsg("选中需要操作的站点数不能超过10个！"); return; }
+		if (targetArr.length > limit) { gf.layerMsg(`选中需要操作的站点数不能超过${limit}个！`); return; }
 		let arrSub = [];
 		for (let item of targetArr) {
 			let json = $(item).data("json");
