@@ -80,10 +80,10 @@ if (_type == 'PROD_LINE') {
 				name: "产线名称", key: "lineName", notnull: true, type: "input",
 			};
 			let json = { id: rowdata.id, name: rowdata.name };
-			let html = getInput(col, { value: data, width: '50%' });
-
+			let html = getInput(col, { value: data, width: '50%', });
 			let btnStr = `<button type="button" class="editLineName btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
-			return html[0].outerHTML + btnStr;
+			$(html).append(btnStr);
+			return html;
 		}
 	};
 	_columns = _columns.concat(opLineName);

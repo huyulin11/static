@@ -5,7 +5,6 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import "./shipment.main.detail.edit.seq.js";
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { findTransferDetailObj } from "/s/buss/wms/j/transfer.main.fun.js";
-import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let _status = gf.urlParam("status");
 let _detailstatus = gf.urlParam("detailstatus");

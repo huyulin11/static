@@ -37,7 +37,7 @@ var whenEditInputEnter = function (that) {
         "skuInfoFormMap.id": currentid,
         "skuInfoFormMap.name": data
     }, "json", function (s) {
-        localStorage.setItem("refreshSkuInfo", 1);
+        localStorage.refreshSkuInfo = 1;
         if (s.code >= 0) {
             gf.layerMsg('修改成功！');
             window.datagrid.loadData();

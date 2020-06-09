@@ -57,7 +57,8 @@ var jsonRequest = function (conf, callback) {
 
 var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
-		return obj.renderData(rowindex, data, rowdata, clm, json);
+		let rtn = obj.renderData(rowindex, data, rowdata, clm, json);
+		if (rtn instanceof jQuery) { return rtn[0].outerHTML; } else { return rtn; };
 	} else {
 		if (json[obj.colkey]) {
 			return json[obj.colkey];

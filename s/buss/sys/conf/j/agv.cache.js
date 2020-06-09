@@ -2,7 +2,6 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
-import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let _columns = [{
     colkey: "id",

@@ -41,8 +41,8 @@ let params = {
 			};
 			let json2 = { id: rowdata.key };
 			let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json2)}>保存</button>`;
-			let html = getInput(col, { value: json.detailsequence, width: '50%' });
-			return html[0].outerHTML + btnStr;
+			let html = getInput(col, { value: json.detailsequence, width: '50%', });
+			return $(html).append(btnStr);
 		}
 	}, {
 		colkey: "company",

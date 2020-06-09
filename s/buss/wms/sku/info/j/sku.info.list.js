@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -23,9 +24,9 @@ window.datagrid = dataGrid({
 		name: "SKU类型",
 		renderData: function (rowindex, data, rowdata, column) {
 			if (rowdata.delflag == "1") {
-				return data;
+				return sku.typevalue(data);
 			}
-			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+			return "<div class='changable'>" + "<span>" + sku.typevalue(data) + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<a class='editSkuType'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}],

@@ -2,7 +2,7 @@ import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let _tasktype;
-var _initCols = function () {
+var _initColsData = function () {
     let _cols;
     switch (localStorage.projectKey) {
         case "CSY_DAJ": {
@@ -109,8 +109,13 @@ var _initCols = function () {
             }
         }
     }
+    return _cols;
+}
+
+var _initCols = function () {
+    let _cols = _initColsData();
     for (let col of _cols) {
-        let obj = $(`<div class="col"><label>${col.name}</label></div>`);
+        let obj = $(`<div class="col"><label>${col.notnull ? "*" : ""}${col.name}</label></div>`);
         obj.append(getInput(col));
         if (typeof col.hide == "boolean" && col.hide) { obj.addClass("hidden"); }
         if (typeof col.hide == "function" && col.hide()) { obj.addClass("hidden"); }
@@ -119,7 +124,7 @@ var _initCols = function () {
     renderAll();
 }
 
-export var initUdf = function (tasktype, _conf) {
+export var initForm = function (tasktype, _conf) {
     _tasktype = tasktype;
     _initCols();
 
@@ -143,18 +148,36 @@ export var initUdf = function (tasktype, _conf) {
             break;
         }
         case "YZBD_NRDW": {
+            $("head").append("<style>.block-tips div.item-group {width: 288px;}</style>");
             $("#warehouse").data("notnull", false);
             let obj = {
-                max: 6,
+                max: 1,
                 items: [{
-                    key: "allocItem",
-                    alias: "userdef1",
-                    name: "货位名称",
+                    key: "item",
+                    name: "类型",
                     notnull: true,
                     type: "associating-input",
-                    searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
+                    searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
+                    explainurl: "/sku/info/findByName.shtml?skuInfoFormMap.id=",
                     containerofinput: "#panelBody",
-                    showcol: 'text,getStatus(status)'
+                    showcol: 'name',
+                    entitycol: "id",
+                }, {
+                    key: "itemcount",
+                    name: "数量",
+                    notnull: true,
+                }, {
+                    key: "userdef3",
+                    name: "尺寸",
+                    notnull: true,
+                }, {
+                    key: "lot",
+                    name: "批次号",
+                    notnull: true,
+                }, {
+                    key: "supplier",
+                    name: "供应商",
+                    notnull: true,
                 },]
             }
             Object.assign(_conf, obj);

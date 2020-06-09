@@ -45,14 +45,14 @@ $("html").on("change", "input.editSkuTypeInput", function (e) {
 });
 var whenEditInputEnter = function () {
     var tr = $currentTd.parents("tr");
-    var data = $currentTd.find("input").val();
+    var data = $currentTd.find("input.editSkuTypeInput").data("vvvvId");
     var currentid = tr.find("input:checkbox").val();
     var url = '/sku/info/editEntity.shtml';
     gf.ajax(url, {
         "skuInfoFormMap.id": currentid,
         "skuInfoFormMap.type": data
     }, "json", function (s) {
-        localStorage.setItem("refreshSkuInfo", 1);
+        localStorage.refreshSkuInfo = 1;
         if (s.code >= 0) {
             gf.layerMsg('修改成功！');
             $currentTd.find("div.changable").find("span").html(data);

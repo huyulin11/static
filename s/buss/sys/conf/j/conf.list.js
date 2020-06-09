@@ -40,8 +40,9 @@ let _columns = [{
         };
         let json = { key: rowdata.key };
         let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
-        let html = getInput(col, { value: data, width: '50%' });
-        return html[0].outerHTML + btnStr;
+        let html = getInput(col, { value: data, width: '50%', });
+        $(html).append(btnStr);
+        return html;
     }
 }, {
     colkey: "delflag",
@@ -68,7 +69,7 @@ window.datagrid = dataGrid({
 
 $("#paging").delegate(".edit", "click", function (e) {
     let key = $(this).data("key");
-    let target = $(this).parent("td").find("input").val();
+    let target = $(this).parents("td").find("input").val();
     if (window.confirm(`是否要改变${key}的值为${target}？`)) {
         gf.doAjax({
             url: `/app/conf/set.shtml`,

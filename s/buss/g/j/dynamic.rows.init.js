@@ -25,9 +25,9 @@ export var getItem = (data) => {
             }
             itemDesc = `${item.name + ':' + value}`;
         } else {
-            itemDesc += getInput(item, { data: data, value: value, serial: _serial })[0].outerHTML;
+            itemDesc += getInput(item, { data: data, value: value, serial: _serial, rtnhtml: true });
         }
-        ss += `<div class="row">${itemDesc}</div>`;
+        ss += `${itemDesc}`;
     }
     let _status = (data) ? "UPDATE" : "NEW";
     ss += `<div class="row" style="display:none;">

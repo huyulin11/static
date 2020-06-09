@@ -1,5 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { sku } from "/s/buss/wms/sku/wms.sku.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 let _type = gf.urlParam("type");

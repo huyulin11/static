@@ -1,4 +1,4 @@
-import { sku } from "/s/buss/wms/sku/wms.sku.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 export var allocOp = function (that) {
     var num = $("input.doChange").val();

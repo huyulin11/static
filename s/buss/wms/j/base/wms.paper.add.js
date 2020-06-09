@@ -1,7 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { initUdf } from "./wms.paper.add.init.js";
+import { initForm } from "./wms.paper.add.init.js";
 
 let _receipttype = gf.urlParam("receipttype");
 
@@ -19,7 +19,7 @@ let _conf = {
 
 export var init = function (tasktype) {
     _tasktype = tasktype;
-    initUdf(_tasktype, _conf);
+    initForm(_tasktype, _conf);
     _initRows();
 }
 

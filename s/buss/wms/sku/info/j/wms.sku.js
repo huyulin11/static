@@ -86,7 +86,8 @@ class sku {
     static refresh() {
         if (Number(localStorage.refreshSkuInfo) > 0) {
             sku.initData();
-            localStorage.setItem("refreshSkuInfo", 0);
+            console.log("刷新SKU缓存！");
+            localStorage.refreshSkuInfo = 0;
         }
     }
 }

@@ -52,7 +52,7 @@ var whenEditInputEnter = function () {
         "skuInfoFormMap.id": currentid,
         "skuInfoFormMap.type": data
     }, "json", function (s) {
-        localStorage.setItem("refreshSkuInfo", 1);
+        localStorage.refreshSkuInfo = 1;
         if (s.code >= 0) {
             gf.layerMsg('修改成功！');
             $currentTd.find("div.changable").find("span").html(data);
