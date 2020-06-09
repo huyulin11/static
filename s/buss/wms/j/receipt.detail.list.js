@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 var paperid = gf.urlParam("receiptMainFormMap.paperid");
 window.datagrid = dataGrid({
@@ -24,7 +25,17 @@ window.datagrid = dataGrid({
 		},
 	}, {
 		colkey: "item",
-		name: "SU"
+		name: () => {
+			switch (localStorage.projectKey) {
+				case "BJJK_HUIRUI":
+					return "SU";
+				default:
+					return "物料类型";
+			}
+		},
+		renderData: function (rowindex, data, rowdata, column) {
+			return sku.value(data);
+		}
 	}, {
 		colkey: "userdef3",
 		name: "货位号"

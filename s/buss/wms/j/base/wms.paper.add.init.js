@@ -1,5 +1,6 @@
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 let _tasktype;
 var _initColsData = function () {
@@ -158,10 +159,10 @@ export var initForm = function (tasktype, _conf) {
                     notnull: true,
                     type: "associating-input",
                     searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
-                    explainurl: "/sku/info/findByName.shtml?skuInfoFormMap.id=",
                     containerofinput: "#panelBody",
                     showcol: 'name',
-                    entitycol: "id",
+                    storeKey: "id",
+                    showFun: (key) => { return sku.value(key); },
                 }, {
                     key: "itemcount",
                     name: "数量",

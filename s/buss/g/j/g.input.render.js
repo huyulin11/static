@@ -28,12 +28,16 @@ export var getInput = (item, option) => {
         $(obj).append(`<select class="form-control ${item.type}" data-patten="${item.patten}" name="${name}"
             data-initval="${_defaultValue}" data-notnull="${item.notnull}" data-alias="${item.alias}" id="${id}" ${readonly}></select>`);
     } else if ("associating-input" == item.type) {
-        $(obj).append(`<input type="text" id="${id}show" name="${name}show" 
-            class="form-control associating-input" value="${_defaultValue}"
-            data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
-            data-showcol='${item.showcol}' placeholder="输入:${label}${item.notnull ? '*' : ''}" 
-            data-notnull='${item.notnull}' autocomplete="off" ${readonly}>`);
-        after = $(`<input type="hidden" id="${id}" name="${name}" value="${_defaultValue}">`);
+        let show = _defaultValue;
+        if (item.storeKey) {
+            if (_defaultValue && item.showFun) show = item.showFun(_defaultValue); else show = _defaultValue;
+            after = $(`<input type="hidden" id="${id}" name="${name}" value="${_defaultValue}">`);
+        }
+        $(obj).append(`<input type="text" id="show_${id}" name="show_${name}" 
+        class="form-control associating-input" value="${show}"
+        data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
+        data-showcol='${item.showcol}' placeholder="输入:${label}${item.notnull ? '*' : ''}" 
+        data-notnull='${item.notnull}' autocomplete="off" ${readonly}>`);
     } else {
         $(obj).append(`<input type="text" id="${id}" name="${name}" 
             class="form-control" value="${_defaultValue}"
@@ -41,21 +45,29 @@ export var getInput = (item, option) => {
             style="${_width ? 'width:' + _width + '' : ''}"
             autocomplete="off" ${readonly}>`);
     }
-    let binds = item.bind;
-    if (binds) {
-        if (typeof binds == "function") {
-            $(obj).find("select|input").bind("change", function () { binds(obj); });
-        } else if (Array.isArray(binds)) {
-            for (let eve of binds) {
-                $(obj).find("select|input").bind(eve.event, function () { eve.work(obj); });
-            }
-        } else {
-            $(obj).find("select|input").bind(binds.event, function () { binds.work(obj); });
-        }
-    }
-    if ("associating-input" == item.type) {
+    _bind(item, obj);
+    if ("associating-input" == item.type && item.storeKey) {
+        window.addEventListener('ASSOCIATING_VAL_CHOOSED', function (event) {
+            $("#" + id).val(event.detail.data[item.storeKey]);
+        });
         $(obj).append(after);
     }
     if (option && option.rtnhtml) return obj[0].outerHTML;
     return obj;
+}
+
+
+let _bind = (item, obj) => {
+    let binds = item.bind;
+    if (binds) {
+        if (typeof binds == "function") {
+            $(obj).find("select,input").bind("change", function () { binds(obj); });
+        } else if (Array.isArray(binds)) {
+            for (let eve of binds) {
+                $(obj).find("select,input").bind(eve.event, function () { eve.work(obj); });
+            }
+        } else {
+            $(obj).find("select,input").bind(binds.event, function () { binds.work(obj); });
+        }
+    }
 }
