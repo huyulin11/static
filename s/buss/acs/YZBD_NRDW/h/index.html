@@ -9,6 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="shortcut icon" href="/wbSampleBuild/TemplateData/favicon.ico">
 	<link rel="stylesheet" href="/wbSampleBuild/TemplateData/style.css">
+	<link rel="stylesheet" href="/s/c/agv.mgr.css">
 	<script src="/wbSampleBuild/TemplateData/UnityProgress.js"></script>
 	<script src="/wbSampleBuild/Build/UnityLoader.js"></script>
 	<script>
@@ -27,6 +28,34 @@
 	</div>
 	<div id="topCtrlContainer"></div>
 	<div id='controlContainer' class="fixed"></div>
+	<div id='receiptContainer' class="fixed" style="width:850px;">
+		<fieldset>
+			<legend>入库任务</legend>
+			<iframe id="receipts" frameborder="no" style="width:800px;height:540px;"
+				src="http://127.0.0.1:99/s/buss/wms/h/receiptMainMgr.simple.html"></iframe>
+		</fieldset>
+	</div>
+	<div id='shipmentContainer' class="fixed">
+		<fieldset>
+			<legend>出库任务</legend>
+			<iframe id="allocs" frameborder="no" style="width:100%;height:540px;"
+				src="/s/buss/wms/alloc/item/h/alloc.html"></iframe>
+		</fieldset>
+	</div>
+	<div id='tongjiContainer' class="fixed">
+		<fieldset>
+			<legend>统计</legend>
+			<iframe id="allocs" frameborder="no" style="width:100%;height:540px;"
+				src="/s/buss/wms/alloc/item/h/alloc.html"></iframe>
+		</fieldset>
+	</div>
+	<div id='searchContainer' class="fixed">
+		<fieldset>
+			<legend>查询</legend>
+			<iframe id="allocs" frameborder="no" style="width:100%;height:540px;"
+				src="/s/buss/wms/alloc/item/h/alloc.html"></iframe>
+		</fieldset>
+	</div>
 </body>
 <script src="/s/j/jquery-1.12.2.min.js"></script>
 <script src="/s/j/layer/v3.1.3/layer.js"></script>
@@ -34,7 +63,6 @@
 <script type="module">
 	import "/s/buss/g/j/g.p.js";
 	import { gf } from "/s/buss/g/j/g.f.js";
-	gf.quote("/s/c/agv.mgr.css");
 	$('body').fadeIn(3000);
 	import "/s/buss/acs/FANCY/j/acs.control.js";
 	import "/s/buss/acs/FANCY/j/agv.list.js";

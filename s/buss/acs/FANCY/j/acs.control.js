@@ -10,7 +10,7 @@ let renderModel = (key, target) => {
 
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
-		$("#controlContainer").append("<fieldset><legend>综合控制</legend><div><table id='allCtrlTable' class='task'></table></div></fieldset>");
+		$("#controlContainer").append("<fieldset><div><table id='allCtrlTable' class='task'></table></div></fieldset>");
 		renderModel('agvs', 'div#agvDiv');
 		renderModel('setup', 'div#controlContainer');
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
@@ -152,40 +152,6 @@ var init = function () {
 	container().delegate("button#taskQuantityBtn", "click", function () {
 		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");
 	});
-
-	// if (localStorage.projectKey == "YZBD_NRDW") {
-	// 	var height = $(window).height();
-	// 	$("iframe#canvas").css("height", height).css("width", "100%").css("scrollbar", "false");
-	// }
-
-	// var agvsHideDivTipsTimes = localStorage.agvsHideDivTipsTimes;
-	// if (!agvsHideDivTipsTimes || agvsHideDivTipsTimes == 'NaN') {
-	// 	layer.tips('从此处切换AGV视图或查看所有AGV状态', '#agvsHideDiv', {
-	// 		tips: [1, '#3595CC'],
-	// 		time: 4000
-	// 	});
-	// 	localStorage.setItem("agvsHideDivTipsTimes", 1);
-	// } else if (agvsHideDivTipsTimes < 10) {
-	// 	layer.tips('从此处切换AGV视图或查看所有AGV状态', '#agvsHideDiv', {
-	// 		tips: [1, '#3595CC'],
-	// 		time: 4000
-	// 	});
-	// 	localStorage.setItem("agvsHideDivTipsTimes", 1 + parseInt(localStorage.agvsHideDivTipsTimes));
-	// }
-	//$("div#robotic").load("/s/buss/acs/h/lap.html");
-
-
-	//js原生监听 滚动事件的---因为项目框架和jquery不兼容
-	// var p = 0;
-	// window.onscroll = function (e) {
-	// 	var t = p;
-	// 	p = $(this).scrollTop();
-	// 	if (p < t) {
-	// 		$("#topCtrlContainer").slideUp(300);
-	// 	} else if (p > t) {
-	// 		$("#topCtrlContainer").slideDown(300);
-	// 	}
-	// }
 }
 
 init();
