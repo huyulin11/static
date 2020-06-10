@@ -8,8 +8,8 @@ export var agvNum = 0;
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
-        let agvDiv = $(`<div id='agvDiv' class='fixed' style='z-index:1;'><fieldset><legend>运输工具</legend>
-        <div id='agvDiv' class='withBorder'></div></fieldset></div>`);
+        let agvDiv = $(`<div id='agvDiv' class='fixed' style='z-index:1;'>
+        <div id='agvDiv' class='withBorder'></div></div>`);
         $("body").prepend(agvDiv);
     }
     if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }

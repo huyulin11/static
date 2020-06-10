@@ -10,7 +10,7 @@ let renderModel = (key, target) => {
 
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
-		$("#controlContainer").append("<fieldset><div><table id='allCtrlTable' class='task'></table></div></fieldset>");
+		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
 		renderModel('agvs', 'div#agvDiv');
 		renderModel('setup', 'div#controlContainer');
 		if (localStorage.projectKey == 'LAO_FOXCONN') {

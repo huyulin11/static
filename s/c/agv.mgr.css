@@ -133,16 +133,17 @@ input.bigSearch {
 	right: 1%;
 	top: 65px;
 	/* background: #ffffff57; */
-	width: 70%;
+	/* width: 70%; */
+	width: auto;
 	box-shadow: gray 10px 10px 30px 5px;
 	border-radius: 10px;
 }
 
-.fixed.big {
+#agvDiv.big {
 	width: 95%;
 }
 
-.fixed.big td {
+#agvDiv.big td {
 	font-size: 12px;
 }
 
@@ -163,11 +164,11 @@ input.bigSearch {
 		/* width: 900px; */
 	}
 
-	.fixed {
+	#agvDiv {
 		width: 300px;
 	}
 
-	.fixed.big {
+	#agvDiv.big {
 		width: 600px;
 	}
 
