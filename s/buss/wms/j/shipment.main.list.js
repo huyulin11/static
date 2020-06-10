@@ -35,11 +35,18 @@ let params = {
 		hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; }
 	}, {
 		colkey: "name",
-		name: function (rowindex, data, rowdata, column) {
+		name: () => {
 			switch (localStorage.projectKey) {
 				case "CSY_DAJ": return "出入口";
 				case "BJJK_HUIRUI": return "目的地";
 				default: return "name";
+			}
+		},
+		hide: () => {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ":
+				case "BJJK_HUIRUI": return false;
+				default: return true;
 			}
 		},
 		renderData: function (rowindex, data, rowdata, column) {

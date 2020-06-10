@@ -125,7 +125,11 @@ var _initCols = function () {
     renderAll();
 }
 
-export var initForm = function (tasktype, _conf) {
+export var initForm = function (tasktype, _conf, callback) {
+    doInitForm(tasktype, _conf, callback);
+}
+
+var doInitForm = function (tasktype, _conf, callback) {
     _tasktype = tasktype;
     _initCols();
 
@@ -151,35 +155,53 @@ export var initForm = function (tasktype, _conf) {
         case "YZBD_NRDW": {
             $("head").append("<style>.block-tips div.item-group {width: 288px;}</style>");
             $("#warehouse").data("notnull", false);
-            let obj = {
-                max: 100,
-                items: [{
-                    key: "item",
-                    name: "类型",
-                    notnull: true,
-                    type: "associating-input",
-                    searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
-                    containerofinput: "#panelBody",
-                    showcol: 'name',
-                    storeKey: "id",
-                    showFun: (key) => { return sku.value(key); },
-                }, {
-                    key: "itemcount",
-                    name: "数量",
-                    notnull: true,
-                }, {
-                    key: "userdef3",
-                    name: "尺寸",
-                    notnull: true,
-                }, {
-                    key: "lot",
-                    name: "批次号",
-                    notnull: true,
-                }, {
-                    key: "supplier",
-                    name: "供应商",
-                    notnull: false,
-                },]
+            let obj;
+            if (_tasktype == 'inventory') {
+            } else if (_tasktype == 'receipt') {
+                obj = {
+                    max: 100,
+                    items: [{
+                        key: "item",
+                        name: "类型",
+                        notnull: true,
+                        type: "associating-input",
+                        searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
+                        containerofinput: "#panelBody",
+                        showcol: 'name',
+                        storeKey: "id",
+                        showFun: (key) => { return sku.value(key); },
+                    }, {
+                        key: "itemcount",
+                        name: "数量",
+                        notnull: true,
+                    }, {
+                        key: "userdef3",
+                        name: "尺寸",
+                        notnull: true,
+                    }, {
+                        key: "lot",
+                        name: "批次号",
+                        notnull: true,
+                    }, {
+                        key: "supplier",
+                        name: "供应商",
+                        notnull: false,
+                    },]
+                }
+            } else if (_tasktype == 'shipment') {
+                obj = {
+                    max: 6,
+                    items: [{
+                        key: "allocItem",
+                        alias: "userdef1",
+                        name: "货位名称",
+                        notnull: true,
+                        type: "associating-input",
+                        searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
+                        containerofinput: "#panelBody",
+                        showcol: 'text,getStatus(status)'
+                    },]
+                };
             }
             Object.assign(_conf, obj);
             break;
@@ -239,4 +261,5 @@ export var initForm = function (tasktype, _conf) {
             break;
         }
     }
+    callback();
 }

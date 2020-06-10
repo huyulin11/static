@@ -19,8 +19,7 @@ let _conf = {
 
 export var init = function (tasktype) {
     _tasktype = tasktype;
-    initForm(_tasktype, _conf);
-    _initRows();
+    initForm(_tasktype, _conf, _initRows);
 }
 
 var _initPage = function (obj) {
