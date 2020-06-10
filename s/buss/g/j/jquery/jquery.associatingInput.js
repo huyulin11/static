@@ -26,8 +26,8 @@
             $(_dataarea).hide();
             $target.val($(this).find("div").data("keyinfo")).trigger("blur");
             $target.focus();
-
-            var myEvent = new CustomEvent('ASSOCIATING_VAL_CHOOSED', {
+            let id = $target.attr("id");
+            var myEvent = new CustomEvent('ASSOCIATING_VAL_CHOOSED' + (id ? id : ""), {
                 detail: { val: $target.val(), data: dataset.data(), },
             });
             if (window.dispatchEvent) { window.dispatchEvent(myEvent); } else { window.fireEvent(myEvent); }

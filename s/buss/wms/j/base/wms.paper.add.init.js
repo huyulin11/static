@@ -152,7 +152,7 @@ export var initForm = function (tasktype, _conf) {
             $("head").append("<style>.block-tips div.item-group {width: 288px;}</style>");
             $("#warehouse").data("notnull", false);
             let obj = {
-                max: 1,
+                max: 100,
                 items: [{
                     key: "item",
                     name: "类型",
@@ -178,7 +178,7 @@ export var initForm = function (tasktype, _conf) {
                 }, {
                     key: "supplier",
                     name: "供应商",
-                    notnull: true,
+                    notnull: false,
                 },]
             }
             Object.assign(_conf, obj);

@@ -47,7 +47,7 @@ export var getInput = (item, option) => {
     }
     _bind(item, obj);
     if ("associating-input" == item.type && item.storeKey) {
-        window.addEventListener('ASSOCIATING_VAL_CHOOSED', function (event) {
+        window.addEventListener('ASSOCIATING_VAL_CHOOSED' + 'show_' + id, function (event) {
             $("#" + id).val(event.detail.data[item.storeKey]);
         });
         $(obj).append(after);

@@ -33,9 +33,11 @@ window.datagrid = dataGrid({
 			btns += "&nbsp;&nbsp;";
 			btns += `<button type='button' class='btn btn-info marR10 detail' 
 						data-dictype='${ rowdata.dictype}'>维护数据</button>`;
-			btns += "&nbsp;&nbsp;";
-			btns += `<button type='button' class='btn btn-info marR10 mgr' 
+			if (localStorage.admin) {
+				btns += "&nbsp;&nbsp;";
+				btns += `<button type='button' class='btn btn-info marR10 mgr' 
 						data-dictype='${ rowdata.dictype}'>维护类型</button>`;
+			}
 			return btns;
 		}
 	}],
