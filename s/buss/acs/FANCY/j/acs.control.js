@@ -1,21 +1,34 @@
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 
+let renderModel = (key, target) => {
+	let style = $(`<style id='${key}HideDiv_style'></style>`);
+	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
+		.append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
+	$("head").append(style);
+	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-target='${target}'></div>`);
+}
+
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<fieldset><legend>综合控制</legend><div><table id='allCtrlTable' class='task'></table></div></fieldset>");
-		$("#topCtrlContainer").prepend("<div id='agvsHideDiv' class='close hideToggle' data-target='div#agvDiv'></div>");
-		$("#topCtrlContainer").prepend("<div id='setupHideDiv' class='close hideToggle' data-target='div#controlContainer'></div>");
+		renderModel('agvs', 'div#agvDiv');
+		renderModel('setup', 'div#controlContainer');
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
-			$("#topCtrlContainer").prepend("<div id='liftHideDiv' class='close hideToggle' data-target='div#liftContainer'></div>");
-			$("#topCtrlContainer").prepend("<div id='doorHideDiv' class='close hideToggle' data-target='div#autodoorContainer'></div>");
+			renderModel('lift', 'div#liftContainer');
+			renderModel('door', 'div#autodoorContainer');
 		} else if (localStorage.projectKey == 'TAIKAI_JY') {
 		} else if (localStorage.projectKey == 'CSY_DAJ') {
-			$("#topCtrlContainer").prepend("<div id='chargeHideDiv' class='close hideToggle' data-target='div#chargeContainer'></div>");
-			$("#topCtrlContainer").prepend("<div id='windowCenterHideDiv' class='close hideToggle' data-target='div#windowCenterContainer'></div>");
-			$("#topCtrlContainer").prepend("<div id='windowHideDiv' class='close hideToggle' data-target='div#windowContainer'></div>");
-			$("#topCtrlContainer").prepend("<div id='wmsHideDiv' class='close hideToggle' data-target='div#wmsContainer'></div>");
+			renderModel('charge', 'div#chargeContainer');
+			renderModel('windowCenter', 'div#windowContainer');
+			renderModel('window', 'div#windowContainer');
+			renderModel('wms', 'div#wmsContainer');
 		} else if (localStorage.projectKey == 'CSY_CDBP') {
 		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
+		} else if (localStorage.projectKey == 'YZBD_NRDW') {
+			renderModel('tongji', 'div#tongjiContainer');
+			renderModel('search', 'div#searchContainer');
+			renderModel('shipment', 'div#shipmentContainer');
+			renderModel('receipt', 'div#receiptContainer');
 		}
 	}
 	return $("#allCtrlTable");
@@ -139,6 +152,11 @@ var init = function () {
 	container().delegate("button#taskQuantityBtn", "click", function () {
 		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");
 	});
+
+	// if (localStorage.projectKey == "YZBD_NRDW") {
+	// 	var height = $(window).height();
+	// 	$("iframe#canvas").css("height", height).css("width", "100%").css("scrollbar", "false");
+	// }
 
 	// var agvsHideDivTipsTimes = localStorage.agvsHideDivTipsTimes;
 	// if (!agvsHideDivTipsTimes || agvsHideDivTipsTimes == 'NaN') {

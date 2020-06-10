@@ -27,7 +27,7 @@ export var init = function (target) {
 			${$(item).data("name")}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
 			</span>`);
 		}
-		chooedBtns.html(nameArr.join("-->"));
+		chooedBtns.html(nameArr.join("→"));
 	}
 
 	var renderSite = function (item) {

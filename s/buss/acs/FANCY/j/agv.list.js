@@ -8,9 +8,9 @@ export var agvNum = 0;
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
-        let agvDiv = $(`<div id='agvDiv' class='fixed'><fieldset><legend>运输工具</legend>
+        let agvDiv = $(`<div id='agvDiv' class='fixed' style='z-index:1;'><fieldset><legend>运输工具</legend>
         <div id='agvDiv' class='withBorder'></div></fieldset></div>`);
-        $("#rootContainer").prepend(agvDiv);
+        $("body").prepend(agvDiv);
     }
     if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     return $("div#agvDiv");
