@@ -381,7 +381,7 @@ var dataGrid = function (params) {
 		var lia = tag("a");
 		lia.href = "javascript:void(0);";
 		ulli.appendChild(lia);
-		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;每页&nbsp;' + _conf.pageSize + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
+		lia.innerHTML = '总&nbsp;' + totalRecords + '&nbsp;条&nbsp;&nbsp;共&nbsp;' + totalPages + '&nbsp;页';
 
 		var btd_1 = tag("td");
 		btd_1.style.textAlign = "right";
@@ -402,7 +402,7 @@ var dataGrid = function (params) {
 			var lia_2 = tag("a");
 		}
 		lia_2.href = "javascript:void(0);";
-		lia_2.innerHTML = '← 上一页';
+		lia_2.innerHTML = '←';
 		ulli_2.appendChild(lia_2);
 		var pg = pagesIndex(_conf.pagecode, pageNow, totalPages);
 		var startpage = pg.start;
@@ -465,7 +465,7 @@ var dataGrid = function (params) {
 			lia_7.id = "pagNum_" + (pageNow + 1);
 		}
 		lia_7.href = "javascript:void(0);";
-		lia_7.innerHTML = '下一页 → ';
+		lia_7.innerHTML = '→';
 		ulli_7.appendChild(lia_7);
 	};
 	var treeHtml = function (tbody, data) {

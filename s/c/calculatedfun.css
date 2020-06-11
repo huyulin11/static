@@ -112,8 +112,8 @@
 }
 
 .table-bordered {
-	border-collapse: separate;
-	border:0;
+	border-collapse: collapse;
+	/* border: 12px; */
 }
 
 .panel-heading {

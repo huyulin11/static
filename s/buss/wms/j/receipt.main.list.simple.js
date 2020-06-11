@@ -3,8 +3,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { findAllocObj } from "/s/buss/wms/j/receipt.main.fun.js";
-
-let _receipttype = gf.urlParam("receipttype");
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 let cols = [{
 	colkey: "id",
@@ -14,35 +13,40 @@ let cols = [{
 	colkey: "paperid",
 	name: "单号"
 }, {
-	colkey: "totallines",
-	name: "明细数"
+	colkey: "item",
+	name: "货物类型",
+	renderData: function (rowindex, data, rowdata, column) {
+		return sku.value(data);
+	}
 }, {
-	colkey: "totalqty",
+	colkey: "itemcount",
 	name: "货物数"
 }, {
 	colkey: "status",
 	name: "状态",
 	renderData: function (rowindex, data, rowdata, column) {
-		gf.rowDisplay(rowdata);
 		return gv.get("ACS_STATUS", data);
 	}
+}, {
+	name: "操作",
+	renderData: function (rowindex, data, rowdata, column) {
+		if (rowdata.delflag == "1" || rowdata.status != 'NEW') {
+			return "";
+		}
+		var btns = "";
+		btns += `<button type='button' class='btn btn-info marR10 exe' data-id='${rowdata.id}'>执行</button>`;
+		return btns;
+	}
 }];
-
-if (localStorage.projectKey == "BJJK_HUIRUI") {
-	cols = cols.concat({
-		colkey: "targetAlloc",
-		name: "目标货位",
-	});
-}
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: cols,
-	jsonUrl: `/receipt/main/find.shtml?receipttype=${_receipttype}`,
+	jsonUrl: `/receipt/util/findWithDetail.shtml?mainstatus=TOSEND`,
 	checkbox: true,
 	serNumber: true,
 	simple: true,
-	refreshTime: 5000,
+	// refreshTime: 5000,
 	callback: function () {
 		let keys = $(".targetAlloc").map(function () { return $(this).parents("tr").find(".paperid").html() }).get().join(":");
 		findAllocObj(keys, function (info) {
@@ -73,6 +77,11 @@ $("#search").on("click", function () {
 $("#searchForm").on("submit", function () {
 	doSearch();
 	return false;
+});
+
+$("#paging").delegate("button.exe", "click", function () {
+	let id = $(this).data("id");
+	console.log(id);
 });
 
 initPaperOp("receipt");
