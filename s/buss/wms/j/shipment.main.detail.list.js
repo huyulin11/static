@@ -12,6 +12,17 @@ let _type = gf.urlParam("type");
 let _pick = gf.urlParam("PICK");
 let _warehouse = gf.urlParam("warehouse");
 
+$("div.doc-buttons").append(`<span>选中查看日志</span><input type="checkbox" id="showTransLog" title="选中查看日志" ${localStorage.showTransLog ? "checked" : ""}>`);
+$('div.doc-buttons').delegate("input:checkbox#showTransLog", "change", function (e) {
+	if (this.checked) {
+		localStorage.showTransLog = true;
+	} else {
+		localStorage.showTransLog = "";
+	}
+	location.reload();
+});
+
+
 let _columns = [{
 	colkey: "id",
 	name: "id",
@@ -90,6 +101,55 @@ let _columns = [{
 	colkey: "sequence",
 	name: "执行优先级",
 }];
+
+if (localStorage.showTransLog) {
+	_columns.push({
+		colkey: "CRETATE.OPERATOR",
+		jsonColumn: "operator",
+		name: "下达人",
+		defaultVal: '--'
+	}, {
+		colkey: "CRETATE.TIME",
+		jsonColumn: "operator",
+		name: "下达时间",
+		defaultVal: '--'
+	}, {
+		colkey: "PICKING.OPERATOR",
+		jsonColumn: "operator",
+		name: "组盘人",
+		defaultVal: '--'
+	}, {
+		colkey: "PICKING.TIME",
+		jsonColumn: "operator",
+		name: "拣配时间",
+		defaultVal: '--'
+	}, {
+		colkey: "COMBINING.OPERATOR",
+		jsonColumn: "operator",
+		name: "组盘人",
+		defaultVal: '--'
+	}, {
+		colkey: "COMBINING.TIME",
+		jsonColumn: "operator",
+		name: "组盘时间",
+		defaultVal: '--'
+	}, {
+		colkey: "ON_PCS.TIME",
+		jsonColumn: "operator",
+		name: "上PCS时间",
+		defaultVal: '--'
+	}, {
+		colkey: "OVER_PCS.TIME",
+		jsonColumn: "operator",
+		name: "出PCS时间",
+		defaultVal: '--'
+	}, {
+		colkey: "OVER.TIME",
+		jsonColumn: "operator",
+		name: "AGV上工位时间",
+		defaultVal: '--'
+	});
+}
 
 if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type)) {
 	_columns = [{

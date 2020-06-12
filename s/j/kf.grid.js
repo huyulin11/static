@@ -59,30 +59,39 @@ var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
 	if (obj.renderData) {
 		let rtn = obj.renderData(rowindex, data, rowdata, clm, json);
 		if (rtn instanceof jQuery) { return rtn[0].outerHTML; } else { return rtn; };
-	} else {
-		if (json[obj.colkey]) {
-			return json[obj.colkey];
-		} else {
-			let keys = obj.colkey.split(".");
-			if (keys) {
-				let item = json;
-				let target;
-				keys.forEach(function (i, y) {
-					item = item[i];
-					if (item) {
-						if (i = keys.length - 1) {
-							target = item;
-							return;
-						}
-					} else {
+	}
+
+	if (data) {
+		return data;
+	}
+
+	if (json[obj.colkey]) {
+		return json[obj.colkey];
+	}
+	let keys = obj.colkey.split(".");
+	if (keys && json) {
+		let item = json;
+		let target;
+		try {
+			keys.forEach(function (i, y) {
+				item = item[i];
+				if (item) {
+					if (y == keys.length - 1) {
+						target = item;
 						return;
 					}
-				});
-				if (target) return target;
-			}
+					if (typeof item == 'string') {
+						item = JSON.parse(item);
+					}
+				} else {
+					return;
+				}
+			});
+		} catch (error) {
 		}
-		return (data ? data : (obj.defaultVal == undefined ? "" : obj.defaultVal));
+		if (target) return target;
 	}
+	return obj.defaultVal == undefined ? "" : obj.defaultVal;
 }
 
 var restoreBgColor = function (tr) {
