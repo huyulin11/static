@@ -73,7 +73,9 @@ var doInit = function (target, json) {
     console.log(json);
     container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}</span>`);
     let tempBtns = [add, detail, edit, send, back];
-    gf.bindBtns(container, tempBtns);
+    let btnContainer = $("<div id='btns'><div>");
+    container.append(btnContainer);
+    gf.bindBtns(btnContainer, tempBtns);
 }
 
 

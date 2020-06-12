@@ -415,3 +415,10 @@ button.small {
 	font-weight: bold;
 	font-size: 30px;
 }
+
+div#btns {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    width: 20%;
+}
