@@ -9,6 +9,8 @@ let targetArr = new Array();
 let container, _target, _currentSite = localStorage.currentSite;
 if (_currentSite) console.log("currentSite:" + _currentSite);
 let limit = 3;
+if (localStorage.projectKey == "CSY_CDBP") { limit = 3; }
+else if (localStorage.projectKey == "YZBD_QSKJ") { limit = 2; }
 
 export var init = function (target) {
 	_target = target;
@@ -71,7 +73,7 @@ export var init = function (target) {
 			let a = targetArr.indexOf(data);
 			targetArr.splice(a, 1);
 		} else {
-			if (localStorage.projectKey == "CSY_CDBP" && targetArr.length >= limit) { gf.layerMsg(`选中需要操作的站点数不能超过${limit}个！`); return; }
+			if (targetArr.length >= limit) { gf.layerMsg(`选中需要操作的站点数不能超过${limit}个！`); return; }
 			$(that).addClass("choosed");
 			targetArr.push(data);
 		}

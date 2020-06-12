@@ -65,6 +65,11 @@
                                 (value.isAutoTask ? "yellow" : "pink") + "'>" +
                                 (value.isAutoTask ? "已开启" : "已关闭") + "</span>-" +
                                 (value.isAutoTask ? "点击关闭" : "点击开启"));
+                        $("button#udfConfirmBtn").data('open', value.isUdfConfirm)
+                            .html("用户确认" + "<br/>" + "<span style='color:" +
+                                (value.isUdfConfirm ? "yellow" : "pink") + "'>" +
+                                (value.isUdfConfirm ? "已开启" : "已关闭") + "</span>-" +
+                                (value.isUdfConfirm ? "点击关闭" : "点击开启"));
                         $("button#autoChargeBtn").data('open', value.isAutoCharge)
                             .html("自动充电" + "<br/>" + "<span style='color:" +
                                 (value.isAutoCharge ? "yellow" : "pink") + "'>" +

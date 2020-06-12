@@ -113,6 +113,22 @@ var init = function () {
 		}
 	});
 
+	container().delegate("button#udfConfirmBtn", "click", function () {
+		var open = $(this).data("open");
+		var tips = "";
+		var opType = "";
+		if (open) {
+			tips = '是否确定取消确认信号？';
+			opType = "stopUdfConfirm";
+		} else {
+			tips = '是否确定发送确认信号？';
+			opType = "openUdfConfirm";
+		}
+		if (window.confirm(tips)) {
+			alert(taskexe.addCtrlTask(0, opType));
+		}
+	});
+
 	var showCtrl = function (that) {
 		var thatTarget = $(that).data("target");
 		$(thatTarget).show(100);
