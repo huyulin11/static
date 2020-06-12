@@ -47,7 +47,8 @@ var dealSheet = function (sheet) {
                 _paper.list.push({ item: sheet["E" + i].v, userdef3: sheet["G" + i].v });
             }
             else {
-                _paper[`item[${i}]`] = sheet["E" + i].v
+                _paper[`index[${i}]`] = i;
+                _paper[`item[${i}]`] = sheet["E" + i].v;
                 _paper[`userdef3[${i}]`] = sheet["G" + i].v;
 
                 let jsonObj = {};
