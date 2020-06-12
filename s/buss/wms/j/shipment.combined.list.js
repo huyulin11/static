@@ -120,7 +120,7 @@ let doSearch = function () {
 		// gf.layerMsg("需指定查询数据的产线名称！");
 		// return;
 	}
-	localStorage.currentSearchProduct = product;
+	// localStorage.currentSearchProduct = product;
 	window.datagrid.setOptions({
 		data: Object.assign(searchParams, { "TABLE_KEY": "COMBINED_TU_INFO" })
 	});
