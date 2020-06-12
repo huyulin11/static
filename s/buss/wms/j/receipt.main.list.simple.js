@@ -81,7 +81,24 @@ $("#searchForm").on("submit", function () {
 
 $("#paging").delegate("button.exe", "click", function () {
 	let id = $(this).data("id");
-	console.log(id);
+	window.location.href = `/s/buss/wms/h/receiptDetailExe.html?detailid=${id}`;
+	// window.pageii = layer.open({
+	// 	title: '入库任务执行',
+	// 	type: 2,
+	// 	area: ['50%', '90%'],
+	// 	// skin: 'layui-layer-rim',
+	// 	content: `/s/buss/wms/h/receiptDetailExe.html?detailid=${id}`,
+	// });
+
+	// if (window.confirm("确定执行该任务？")) {
+	// 	gf.doAjax({
+	// 		url: `/receipt/util/addReceiptTask.shtml`,
+	// 		data: { detailid: id },
+	// 		success: function (data) {
+	// 			alert(data);
+	// 		}
+	// 	});
+	// }
 });
 
 initPaperOp("receipt");

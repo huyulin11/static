@@ -10,6 +10,7 @@ fieldset {
 	border: 1px #ffffff2b;
 	margin: 5px;
 	border-style: dotted;
+	height: 100%;
 }
 
 fieldset>legend {
@@ -134,6 +135,7 @@ input.bigSearch {
 	top: 65px;
 	/* background: #ffffff57; */
 	/* width: 70%; */
+	height: 90%;
 	width: auto;
 	box-shadow: gray 10px 10px 30px 5px;
 	border-radius: 10px;
