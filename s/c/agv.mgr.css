@@ -135,7 +135,7 @@ input.bigSearch {
 	top: 65px;
 	/* background: #ffffff57; */
 	/* width: 70%; */
-	height: 90%;
+	/* height: auto; */
 	width: auto;
 	box-shadow: gray 10px 10px 30px 5px;
 	border-radius: 10px;

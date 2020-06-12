@@ -3,6 +3,7 @@ import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 var _detailid = gf.urlParam("detailid");
 var _target, container;
@@ -59,15 +60,35 @@ let doJob = (param, that, callback) => {
         });
     });
 };
-export var init = function (target) {
-    _target = target;
-    container = $(target);
+
+var doInit = function (target, json) {
     // let table = $("<table></table>");
     // let tdStart = $("<tr><td></td></tr>");
     // let btnStart = $("<button></button>");
     // tdStart.append(btnStart);
     // table.append(tdStart);
     // container.append(table);
+    _target = target;
+    container = $(target);
+    console.log(json);
+    container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}</span>`);
     let tempBtns = [add, detail, edit, send, back];
-    gf.bindBtns("div#rootContainer", tempBtns);
+    gf.bindBtns(container, tempBtns);
+}
+
+
+export var init = function (target) {
+    gf.doAjax({
+        url: `/receipt/detail/findJsonList.shtml`,
+        data: { "receiptDetailFormMap.id": _detailid },
+        success: function (data) {
+            if (typeof data == 'string') data = JSON.parse(data);
+            if (!data || data.length > 1) {
+                alert("数据存在问题！");
+                return;
+            }
+            let json = data[0];
+            doInit(target, json);
+        }
+    });
 }
