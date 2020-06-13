@@ -9,25 +9,25 @@ var _detailid = gf.urlParam("detailid");
 var _target, container;
 
 let play = {
-    url: `/receipt/detail/util/play.shtml`,
+    url: `/receipt/util/play.shtml`,
     id: "play", name: "开始预设", class: "btn-warning",
     bind: function () {
         doJob("play", this);
     },
 }, init = {
-    url: `/receipt/detail/util/init.shtml`,
+    url: `/receipt/util/init.shtml`,
     id: "init", name: "恢复初始状态", class: "btn-warning",
     bind: function () {
         doJob("init", this);
     },
 }, save = {
-    url: `/receipt/detail/util/save.shtml`,
+    url: `/receipt/util/save.shtml`,
     id: "save", name: "暂时存储", class: "btn-warning",
     bind: function () {
         doJob("save", this);
     },
 }, exe = {
-    url: `/receipt/detail/util/exe.shtml`,
+    url: `/receipt/util/exe.shtml`,
     id: "exe", name: "确认执行", class: "btn-warning", style: "color: 'coffee'",
     bind: function () {
         doJob("exe", this);
