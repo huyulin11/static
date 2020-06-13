@@ -14,11 +14,11 @@ let play = {
     bind: function () {
         doJob("play", this);
     },
-}, init = {
-    url: `/receipt/util/init.shtml`,
-    id: "init", name: "恢复初始状态", class: "btn-warning",
+}, restore = {
+    url: `/receipt/util/restore.shtml`,
+    id: "restore", name: "恢复初始状态", class: "btn-warning",
     bind: function () {
-        doJob("init", this);
+        doJob("restore", this);
     },
 }, save = {
     url: `/receipt/util/save.shtml`,
@@ -28,32 +28,27 @@ let play = {
     },
 }, exe = {
     url: `/receipt/util/exe.shtml`,
-    id: "exe", name: "确认执行", class: "btn-warning", style: "color: 'coffee'",
+    id: "exe", name: "确认执行", class: "btn-warning",
+    style: "background-color:chocolate",
     bind: function () {
         doJob("exe", this);
     },
 }, back = {
-    id: "back", name: "返回", class: "btn-warning", style: "color: 'gray'",
+    id: "back", name: "返回", class: "btn-warning",
+    style: "background-color:gray",
     bind: function () {
         window.history.back();
     },
 };
 
 let doJob = (param, that, callback) => {
-    var paperid;
-    if (that.paperid) {
-        paperid = that.paperid;
-    } else {
-        paperid = gf.checkOnlyOne("paperid");
-    }
-    if (!paperid) { return; }
-    layer.confirm(`是否${that.name}${paperid}？`, function (index) {
-        gf.ajax(that.url, { paperid: paperid }, "json", function (s) {
+    layer.confirm(`确认开始执行改操作：${that.name}？`, function (index) {
+        gf.ajax(that.url, { detailid: _detailid }, "json", function (s) {
             if (s.code >= 0) {
                 gf.layerMsg(`成功${that.name}！`);
                 if (window.datagrid) window.datagrid.loadData();
                 else if (parent.datagrid) parent.datagrid.loadData();
-                if (callback) { callback(paperid); }
+                if (callback) { callback(_detailid); }
             } else {
                 gf.layerMsg(`${that.name}失败！` + s.msg);
             }
@@ -72,7 +67,7 @@ var doInit = function (target, json) {
     container = $(target);
     console.log(json);
     container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}</span>`);
-    let tempBtns = [play, init, save, exe, back];
+    let tempBtns = [play, restore, save, exe, back];
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
     gf.bindBtns(btnContainer, tempBtns);
