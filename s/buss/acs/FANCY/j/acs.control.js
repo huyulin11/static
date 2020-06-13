@@ -153,6 +153,9 @@ var init = function () {
 	}
 
 	$("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
+		gf.checkLoginError(function () {
+			window.location.href = "/s/buss/g/h/login.html";
+		});
 		hideAllCtrl($(this).data("target"));
 		if ($(this).hasClass("open")) {
 			hideCtrl(this);

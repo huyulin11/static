@@ -8,32 +8,32 @@ import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 var _detailid = gf.urlParam("detailid");
 var _target, container;
 
-let add = {
-    url: `/s/buss/wms/h/AddUI.html?receipttype=`,
-    id: "add", name: "开始预设", class: "btn-primary",
+let play = {
+    url: `/receipt/detail/util/play.shtml`,
+    id: "play", name: "开始预设", class: "btn-warning",
     bind: function () {
-        add(this);
+        doJob("play", this);
     },
-}, detail = {
-    url: `/s/buss/wms/h/Details.html?MainFormMap.paperid=`,
-    id: "detail", name: "恢复初始状态", class: "btn-primary",
+}, init = {
+    url: `/receipt/detail/util/init.shtml`,
+    id: "init", name: "恢复初始状态", class: "btn-warning",
     bind: function () {
-        detail(this);
+        doJob("init", this);
     },
-}, edit = {
-    url: `/s/buss/wms/h/AddUI.html`,
-    id: "edit", name: "暂时存储", class: "btn-warning",
+}, save = {
+    url: `/receipt/detail/util/save.shtml`,
+    id: "save", name: "暂时存储", class: "btn-warning",
     bind: function () {
-        edit(this);
+        doJob("save", this);
     },
-}, send = {
-    url: `//main/send.shtml`,
-    id: "send", name: "确认执行", class: "btn-warning",
+}, exe = {
+    url: `/receipt/detail/util/exe.shtml`,
+    id: "exe", name: "确认执行", class: "btn-warning", style: "color: 'coffee'",
     bind: function () {
-        doJob("send", this);
+        doJob("exe", this);
     },
 }, back = {
-    id: "back", name: "返回", class: "btn-warning",
+    id: "back", name: "返回", class: "btn-warning", style: "color: 'gray'",
     bind: function () {
         window.history.back();
     },
@@ -72,7 +72,7 @@ var doInit = function (target, json) {
     container = $(target);
     console.log(json);
     container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}</span>`);
-    let tempBtns = [add, detail, edit, send, back];
+    let tempBtns = [play, init, save, exe, back];
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
     gf.bindBtns(btnContainer, tempBtns);
