@@ -101,17 +101,17 @@ var initPaperOp = function (tasktype, optype) {
                 } else if (optype == "DETAIL") {
                     tempBtns = [btns.refresh,];
                 } else if (optype == "PRIORITY") {
-                    tempBtns = [btns.editSeqDetail, btns.editSeq1, btns.editSeq2, btns.editSeq3, btns.refresh, btns.back,];
+                    tempBtns = [btns.refresh, btns.editSeqDetail, btns.editSeq2, btns.editSeq3, btns.editSeq1, btns.back,];
                 } else if (optype == "COMBINED") {
                     tempBtns = [btns.refresh, btns.deleteSure,];
                 } else if (optype == "PICKED") {
                     tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
                 } else if (optype == "PICKED_COLD") {
-                    tempBtns = [btns.refresh, btns.back, btns.callShipmentFromCold, btns.backShipmentToCold, btns.deleteSure,];
+                    tempBtns = [btns.refresh, btns.callShipmentFromCold, btns.backShipmentToCold, btns.deleteSure,];
                 } else if (optype == "PICKED_NORMAL") {
-                    tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
+                    tempBtns = [btns.refresh,];
                 } else if (optype == "COMBINE") {
-                    tempBtns = [btns.refresh, btns.back, btns.deleteSure,];
+                    tempBtns = [btns.refresh, btns.deleteSure,];
                 } else {
                     tempBtns = tempBtns.concat(chooseByWarehouse());
                 }

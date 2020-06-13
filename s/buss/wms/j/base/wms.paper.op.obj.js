@@ -175,7 +175,7 @@ var initBtns = function () {
     };
     let editSeq = function (seq) {
         return {
-            resKey: "editSeq" + seq, id: "editSeq" + seq, name: seq == 1 ? "取消优先级" : "设优先级为" + seq,
+            resKey: "editSeq" + seq, id: "editSeq" + seq, name: seq == 1 ? "优先级取消" : "优先级为" + seq,
             class: "btn-info", url: '/shipment/util/editSeq.shtml',
             bind: function () {
                 paperOp.editSeq(this, seq);
@@ -184,7 +184,7 @@ var initBtns = function () {
     }
     let editSeqDetail = function (seq) {
         return {
-            resKey: "editSeqDetail", id: "editSeqDetail", name: "设置顺序",
+            resKey: "editSeqDetail", id: "editSeqDetail", name: "顺序设置",
             class: "btn-info", url: '/shipment/util/editSeq.shtml',
             bind: function () {
                 paperOp.editSeq(this, seq, true);

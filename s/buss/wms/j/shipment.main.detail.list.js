@@ -97,9 +97,6 @@ let _columns = [{
 			return data;
 		return "";
 	}
-}, {
-	colkey: "sequence",
-	name: "执行优先级",
 }];
 
 if (localStorage.showTransLog) {
@@ -109,46 +106,46 @@ if (localStorage.showTransLog) {
 		name: "下达人",
 		defaultVal: '--'
 	}, {
-		colkey: "CRETATE.TIME",
-		jsonColumn: "operator",
-		name: "下达时间",
-		defaultVal: '--'
-	}, {
-		colkey: "PICKING.OPERATOR",
-		jsonColumn: "operator",
-		name: "组盘人",
-		defaultVal: '--'
-	}, {
-		colkey: "PICKING.TIME",
-		jsonColumn: "operator",
-		name: "拣配时间",
-		defaultVal: '--'
-	}, {
-		colkey: "COMBINING.OPERATOR",
-		jsonColumn: "operator",
-		name: "组盘人",
-		defaultVal: '--'
-	}, {
-		colkey: "COMBINING.TIME",
-		jsonColumn: "operator",
-		name: "组盘时间",
-		defaultVal: '--'
-	}, {
-		colkey: "ON_PCS.TIME",
-		jsonColumn: "operator",
-		name: "上PCS时间",
-		defaultVal: '--'
-	}, {
-		colkey: "OVER_PCS.TIME",
-		jsonColumn: "operator",
-		name: "出PCS时间",
-		defaultVal: '--'
-	}, {
-		colkey: "OVER.TIME",
-		jsonColumn: "operator",
-		name: "AGV上工位时间",
-		defaultVal: '--'
-	});
+			colkey: "CRETATE.TIME",
+			jsonColumn: "operator",
+			name: "下达时间",
+			defaultVal: '--'
+		}, {
+			colkey: "PICKING.OPERATOR",
+			jsonColumn: "operator",
+			name: "组盘人",
+			defaultVal: '--'
+		}, {
+			colkey: "PICKING.TIME",
+			jsonColumn: "operator",
+			name: "拣配时间",
+			defaultVal: '--'
+		}, {
+			colkey: "COMBINING.OPERATOR",
+			jsonColumn: "operator",
+			name: "组盘人",
+			defaultVal: '--'
+		}, {
+			colkey: "COMBINING.TIME",
+			jsonColumn: "operator",
+			name: "组盘时间",
+			defaultVal: '--'
+		}, {
+			colkey: "ON_PCS.TIME",
+			jsonColumn: "operator",
+			name: "上PCS时间",
+			defaultVal: '--'
+		}, {
+			colkey: "OVER_PCS.TIME",
+			jsonColumn: "operator",
+			name: "出PCS时间",
+			defaultVal: '--'
+		}, {
+			colkey: "OVER.TIME",
+			jsonColumn: "operator",
+			name: "AGV上工位时间",
+			defaultVal: '--'
+		});
 }
 
 if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type)) {
@@ -194,13 +191,17 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 	}, {
 		colkey: "item",
 		name: "SU"
-	}, {
+	}];
+}
+
+if (["PICKED_COLD", "PRODUCT"].includes(_type)) {
+	_columns.push({
 		colkey: "status",
 		name: "状态",
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
 		}
-	},];
+	});
 }
 
 if (["PRIORITY", "PRODUCT"].includes(_type)) {
@@ -213,12 +214,12 @@ if (["PRIORITY", "PRODUCT"].includes(_type)) {
 			return "";
 		}
 	});
-	_columns.push({
-		colkey: "sequence",
-		name: "执行优先级",
-	});
 }
 
+_columns.push({
+	colkey: "sequence",
+	name: "优先级",
+});
 _columns.push({
 	colkey: "userdef1",
 	name: "顺序",

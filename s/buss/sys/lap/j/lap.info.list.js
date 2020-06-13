@@ -5,6 +5,11 @@ import { getInput } from "/s/buss/g/j/g.input.render.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 
 let tempBtns = [{
+	id: "refresh", name: "刷新", class: "btn-info",
+	bind: function () {
+		window.datagrid.loadData();
+	}
+}, {
 	id: "back", name: "返回", class: "btn-info",
 	bind: function () {
 		window.history.back();
@@ -25,7 +30,7 @@ let _columns = [{
 	}
 }, {
 	colkey: "name",
-	name: "名称",
+	name: "产线名称",
 	renderData: function (rowindex, data, rowdata, column) {
 		return data;
 		// return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"

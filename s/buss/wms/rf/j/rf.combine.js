@@ -22,7 +22,7 @@ var sub = function () {
     }
     if (!_su) {
         if (!_line) {
-            if (!window.confirm("SU为空时提交，会组成空托盘上PCS，是否继续？")) {
+            if (!window.confirm("SU为空时提交，托盘直接发往产线，是否继续？")) {
                 $("#su").focus();
                 return;
             }
