@@ -30,11 +30,12 @@ let cols = [{
 }, {
 	name: "操作",
 	renderData: function (rowindex, data, rowdata, column) {
-		if (rowdata.delflag == "1" || rowdata.status != 'NEW') {
+		if (rowdata.delflag == "1") {
 			return "";
 		}
 		var btns = "";
-		btns += `<button type='button' class='btn btn-info marR10 exe' data-id='${rowdata.id}'>执行</button>`;
+		btns += `<button type='button' class='btn btn-info marR10 exe' 
+		data-id='${rowdata.id}'>处理</button>`;
 		return btns;
 	}
 }];
@@ -42,7 +43,7 @@ let cols = [{
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: cols,
-	jsonUrl: `/receipt/util/findWithDetail.shtml?mainstatus=TOSEND`,
+	jsonUrl: `/receipt/util/findWithDetail.shtml?mainstatus=TOSEND&detailstatus=NEW:TOSEND`,
 	checkbox: true,
 	serNumber: true,
 	simple: true,
