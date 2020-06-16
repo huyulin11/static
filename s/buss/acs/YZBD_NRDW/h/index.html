@@ -70,6 +70,9 @@
 	import "/s/buss/acs/g/j/agv.msg.js";
 	import { init as initTransport } from '/s/buss/acs/FANCY/j/agv/agv.info.transport.js';
 	initTransport('div#transport');
+	gf.checkLoginError(function () {
+		window.location.href = "/s/buss/g/h/login.html";
+	});
 </script>
 
 </html>
