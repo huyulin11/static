@@ -13,11 +13,15 @@ var login = function () {
         },
         success: function (data) {
             if (data.code >= 0) {
-                if (!gf.isPc() && localStorage.projectKey == "BJJK_HUIRUI") {
-                    location.assign("/s/buss/wms/rf/h/rf.mgr.html");
+                let indexUrl;
+                if (data.object) {
+                    indexUrl = data.object;
+                } else if (!gf.isPc() && localStorage.projectKey == "BJJK_HUIRUI") {
+                    indexUrl = "/s/buss/wms/rf/h/rf.mgr.html";
                 } else {
-                    location.assign("/s/buss/g/h/manager.html");
+                    indexUrl = "/s/buss/g/h/manager.html";
                 }
+                location.assign(indexUrl);
             } else {
                 layer.msg(data.msg);
                 $("#username").focus();
