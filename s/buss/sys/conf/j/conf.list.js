@@ -20,21 +20,21 @@ let _columns = [{
     colkey: "value",
     name: "值",
     renderData: function (rowindex, data, rowdata, column) {
-        try {
-            let json = JSON.parse(data);
-            if (json instanceof Array) {
-                for (let item of json) {
-                    console.log(item);
-                }
-                return "json_Array配置";
-            } else if (json instanceof Object) {
-                for (let item in json) {
-                    console.log(item);
-                }
-                return "json_Object配置";
-            }
-        } catch (error) {
-        }
+        // try {
+        //     let json = JSON.parse(data);
+        //     if (json instanceof Array) {
+        //         for (let item of json) {
+        //             console.log(item);
+        //         }
+        //         return "json_Array配置";
+        //     } else if (json instanceof Object) {
+        //         for (let item in json) {
+        //             console.log(item);
+        //         }
+        //         return "json_Object配置";
+        //     }
+        // } catch (error) {
+        // }
         let col = {
             name: "键值", key: "key", notnull: true, type: "input",
         };

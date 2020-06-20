@@ -12,7 +12,8 @@ var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
 		renderModel('agvs', 'div#agvDiv');
-		renderModel('setup', 'div#controlContainer');
+		if (localStorage.projectKey != 'CSY_CDBP')
+			renderModel('setup', 'div#controlContainer');
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
 			renderModel('lift', 'div#liftContainer');
 			renderModel('door', 'div#autodoorContainer');
