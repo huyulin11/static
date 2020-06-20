@@ -80,7 +80,7 @@ $("#paging").delegate(".edit", "click", function (e) {
     let target = $(this).parents("td").find("input").val();
     if (!target) {
         target = $(this).parents("td").find("textarea").val();
-        target = JSON.stringify(target);
+        // target = JSON.stringify(target);
     }
     if (window.confirm(`是否要改变${key}的值为${target}？`)) {
         gf.doAjax({
