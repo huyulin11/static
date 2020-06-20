@@ -20,24 +20,32 @@ let _columns = [{
     colkey: "value",
     name: "值",
     renderData: function (rowindex, data, rowdata, column) {
-        // try {
-        //     let json = JSON.parse(data);
-        //     if (json instanceof Array) {
-        //         for (let item of json) {
-        //             console.log(item);
-        //         }
-        //         return "json_Array配置";
-        //     } else if (json instanceof Object) {
-        //         for (let item in json) {
-        //             console.log(item);
-        //         }
-        //         return "json_Object配置";
-        //     }
-        // } catch (error) {
-        // }
-        let col = {
-            name: "键值", key: "key", notnull: true, type: "input",
-        };
+        let col;
+        try {
+            let json = JSON.parse(data);
+            if (json instanceof Array || json instanceof Object) {
+                col = {
+                    name: "键值", key: "key", notnull: true, type: "textarea",
+                };
+            }
+            // if (json instanceof Array) {
+            //     for (let item of json) {
+            //         console.log(item);
+            //     }
+            //     return "json_Array配置";
+            // } else if (json instanceof Object) {
+            //     for (let item in json) {
+            //         console.log(item);
+            //     }
+            //     return "json_Object配置";
+            // }
+        } catch (error) {
+        }
+        if (!col) {
+            col = {
+                name: "键值", key: "key", notnull: true, type: "input",
+            };
+        }
         let json = { key: rowdata.key };
         let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
         let html = getInput(col, { value: data, width: '50%', });
@@ -70,6 +78,9 @@ window.datagrid = dataGrid({
 $("#paging").delegate(".edit", "click", function (e) {
     let key = $(this).data("key");
     let target = $(this).parents("td").find("input").val();
+    if (!target) {
+        target = $(this).parents("td").find("textarea").val();
+    }
     if (window.confirm(`是否要改变${key}的值为${target}？`)) {
         gf.doAjax({
             url: `/app/conf/set.shtml`,

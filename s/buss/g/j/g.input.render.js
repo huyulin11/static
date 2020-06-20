@@ -38,6 +38,12 @@ export var getInput = (item, option) => {
         data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
         data-showcol='${item.showcol}' placeholder="输入:${label}${item.notnull ? '*' : ''}" 
         data-notnull='${item.notnull}' autocomplete="off" ${readonly}>`);
+    } else if ("textarea" == item.type) {
+        $(obj).append(`<textarea id="${id}" name="${name}" 
+            class="form-control" value="${_defaultValue}"
+            placeholder="输入:${label}${item.notnull ? '*' : ''}" data-notnull='${item.notnull}' 
+            style="${_width ? 'width:' + _width + '' : ''}"
+            autocomplete="off" ${readonly}>${_defaultValue}</textarea>`);
     } else {
         $(obj).append(`<input type="text" id="${id}" name="${name}" 
             class="form-control" value="${_defaultValue}"
