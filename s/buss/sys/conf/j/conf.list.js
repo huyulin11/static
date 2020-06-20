@@ -80,10 +80,11 @@ $("#paging").delegate(".edit", "click", function (e) {
     let target = $(this).parents("td").find("input").val();
     if (!target) {
         target = $(this).parents("td").find("textarea").val();
+        target = JSON.stringify(target);
     }
     if (window.confirm(`是否要改变${key}的值为${target}？`)) {
         gf.doAjax({
-            url: `/app/conf/set.shtml`,
+            url: `/app/conf/set.shtml`, type: "POST",
             data: { table: "CONF_KEY", key: key, value: target }
         });
     }
