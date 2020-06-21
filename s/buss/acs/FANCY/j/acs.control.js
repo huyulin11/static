@@ -30,6 +30,13 @@ var container = function () {
 			renderModel('search', 'div#searchContainer');
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
+		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
+			let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
+			$(taskContainer).append("<iframe id='taskFrame'></iframe>");
+			let url = "/s/buss/sys/conf/h/agv.cache.html";
+			$(taskContainer).find("iframe#taskFrame").css("height", "500px").css("width", "500px").attr("src", url);
+			$("body").append(taskContainer);
+			renderModel('task', 'div#taskContainer');
 		}
 	}
 	return $("#allCtrlTable");
@@ -154,9 +161,11 @@ var init = function () {
 	}
 
 	$("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
-		gf.checkLoginError(function () {
-			window.location.href = "/s/buss/g/h/login.html";
-		});
+		if (localStorage.projectKey == 'YZBD_NRDW') {
+			gf.checkLoginError(function () {
+				window.location.href = "/s/buss/g/h/login.html";
+			});
+		}
 		hideAllCtrl($(this).data("target"));
 		if ($(this).hasClass("open")) {
 			hideCtrl(this);
