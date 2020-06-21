@@ -4,18 +4,18 @@ import { dataGrid } from "/s/j/kf.grid.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 
 let _columns = [{
-    colkey: "id",
-    name: "id",
+    colkey: "key",
+    name: "key",
     hide: true,
 }, {
     colkey: "key",
-    name: "时间",
+    name: "关键字",
     renderData: function (rowindex, data, rowdata, column) {
         return data;
     }
 }, {
     colkey: "value",
-    name: "任务信息",
+    name: "内容",
     renderData: function (rowindex, data, rowdata, column) {
         return data;
     }
@@ -58,3 +58,21 @@ $("#searchForm").on("submit", function () {
     doSearch();
     return false;
 });
+
+let add = (that) => {
+    window.pageii = layer.open({
+        title: `${that.name}`,
+        type: 2,
+        area: gf.layerArea(),
+        content: that.url
+    });
+};
+let btnAdd = {
+    url: `/s/buss/wms/h/AddUI.html`,
+    id: "add", name: "增加", class: "btn-primary",
+    bind: function () {
+        add(this);
+    },
+};
+let tempBtns = [btnAdd];
+gf.bindBtns("div.doc-buttons", tempBtns);
