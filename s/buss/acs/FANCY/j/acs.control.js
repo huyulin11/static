@@ -63,84 +63,48 @@ var init = function () {
 		alert(taskexe.addCtrlTask(0, "CONTINUE"));
 	});
 
-	container().delegate("button#togglePiBtn", "click", function () {
-		var open = $(this).data("open");
-		var tips = "";
-		var opType = "";
+	let doCtrlTask = (that, tips, opType) => {
+		var open = $(that).data("open");
 		if (open) {
-			tips = '是否确定关闭交通管制？';
-			opType = "stopPI";
+			tips = '是否确定关闭' + tips + '？';
+			opType = "stop" + opType;
 		} else {
-			tips = '是否确定开启交通管制？';
-			opType = "openPI";
+			tips = '是否确定开启' + tips + '？';
+			opType = "open" + opType;
 		}
 		if (window.confirm(tips)) {
 			alert(taskexe.addCtrlTask(0, opType));
 		}
+	}
+
+	container().delegate("button#togglePiBtn", "click", function () {
+		var tips = "交通管制";
+		var opType = "PI";
+		doCtrlTask(that, tips, opType);
 	});
 
 	container().delegate("button#autoChargeBtn", "click", function () {
-		var open = $(this).data("open");
-		var tips = "";
-		var opType = "";
-		if (open) {
-			tips = '是否确定关闭自动充电功能？';
-			opType = "stopAutoCharge";
-		} else {
-			tips = '是否确定开启自动充电功能？';
-			opType = "openAutoCharge";
-		}
-		if (window.confirm(tips)) {
-			alert(taskexe.addCtrlTask(0, opType));
-		}
+		var tips = "自动充电功能";
+		var opType = "AutoCharge";
+		doCtrlTask(that, tips, opType);
 	});
 
 	container().delegate("button#errBackBtn", "click", function () {
-		var open = $(this).data("open");
-		var tips = "";
-		var opType = "";
-		if (open) {
-			tips = '是否确定关闭脱轨重新规划功能？';
-			opType = "stopErrBack";
-		} else {
-			tips = '是否确定开启脱轨重新规划功能？';
-			opType = "openErrBack";
-		}
-		if (window.confirm(tips)) {
-			alert(taskexe.addCtrlTask(0, opType));
-		}
+		var tips = "脱轨重新规划功能";
+		var opType = "ErrBack";
+		doCtrlTask(that, tips, opType);
 	});
 
 	container().delegate("button#autoTaskBtn", "click", function () {
-		var open = $(this).data("open");
-		var tips = "";
-		var opType = "";
-		if (open) {
-			tips = '是否确定关闭自动任务功能？';
-			opType = "stopAutoTask";
-		} else {
-			tips = '是否确定开启自动任务功能？';
-			opType = "openAutoTask";
-		}
-		if (window.confirm(tips)) {
-			alert(taskexe.addCtrlTask(0, opType));
-		}
+		var tips = "自动任务功能";
+		var opType = "AutoTask";
+		doCtrlTask(that, tips, opType);
 	});
 
 	container().delegate("button#udfConfirmBtn", "click", function () {
-		var open = $(this).data("open");
-		var tips = "";
-		var opType = "";
-		if (open) {
-			tips = '是否确定取消确认信号？';
-			opType = "stopUdfConfirm";
-		} else {
-			tips = '是否确定发送确认信号？';
-			opType = "openUdfConfirm";
-		}
-		if (window.confirm(tips)) {
-			alert(taskexe.addCtrlTask(0, opType));
-		}
+		var tips = "确认信号";
+		var opType = "UdfConfirm";
+		doCtrlTask(that, tips, opType);
 	});
 
 	var showCtrl = function (that) {
