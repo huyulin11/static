@@ -8,6 +8,14 @@ let renderModel = (key, target) => {
 	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-target='${target}'></div>`);
 }
 
+let taskReady = () => {
+	let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
+	$(taskContainer).append("<iframe id='taskFrame'></iframe>");
+	let url = "/s/buss/sys/conf/h/agv.cache.html";
+	$(taskContainer).find("iframe#taskFrame").css("height", "500px").css("width", "500px").attr("src", url);
+	$("body").append(taskContainer);
+}
+
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
@@ -24,6 +32,8 @@ var container = function () {
 			renderModel('window', 'div#windowContainer');
 			renderModel('wms', 'div#wmsContainer');
 		} else if (localStorage.projectKey == 'CSY_CDBP') {
+			taskReady();
+			renderModel('task', 'div#taskContainer');
 		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
 		} else if (localStorage.projectKey == 'YZBD_NRDW') {
 			renderModel('tongji', 'div#tongjiContainer');
@@ -31,11 +41,7 @@ var container = function () {
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
-			let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
-			$(taskContainer).append("<iframe id='taskFrame'></iframe>");
-			let url = "/s/buss/sys/conf/h/agv.cache.html";
-			$(taskContainer).find("iframe#taskFrame").css("height", "500px").css("width", "500px").attr("src", url);
-			$("body").append(taskContainer);
+			taskReady();
 			renderModel('task', 'div#taskContainer');
 		}
 	}

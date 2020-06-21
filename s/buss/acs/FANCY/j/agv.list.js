@@ -93,11 +93,6 @@ var init = function () {
 
     var height = "300px";
     if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
-    if (localStorage.projectKey == 'CSY_CDBP') {
-        height = "300px";
-        let url = "/s/buss/sys/conf/h/agv.cache.html";
-        $("#mainPage").css("height", height).attr("src", url);
-    }
 }
 
 init();
