@@ -193,10 +193,16 @@ var dataGrid = function (params) {
 	var render = function (jsonDatas) {
 		if (!_conf.simple) {
 			renderHead(_container);
-			renderFenye(_container, jsonDatas);
+			if (!_conf.fenyeInTail) {
+				renderFenye(_container, jsonDatas);
+			}
+			renderBody(_container, jsonDatas);
+			if (_conf.fenyeInTail) {
+				renderFenye(_container, jsonDatas);
+			}
+		} else {
+			renderBody(_container, jsonDatas);
 		}
-		renderBody(_container, jsonDatas);
-
 		if (_conf.callback) { _conf.callback(); }
 		fixhead();
 	};

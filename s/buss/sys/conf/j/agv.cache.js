@@ -57,6 +57,7 @@ window.datagrid = dataGrid({
     serNumber: true,
     pageSize: 10,
     refreshTime: 3000,
+    fenyeInTail: true,
     data: { "TABLE_KEY": "AGV_CACHED_TASK", "ORDER_BY_KEY": "key" }
 });
 
