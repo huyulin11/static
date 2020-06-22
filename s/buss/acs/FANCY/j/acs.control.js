@@ -20,7 +20,7 @@ var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
 		renderModel('agvs', 'div#agvDiv');
-		if (localStorage.projectKey != 'CSY_CDBP')
+		if (![''].includes(localStorage.projectKey))
 			renderModel('setup', 'div#controlContainer');
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
 			renderModel('lift', 'div#liftContainer');
@@ -51,7 +51,8 @@ var container = function () {
 var init = function () {
 	var initBtns = jQuery.parseJSON(localStorage.acsControl);
 	for (var btn of initBtns) {
-		container().append("<tr><td><div><button id='" + btn.id + "'>" + btn.name + "</button></div></td></tr>");
+		if (!btn.hide)
+			container().append("<tr><td><div><button id='" + btn.id + "'>" + btn.name + "</button></div></td></tr>");
 	}
 	container().delegate("button#PAUSE_USER", "click", function () {
 		alert(taskexe.addCtrlTask(0, "PAUSE_USER"));
