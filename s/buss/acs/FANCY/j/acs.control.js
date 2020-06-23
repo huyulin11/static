@@ -54,15 +54,6 @@ var init = function () {
 		if (!btn.hide)
 			container().append("<tr><td><div><button id='" + btn.id + "'>" + btn.name + "</button></div></td></tr>");
 	}
-	container().delegate("button#PAUSE_USER", "click", function () {
-		alert(taskexe.addCtrlTask(0, "PAUSE_USER"));
-	});
-	container().delegate("button#manager", "click", function () {
-		window.open('/s/buss/g/h/manager.html');
-	});
-	container().delegate("button#CONTINUE", "click", function () {
-		alert(taskexe.addCtrlTask(0, "CONTINUE"));
-	});
 	delegateEvent();
 
 	var showCtrl = function (that) {
@@ -101,14 +92,6 @@ var init = function () {
 			showCtrl(this);
 		}
 	});
-
-	container().delegate("button#sysLocation", "click", function () {
-		window.open("/s/buss/acs/location/" + localStorage.projectKey + "/location.html");
-	});
-
-	container().delegate("button#taskQuantityBtn", "click", function () {
-		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");
-	});
 }
 
 let doCtrlTask = (that, tips, opType) => {
@@ -129,56 +112,57 @@ var delegateEvent = () => {
 	container().delegate("button#togglePiBtn", "click", function () {
 		var tips = "交通管制";
 		var opType = "PI";
-		doCtrlTask(that, tips, opType);
+		doCtrlTask(this, tips, opType);
 	});
 	container().delegate("button#autoChargeBtn", "click", function () {
 		var tips = "自动充电功能";
 		var opType = "AutoCharge";
-		doCtrlTask(that, tips, opType);
+		doCtrlTask(this, tips, opType);
 	});
 	container().delegate("button#errBackBtn", "click", function () {
 		var tips = "脱轨重新规划功能";
 		var opType = "ErrBack";
-		doCtrlTask(that, tips, opType);
+		doCtrlTask(this, tips, opType);
 	});
 	container().delegate("button#autoTaskBtn", "click", function () {
 		var tips = "自动任务功能";
 		var opType = "AutoTask";
-		doCtrlTask(that, tips, opType);
+		doCtrlTask(this, tips, opType);
 	});
 	container().delegate("button#udfConfirmBtn", "click", function () {
 		var tips = "确认信号";
 		var opType = "UdfConfirm";
-		doCtrlTask(that, tips, opType);
+		doCtrlTask(this, tips, opType);
+	});
+	container().delegate("button#PAUSE_USER", "click", function () {
+		alert(taskexe.addCtrlTask(0, "PAUSE_USER"));
+	});
+	container().delegate("button#manager", "click", function () {
+		window.open('/s/buss/g/h/manager.html');
+	});
+	container().delegate("button#CONTINUE", "click", function () {
+		alert(taskexe.addCtrlTask(0, "CONTINUE"));
+	});
+	container().delegate("button#sysLocation", "click", function () {
+		window.open("/s/buss/acs/location/" + localStorage.projectKey + "/location.html");
+	});
+	container().delegate("button#taskQuantityBtn", "click", function () {
+		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");
 	});
 }
 
 export var renderCtrlBtns = (value) => {
-	$("button#togglePiBtn").data("open", value.isOpenPi)
-		.html("交通管制" + "<br/>" + "<span style='color:" +
-			(value.isOpenPi ? "yellow" : "pink") + "'>" +
-			(value.isOpenPi ? "已开启" : "已关闭") + "</span>-" +
-			(value.isOpenPi ? "点击关闭" : "点击开启"));
-	$("button#autoTaskBtn").data('open', value.isAutoTask)
-		.html("自动任务" + "<br/>" + "<span style='color:" +
-			(value.isAutoTask ? "yellow" : "pink") + "'>" +
-			(value.isAutoTask ? "已开启" : "已关闭") + "</span>-" +
-			(value.isAutoTask ? "点击关闭" : "点击开启"));
-	$("button#udfConfirmBtn").data('open', value.isUdfConfirm)
-		.html("用户确认" + "<br/>" + "<span style='color:" +
-			(value.isUdfConfirm ? "yellow" : "pink") + "'>" +
-			(value.isUdfConfirm ? "已开启" : "已关闭") + "</span>-" +
-			(value.isUdfConfirm ? "点击关闭" : "点击开启"));
-	$("button#autoChargeBtn").data('open', value.isAutoCharge)
-		.html("自动充电" + "<br/>" + "<span style='color:" +
-			(value.isAutoCharge ? "yellow" : "pink") + "'>" +
-			(value.isAutoCharge ? "已开启" : "已关闭") + "</span>-" +
-			(value.isAutoCharge ? "点击关闭" : "点击开启"));
-	$("button#errBackBtn").data('open', value.isErrBack)
-		.html("脱轨重新规划" + "<br/>" + "<span style='color:" +
-			(value.isErrBack ? "yellow" : "pink") + "'>" +
-			(value.isErrBack ? "已开启" : "已关闭") + "</span>-" +
-			(value.isErrBack ? "点击关闭" : "点击开启"));
+	let htmlPiece = (v) => {
+		return "<br/>" + "<span style='color:" +
+			(v ? "yellow" : "pink") + "'>" +
+			(v ? "已开启" : "已关闭") + "</span>-" +
+			(v ? "点击关闭" : "点击开启");
+	}
+	$("button#togglePiBtn").data("open", value.isOpenPi).html("交通管制" + htmlPiece(value.isOpenPi));
+	$("button#autoTaskBtn").data('open', value.isAutoTask).html("自动任务" + htmlPiece(value.isAutoTask));
+	$("button#udfConfirmBtn").data('open', value.isUdfConfirm).html("用户确认" + htmlPiece(value.isUdfConfirm));
+	$("button#autoChargeBtn").data('open', value.isAutoCharge).html("自动充电" + htmlPiece(value.isAutoCharge));
+	$("button#errBackBtn").data('open', value.isErrBack).html("脱轨重新规划" + htmlPiece(value.isErrBack));
 }
 
 init();
