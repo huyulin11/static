@@ -29,11 +29,13 @@ export var getInput = (item, option) => {
             data-initval="${_defaultValue}" data-notnull="${item.notnull}" data-alias="${item.alias}" id="${id}" ${readonly}></select>`);
     } else if ("associating-input" == item.type) {
         let show = _defaultValue;
+        let showModel = "";
         if (item.storeKey) {
             if (_defaultValue && item.showFun) show = item.showFun(_defaultValue); else show = _defaultValue;
             after = $(`<input type="hidden" id="${id}" name="${name}" value="${_defaultValue}">`);
+            showModel = "show_";
         }
-        $(obj).append(`<input type="text" id="show_${id}" name="show_${name}" 
+        $(obj).append(`<input type="text" id="${showModel}${id}" name="${showModel}${name}" 
         class="form-control associating-input" value="${show}"
         data-searchurl='${item.searchurl}' data-containerofinput="${item.containerofinput}" 
         data-showcol='${item.showcol}' placeholder="输入:${label}${item.notnull ? '*' : ''}" 
