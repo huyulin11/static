@@ -67,7 +67,7 @@ var getShowVal = function (agvinfo) {
     if (agvinfo.json) {
         json = JSON.parse(agvinfo.json);
         if (json) {
-            target = json.TO;
+            target = json.to;
             try {
                 let targetJson = JSON.parse(target);
                 if (targetJson instanceof Array) {
