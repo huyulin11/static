@@ -88,8 +88,7 @@ export var init = function (target) {
 			let json = $(item).data("json");
 			let arrivedact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
 			arrSub.push({
-				arrivedact: arrivedact, site: json.name || $(item).data("name"),
-				id: $(item).data("id"), name: $(item).data("name")
+				arrivedact: arrivedact, id: $(item).data("id")
 			});
 		} console.log(JSON.stringify(arrSub));
 		if (window.confirm("确定呼叫车辆？")) {

@@ -137,9 +137,9 @@ var getShowVal = function (agvinfo) {
     val.colorStyle = colorStyle;
     val.taskStatusVal = "任务状态:" + taskStatusVal + ((agvinfo.taskstatus != "FREE" && target) ? "-" + target : "") + "<br/>"
         + (agvinfo.taskexesid ? agvinfo.taskexesid : (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中"));
-    val.currentsite = "当前站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
-    val.battery = "当前电压:" + (agvinfo.battery ? agvinfo.battery : "");
-    val.speed = "当前速度(%):" + (agvinfo.speed ? agvinfo.speed : "");
+    val.currentsite = "站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
+    val.battery = "电压:" + (agvinfo.battery ? agvinfo.battery : "");
+    val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
     val.agvstatus = "AGV反馈状态:" + (agvinfo.agvstatus ? agvinfo.agvstatus : "");
     val.remark = (remark ? remark : "");
 

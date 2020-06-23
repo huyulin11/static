@@ -72,7 +72,7 @@ window.datagrid = dataGrid({
     jsonUrl: `/app/conf/findByPage.shtml`,
     checkbox: false,
     serNumber: true,
-    data: { "TABLE_KEY": "CONF_KEY", "key": "LDAP_IP:LDAP_DOMAIN:FORBIT_SAME_TRANSID" }
+    data: { "TABLE_KEY": "CONF_KEY", "key": "LDAP_IP:LDAP_DOMAIN:FORBIT_SAME_TRANSID", "ORDER_BY_KEY": "key" }
 });
 
 $("#paging").delegate(".edit", "click", function (e) {
