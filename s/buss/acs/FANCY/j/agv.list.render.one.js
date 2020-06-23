@@ -69,15 +69,18 @@ var getShowVal = function (agvinfo) {
         if (json) {
             target = json.to;
             try {
-                let targetJson = JSON.parse(target);
+                let targetJson = target;
+                if (typeof target == 'string') {
+                    targetJson = JSON.parse(target);
+                }
                 if (targetJson instanceof Array) {
                     let showTarget = [];
                     for (let i of targetJson) {
-                        showTarget.push(i.site);
+                        showTarget.push(i.id);
                     }
                     target = showTarget.join("、");
                 } else if (targetJson instanceof Object) {
-                    target = targetJson.site;
+                    target = targetJson.id;
                 }
             } catch (error) {
             }
@@ -140,6 +143,7 @@ var getShowVal = function (agvinfo) {
     val.currentsite = "站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
     val.battery = "电压:" + (agvinfo.battery ? agvinfo.battery : "");
     val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
+    if (agvinfo.id == 2) console.log(agvinfo.speed)
     val.agvstatus = "AGV反馈状态:" + (agvinfo.agvstatus ? agvinfo.agvstatus : "");
     val.remark = (remark ? remark : "");
 
