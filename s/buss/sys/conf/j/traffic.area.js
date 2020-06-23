@@ -128,7 +128,7 @@ let btnUpload = {
     id: "upload", name: "更新", class: "btn-danger",
     bind: function () {
         if (window.confirm(`改变将提交到服务器，此举会将更新现有的交管逻辑，确定是否更新？`)) {
-            alert(taskexe.addCtrlTask(0, "IS_REFRESH_LOCK_CACHE"));
+            taskexe.addCtrlTask(0, "IS_REFRESH_LOCK_CACHE");
         }
     },
 };

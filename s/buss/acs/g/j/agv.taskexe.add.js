@@ -1,66 +1,52 @@
 export var taskexe = new Object();
 
-taskexe.addTaskById = function (agvId, tasktype, whenError) {
-    return addTask(agvId, tasktype, whenError, "/json/op/addTaskById.shtml ");
+taskexe.addTaskById = function (agvId, tasktype) {
+    _doAddTask(agvId, tasktype, "/json/op/addTaskById.shtml ");
 }
 
-taskexe.addTask = function (agvId, tasktype, whenError) {
-    return addTask(agvId, tasktype, whenError);
+taskexe.addTask = function (agvId, tasktype) {
+    _doAddTask(agvId, tasktype);
 }
 
-taskexe.addCtrlTask = function (agvId, tasktype, whenError) {
-    return addTask(agvId, tasktype, whenError, "/json/op/addCtrlTask.shtml");
-}
-
-taskexe.addCtrlTaskRtnCode = function (agvId, tasktype, whenError) {
-    return addTaskRtnCode(agvId, tasktype, whenError, "/json/op/addCtrlTask.shtml");
-}
-
-taskexe.addATaskBySystem = function (lapId) {
-    return addTask(null, null, null, "/json/op/addATaskBySystem.shtml?lapId=" + lapId);
+taskexe.addCtrlTask = function (agvId, tasktype, devId) {
+    _doAddTask(agvId, tasktype, "/json/op/addCtrlTask.shtml", devId);
 }
 
 taskexe.addTaskTo = function (agvId, tasktype, to) {
-    return addTaskTo(agvId, tasktype, to);
+    addTaskTo(agvId, tasktype, to);
 }
 
-var addTask = function (agvId, tasktype, whenError, urlInfo) {
-    return _addTask(agvId, tasktype, whenError, urlInfo).msg;
+var _doAddTask = function (agvId, tasktype, urlInfo, devId) {
+    _addTask(agvId, tasktype, urlInfo, devId);
 }
 
-var addTaskRtnCode = function (agvId, tasktype, whenError, urlInfo) {
-    return _addTask(agvId, tasktype, whenError, urlInfo).code;
-}
-
-var _addTask = function (agvId, tasktype, whenError, urlInfo) {
-    var rtnData;
+var _addTask = function (agvId, tasktype, urlInfo, devId) {
     jQuery.ajax({
         url: (urlInfo) ? urlInfo : "/json/op/addTask.shtml",
         type: "post",
         data: {
             tasktype: tasktype,
             taskid: tasktype,
-            agvId: agvId
+            agvId: agvId,
+            devId: devId
         },
-        async: false,
+        async: true,
         dataType: "json",
         success: function (data) {
-            rtnData = data;
+            layer.msg(data.msg);
         },
         error: function (e) {
             layer.msg("数据中断，请刷新界面或重新登录！");
         },
         timeout: 5000
     });
-    return rtnData;
 }
 
 var addTaskTo = function (agvId, tasktype, to) {
-    return _addTaskTo(agvId, tasktype, to).msg;
+    _addTaskTo(agvId, tasktype, to);
 }
 
 var _addTaskTo = function (agvId, tasktype, to) {
-    var rtnData;
     let targetUrl = "/json/op/addTaskTo.shtml ";
     if (localStorage.projectKey == 'TAIKAI_JY' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
         targetUrl = "/json/op/fancy/addTaskTo.shtml";
@@ -73,15 +59,14 @@ var _addTaskTo = function (agvId, tasktype, to) {
             to: to,
             agvId: agvId
         },
-        async: false,
+        async: true,
         dataType: "json",
         success: function (data) {
-            rtnData = data;
+            layer.msg(data.msg);
         },
         error: function (e) {
             layer.msg("数据中断，请刷新界面或重新登录！");
         },
         timeout: 2000
     });
-    return rtnData;
 }

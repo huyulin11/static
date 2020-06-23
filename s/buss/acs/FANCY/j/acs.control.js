@@ -104,7 +104,7 @@ let doCtrlTask = (that, tips, opType) => {
 		opType = "open" + opType;
 	}
 	if (window.confirm(tips)) {
-		alert(taskexe.addCtrlTask(0, opType));
+		taskexe.addCtrlTask(0, opType);
 	}
 }
 
@@ -135,19 +135,31 @@ var delegateEvent = () => {
 		doCtrlTask(this, tips, opType);
 	});
 	container().delegate("button#PAUSE_USER", "click", function () {
-		alert(taskexe.addCtrlTask(0, "PAUSE_USER"));
+		taskexe.addCtrlTask(0, "PAUSE_USER");
 	});
 	container().delegate("button#manager", "click", function () {
 		window.open('/s/buss/g/h/manager.html');
 	});
 	container().delegate("button#CONTINUE", "click", function () {
-		alert(taskexe.addCtrlTask(0, "CONTINUE"));
+		taskexe.addCtrlTask(0, "CONTINUE");
 	});
 	container().delegate("button#sysLocation", "click", function () {
 		window.open("/s/buss/acs/location/" + localStorage.projectKey + "/location.html");
 	});
 	container().delegate("button#taskQuantityBtn", "click", function () {
 		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");
+	});
+	container().delegate("button#callFromLathe", "click", function () {
+		layer.prompt({ title: '输入磨床号码（1、2、3、4）', formType: 0 }, function (key, index) {
+			if (!["1", "2", "3", "4"].includes(key)) {
+				layer.msg("错误的磨床编号！");
+				return;
+			}
+			layer.close(index);
+			if (window.confirm(`确定呼叫AGV？磨床编号：${key}`)) {
+				taskexe.addCtrlTask(0, "UDF_COMMAND", key);
+			}
+		});
 	});
 }
 

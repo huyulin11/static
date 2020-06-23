@@ -92,7 +92,7 @@ export var init = function (target) {
 			});
 		} console.log(JSON.stringify(arrSub));
 		if (window.confirm("确定呼叫车辆？")) {
-			layer.msg(taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub)));
+			taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub));
 		}
 	}
 	container.delegate("#ops>button", "click", () => { transportHandler(); });

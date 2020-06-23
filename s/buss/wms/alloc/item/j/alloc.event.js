@@ -76,7 +76,7 @@ $("html").delegate("button.doTask", "click", function () {
     }
 
     if (window.confirm(confirmMsg + '你确定要' + "执行:" + $(this).html() + '吗？')) {
-        alert(taskexe.addTaskById($(this).data("agvid"), $(this).data("id")));
+        taskexe.addTaskById($(this).data("agvid"), $(this).data("id"));
         initAlloc();
     } else {
         return;

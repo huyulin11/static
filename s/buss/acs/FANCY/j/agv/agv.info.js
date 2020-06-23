@@ -18,7 +18,7 @@ var doTask = (agvId, task, targetSite) => {
 		layer.msg("请输入有效的目标站点编号！");
 		return;
 	}
-	layer.msg(taskexe.addTaskTo(agvId, task, targetSite));
+	taskexe.addTaskTo(agvId, task, targetSite);
 }
 
 var getTargets = function () {
@@ -259,7 +259,7 @@ var gotoInitHandler = function (that) {
 		gotoInitLaoDbwy(that);
 	} else {
 		if (!confirm('是否确认执行该操作?')) { return; }
-		layer.msg(taskexe.addCtrlTask(agvId, $(that).attr("id")));
+		taskexe.addCtrlTask(agvId, $(that).attr("id"));
 	}
 }
 
@@ -447,7 +447,7 @@ export var init = function (target) {
 	$(_target).delegate("button" + especial, "click", function () {
 		allDisabled();
 		if (!confirm('是否确认执行该操作?')) { return; }
-		layer.msg(taskexe.addCtrlTask(agvId, $(this).attr("id")));
+		taskexe.addCtrlTask(agvId, $(this).attr("id"));
 	});
 
 	var initBtns = jQuery.parseJSON(localStorage.agvControl);
