@@ -65,10 +65,10 @@ export var init = function (target) {
 		var that = this;
 		var data = that;//$(that).data();
 		if ($(that).hasClass("choosed")) {
-			if ($(that).data("id") == _currentSite) {
-				layer.msg("当前站点无法选择！");
-				return;
-			}
+			// if ($(that).data("id") == _currentSite) {
+			// 	layer.msg("当前站点无法选择！");
+			// 	return;
+			// }
 			$(that).removeClass("choosed");
 			let a = targetArr.indexOf(data);
 			targetArr.splice(a, 1);

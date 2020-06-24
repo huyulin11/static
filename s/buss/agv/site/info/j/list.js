@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -10,10 +11,17 @@ window.datagrid = dataGrid({
 		hide: false,
 	}, {
 		colkey: "sitename",
-		name: "站点名称"
-	}, {
-		colkey: "sitecode",
-		name: "站点编码"
+		name: "站点名称",
+		renderData: function (rowindex, data, rowdata, column) {
+			let col = {
+				name: "站点名称", key: "siteName", notnull: true, type: "input",
+			};
+			let json = { id: rowdata.id, name: rowdata.sitename };
+			let html = getInput(col, { value: data, width: '50%', });
+			let btnStr = `<button type="button" class="editSiteName btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
+			$(html).append(btnStr);
+			return html;
+		}
 	}, {
 		colkey: "sitetype",
 		name: "站点类型",
@@ -31,9 +39,22 @@ window.datagrid = dataGrid({
 			return "正常使用";
 		}
 	}],
-	jsonUrl: '/tasksite/findByPage.shtml',
+	jsonUrl: '/tasksite/findByPage.shtml?ORDER_BY_KEY=id',
 	checkbox: true,
 	serNumber: true
+});
+
+$("#paging").delegate(".editSiteName", "click", function (e) {
+	let name = $(this).data("name");
+	let id = $(this).data("id");
+	let targetVal = $(this).parents("td").find("input#siteName").val();
+	if (name == targetVal) { gf.layerMsg("名称无修改！"); return; }
+	if (window.confirm(`是否要改变该站点(原名称：${name})名称为${targetVal}？`)) {
+		gf.doAjax({
+			url: `/tasksite/editName.shtml`,
+			data: { id: id, sitename: targetVal }
+		});
+	}
 });
 
 let doSearch = function () {
