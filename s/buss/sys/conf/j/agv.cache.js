@@ -28,7 +28,7 @@ let _columns = [{
             info += "路线:";
             let path = [];
             for (let item of jsonTo) {
-                path.push(item.name + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
+                path.push(item.id + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
             }
             info += path.join("->");
             return info;
