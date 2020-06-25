@@ -373,6 +373,10 @@ div#doChangeDiv {
 	font-size: 12px;
 }
 
+button.current {
+	background-color: #4E6680;
+}
+
 button.choosed {
 	background-color: #EB7347;
 }

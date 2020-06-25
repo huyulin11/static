@@ -34,13 +34,13 @@ export var init = function (target) {
 
 	var renderSite = function (item) {
 		let currentFlag = item.id == _currentSite;
-		var tmpStr = ` class='flag ${currentFlag ? "choosed" : ""}' data-name='${item.sitename}' `;
+		var tmpStr = ` class='flag ${currentFlag ? "current" : ""}' data-name='${item.sitename}' `;
 		var disabled = "";
 		for (let i in item) {
 			tmpStr += ` data-${i}='${item[i]}' `;
 		}
 		let btn = `<button ${tmpStr} ${disabled}>${item.sitename}<br/>${currentFlag ? "当前站点" : ""}</button>`;
-		if (currentFlag) { targetArr.push($(btn)); showPath(); }
+		// if (currentFlag) { targetArr.push($(btn)); showPath(); }
 		tmpStr = `<div>${btn}</div>`;
 		return tmpStr;
 	}
