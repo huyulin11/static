@@ -12,8 +12,8 @@ taskexe.addCtrlTask = function (agvId, tasktype, devId) {
     _doAddTask(agvId, tasktype, "/json/op/addCtrlTask.shtml", devId);
 }
 
-taskexe.addTaskTo = function (agvId, tasktype, to) {
-    addTaskTo(agvId, tasktype, to);
+taskexe.addTaskTo = function (agvId, tasktype, to, callback) {
+    addTaskTo(agvId, tasktype, to, callback);
 }
 
 var _doAddTask = function (agvId, tasktype, urlInfo, devId) {
@@ -42,11 +42,11 @@ var _addTask = function (agvId, tasktype, urlInfo, devId) {
     });
 }
 
-var addTaskTo = function (agvId, tasktype, to) {
-    _addTaskTo(agvId, tasktype, to);
+var addTaskTo = function (agvId, tasktype, to, callback) {
+    _addTaskTo(agvId, tasktype, to, callback);
 }
 
-var _addTaskTo = function (agvId, tasktype, to) {
+var _addTaskTo = function (agvId, tasktype, to, callback) {
     let targetUrl = "/json/op/addTaskTo.shtml ";
     if (localStorage.projectKey == 'TAIKAI_JY' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
         targetUrl = "/json/op/fancy/addTaskTo.shtml";
@@ -62,7 +62,11 @@ var _addTaskTo = function (agvId, tasktype, to) {
         async: true,
         dataType: "json",
         success: function (data) {
-            layer.msg(data.msg);
+            if (callback) {
+                callback(data);
+            } else {
+                layer.msg(data.msg);
+            }
         },
         error: function (e) {
             layer.msg("数据中断，请刷新界面或重新登录！");

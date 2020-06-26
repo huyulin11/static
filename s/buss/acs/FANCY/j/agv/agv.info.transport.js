@@ -53,7 +53,7 @@ export var init = function (target) {
 		timeout: 5000,
 		cache: false,
 		success: function (data) {
-			let conf = { data: data, numInLine: 8, render: renderSite, target: tableSite };
+			let conf = { data: data, numInLine: 5, render: renderSite, target: tableSite };
 			gf.renderBtnTable(conf, () => {
 				gf.resizeTable();
 			});
@@ -92,8 +92,10 @@ export var init = function (target) {
 			});
 		} console.log(JSON.stringify(arrSub));
 		if (window.confirm("确定呼叫车辆？")) {
-			taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub));
-			window.location.reload();
+			taskexe.addTaskTo(agvId, "TRANSPORT", JSON.stringify(arrSub), function (data) {
+				alert(data.msg);
+				window.location.reload();
+			});
 		}
 	}
 	container.delegate("#ops>button", "click", () => { transportHandler(); });
