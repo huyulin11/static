@@ -33,6 +33,11 @@ export var init = function (target) {
 	}
 
 	var renderSite = function (item) {
+		let json = item.jsonObject;
+		if (json) {
+			let hide = json.hide;
+			if (hide) { return null; }
+		}
 		let currentFlag = item.id == _currentSite;
 		var tmpStr = ` class='flag ${currentFlag ? "current" : ""}' data-name='${item.sitename}' `;
 		var disabled = "";
