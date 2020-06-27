@@ -27,8 +27,15 @@ let _columns = [{
             let jsonTo = json.to;
             info += "路线:";
             let path = [];
+            if (typeof jsonTo == 'string') {
+                jsonTo = jsonTo.split(",");
+            }
             for (let item of jsonTo) {
-                path.push(item.id + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
+                if (typeof item == 'string') {
+                    path.push(item);
+                } else {
+                    path.push(item.id + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
+                }
             }
             info += path.join("->");
             return info;
