@@ -2,6 +2,57 @@ import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { agvNum } from "/s/buss/acs/FANCY/j/agv.list.js";
 
 var numInLine = 1;
+let showPlcstatus = ['CSY_DAJ'].includes(localStorage.projectKey);
+let showAgvbusstype = ['TAIKAI_JY'].includes(localStorage.projectKey);
+let showSiteStatusVal = ['CSY_DAJ', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].includes(localStorage.projectKey);
+let showBattery = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
+let showSpeed = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
+
+export var renderList = function (agvs, agvDiv) {
+    if (agvNum >= 6) numInLine = 3;
+    var numOfRow = agvNum >= numInLine ? numInLine : agvNum;
+    $.each(agvs, function (n, agvinfo) {
+        renderOne(numOfRow, agvinfo, agvDiv);
+    });
+}
+
+var renderOne = function (numOfRow, agvinfo, agvDiv) {
+    var currentTable = `table.agv[data-area='${agvinfo.environment}']`;
+    if ($(currentTable).length <= 0) {
+        agvDiv.append(`<table class='agv' data-area='${agvinfo.environment}'></table>`);
+    }
+
+    var showVal = getShowVal(agvinfo);
+
+    var relativeHD = showPlcstatus ? (`<tr><td colspan='2'>关联硬件状态:${agvinfo.plcstatus ? agvinfo.plcstatus : "正常"}</td></tr>`) : ``;
+    var agvbusstype = showAgvbusstype ? (`<tr><td colspan='2'>车类型:${showVal.agvbusstype ? showVal.agvbusstype : "未知"}</td></tr>`) : ``;
+    var siteStatusVal = showSiteStatusVal ? `<tr><td>${showVal.siteStatusVal}</td><td>${showVal.currentsite}</td></tr>` : ``;
+    var batteryDes = showBattery ? `<td>${showVal.battery}</td>` : ``;
+    var speedDes = showSpeed ? `<td>${showVal.speed}</td>` : ``;
+
+    let name = findIotInfo(agvinfo.id, "name");
+    var tmpStr = `<td class='agv'><div>
+    <button id='${agvinfo.id}' style='background-color:${showVal.colorStyle};'>
+        <table cellspacing='0px' cellspadding='2px'>
+        <tr><td>${name}</td>
+        <td>${showVal.moveStatusVal}</td></tr>
+        ${siteStatusVal}
+        <tr>${batteryDes}
+        ${speedDes}</tr>
+        <tr><td colspan='2'>${showVal.taskStatusVal}</td></tr>
+        <tr><td colspan='2'>${showVal.agvstatus}</td></tr>
+        <tr><td colspan='2'>${showVal.remark}</td></tr>
+        ${relativeHD}
+        ${agvbusstype}
+        </table></button>
+        </div></td>`;
+
+    if ($(currentTable).find("tr.agvTr:last").find("td.agv").length >= numOfRow
+        || $(currentTable).find("tr.agvTr:last").length == 0) {
+        $(currentTable).append("<tr class='agvTr'></tr>");
+    }
+    $(currentTable).find("tr.agvTr:last").append(tmpStr);
+}
 
 var getShowVal = function (agvinfo) {
     var val = new Object();
@@ -153,49 +204,4 @@ var getShowVal = function (agvinfo) {
     }
 
     return val;
-}
-
-export var renderList = function (agvs, agvDiv) {
-    if (agvNum >= 6) numInLine = 3;
-    var numOfRow = agvNum >= numInLine ? numInLine : agvNum;
-    $.each(agvs, function (n, agvinfo) {
-        renderOne(numOfRow, agvinfo, agvDiv);
-    });
-}
-
-var renderOne = function (numOfRow, agvinfo, agvDiv) {
-    var currentTable = `table.agv[data-area='${agvinfo.environment}']`;
-    if ($(currentTable).length <= 0) {
-        agvDiv.append(`<hr class='withBorder'/><table class='agv' 
-        data-area='${agvinfo.environment}'><caption style='color:black'>
-        ${agvinfo.environment == 1 ? "" : "二楼仓库AGV列表↓"}</caption></table>`);
-    }
-
-    var showVal = getShowVal(agvinfo);
-
-    var relativeHD = localStorage.projectKey == 'CSY_DAJ' ?
-        (`<tr><td colspan='2'>关联硬件状态:${agvinfo.plcstatus ? agvinfo.plcstatus : "正常"}</td></tr>`) : ``;
-    var agvbusstype = localStorage.projectKey == 'TAIKAI_JY' ?
-        (`<tr><td colspan='2'>车类型:${showVal.agvbusstype ? showVal.agvbusstype : "未知"}</td></tr>`) : ``;
-    var siteStatusVal = ['CSY_DAJ', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].indexOf(localStorage.projectKey) >= 0 ?
-        `<tr><td>${showVal.siteStatusVal}</td><td>${showVal.currentsite}</td></tr>` : ``;
-
-    let name = findIotInfo(agvinfo.id, "name");
-    var tmpStr = `<td class='agv'><div>
-        <button id='${agvinfo.id}' style='background-color:${showVal.colorStyle};'>
-        <table cellspacing='0px' cellspadding='2px'>
-        <tr><td>${name}</td>
-        <td>${showVal.moveStatusVal}</td></tr>${siteStatusVal}
-        <tr><td>${showVal.battery}</td><td>${showVal.speed}</td></tr>
-        <tr><td colspan='2'>${showVal.taskStatusVal}</td></tr>
-        <tr><td colspan='2'>${showVal.agvstatus}</td></tr>
-        <tr><td colspan='2'>${showVal.remark}</td></tr>
-        ${relativeHD}${agvbusstype}</table></button>
-        </div></td>`;
-
-    if ($(currentTable).find("tr.agvTr:last").find("td.agv").length >= numOfRow
-        || $(currentTable).find("tr.agvTr:last").length == 0) {
-        $(currentTable).append("<tr class='agvTr'></tr>");
-    }
-    $(currentTable).find("tr.agvTr:last").append(tmpStr);
 }
