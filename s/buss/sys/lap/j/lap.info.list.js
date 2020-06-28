@@ -30,7 +30,7 @@ let _columns = [{
 	}
 }, {
 	colkey: "name",
-	name: "产线名称",
+	name: "名称",
 	renderData: function (rowindex, data, rowdata, column) {
 		return data;
 		// return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"

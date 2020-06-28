@@ -12,7 +12,9 @@ let _type = gf.urlParam("type");
 let _pick = gf.urlParam("PICK");
 let _warehouse = gf.urlParam("warehouse");
 
-$("div.doc-buttons").append(`<span>选中查看日志</span><input type="checkbox" id="showTransLog" title="选中查看日志" ${localStorage.showTransLog ? "checked" : ""}>`);
+if (["PICKING", "COMBINED", "MGR"].includes(_type)) {
+	$("div.doc-buttons").append(`<span>选中查看日志</span><input type="checkbox" id="showTransLog" title="选中查看日志" ${localStorage.showTransLog ? "checked" : ""}>`);
+}
 $('div.doc-buttons').delegate("input:checkbox#showTransLog", "change", function (e) {
 	if (this.checked) {
 		localStorage.showTransLog = true;
@@ -113,7 +115,7 @@ if (localStorage.showTransLog) {
 		}, {
 			colkey: "PICKING.OPERATOR",
 			jsonColumn: "operator",
-			name: "组盘人",
+			name: "拣配人",
 			defaultVal: '--'
 		}, {
 			colkey: "PICKING.TIME",
@@ -143,7 +145,7 @@ if (localStorage.showTransLog) {
 		}, {
 			colkey: "OVER.TIME",
 			jsonColumn: "operator",
-			name: "AGV上工位时间",
+			name: "到达产线时间",
 			defaultVal: '--'
 		});
 }

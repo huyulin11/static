@@ -53,7 +53,11 @@ let initDatas = function () {
 
 var initPick = function () {
     if (!$("#topCtrlContainer")) return;
-    $("#topCtrlContainer").prepend("<div id='settingHideDiv' class='close hideToggle' data-target='div#settingContainer'></div>");
+    let style = $(`<style id='settingHideDiv_style'></style>`);
+    $(style).append(`#settingHideDiv.close {background-image: url(/s//i/icon/settingClose.png);}`)
+        .append(`#settingHideDiv.open {background-image: url(/s//i/icon/settingOpen.png);}`);
+    $("head").append(style);
+    $("#topCtrlContainer").prepend(`<div id='settingHideDiv' class='close hideToggle' data-target='div#settingContainer'></div>`);
 
     if (_paperid) {
         let url = `/shipment/main/findOneData.shtml`;

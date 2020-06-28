@@ -94,7 +94,7 @@ var initPaperOp = function (tasktype, optype) {
         }
         case "BJJK_HUIRUI": {
             if (_tasktype == "shipment") {
-                tempBtns = [btns.detail, btns.refresh,];
+                tempBtns = [btns.refresh, btns.detail,];
                 if (optype == "RF") {
                     tempBtns = [btns.detail, btns.refresh, btns.back,];
                     tempBtns = tempBtns.concat(chooseByWarehouse());
@@ -116,11 +116,9 @@ var initPaperOp = function (tasktype, optype) {
                     tempBtns = tempBtns.concat(chooseByWarehouse());
                 }
             } else if (_tasktype == "receipt") {
-                tempBtns = [btns.detail, btns.send, btns.del, btns.over, btns.refresh, btns.whichOne,];
-                tempBtns = tempBtns.concat(btns.execute);
+                tempBtns = [btns.refresh, btns.detail,];
             } else if (_tasktype == "transfer") {
-                tempBtns = [btns.detail, btns.send, btns.refresh,];
-                tempBtns = tempBtns.concat(btns.deleteSub);
+                tempBtns = [btns.refresh, btns.send, btns.detail, btns.deleteSub];
                 // tempBtns = tempBtns.concat(btns[`combine`]);
                 // tempBtns = tempBtns.concat(btns[`pick`]);
                 // $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
