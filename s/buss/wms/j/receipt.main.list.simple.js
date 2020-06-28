@@ -43,7 +43,7 @@ let cols = [{
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: cols,
-	jsonUrl: `/receipt/util/findWithDetail.shtml?mainstatus=TOSEND&detailstatus=NEW:TOSEND`,
+	jsonUrl: `/receipt/util/findWithDetail.shtml?mainstatus=TOSEND&detailstatus=NEW:TOSEND:EXECUTING`,
 	checkbox: true,
 	serNumber: true,
 	simple: true,

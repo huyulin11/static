@@ -81,9 +81,7 @@ var init = function () {
 
 	$("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
 		if (localStorage.projectKey == 'YZBD_NRDW') {
-			gf.checkLoginError(function () {
-				window.location.href = "/s/buss/g/h/login.html";
-			});
+			gf.checkLoginError();
 		}
 		hideAllCtrl($(this).data("target"));
 		if ($(this).hasClass("open")) {

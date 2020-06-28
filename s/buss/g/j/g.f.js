@@ -479,6 +479,14 @@ class GF {
         gf.checkLogin(yes, null);
     };
     checkLoginError(no) {
+        if (!no) {
+            no = () => {
+                if (parent)
+                    parent.location.href = "/s/buss/g/h/login.html";
+                else
+                    window.location.href = "/s/buss/g/h/login.html";
+            };
+        }
         gf.checkLogin(null, no);
     };
     currentRole(callback) {

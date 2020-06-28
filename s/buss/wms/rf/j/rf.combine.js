@@ -3,9 +3,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
-gf.checkLoginError(function () {
-    window.location.href = "/s/buss/g/h/login.html";
-});
+gf.checkLoginError();
 
 let container = "#rootContainer";
 let _warehouse = gf.urlParam("warehouse");

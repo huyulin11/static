@@ -40,6 +40,20 @@ window.datagrid = dataGrid({
 		colkey: "userdef3",
 		name: "货位号"
 	}, {
+		colkey: "status",
+		name: "状态",
+		hide: function () {
+			switch (localStorage.projectKey) {
+				case "CSY_DAJ":
+				case "BJJK_HUIRUI": return true;
+				default: return false;
+			}
+		},
+		renderData: (rowindex, data, rowdata, column) => {
+			// gf.rowDisplay(rowdata);
+			return gv.get("ACS_STATUS", data);
+		}
+	}, {
 		colkey: "itemcount",
 		name: "数量"
 	}, {
