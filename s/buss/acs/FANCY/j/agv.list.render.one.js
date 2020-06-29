@@ -185,6 +185,9 @@ var getShowVal = function (agvinfo) {
     } else {
         taskStatusVal += agvinfo.taskstatus;
     }
+    if (agvinfo.inCharging) {
+        colorStyle = "#D24D57";
+    }
     if (agvinfo.agvstatus == "未连接") {
         colorStyle = "#D0D0D0";
     }
