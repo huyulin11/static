@@ -12,7 +12,7 @@ else $("h2#thisTitle").html("出库管理");
 let params = {
 	pagId: 'paging',
 	simple: true,
-	// refreshTime: 5000,
+	refreshTime: 5000,
 	columns: [{
 		colkey: "id",
 		name: "id",
@@ -58,9 +58,6 @@ let params = {
 				default: return "name";
 			}
 		}
-	}, {
-		colkey: "totallines",
-		name: "明细数"
 	}, {
 		colkey: "totalqty",
 		name: "货物数"

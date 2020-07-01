@@ -47,7 +47,7 @@ window.datagrid = dataGrid({
 	checkbox: true,
 	serNumber: true,
 	simple: true,
-	// refreshTime: 5000,
+	refreshTime: 5000,
 	callback: function () {
 		let keys = $(".targetAlloc").map(function () { return $(this).parents("tr").find(".paperid").html() }).get().join(":");
 		findAllocObj(keys, function (info) {
