@@ -190,16 +190,21 @@ var doInitForm = function (tasktype, _conf, callback) {
                 }
             } else if (_tasktype == 'shipment') {
                 obj = {
-                    max: 6,
+                    max: 100,
                     items: [{
-                        key: "allocItem",
-                        alias: "userdef1",
-                        name: "货位名称",
+                        key: "item",
+                        name: "类型",
                         notnull: true,
                         type: "associating-input",
-                        searchurl: "/alloc/item/findFirstPage.shtml?allocItemFormMap.text=",
+                        searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
                         containerofinput: "#panelBody",
-                        showcol: 'text,getStatus(status)'
+                        showcol: 'name',
+                        storeKey: "id",
+                        showFun: (key) => { return sku.value(key); },
+                    }, {
+                        key: "itemcount",
+                        name: "数量",
+                        notnull: true,
                     },]
                 };
             }
