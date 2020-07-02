@@ -6,12 +6,6 @@ var renderOne = function (allocInfo) {
     var tmpStr = "";
     if (allocInfo.delflag == '0') {
         var disabled = "";
-        var showInfo;
-        if (allocInfo.text) {
-            showInfo = allocInfo.text;
-        } else {
-            showInfo = "位" + allocInfo.id;
-        }
         var skuTypeName = ((allocInfo.status != 1) ? sku.value(allocInfo.skuId) : "空");
         skuTypeName = (!skuTypeName) ? "普通货物" : skuTypeName;
         var skuInfo = `<font style='font-size: 10px;'>${skuTypeName}</font>`;
@@ -19,7 +13,7 @@ var renderOne = function (allocInfo) {
         let showInfos = [];
         showInfos.push(skuInfo);
         showInfos.push(weightNum);
-        showInfos.push(showInfo);
+        showInfos.push(allocInfo.text);
         if (allocInfo.stock) {
             let detailInfo = [];
             let stockJson = JSON.parse(allocInfo.stock);
