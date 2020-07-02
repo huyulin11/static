@@ -16,7 +16,6 @@ export var initAlloc = function () {
     let serach = { "allocItemFormMap.text": $("#kw").val() };
     if (localStorage.projectKey == "BJJK_HUIRUI") { serach['allocItemFormMap.whid'] = 2; }
     jQuery.ajax({
-        //url: "/s/jsons/" + localStorage.projectKey + "/allocs/allocs.json?fv=" + localStorage.timeStamp,
         url: "/alloc/item/findByPage.shtml",
         data: serach,
         type: "POST",
@@ -48,4 +47,4 @@ setInterval(function () {
     if ($("#simple-2").is(":checked")) {
         initAlloc();
     }
-}, 8000);
+}, 5000);

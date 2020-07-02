@@ -1,31 +1,47 @@
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gcol } from "/s/buss/g/j/g.col.js";
 
-var renderOne = function (allocationInfo) {
+var renderOne = function (allocInfo) {
     var tmpStr = "";
-    if (allocationInfo.delflag == '0') {
+    if (allocInfo.delflag == '0') {
         var disabled = "";
         var showInfo;
-        if (allocationInfo.text) {
-            showInfo = allocationInfo.text;
+        if (allocInfo.text) {
+            showInfo = allocInfo.text;
         } else {
-            showInfo = "位" + allocationInfo.id;
+            showInfo = "位" + allocInfo.id;
         }
-        var skuTypeName = ((allocationInfo.status != 1) ? sku.value(allocationInfo.skuId) : "空");
+        var skuTypeName = ((allocInfo.status != 1) ? sku.value(allocInfo.skuId) : "空");
         skuTypeName = (!skuTypeName) ? "普通货物" : skuTypeName;
-        var skuInfo = "<font style='font-size: 10px;'>" + skuTypeName + "</font>";
-        var weightNum = "<font style='font-weight: bolder;'>" + ((allocationInfo.status != 1) ? allocationInfo.num : "0") + "</font>";
-        showInfo = skuInfo + "<hr/>" + weightNum + "<hr/>" + showInfo;
-        tmpStr = `<div><button
-            data-id='${allocationInfo.id}'
-            data-rowId=' ${allocationInfo.rowId}'
-            data-colId=' ${allocationInfo.colId}'
-            data-zId=' ${allocationInfo.zId}'
-            data-text=' ${allocationInfo.text}'
-            data-num=' ${allocationInfo.num}'
-            data-status='${ allocationInfo.status}'
-            data-skuid=' ${allocationInfo.skuId}'
-            ${disabled} > ${showInfo}
+        var skuInfo = `<font style='font-size: 10px;'>${skuTypeName}</font>`;
+        var weightNum = `<font style='font-weight: bolder;'>${((allocInfo.status != 1) ? allocInfo.num : "0")}</font>`;
+        let showInfos = [];
+        showInfos.push(skuInfo);
+        showInfos.push(weightNum);
+        showInfos.push(showInfo);
+        if (allocInfo.stock) {
+            let detailInfo = [];
+            let stockJson = JSON.parse(allocInfo.stock);
+            for (let item of stockJson) {
+                let oneInfo = [];
+                for (let i in item) {
+                    oneInfo.push(`${gcol.getColName(i)}-${item[i]}`);
+                }
+                detailInfo.push(oneInfo.join(";"));
+            }
+            showInfos.push("明细：" + `<div>${detailInfo.join("<hr/>")}</div>`);
+        }
+        tmpStr = `<div class='allocDiv'><button
+            data-id='${allocInfo.id}'
+            data-rowId=' ${allocInfo.rowId}'
+            data-colId=' ${allocInfo.colId}'
+            data-zId=' ${allocInfo.zId}'
+            data-text=' ${allocInfo.text}'
+            data-num=' ${allocInfo.num}'
+            data-status='${ allocInfo.status}'
+            data-skuid=' ${allocInfo.skuId}'
+            ${disabled} > ${showInfos.join("<hr/>")}
             </button></div>`;
     }
     return tmpStr;
