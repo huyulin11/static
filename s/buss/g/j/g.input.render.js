@@ -1,9 +1,9 @@
 
 import { gv } from "/s/buss/g/j/g.v.js";
 
-export var getInput = (item, option) => {
-    let _data, _defaultValue, _serial, _width;
-    if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial, _width = option.width; } else { _defaultValue = item.defaultValue; }
+export var getInput = (item, option, datas) => {
+    let _data, _defaultValue, _serial, _width, _class;
+    if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial, _width = option.width, _class = option.class; } else { _defaultValue = item.defaultValue; }
     _defaultValue = _defaultValue ? _defaultValue : "";
     let id, name, label = item.name, readonly = item.readonly;
     if (!_serial) {
@@ -61,6 +61,14 @@ export var getInput = (item, option) => {
         $(obj).append(after);
     }
     if (option && option.rtnhtml) return obj[0].outerHTML;
+    if (_class) {
+        $(obj).find("select,input").addClass(_class);
+    }
+    if (datas) {
+        for (let ii in datas) {
+            $(obj).find("select,input").attr("data-" + ii, datas[ii]);
+        }
+    }
     return obj;
 }
 

@@ -187,7 +187,9 @@ var initBtns = function () {
             resKey: "editSeqDetail", id: "editSeqDetail", name: "顺序设置",
             class: "btn-info", url: '/shipment/util/editSeq.shtml',
             bind: function () {
-                paperOp.editSeq(this, seq, true);
+                // paperOp.editSeq(this, seq, true);
+                sessionStorage.editSeq = true;
+                window.location.reload();
             }
         }
     }

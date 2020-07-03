@@ -5,6 +5,7 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import "./shipment.main.detail.edit.seq.js";
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { findTransferDetailObj } from "/s/buss/wms/j/transfer.main.fun.js";
+import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let _status = gf.urlParam("status");
 let _detailstatus = gf.urlParam("detailstatus");
@@ -108,46 +109,46 @@ if (localStorage.showTransLog) {
 		name: "下达人",
 		defaultVal: '--'
 	}, {
-			colkey: "CRETATE.TIME",
-			jsonColumn: "operator",
-			name: "下达时间",
-			defaultVal: '--'
-		}, {
-			colkey: "PICKING.OPERATOR",
-			jsonColumn: "operator",
-			name: "拣配人",
-			defaultVal: '--'
-		}, {
-			colkey: "PICKING.TIME",
-			jsonColumn: "operator",
-			name: "拣配时间",
-			defaultVal: '--'
-		}, {
-			colkey: "COMBINING.OPERATOR",
-			jsonColumn: "operator",
-			name: "组盘人",
-			defaultVal: '--'
-		}, {
-			colkey: "COMBINING.TIME",
-			jsonColumn: "operator",
-			name: "组盘时间",
-			defaultVal: '--'
-		}, {
-			colkey: "ON_PCS.TIME",
-			jsonColumn: "operator",
-			name: "上PCS时间",
-			defaultVal: '--'
-		}, {
-			colkey: "OVER_PCS.TIME",
-			jsonColumn: "operator",
-			name: "出PCS时间",
-			defaultVal: '--'
-		}, {
-			colkey: "OVER.TIME",
-			jsonColumn: "operator",
-			name: "到达产线时间",
-			defaultVal: '--'
-		});
+		colkey: "CRETATE.TIME",
+		jsonColumn: "operator",
+		name: "下达时间",
+		defaultVal: '--'
+	}, {
+		colkey: "PICKING.OPERATOR",
+		jsonColumn: "operator",
+		name: "拣配人",
+		defaultVal: '--'
+	}, {
+		colkey: "PICKING.TIME",
+		jsonColumn: "operator",
+		name: "拣配时间",
+		defaultVal: '--'
+	}, {
+		colkey: "COMBINING.OPERATOR",
+		jsonColumn: "operator",
+		name: "组盘人",
+		defaultVal: '--'
+	}, {
+		colkey: "COMBINING.TIME",
+		jsonColumn: "operator",
+		name: "组盘时间",
+		defaultVal: '--'
+	}, {
+		colkey: "ON_PCS.TIME",
+		jsonColumn: "operator",
+		name: "上PCS时间",
+		defaultVal: '--'
+	}, {
+		colkey: "OVER_PCS.TIME",
+		jsonColumn: "operator",
+		name: "出PCS时间",
+		defaultVal: '--'
+	}, {
+		colkey: "OVER.TIME",
+		jsonColumn: "operator",
+		name: "到达产线时间",
+		defaultVal: '--'
+	});
 }
 
 if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type)) {
@@ -222,11 +223,50 @@ _columns.push({
 	colkey: "sequence",
 	name: "优先级",
 });
-_columns.push({
-	colkey: "userdef1",
-	name: "顺序",
-	defaultVal: 0
-});
+
+if (sessionStorage.editSeq && ["PRIORITY"].includes(_type)) {
+	_columns.push({
+		colkey: "userdef1",
+		name: "顺序设置",
+		renderData: function (rowindex, data, rowdata, column) {
+			let col = {
+				name: "顺序", key: "seq", notnull: true, type: "input", id: rowdata.id,
+			};
+			data = data || "0";
+			let html = getInput(col, { value: data, width: '50%', class: "editSeqDiv", }, rowdata);
+			return html;
+		}
+	});
+	$("#paging").delegate(".editSeqDiv", "blur", function (e) {
+		let that = this;
+		var json = {
+			"sequence": 1
+		};
+		let target = $(that).val();
+		json.company = $(that).data("company");
+		json.item = $(that).data("item");
+		json.userdef4 = $(that).data("userdef4");
+		if ($(that).data("userdef1") == target) {
+			return;
+		}
+		if (!target || isNaN(target) || target < 0 || target >= 100) {
+			gf.layerMsg("提交内容应为大于0小于100的数值！");
+			return;
+		}
+		json.detailSeq = target;
+		json.type = "BY_SU";
+		gf.ajax(`/shipment/util/editSeq.shtml`, json, "json", function (data) {
+			layer.msg(data.msg ? data.msg : "保存成功！");
+			$(that).data("userdef1", target);
+		});
+	});
+} else {
+	_columns.push({
+		colkey: "userdef1",
+		name: "顺序",
+		defaultVal: 0
+	});
+}
 
 if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type))
 	_columns.push({

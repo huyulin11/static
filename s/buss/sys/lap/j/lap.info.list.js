@@ -106,7 +106,7 @@ window.datagrid = dataGrid({
 $("#paging").delegate(".editLineName", "click", function (e) {
 	let name = $(this).data("name");
 	let id = $(this).data("id");
-	let targetVal = $(this).parent("td").find("input#lineName").val();
+	let targetVal = $(this).parents("td").find("input#lineName").val();
 	if (name == targetVal) { gf.layerMsg("名称无修改！"); return; }
 	if (window.confirm(`是否要改变该产线(原名称：${name})名称为${targetVal}？`)) {
 		gf.doAjax({
@@ -119,8 +119,8 @@ $("#paging").delegate(".editLineName", "click", function (e) {
 $("#paging").delegate(".editStatus", "click", function (e) {
 	let id = $(this).data("id");
 	let name = $(this).data("name");
-	let targetVal = $(this).parent("td").find("select").val();
-	let target = $(this).parent("td").find("select").find("option:selected").text();
+	let targetVal = $(this).parents("td").find("select").val();
+	let target = $(this).parents("td").find("select").find("option:selected").text();
 	if (window.confirm(`是否要改变${name}的状态为${target}？`)) {
 		gf.doAjax({
 			url: `/sys/lap/bjjk/huirui/editStatus.shtml`,
