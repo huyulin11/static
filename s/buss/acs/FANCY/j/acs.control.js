@@ -18,7 +18,6 @@ let taskReady = () => {
 
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
-		console.log(typeof eval("taskReady"));
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
 		renderModel('agvs', 'div#agvDiv');
 		if (![''].includes(localStorage.projectKey))
