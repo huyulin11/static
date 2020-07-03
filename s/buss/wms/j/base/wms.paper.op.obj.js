@@ -175,7 +175,7 @@ var initBtns = function () {
     };
     let editSeq = function (seq) {
         return {
-            resKey: "editSeq" + seq, id: "editSeq" + seq, name: seq == 1 ? "优先级取消" : "优先级为" + seq,
+            resKey: "editSeq" + seq, id: "editSeq" + seq, name: seq == 1 ? "等级取消" : "优先级为" + seq,
             class: "btn-info", url: '/shipment/util/editSeq.shtml',
             bind: function () {
                 paperOp.editSeq(this, seq);
@@ -309,17 +309,21 @@ class PaperOp {
             paperid = gf.checkOnlyOne("paperid");
         }
         if (!paperid) { return; }
+        var lock = false;
         layer.confirm(`是否${that.name}${paperid}？`, function (index) {
-            gf.ajax(that.url, { paperid: paperid }, "json", function (s) {
-                if (s.code >= 0) {
-                    gf.layerMsg(`成功${that.name}！`);
-                    if (window.datagrid) window.datagrid.loadData();
-                    else if (parent.datagrid) parent.datagrid.loadData();
-                    if (callback) { callback(paperid); }
-                } else {
-                    gf.layerMsg(`${that.name}失败！` + s.msg);
-                }
-            });
+            if (!lock) {
+                lock = true;
+                gf.ajax(that.url, { paperid: paperid }, "json", function (s) {
+                    if (s.code >= 0) {
+                        gf.layerMsg(`成功${that.name}！`);
+                        if (window.datagrid) window.datagrid.loadData();
+                        else if (parent.datagrid) parent.datagrid.loadData();
+                        if (callback) { callback(paperid); }
+                    } else {
+                        gf.layerMsg(`${that.name}失败！` + s.msg);
+                    }
+                });
+            }
         });
     }; doDeleteSure(that) {
         var detailid = gf.checkOnlyOne("id");
