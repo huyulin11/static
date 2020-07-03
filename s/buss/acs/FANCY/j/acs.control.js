@@ -18,6 +18,7 @@ let taskReady = () => {
 
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
+		console.log(typeof eval("taskReady"));
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
 		renderModel('agvs', 'div#agvDiv');
 		if (![''].includes(localStorage.projectKey))
@@ -28,7 +29,7 @@ var container = function () {
 		} else if (localStorage.projectKey == 'TAIKAI_JY') {
 		} else if (localStorage.projectKey == 'CSY_DAJ') {
 			renderModel('charge', 'div#chargeContainer');
-			renderModel('windowCenter', 'div#windowContainer');
+			renderModel('windowCenter', 'div#windowCenterContainer');
 			renderModel('window', 'div#windowContainer');
 			renderModel('wms', 'div#wmsContainer');
 		} else if (localStorage.projectKey == 'CSY_CDBP') {
