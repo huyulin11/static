@@ -28,14 +28,14 @@ var renderOne = function (allocInfo) {
         }
         tmpStr = `<div class='allocDiv'><button
             data-id='${allocInfo.id}'
-            data-rowId=' ${allocInfo.rowId}'
-            data-colId=' ${allocInfo.colId}'
-            data-zId=' ${allocInfo.zId}'
-            data-text=' ${allocInfo.text}'
-            data-num=' ${allocInfo.num}'
-            data-status='${ allocInfo.status}'
-            data-skuid=' ${allocInfo.skuId}'
-            ${disabled} > ${showInfos.join("<hr/>")}
+            data-rowId='${allocInfo.rowId}'
+            data-colId='${allocInfo.colId}'
+            data-zId='${allocInfo.zId}'
+            data-text='${allocInfo.text}'
+            data-num='${allocInfo.num}'
+            data-status='${allocInfo.status}'
+            data-skuid='${allocInfo.skuId}'
+            ${disabled} >${showInfos.join("<hr/>")}
             </button></div>`;
     }
     return tmpStr;
