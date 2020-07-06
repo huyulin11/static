@@ -34,11 +34,9 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
     var tmpStr = `<td class='agv'><div>
     <button id='${agvinfo.id}' style='background-color:${showVal.colorStyle};'>
         <table cellspacing='0px' cellspadding='2px'>
-        <tr><td>${name}</td>
-        <td>${showVal.moveStatusVal}</td></tr>
+        <tr><td>${name}</td><td>${showVal.moveStatusVal}</td></tr>
         ${siteStatusVal}
-        <tr>${batteryDes}
-        ${speedDes}</tr>
+        <tr>${batteryDes}${speedDes}</tr>
         <tr><td colspan='2'>${showVal.taskStatusVal}</td></tr>
         <tr><td colspan='2'>${showVal.agvstatus}</td></tr>
         <tr><td colspan='2'>${showVal.remark}</td></tr>
@@ -56,111 +54,79 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
 
 var getShowVal = function (agvinfo) {
     var val = new Object();
-    var moveStatusVal = "";
-    if (agvinfo.movestatus == "CONTINUE") {
-        moveStatusVal += "启";
-    } else if (agvinfo.movestatus == "PAUSE_SYS") {
-        moveStatusVal += "交管自停";
-    } else if (agvinfo.movestatus == "PAUSE_SELF") {
-        moveStatusVal += "路口自停";
-    } else if (agvinfo.movestatus == "PAUSE_OUT_ERR") {
-        moveStatusVal += "脱轨错停";
-    } else if (agvinfo.movestatus == "PAUSE_REPATH_ERR") {
-        moveStatusVal += "规划错停";
-    } else if (agvinfo.movestatus == "PAUSE_CACHE_ERR") {
-        moveStatusVal += "缓存错停";
-    } else if (agvinfo.movestatus == "PAUSE_USER") {
-        moveStatusVal += "手停";
-    }
-    val.moveStatusVal = "行驶状态:" + moveStatusVal;
+    val.moveStatusVal = "行驶状态:" + movestatus(agvinfo.movestatus);
+    val.siteStatusVal = "站点状态:" + sitestatus(agvinfo.sitestatus);
 
-    var siteStatusVal = "";
-    if (agvinfo.sitestatus == "INIT") {
-        siteStatusVal += "初始站点";
-    } else if (agvinfo.sitestatus == "MOVING") {
-        siteStatusVal += "行驶中";
-    } else if (agvinfo.sitestatus == "WINDOW_GET") {
-        siteStatusVal += "窗口获取档案";
-    } else if (agvinfo.sitestatus == "ALLOC_STOCK") {
-        siteStatusVal += "货位放货";
-    } else if (agvinfo.sitestatus == "WINDOW_STOCK") {
-        siteStatusVal += "窗口放货";
-    } else if (agvinfo.sitestatus == "ALLOC_SCAN") {
-        siteStatusVal += "窗口扫描";
-    } else if (agvinfo.sitestatus == "ALLOC_GET") {
-        siteStatusVal += "货位取货";
-    } else if (agvinfo.sitestatus == "CHARGING") {
-        siteStatusVal += "正在充电";
-    } else if (agvinfo.sitestatus == "WAITING_AUTODOOR") {
-        siteStatusVal += "等待自动门";
-    } else if (agvinfo.sitestatus == "WAITING_LIFT") {
-        siteStatusVal += "等待电梯";
-    } else if (agvinfo.sitestatus == "HOOK_UP") {
-        siteStatusVal += "挂钩升起";
-    } else if (agvinfo.sitestatus == "HOOK_DOWN") {
-        siteStatusVal += "挂钩下降";
-    } else if (agvinfo.sitestatus == "REVOLVE") {
-        siteStatusVal += "旋转中";
-    } else if (agvinfo.sitestatus == "STOP_WORK") {
-        siteStatusVal += "停车工作";
-    } else if (agvinfo.sitestatus == "WAIT") {
-        siteStatusVal += "按钮确认";
-    } else if (agvinfo.sitestatus == "PI") {
-        siteStatusVal += "交管中";
-    }
-    val.siteStatusVal = "站点状态:" + siteStatusVal;
+    val.colorStyle = colorStyle(agvinfo);
+    var target = agvinfo.taskstatus != "FREE" ? targetV(agvinfo) : "";
+    let shortLength = 20;
+    let shortTarget = target.length > shortLength ? (target.substr(0, shortLength) + "...") : target;
+    shortTarget = shortTarget ? "（" + shortTarget + "）" : "";
+    target = `<span title='${target}'>${shortTarget}</span>`;
+    let taskDesc = agvinfo.taskexesid ? agvinfo.taskexesid :
+        (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中");
+    val.taskStatusVal = "任务状态:" + taskstatus(agvinfo) + target + "<br/>" + taskDesc;
+    val.currentsite = "站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
+    val.battery = "电量:" + (agvinfo.battery ? agvinfo.battery : "");
+    val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
+    if (agvinfo.id == 2) console.log(agvinfo.speed)
+    val.agvstatus = "AGV反馈状态:" + (agvinfo.agvstatus ? agvinfo.agvstatus : "");
 
-    var taskStatusVal = "";
-    var colorStyle = "";
-    var json = "";
+    if (localStorage.projectKey == 'TAIKAI_JY') {
+        let temp = findIotInfo(agvinfo.id, "agvbusstype");
+        if (temp == 'TON_1') { val.agvbusstype = "1吨车"; } else if (temp == 'TON_2') { val.agvbusstype = "2吨车"; }
+    }
+
+    return val;
+}
+
+let targetV = (agvinfo) => {
+    if (!agvinfo.json) {
+        return "";
+    }
+    var json = JSON.parse(agvinfo.json);
+    if (!json) {
+        return "";
+    }
     var target = "";
-    var remark = "";
-    if (agvinfo.json) {
-        json = JSON.parse(agvinfo.json);
-        if (json) {
-            target = json.to;
-            try {
-                let targetJson = target;
-                if (typeof target == 'string') {
-                    targetJson = JSON.parse(target);
-                }
-                if (targetJson instanceof Array) {
-                    let showTarget = [];
-                    for (let i of targetJson) {
-                        showTarget.push(i.id);
-                    }
-                    target = showTarget.join("、");
-                } else if (targetJson instanceof Object) {
-                    target = targetJson.id;
-                }
-            } catch (error) {
-            }
-            remark = json.REMARK;
+    target = json.to;
+    try {
+        let targetJson = target;
+        if (typeof target == 'string') {
+            targetJson = JSON.parse(target);
         }
+        if (targetJson instanceof Array) {
+            let showTarget = [];
+            for (let i of targetJson) {
+                showTarget.push(i.id);
+            }
+            target = showTarget.join("、");
+        } else if (targetJson instanceof Object) {
+            target = targetJson.id;
+        }
+    } catch (error) {
     }
+    return target ? target : "";
+}
+
+let taskstatus = (agvinfo) => {
+    var taskStatusVal = "";
     if (agvinfo.taskstatus == "FREE") {
         taskStatusVal += "空闲";
     } else if (agvinfo.taskstatus == "GOTO_INIT") {
         taskStatusVal += "返回起点";
-        colorStyle = "green";
     } else if (agvinfo.taskstatus == "RECEIPT") {
         taskStatusVal += "入库";
-        colorStyle = "gray";
     } else if (agvinfo.taskstatus == "SHIPMENT") {
         taskStatusVal += "出库";
-        colorStyle = "gray";
     } else if (agvinfo.taskstatus == "INVENTORY") {
         taskStatusVal += "盘点";
-        colorStyle = "gray";
     } else if (agvinfo.taskstatus == "TRANSPORT") {
         taskStatusVal += "运输";
-        colorStyle = "gray";
     } else if (agvinfo.taskstatus == "DELIVER") {
         taskStatusVal += "送货";
-        colorStyle = "gray";
     } else if (agvinfo.taskstatus == "FETCH") {
         taskStatusVal += "取货";
-        colorStyle = "gray";
     } else if (agvinfo.taskstatus == "GOTO_CHARGE" || agvinfo.taskstatus == "BACK_CHARGE") {
         var chargeInfo = "";
         if (localStorage.projectKey == 'CSY_DAJ') {
@@ -181,35 +147,80 @@ var getShowVal = function (agvinfo) {
         } else {
             taskStatusVal += "停止充电返回" + chargeInfo;
         }
-        colorStyle = "#D24D57";
     } else {
         taskStatusVal += agvinfo.taskstatus;
     }
-    if (agvinfo.inCharging) {
-        colorStyle = "#D24D57";
+    return taskStatusVal;
+}
+
+let colorStyle = (agvinfo) => {
+    if (agvinfo.taskstatus == "FREE") {
+        return null;
     }
     if (agvinfo.agvstatus == "未连接") {
-        colorStyle = "#D0D0D0";
+        return "#D0D0D0";
     }
-    val.colorStyle = colorStyle;
-    target = (agvinfo.taskstatus != "FREE" && target) ? target : "";
-    let shortLength = 20;
-    let shortTarget = target.length > shortLength ? (target.substr(0, shortLength) + "...") : target;
-    shortTarget = shortTarget ? "（" + shortTarget + "）" : "";
-    target = `<span title='${target}'>${shortTarget}</span>`;
-    let taskDesc = agvinfo.taskexesid ? agvinfo.taskexesid : (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中");
-    val.taskStatusVal = "任务状态:" + taskStatusVal + target + "<br/>" + taskDesc;
-    val.currentsite = "站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
-    val.battery = "电量:" + (agvinfo.battery ? agvinfo.battery : "");
-    val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
-    if (agvinfo.id == 2) console.log(agvinfo.speed)
-    val.agvstatus = "AGV反馈状态:" + (agvinfo.agvstatus ? agvinfo.agvstatus : "");
-    val.remark = (remark ? remark : "");
-
-    if (localStorage.projectKey == 'TAIKAI_JY') {
-        let temp = findIotInfo(agvinfo.id, "agvbusstype");
-        if (temp == 'TON_1') { val.agvbusstype = "1吨车"; } else if (temp == 'TON_2') { val.agvbusstype = "2吨车"; }
+    if (agvinfo.inCharging || agvinfo.taskstatus == "GOTO_CHARGE" || agvinfo.taskstatus == "BACK_CHARGE") {
+        return "#D24D57";
     }
+    if (agvinfo.taskstatus == "GOTO_INIT") {
+        return "green";
+    }
+    return "gray";
+}
 
-    return val;
+let movestatus = (movestatus) => {
+    if (movestatus == "CONTINUE") {
+        return "启";
+    } else if (movestatus == "PAUSE_SYS") {
+        return "交管自停";
+    } else if (movestatus == "PAUSE_SELF") {
+        return "路口自停";
+    } else if (movestatus == "PAUSE_OUT_ERR") {
+        return "脱轨错停";
+    } else if (movestatus == "PAUSE_REPATH_ERR") {
+        return "规划错停";
+    } else if (movestatus == "PAUSE_CACHE_ERR") {
+        return "缓存错停";
+    } else if (movestatus == "PAUSE_USER") {
+        return "手停";
+    }
+    return movestatus;
+}
+
+let sitestatus = (sitestatus) => {
+    if (sitestatus == "INIT") {
+        return "初始站点";
+    } else if (sitestatus == "MOVING") {
+        return "行驶中";
+    } else if (sitestatus == "WINDOW_GET") {
+        return "窗口获取档案";
+    } else if (sitestatus == "ALLOC_STOCK") {
+        return "货位放货";
+    } else if (sitestatus == "WINDOW_STOCK") {
+        return "窗口放货";
+    } else if (sitestatus == "ALLOC_SCAN") {
+        return "窗口扫描";
+    } else if (sitestatus == "ALLOC_GET") {
+        return "货位取货";
+    } else if (sitestatus == "CHARGING") {
+        return "正在充电";
+    } else if (sitestatus == "WAITING_AUTODOOR") {
+        return "等待自动门";
+    } else if (sitestatus == "WAITING_LIFT") {
+        return "等待电梯";
+    } else if (sitestatus == "HOOK_UP") {
+        return "挂钩升起";
+    } else if (sitestatus == "HOOK_DOWN") {
+        return "挂钩下降";
+    } else if (sitestatus == "REVOLVE") {
+        return "旋转中";
+    } else if (sitestatus == "STOP_WORK") {
+        return "停车工作";
+    } else if (sitestatus == "WAIT") {
+        return "按钮确认";
+    } else if (sitestatus == "PI") {
+        return "交管中";
+    }
+    return sitestatus;
 }
