@@ -40,29 +40,6 @@ $("html").delegate("button.clr", "click", function () {
     });
 });
 
-if (['HONGFU_ZHENMU', "CSY_CDBP", 'BJJK_HUIRUI'].includes(localStorage.projectKey)) {
-    $("html").delegate("button.doChange", "click", function () {
-        allocOp(this);
-    });
-
-    $("table.alloc").delegate("button", "click", function () {
-        switch (localStorage.projectKey) {
-            case "HONGFU_ZHENMU": {
-                doAllocOpHongfu(this);
-                return;
-            }
-            case "CSY_CDBP": {
-                doAllocOpHongfu(this);
-                return;
-            }
-            case "BJJK_HUIRUI": {
-                doAllocOpBjjkHuirui(this);
-                return;
-            }
-        }
-    });
-}
-
 $("html").delegate("button.doTask", "click", function () {
     var confirmMsg = "";
     if ($(this).html().endsWith('上料')) {
@@ -82,6 +59,63 @@ $("html").delegate("button.doTask", "click", function () {
         return;
     }
 });
+
+if (['HONGFU_ZHENMU', "CSY_CDBP", 'BJJK_HUIRUI'].includes(localStorage.projectKey)) {
+    $("html").delegate("button.doChange", "click", function () {
+        allocOp(this);
+    });
+
+    $("table.alloc").delegate("button.item", "click", function () {
+        switch (localStorage.projectKey) {
+            case "HONGFU_ZHENMU": {
+                doAllocOpHongfu(this);
+                return;
+            }
+            case "CSY_CDBP": {
+                doAllocOpHongfu(this);
+                return;
+            }
+            case "BJJK_HUIRUI": {
+                doAllocOpBjjkHuirui(this);
+                return;
+            }
+        }
+    });
+    $("table.alloc").delegate("button.shipment", "click", function () {
+        switch (localStorage.projectKey) {
+            case "BJJK_HUIRUI": {
+                var allocName = $(this).data("text");
+                let work = function (index) {
+                    gf.ajax(`/agv/huirui/callShipmentFromCold.shtml`, { key: allocName }, "json", function (s) {
+                        var layerMsg = "下发呼叫指令成功！"
+                        if (s.msg)
+                            layerMsg = s.msg;
+                        gf.layerMsg(layerMsg);
+                    });
+                }
+                layer.confirm(`对${allocName}，确定呼叫AGV送出料架？`, function (index) { work(index); });
+                return;
+            }
+        }
+    });
+    $("table.alloc").delegate("button.receipt", "click", function () {
+        switch (localStorage.projectKey) {
+            case "BJJK_HUIRUI": {
+                var allocName = $(this).data("text");
+                let work = function (index) {
+                    gf.ajax(`/agv/huirui/backShipmentToCold.shtml`, { key: allocName }, "json", function (s) {
+                        var layerMsg = "下发呼叫指令成功！"
+                        if (s.msg)
+                            layerMsg = s.msg;
+                        gf.layerMsg(layerMsg);
+                    });
+                }
+                layer.confirm(`对${allocName}，确定让AGV送料架返库？`, function (index) { work(index); });
+                return;
+            }
+        }
+    });
+}
 
 var doAllocOpHongfu = function (that) {
     var singletasks = getSingleTask($(that).data("id"));

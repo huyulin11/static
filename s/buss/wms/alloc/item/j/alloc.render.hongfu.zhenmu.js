@@ -26,7 +26,7 @@ var renderOne = function (allocInfo) {
             }
             showInfos.push("明细：" + `<div>${detailInfo.join("<hr/>")}</div>`);
         }
-        tmpStr = `<div class='allocDiv'><button
+        tmpStr = `<button class='item'
             data-id='${allocInfo.id}'
             data-rowId='${allocInfo.rowId}'
             data-colId='${allocInfo.colId}'
@@ -36,7 +36,31 @@ var renderOne = function (allocInfo) {
             data-status='${allocInfo.status}'
             data-skuid='${allocInfo.skuId}'
             ${disabled} >${showInfos.join("<hr/>")}
-            </button></div>`;
+            </button>`;
+        if (localStorage.projectKey == 'BJJK_HUIRUI') {
+            let shipmentBtn = `<button class='shipment'
+            data-id='${allocInfo.id}'
+            data-rowId='${allocInfo.rowId}'
+            data-colId='${allocInfo.colId}'
+            data-zId='${allocInfo.zId}'
+            data-text='${allocInfo.text}'
+            data-num='${allocInfo.num}'
+            data-status='${allocInfo.status}'
+            data-skuid='${allocInfo.skuId}'
+            ${disabled} style='min-height:30px;width: 49%;'>发起出库</button>`;
+            let receiptBtn = `<button class='receipt'
+            data-id='${allocInfo.id}'
+            data-rowId='${allocInfo.rowId}'
+            data-colId='${allocInfo.colId}'
+            data-zId='${allocInfo.zId}'
+            data-text='${allocInfo.text}'
+            data-num='${allocInfo.num}'
+            data-status='${allocInfo.status}'
+            data-skuid='${allocInfo.skuId}'
+            ${disabled}  style='min-height:30px;width: 49%;'>发起入库</button>`;
+            tmpStr += shipmentBtn + receiptBtn;
+        }
+        tmpStr = `<div class='allocDiv'>${tmpStr}</div>`;
     }
     return tmpStr;
 }
