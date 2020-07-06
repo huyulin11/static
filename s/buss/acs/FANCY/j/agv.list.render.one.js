@@ -192,8 +192,13 @@ var getShowVal = function (agvinfo) {
         colorStyle = "#D0D0D0";
     }
     val.colorStyle = colorStyle;
-    val.taskStatusVal = "任务状态:" + taskStatusVal + ((agvinfo.taskstatus != "FREE" && target) ? "-" + target : "") + "<br/>"
-        + (agvinfo.taskexesid ? agvinfo.taskexesid : (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中"));
+    target = (agvinfo.taskstatus != "FREE" && target) ? target : "";
+    let shortLength = 20;
+    let shortTarget = target.length > shortLength ? (target.substr(0, shortLength) + "...") : target;
+    shortTarget = shortTarget ? "（" + shortTarget + "）" : "";
+    target = `<span title='${target}'>${shortTarget}</span>`;
+    let taskDesc = agvinfo.taskexesid ? agvinfo.taskexesid : (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中");
+    val.taskStatusVal = "任务状态:" + taskStatusVal + target + "<br/>" + taskDesc;
     val.currentsite = "站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
     val.battery = "电量:" + (agvinfo.battery ? agvinfo.battery : "");
     val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
