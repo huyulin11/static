@@ -39,7 +39,6 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
         <tr>${batteryDes}${speedDes}</tr>
         <tr><td colspan='2'>${showVal.taskStatusVal}</td></tr>
         <tr><td colspan='2'>${showVal.agvstatus}</td></tr>
-        <tr><td colspan='2'>${showVal.remark}</td></tr>
         ${relativeHD}
         ${agvbusstype}
         </table></button>
@@ -154,11 +153,11 @@ let taskstatus = (agvinfo) => {
 }
 
 let colorStyle = (agvinfo) => {
-    if (agvinfo.taskstatus == "FREE") {
-        return null;
-    }
     if (agvinfo.agvstatus == "未连接") {
         return "#D0D0D0";
+    }
+    if (agvinfo.taskstatus == "FREE") {
+        return null;
     }
     if (agvinfo.inCharging || agvinfo.taskstatus == "GOTO_CHARGE" || agvinfo.taskstatus == "BACK_CHARGE") {
         return "#D24D57";
