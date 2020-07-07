@@ -40,26 +40,6 @@ $("html").delegate("button.clr", "click", function () {
     });
 });
 
-$("html").delegate("button.doTask", "click", function () {
-    var confirmMsg = "";
-    if ($(this).html().endsWith('上料')) {
-        confirmMsg = "上料需保证送料工序已经执行完毕，";
-    } else if ($(this).html().endsWith('送光轴')) {
-        confirmMsg = "送光轴需保证上料工序已经执行完毕，";
-    } else if ($(this).html().endsWith('叫料')) {
-        confirmMsg = "叫料需保证agv已回到起始位置，";
-    } else if ($(this).html().endsWith('送料')) {
-        confirmMsg = "送料需保证agv已回到起始位置，";
-    }
-
-    if (window.confirm(confirmMsg + '你确定要' + "执行:" + $(this).html() + '吗？')) {
-        taskexe.addTaskById($(this).data("agvid"), $(this).data("id"));
-        initAlloc();
-    } else {
-        return;
-    }
-});
-
 if (['HONGFU_ZHENMU', "CSY_CDBP", 'BJJK_HUIRUI'].includes(localStorage.projectKey)) {
     $("html").delegate("button.doChange", "click", function () {
         allocOp(this);
