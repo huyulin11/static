@@ -21,7 +21,7 @@
     import "/s/buss/acs/g/j/agv.g.js";
     import { gf } from "/s/buss/g/j/g.f.js";
     import "/s/buss/g/j/jquery/jquery.autofill.js";
-    import "/s/buss/acs/CSY_DAJ/j/agv/plc.op.js";
+    import { init as initPlc } from "/s/buss/acs/CSY_DAJ/j/agv/plc.op.js";
     import "/s/buss/acs/CSY_DAJ/j/agv/plc.msg.js";
 
     import { currentTask, init as initInfo } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
@@ -30,6 +30,7 @@
     gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#agvDetail", function () {
         initInfo(".oneCtrlTr");
         initOp("div#tempAgvMgr");
+        initPlc();
         setInterval(function () { showTaskexe(currentTask); }, 500);
     });
 </script>
