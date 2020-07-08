@@ -21,6 +21,7 @@ var _defaultConf = {
 	data: '', // 发送给后台的数据 是json数据 例如{nama:"a",age:"100"}....
 	pageSize: 40, // 每页显示多少条数据
 	checkbox: false,// 是否显示复选框
+	checkone: true,// 复选框仅能选择一个
 	searchInInit: true,// 是否显示复选框
 	checkValue: 'id', // 当checkbox为true时，需要设置存放checkbox的值字段 默认存放字段id的值
 	treeGrid: {
@@ -226,7 +227,8 @@ var dataGrid = function (params) {
 		chkbox.type = "checkbox";
 		chkbox.setAttribute("pagId", _conf.pagId);
 		$(chkbox).on("click", checkboxbind);
-		cth.appendChild(chkbox);
+		if (!_conf.checkone)
+			cth.appendChild(chkbox);
 		tr.appendChild(cth);
 		for (let oneColumn of _columns) {
 			var th = tag('th');
@@ -278,7 +280,8 @@ var dataGrid = function (params) {
 			chkbox.type = "checkbox";
 			chkbox.setAttribute("pagId", _conf.pagId);
 			$(chkbox).on("click", checkboxbind);
-			cth.appendChild(chkbox);
+			if (!_conf.checkone)
+				cth.appendChild(chkbox);
 			tr.appendChild(cth);
 			for (let oneColumn of _columns) {
 				var th = tag('th');
