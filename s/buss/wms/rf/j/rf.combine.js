@@ -2,11 +2,13 @@ import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { initSetting } from "/s/buss/wms/rf/j/rf.picking.setting.js";
 
 gf.checkLoginError();
 
 let container = "#rootContainer";
 let _warehouse = gf.urlParam("warehouse");
+let _setting;
 
 var sub = function () {
     let _su = $("#su").val();
@@ -56,9 +58,23 @@ let initDatas = function () {
 }
 
 var initCombine = function () {
+    if (!$("#topCtrlContainer")) return;
+    let style = $(`<style id='settingHideDiv_style'></style>`);
+    $(style).append(`#settingHideDiv.close {background-image: url(/s//i/icon/settingClose.png);}`)
+        .append(`#settingHideDiv.open {background-image: url(/s//i/icon/settingOpen.png);}`);
+    $("head").append(style);
+    $("#topCtrlContainer").prepend(`<div id='settingHideDiv' class='close hideToggle' data-target='div#settingContainer'></div>`);
+
     let title = function () {
         if (_warehouse) {
             return `正在组盘-${gv.get("WAREHOUSE", _warehouse)}`;
+        } else if (_setting && _setting.SETTING && _setting.SETTING != "[]" && _setting.SETTING.length > 0) {
+            let json = _setting.SETTING;
+            let str = (_setting.TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
+            let items = [];
+            for (let item of json) { items.push(item.name); }
+            str += items.join("、");
+            return (`正在组盘<br/>${str}`);
         } else {
             return `全库匹配组盘`;
         }
@@ -66,6 +82,38 @@ var initCombine = function () {
     $(container).find("h2").html(title);
     $(document).attr("title", title);
     initDatas();
+
+    var showCtrl = function (that) {
+        var thatTarget = $(that).data("target");
+        $(thatTarget).show(100);
+        $(that).removeClass("close");
+        $(that).addClass("open");
+    }
+
+    var hideCtrl = function (that) {
+        var thatTarget = $(that).data("target");
+        $(thatTarget).hide(100);
+        $(that).removeClass("open");
+        $(that).addClass("close");
+    }
+
+    var hideAllCtrl = function (thatTarget) {
+        $("#topCtrlContainer").find("div.hideToggle").each(function () {
+            var target = $(this).data("target");
+            if (target != thatTarget) {
+                hideCtrl(this);
+            }
+        });
+    }
+
+    $("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
+        hideAllCtrl($(this).data("target"));
+        if ($(this).hasClass("open")) {
+            hideCtrl(this);
+        } else {
+            showCtrl(this);
+        }
+    });
 }
 
 var getCombinedList = function () {
@@ -100,7 +148,17 @@ var initRf = function () {
         created: function () {
         },
         mounted: function () {
-            initCombine();
+            gf.doAjax({
+                url: `/app/conf/getByUser.shtml`,
+                data: { TABLE_KEY: "COMBINE_SETTING" },
+                dataType: "json",
+                timeout: 2000,
+                success: function (setting) {
+                    _setting = setting;
+                    initSetting(_setting);
+                    initCombine();
+                }
+            });
 
             $(container).find("table").show();
             $(container).find("#sub").on("click", function () { sub(); });

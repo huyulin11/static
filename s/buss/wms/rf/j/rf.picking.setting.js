@@ -1,4 +1,5 @@
 let _setting;
+let _type = gf.urlParam("type");
 
 export var initSetting = function (setting) {
     _setting = setting;
@@ -11,6 +12,7 @@ var render = function (laps, setting, callback) {
     let tabs = new Map();
     for (var a of laps) {
         if (a.type != 'PICK' && a.type != 'PROD_LINE') { continue; }
+        if (!_type && a.type != 'PROD_LINE') { continue; }
         let tab = tabs.get(a.type);
         if (!tab) {
             tab = {};
@@ -111,9 +113,11 @@ $("html").delegate("button#save", "click", function () {
     let setting = {};
     setting.TYPE = _value;
     setting.SETTING = obj;
+    let table_key = "PICKING_SETTING";
+    if (!_type) table_key = "COMBINE_SETTING";
     gf.doAjax({
         url: `/app/conf/setByUser.shtml`,
-        data: { TABLE_KEY: "PICKING_SETTING", value: JSON.stringify(setting) },
+        data: { TABLE_KEY: table_key, value: JSON.stringify(setting) },
         success: function (data) {
             location.reload();
         }

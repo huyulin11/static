@@ -13,7 +13,7 @@ let _type = gf.urlParam("type");
 let _pick = gf.urlParam("PICK");
 let _warehouse = gf.urlParam("warehouse");
 
-if (["PICKING", "COMBINED", "MGR"].includes(_type)) {
+if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "COMBINED", "PICKING"].includes(_type)) {
 	$("div.doc-buttons").append(`<span>选中查看日志</span><input type="checkbox" id="showTransLog" title="选中查看日志" ${localStorage.showTransLog ? "checked" : ""}>`);
 }
 $('div.doc-buttons').delegate("input:checkbox#showTransLog", "change", function (e) {
@@ -209,14 +209,17 @@ if (["PICKED_COLD", "PRODUCT"].includes(_type)) {
 
 if (["PRIORITY", "PRODUCT"].includes(_type)) {
 	_columns.push({
-		colkey: "userdef4",
-		name: "TU",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
-				return data;
-			return "";
-		}
-	});
+		colkey: "C",
+		name: "物料名称",
+	}, {
+			colkey: "userdef4",
+			name: "TU",
+			renderData: function (rowindex, data, rowdata, column) {
+				if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
+					return data;
+				return "";
+			}
+		});
 }
 
 _columns.push({
