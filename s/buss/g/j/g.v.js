@@ -7,7 +7,7 @@ class GV {
 			async: true,
 			type: 'GET',
 			dataType: 'json',
-			timeout: 1000,
+			timeout: 5000,
 			cache: false,
 			success: function (data) {
 				var str = JSON.stringify(data.role);
@@ -101,7 +101,7 @@ class GV {
 			async: false,
 			type: 'GET',
 			dataType: 'json',
-			timeout: 1000,
+			timeout: 5000,
 			cache: false,
 			data: {
 				"userid": userid

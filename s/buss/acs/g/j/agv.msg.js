@@ -62,7 +62,7 @@ var agvsinfo = function () {
         },
         error: function (e) {
         },
-        timeout: 3000
+        timeout: 5000
     });
 }
 agvsinfo();

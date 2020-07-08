@@ -128,7 +128,7 @@ class GF {
         var pp = {
             error: defaultErr,
             success: defaultSucFun,
-            timeout: 3000
+            timeout: 5000
         };
         $.extend(pp, params);
         $.ajax(pp);
@@ -137,7 +137,7 @@ class GF {
         var pp = {
             error: defaultErr,
             success: defaultSucFun,
-            timeout: 3000
+            timeout: 5000
         };
         $.extend(pp, params);
         $(form).ajaxSubmit(pp);
@@ -164,7 +164,7 @@ class GF {
             dataType: dataType,// 这里的dataType就是返回回来的数据格式了html,xml,json
             async: true,
             cache: false,// 设置是否缓存，默认设置成为true，当需要每次刷新都需要执行数据库操作的话，需要设置成为false
-            timeout: 3000,
+            timeout: 5000,
             success: function (data) {
                 html = data;
                 if (callback) { callback(data); } else { defaultSucFun(data); }
@@ -369,7 +369,7 @@ class GF {
             type: "POST",
             url: '/resources/findMyRes.shtml',
             dataType: 'json',
-            timeout: 3000,
+            timeout: 5000,
             error: function () {
                 location.assign("/s/buss/g/h/login.html");
             },
@@ -461,7 +461,7 @@ class GF {
     checkLogin(yes, no) {
         gf.doAjax({
             url: "/checkLogin.shtml",
-            timeout: 2000,
+            timeout: 5000,
             dataType: "JSON",
             success: function (json) {
                 if (json) {

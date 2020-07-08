@@ -18,7 +18,7 @@ export var submitForm = function () {
     $("#form").ajaxSubmit({
         type: "post",
         dataType: "json",
-        timeout: 2000,
+        timeout: 5000,
         data: { dictype: $("#dictype").html() },
         error: function (data) {
             if (layer) layer.msg("连接错误！" + data);

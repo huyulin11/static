@@ -152,7 +152,7 @@
                     async: true,
                     type: 'GET',
                     dataType: 'json',
-                    timeout: 2000,
+                    timeout: 5000,
                     cache: false,
                     success: dealdata,
                     error: function () {

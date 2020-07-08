@@ -58,7 +58,7 @@ class sku {
             type: "post",
             dataType: "json",
             async: true,
-            timeout: 3000,
+            timeout: 5000,
             success: function (data) {
                 localStorage.setItem("skuinfo", JSON.stringify(data.skuInfo));
                 localStorage.setItem("skutype", JSON.stringify(data.skuType));

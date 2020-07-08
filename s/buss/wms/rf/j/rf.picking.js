@@ -165,7 +165,7 @@ var initRf = function () {
                     url: `/app/conf/getByUser.shtml`,
                     data: { TABLE_KEY: "PICKING_SETTING" },
                     dataType: "json",
-                    timeout: 2000,
+                    timeout: 5000,
                     success: function (setting) {
                         _setting = setting;
                         initSetting(_setting);

@@ -4,7 +4,7 @@ export var dicdata = (dictypeStr, callback) => {
         async: false,
         type: 'GET',
         dataType: 'json',
-        timeout: 2000,
+        timeout: 5000,
         cache: false,
         success: (datas) => {
             if (!datas) return;

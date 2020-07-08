@@ -74,7 +74,7 @@ var agvinfo = function () {
 			$(".black_overlay").hide();
 		},
 		error: function (e) { console.log(e); },
-		timeout: 3000
+		timeout: 5000
 	});
 }
 

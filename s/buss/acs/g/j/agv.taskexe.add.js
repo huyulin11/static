@@ -71,6 +71,6 @@ var _addTaskTo = function (agvId, tasktype, to, callback) {
         error: function (e) {
             layer.msg("数据中断，请刷新界面或重新登录！");
         },
-        timeout: 2000
+        timeout: 5000
     });
 }
