@@ -56,7 +56,7 @@ let _columns = [{
 	colkey: "D",
 }, {
 	colkey: "company",
-	name: "转移单号"
+	name: "单号"
 }, {
 	colkey: "name",
 	name: function (rowindex, data, rowdata, column) {
