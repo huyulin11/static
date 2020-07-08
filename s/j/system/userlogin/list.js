@@ -24,7 +24,7 @@ window.datagrid = dataGrid({
 		name: "登入IP"
 	}],
 	jsonUrl: '/userlogin/findByPage.shtml',
-	checkbox: true
+	checkbox: false
 });
 
 let doSearch = function () {
