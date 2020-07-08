@@ -284,7 +284,7 @@ class GF {
     checkNotNull(conf) {
         var cbox = this.getCheckedVal(conf);
         if (cbox == "") {
-            layer.msg("至少需选中一个！");
+            layer.msg("请至少选择一个操作目标！");
             return null;
         }
         return cbox;
@@ -292,7 +292,7 @@ class GF {
     checkOnlyOne(conf, notshowtips) {
         var cbox = this.getCheckedVal(conf);
         if (cbox.length > 1 || cbox == "") {
-            if (!notshowtips) layer.msg("当且仅能选择一个");
+            if (!notshowtips) layer.msg("请选择一个操作目标！");
             return null;
         }
         return cbox[0];
