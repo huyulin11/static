@@ -13,13 +13,7 @@ var defaultSucFun = function (data) {
 }, defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
-    msg = `<div id='layerError' style='color:red'>${msg}</div>`;
-    layer.open({
-        type: 1,
-        title: "出错啦！",
-        area: ['50%', '500px'],
-        content: msg,
-    });
+    gf.layerMsg(msg);
 };
 
 class GF {
