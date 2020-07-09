@@ -2,6 +2,7 @@ import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { agvNum } from "/s/buss/acs/FANCY/j/agv.list.js";
 
 var numInLine = 1;
+let shortLength = 20;
 let showPlcstatus = ['CSY_DAJ'].includes(localStorage.projectKey);
 let showAgvbusstype = ['TAIKAI_JY'].includes(localStorage.projectKey);
 let showSiteStatusVal = ['CSY_DAJ', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].includes(localStorage.projectKey);
@@ -29,6 +30,7 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
     var siteStatusVal = showSiteStatusVal ? `<tr><td>${showVal.siteStatusVal}</td><td>${showVal.currentsite}</td></tr>` : ``;
     var batteryDes = showBattery ? `<td>${showVal.battery}</td>` : ``;
     var speedDes = showSpeed ? `<td>${showVal.speed}</td>` : ``;
+    var remark = agvinfo.msg ? agvinfo.msg : "";
 
     let name = findIotInfo(agvinfo.id, "name");
     var tmpStr = `<td class='agv'><div>
@@ -41,6 +43,7 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
         <tr><td colspan='2'>${showVal.agvstatus}</td></tr>
         ${relativeHD}
         ${agvbusstype}
+        <tr><td colspan='2' title='${remark}'>${remark.length > shortLength ? remark.substr(0, shortLength) + "..." : remark}</td></tr>
         </table></button>
         </div></td>`;
 
@@ -58,7 +61,6 @@ var getShowVal = function (agvinfo) {
 
     val.colorStyle = colorStyle(agvinfo);
     var target = agvinfo.taskstatus != "FREE" ? targetV(agvinfo) : "";
-    let shortLength = 20;
     let shortTarget = target.length > shortLength ? (target.substr(0, shortLength) + "...") : target;
     shortTarget = shortTarget ? "（" + shortTarget + "）" : "";
     target = `<span title='${target}'>${shortTarget}</span>`;
@@ -155,6 +157,9 @@ let taskstatus = (agvinfo) => {
 let colorStyle = (agvinfo) => {
     if (agvinfo.agvstatus == "未连接") {
         return "#D0D0D0";
+    }
+    if (agvinfo.msg) {
+        return "#FFB0D9";
     }
     if (agvinfo.taskstatus == "FREE") {
         return null;
