@@ -181,9 +181,9 @@ if (localStorage.isTest) {
 let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
 $("#searchForm").find("div.search-group").html(
 	`<label>
-                <span>产线名称:</span>
-                <input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
-            </label>`
+		<span>产线名称:</span>
+		<input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
+	</label>`
 );
 $("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
 
