@@ -1,24 +1,22 @@
-if (window.location.href.indexOf("127.0.0.1") >= 0) {
-    var websocket = null;
-    if ('WebSocket' in window) {//buss.calculatedfun.com 127.0.0.1:180
-        websocket = new WebSocket("ws://buss.calculatedfun.com/websocket");
+import { gf } from "/s/buss/g/j/g.f.js";
+
+export var ws = (url, whenmsg, whenopen, whenclose) => {
+    var o = null;
+    if ('WebSocket' in window) {
+        o = new WebSocket(url);//"ws://127.0.0.1:180/websocket"
     }
     else {
-        alert('当前浏览器 Not support websocket')
+        alert('当前浏览器 Not support websocket');
+        return null;
     }
-
-    //连接成功建立的回调方法
-    websocket.onopen = function () {
-        setMessageInnerHTML("今日计划：");
+    o.onopen = whenopen ? whenopen : () => {
+        console.log("ws打开事件");
     }
-
-    //接收到消息的回调方法
-    websocket.onmessage = function (event) {
-        setMessageInnerHTML(event.data);
+    o.onmessage = whenmsg ? whenmsg : (event) => {
+        console.log(event.data);
     }
-
-    //将消息显示在网页上
-    function setMessageInnerHTML(innerHTML) {
-        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    o.onclose = whenclose ? whenclose : () => {
+        gf.layerMsg("数据通道处于关闭状态，请确定连接成功后刷新界面！");
     }
+    return o;
 }
