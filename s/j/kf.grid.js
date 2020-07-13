@@ -1,6 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import {
-	_defaultConf, renderFun, restoreBgColor, setBgColor, highlight, renderChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
+	_defaultConf, renderFun, restoreBgColor, setBgColor, renderChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
 	_getValueByName, fixhead, tag, name, hide, _conf, _confTreeGrid, _columns, initUtil, checkItem, jsonRequest
 } from "/s/j/kf.grid.util.js";
 
@@ -156,7 +156,6 @@ var dataGrid = function (params) {
 				var td_d = tr.insertCell(-1); hideCheckbox(td_d);
 				if (checkItem(rowdata)) {
 					var chkbox = renderChkbox(rowdata, _confTreeGrid.id, _confTreeGrid.id);
-					$(chkbox).on("click", highlight);
 					td_d.appendChild(chkbox);
 				}
 				for (let oneColumn of _columns) {
@@ -351,7 +350,6 @@ var dataGrid = function (params) {
 
 			if (checkItem(rowdata)) {
 				var chkbox = renderChkbox(rowdata, "id", "parentId");
-				$(chkbox).on("click", highlight);
 				td_d.appendChild(chkbox);
 			}
 			for (let oneColumn of _columns) {
@@ -428,7 +426,6 @@ var dataGrid = function (params) {
 
 					if (checkItem(rowdata)) {
 						var chkbox = renderChkbox(rowdata, _confTreeGrid.id, _confTreeGrid.id);
-						$(chkbox).on("click", highlight);
 						td_d.appendChild(chkbox);
 					}
 					for (let oneColumn of _columns) {

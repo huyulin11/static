@@ -82,11 +82,19 @@ var setBgColor = function (tr) {
     }
 };
 
-var highlight = function () {
+var chkboxClick = function () {
     var evt = arguments[0] || window.event;
     var chkbox = evt.srcElement || evt.target;
     var tr = chkbox.parentNode.parentNode;
     chkbox.checked ? setBgColor(tr) : restoreBgColor(tr);
+    if (_conf.checkone && chkbox.checked) {
+        let that = this;
+        $("#" + _conf.pagId).find(":checkbox:checked").each((item, obj) => {
+            if ($(that).val() != $(obj).val()) {
+                $(obj).trigger("click");
+            }
+        });
+    }
 };
 
 var renderChkbox = (rowdata, cid, pid) => {
@@ -97,6 +105,7 @@ var renderChkbox = (rowdata, cid, pid) => {
     chkbox.setAttribute("pid", _getValueByName(rowdata, pid));
     chkbox.setAttribute("_l_key", "checkbox");
     chkbox.value = _getValueByName(rowdata, _conf.checkValue);
+    $(chkbox).on("click", chkboxClick);
     return chkbox;
 }
 
@@ -191,6 +200,6 @@ var initUtil = (params) => {
 }
 
 export {
-    _defaultConf, renderFun, restoreBgColor, setBgColor, highlight, renderChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
+    _defaultConf, renderFun, restoreBgColor, setBgColor, renderChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
     _getValueByName, fixhead, tag, name, hide, _conf, _confTreeGrid, _columns, initUtil, checkItem, jsonRequest
 };
