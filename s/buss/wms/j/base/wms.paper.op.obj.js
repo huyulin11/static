@@ -364,12 +364,16 @@ class PaperOp {
             layer.confirm('选择修改的类型', {
                 btn: ['按单号', '按SU'],
                 btn1: function () {
-                    json.type = "BY_PAPER";
-                    gf.ajax(that.url, json, "json");
+                    layer.confirm(`是否确定提交操作？`, function (index) {
+                        json.type = "BY_PAPER";
+                        gf.ajax(that.url, json, "json");
+                    });
                 },
                 btn2: function () {
-                    json.type = "BY_SU";
-                    gf.ajax(that.url, json, "json");
+                    layer.confirm(`是否确定提交操作？`, function (index) {
+                        json.type = "BY_SU";
+                        gf.ajax(that.url, json, "json");
+                    });
                 },
             });
         }

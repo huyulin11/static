@@ -211,15 +211,16 @@ if (["PRIORITY", "PRODUCT"].includes(_type)) {
 	_columns.push({
 		colkey: "C",
 		name: "物料名称",
+		hide: !gf.isPc(),
 	}, {
-			colkey: "userdef4",
-			name: "TU",
-			renderData: function (rowindex, data, rowdata, column) {
-				if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
-					return data;
-				return "";
-			}
-		});
+		colkey: "userdef4",
+		name: "TU",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
+				return data;
+			return "";
+		}
+	});
 }
 
 _columns.push({
