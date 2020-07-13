@@ -385,7 +385,7 @@ $("#searchForm").on("submit", function () {
 });
 
 $("#searchForm").delegate("#export", "click", function () {
-	window.location.href = '/shipment/main/download.shtml' + '?' + $("#searchForm").serialize();
+	window.location.href = '/shipment/util/download.shtml' + '?' + $("#searchForm").serialize();
 });
 
 $("html").delegate(".stockout", "click", function () {
