@@ -118,7 +118,7 @@ var initCombine = function () {
 
 var getCombinedList = function () {
     var tuVal = $("#tu").val();
-    if (!tuVal) { $("#tu").focus(); return; }
+    if (!tuVal) { return; }
     gf.doAjax({
         url: `/app/conf/findJsonList.shtml`,
         data: { TABLE_KEY: "COMBINED_TU_INFO", key: tuVal },
