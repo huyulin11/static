@@ -215,6 +215,7 @@ if (["PRIORITY", "PRODUCT"].includes(_type)) {
 	}, {
 		colkey: "userdef4",
 		name: "TU",
+		hide: !gf.isPc(),
 		renderData: function (rowindex, data, rowdata, column) {
 			if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
 				return data;
