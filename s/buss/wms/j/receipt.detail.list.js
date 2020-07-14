@@ -34,7 +34,12 @@ window.datagrid = dataGrid({
 			}
 		},
 		renderData: function (rowindex, data, rowdata, column) {
-			return sku.value(data);
+			switch (localStorage.projectKey) {
+				case "BJJK_HUIRUI":
+					return data;
+				default:
+					return sku.value(data);
+			}
 		}
 	}, {
 		colkey: "userdef3",
