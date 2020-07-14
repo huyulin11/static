@@ -82,7 +82,12 @@ var setBgColor = function (tr) {
     }
 };
 
-var chkboxClick = function () {
+var getChkBox = function (tr) {
+    return tr.cells[1].firstChild;
+
+};
+
+var chkOneClick = function () {
     var evt = arguments[0] || window.event;
     var chkbox = evt.srcElement || evt.target;
     var tr = chkbox.parentNode.parentNode;
@@ -97,6 +102,26 @@ var chkboxClick = function () {
     }
 };
 
+var chkAllClick = function () {
+    var evt = arguments[0] || window.event;
+    var chkbox = evt.srcElement || evt.target;
+    var checkboxes = $("#" + chkbox.attributes.pagId.value + " input[_l_key='checkbox']");
+    if (chkbox.checked) {
+        checkboxes.prop('checked', true);
+    } else {
+        checkboxes.prop('checked', false);
+    }
+    checkboxes.each(function () {
+        var tr = this.parentNode.parentNode;
+        var chkbox = getChkBox(tr);
+        if (chkbox.checked) {
+            setBgColor(tr);
+        } else {
+            restoreBgColor(tr);
+        }
+    });
+}
+
 var renderChkbox = (rowdata, cid, pid) => {
     var chkbox = tag("INPUT");
     chkbox.type = "checkbox";
@@ -105,7 +130,15 @@ var renderChkbox = (rowdata, cid, pid) => {
     chkbox.setAttribute("pid", _getValueByName(rowdata, pid));
     chkbox.setAttribute("_l_key", "checkbox");
     chkbox.value = _getValueByName(rowdata, _conf.checkValue);
-    $(chkbox).on("click", chkboxClick);
+    $(chkbox).on("click", chkOneClick);
+    return chkbox;
+}
+
+var renderAllChkbox = () => {
+    var chkbox = tag("INPUT");
+    chkbox.type = "checkbox";
+    chkbox.setAttribute("pagId", _conf.pagId);
+    $(chkbox).on("click", chkAllClick);
     return chkbox;
 }
 
@@ -199,7 +232,8 @@ var initUtil = (params) => {
     _columns = _conf.columns;
 }
 
+
 export {
-    _defaultConf, renderFun, restoreBgColor, setBgColor, renderChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
-    _getValueByName, fixhead, tag, name, hide, _conf, _confTreeGrid, _columns, initUtil, checkItem, jsonRequest
+    _defaultConf, renderFun, restoreBgColor, setBgColor, renderChkbox, renderAllChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
+    _getValueByName, fixhead, tag, name, hide, _conf, _confTreeGrid, _columns, initUtil, checkItem, jsonRequest, getChkBox
 };

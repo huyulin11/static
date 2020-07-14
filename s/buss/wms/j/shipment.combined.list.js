@@ -6,6 +6,7 @@ import { getInput } from "/s/buss/g/j/g.input.render.js";
 let params = {
 	pagId: 'paging',
 	jsonColumn: 'value',
+	checkValue: "key",
 	columns: [{
 		colkey: "key",
 		name: "托盘号",

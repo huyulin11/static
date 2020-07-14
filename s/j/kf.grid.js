@@ -1,7 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import {
-	_defaultConf, renderFun, restoreBgColor, setBgColor, renderChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
-	_getValueByName, fixhead, tag, name, hide, _conf, _confTreeGrid, _columns, initUtil, checkItem, jsonRequest
+	_defaultConf, renderFun, restoreBgColor, setBgColor, renderChkbox, renderAllChkbox, _fieldModel, _focusCss, _hideCss, hideNumber, hideCheckbox,
+	_getValueByName, fixhead, tag, name, hide, _conf, _confTreeGrid, _columns, initUtil, checkItem, jsonRequest, getChkBox
 } from "/s/j/kf.grid.util.js";
 
 var _container;
@@ -67,12 +67,10 @@ var dataGrid = function (params) {
 		var th = tag('th'); hideNumber(th);
 		tr.appendChild(th);
 		var cth = tag('th'); hideCheckbox(cth);
-		var chkbox = tag("INPUT");
-		chkbox.type = "checkbox";
-		chkbox.setAttribute("pagId", _conf.pagId);
-		$(chkbox).on("click", checkboxbind);
-		if (!_conf.checkone)
+		if (!_conf.checkone) {
+			var chkbox = renderAllChkbox();
 			cth.appendChild(chkbox);
+		}
 		tr.appendChild(cth);
 		for (let oneColumn of _columns) {
 			var th = tag('th');
@@ -120,12 +118,10 @@ var dataGrid = function (params) {
 			var th = tag('th'); hideNumber(th);
 			tr.appendChild(th);
 			var cth = tag('th'); hideCheckbox(cth);
-			var chkbox = tag("INPUT");
-			chkbox.type = "checkbox";
-			chkbox.setAttribute("pagId", _conf.pagId);
-			$(chkbox).on("click", checkboxbind);
-			if (!_conf.checkone)
+			if (!_conf.checkone) {
+				var chkbox = renderAllChkbox();
 				cth.appendChild(chkbox);
+			}
 			tr.appendChild(cth);
 			for (let oneColumn of _columns) {
 				var th = tag('th');
@@ -568,26 +564,7 @@ var dataGrid = function (params) {
 			arr.push($(this).val());
 		});
 		return arr;
-	};
-	var checkboxbind = function () {
-		var evt = arguments[0] || window.event;
-		var chkbox = evt.srcElement || evt.target;
-		var checkboxes = $("#" + chkbox.attributes.pagId.value + " input[_l_key='checkbox']");
-		if (chkbox.checked) {
-			checkboxes.prop('checked', true);
-		} else {
-			checkboxes.prop('checked', false);
-		}
-		checkboxes.each(function () {
-			var tr = this.parentNode.parentNode;
-			var chkbox = getChkBox(tr);
-			if (chkbox.checked) {
-				setBgColor(tr);
-			} else {
-				restoreBgColor(tr);
-			}
-		});
-	};
+	};;
 
 	var pageBind = function () {
 		var evt = arguments[0] || window.event;
@@ -616,10 +593,6 @@ var dataGrid = function (params) {
 		var tBody = tr1.parentNode;
 		tBody.replaceChild(tr2, tr1);
 		tBody.insertBefore(tr1, target);
-	};
-	var getChkBox = function (tr) {
-		return tr.cells[1].firstChild;
-
 	};
 	Function.prototype.bind = function () {
 		var __method = this, args = [].concat(arguments), object = args.shift();
