@@ -126,6 +126,7 @@ gf.doAjax({
             let tagA = $("<a></a>");
             if (index == 0) { tagA.addClass("active"); }
             let ul = $('<ul class="nav lt"></ul>');
+            key.children.sort((m, n) => { return m.sortflag - n.sortflag });
             if (key.children && key.children.length > 0) {
                 let info = $("<i class='fa icon'></i>");
                 if (index == 0) { info.addClass("bg-danger"); }
