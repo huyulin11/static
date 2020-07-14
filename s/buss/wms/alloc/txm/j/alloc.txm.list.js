@@ -83,7 +83,7 @@ window.datagrid = dataGrid({
 		hide: true,
 	}],
 	jsonUrl: _jsonUrl,
-	checkbox: true,
+	checkbox: false,
 	serNumber: true
 });
 $("#search").on("click", function () {
@@ -95,11 +95,6 @@ $("#search").on("click", function () {
 $("#edit").click("click", function () {
 	edit();
 });
-
-$("#permissions").click("click", function () {
-	permissions();
-});
-
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {

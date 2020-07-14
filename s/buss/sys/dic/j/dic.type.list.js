@@ -88,10 +88,6 @@ $("html").delegate("button.mgr", "click", function () {
 $("#del").on("click", function () {
 	del();
 });
-$("#permissions").on("click", function () {
-	permissions();
-});
-
 function mgr(dictype) {
 	window.pageii = layer.open({
 		title: "明细",

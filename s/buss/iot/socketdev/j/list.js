@@ -54,10 +54,6 @@ $("#edit").click("click", function () {
 $("#del").click("click", function () {
 	del();
 });
-$("#permissions").click("click", function () {
-	permissions();
-});
-
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
