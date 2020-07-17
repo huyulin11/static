@@ -46,6 +46,12 @@ export var getInput = (item, option, datas) => {
             placeholder="输入:${label}${item.notnull ? '*' : ''}" data-notnull='${item.notnull}' 
             style="${_width ? 'width:' + _width + '' : ''}"
             autocomplete="off" ${readonly}>${_defaultValue}</textarea>`);
+    } else if ("password" == item.type) {
+        $(obj).append(`<input type="password" id="${id}" name="${name}" 
+            class="form-control" value="${_defaultValue}"
+            placeholder="输入:${label}${item.notnull ? '*' : ''}" data-notnull='${item.notnull}' 
+            style="${_width ? 'width:' + _width + '' : ''}"
+            autocomplete="off" ${readonly}>`);
     } else {
         $(obj).append(`<input type="text" id="${id}" name="${name}" 
             class="form-control" value="${_defaultValue}"

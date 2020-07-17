@@ -41,6 +41,11 @@ let _columns = [{
             // }
         } catch (error) {
         }
+        if (rowdata.key.indexOf("PASSWORD") >= 0) {
+            col = {
+                name: "键值", key: "key", notnull: true, type: "password",
+            };
+        }
         if (!col) {
             col = {
                 name: "键值", key: "key", notnull: true, type: "input",
@@ -77,12 +82,18 @@ window.datagrid = dataGrid({
 
 $("#paging").delegate(".edit", "click", function (e) {
     let key = $(this).data("key");
-    let target = $(this).parents("td").find("input").val();
+    let targetObj = $(this).parents("td").find("input");
+    let target = $(targetObj).val();
     if (!target) {
-        target = $(this).parents("td").find("textarea").val();
-        // target = JSON.stringify(target);
+        targetObj = $(this).parents("td").find("textarea");
+        target = $(targetObj).val();
     }
-    if (window.confirm(`是否要改变${key}的值为${target}？`)) {
+    let targetShow = target;
+    console.log($(this).attr("type"));
+    if ($(targetObj).attr("type") == "password") {
+        targetShow = "***";
+    }
+    if (window.confirm(`是否要改变${key}的值为${targetShow}？`)) {
         gf.doAjax({
             url: `/app/conf/set.shtml`, type: "POST",
             data: { table: "CONF_KEY", key: key, value: target }
