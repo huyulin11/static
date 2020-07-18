@@ -12,7 +12,8 @@ window.datagrid = dataGrid({
 		hide: true,
 	}, {
 		colkey: "paperid",
-		name: "单号"
+		name: "单号",
+		hide: true,
 	}, {
 		colkey: "orderid",
 		name: "订单号"
