@@ -6,10 +6,6 @@ import { ws } from "/s/buss/g/j/websocket.js";
 var reloadFlag = 0;
 var intervalVal;
 export var agvNum = 0;
-ws("ws://127.0.0.1:180/websocket/agvsinfo", (event) => {
-    let json = JSON.parse(event.data);
-    whenSuccess(json);
-});
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
@@ -80,8 +76,13 @@ var checkLogin = function () {
 }
 
 var init = function () {
-    // getAgvList();
-    // intervalVal = setInterval(getAgvList, 3000);
+    ws("ws://127.0.0.1:9080/websocket/agvsinfo", (event) => {
+        let json = JSON.parse(event.data);
+        whenSuccess(json);
+    }, null, () => {
+        getAgvList();
+        intervalVal = setInterval(getAgvList, 3000);
+    });
     if (localStorage.projectKey == 'TAIKAI_JY')
         setInterval(checkLogin, 5 * 60 * 1000);
 
