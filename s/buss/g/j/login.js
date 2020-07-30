@@ -41,7 +41,7 @@ var vm = new Vue({
                 $("title").html("MFA");
                 break;
             default:
-                $("title").html("AGV调度系统");
+                $("title").html("ACS");
                 break;
         }
     },
