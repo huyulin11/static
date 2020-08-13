@@ -9,10 +9,10 @@ let params = {
 	checkValue: "key",
 	columns: [{
 		colkey: "key",
-		name: "托盘号",
+		name: "TU",
 	}, {
 		colkey: "name",
-		name: "目的地",
+		name: "产线",
 	}, {
 		colkey: "sequence",
 		name: "优先级",
@@ -182,7 +182,7 @@ if (localStorage.isTest) {
 let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
 $("#searchForm").find("div.search-group").html(
 	`<label>
-		<span>产线名称:</span>
+		<span>产线:</span>
 		<input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
 	</label>`
 );

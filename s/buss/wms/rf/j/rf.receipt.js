@@ -28,6 +28,7 @@ var initReceipt = function () {
     $(container).find("#execute").on("click", function () { execute(); });
 
     let title = "冷库入库";
+    $(document).attr("title", title);
     if (_paperid) {
         let url = `/receipt/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
@@ -48,13 +49,11 @@ var initReceipt = function () {
                     info = info ? ("-" + info) : "";
                     title = `正在${main.receipttype == '2' ? "返料入库" : "入库"}` + info;
                     $(container).find("h2").html(title);
-                    $(document).attr("title", title);
                 });
             }
         });
     } else {
         $(container).find("h2").html(title);
-        $(document).attr("title", title);
     }
     if (_alloc) {
         start(_alloc);

@@ -11,12 +11,11 @@ window.datagrid = dataGrid({
 		name: "id",
 		hide: true,
 	}, {
-		colkey: "paperid",
-		name: "单号",
-		hide: true,
-	}, {
 		colkey: "orderid",
 		name: "订单号"
+	}, {
+		colkey: "paperid",
+		name: "单号",
 	}, {
 		colkey: "sourcewh",
 		name: "源仓库",
@@ -47,7 +46,7 @@ window.datagrid = dataGrid({
 		},
 	}, {
 		colkey: "totallines",
-		name: "明细行数"
+		name: "明细数"
 	}, {
 		colkey: "totalqty",
 		name: "货物数",
@@ -57,7 +56,7 @@ window.datagrid = dataGrid({
 		name: function (rowindex, data, rowdata, column) {
 			switch (localStorage.projectKey) {
 				case "CSY_DAJ": return "出入口";
-				case "BJJK_HUIRUI": return "目的地";
+				case "BJJK_HUIRUI": return "产线";
 				default: return "name";
 			}
 		},

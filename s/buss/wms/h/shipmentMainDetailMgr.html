@@ -9,6 +9,7 @@
     <meta http-equiv="content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>优先等级</title>
     <link href="/s/i/ico/calculatedfun.ico" type="image/x-icon" rel="shortcut icon">
     <link type="text/css" rel="stylesheet" href="/s/c/app.all.css" />
     <script src="/s/j/jquery-1.12.2.min.js"></script>
@@ -26,12 +27,6 @@
                 <span>出库单号:</span>
                 <input id="paperid" name="paperid">
             </label>
-            <label>
-                <span>状态:</span>
-                <select class="jsSelect" data-patten="ACS_STATUS"
-                    data-patten-gather="TOSEND,PICKING,COMBINING,ON_PCS,OVER_PCS,OVER" id="status"
-                    name="detailstatus"></select>
-            </label>
             <label class="hidden">
                 <span>交接点:</span>
                 <select class=" jsSelect" data-patten="ACS_CACHE_CABLE" id="name" name="name"></select>
@@ -45,7 +40,13 @@
                 <input id="tu" name="userdef3">
             </label>
             <label>
-                <span>组盘号:</span>
+                <span>明细状态:</span>
+                <select class="jsSelect" data-patten="ACS_STATUS"
+                    data-patten-gather="TOSEND,PICKING,COMBINING,ON_PCS,OVER_PCS,OVER" id="status"
+                    name="detailstatus"></select>
+            </label>
+            <label>
+                <span>TU:</span>
                 <input id="combined" name="userdef4">
             </label>
         </div>

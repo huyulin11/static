@@ -56,21 +56,23 @@ let cols = [{
 		gf.rowDisplay(rowdata);
 		return gv.get("ACS_STATUS", data);
 	}
-}, {
+}];
+
+if (localStorage.projectKey == "BJJK_HUIRUI") {
+	cols.push({
+		colkey: "targetAlloc",
+		name: "目标货位",
+	});
+}
+
+cols.push({
 	colkey: "updatetime",
 	name: "时间",
 	renderData: function (rowindex, data, rowdata, column) {
 		return "创建：" + new Date(rowdata.createtime).format("yyyy-MM-dd hh:mm:ss") + "<br/>"
 			+ "更新：" + new Date(rowdata.updatetime).format("yyyy-MM-dd hh:mm:ss");
 	}
-}];
-
-if (localStorage.projectKey == "BJJK_HUIRUI") {
-	cols = cols.concat({
-		colkey: "targetAlloc",
-		name: "目标货位",
-	});
-}
+});
 
 window.datagrid = dataGrid({
 	pagId: 'paging',

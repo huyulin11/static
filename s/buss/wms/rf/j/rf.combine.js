@@ -74,13 +74,11 @@ var initCombine = function () {
             let items = [];
             for (let item of json) { items.push(item.name); }
             str += items.join("、");
-            return (`正在组盘<br/>${str}`);
-        } else {
-            return `全库匹配组盘`;
+            return (`发料组盘<br/>${str}`);
         }
     };
-    $(container).find("h2").html(title);
-    $(document).attr("title", title);
+    if (title)
+        $(container).find("h2").html(title);
     initDatas();
 
     var showCtrl = function (that) {

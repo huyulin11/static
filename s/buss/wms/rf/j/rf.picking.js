@@ -72,24 +72,25 @@ var initPick = function () {
         });
     }
 
-    let title = function () {
+    let title = "发料拣配";
+    if (_warehouse)
+        title = "冷库出库";
+    $(document).attr("title", title);
+    title = function () {
         if (_paperid) {
             return ("正在拣货-" + _paperid);
         } else if (_warehouse) {
-            return (`正在拣货-${gv.get("WAREHOUSE", _warehouse)}`);
+            return (`${gv.get("WAREHOUSE", _warehouse)}出库`);
         } else if (_setting && _setting.SETTING && _setting.SETTING != "[]" && _setting.SETTING.length > 0) {
             let json = _setting.SETTING;
             let str = (_setting.TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
             let items = [];
             for (let item of json) { items.push(item.name); }
             str += items.join("、");
-            return (`正在拣货<br/>${str}`);
-        } else {
-            return (`全库匹配拣货`);
+            return (`发料拣配<br/>${str}`);
         }
     };
     $(container).find("h2").html(title);
-    $(document).attr("title", title);
     initDatas();
 
     var showCtrl = function (that) {

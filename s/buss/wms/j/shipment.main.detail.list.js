@@ -62,7 +62,7 @@ let _columns = [{
 	name: function (rowindex, data, rowdata, column) {
 		switch (localStorage.projectKey) {
 			case "CSY_DAJ": return "出入口";
-			case "BJJK_HUIRUI": return "目的地";
+			case "BJJK_HUIRUI": return "产线";
 			default: return "name";
 		}
 	},
@@ -109,46 +109,46 @@ if (localStorage.showTransLog) {
 		name: "下达人",
 		defaultVal: '--'
 	}, {
-		colkey: "CRETATE.TIME",
-		jsonColumn: "operator",
-		name: "下达时间",
-		defaultVal: '--'
-	}, {
-		colkey: "PICKING.OPERATOR",
-		jsonColumn: "operator",
-		name: "拣配人",
-		defaultVal: '--'
-	}, {
-		colkey: "PICKING.TIME",
-		jsonColumn: "operator",
-		name: "拣配时间",
-		defaultVal: '--'
-	}, {
-		colkey: "COMBINING.OPERATOR",
-		jsonColumn: "operator",
-		name: "组盘人",
-		defaultVal: '--'
-	}, {
-		colkey: "COMBINING.TIME",
-		jsonColumn: "operator",
-		name: "组盘时间",
-		defaultVal: '--'
-	}, {
-		colkey: "ON_PCS.TIME",
-		jsonColumn: "operator",
-		name: "上PCS时间",
-		defaultVal: '--'
-	}, {
-		colkey: "OVER_PCS.TIME",
-		jsonColumn: "operator",
-		name: "出PCS时间",
-		defaultVal: '--'
-	}, {
-		colkey: "OVER.TIME",
-		jsonColumn: "operator",
-		name: "到达产线时间",
-		defaultVal: '--'
-	});
+			colkey: "CRETATE.TIME",
+			jsonColumn: "operator",
+			name: "下达时间",
+			defaultVal: '--'
+		}, {
+			colkey: "PICKING.OPERATOR",
+			jsonColumn: "operator",
+			name: "拣配人",
+			defaultVal: '--'
+		}, {
+			colkey: "PICKING.TIME",
+			jsonColumn: "operator",
+			name: "拣配时间",
+			defaultVal: '--'
+		}, {
+			colkey: "COMBINING.OPERATOR",
+			jsonColumn: "operator",
+			name: "组盘人",
+			defaultVal: '--'
+		}, {
+			colkey: "COMBINING.TIME",
+			jsonColumn: "operator",
+			name: "组盘时间",
+			defaultVal: '--'
+		}, {
+			colkey: "ON_PCS.TIME",
+			jsonColumn: "operator",
+			name: "上PCS时间",
+			defaultVal: '--'
+		}, {
+			colkey: "OVER_PCS.TIME",
+			jsonColumn: "operator",
+			name: "出PCS时间",
+			defaultVal: '--'
+		}, {
+			colkey: "OVER.TIME",
+			jsonColumn: "operator",
+			name: "到达产线时间",
+			defaultVal: '--'
+		});
 }
 
 if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type)) {
@@ -180,7 +180,7 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 		name: function (rowindex, data, rowdata, column) {
 			switch (localStorage.projectKey) {
 				case "CSY_DAJ": return "出入口";
-				case "BJJK_HUIRUI": return "目的地";
+				case "BJJK_HUIRUI": return "产线";
 				default: return "name";
 			}
 		},
@@ -213,15 +213,15 @@ if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		name: "物料名称",
 		hide: !gf.isPc(),
 	}, {
-		colkey: "userdef4",
-		name: "TU",
-		hide: !gf.isPc(),
-		renderData: function (rowindex, data, rowdata, column) {
-			if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
-				return data;
-			return "";
-		}
-	});
+			colkey: "userdef4",
+			name: "TU",
+			hide: !gf.isPc(),
+			renderData: function (rowindex, data, rowdata, column) {
+				if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
+					return data;
+				return "";
+			}
+		});
 }
 
 _columns.push({
@@ -311,7 +311,7 @@ var initSearch = function () {
 	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		$("#searchForm").find("div.search-group").html(
 			`<label>
-                <span>产线名称:</span>
+                <span>产线:</span>
                 <input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
             </label>`
 		);
