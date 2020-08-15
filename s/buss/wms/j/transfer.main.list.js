@@ -16,6 +16,7 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "paperid",
 		name: "单号",
+		hide: true,
 	}, {
 		colkey: "sourcewh",
 		name: "源仓库",

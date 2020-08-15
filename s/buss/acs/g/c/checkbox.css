@@ -31,13 +31,13 @@ input[type="checkbox"]+label:before {
 #simple-1:checked+label.red,
 #simple-2:checked+label.red,
 #simple-3:checked+label.red {
-    background: #ECA9A7;
+    background: #AEDCAE;
 }
 
 #simple-1:checked+label.red:after,
 #simple-2:checked+label.red:after,
 #simple-3:checked+label.red:after {
-    background: #D9534F;
+    background: #84AF9B;
 }
 
 #simple-1:checked+label.green,

@@ -9,7 +9,7 @@ window.datagrid = dataGrid({
 	columns: [{
 		colkey: "id",
 		name: "货位ID",
-		hide: false,
+		hide: true,
 	}, {
 		colkey: "text",
 		name: "货位名称",
@@ -62,9 +62,9 @@ window.datagrid = dataGrid({
 	jsonUrl: '/alloc/item/findByPage.shtml',
 	checkbox: true,
 	checkone: false,
-	checkItem: function (rowdata) {
-		return rowdata.whid != 2;
-	},
+	// checkItem: function (rowdata) {
+	// 	return rowdata.whid != 2;
+	// },
 	serNumber: true
 });
 
@@ -163,4 +163,8 @@ $('#upload').on("change", function (e) {
 		let sheet = workbook.Sheets[workbook.SheetNames[0]];
 		dealSheet(sheet);
 	});
+});
+
+$("#export").on("click", function () {
+	window.location.href = '/alloc/item/downloads.shtml?allocItemFormMap.inStock=true' + '&' + $("#searchForm").serialize();
 });
