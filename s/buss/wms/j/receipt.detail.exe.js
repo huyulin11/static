@@ -42,7 +42,7 @@ let play = {
 };
 
 let doJob = (param, that, callback) => {
-    layer.confirm(`确认开始执行改操作：${that.name}？`, function (index) {
+    let tmpJob = function (index) {
         gf.ajax(that.url, { detailid: _detailid }, "json", function (s) {
             if (s.code >= 0) {
                 gf.layerMsg(`成功${that.name}！`);
@@ -53,7 +53,9 @@ let doJob = (param, that, callback) => {
                 gf.layerMsg(`${that.name}失败！` + s.msg);
             }
         });
-    });
+    };
+    if (that.id == 'play') tmpJob(); else
+        layer.confirm(`确认开始执行改操作：${that.name}？`, tmpJob);
 };
 
 var doInit = function (target, json) {
