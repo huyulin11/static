@@ -5,7 +5,7 @@ var numInLine = 1;
 let shortLength = 20;
 let showPlcstatus = ['CSY_DAJ'].includes(localStorage.projectKey);
 let showAgvbusstype = ['TAIKAI_JY'].includes(localStorage.projectKey);
-let showSiteStatusVal = ['CSY_DAJ', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].includes(localStorage.projectKey);
+let showSiteStatusVal = ['CSY_DAJ', 'CSY_CDBP', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].includes(localStorage.projectKey);
 let showBattery = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 let showSpeed = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 
@@ -67,7 +67,8 @@ var getShowVal = function (agvinfo) {
     let taskDesc = agvinfo.taskexesid ? agvinfo.taskexesid :
         (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中");
     val.taskStatusVal = "任务状态:" + taskstatus(agvinfo) + target + "<br/>" + taskDesc;
-    val.currentsite = "站点:" + (agvinfo.currentsite ? agvinfo.currentsite : "");
+    let site = gv.site(agvinfo.currentsite);
+    val.currentsite = "站点:" + (agvinfo.currentsite ? (!site ? agvinfo.currentsite : site) : "");
     val.battery = "电量:" + (agvinfo.battery ? agvinfo.battery : "");
     val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
     if (agvinfo.id == 2) console.log(agvinfo.speed)
@@ -99,7 +100,8 @@ let targetV = (agvinfo) => {
         if (targetJson instanceof Array) {
             let showTarget = [];
             for (let i of targetJson) {
-                showTarget.push(i.id);
+                let site = gv.site(i.id);
+                showTarget.push(!site ? i.id : site);
             }
             target = showTarget.join("、");
         } else if (targetJson instanceof Object) {

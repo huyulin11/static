@@ -34,7 +34,8 @@ let _columns = [{
                 if (typeof item == 'string') {
                     path.push(item);
                 } else {
-                    path.push(item.id + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
+                    let site = gv.site(item.id);
+                    path.push((!site ? item.id : site) + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
                 }
             }
             info += path.join("->");

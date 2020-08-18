@@ -25,9 +25,10 @@ export var init = function (target) {
 	let showPath = () => {
 		let nameArr = [];
 		for (let item of targetArr) {
+			let chooseOpType = '';
+			if (localStorage.projectKey != "CSY_CDBP") { chooseOpType = gv.select("ARRIVED_SITE_ACT_TYPE", "S"); }
 			nameArr.push(`<span data-id='${$(item).data("id")}'>
-			${$(item).data("name")}${gv.select("ARRIVED_SITE_ACT_TYPE", "S")}
-			</span>`);
+			${$(item).data("name")}${chooseOpType}</span>`);
 		}
 		chooedBtns.html(nameArr.join("→"));
 	}
@@ -50,20 +51,11 @@ export var init = function (target) {
 		return tmpStr;
 	}
 
-	$.ajax({
-		url: '/s/jsons/' + localStorage.projectKey + '/sites.json',
-		async: false,
-		type: 'GET',
-		dataType: 'json',
-		timeout: 5000,
-		cache: false,
-		success: function (data) {
-			let conf = { data: data, numInLine: 5, render: renderSite, target: tableSite };
-			gf.renderBtnTable(conf, () => {
-				gf.resizeTable();
-			});
-		},
-		error: function (e) { console.log(e); }
+	gv.getSite(function (data) {
+		let conf = { data: data, numInLine: 5, render: renderSite, target: tableSite };
+		gf.renderBtnTable(conf, () => {
+			gf.resizeTable();
+		});
 	});
 
 	container.delegate("button.flag", "click", function () {
@@ -92,6 +84,7 @@ export var init = function (target) {
 		for (let item of targetArr) {
 			let json = $(item).data("json");
 			let arrivedact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
+			if (!arrivedact) { arrivedact = "S"; }
 			arrSub.push({
 				arrivedact: arrivedact, id: $(item).data("id")
 			});

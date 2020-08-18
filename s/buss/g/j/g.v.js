@@ -81,10 +81,28 @@ class GV {
 		return (!o) ? "" : o.name;
 	};
 
-	getSite(key) {
-		var o = this._site.find((v) => { return v.id == key });
-		return (!o) ? "" : o.sitename;
+	getSite(callback) {
+		$.ajax({
+			url: '/s/jsons/' + localStorage.projectKey + '/sites.json',
+			async: false,
+			type: 'GET',
+			dataType: 'json',
+			timeout: 5000,
+			cache: false,
+			success: function (data) {
+				localStorage.sites = JSON.stringify(data);
+				if (callback) callback(data);
+			},
+			error: function (e) { console.log(e); }
+		});
 	};
+
+	site(key) {
+		if (!localStorage.sites) return "";
+		let json = JSON.parse(localStorage.sites);
+		var o = json.find((v) => { return v.id == key });
+		return (!o) ? "" : o.sitename;
+	}
 
 	getArmact(key) {
 		var o = this._armact.find((v) => { return v.id == key });
@@ -115,4 +133,5 @@ class GV {
 }
 var gv = new GV();
 window.gv = gv;
+gv.getSite();
 export { gv };
