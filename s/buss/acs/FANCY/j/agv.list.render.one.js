@@ -96,6 +96,9 @@ let targetV = (agvinfo) => {
         let targetJson = target;
         if (typeof target == 'string') {
             targetJson = JSON.parse(target);
+        } else if (typeof target == "number") {
+            let site = gv.site(target);
+            target = !site ? target : site;
         }
         if (targetJson instanceof Array) {
             let showTarget = [];
@@ -105,7 +108,8 @@ let targetV = (agvinfo) => {
             }
             target = showTarget.join("、");
         } else if (targetJson instanceof Object) {
-            target = targetJson.id;
+            let site = gv.site(targetJson.id);
+            target = !site ? targetJson.id : site;
         }
     } catch (error) {
     }
@@ -163,14 +167,14 @@ let colorStyle = (agvinfo) => {
     if (agvinfo.msg) {
         return "#FFB0D9";
     }
-    if (agvinfo.taskstatus == "FREE") {
-        return null;
-    }
     if (agvinfo.inCharging || agvinfo.taskstatus == "GOTO_CHARGE" || agvinfo.taskstatus == "BACK_CHARGE") {
         return "#D24D57";
     }
     if (agvinfo.taskstatus == "GOTO_INIT") {
         return "green";
+    }
+    if (agvinfo.taskstatus == "FREE") {
+        return null;
     }
     return "gray";
 }
