@@ -134,7 +134,7 @@ let tempBtns = [{
 	}
 }, {
 	url: `/app/conf/bjjkhuirui/deleteBySure.shtml`,
-	id: "deleteSure", name: "确认撤销", class: "btn-danger",
+	id: "deleteSure", name: "确定撤销", class: "btn-danger",
 	bind: function () {
 		var cbox = gf.checkOnlyOne("key");
 		if (!cbox) { return; }

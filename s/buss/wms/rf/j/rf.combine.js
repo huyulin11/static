@@ -126,7 +126,7 @@ var getCombinedList = function () {
                 let value = JSON.parse(data[0].value);
                 let items = value.items;
                 let target = value.name;
-                target = target ? ("<br/>目的地：" + target) : "";
+                target = target ? ("<br/>产线：" + target) : "";
                 if (items) {
                     let itemArr = [];
                     for (let item of items) {

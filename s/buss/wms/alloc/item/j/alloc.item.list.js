@@ -11,6 +11,14 @@ window.datagrid = dataGrid({
 		name: "货位ID",
 		hide: true,
 	}, {
+		colkey: "whid",
+		name: "仓库",
+		renderData: function (rowindex, data, rowdata, column) {
+			var whId = "";
+			whId = (data ? gv.get("WAREHOUSE", data) : "");
+			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
+		}
+	}, {
 		colkey: "text",
 		name: "货位名称",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -31,14 +39,6 @@ window.datagrid = dataGrid({
 			return "<div class='changable'>" + "<span>" + data
 				+ "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<a class='editSite'><img src='/s/i/edit.png'/></a>" + "</div>";
-		}
-	}, {
-		colkey: "whid",
-		name: "仓库",
-		renderData: function (rowindex, data, rowdata, column) {
-			var whId = "";
-			whId = (data ? gv.get("WAREHOUSE", data) : "");
-			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
 		}
 	}, {
 		colkey: "userdef1",

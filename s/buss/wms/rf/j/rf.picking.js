@@ -88,6 +88,8 @@ var initPick = function () {
             for (let item of json) { items.push(item.name); }
             str += items.join("、");
             return (`发料拣配<br/>${str}`);
+        } else {
+            return "发料拣配";
         }
     };
     $(container).find("h2").html(title);
