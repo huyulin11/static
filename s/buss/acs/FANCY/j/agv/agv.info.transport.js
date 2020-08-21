@@ -11,6 +11,8 @@ if (_currentSite) console.log("currentSite:" + _currentSite);
 let limit = 3;
 if (localStorage.projectKey == "CSY_CDBP") { limit = 3; }
 else if (localStorage.projectKey == "YZBD_QSKJ") { limit = 2; }
+let showSiteWorkChoose = true;
+if (localStorage.projectKey != "CSY_CDBP") { showSiteWorkChoose = false; }
 
 export var init = function (target) {
 	_target = target;
@@ -26,7 +28,7 @@ export var init = function (target) {
 		let nameArr = [];
 		for (let item of targetArr) {
 			let chooseOpType = '';
-			if (localStorage.projectKey != "CSY_CDBP") { chooseOpType = gv.select("ARRIVED_SITE_ACT_TYPE", "S"); }
+			if (showSiteWorkChoose) { chooseOpType = gv.select("ARRIVED_SITE_ACT_TYPE", "S"); }
 			nameArr.push(`<span data-id='${$(item).data("id")}'>
 			${$(item).data("name")}${chooseOpType}</span>`);
 		}
