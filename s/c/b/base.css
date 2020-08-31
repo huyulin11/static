@@ -88,6 +88,13 @@ html.frame>body {
   padding-top: 50px;
 }
 
+html.small>body {
+  /* overflow-y: scroll; */
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
 html.aui-dialog-iframe-root-node {
   overflow: auto;
 }

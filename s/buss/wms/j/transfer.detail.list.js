@@ -70,3 +70,4 @@ window.datagrid = dataGrid({
 	checkbox: true,
 	serNumber: true
 });
+$("html").addClass("small");
