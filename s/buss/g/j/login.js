@@ -3,13 +3,16 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gp } from "/s/buss/g/j/g.p.js";
 
 var data = { shortname: "凯钒科技", expireTime: "" }
+let logingBtnStr = $("#loginBtn").html();
 var login = function () {
+    $("#loginBtn").html(logingBtnStr + "&nbsp;&nbsp;" + `<img style="width:12px;" src="/s/i/loading2.gif"/>`);
     $("#loginform").ajaxSubmit({
         type: "post",
         dataType: "json",
         timeout: 5000,
         error: function (data) {
             layer.msg("连接错误！");
+            $("#loginBtn").html(logingBtnStr);
         },
         success: function (data) {
             if (data.code >= 0) {
@@ -25,6 +28,7 @@ var login = function () {
             } else {
                 layer.msg(data.msg);
                 $("#username").focus();
+                $("#loginBtn").html(logingBtnStr);
             }
         }
     });
