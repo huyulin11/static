@@ -1,22 +1,19 @@
 import { gf } from "/s/buss/g/j/g.f.js";
-import { currentReceiptPaperid, setCurrentReceiptPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 import "/s/j/vue/vue.min.js";
 import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
 
 gf.checkLoginError();
 
 let container = "#rootContainer";
-let _paperid = gf.urlParam("paperid");
 let _alloc = gf.urlParam("alloc");
-if (_paperid) {
-    setCurrentReceiptPaperid(_paperid);
-} else {
-    if (currentReceiptPaperid()) {
-        _paperid = currentReceiptPaperid();
-        // if (window.confirm("有入库任务尚未结束，是否继续？" + currentReceiptPaperid())) {
-        // }
-    }
-}
+let _paperid;
+
+var currentReceiptPaperid = function () {
+    return localStorage.__receiptPaperId;
+};
+var setCurrentReceiptPaperid = function (val) {
+    return localStorage.__receiptPaperId = val;
+};
 
 var initReceipt = function () {
     $(container).find("#start").on("click", function () { start(); });
@@ -176,6 +173,16 @@ var initReceipt = function () {
     }
 }
 export var initRf = function () {
+    _paperid = gf.urlParam("paperid");
+    if (_paperid) {
+        setCurrentReceiptPaperid(_paperid);
+    } else {
+        if (currentReceiptPaperid()) {
+            _paperid = currentReceiptPaperid();
+            // if (window.confirm("有入库任务尚未结束，是否继续？" + currentReceiptPaperid())) {
+            // }
+        }
+    }
     var vm = new Vue({
         data: {},
         el: container,

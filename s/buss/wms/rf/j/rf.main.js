@@ -7,35 +7,11 @@ gv.init();
 
 let container = "#rootContainer";
 
-export var currentReceiptPaperid = function () {
-    return localStorage.__receiptPaperId;
-};
-export var setCurrentReceiptPaperid = function (val) {
-    return localStorage.__receiptPaperId = val;
-};
-
 export var currentShipmentPaperid = function () {
     return localStorage.__shipmentPaperId;
 };
 export var setCurrentShipmentPaperid = function (val) {
     return localStorage.__shipmentPaperId = val;
-};
-
-var agvOk = function () {
-    if (window.confirm("该功能仅为测试使用，点击后，所有入库单的状态都将从下达变成完成，是否继续？")) {
-        gf.doAjax({
-            url: `/receipt/main/agvOk.shtml`,
-            success: function (data) {
-                data = JSON.parse(data);
-                gf.layerMsg(data.msg);
-                if (data.code >= 0) {
-                    setCurrentReceiptPaperid("");
-                    setCurrentShipmentPaperid("");
-                    window.location.reload();
-                }
-            }
-        });
-    }
 };
 
 var btns = [
