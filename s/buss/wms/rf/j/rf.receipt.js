@@ -8,11 +8,17 @@ let container = "#rootContainer";
 let _alloc = gf.urlParam("alloc");
 let _paperid;
 
-var currentReceiptPaperid = function () {
-    return localStorage.__receiptPaperId;
+var getCurrentReceiptPaperid = function (callback) {
+    gf.getConf("__currentReceiptPaperid", (p) => {
+        _paperid = p;
+        callback();
+    });
 };
-var setCurrentReceiptPaperid = function (val) {
-    return localStorage.__receiptPaperId = val;
+var setCurrentReceiptPaperid = function (val, callback) {
+    gf.setConf("__currentReceiptPaperid", val, (p) => {
+        _paperid = val;
+        if (callback) { callback(); }
+    });
 };
 
 var initReceipt = function () {
@@ -30,16 +36,16 @@ var initReceipt = function () {
         let url = `/receipt/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
             if (s.code < 0) {
-                gf.layerMsg(_paperid + s.msg);
-                _paperid = "";
-                setCurrentReceiptPaperid("");
+                setCurrentReceiptPaperid("", () => {
+                    gf.layerMsg(_paperid + s.msg, () => { window.location.reload(); });
+                });
                 return;
             }
             let main = s.object.main;
             if (!main || main["status"] != "NEW" || main["delflag"] != "0") {
-                gf.layerMsg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！");
-                _paperid = "";
-                setCurrentReceiptPaperid("");
+                setCurrentReceiptPaperid("", () => {
+                    gf.layerMsg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！", () => { window.location.reload(); });
+                });
                 return;
             } else {
                 findAlloc(_paperid, function (info) {
@@ -68,9 +74,9 @@ var initReceipt = function () {
             data = JSON.parse(data);
             gf.layerMsg(data.msg);
             if (data.code >= 0) {
-                _paperid = data.object;
-                setCurrentReceiptPaperid(_paperid);
-                window.location.reload();
+                setCurrentReceiptPaperid(data.object, () => {
+                    window.location.reload();
+                });
             }
         }
     });
@@ -85,13 +91,13 @@ var initReceipt = function () {
             data = JSON.parse(data);
             gf.layerMsg(data.msg);
             if (data.code >= 0) {
-                _paperid = "";
-                setCurrentReceiptPaperid("");
-                if (_alloc) {
-                    parent.layer.close(parent.pageii);
-                } else {
-                    window.location.reload();
-                }
+                setCurrentReceiptPaperid("", () => {
+                    if (_alloc) {
+                        parent.layer.close(parent.pageii);
+                    } else {
+                        window.location.reload();
+                    }
+                });
             }
         }
     });
@@ -106,13 +112,13 @@ var initReceipt = function () {
             data = JSON.parse(data);
             gf.layerMsg(data.msg);
             if (data.code >= 0) {
-                _paperid = "";
-                setCurrentReceiptPaperid("");
-                if (_alloc) {
-                    parent.layer.close(parent.pageii);
-                } else {
-                    window.location.reload();
-                }
+                setCurrentReceiptPaperid("", () => {
+                    if (_alloc) {
+                        parent.layer.close(parent.pageii);
+                    } else {
+                        window.location.reload();
+                    }
+                });
             }
         }
     });
@@ -128,13 +134,13 @@ var initReceipt = function () {
                 data = JSON.parse(data);
                 gf.layerMsg(data.msg);
                 if (data.code >= 0) {
-                    _paperid = "";
-                    setCurrentReceiptPaperid("");
-                    if (_alloc) {
-                        parent.layer.close(parent.pageii);
-                    } else {
-                        window.location.reload();
-                    }
+                    setCurrentReceiptPaperid("", () => {
+                        if (_alloc) {
+                            parent.layer.close(parent.pageii);
+                        } else {
+                            window.location.reload();
+                        }
+                    });
                 }
             }
         });
@@ -169,36 +175,32 @@ var initReceipt = function () {
         });
     } else {
         gf.layerMsg("无有效入库单，请先呼叫料架生成入库单！");
+        setCurrentReceiptPaperid("", () => {
+            window.location.reload();
+        });
         return;
     }
 }
 export var initRf = function () {
-    _paperid = gf.urlParam("paperid");
-    if (_paperid) {
-        setCurrentReceiptPaperid(_paperid);
-    } else {
-        if (currentReceiptPaperid()) {
-            _paperid = currentReceiptPaperid();
-            // if (window.confirm("有入库任务尚未结束，是否继续？" + currentReceiptPaperid())) {
-            // }
-        }
-    }
-    var vm = new Vue({
-        data: {},
-        el: container,
-        created: function () {
-        },
-        mounted: function () {
-            initReceipt();
-            gf.resizeTable();
-        },
-        methods: {
-            suEnter: function () {
-                sub();
+    let fun = () => {
+        new Vue({
+            data: {},
+            el: container,
+            created: function () {
             },
-            tuEnter: function () {
-                $("#su").focus();
+            mounted: function () {
+                initReceipt();
+                gf.resizeTable();
             },
-        }
-    });
+            methods: {
+                suEnter: function () {
+                    sub();
+                },
+                tuEnter: function () {
+                    $("#su").focus();
+                },
+            }
+        });
+    };
+    getCurrentReceiptPaperid(fun);
 }
