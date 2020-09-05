@@ -42,6 +42,9 @@ let _columns = [{
 		return gv.get("WAREHOUSE", data);
 	}
 }, {
+	colkey: "orderid",
+	name: "订单号"
+}, {
 	colkey: "paperid",
 	name: "单号",
 	hide: true,
