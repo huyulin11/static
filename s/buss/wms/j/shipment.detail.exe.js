@@ -69,7 +69,7 @@ var doInit = function (target, json) {
     container = $(target);
     console.log(json);
     container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}</span>`);
-    let tempBtns = [play, restore, save, exe, back];
+    let tempBtns = [exe, back];//play, restore, save, 
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
     gf.bindBtns(btnContainer, tempBtns);

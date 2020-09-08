@@ -27,6 +27,10 @@ a:focus {
 	color: #28b779;
 }
 
+a#loginBtn:hover {
+    background-color: #007785;
+}
+
 .dropdown-menu .divider {
 	margin: 4px 0px;
 }
