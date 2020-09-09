@@ -128,30 +128,50 @@ function del() {
 }
 
 var dealSheet = function (sheet) {
-	let _paper = {};
-	let index = 500;
-	for (let i = 2; i > 0; i++) {
-		if (i > index + 12) {
-			alert("单次最多仅能导入" + index + "条明细！");
-			break;
+	let MAX_ONE_TIME = 200;
+	let submit = (p, callback) => {
+		gf.doAjax({
+			url: `/alloc/item/import.shtml`,
+			data: p, dataType: "json", type: "POST", timeout: 0, success: callback
+		});
+	};
+	let submitSuc = (_paper, i, goon) => {
+		_paper = {};
+		gf.layerMsg(`${goon ? "前" + (i - 1) + "行完成提交（刷新界面中断导入）" : "全部" + (i - 1) + "行提交成功！"}`, () => { window.datagrid.loadData(); });
+		if (goon) fun(i);
+	};
+	let times = 1;
+	let fun = (start) => {
+		let _paper = {};
+		for (let i = start + 1; ; i++) {
+			if (sheet["A" + i] && sheet["B" + i]) {
+				if (i > times * MAX_ONE_TIME) {
+					times++;
+					submit(_paper, () => {
+						submitSuc(_paper, i, true);
+					});
+					break;
+				}
+				_paper[`allocItem[${i}]`] = sheet["A" + i].v;
+				_paper[`warehouse[${i}]`] = sheet["B" + i].v;
+				_paper[`name[${i}]`] = sheet["C" + i] ? sheet["C" + i].v : "";
+			} else {
+				submit(_paper, () => {
+					submitSuc(_paper, i - 1);
+				});
+				break;
+			}
 		}
-		if (sheet["A" + i] && sheet["B" + i]) {
-			_paper[`allocItem[${i}]`] = sheet["A" + i].v;
-			_paper[`warehouse[${i}]`] = sheet["B" + i].v;
-			_paper[`name[${i}]`] = sheet["C" + i] ? sheet["C" + i].v : "";
-		} else { break; }
 	}
+	fun(1);
 	$('#upload').val("");
-	gf.doAjax({
-		url: `/alloc/item/import.shtml`,
-		data: _paper, dataType: "json", type: "POST", timeout: 0
-	});
 	gf.layerMsg("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
 }
 
-$("div.doc-buttons").append(`<label class="ui-upload">
+let importStr = `<label class="ui-upload">
 导入货位<input multiple type="file" id="upload" style="display: none;" />
-</label>`);
+</label>`;
+$("div.doc-buttons").append(importStr);
 $('#upload').on("change", function (e) {
 	var files = e.target.files;
 	if (files.length > 1 && localStorage.importThenEdit) {
