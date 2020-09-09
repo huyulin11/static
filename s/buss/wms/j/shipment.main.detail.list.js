@@ -170,8 +170,14 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 			return `${rowdata.userdef3}`;
 		}
 	}, {
-		name: "TO",
-		colkey: "A",
+		name: "物料名称",
+		colkey: "C"
+	}, {
+		name: "批号",
+		colkey: "D"
+	}, {
+		colkey: "item",
+		name: "SU"
 	}, {
 		name: "转移量",
 		colkey: "I",
@@ -195,8 +201,8 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 			}
 		}
 	}, {
-		colkey: "item",
-		name: "SU"
+		name: "TO",
+		colkey: "A",
 	}];
 }
 
