@@ -44,6 +44,9 @@ $(".menu_1").on("click", function () {
 });
 
 function menu_1_1(obj) {
+	$("input[_key_3='menu_1_1_" + $(obj).val() + "']").each(function () {
+		$(this).prop("checked", obj.checked);
+	});
 	if (obj.checked == true) {
 		$("input[_key_1='menu_1_1_" + $(obj).data("kcid") + "']").each(function () {
 			$(this).prop("checked", obj.checked);
