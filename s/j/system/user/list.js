@@ -31,7 +31,10 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "description",
-		name: "备注"
+		name: "备注",
+		renderData: function (rowindex, data, rowdata, column) {
+			return data ? data : "N/A";
+		}
 	}, {
 		colkey: "createTime",
 		name: "时间",

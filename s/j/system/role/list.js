@@ -24,7 +24,10 @@ window.datagrid = dataGrid({
 		// 	name: "角色键值"
 	}, {
 		colkey: "description",
-		name: "备注"
+		name: "备注",
+		renderData: function (rowindex, data, rowdata, column) {
+			return data ? data : "N/A";
+		}
 	}],
 	jsonUrl: '/role/findByPage.shtml',
 	checkbox: true

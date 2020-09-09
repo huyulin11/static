@@ -46,7 +46,7 @@ window.datagrid = dataGrid({
 		hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; },
 		renderData: function (rowindex, data, rowdata, column) {
 			var lap = gv.getLap(data);
-			return lap ? lap.name : "";
+			return lap ? lap.name : "N/A";
 		}
 	}, {
 		colkey: "status",
