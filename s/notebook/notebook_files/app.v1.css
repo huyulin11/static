@@ -3541,6 +3541,7 @@ select[multiple].input-lg {
 	background-image: none;
 	border: 1px solid transparent;
 	border-radius: 4px;
+	margin: 1px 2px;
 }
 
 .btn:focus,
