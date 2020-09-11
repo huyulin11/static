@@ -8,26 +8,71 @@
 	<title>库存查询</title>
 	<link rel="stylesheet" href="/s/c/agv.mgr.css">
 	<link rel="stylesheet" href="/s/buss/acs/g/c/checkbox.css">
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		.div_table {
+			display: table;
+			border-collapse: collapse;
+		}
+
+		.div_table .thead,
+		.div_table .tbody {
+			display: table-header-group;
+			vertical-align: middle;
+		}
+
+		.div_table .row {
+			display: table-row;
+		}
+
+		.div_table .row div {
+			display: table-cell;
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: center;
+		}
+
+		.div_table .row .children_1,
+		.div_table .row .children_2,
+		.div_table .row .children_3 {
+			width: 150px;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="doc-buttons">
 	</div>
 	<div id="rootContainer">
-		<div id="ctrl">
-			<div><input type="checkbox" id="simple-2" checked>
-				<label for="simple-2" class="red" title="定时刷新">
+		<div class="tbody">
+			<div class="row">
+				<div class="children_1">采购批次号</div>
+				<div class="children_2">物资类型</div>
+				<div class="children_2">批次号</div>
+				<div class="children_2">物料名称</div>
+				<div class="children_2">物料编码</div>
+				<div class="children_2">物料描述</div>
+				<div class="children_2">物料单位</div>
 			</div>
-			<input id="kw" name="wd" class="bigSearch" :value="bigSearchResult" @input="inputFun" maxlength="255"
-				autocomplete="off" placeholder="输入货位名称过滤查询结果">
-		</div>
-		<div>
-			<table class="allocCol">
-			</table>
-		</div>
-		<div>
-			<table class="alloc">
-			</table>
+			<div class="row">
+				<div class="children_1"><input id="kw" name="wd" class="bigSearch" :value="bigSearchResult"
+						maxlength="255" autocomplete="off"></div>
+				<div class="children_2"><select> </select></div>
+				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
+				</div>
+				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
+				</div>
+				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
+				</div>
+				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
+				</div>
+				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
