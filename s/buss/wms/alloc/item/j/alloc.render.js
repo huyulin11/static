@@ -1,9 +1,10 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-export var initAlloc = function (callback) {
+export var initAlloc = function (callback, data) {
     $(".black_overlay").show();
     $("table.alloc").html("");
     let serach = { "allocItemFormMap.text": $("#kw").val() };
+    if (data) { serach = Object.assign(serach, data); }
     if (localStorage.projectKey == "BJJK_HUIRUI") { serach['allocItemFormMap.whid'] = 2; }
     jQuery.ajax({
         url: "/alloc/item/findByPage.shtml",
@@ -11,7 +12,7 @@ export var initAlloc = function (callback) {
         type: "POST",
         dataType: "json",
         success: function (data) {
-            callback(data.records);
+            if (callback) callback(data.records);
         },
         complete: function (data) {
             setTimeout(function () {
@@ -24,7 +25,3 @@ export var initAlloc = function (callback) {
         timeout: 5000
     });
 }
-
-setTimeout(function () {
-    gf.resizeTable();
-}, 1000);

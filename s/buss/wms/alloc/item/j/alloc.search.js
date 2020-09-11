@@ -35,3 +35,7 @@ setInterval(function () {
         initAlloc(render);
     }
 }, 5000);
+
+setTimeout(function () {
+    gf.resizeTable();
+}, 1000);

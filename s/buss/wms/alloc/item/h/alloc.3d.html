@@ -8,77 +8,93 @@
 	<title>库存查询</title>
 	<link rel="stylesheet" href="/s/c/agv.mgr.css">
 	<link rel="stylesheet" href="/s/buss/acs/g/c/checkbox.css">
-	<style>
-		* {
-			padding: 0;
-			margin: 0;
+	<!-- <style>
+		.card {
+			width: 100%;
+			display: block;
+			position: relative;
 		}
 
-		.div_table {
-			display: table;
-			border-collapse: collapse;
+		.card tr {
+			display: inline-block;
 		}
 
-		.div_table .thead,
-		.div_table .tbody {
-			display: table-header-group;
-			vertical-align: middle;
+		.card td {
+			display: block;
+			height: 45px;
 		}
-
-		.div_table .row {
-			display: table-row;
-		}
-
-		.div_table .row div {
-			display: table-cell;
-			border: 1px solid #ddd;
-			padding: 8px;
-			text-align: center;
-		}
-
-		.div_table .row .children_1,
-		.div_table .row .children_2,
-		.div_table .row .children_3 {
-			width: 150px;
-		}
-	</style>
+	</style> -->
 </head>
 
 <body>
 	<div class="doc-buttons">
 	</div>
 	<div id="rootContainer">
-		<div class="tbody">
-			<div class="row">
-				<div class="children_1">采购批次号</div>
-				<div class="children_2">物资类型</div>
-				<div class="children_2">批次号</div>
-				<div class="children_2">物料名称</div>
-				<div class="children_2">物料编码</div>
-				<div class="children_2">物料描述</div>
-				<div class="children_2">物料单位</div>
-			</div>
-			<div class="row">
-				<div class="children_1"><input id="kw" name="wd" class="bigSearch" :value="bigSearchResult"
-						maxlength="255" autocomplete="off"></div>
-				<div class="children_2"><select> </select></div>
-				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
-				</div>
-				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
-				</div>
-				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
-				</div>
-				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
-				</div>
-				<div class="children_1"><input id="kw" name="wd" class="bigSearch" maxlength="255" autocomplete="off">
-				</div>
-			</div>
-		</div>
+		<form id="form">
+			<table class="card">
+				<thead>
+					<tr>
+						<th width="40%"></th>
+						<th width="60%"></th>
+					</tr>
+				</thead>
+				<tr>
+					<td>采购批次号</td>
+					<td><input id="lot" name="allocItemFormMap.lot" class="bigSearch" maxlength="255"
+							autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>物资类型</td>
+					<td><input type="text" id="item" name="allocItemFormMap.item"
+							class="form-control associating-input bigSearch" value=""
+							data-searchurl="/sku/info/findByName.shtml?skuInfoFormMap.name="
+							data-containerofinput="#panelBody" data-showcol="name" data-notnull="true"
+							autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>批次号</td>
+					<td><input id="lot" name="allocItemFormMap.lot" class="bigSearch" maxlength="255"
+							autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>物料名称</td>
+					<td><input id="kw" name="allocItemFormMap.wd" class="bigSearch" maxlength="255" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>物料编码</td>
+					<td><input id="kw" name="allocItemFormMap.wd" class="bigSearch" maxlength="255" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>物料描述</td>
+					<td><input id="kw" name="allocItemFormMap.wd" class="bigSearch" maxlength="255" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>物料单位</td>
+					<td><input id="kw" name="allocItemFormMap.wd" class="bigSearch" maxlength="255" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id="btnss"></div>
+					</td>
+				</tr>
+				<tr>
+				</tr>
+			</table>
+		</form>
 	</div>
 </body>
 
 <script src="/s/j/jquery-1.12.2.min.js"></script>
 <script src="/s/j/layer/v3.1.3/layer.js"></script>
+<script src="/s/j/jquery.toJSON.js"></script>
+<script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>
 
 <script type="module">
 	import "/s/buss/wms/alloc/item/j/alloc.search.3d.js";
