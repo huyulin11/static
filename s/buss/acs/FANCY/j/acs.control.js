@@ -8,6 +8,13 @@ let renderModel = (key, target) => {
 	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-target='${target}'></div>`);
 }
 
+let renderLink = (key, url) => {
+	let style = $(`<style id='${key}HideDiv_style'></style>`);
+	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
+	$("head").append(style);
+	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}'></div>`);
+}
+
 let taskReady = () => {
 	let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
 	$(taskContainer).append("<iframe id='taskFrame'></iframe>");
@@ -40,6 +47,7 @@ var container = function () {
 			renderModel('search', 'div#searchContainer');
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
+			renderLink('manager', '/s/buss/g/h/manager.html');
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 			taskReady();
 			renderModel('task', 'div#taskContainer');
@@ -73,7 +81,7 @@ var init = function () {
 	var hideAllCtrl = function (thatTarget) {
 		$("#topCtrlContainer").find("div.hideToggle").each(function () {
 			var target = $(this).data("target");
-			if (target != thatTarget) {
+			if (target && target != thatTarget) {
 				hideCtrl(this);
 			}
 		});
@@ -83,11 +91,17 @@ var init = function () {
 		if (localStorage.projectKey == 'YZBD_NRDW') {
 			gf.checkLoginError();
 		}
-		hideAllCtrl($(this).data("target"));
-		if ($(this).hasClass("open")) {
-			hideCtrl(this);
+		var target = $(this).data("target");
+		if (target) {
+			hideAllCtrl(target);
+			if ($(this).hasClass("open")) {
+				hideCtrl(this);
+			} else {
+				showCtrl(this);
+			}
 		} else {
-			showCtrl(this);
+			var url = $(this).data("url");
+			if (url) { window.open(url, "_self"); }
 		}
 	});
 }

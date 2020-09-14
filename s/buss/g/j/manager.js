@@ -45,6 +45,8 @@ var loadPage = function (tip) {
                 offset: 'rb',
                 content: url
             }); return;
+        } else if (openType == "3") {
+            window.open(url, '_self');
         }
     }
 
