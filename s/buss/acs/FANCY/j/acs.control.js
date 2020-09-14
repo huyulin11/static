@@ -1,5 +1,8 @@
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 
+let checkLoginError = false;
+if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
+
 let renderModel = (key, target) => {
 	let style = $(`<style id='${key}HideDiv_style'></style>`);
 	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
@@ -88,7 +91,7 @@ var init = function () {
 	}
 
 	$("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
-		if (localStorage.projectKey == 'YZBD_NRDW') {
+		if (checkLoginError) {
 			gf.checkLoginError();
 		}
 		var target = $(this).data("target");
