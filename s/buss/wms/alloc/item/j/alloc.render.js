@@ -5,7 +5,7 @@ export var initAlloc = function (callback, data) {
     $("table.alloc").html("");
     let serach = { "allocItemFormMap.text": $("#kw").val() };
     if (data) { serach = Object.assign(serach, data); }
-    if (localStorage.projectKey == "BJJK_HUIRUI") { serach['allocItemFormMap.whid'] = 2; }
+    if (localStorage.projectKey == "BJJK_HUIRUI") { serach['allocItemFormMap.whid'] = 2; serach['pageSize'] = 100; }
     jQuery.ajax({
         url: "/alloc/item/findByPage.shtml",
         data: serach,
