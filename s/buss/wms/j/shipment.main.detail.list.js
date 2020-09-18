@@ -206,6 +206,13 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 	}];
 }
 
+if ("COMBINE".includes(_type)) {
+	_columns.unshift({
+		colkey: "orderid",
+		name: "订单号"
+	});
+}
+
 if (["PICKED_COLD", "PRODUCT"].includes(_type)) {
 	_columns.push({
 		colkey: "status",
@@ -218,19 +225,15 @@ if (["PICKED_COLD", "PRODUCT"].includes(_type)) {
 
 if (["PRIORITY", "PRODUCT"].includes(_type)) {
 	_columns.push({
-		colkey: "C",
-		name: "物料名称",
+		colkey: "userdef4",
+		name: "TU",
 		hide: !gf.isPc(),
-	}, {
-			colkey: "userdef4",
-			name: "TU",
-			hide: !gf.isPc(),
-			renderData: function (rowindex, data, rowdata, column) {
-				if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
-					return data;
-				return "";
-			}
-		});
+		renderData: function (rowindex, data, rowdata, column) {
+			if (["COMBINING", "ON_PCS", "OVER_PCS", "OVER"].includes(rowdata.status))
+				return data;
+			return "";
+		}
+	});
 }
 
 _columns.push({

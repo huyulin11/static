@@ -513,7 +513,7 @@ class GF {
     };
     layerArea() {
         if (!localStorage.layerArea)
-            localStorage.layerArea = ($(window).width() < 960) ? ["90%", "90%"] : ["900px", "80%"];
+            localStorage.layerArea = ["90%", "90%"];
         return localStorage.layerArea.split(",");
     };
     renderBtnTable(conf, callback) {

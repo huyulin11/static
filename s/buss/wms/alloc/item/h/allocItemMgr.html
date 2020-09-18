@@ -12,6 +12,13 @@
             <table>
                 <tr>
                     <td>
+                        <label>
+                            <span>仓库:</span>
+                            <select class="jsSelect" data-patten="WAREHOUSE" data-patten-gather="1,2,3,4,5" id="whid"
+                                name="allocItemFormMap.whid"></select>
+                        </label>
+                    </td>
+                    <td>
                         <label class="control-label">
                             <span class="font-thin v-middle">货位名称:</span>
                         </label>
@@ -40,3 +47,7 @@
 <script type="module" src="/s/buss/wms/alloc/item/j/eidtSiteInList.js"></script>
 <script type="module" src="/s/buss/wms/alloc/item/j/eidtWhInList.js"></script>
 <script src="/s/buss/g/j/jquery/jquery.associatingInput.js"></script>
+<script type="module">
+    import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+    renderAll();
+</script>
