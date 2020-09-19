@@ -16,8 +16,15 @@ var sub = function () {
     let _to = $("#to").val();
     let _line = $("#line").val();
     if (!_tu) {
-        gf.layerMsg("TU不能为空！");
-        $("#tu").focus();
+        gf.layerMsg("TU不能为空！", function () {
+            $("#tu").focus();
+        });
+        return;
+    }
+    if (_tu.trim().length != 6) {
+        gf.layerMsg("TU格式需为6位！", function () {
+            $("#tu").focus();
+        });
         return;
     }
     if (!_su) {
@@ -35,20 +42,21 @@ var sub = function () {
         data: { item: _su.trim(), userdef4: _tu.trim(), warehouse: _warehouse, to: _to, line: _line },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
-            gf.layerMsg(data.msg);
-            if (data.code >= 0) {
-                $("#tu").val("");
-                $("#su").val("");
-                $("#to").val("");
-                $("#toTr").addClass("hidden");
-                $("#tu").focus();
-                initDatas();
-            } else if (data.code == -100) {
-                $("#toTr").removeClass("hidden");
-                $("#to").focus();
-            } else {
-                $("#su").focus();
-            }
+            gf.layerMsg(data.msg, function () {
+                if (data.code >= 0) {
+                    $("#tu").val("");
+                    $("#su").val("");
+                    $("#to").val("");
+                    $("#toTr").addClass("hidden");
+                    $("#tu").focus();
+                    initDatas();
+                } else if (data.code == -100) {
+                    $("#toTr").removeClass("hidden");
+                    $("#to").focus();
+                } else {
+                    $("#su").focus();
+                }
+            });
         }
     });
 }
