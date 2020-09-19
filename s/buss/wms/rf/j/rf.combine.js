@@ -63,6 +63,11 @@ var sub = function () {
 
 let initDatas = function () {
     $("#datas iframe").attr("src", "/s/buss/wms/h/shipmentMainDetailMgr.html?PICK=COMBINE&type=COMBINE&detailstatus=PICKING");
+    let check = () => {
+        gf.changeFrameHeight("datasFrame");
+    }
+    $("#datas iframe").on("load", check);
+    window.οnresize = check;
 }
 
 var initCombine = function () {

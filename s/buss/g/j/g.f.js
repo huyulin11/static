@@ -572,6 +572,10 @@ class GF {
             }
         });
     }
+    changeFrameHeight(id) {
+        var ifm = document.getElementById(id);
+        ifm.height = document.documentElement.clientHeight;
+    }
 }
 
 var gf = new GF();
