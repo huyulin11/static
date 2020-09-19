@@ -576,6 +576,13 @@ class GF {
         var ifm = document.getElementById(id);
         ifm.height = document.documentElement.clientHeight;
     }
+    suitFrameHeight(id) {
+        let check = () => {
+            gf.changeFrameHeight(id);
+        }
+        $("#" + id).on("load", check);
+        window.οnresize = check;
+    }
 }
 
 var gf = new GF();

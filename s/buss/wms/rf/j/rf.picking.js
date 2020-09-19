@@ -47,11 +47,7 @@ var sub = function () {
 
 let initDatas = function () {
     $("#datas iframe").attr("src", `/s/buss/wms/h/shipmentMainDetailMgr.html?detailstatus=NEW:TOSEND&PICK=PICK&type=${_type}&warehouse=${_warehouse}`);
-    let check = () => {
-        gf.changeFrameHeight("datasFrame");
-    }
-    $("#datas iframe").on("load", check);
-    window.οnresize = check;
+    gf.suitFrameHeight("datasFrame");
 }
 
 var initPick = function () {
