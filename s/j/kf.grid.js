@@ -98,7 +98,7 @@ var dataGrid = function (params) {
 		} else {
 			h = _conf.height;
 		}
-		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;background: white;');
+		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;');
 		tdiv.className = "t_table";
 		divid.appendChild(tdiv);
 		var table2 = tag("table");

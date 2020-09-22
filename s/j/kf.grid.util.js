@@ -38,6 +38,10 @@ var renderFun = function (obj, rowindex, data, rowdata, clm, json) {
         if (rtn instanceof jQuery) { return rtn[0].outerHTML; } else { return rtn; };
     }
 
+    if (data === 0 || data === true || data === false) {
+        return data;
+    }
+
     if (data) {
         return data;
     }
