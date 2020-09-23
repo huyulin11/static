@@ -48,7 +48,7 @@ var doWhenSuccess = function (data) {
     gf.resizeTable();
 }
 
-let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN"].includes(localStorage.projectKey);
+let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN", "TAIKAI_JY"].includes(localStorage.projectKey);
 
 var openAGVMGR = function (tmpAgvId, layerName) {
     let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;

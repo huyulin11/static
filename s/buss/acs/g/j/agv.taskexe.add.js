@@ -48,9 +48,9 @@ var addTaskTo = function (agvId, tasktype, to, callback) {
 
 var _addTaskTo = function (agvId, tasktype, to, callback) {
     let targetUrl = "/json/op/addTaskTo.shtml ";
-    if (localStorage.projectKey == 'TAIKAI_JY' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
-        targetUrl = "/json/op/fancy/addTaskTo.shtml";
-    }
+    // if (localStorage.projectKey == 'TAIKAI_JY' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
+    //     targetUrl = "/json/op/fancy/addTaskTo.shtml";
+    // }
     jQuery.ajax({
         url: targetUrl,
         type: "post",

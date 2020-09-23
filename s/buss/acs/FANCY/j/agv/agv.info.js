@@ -33,6 +33,8 @@ var getTargets = function () {
 var getButtonsHtml = (targets) => {
 	var index = 1;
 	var numInLine = 7;
+	if (localStorage.projectKey == 'TAIKAI_JY')
+		numInLine = 6;
 	var tmpStr = "";
 	var buttons = ``;
 	for (var target of targets) {
@@ -149,18 +151,24 @@ var transportHandler = function (that) {
 var fetchTaskTaikaiJy = function (that) {
 	allDisabled();
 	var agvbusstype = findIotInfo(agvId, "agvbusstype");
-	if (agvbusstype == 'TON_1') {
-		layer.msg("小车不支持取料任务");
-	} else if (agvbusstype == 'TON_2') {
+	if (agvbusstype == 'TON_2') {
+		layer.msg("原料车不支持取料任务");
+	} else if (agvbusstype == 'TON_1') {
 		var task = $(that).attr("id");
 		var indexOfTips = layer.confirm('请选择取货任务的目的地', {
-			btn: ['22号 (呼叫1)', '21号 (呼叫2)', '20号 (呼叫3)', '19号 (呼叫4)', '18号 (呼叫5)', '17号 (呼叫6)'],
-			btn1: function () { doTask(agvId, task, 83); },
-			btn2: function () { doTask(agvId, task, 84); },
-			btn3: function () { doTask(agvId, task, 95); },
-			btn4: function () { doTask(agvId, task, 93); },
-			btn5: function () { doTask(agvId, task, 97); },
-			btn6: function () { doTask(agvId, task, 99); }
+			btn: ['1号 (呼叫1)', '2号 (呼叫2)', '3号 (呼叫3)', '4号 (呼叫4)', '5号 (呼叫5)', '6号 (呼叫6)', '7号 (呼叫7)', '8号 (呼叫8)', '9号 (呼叫9)', '10号 (呼叫10)', '11号 (呼叫11)', '12号 (呼叫12)'],
+			btn1: function () { doTask(agvId, task, 153); },
+			btn2: function () { doTask(agvId, task, 154); },
+			btn3: function () { doTask(agvId, task, 157); },
+			btn4: function () { doTask(agvId, task, 158); },
+			btn5: function () { doTask(agvId, task, 160); },
+			btn6: function () { doTask(agvId, task, 161); },
+			btn7: function () { doTask(agvId, task, 164); },
+			btn8: function () { doTask(agvId, task, 165); },
+			btn9: function () { doTask(agvId, task, 168); },
+			btn10: function () { doTask(agvId, task, 169); },
+			btn11: function () { doTask(agvId, task, 171); },
+			btn12: function () { doTask(agvId, task, 172); }
 		});
 	}
 }
@@ -169,13 +177,9 @@ var deleverTaskTaikaiJy = function () {
 	var agvbusstype = findIotInfo(agvId, "agvbusstype");
 	var targets;
 	if (agvbusstype == 'TON_1') {
-		if (agvId == 5) {
-			targets = [{ id: 12, name: "20号" }, { id: 13, name: "19号" }, { id: 14, name: "18号" }, { id: 15, name: "17号" }, { id: 16, name: "9号" }, { id: 17, name: "10号" }, { id: 18, name: "12号" }];
-		} else if (agvId == 4) {
-			targets = [{ id: 2, name: "22号" }, { id: 3, name: "21号" }, { id: 4, name: "13号" }, { id: 5, name: "14号" }, { id: 6, name: "15号" }, { id: 7, name: "16号" }];
-		}
+		layer.msg("成品车不支持送料任务");
 	} else if (agvbusstype == 'TON_2') {
-		targets = [62, 61, 60, 65];
+		targets = [{ id: 21, name: "1号" }, { id: 22, name: "2号" }, { id: 25, name: "3号" }, { id: 26, name: "4号" }, { id: 29, name: "5号" }, { id: 30, name: "6号" }, { id: 33, name: "7号" }, { id: 34, name: "8号" }, { id: 37, name: "9号" }, { id: 38, name: "10号" }, { id: 41, name: "11号" }, { id: 42, name: "12号" }];
 	}
 	var buttons = getButtonsHtml(targets);
 	var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
@@ -184,9 +188,6 @@ var deleverTaskTaikaiJy = function () {
 			var arr = getTargets();
 			if (!arr || arr.length == 0) {
 				alert("无有效停车站点");
-				return;
-			} else if (arr.length > 1 && agvbusstype == 'TON_2') {
-				alert("大车只能选择1个点");
 				return;
 			}
 			var targetSite = arr.join("#");
