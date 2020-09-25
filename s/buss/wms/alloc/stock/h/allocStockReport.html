@@ -40,7 +40,6 @@
     </div>
 
     <script src="/s/j/layui/layui.all.js" charset="utf-8"></script>
-    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
         let map = {
             "1": { "qywzsl": "15", "wzzdmj": "12.99", "qyzdmj": "23.55", "qykcl": "45%" },
@@ -48,7 +47,7 @@
             "3": { "qywzsl": "34", "wzzdmj": "67.59", "qyzdmj": "83.67", "qykcl": "78%" }
         };
         layui.use('element', function () {
-            var $ = layui.jquery, element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            var $ = layui.jquery, element = layui.element;
             $("#change").on("click", () => {
                 let key = $("#area").val();
                 let data = map[key];
