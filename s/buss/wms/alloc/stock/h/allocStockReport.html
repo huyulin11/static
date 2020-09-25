@@ -9,34 +9,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/s/j/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/s/c/agv.mgr.css">
+    <style>
+        .item {
+            margin-top: 40px;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="rootContainer">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-            <legend>分区选择：</legend>
+    <div id="rootContainer" style="font-size: 16px;">
+        <div>
+            <span>分区选择：</span>
             <select id="area">
+                <option value="0">请选择区域</option>
                 <option value="1">区域一</option>
                 <option value="2">区域二</option>
                 <option value="3">区域三</option>
             </select>
-            <button style="width: 100px;min-height: 40px;" id="change">更换区域</button>
-        </fieldset>
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-            <legend>区域物资放置数量：</legend> <span id="qywzsl"></span>台
-        </fieldset>
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-            <legend>物资占地面积：</legend><span id="wzzdmj"></span>平方米
-        </fieldset>
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-            <legend>区域占地面积：</legend><span id="qyzdmj"></span>平方米
-        </fieldset>
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-            <legend>区域库存率：</legend>
+            <button style="width: 80px;min-height: 40px;" id="change">更换区域</button>
+        </div>
+        <div class="item">
+            <span>区域物资放置数量：</span> <span id="qywzsl"></span>台
+        </div>
+        <div class="item">
+            <span>物资占地面积：</span><span id="wzzdmj"></span>平方米
+        </div>
+        <div class="item">
+            <span>区域占地面积：</span><span id="qyzdmj"></span>平方米
+        </div>
+        <div class="item">
+            <span>区域库存率：</span>
             <div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="qykcl">
                 <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
             </div>
-        </fieldset>
+        </div>
     </div>
 
     <script src="/s/j/layui/layui.all.js" charset="utf-8"></script>
@@ -51,6 +57,7 @@
             $("#change").on("click", () => {
                 let key = $("#area").val();
                 let data = map[key];
+                if (!data) { return; }
                 $("#qywzsl").html(data.qywzsl);
                 $("#wzzdmj").html(data.wzzdmj);
                 $("#qyzdmj").html(data.qyzdmj);
