@@ -70,14 +70,14 @@ window.datagrid = dataGrid({
 		},
 	}, {
 		colkey: "status",
-		name: "状态",
+		name: "单据状态",
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("ACS_STATUS", data) + gf.rowDisplay(rowdata);
 		}
 	}, {
 		colkey: "CRETATE.OPERATOR",
 		jsonColumn: "operator",
-		name: "导入人",
+		name: "用户名",
 	}, {
 		colkey: "updatetime",
 		name: "时间",
