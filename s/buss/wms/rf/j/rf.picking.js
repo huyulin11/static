@@ -32,12 +32,12 @@ var sub = function () {
         data: { userdef3: tu.trim(), item: su.trim(), paperid: _paperid, warehouse: _warehouse, },
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
+            if (data.code >= 0) {
+                $("#tu").val("");
+                initDatas();
+            }
+            $("#tu").focus();
             gf.layerMsg(data.msg, function () {
-                if (data.code >= 0) {
-                    $("#tu").val("");
-                    $("#su").val("");
-                    initDatas();
-                }
                 $("#tu").val("");
                 $("#tu").focus();
             });

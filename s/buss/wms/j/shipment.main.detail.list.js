@@ -164,6 +164,9 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 		name: "relationid",
 		hide: true,
 	}, {
+		colkey: "orderid",
+		name: "订单号"
+	}, {
 		colkey: "company",
 		name: "货位号",
 		renderData: function (rowindex, data, rowdata, column) {
@@ -204,13 +207,6 @@ if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(
 		name: "TO",
 		colkey: "A",
 	}];
-}
-
-if ("COMBINE".includes(_type)) {
-	_columns.unshift({
-		colkey: "orderid",
-		name: "订单号"
-	});
 }
 
 if (["PICKED_COLD", "PRODUCT"].includes(_type)) {
