@@ -124,6 +124,7 @@ var auth = (agvInfo) => {
 			$(_target).find("button#GOTO_STEREOTYPE").removeAttr("disabled");
 			$(_target).find("button#GOTO_PACK").removeAttr("disabled");
 			$(_target).find("button#FETCH").removeAttr("disabled");
+			$(_target).find("button#WAIT").removeAttr("disabled");
 		}
 		if (sitestatus == "CHARGING" && taskstatus == "GOTO_CHARGE") {
 			$(_target).find("button#BACK_CHARGE").removeAttr("disabled");
@@ -252,6 +253,12 @@ var deliverHandler = function (that) {
 	} else if (localStorage.projectKey == 'LAO_FOXCONN') {
 		deleverTaskLaoFoxconn(that);
 	}
+}
+
+var waitHandler = function (that) {
+	allDisabled();
+	if (!confirm('是否确认执行该操作?')) { return; }
+	doTask(agvId, "FETCH", 123);
 }
 
 var gotoInitHandler = function (that) {
@@ -422,6 +429,10 @@ export var init = function (target) {
 	}, {
 		id: 'DELIVER_PACK', handler: function () {
 			deleverPackHandler();
+		}
+	}, {
+		id: 'WAIT', handler: function () {
+			waitHandler(this);
 		}
 	}, {
 		id: 'GOTO_INIT', handler: function () {
