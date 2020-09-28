@@ -43,7 +43,14 @@ window.datagrid = dataGrid({
 		}
 	}, {
 		colkey: "userdef3",
-		name: "货位号"
+		name: () => {
+			switch (localStorage.projectKey) {
+				case "YZBD_NRDW":
+					return "尺寸";
+				default:
+					return "货位号";
+			}
+		},
 	}, {
 		colkey: "status",
 		name: "状态",
