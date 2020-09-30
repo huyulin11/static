@@ -23,26 +23,23 @@
     <div id="loginbox">
         <div class="control-group normal_text">
             <table style="width:100%;">
-                <tr>
+                <tr id="msgTr" class="hidden">
                     <td colspan="2">
                         <div id="message"></div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="">统一认证</td>
-                    <td class="" style="text-align:right;text-decoration:underline;">
-                        <!-- <a href="/">官网首页</a> -->
-                    </td>
+                <tr id="titleTr" class="hidden">
+                    <td></td>
                 </tr>
-                <tr class="small">
+                <tr id="browserTr" class="small hidden">
                     <td colspan="2">请使用推荐浏览器（chrome）</td>
                 </tr>
-                <tr class="small">
+                <tr id="clientTr" class="small hidden">
                     <td colspan="2">power by
                         <span data-autofill data-autokey='client.shortname'></span>
                     </td>
                 </tr>
-                <tr class="small">
+                <tr id="expireTr" class="small hidden">
                     <td colspan="2">
                         <span v-html="expireTime"></span>
                     </td>

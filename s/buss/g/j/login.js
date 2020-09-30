@@ -43,9 +43,13 @@ var vm = new Vue({
         switch (localStorage.projectKey) {
             case "BJJK_HUIRUI":
                 $("title").html("MFA");
+                $("#titleTr").find("td").html("MFA");
+                $("div.normal_text").find("tr[id='titleTr']").removeClass("hidden");
                 break;
             default:
                 $("title").html("ACS");
+                $("#titleTr").find("td").html("统一认证");
+                $("div.normal_text").find("tr").removeClass("hidden");
                 break;
         }
     },
