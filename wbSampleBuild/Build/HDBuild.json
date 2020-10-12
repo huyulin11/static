@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "HD",
+"productVersion": "0.1",
+"dataUrl": "HDBuild.data.unityweb",
+"wasmCodeUrl": "HDBuild.wasm.code.unityweb",
+"wasmFrameworkUrl": "HDBuild.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.1f1"
+}
