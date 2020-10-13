@@ -22,8 +22,10 @@ let chooseByWarehouse = function () {
 
 var dealSheet = function (sheet) {
     let _paper = {};
-    _paper.orderid = sheet.C8.v;
-    _paper.name = sheet.E8.v;
+    if (sheet.C8)
+        _paper.orderid = sheet.C8.v;
+    if (sheet.E8)
+        _paper.name = sheet.E8.v;
 
     let index = 200;
     let checkRepeat = [];
