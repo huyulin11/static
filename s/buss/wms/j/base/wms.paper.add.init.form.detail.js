@@ -5,7 +5,7 @@ import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 let CSY_DAJ = (_tasktype, _conf) => {
     $("#warehouse").data("notnull", false);
     let obj = {
-        max: 6,
+        max: 100,
         items: [{
             key: "allocItem",
             alias: "userdef1",
