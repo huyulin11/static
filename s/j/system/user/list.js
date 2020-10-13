@@ -13,6 +13,7 @@ window.datagrid = dataGrid({
 	columns: [{
 		colkey: "id",
 		name: "id",
+		hide: true
 	}, {
 		colkey: "userName",
 		name: "用户名"
@@ -24,7 +25,7 @@ window.datagrid = dataGrid({
 		name: "所属角色",
 	}, {
 		colkey: "locked",
-		name: "账号状态",
+		name: "状态",
 		width: '90px',
 		renderData: function (rowindex, data, rowdata, column) {
 			return gv.get("ISOK", data);

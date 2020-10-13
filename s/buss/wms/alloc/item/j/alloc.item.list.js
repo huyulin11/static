@@ -69,7 +69,7 @@ window.datagrid = dataGrid({
 });
 
 let doSearch = function () {
-	var searchParams = $("#searchForm").serialize();
+	var searchParams = $("#searchForm").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});

@@ -7,11 +7,11 @@ window.datagrid = dataGrid({
 		name: "id",
 		hide: true
 	}, {
-		colkey: "accountName",
-		name: "账号",
-	}, {
 		colkey: "userName",
 		name: "用户名"
+	}, {
+		colkey: "accountName",
+		name: "账号",
 	}, {
 		colkey: "module",
 		name: "模块"
@@ -24,10 +24,10 @@ window.datagrid = dataGrid({
 		width: "150px"
 	}, {
 		colkey: "userIP",
-		name: "IP地址"
+		name: "IP"
 	}, {
 		colkey: "operTime",
-		name: "执行时间",
+		name: "时间",
 		renderData: function (rowindex, data, rowdata, column) {
 			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
 		}
@@ -38,11 +38,12 @@ window.datagrid = dataGrid({
 		hide: function () { return localStorage.projectKey == 'BJJK_HUIRUI'; }
 	}],
 	jsonUrl: '/log/findByPage.shtml',
-	checkbox: false
+	checkbox: false,
+	serNumber: true
 });
 
 let doSearch = function () {
-	var searchParams = $("#searchForm").serialize();
+	var searchParams = $("#searchForm").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});

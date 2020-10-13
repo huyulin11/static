@@ -30,7 +30,8 @@ window.datagrid = dataGrid({
 		}
 	}],
 	jsonUrl: '/role/findByPage.shtml',
-	checkbox: true
+	checkbox: true,
+	serNumber: true
 });
 
 let doSearch = function () {

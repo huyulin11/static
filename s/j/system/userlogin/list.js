@@ -14,21 +14,23 @@ window.datagrid = dataGrid({
 		colkey: "result",
 		name: "是否成功"
 	}, {
+		colkey: "loginIP",
+		name: "IP",
+		hide: true
+	}, {
 		colkey: "loginTime",
-		name: "登入时间",
+		name: "时间",
 		renderData: function (rowindex, data, rowdata, column) {
 			return new Date(data).format("yyyy-MM-dd hh:mm:ss");
 		}
-	}, {
-		colkey: "loginIP",
-		name: "登入IP"
 	}],
 	jsonUrl: '/userlogin/findByPage.shtml',
-	checkbox: false
+	checkbox: false,
+	serNumber: true
 });
 
 let doSearch = function () {
-	var searchParams = $("#searchForm").serialize();
+	var searchParams = $("#searchForm").serializeObject();
 	window.datagrid.setOptions({
 		data: searchParams
 	});
