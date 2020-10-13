@@ -44,7 +44,9 @@ var sub = function () {
             if (typeof data == "string") data = JSON.parse(data);
             if (data.code >= 0) {
                 gf.layerMsg(data.msg, function () {
-                    $("#tu").focus();
+                    var isFocus = $("#su").is(":focus");
+                    if (isFocus != true)
+                        $("#tu").focus();
                 });
                 $("#tu").val("");
                 $("#su").val("");
