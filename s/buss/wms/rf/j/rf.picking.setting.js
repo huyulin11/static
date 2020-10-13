@@ -29,7 +29,7 @@ var render = function (laps, setting, callback) {
         tabStrs += (
             `<label>
                 <input type="radio" name="tab" class='chooseRadio' data-id='${obj.key}'>
-                <span>${obj.key == 'PICK' ? "按拣货点" : "按生产线"}</span>
+                <span>${obj.key == 'PICK' ? "按拣配点" : "按生产线"}</span>
             </label>`);
     }
 

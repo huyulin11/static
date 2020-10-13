@@ -90,7 +90,7 @@ var initCombine = function () {
             return `正在组盘-${gv.get("WAREHOUSE", _warehouse)}`;
         } else if (_setting && _setting.SETTING && _setting.SETTING != "[]" && _setting.SETTING.length > 0) {
             let json = _setting.SETTING;
-            let str = (_setting.TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
+            let str = (_setting.TYPE == "PICK" ? "按拣配点" : "按生产线") + ":";
             let items = [];
             for (let item of json) { items.push(item.name); }
             str += items.join("、");

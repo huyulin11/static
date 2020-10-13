@@ -79,12 +79,12 @@ var initPick = function () {
     $(document).attr("title", title);
     title = function () {
         if (_paperid) {
-            return ("正在拣货-" + _paperid);
+            return ("正在拣配-" + _paperid);
         } else if (_warehouse) {
             return (`${gv.get("WAREHOUSE", _warehouse)}出库`);
         } else if (_setting && _setting.SETTING && _setting.SETTING != "[]" && _setting.SETTING.length > 0) {
             let json = _setting.SETTING;
-            let str = (_setting.TYPE == "PICK" ? "按拣货点" : "按生产线") + ":";
+            let str = (_setting.TYPE == "PICK" ? "按拣配点" : "按生产线") + ":";
             let items = [];
             for (let item of json) { items.push(item.name); }
             str += items.join("、");

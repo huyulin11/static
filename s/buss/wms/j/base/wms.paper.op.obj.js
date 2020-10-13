@@ -163,7 +163,7 @@ var initBtns = function () {
         },
     }; btns.pickOne = {
         url: `/s/buss/wms/rf/h/rf.picking.html`,
-        id: "pickOne", name: "RF-按单拣货", class: "btn-warning",
+        id: "pickOne", name: "RF-按单拣配", class: "btn-warning",
         bind: function () {
             paperOp.pickOne(this);
         },
@@ -198,7 +198,7 @@ var initBtns = function () {
 
     btns[`pick`] = {
         url: `/s/buss/wms/rf/h/rf.picking.html`,
-        id: `pick`, name: `RF-拣货`, class: "btn-default",
+        id: `pick`, name: `RF-拣配`, class: "btn-default",
         bind: function () {
             window.location.href = this.url;
         },
@@ -213,7 +213,7 @@ var initBtns = function () {
     for (let ware of gv.getT("WAREHOUSE")) {
         btns[`pick${ware.key}`] = {
             url: `/s/buss/wms/rf/h/rf.picking.html?warehouse=${ware.key}`,
-            id: `pick${ware.key}`, name: `RF-${ware.value}拣货`, class: "btn-default",
+            id: `pick${ware.key}`, name: `RF-${ware.value}拣配`, class: "btn-default",
             bind: function () {
                 window.location.href = this.url;
             },
