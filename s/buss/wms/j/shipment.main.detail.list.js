@@ -109,7 +109,7 @@ if (localStorage.showTransLog) {
 	_columns.push({
 		colkey: "CRETATE.OPERATOR",
 		jsonColumn: "operator",
-		name: "下达人",
+		name: "下达人员",
 		defaultVal: '--'
 	}, {
 			colkey: "CRETATE.TIME",
@@ -119,7 +119,7 @@ if (localStorage.showTransLog) {
 		}, {
 			colkey: "PICKING.OPERATOR",
 			jsonColumn: "operator",
-			name: "拣配人",
+			name: "拣配人员",
 			defaultVal: '--'
 		}, {
 			colkey: "PICKING.TIME",
@@ -129,7 +129,7 @@ if (localStorage.showTransLog) {
 		}, {
 			colkey: "COMBINING.OPERATOR",
 			jsonColumn: "operator",
-			name: "组盘人",
+			name: "组盘人员",
 			defaultVal: '--'
 		}, {
 			colkey: "COMBINING.TIME",
