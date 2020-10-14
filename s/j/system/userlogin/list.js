@@ -15,8 +15,7 @@ window.datagrid = dataGrid({
 		name: "是否成功"
 	}, {
 		colkey: "loginIP",
-		name: "IP",
-		hide: true
+		name: "IP"
 	}, {
 		colkey: "loginTime",
 		name: "时间",

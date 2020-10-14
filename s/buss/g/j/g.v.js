@@ -133,5 +133,6 @@ class GV {
 }
 var gv = new GV();
 window.gv = gv;
-gv.getSite();
+if (localStorage.projectKey != 'BJJK_HUIRUI')
+	gv.getSite();
 export { gv };
