@@ -26,7 +26,7 @@ export var initMainColsData = function (_tasktype) {
         case "YZBD_NRDW": {
             if (_tasktype == 'inventory') {
                 _cols = [
-                    { name: "盘点类型", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype" },
+                    { name: "盘点类型", type: "jsSelect", patten: "WMS_INVENTORY_TYPE", notnull: true, key: "inventorytype", defaultValue: 'FULL' },
                 ];
             } else if (_tasktype == 'receipt') {
                 _cols = [

@@ -19,6 +19,9 @@ let _conf = {
 
 export var init = function (tasktype) {
     _tasktype = tasktype;
+    if (_tasktype == "inventory" && localStorage.projectKey == "YZBD_NRDW") {
+        $("div.addOne").hide();
+    }
     initForm(_tasktype, _conf, _initRows);
 }
 
@@ -50,9 +53,11 @@ var _initRows = function () {
         }
     }
 
-    if (_tasktype == "transfer" && localStorage.projectKey == "BJJK_HUIRUI")
+    if (_tasktype == "transfer" && localStorage.projectKey == "BJJK_HUIRUI") {
         $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml`);
-    else $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
+    } else {
+        $("#form").attr("action", `/${_tasktype}/detail/editEntity.shtml?paperid=${_paperid}`);
+    }
     let url = `/${_tasktype}/main/findOneData.shtml`;
     gf.ajax(url, { paperid: _paperid, receipttype: _receipttype }, "json", function (s) {
         let main = s.object.main;
