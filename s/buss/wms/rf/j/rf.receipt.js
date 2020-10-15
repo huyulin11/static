@@ -25,7 +25,7 @@ var initReceipt = function () {
     $(container).find("#start").on("click", function () { start(); });
     $(container).find("#sub").on("click", function () { sub(); });
     $(container).find("#cancel").on("click", function () { cancel(); });
-    $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); });
+    $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); $("#tu").focus(); });
     $(container).find("#back").on("click", function () { window.history.back(); });
     $(container).find("#send").on("click", function () { send(); });
     $(container).find("#execute").on("click", function () { execute(); });
@@ -149,16 +149,16 @@ var initReceipt = function () {
     let su = $("#su").val();
     let tu = $("#tu").val();
     if (!su || !tu) {
-        gf.layerMsg("货位号与SU均不能为空！");
-        if (!su) {
-            $("#su").focus();
-        } else if (!tu) {
+        layer.msg("货位号与SU均不能为空！");
+        if (!tu) {
             $("#tu").focus();
+        } else if (!su) {
+            $("#su").focus();
         }
         return;
     }
     if (su.trim().length != 9) {
-        gf.layerMsg("SU格式错误！");
+        layer.msg("SU格式需为9位！");
         $("#su").focus();
         return;
     }
@@ -168,9 +168,12 @@ var initReceipt = function () {
             data: { item: su, userdef3: tu },
             success: function (data) {
                 if (typeof data == "string") data = JSON.parse(data);
-                gf.layerMsg(data.msg);
+                gf.layerMsg(data.msg, function () {
+                    $("#tu").focus();
+                });
+                $("#tu").val("");
                 $("#su").val("");
-                $("#su").focus();
+                $("#tu").focus();
             }
         });
     } else {

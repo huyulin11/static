@@ -34,11 +34,13 @@ var sub = function () {
             if (typeof data == "string") data = JSON.parse(data);
             if (data.code >= 0) {
                 $("#tu").val("");
+                $("#su").val("");
                 initDatas();
             }
             $("#tu").focus();
             gf.layerMsg(data.msg, function () {
                 $("#tu").val("");
+                $("#su").val("");
                 $("#tu").focus();
             });
         }
@@ -137,7 +139,7 @@ var initPick = function () {
     }
     $(container).find("table").show();
     $(container).find("#sub").on("click", function () { sub(); });
-    $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); });
+    $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); $("#tu").focus(); });
     initPaperOp("shipment");
     $("#tu").focus();
 

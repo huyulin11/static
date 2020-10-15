@@ -182,7 +182,7 @@ var initRf = function () {
 
             $(container).find("table").show();
             $(container).find("#sub").on("click", function () { sub(); });
-            $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); });
+            $(container).find("#clean").on("click", function () { $("#su,#tu").val(""); $("#tu").focus(); });
             initPaperOp("shipment");
             $("#tu").focus();
 
