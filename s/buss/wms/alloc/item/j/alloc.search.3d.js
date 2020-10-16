@@ -3,13 +3,13 @@ import { initAlloc } from "/s/buss/wms/alloc/item/j/alloc.render.js";
 
 let clear = {
     url: `/alloc/item/util/clearSearch.shtml`, style: "width:49%;",
-    id: "play", name: "重置信息", class: "btn-warning",
+    id: "play", name: "重置", class: "btn-warning",
     bind: function () {
         doJob("clear", this);
     },
 }, search = {
     url: ` `, style: "width:49%;",
-    id: "find", name: "查询物资", class: "btn-warning",
+    id: "find", name: "查询", class: "btn-warning",
     bind: function () {
         initAlloc(() => {
             layer.msg("已提交查询");
