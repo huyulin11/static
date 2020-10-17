@@ -521,6 +521,11 @@ class GF {
             localStorage.layerArea = ["90%", "90%"];
         return localStorage.layerArea.split(",");
     };
+    layerAreaSmall() {
+        if (!localStorage.layerAreaSmall)
+            localStorage.layerAreaSmall = ["50%", "50%"];
+        return localStorage.layerAreaSmall.split(",");
+    };
     renderBtnTable(conf, callback) {
         var datas = conf.data, renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4;
         var target = conf.target;

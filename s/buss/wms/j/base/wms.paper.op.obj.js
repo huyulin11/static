@@ -129,6 +129,14 @@ var initBtns = function () {
                 gf.layerMsg(info);
             });
         },
+    }; btns.inventoryResult = {
+        id: "inventoryResult", name: "盘点结果", class: "btn-primary",
+        bind: function () {
+            var cbox = gf.checkOnlyOne("paperid");
+            if (!cbox) { return; }
+            this.url = `/s/buss/wms/h/inventory.result.list.html?paperid=${cbox}`;
+            paperOp.layerOpen(this);
+        },
     }; btns.whichOne = {
         id: "whichOne", name: "经办", class: "btn-info",
         bind: function () {
@@ -292,6 +300,13 @@ class PaperOp {
             title: `${that.name}`,
             type: 2,
             area: gf.layerArea(),
+            content: that.url
+        });
+    }; layerOpen(that) {
+        window.pageii = layer.open({
+            title: `${that.name}`,
+            type: 2,
+            area: gf.layerAreaSmall(),
             content: that.url
         });
     }; detail(that) {
