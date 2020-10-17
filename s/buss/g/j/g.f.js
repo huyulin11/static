@@ -447,6 +447,11 @@ class GF {
         }
         return flag;
     };
+    layerParentMsg(content) {
+        let layerCurrent = layer;
+        if (parent && parent.layer) { layerCurrent = parent.layer; } else { layerCurrent = layer; }
+        layerCurrent.msg(content);
+    };
     layerMsg(content, end) {
         layer.msg(content, {
             time: 0, //...s后自动关闭
