@@ -1,38 +1,35 @@
 import "/s/j/vue/vue.min.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 
 let container = "#rootContainer";
 
-var initRf = function () {
-    var vm = new Vue({
-        data: {},
-        el: container,
-        created: function () {
+var vm = new Vue({
+    data:{
+        msg:null,
+        savacode:null,
+    },
+    el:container,
+    methods:{
+        saveBarCode(){
+            this.savacode=this.msg;
+            if(!this.savacode){
+                $("#barcode").focus();
+                layer.msg("条码不能为空！");
+                return;
+            };
+            if(this.savacode.trim().length != 6){
+                $("#barcode").focus();
+                layer.msg("条码格式需为6位！");
+                $("#barcode").val("");
+                return;
+            };
+            gf.doAjax({
+                url:'/de/acs/instantBarcode.shtml',
+                data:{barcode : this.savacode}
+            })
         },
-        mounted: function () {
-        },
-        methods: {
-            barcodeEnter: function () {
-                $("#su").focus();
-            },
-            suInput: function () {
-                if (!$("#lineTr").hasClass("hidden")) {
-                    $("#lineTr").addClass("hidden");
-                }
-            },
-            getCombinedList: function () {
-                getCombinedList();
-            },
-            suEnter: function () {
-                sub();
-            },
-            toEnter: function () {
-                sub();
-            },
-            lineEnter: function () {
-                sub();
-            },
+        clearBarCode(){
+            this.msg=null
         }
-    });
-}
-
-initRf();
+    }
+})
