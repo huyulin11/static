@@ -38,10 +38,9 @@ export let tempBtns = [{
 export var initConfList = function (table, params, searchHtml) {
     _table = table;
     _searchHtml = searchHtml;
-    _params = Object.assign(_params, {
+    Object.assign(_params, params, {
         data: { "TABLE_KEY": _table }
     });
-    _params = Object.assign(_params, params);
     window.datagrid = dataGrid(_params);
     $("#searchForm").delegate("#search", "click", function () {
         doSearch();

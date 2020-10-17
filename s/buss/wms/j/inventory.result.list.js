@@ -14,8 +14,8 @@ export let init = function () {
 		checkbox: false,
 		columns: [{
 			colkey: "key",
-			name: "已盘点条码",
-			fenyeInTail: true
+			name: "已盘点条码"
 		}],
+		fenyeInTail: true,
 	});
 }
