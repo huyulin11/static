@@ -19,7 +19,7 @@ var login = function () {
                 let indexUrl;
                 if (data.object) {
                     indexUrl = data.object;
-                } else if (!gf.isPc() && localStorage.projectKey == "BJJK_HUIRUI") {
+                } else if (!gf.isPc()) {
                     indexUrl = "/s/buss/wms/rf/h/rf.mgr.html";
                 } else {
                     indexUrl = "/s/buss/g/h/manager.html";

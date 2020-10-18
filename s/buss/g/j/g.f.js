@@ -375,7 +375,8 @@ class GF {
                 callback(myRes);
             }
         });
-    }; getButtonByRes(conf, callback) {
+    };
+    getButtonByRes(conf, callback) {
         gf.getMyRes(function (myRes) {
             let _conf = $.extend(conf, {
                 display: function (value) {
@@ -387,7 +388,20 @@ class GF {
             });
             callback(gf.getButtonsTable(_conf));
         });
-    }
+    };
+    getButtonDomByRes(conf, callback) {
+        gf.getMyRes(function (myRes) {
+            let _conf = $.extend(conf, {
+                display: function (value) {
+                    if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
+                        return true;
+                    }
+                    return false;
+                },
+            });
+            callback(gf.getButtonsTableDom(_conf));
+        });
+    };
     getButtonsTable(conf) {
         var _numInLine = conf.numInLine ? conf.numInLine : 7;
 
@@ -428,6 +442,67 @@ class GF {
             buttons = `${buttons}<tr>${tmpStr}</tr>`;
         }
         var rtn = `<div id='targets'><table ${conf.style ? conf.style : ""}>${buttons}</table></div>`;
+        return rtn;
+    };
+    getButtonsTableDom(conf) {
+        var _numInLine = conf.numInLine ? conf.numInLine : 7;
+
+        var rtn = $(`<div id='targets'></div>`);
+        var table = $(`<table ${conf.style ? conf.style : ""}></table>`);
+        var trBtns = $(`<tr></tr>`);
+        var index = 1;
+        for (var value of conf.values) {
+            var tdBtn = $("<td></td>");
+            var btn = $("<button></button>");
+            var isChoosed = false;
+            var isDisplay = true;
+            if (conf.choose) {
+                isChoosed = typeof conf.choose == 'function' ? (conf.choose(value)) : conf.choose;
+            }
+            if (conf.display) {
+                isDisplay = typeof conf.display == 'function' ? (conf.display(value)) : conf.display;
+            }
+            if (!isDisplay) { continue; }
+            if (isChoosed) $(btn).addClass('choosed');
+            if (typeof (value) == "number" || typeof (value) == "string") {
+                $(btn).attr("id", value);
+                $(btn).data("id", value);
+                $(btn).html(value);
+            } else {
+                let datas = "";
+                for (let ii in value) {
+                    if (typeof value[ii] == 'function') {
+                        $(btn).bind(ii, value[ii]);
+                    } else {
+                        if (ii == 'url') {
+                            $(btn).bind("click", function () {
+                                window.location.href = $(this).data('url');
+                            });
+                        }
+                        $(btn).data(ii, value[ii]);
+                    }
+                }
+                $(btn).attr("id", value.id);
+                $(btn).data("id", value.id);
+                $(btn).html(`${value.name}${conf.showId ? "-" + value.id : ""}`);
+            }
+            $(tdBtn).append(btn);
+            if (index >= _numInLine) {
+                $(trBtns).append(tdBtn);
+                $(table).append(trBtns);
+                trBtns = $(`<tr></tr>`);
+                index = 1;
+                tdBtn = "";
+            } else {
+                $(trBtns).append(tdBtn);
+                index++;
+            }
+        }
+        if (tdBtn) {
+            $(trBtns).append(tdBtn);
+            $(table).append(trBtns);
+        }
+        $(rtn).append(table);
         return rtn;
     };
     getTargets() {
