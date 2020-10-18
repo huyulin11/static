@@ -1,8 +1,4 @@
-import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
-import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
-import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { gv } from "/s/buss/g/j/g.v.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 var _detailid = gf.urlParam("detailid");
