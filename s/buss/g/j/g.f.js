@@ -667,6 +667,11 @@ class GF {
         }
         $("#" + id).on("load", check);
         window.οnresize = check;
+    } htmlPiece(v) {
+        return "<br/>" + "<span style='color:" +
+            (v ? "yellow" : "pink") + "'>" +
+            (v ? "已开启" : "已关闭") + "</span>-" +
+            (v ? "点击关闭" : "点击开启");
     }
 }
 

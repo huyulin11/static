@@ -12,6 +12,20 @@ taskexe.addCtrlTask = function (agvId, tasktype, devId) {
     _doAddTask(agvId, tasktype, "/json/op/addCtrlTask.shtml", devId);
 }
 
+taskexe.addCtrlTaskFromBtn = (that, tips, opType) => {
+    var open = $(that).data("open");
+    if (open) {
+        tips = '是否确定关闭' + tips + '？';
+        opType = "stop" + opType;
+    } else {
+        tips = '是否确定开启' + tips + '？';
+        opType = "open" + opType;
+    }
+    if (window.confirm(tips)) {
+        taskexe.addCtrlTask(0, opType);
+    }
+}
+
 taskexe.addTaskTo = function (agvId, tasktype, to, callback) {
     addTaskTo(agvId, tasktype, to, callback);
 }

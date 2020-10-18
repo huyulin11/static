@@ -3,7 +3,7 @@ import "/s/j/vue/vue.min.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/manager.js"
 import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
-import { htmlPiece, doCtrlTask } from "/s/buss/acs/FANCY/j/acs.control.js";
+import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 
 gv.init();
 
@@ -38,13 +38,13 @@ if (localStorage.projectKey == 'BJJK_HUIRUI') {
             id: "udfConfirm", name: "用户确认", "click": function () {
                 var tips = "确认信号";
                 var opType = "UdfConfirm";
-                doCtrlTask(this, tips, opType);
+                taskexe.addCtrlTaskFromBtn(this, tips, opType);
             }
         },
         { id: "logout", name: "退出", "url": "/logout.shtml" },
     ];
     let checkValue = (value) => {
-        $("#udfConfirm").data('open', value.IS_UDF_CONFIRM).html("用户确认" + htmlPiece(value.IS_UDF_CONFIRM));
+        $("#udfConfirm").data('open', value.IS_UDF_CONFIRM).html("用户确认" + gf.htmlPiece(value.IS_UDF_CONFIRM));
     };
     setInterval(() => {
         refreshAcsInfo(checkValue);
