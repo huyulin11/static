@@ -170,7 +170,7 @@ var taskSiteLocation = function () {
 
 var taskPath = function () {
     $.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/agv/agvInfo0.json",
+        url: "/s/jsons/" + localStorage.projectKey + "/agv/allAgvsInfo.json",
         type: "get",
         dataType: "json",
         cache: false,

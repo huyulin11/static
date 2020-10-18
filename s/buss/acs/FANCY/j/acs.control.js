@@ -1,6 +1,7 @@
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { initAgvList } from "/s/buss/acs/FANCY/j/agv.list.js";
 import { refreshAgvsInfo } from "/s/buss/acs/g/j/agv.msg.js";
+import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
 
 let checkLoginError = false;
 if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
@@ -197,4 +198,7 @@ export var renderCtrlBtns = (value) => {
 init();
 initAgvList();
 refreshAgvsInfo();
-setInterval(refreshAgvsInfo, 2000);
+setInterval(() => {
+	refreshAcsInfo(renderCtrlBtns);
+	refreshAgvsInfo();
+}, 2000);

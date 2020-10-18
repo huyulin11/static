@@ -1,5 +1,3 @@
-import { renderCtrlBtns } from "/s/buss/acs/FANCY/j/acs.control.js";
-
 var container = function () {
     if ($("#tipsOper").length == 0) {
         $("#msgContainer").append("<fieldset><legend>系统消息</legend><div id='tipsOper'></div></fieldset>");
@@ -43,7 +41,7 @@ var addMsg = function (msg, level, agvId) {
 
 export var refreshAgvsInfo = function () {
     jQuery.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/agv/agvInfo0.json",
+        url: "/s/jsons/" + localStorage.projectKey + "/agv/allAgvsInfo.json",
         type: "GET",
         dataType: "json",
         cache: false,
@@ -55,8 +53,6 @@ export var refreshAgvsInfo = function () {
                         var msg = (value.currentTask[0].opflag == "OVER" ? "执行结束：" : "正在执行：") + value.currentTask[0].taskText;
                         addMsg(msg, 3, n);
                     }
-                } else {
-                    renderCtrlBtns(value);
                 }
             });
         },
