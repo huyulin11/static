@@ -32,8 +32,8 @@
             <tbody>
                 <tr>
                     <td><button id="sub" @click="saveBarCode" >确认</button></td>
-                    <td><button id="back">返回</button></td>
-                    <td><button id="clean" @click="clearBarCode">清空</button></td>
+                    <td><button id="back" @click="history.back()" >返回</button></td>
+                    <td><button id="clean" @click="clearBarCode" >清空</button></td>
                 </tr>
             </tbody>
         </table>
