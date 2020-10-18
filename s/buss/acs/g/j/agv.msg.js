@@ -41,7 +41,7 @@ var addMsg = function (msg, level, agvId) {
     }
 }
 
-var agvsinfo = function () {
+export var refreshAgvsInfo = function () {
     jQuery.ajax({
         url: "/s/jsons/" + localStorage.projectKey + "/agv/agvInfo0.json",
         type: "GET",
@@ -65,5 +65,3 @@ var agvsinfo = function () {
         timeout: 5000
     });
 }
-agvsinfo();
-setInterval(agvsinfo, 2000);

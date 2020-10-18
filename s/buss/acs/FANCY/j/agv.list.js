@@ -75,7 +75,7 @@ var checkLogin = function () {
     gf.checkLogin();
 }
 
-var init = function () {
+export var initAgvList = function () {
     ws("ws://127.0.0.1:9080/websocket/agvsinfo", (event) => {
         let json = JSON.parse(event.data);
         whenSuccess(json);
@@ -100,5 +100,3 @@ var init = function () {
     var height = "300px";
     if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
 }
-
-init();
