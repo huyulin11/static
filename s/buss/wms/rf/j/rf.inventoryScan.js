@@ -3,6 +3,12 @@ import { gf } from "/s/buss/g/j/g.f.js";
 
 let container = "#rootContainer";
 
+Vue.directive('focus', {
+    inserted: function (el) {
+      el.focus()
+    }
+  })
+
 var vm = new Vue({
     data: {
         msg: null,
