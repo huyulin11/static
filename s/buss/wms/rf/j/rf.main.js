@@ -2,6 +2,8 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import "/s/j/vue/vue.min.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/manager.js"
+import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
+import { htmlPiece, doCtrlTask } from "/s/buss/acs/FANCY/j/acs.control.js";
 
 gv.init();
 
@@ -32,21 +34,38 @@ if (localStorage.projectKey == 'BJJK_HUIRUI') {
     btns = [
         { id: "inventoryScan", name: "盘点扫描", "url": `/s/buss/wms/rf/h/rf.inventoryScan.html` },
         { id: "instantBarcode", name: "入库扫码", "url": `/s/buss/wms/rf/h/rf.instant.barcode.html` },
+        {
+            id: "udfConfirm", name: "用户确认", "click": function () {
+                var tips = "确认信号";
+                var opType = "UdfConfirm";
+                doCtrlTask(this, tips, opType);
+            }
+        },
         { id: "logout", name: "退出", "url": "/logout.shtml" },
     ];
+    let checkValue = (value) => {
+        $("#udfConfirm").data('open', value.IS_UDF_CONFIRM).html("用户确认" + htmlPiece(value.IS_UDF_CONFIRM));
+    };
+    setInterval(() => {
+        refreshAcsInfo(checkValue);
+    }, 2000);
 }
 var initMain = function () {
     let title = "RF主界面";
     $(container).find("h2").html(title);
     $(document).attr("title", title);
 
-    gf.getButtonDomByRes({
+    let conf = {
         values: btns, numInLine: 2, style: `cellspacing="10px" cellspadding="1px"`,
         choose: function (value) {
             if (value.choosed == "ON") { return true; }
             return false;
         },
-    }, function (btns) {
+    };
+    if (localStorage.projectKey == 'YZBD_NRDW') {
+        Object.assign(conf, { numInLine: 1 });
+    }
+    gf.getButtonDomByRes(conf, function (btns) {
         $(container).append(btns);
     });
 };

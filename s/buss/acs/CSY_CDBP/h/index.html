@@ -39,7 +39,8 @@
 	import { gf } from "/s/buss/g/j/g.f.js";
 	gf.quote("/s/c/agv.mgr.css");
 	$('body').fadeIn(3000);
-	import "/s/buss/acs/FANCY/j/acs.control.js";
+	import { initAcsControl } from "/s/buss/acs/FANCY/j/acs.control.js";
+	initAcsControl();
 	import "/s/buss/acs/g/j/agv.g.js";
 	import { init as initTransport } from '/s/buss/acs/FANCY/j/agv/agv.info.transport.js';
 	initTransport('div#transport');
