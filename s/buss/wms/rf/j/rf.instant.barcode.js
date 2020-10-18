@@ -17,19 +17,17 @@ var vm = new Vue({
                 layer.msg("条码不能为空！");
                 return;
             };
-            if(this.savacode.trim().length != 6){
-                $("#barcode").focus();
-                layer.msg("条码格式需为6位！");
-                $("#barcode").val("");
-                return;
-            };
             gf.doAjax({
                 url:'/de/acs/instantBarcode.shtml',
                 data:{barcode : this.savacode}
-            })
+            });
+            this.clearBarCode();
         },
         clearBarCode(){
             this.msg=null
+        },
+        barcodeEnter(){
+            this.saveBarCode();
         }
     }
 })
