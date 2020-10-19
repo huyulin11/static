@@ -72,6 +72,8 @@ var doInit = function (target, json) {
     container.append(btnContainer);
     gf.bindBtns(btnContainer, tempBtns);
 
+    container.append(`<div>可选择货物↓↓↓↓↓↓</div>`);
+    container.append(`<div><table class="alloc"></table></div>`);
     let _conf = { numInLine: 5, target: "table.alloc" };
     let allocRenderUdf = (data) => {
         allocRender(data, _conf);
@@ -79,7 +81,8 @@ var doInit = function (target, json) {
     setTimeout(function () {
         allocData(allocRenderUdf, {
             'allocItemFormMap.skuid': json.item,
-            'allocItemFormMap.txm': json.txm
+            'allocItemFormMap.txm': json.txm,
+            'allocItemFormMap.status': '3'
         });
     }, 500);
     setTimeout(function () {
