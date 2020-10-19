@@ -35,6 +35,7 @@ let play = {
     id: "back", name: "返回", class: "btn-warning",
     style: "background-color:gray",
     bind: function () {
+        gf.ajax(`/alloc/item/util/clearSearch.shtml`);
         window.history.back();
     },
 };
