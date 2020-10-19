@@ -1,6 +1,6 @@
 import "/s/j/vue/vue.min.js";
-import { render } from "/s/buss/wms/alloc/item/j/alloc.render.hongfu.zhenmu.js";
-import { initAlloc } from "/s/buss/wms/alloc/item/j/alloc.render.js";
+import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
+import { allocRender } from "/s/buss/wms/alloc/item/j/alloc.render.list.work.js";
 import "/s/buss/wms/alloc/item/j/alloc.event.js";
 
 let tempBtns = [{
@@ -10,6 +10,12 @@ let tempBtns = [{
     }, style: "min-height:25px;width:60px;float:right;"
 }];
 gf.bindBtns("div.doc-buttons", tempBtns);
+
+
+let _conf = { numInLine: 5, target: "table.alloc" };
+let allocRenderUdf = (data) => {
+    allocRender(data, _conf);
+};
 
 var vm = new Vue({
     el: "#kw",
@@ -21,18 +27,18 @@ var vm = new Vue({
     }, methods: {
         inputFun: function (e) {
             localStorage.setItem("bigSearchResult", e.target.value);
-            initAlloc(render);
+            allocData(allocRenderUdf);
         }
     }
 });
 
 setTimeout(function () {
-    initAlloc(render);
+    allocData(allocRenderUdf);
 }, 500);
 
 setInterval(function () {
     if ($("#simple-2").is(":checked")) {
-        initAlloc(render);
+        allocData(allocRenderUdf);
     }
 }, 5000);
 

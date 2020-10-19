@@ -1,11 +1,11 @@
-import { gf } from "/s/buss/g/j/g.f.js";
-
-export var initAlloc = function (callback, data) {
+export var allocData = function (callback, condition) {
     $(".black_overlay").show();
     $("table.alloc").html("");
     let serach = { "allocItemFormMap.text": $("#kw").val() };
-    if (data) { serach = Object.assign(serach, data); }
-    if (localStorage.projectKey == "BJJK_HUIRUI") { serach['allocItemFormMap.whid'] = 2; serach['pageSize'] = 100; }
+    if (condition) { serach = Object.assign(serach, condition); }
+    if (localStorage.projectKey == "BJJK_HUIRUI") {
+        serach['allocItemFormMap.whid'] = 2; serach['pageSize'] = 100;
+    }
     jQuery.ajax({
         url: "/alloc/item/findByPage.shtml",
         data: serach,

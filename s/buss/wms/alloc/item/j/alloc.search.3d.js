@@ -1,5 +1,5 @@
 import "/s/j/vue/vue.min.js";
-import { initAlloc } from "/s/buss/wms/alloc/item/j/alloc.render.js";
+import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
 let clear = {
@@ -13,7 +13,7 @@ let clear = {
     url: ` `, style: "width:49%;",
     id: "find", name: "查询", class: "btn-warning",
     bind: function () {
-        initAlloc(() => {
+        allocData(() => {
             gf.layerParentMsg("已提交查询");
         }, $("form").serializeObject());
     },

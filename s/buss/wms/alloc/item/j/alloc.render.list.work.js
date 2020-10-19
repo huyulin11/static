@@ -70,28 +70,21 @@ var renderOne = function (allocInfo) {
     return tmpStr;
 }
 
-var dealData = function (data) {
-    if (data.length > 1000) {
-        return data.slice(0, 1000);
-    }
-    return data;
-}
 
 let flag = false;
-
-var toRender = function (data) {
+var toRender = function (data, conf) {
     if (!data || data.length == 0) return;
-    var filterData = dealData(data);
-    let conf = { data: filterData, numInLine: 4, render: renderOne, target: "table.alloc" };
-    gf.renderBtnTable(conf);
+    let _conf = { data: data, numInLine: 4, numInPage: 1000, render: renderOne, target: "table.alloc" };
+    Object.assign(_conf, conf);
+    gf.renderBtnTable(_conf);
     gf.resizeTable();
 }
 
-export var render = function (data) {
+export var allocRender = function (data, conf) {
     if (flag) return;
     try {
         flag = true;
-        toRender(data);
+        toRender(data, conf);
     } finally {
         flag = false;
     }

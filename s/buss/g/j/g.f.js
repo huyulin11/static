@@ -602,7 +602,16 @@ class GF {
         return localStorage.layerAreaSmall.split(",");
     };
     renderBtnTable(conf, callback) {
-        var datas = conf.data, renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4;
+        var dealData = function (data) {
+            if (data.length > 1000) {
+                return data.slice(0, 1000);
+            }
+            return data;
+        }
+        var renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4,
+            numInPage = conf.numInPage ? conf.numInPage : 1000;
+        var filterData = dealData(conf.data, numInPage);
+        var datas = filterData;
         var target = conf.target;
         var index = 1;
         var tmpStr = "";

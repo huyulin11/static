@@ -1,8 +1,5 @@
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
-import { gv } from "/s/buss/g/j/g.v.js";
 import { getSingleTask } from "/s/buss/acs/g/j/singletask.js";
-import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
-import { initAlloc } from "/s/buss/wms/alloc/item/j/alloc.render.js";
 import { allocOp } from "/s/buss/wms/alloc/item/j/alloc.op.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
