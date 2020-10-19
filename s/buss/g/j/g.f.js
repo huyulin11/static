@@ -609,26 +609,29 @@ class GF {
             return data;
         }
         var renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4,
-            numInPage = conf.numInPage ? conf.numInPage : 1000;
+            numInPage = conf.numInPage ? conf.numInPage : 1000, clickFun = conf.click;
         var filterData = dealData(conf.data, numInPage);
         var datas = filterData;
         var target = conf.target;
         var index = 1;
-        var tmpStr = "";
+        var trObj = $('<tr></tr>');
         for (var item of datas) {
             var tmpItemStr = renderOne(item);
             if (!tmpItemStr) continue;
-            tmpStr = tmpStr + "<td>" + tmpItemStr + "</td>";
+            let tdObj = $('<td></td>');
+            $(tdObj).append(tmpItemStr);
+            if (clickFun) { $(tdObj).find('button').bind("click", clickFun); }
+            $(trObj).append(tdObj);
             if (index >= numInLine) {
-                $(target).append(`<tr>${tmpStr}</tr>`);
+                $(target).append(trObj);
+                trObj = $('<tr></tr>');
                 index = 1;
-                tmpStr = "";
             } else {
                 index++;
             }
         }
-        if (tmpStr) {
-            $(target).append(`<tr>${tmpStr}</tr>`);
+        if ($(trObj).find('td').length > 0) {
+            $(target).append(trObj);
         }
         if (callback) callback();
     }

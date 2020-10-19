@@ -75,7 +75,15 @@ var doInit = function (target, json) {
 
     container.append(`<div>可选择货物↓↓↓↓↓↓</div>`);
     container.append(`<div><table class="alloc"></table></div>`);
-    let _conf = { numInLine: 5, target: "table.alloc" };
+    let _conf = {
+        numInLine: 5, target: "table.alloc", click: function () {
+            if ($(this).hasClass("choosed")) {
+                $(this).removeClass("choosed").css("background-color", "");
+            } else {
+                $(this).addClass("choosed").css("background-color", "green");
+            }
+        }
+    };
     setTimeout(function () {
         allocData((data) => {
             allocRender(data, _conf);
