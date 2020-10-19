@@ -74,6 +74,10 @@ let YZBD_NRDW = (_tasktype, _conf) => {
                 key: "itemcount",
                 name: "数量",
                 notnull: true,
+            }, {
+                key: "txm",
+                name: "条码",
+                notnull: false,
             },]
         };
     }

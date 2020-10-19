@@ -1,5 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
+import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
+import { allocRender } from "/s/buss/wms/alloc/item/j/alloc.render.list.work.js";
 
 var _detailid = gf.urlParam("detailid");
 var _target, container;
@@ -69,6 +71,20 @@ var doInit = function (target, json) {
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
     gf.bindBtns(btnContainer, tempBtns);
+
+    let _conf = { numInLine: 5, target: "table.alloc" };
+    let allocRenderUdf = (data) => {
+        allocRender(data, _conf);
+    };
+    setTimeout(function () {
+        allocData(allocRenderUdf, {
+            'allocItemFormMap.skuid': json.item,
+            'allocItemFormMap.txm': json.txm
+        });
+    }, 500);
+    setTimeout(function () {
+        gf.resizeTable();
+    }, 1000);
 }
 
 
