@@ -379,6 +379,9 @@ button.current {
 
 button.choosed {
 	background-color: #EB7347;
+	background-image: url(/s/i/icon/choosed.png);
+	background-repeat: no-repeat;
+	background-position: right top;
 }
 
 .rf-op input {
