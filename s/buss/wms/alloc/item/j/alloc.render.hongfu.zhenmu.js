@@ -9,22 +9,27 @@ var renderOne = function (allocInfo) {
         var skuTypeName = ((allocInfo.status != 1) ? sku.value(allocInfo.skuId) : "空");
         skuTypeName = (!skuTypeName) ? "普通货物" : skuTypeName;
         var skuInfo = `<font style='font-size: 10px;'>${skuTypeName}</font>`;
-        var weightNum = `<font style='font-weight: bolder;'>${((allocInfo.status != 1) ? allocInfo.num : "0")}</font>`;
+        var num = `<font style='font-weight: bolder;'>${((allocInfo.status != 1) ? allocInfo.num : "0")}</font>`;
         let showInfos = [];
-        showInfos.push(skuInfo);
-        showInfos.push(weightNum);
-        showInfos.push(allocInfo.text);
+        showInfos.push("物料:" + skuInfo);
+        showInfos.push("数量:" + num);
+        showInfos.push("货位:" + allocInfo.text);
         if (allocInfo.stock) {
-            let detailInfo = [];
             let stockJson = JSON.parse(allocInfo.stock);
-            for (let item of stockJson) {
-                let oneInfo = [];
-                for (let i in item) {
-                    oneInfo.push(`${gcol.getColName(i)}-${item[i]}`);
+            if (stockJson instanceof Array) {
+                let detailInfo = [];
+                for (let item of stockJson) {
+                    let oneInfo = [];
+                    for (let i in item) {
+                        oneInfo.push(`${gcol.getColName(i)}-${item[i]}`);
+                    }
+                    detailInfo.push(oneInfo.join(";"));
                 }
-                detailInfo.push(oneInfo.join(";"));
+                showInfos.push("明细:" + `<div>${detailInfo.join("<hr/>")}</div>`);
+            } else if (stockJson instanceof Object) {
+                showInfos.push("批次:" + stockJson.lot);
+                showInfos.push("条码:" + stockJson.txm);
             }
-            showInfos.push("明细：" + `<div>${detailInfo.join("<hr/>")}</div>`);
         }
         tmpStr = `<button class='item'
             data-id='${allocInfo.id}'
