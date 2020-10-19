@@ -42,10 +42,11 @@ let YZBD_NRDW = (_tasktype, _conf) => {
                 key: "itemcount",
                 name: "数量",
                 notnull: true,
-            }, {
-                key: "userdef3",
-                name: "尺寸",
-                notnull: true,
+                // }, {
+                //     key: "userdef3",
+                //     name: "尺寸",
+                //     notnull: false,
+                //     hide: true,
             }, {
                 key: "lot",
                 name: "批次号",
