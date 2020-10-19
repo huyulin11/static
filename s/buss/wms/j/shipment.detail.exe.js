@@ -80,7 +80,7 @@ var doInit = function (target, json) {
             if ($(this).hasClass("choosed")) {
                 $(this).removeClass("choosed").css("background-color", "");
             } else {
-                $(this).addClass("choosed").css("background-color", "#0FB7DC");
+                $(this).addClass("choosed").css("background-color", "#246153");
             }
         }
     };
