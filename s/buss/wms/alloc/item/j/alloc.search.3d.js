@@ -6,6 +6,7 @@ let clear = {
     url: `/alloc/item/util/clearSearch.shtml`, style: "width:49%;",
     id: "play", name: "重置", class: "btn-warning",
     bind: function () {
+        $("#form").find("input").val("");
         doJob("clear", this);
     },
 }, search = {
