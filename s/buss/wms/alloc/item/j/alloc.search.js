@@ -13,11 +13,15 @@ let tempBtns = [{
 gf.bindBtns("div.doc-buttons", tempBtns);
 
 let _conf = { numInLine: 5, target: "table.alloc" };
+let _search = {};
 if (localStorage.projectKey == 'BJJK_HUIRUI') {
-    _conf = { numInLine: 4, target: "table.alloc" };
+    Object.assign(_conf, { numInLine: 4 });
+    Object.assign(_search, { 'allocItemFormMap.whid': 2, pageSize: 100 });
 }
-let allocRenderUdf = (data) => {
-    allocRender(data, _conf);
+let allocDataUdf = () => {
+    allocData((data) => {
+        allocRender(data, _conf);
+    }, _search);
 };
 
 var vm = new Vue({
@@ -30,19 +34,19 @@ var vm = new Vue({
     }, methods: {
         inputFun: function (e) {
             localStorage.setItem("bigSearchResult", e.target.value);
-            allocData(allocRenderUdf);
+            allocDataUdf();
         }
     }
 });
 
 setInterval(function () {
     if ($("#simple-2").is(":checked")) {
-        allocData(allocRenderUdf);
+        allocDataUdf();
     }
 }, 5000);
 
 setTimeout(function () {
-    allocData(allocRenderUdf);
+    allocDataUdf();
 }, 500);
 
 setTimeout(function () {

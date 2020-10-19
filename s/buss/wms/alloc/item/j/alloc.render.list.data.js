@@ -3,9 +3,6 @@ export var allocData = function (callback, condition) {
     $("table.alloc").html("");
     let serach = { "allocItemFormMap.text": $("#kw").val() };
     if (condition) { serach = Object.assign(serach, condition); }
-    if (localStorage.projectKey == "BJJK_HUIRUI") {
-        serach['allocItemFormMap.whid'] = 2; serach['pageSize'] = 100;
-    }
     jQuery.ajax({
         url: "/alloc/item/findByPage.shtml",
         data: serach,

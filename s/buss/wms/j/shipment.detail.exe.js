@@ -76,11 +76,10 @@ var doInit = function (target, json) {
     container.append(`<div>可选择货物↓↓↓↓↓↓</div>`);
     container.append(`<div><table class="alloc"></table></div>`);
     let _conf = { numInLine: 5, target: "table.alloc" };
-    let allocRenderUdf = (data) => {
-        allocRender(data, _conf);
-    };
     setTimeout(function () {
-        allocData(allocRenderUdf, {
+        allocData((data) => {
+            allocRender(data, _conf);
+        }, {
             'allocItemFormMap.skuid': json.item,
             'allocItemFormMap.txm': json.txm,
             'allocItemFormMap.status': '3'
