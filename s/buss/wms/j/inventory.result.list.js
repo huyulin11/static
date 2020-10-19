@@ -12,9 +12,16 @@ export let init = function () {
 	}
 	initConfList("inventory_result_" + paperid, {
 		checkbox: false,
+		jsonColumn: 'value',
 		columns: [{
 			colkey: "key",
 			name: "已盘点条码"
+		}, {
+			colkey: "lot",
+			name: "批次号"
+		}, {
+			colkey: "skuname",
+			name: "物料名称"
 		}],
 		fenyeInTail: true,
 	});
