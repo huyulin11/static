@@ -4,15 +4,17 @@ import { allocRender } from "/s/buss/wms/alloc/item/j/alloc.render.list.work.js"
 import "/s/buss/wms/alloc/item/j/alloc.event.js";
 
 let tempBtns = [{
-    id: "back", name: "返回", class: "btn-info", hide: function () { return localStorage.projectKey != 'BJJK_HUIRUI'; },
+    id: "back", name: "返回", class: "btn-info", hide: () => localStorage.projectKey != 'BJJK_HUIRUI',
     bind: function () {
         window.history.back();
     }, style: "min-height:25px;width:60px;float:right;"
 }];
 gf.bindBtns("div.doc-buttons", tempBtns);
 
-
 let _conf = { numInLine: 5, target: "table.alloc" };
+if (localStorage.projectKey == 'BJJK_HUIRUI') {
+    _conf = { numInLine: 4, target: "table.alloc" };
+}
 let allocRenderUdf = (data) => {
     allocRender(data, _conf);
 };
