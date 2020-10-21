@@ -64,7 +64,7 @@ var getShowVal = function (agvinfo) {
     let shortTarget = target.length > shortLength ? (target.substr(0, shortLength) + "...") : target;
     shortTarget = shortTarget ? "（" + shortTarget + "）" : "";
     target = `<span title='${target}'>${shortTarget}</span>`;
-    let taskDesc = agvinfo.taskexesid ? (agvinfo.taskexesid + ((!agvinfo.tasksequence || agvinfo.tasksequence == 1) ? "" : ("-" + agvinfo.tasksequence))) :
+    let taskDesc = agvinfo.taskexesid ? (agvinfo.taskexesid + (agvinfo.tasksequence == 1 ? "" : ("-" + agvinfo.tasksequence))) :
         (agvinfo.taskstatus == "FREE" || (agvinfo.taskstatus == "GOTO_CHARGE" && agvinfo.sitestatus == "CHARGING") ? "" : "阻塞中");
     val.taskStatusVal = "任务状态:" + taskstatus(agvinfo) + target + "<br/>" + taskDesc;
     let site = gv.site(agvinfo.currentsite);

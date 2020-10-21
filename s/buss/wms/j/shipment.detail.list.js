@@ -1,7 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
-import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 var paperid = gf.urlParam("shipmentMainFormMap.paperid");
 window.datagrid = dataGrid({
@@ -25,18 +24,7 @@ window.datagrid = dataGrid({
 		},
 	}, {
 		colkey: "item",
-		name: function () {
-			switch (localStorage.projectKey) {
-				case "BJJK_HUIRUI": return "SU";
-				default: return "物料类型";
-			}
-		},
-		renderData: (rowindex, data, rowdata, column) => {
-			switch (localStorage.projectKey) {
-				case "BJJK_HUIRUI": return data;
-				default: return sku.value(data);
-			}
-		},
+		name: "SU"
 	}, {
 		colkey: "userdef3",
 		name: "货位号"
