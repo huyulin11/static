@@ -83,14 +83,14 @@ var initPaperOp = function (tasktype, optype) {
         case "CSY_DAJ": {
             tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.del, btns.refresh,];
             if (_tasktype == "inventory") {
-                tempBtns.push(btns.whichAgv);
+                tempBtns = tempBtns.concat(btns.whichAgv);
             }
             break;
         }
         case "YZBD_NRDW": {
             tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.refresh,];
             if (_tasktype == "inventory") {
-                tempBtns.push(btns.del, btns.inventoryResult, btns.over);
+                tempBtns = tempBtns.concat(btns.del, btns.inventoryResult, btns.over);
             }
             break;
         }
@@ -99,7 +99,7 @@ var initPaperOp = function (tasktype, optype) {
                 tempBtns = [btns.refresh, btns.detail,];
                 if (optype == "RF") {
                     tempBtns = [btns.detail, btns.refresh, btns.back,];
-                    tempBtns.push(chooseByWarehouse());
+                    tempBtns = tempBtns.concat(chooseByWarehouse());
                 } else if (optype == "DETAIL") {
                     tempBtns = [btns.refresh,];
                 } else if (optype == "PRIORITY") {
@@ -115,14 +115,14 @@ var initPaperOp = function (tasktype, optype) {
                 } else if (optype == "COMBINE") {
                     tempBtns = [btns.refresh, btns.deleteSure,];
                 } else {
-                    tempBtns.push(chooseByWarehouse());
+                    tempBtns = tempBtns.concat(chooseByWarehouse());
                 }
             } else if (_tasktype == "receipt") {
                 tempBtns = [btns.refresh, btns.detail,];
             } else if (_tasktype == "transfer") {
                 tempBtns = [btns.refresh, btns.send, btns.detail, btns.deleteSub];
-                // tempBtns.push(btns[`combine`]);
-                // tempBtns.push(btns[`pick`]);
+                // tempBtns = tempBtns.concat(btns[`combine`]);
+                // tempBtns = tempBtns.concat(btns[`pick`]);
                 // $('div.doc-buttons').delegate("input:checkbox#importthenedit", "change", function (e) {
                 // <input type="checkbox" id="importthenedit" title="选中后导入进入编辑界面" ${localStorage.importThenEdit ? "checked" : ""}>
                 //     if (this.checked) {
