@@ -20,6 +20,18 @@ window.datagrid = dataGrid({
 				+ "<a class='editSkuName'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}, {
+		colkey: "WIDE",
+		name: "WIDE",
+		hide: false,
+	}, {
+		colkey: "HEIGHT",
+		name: "HEIGHT",
+		hide: false,
+	}, {
+		colkey: "LONG",
+		name: "LONG",
+		hide: false,
+	}, {
 		colkey: "type",
 		name: "SKU类型",
 		renderData: function (rowindex, data, rowdata, column) {
