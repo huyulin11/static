@@ -2,6 +2,7 @@ import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { initAgvList } from "/s/buss/acs/FANCY/j/agv.list.js";
 import { refreshAgvsInfo } from "/s/buss/acs/g/j/agv.msg.js";
 import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
+import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
 let checkLoginError = false;
@@ -118,6 +119,15 @@ export var initAcsControl = function () {
 		refreshAcsInfo(renderCtrlBtns);
 		refreshAgvsInfo();
 	}, 2000);
+
+	setInterval(() => {
+		agvRunningLogs((datas) => {
+			if (!datas) { return; }
+			for (let data of datas) {
+				layer.msg(data.key + "号车辆：" + data.value, { offset: ['90%', '60%'] });
+			}
+		});
+	}, 5000);
 }
 
 var delegateEvent = () => {
