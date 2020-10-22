@@ -42,6 +42,15 @@ window.datagrid = dataGrid({
 			}
 		}
 	}, {
+		colkey: "txm",
+		name: "条形码",
+		hide: () => {
+			switch (localStorage.projectKey) {
+				case "YZBD_NRDW": return false;
+				default: return true;
+			}
+		},
+	}, {
 		colkey: "userdef3",
 		name: () => {
 			switch (localStorage.projectKey) {
