@@ -124,7 +124,7 @@ export var initAcsControl = function () {
 		agvRunningLogs((datas) => {
 			if (!datas) { return; }
 			for (let data of datas) {
-				layer.msg(data.key + "号车辆：" + data.value, { offset: ['90%', '60%'] });
+				layer.msg(data.key + "号车辆：" + data.value, { offset: 'b' });
 			}
 		});
 	}, 5000);
