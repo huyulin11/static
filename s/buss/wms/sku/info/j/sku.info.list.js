@@ -20,16 +20,16 @@ window.datagrid = dataGrid({
 				+ "<a class='editSkuName'><img src='/s/i/edit.png'/></a>" + "</div>";
 		}
 	}, {
+		colkey: "LONG",
+		name: "长",
+		hide: false,
+	}, {
 		colkey: "WIDE",
-		name: "WIDE",
+		name: "宽",
 		hide: false,
 	}, {
 		colkey: "HEIGHT",
-		name: "HEIGHT",
-		hide: false,
-	}, {
-		colkey: "LONG",
-		name: "LONG",
+		name: "高",
 		hide: false,
 	}, {
 		colkey: "type",
@@ -73,6 +73,10 @@ $("#edit").click("click", function () {
 $("#del").click("click", function () {
 	del();
 });
+
+$("#scan").click("click", function () {
+	scan();
+});
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -106,4 +110,27 @@ function del() {
 			ids: cbox.join(":")
 		}, "json");
 	});
+}
+function scan() {
+	var detailid = gf.checkOnlyOne("id");
+	var cbox = window.datagrid.getSelectedCheckbox();
+	if (cbox == "") {
+		gf.layerMsg("请选择扫描项！！");
+		return;
+	}
+	layer.confirm('是否扫描？',function(){
+		gf.doAjax({
+		url:'/sku/info/scanByName.shtml',
+		data: {id: detailid},
+	})
+	})
+	
+	// var cbox = window.datagrid.getSelectedCheckbox();
+	// if (cbox == "") {return;}
+	// layer.confirm('是否保存？', function (index) {
+	// 	var url = '/sku/info/scanByName.shtml';
+	// 	gf.ajax(url, {
+	// 		id: cbox.join(":")
+	// 	}, "json");
+	// });
 }
