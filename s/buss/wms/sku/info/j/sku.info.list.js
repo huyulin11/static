@@ -130,6 +130,6 @@ function scan() {
 setInterval(() => {
 	skuInfoLogs((data) => {
 		if (!data) { return; }
-		layer.msg('长:'+data.LONG+',宽:'+data.WIDE+',高:'+data.HEIGHT+',最近更新：'+data.TIME, { offset: 'b' });
+		layer.msg('扫描仪扫描数据：' + '长:' + data.LONG + ',宽:' + data.WIDE + ',高:' + data.HEIGHT + '<br/>' + '最近更新：' + data.TIME, { offset: 'b' });
 	});
 }, 5000);
