@@ -64,7 +64,7 @@ var doInit = function (target, json) {
     _target = target;
     container = $(target);
     console.log(json);
-    container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}</span>`);
+    container.append(`<span>物料类型：${sku.value(json.item)}，数量：${json.itemcount}${json.txm ? ("，条形码：" + json.txm) : ""}</span>`);
     let tempBtns = [play, restore, save, exe, back];
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
