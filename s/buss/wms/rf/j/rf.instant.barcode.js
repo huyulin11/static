@@ -1,7 +1,17 @@
 import "/s/j/vue/vue.min.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import {agvRunningLogs} from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 
 let container = "#rootContainer";
+
+setInterval(() => {
+	agvRunningLogs((datas) => {
+        if (!datas) { return; }
+        for (let data of datas) {
+            layer.msg(data.key + "号车辆：" + data.value, { offset: 'b' });
+        }
+    });
+}, 5000);
 
 Vue.directive('focus', {
     inserted: function (el) {
