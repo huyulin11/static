@@ -36,27 +36,24 @@ if (localStorage.projectKey == 'BJJK_HUIRUI') {
         { id: "instantBarcode", name: "入库扫码", "url": `/s/buss/wms/rf/h/rf.instant.barcode.html` },
         {
             id: "udfConfirm", name: "用户确认", "click": function () {
-                var tips = "确认信号";
-                var opType = "UdfConfirm";
-                taskexe.addCtrlTaskFromBtn(this, tips, opType);
-            }
+                taskexe.addCtrlTaskFromBtn(this, "确认信号", "UdfConfirm");
+            }, nameRenderFun: function (obj, dataSupport) {
+                $(obj).data('open', dataSupport.IS_UDF_CONFIRM).html("用户确认" + gf.htmlPiece(dataSupport.IS_UDF_CONFIRM));
+            }, interval: 1000
         },
         { id: "logout", name: "退出", "url": "/logout.shtml" },
     ];
-    let checkValue = (value) => {
-        $("#udfConfirm").data('open', value.IS_UDF_CONFIRM).html("用户确认" + gf.htmlPiece(value.IS_UDF_CONFIRM));
-    };
-    setInterval(() => {
-        refreshAcsInfo(checkValue);
-    }, 2000);
 }
+
 var initMain = function () {
     let title = "RF主界面";
     $(container).find("h2").html(title);
     $(document).attr("title", title);
 
     let conf = {
-        values: btns, numInLine: 2, style: `cellspacing="10px" cellspadding="1px"`,
+        dataSupport: refreshAcsInfo,
+        values: btns, numInLine: 2,
+        style: `cellspacing="10px" cellspadding="1px"`,
         choose: function (value) {
             if (value.choosed == "ON") { return true; }
             return false;

@@ -469,7 +469,6 @@ class GF {
                 $(btn).data("id", value);
                 $(btn).html(value);
             } else {
-                let datas = "";
                 for (let ii in value) {
                     if (typeof value[ii] == 'function') {
                         $(btn).bind(ii, value[ii]);
@@ -485,6 +484,22 @@ class GF {
                 $(btn).attr("id", value.id);
                 $(btn).data("id", value.id);
                 $(btn).html(`${value.name}${conf.showId ? "-" + value.id : ""}`);
+                if (value.nameRenderFun && conf.dataSupport) {
+                    let nameRenderFun = value.nameRenderFun;
+                    let obj = btn;
+                    let fun = () => {
+                        if (typeof conf.dataSupport == 'function') {
+                            conf.dataSupport((data) => {
+                                nameRenderFun(obj, data);
+                            });
+                        } else {
+                            let data = conf.dataSupport;
+                            nameRenderFun(obj, data);
+                        }
+                    };
+                    fun();
+                    if (value.interval) { setInterval(fun, value.interval); }
+                }
             }
             $(tdBtn).append(btn);
             if (index >= _numInLine) {
