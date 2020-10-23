@@ -2,6 +2,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
+import { skuInfoLogs } from "/s/buss/g/j/jquery/skuinfo.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
@@ -118,19 +119,17 @@ function scan() {
 		gf.layerMsg("请选择扫描项！！");
 		return;
 	}
-	layer.confirm('是否扫描？',function(){
+	layer.confirm('是否扫描？', function () {
 		gf.doAjax({
-		url:'/sku/info/scanByName.shtml',
-		data: {id: detailid},
+			url: '/sku/info/scanByName.shtml',
+			data: { id: detailid },
+		})
 	})
-	})
-	
-	// var cbox = window.datagrid.getSelectedCheckbox();
-	// if (cbox == "") {return;}
-	// layer.confirm('是否保存？', function (index) {
-	// 	var url = '/sku/info/scanByName.shtml';
-	// 	gf.ajax(url, {
-	// 		id: cbox.join(":")
-	// 	}, "json");
-	// });
 }
+
+setInterval(() => {
+	skuInfoLogs((data) => {
+		if (!data) { return; }
+		layer.msg('长:'+data.LONG+',宽:'+data.WIDE+',高:'+data.HEIGHT+',最近更新：'+data.TIME, { offset: 'b' });
+	});
+}, 5000);
