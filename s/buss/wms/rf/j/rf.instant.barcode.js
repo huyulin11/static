@@ -30,7 +30,8 @@ var vm = new Vue({
             this.clearBarCode();
         },
         clearBarCode(){
-            this.msg=null
+            this.msg=null;
+            $("#barcode").focus();
         },
         barcodeEnter(){
             this.saveBarCode();
