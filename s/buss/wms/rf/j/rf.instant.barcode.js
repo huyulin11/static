@@ -43,8 +43,5 @@ var vm = new Vue({
             this.msg=null;
             $("#barcode").focus();
         },
-        barcodeEnter(){
-            this.saveBarCode();
-        }
     }
 })
