@@ -21,9 +21,6 @@ let cols = [{
 	colkey: "itemcount",
 	name: "货物数"
 }, {
-	colkey: "txm",
-	name: "条形码"
-}, {
 	colkey: "status",
 	name: "状态",
 	renderData: function (rowindex, data, rowdata, column) {
