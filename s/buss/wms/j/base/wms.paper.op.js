@@ -88,10 +88,12 @@ var initPaperOp = function (tasktype, optype) {
             break;
         }
         case "YZBD_NRDW": {
-            tempBtns = [btns.add, btns.edit, btns.send, btns.refresh,];
             if (_tasktype == "inventory") {
+                tempBtns = [btns.add, btns.edit, btns.send, btns.refresh,];
                 tempBtns = tempBtns.concat(btns.del, btns.inventoryResult, btns.over);
-            }
+            }else {
+                tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.refresh,];
+            }  
             break;
         }
         case "BJJK_HUIRUI": {
