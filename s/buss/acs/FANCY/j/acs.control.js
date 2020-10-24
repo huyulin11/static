@@ -16,11 +16,11 @@ let renderModel = (key, target) => {
 	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-target='${target}'></div>`);
 }
 
-let renderLink = (key, url) => {
+let renderLink = (key, url, self) => {
 	let style = $(`<style id='${key}HideDiv_style'></style>`);
 	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
 	$("head").append(style);
-	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}'></div>`);
+	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-self='${self ? self : ""}'></div>`);
 }
 
 let taskReady = () => {
@@ -55,7 +55,8 @@ var container = function () {
 			renderModel('search', 'div#searchContainer');
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
-			renderLink('manager', '/s/buss/g/h/manager.html');
+			renderLink('PDA', '/s/buss/wms/rf/h/rf.mgr.html');
+			renderLink('manager', '/s/buss/g/h/manager.html', true);
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 			taskReady();
 			renderModel('task', 'div#taskContainer');
@@ -109,7 +110,10 @@ export var initAcsControl = function () {
 			}
 		} else {
 			var url = $(this).data("url");
-			if (url) { window.open(url, "_self"); }
+			var self = $(this).data("self");
+			if (url) {
+				window.open(url, self ? "_self" : false);
+			}
 		}
 	});
 

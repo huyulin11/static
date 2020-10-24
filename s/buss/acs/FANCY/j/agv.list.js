@@ -76,7 +76,7 @@ var checkLogin = function () {
 }
 
 export var initAgvList = function () {
-    ws("ws://127.0.0.1:9080/websocket/agvsinfo", (event) => {
+    ws("ws://" + window.document.location.hostname + ":9080" + "/websocket/agvsinfo", (event) => {
         let json = JSON.parse(event.data);
         whenSuccess(json);
     }, null, () => {
