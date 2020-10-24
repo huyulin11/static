@@ -51,7 +51,7 @@ var container = function () {
 			renderModel('task', 'div#taskContainer');
 		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
 		} else if (localStorage.projectKey == 'YZBD_NRDW') {
-			renderModel('tongji', 'div#tongjiContainer');
+			// renderModel('tongji', 'div#tongjiContainer');
 			renderModel('search', 'div#searchContainer');
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
