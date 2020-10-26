@@ -258,7 +258,12 @@ var deliverHandler = function (that) {
 var waitHandler = function (that) {
 	allDisabled();
 	if (!confirm('是否确认执行该操作?')) { return; }
-	doTask(agvId, "FETCH", 123);
+	var agvbusstype = findIotInfo(agvId, "agvbusstype");
+	if (agvbusstype == 'TON_1') {
+		doTask(agvId, "FETCH", 123);
+	} else if (agvbusstype == 'TON_2') {
+		doTask(agvId, "DELIVER", 12);
+	}
 }
 
 var gotoInitHandler = function (that) {
