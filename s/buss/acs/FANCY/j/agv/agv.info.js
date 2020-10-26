@@ -4,24 +4,13 @@ import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { fetchTaskTaikaiJy, deleverTaskTaikaiJy } from '/s/buss/acs/FANCY/j/agv/agv.info.taikaiJy.js';
 import { fetchTaskLaoFoxconn, deleverTaskLaoFoxconn } from '/s/buss/acs/FANCY/j/agv/agv.info.laoFoxconn.js';
+import { gotoInitLaoDbwy } from '/s/buss/acs/FANCY/j/agv/agv.info.laoDbwy.js';
 
 var agvId = currentAgvId;
 
 var currentTask = new Array();
 
 var _target;
-
-export var doTask = (agvId, task, targetSite) => {
-	let checkSite = function () {
-		if (localStorage.projectKey == "CSY_CDBP") { return false; }
-		return (isNaN(Number(targetSite)) && isNaN(Number(targetSite.replace(/#/g, ""))));
-	}
-	if (!targetSite || checkSite()) {
-		layer.msg("请输入有效的目标站点编号！");
-		return;
-	}
-	taskexe.addTaskTo(agvId, task, targetSite);
-}
 
 var getTargets = function () {
 	var arr = [];
@@ -148,7 +137,7 @@ var transportHandler = function (that) {
 	allDisabled();
 	if (!confirm('是否确认执行该操作?')) { return; }
 	var targetSite = prompt("请输入有效的目标站点编号！");
-	doTask(agvId, $(that).attr("id"), targetSite);
+	taskexe.addTaskToSite(agvId, $(that).attr("id"), targetSite);
 }
 
 var fetchHandler = function (that) {
@@ -174,9 +163,9 @@ var waitHandler = function (that) {
 	if (!confirm('是否确认执行该操作?')) { return; }
 	var agvbusstype = findIotInfo(agvId, "agvbusstype");
 	if (agvbusstype == 'TON_1') {
-		doTask(agvId, "FETCH", 123);
+		taskexe.addTaskToSite(agvId, "FETCH", 123);
 	} else if (agvbusstype == 'TON_2') {
-		doTask(agvId, "DELIVER", 12);
+		taskexe.addTaskToSite(agvId, "DELIVER", 12);
 	}
 }
 
@@ -188,19 +177,6 @@ var gotoInitHandler = function (that) {
 		if (!confirm('是否确认执行该操作?')) { return; }
 		taskexe.addCtrlTask(agvId, $(that).attr("id"));
 	}
-}
-
-var gotoInitLaoDbwy = function () {
-	var task = "TRANSPORT";
-	var indexOfTips = layer.confirm('请选择返回原料库的目的地', {
-		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056', '原料库4号-3057', '原料库5号-3058', '原料库6号-3059'],
-		btn1: function () { doTask(agvId, task, 3054); },
-		btn2: function () { doTask(agvId, task, 3055); },
-		btn3: function () { doTask(agvId, task, 3056); },
-		btn4: function () { doTask(agvId, task, 3057); },
-		btn5: function () { doTask(agvId, task, 3058); },
-		btn6: function () { doTask(agvId, task, 3059); }
-	});
 }
 
 var deleverInitHandler = function () {
@@ -220,7 +196,7 @@ var deleverInitHandler = function () {
 				return;
 			}
 			var targetSite = arr.join("#");
-			doTask(agvId, "DELIVER", targetSite);
+			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
 		},
 	});
 }
@@ -230,13 +206,13 @@ var deleverStereotypeHandler = function () {
 	var task = "DELIVER";
 	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
 		btn: ['袜机线尾1号-4001', '袜机线尾2号-4002', '袜机线尾3号-4003', '定型1号-2054', '定型2号-2055', '定型3号-2056', '定型4号-2057'],
-		btn1: function () { doTask(agvId, task, 4001); },
-		btn2: function () { doTask(agvId, task, 4002); },
-		btn3: function () { doTask(agvId, task, 4003); },
-		btn4: function () { doTask(agvId, task, 2054); },
-		btn5: function () { doTask(agvId, task, 2055); },
-		btn6: function () { doTask(agvId, task, 2056); },
-		btn7: function () { doTask(agvId, task, 2057); }
+		btn1: function () { taskexe.addTaskToSite(agvId, task, 4001); },
+		btn2: function () { taskexe.addTaskToSite(agvId, task, 4002); },
+		btn3: function () { taskexe.addTaskToSite(agvId, task, 4003); },
+		btn4: function () { taskexe.addTaskToSite(agvId, task, 2054); },
+		btn5: function () { taskexe.addTaskToSite(agvId, task, 2055); },
+		btn6: function () { taskexe.addTaskToSite(agvId, task, 2056); },
+		btn7: function () { taskexe.addTaskToSite(agvId, task, 2057); }
 	});
 }
 
@@ -245,21 +221,21 @@ var deleverPackHandler = function () {
 	var task = "DELIVER";
 	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
 		btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
-		btn1: function () { doTask(agvId, task, 2058); },
-		btn2: function () { doTask(agvId, task, 2059); },
-		btn3: function () { doTask(agvId, task, 2060); },
-		btn4: function () { doTask(agvId, task, 2061); },
-		btn5: function () { doTask(agvId, task, 2108); },
-		btn6: function () { doTask(agvId, task, 2109); },
-		btn7: function () { doTask(agvId, task, 2110); },
-		btn8: function () { doTask(agvId, task, 2111); },
-		btn9: function () { doTask(agvId, task, 2112); },
-		btn10: function () { doTask(agvId, task, 2113); },
-		btn11: function () { doTask(agvId, task, 2114); },
-		btn12: function () { doTask(agvId, task, 2115); },
-		btn13: function () { doTask(agvId, task, 2116); },
-		btn14: function () { doTask(agvId, task, 2117); },
-		btn15: function () { doTask(agvId, task, 2118); }
+		btn1: function () { taskexe.addTaskToSite(agvId, task, 2058); },
+		btn2: function () { taskexe.addTaskToSite(agvId, task, 2059); },
+		btn3: function () { taskexe.addTaskToSite(agvId, task, 2060); },
+		btn4: function () { taskexe.addTaskToSite(agvId, task, 2061); },
+		btn5: function () { taskexe.addTaskToSite(agvId, task, 2108); },
+		btn6: function () { taskexe.addTaskToSite(agvId, task, 2109); },
+		btn7: function () { taskexe.addTaskToSite(agvId, task, 2110); },
+		btn8: function () { taskexe.addTaskToSite(agvId, task, 2111); },
+		btn9: function () { taskexe.addTaskToSite(agvId, task, 2112); },
+		btn10: function () { taskexe.addTaskToSite(agvId, task, 2113); },
+		btn11: function () { taskexe.addTaskToSite(agvId, task, 2114); },
+		btn12: function () { taskexe.addTaskToSite(agvId, task, 2115); },
+		btn13: function () { taskexe.addTaskToSite(agvId, task, 2116); },
+		btn14: function () { taskexe.addTaskToSite(agvId, task, 2117); },
+		btn15: function () { taskexe.addTaskToSite(agvId, task, 2118); }
 	});
 }
 
@@ -284,7 +260,7 @@ var gotoStereotypeHandler = function () {
 				return;
 			}
 			var targetSite = arr.join("#");
-			doTask(agvId, "DELIVER", targetSite);
+			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
 		}
 	});
 }
@@ -309,7 +285,7 @@ var gotoPackHandler = function () {
 				return;
 			}
 			var targetSite = arr.join("#");
-			doTask(agvId, "DELIVER", targetSite);
+			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
 		}
 	});
 }
@@ -325,47 +301,18 @@ export var init = function (target) {
 		}
 	});
 
-	let items = [{
-		id: 'TRANSPORT', handler: function () {
-			transportHandler(this);
-		}
-	}, {
-		id: 'DELIVER', handler: function () {
-			deliverHandler(this);
-		}
-	}, {
-		id: 'FETCH', handler: function () {
-			fetchHandler(this);
-		}
-	}, {
-		id: 'DELIVER_INIT', handler: function () {
-			deleverInitHandler();
-		}
-	}, {
-		id: 'DELIVER_STEREOTYPE', handler: function () {
-			deleverStereotypeHandler();
-		}
-	}, {
-		id: 'DELIVER_PACK', handler: function () {
-			deleverPackHandler();
-		}
-	}, {
-		id: 'WAIT', handler: function () {
-			waitHandler(this);
-		}
-	}, {
-		id: 'GOTO_INIT', handler: function () {
-			gotoInitHandler(this);
-		}
-	}, {
-		id: 'GOTO_STEREOTYPE', handler: function () {
-			gotoStereotypeHandler();
-		}
-	}, {
-		id: 'GOTO_PACK', handler: function () {
-			gotoPackHandler();
-		}
-	},];
+	let items = [
+		{ id: 'TRANSPORT', handler: function () { transportHandler(this); } },
+		{ id: 'DELIVER', handler: function () { deliverHandler(this); } },
+		{ id: 'FETCH', handler: function () { fetchHandler(this); } },
+		{ id: 'DELIVER_INIT', handler: function () { deleverInitHandler(); } },
+		{ id: 'DELIVER_STEREOTYPE', handler: function () { deleverStereotypeHandler(); } },
+		{ id: 'DELIVER_PACK', handler: function () { deleverPackHandler(); } },
+		{ id: 'WAIT', handler: function () { waitHandler(this); } },
+		{ id: 'GOTO_INIT', handler: function () { gotoInitHandler(this); } },
+		{ id: 'GOTO_STEREOTYPE', handler: function () { gotoStereotypeHandler(); } },
+		{ id: 'GOTO_PACK', handler: function () { gotoPackHandler(); } },
+	];
 
 	let especial = "";
 	for (let item of items) {

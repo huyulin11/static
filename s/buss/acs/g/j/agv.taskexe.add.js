@@ -26,6 +26,18 @@ taskexe.addCtrlTaskFromBtn = (that, tips, opType) => {
     }
 }
 
+taskexe.addTaskToSite = (agvId, task, targetSite) => {
+    let checkSite = function () {
+        if (localStorage.projectKey == "CSY_CDBP") { return false; }
+        return (isNaN(Number(targetSite)) && isNaN(Number(targetSite.replace(/#/g, ""))));
+    }
+    if (!targetSite || checkSite()) {
+        layer.msg("请输入有效的目标站点编号！");
+        return;
+    }
+    taskexe.addTaskTo(agvId, task, targetSite);
+}
+
 taskexe.addTaskTo = function (agvId, tasktype, to, callback) {
     addTaskTo(agvId, tasktype, to, callback);
 }

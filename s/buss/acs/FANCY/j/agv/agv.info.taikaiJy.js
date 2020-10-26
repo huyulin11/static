@@ -1,6 +1,7 @@
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
-import { doTask, getButtonsHtml, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
+import { getButtonsHtml, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
+import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 
 var agvId = currentAgvId;
 
@@ -14,18 +15,18 @@ var fetchTaskTaikaiJy = function (that) {
 		var task = $(that).attr("id");
 		var indexOfTips = layer.confirm('请选择取货任务的目的地', {
 			btn: ['1号 (呼叫1)', '2号 (呼叫2)', '3号 (呼叫3)', '4号 (呼叫4)', '5号 (呼叫5)', '6号 (呼叫6)', '7号 (呼叫7)', '8号 (呼叫8)', '9号 (呼叫9)', '10号 (呼叫10)', '11号 (呼叫11)', '12号 (呼叫12)'],
-			btn1: function () { doTask(agvId, task, 153); },
-			btn2: function () { doTask(agvId, task, 154); },
-			btn3: function () { doTask(agvId, task, 156); },
-			btn4: function () { doTask(agvId, task, 157); },
-			btn5: function () { doTask(agvId, task, 160); },
-			btn6: function () { doTask(agvId, task, 161); },
-			btn7: function () { doTask(agvId, task, 164); },
-			btn8: function () { doTask(agvId, task, 165); },
-			btn9: function () { doTask(agvId, task, 168); },
-			btn10: function () { doTask(agvId, task, 169); },
-			btn11: function () { doTask(agvId, task, 171); },
-			btn12: function () { doTask(agvId, task, 172); }
+			btn1: function () { taskexe.addTaskToSite(agvId, task, 153); },
+			btn2: function () { taskexe.addTaskToSite(agvId, task, 154); },
+			btn3: function () { taskexe.addTaskToSite(agvId, task, 156); },
+			btn4: function () { taskexe.addTaskToSite(agvId, task, 157); },
+			btn5: function () { taskexe.addTaskToSite(agvId, task, 160); },
+			btn6: function () { taskexe.addTaskToSite(agvId, task, 161); },
+			btn7: function () { taskexe.addTaskToSite(agvId, task, 164); },
+			btn8: function () { taskexe.addTaskToSite(agvId, task, 165); },
+			btn9: function () { taskexe.addTaskToSite(agvId, task, 168); },
+			btn10: function () { taskexe.addTaskToSite(agvId, task, 169); },
+			btn11: function () { taskexe.addTaskToSite(agvId, task, 171); },
+			btn12: function () { taskexe.addTaskToSite(agvId, task, 172); }
 		});
 	}
 }
@@ -50,7 +51,7 @@ var deleverTaskTaikaiJy = function () {
 				return;
 			}
 			var targetSite = arr.join("#");
-			doTask(agvId, "DELIVER", targetSite);
+			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
 		}
 	});
 }
