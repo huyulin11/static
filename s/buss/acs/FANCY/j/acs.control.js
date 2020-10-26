@@ -40,16 +40,21 @@ var container = function () {
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
 			renderModel('lift', 'div#liftContainer');
 			renderModel('door', 'div#autodoorContainer');
+			renderModel('msg', 'div#msgContainer');
 		} else if (localStorage.projectKey == 'TAIKAI_JY') {
+			renderModel('msg', 'div#msgContainer');
 		} else if (localStorage.projectKey == 'CSY_DAJ') {
 			renderModel('charge', 'div#chargeContainer');
 			renderModel('windowCenter', 'div#windowCenterContainer');
 			renderModel('window', 'div#windowContainer');
 			renderModel('wms', 'div#wmsContainer');
+			renderModel('msg', 'div#msgContainer');
 		} else if (localStorage.projectKey == 'CSY_CDBP') {
 			taskReady();
 			renderModel('task', 'div#taskContainer');
+			renderModel('msg', 'div#msgContainer');
 		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
+			renderModel('msg', 'div#msgContainer');
 		} else if (localStorage.projectKey == 'YZBD_NRDW') {
 			// renderModel('tongji', 'div#tongjiContainer');
 			renderModel('search', 'div#searchContainer');

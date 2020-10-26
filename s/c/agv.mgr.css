@@ -183,7 +183,7 @@ input.bigSearch {
 	}
 }
 
-#msgContainer {
+/* #msgContainer {
 	border: 1px;
 	height: auto;
 	background-color: inherit;
@@ -192,7 +192,7 @@ input.bigSearch {
 	right: 0;
 	margin: auto;
 	text-align: left;
-}
+} */
 
 #op {
 	padding-top: 2%;
