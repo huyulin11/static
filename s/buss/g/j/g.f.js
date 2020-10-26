@@ -537,10 +537,15 @@ class GF {
         }
         return flag;
     };
-    layerParentMsg(content) {
+    layer() {
         let layerCurrent = layer;
-        if (parent && parent.layer) { layerCurrent = parent.layer; } else { layerCurrent = layer; }
-        layerCurrent.msg(content);
+        if (parent && parent.layer) {
+            layerCurrent = parent.layer;
+        }
+        return layerCurrent;
+    };
+    layerParentMsg(content) {
+        gf.layer().msg(content);
     };
     layerMsg(content, end) {
         layer.msg(content, {

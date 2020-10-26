@@ -186,7 +186,7 @@ var deleverInitHandler = function () {
 		targets.push({ id: i });
 	}
 	var buttons = getButtonsHtml(targets);
-	var indexOfTips = layer.confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
+	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
 		btn: ['确定送料'],
 		area: '386px',
 		btn1: function () {
@@ -204,7 +204,7 @@ var deleverInitHandler = function () {
 var deleverStereotypeHandler = function () {
 	allDisabled();
 	var task = "DELIVER";
-	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
+	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地', {
 		btn: ['袜机线尾1号-4001', '袜机线尾2号-4002', '袜机线尾3号-4003', '定型1号-2054', '定型2号-2055', '定型3号-2056', '定型4号-2057'],
 		btn1: function () { taskexe.addTaskToSite(agvId, task, 4001); },
 		btn2: function () { taskexe.addTaskToSite(agvId, task, 4002); },
@@ -219,7 +219,7 @@ var deleverStereotypeHandler = function () {
 var deleverPackHandler = function () {
 	allDisabled();
 	var task = "DELIVER";
-	var indexOfTips = layer.confirm('请选择送料任务的目的地', {
+	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地', {
 		btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
 		btn1: function () { taskexe.addTaskToSite(agvId, task, 2058); },
 		btn2: function () { taskexe.addTaskToSite(agvId, task, 2059); },
@@ -247,7 +247,7 @@ var gotoStereotypeHandler = function () {
 		targets.push({ id: i });
 	}
 	var buttons = getButtonsHtml(targets);
-	var indexOfTips = layer.confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
+	var indexOfTips = gf.layer().confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
 		btn: ['确定前往'],
 		area: '386px',
 		btn1: function () {
@@ -272,7 +272,7 @@ var gotoPackHandler = function () {
 		targets.push({ id: i });
 	}
 	var buttons = getButtonsHtml(targets);
-	var indexOfTips = layer.confirm('请选择前往包装暂存区的目的地' + '<br/>' + buttons, {
+	var indexOfTips = gf.layer().confirm('请选择前往包装暂存区的目的地' + '<br/>' + buttons, {
 		btn: ['确定前往'],
 		area: '386px',
 		btn1: function () {
