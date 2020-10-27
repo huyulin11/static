@@ -13,6 +13,10 @@
 	<script src="/wbSampleBuild/TemplateData/UnityProgress.js"></script>
 	<script src="/wbSampleBuild/Build/UnityLoader.js"></script>
 	<script>
+		function send2Js() {
+			let url = 'ws://' + location.hostname + ':9080/websocket/3d';
+			unityInstance.SendMessage("Main Camera", "ReciveJsMsg", url);
+		}
 		var unityInstance = UnityLoader.instantiate("unityContainer", "/wbSampleBuild/Build/HDBuild.json", { onProgress: UnityProgress });
 	</script>
 </head>
