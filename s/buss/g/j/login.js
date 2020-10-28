@@ -67,19 +67,24 @@ var vm = new Vue({
         calExpireTime: function () {
             var times = gp.expireTime;
             var deadline;
+            var errMsg;
             if (times == "0") {
                 deadline = "永久";
             } else {
                 let deadtime = new Date(0 + Number(times));
                 let leftDays = (deadtime - new Date()) / (24 * 3600 * 1000);
                 if (leftDays >= 0 && leftDays < 7) {
-                    layer.msg("授权日期不足七天，请提前与技术提供商联系，防止授权到期影响您的使用！");
+                    errMsg = "授权日期不足七天，请提前与技术提供商联系，防止授权到期影响您的使用！";
+                    layer.msg(errMsg);
+                    this.expireTime = errMsg;
                 } else if (leftDays < 0) {
-                    layer.msg("当前授权已过期！");
+                    errMsg = "当前授权已过期！";
+                    layer.msg(errMsg);
+                    this.expireTime = errMsg;
                 }
                 deadline = deadtime.toLocaleDateString() + "(测试授权)";
             }
-            this.expireTime = "授权有效期至:" + deadline;
+            console.log("授权有效期至:" + deadline);
         }
     },
     computed: {
