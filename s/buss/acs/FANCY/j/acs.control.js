@@ -60,7 +60,7 @@ var container = function () {
 			renderModel('search', 'div#searchContainer');
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
-			renderLink('PDA', '/s/buss/wms/rf/h/rf.mgr.html');
+			renderModel('PDA', 'div#PDAContainer');
 			renderLink('manager', '/s/buss/g/h/manager.html', true);
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 			taskReady();
