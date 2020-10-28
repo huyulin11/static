@@ -55,6 +55,10 @@ let YZBD_NRDW = (_tasktype, _conf) => {
                 key: "supplier",
                 name: "供应商",
                 notnull: false,
+            },{
+                key:"txm",
+                name:"条码",
+                notnull:true,
             },]
         }
     } else if (_tasktype == 'shipment') {
