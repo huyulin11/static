@@ -55,6 +55,16 @@ let _columns = [{
             return "使用中";
         }
     }
+}, {
+    name: "操作",
+    renderData: function (rowindex, data, rowdata, column) {
+        if (rowdata.delflag == "1") {
+            return "";
+        }
+        var btns = $(`<button type='button' class='btn btn-info marR10 delByLogic' data-key='${rowdata.key}'>删除</button>`);
+        btns.bind("click", this.fun);
+        return btns;
+    },
 }];
 
 window.datagrid = dataGrid({
@@ -83,4 +93,11 @@ $("#search").on("click", function () {
 $("#searchForm").on("submit", function () {
     doSearch();
     return false;
+});
+
+$("#paging").delegate(".delByLogic", "click", function () {
+    let key = $(this).data("key");
+    layer.confirm(`是否删除该任务？`, function (index) {
+        gf.ajax("/app/conf/delByLogic.shtml", { "table": "AGV_CACHED_TASK", key: key }, "json");
+    });
 });

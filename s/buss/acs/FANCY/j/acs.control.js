@@ -27,7 +27,8 @@ let taskReady = () => {
 	let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
 	$(taskContainer).append("<iframe id='taskFrame'></iframe>");
 	let url = "/s/buss/sys/conf/h/agv.cache.html";
-	$(taskContainer).find("iframe#taskFrame").css("height", "500px").css("width", "500px").attr("src", url);
+	$(taskContainer).css("height", "50%").css("width", "80%");
+	$(taskContainer).find("iframe#taskFrame").css("height", "100%").css("width", "100%").attr("src", url);
 	$("body").append(taskContainer);
 }
 
