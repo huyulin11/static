@@ -8,12 +8,15 @@ import { gf } from "/s/buss/g/j/g.f.js";
 let checkLoginError = false;
 if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
 
-let renderModel = (key, target) => {
+let renderModel = (key, target, click) => {
 	let style = $(`<style id='${key}HideDiv_style'></style>`);
 	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
 		.append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
 	$("head").append(style);
-	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-target='${target}'></div>`);
+	let op = $(`<div id='${key}HideDiv' class='close hideToggle'></div>`);
+	if (target) $(op).data("target", target);
+	if (click) $(op).bind("click", click);
+	$("#topCtrlContainer").prepend(op);
 }
 
 let renderLink = (key, url, self) => {
@@ -61,6 +64,10 @@ var container = function () {
 			renderModel('search', 'div#searchContainer');
 			renderModel('shipment', 'div#shipmentContainer');
 			renderModel('receipt', 'div#receiptContainer');
+			renderModel('POS', "none", function () {
+				let value = $(this).hasClass("close");
+				gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gf.layer().msg((value ? "显示" : "隐藏") + "坐标"); });
+			});
 			renderModel('PDA', 'div#PDAContainer');
 			renderLink('manager', '/s/buss/g/h/manager.html', true);
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
