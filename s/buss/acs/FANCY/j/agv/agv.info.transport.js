@@ -7,11 +7,18 @@ var agvId = currentAgvId;
 let targetArr = new Array();
 let container, _target, _currentSite = localStorage.currentSite;
 if (_currentSite) console.log("currentSite:" + _currentSite);
-let limit = 3;
-if (localStorage.projectKey == "CSY_CDBP") { limit = 3; }
-else if (localStorage.projectKey == "YZBD_QSKJ") { limit = 2; }
-let showSiteWorkChoose = true;
-if (localStorage.projectKey != "CSY_CDBP") { showSiteWorkChoose = false; }
+
+let _oneTimeLimit = 3, _numInLine = 5, showSiteWorkChoose = false;
+switch (localStorage.projectKey) {
+	case "CSY_CDBP":
+		_oneTimeLimit = 3; showSiteWorkChoose = true; break;
+	case "YZBD_QSKJ":
+		_oneTimeLimit = 2; break;
+	case "QDTY_SELF":
+		_oneTimeLimit = 5; _numInLine = 8; break;
+	default:
+		break;
+}
 
 export var init = function (target) {
 	_target = target;
@@ -53,7 +60,7 @@ export var init = function (target) {
 	}
 
 	gv.getSite(function (data) {
-		let conf = { data: data, numInLine: 5, render: renderSite, target: tableSite };
+		let conf = { data: data, numInLine: _numInLine, render: renderSite, target: tableSite };
 		gf.renderBtnTable(conf, () => {
 			gf.resizeTable();
 		});
@@ -71,7 +78,7 @@ export var init = function (target) {
 			let a = targetArr.indexOf(data);
 			targetArr.splice(a, 1);
 		} else {
-			if (targetArr.length >= limit) { gf.layerMsg(`选中需要操作的站点数不能超过${limit}个！`); return; }
+			if (targetArr.length >= _oneTimeLimit) { gf.layerMsg(`选中需要操作的站点数不能超过${_oneTimeLimit}个！`); return; }
 			$(that).addClass("choosed");
 			targetArr.push(data);
 		}
@@ -80,7 +87,7 @@ export var init = function (target) {
 
 	var transportHandler = function (that) {
 		if (targetArr.length <= 0) { gf.layerMsg("没有选中需要操作的站点！"); return; }
-		if (targetArr.length > limit) { gf.layerMsg(`选中需要操作的站点数不能超过${limit}个！`); return; }
+		if (targetArr.length > _oneTimeLimit) { gf.layerMsg(`操作的站点数不能超过${_oneTimeLimit}个！`); return; }
 		let arrSub = [];
 		for (let item of targetArr) {
 			let json = $(item).data("json");
