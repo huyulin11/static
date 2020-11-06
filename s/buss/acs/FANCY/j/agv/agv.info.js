@@ -5,11 +5,10 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { fetchTaskTaikaiJy, deleverTaskTaikaiJy } from '/s/buss/acs/FANCY/j/agv/agv.info.taikaiJy.js';
 import { fetchTaskLaoFoxconn, deleverTaskLaoFoxconn } from '/s/buss/acs/FANCY/j/agv/agv.info.laoFoxconn.js';
 import { gotoInitLaoDbwy } from '/s/buss/acs/FANCY/j/agv/agv.info.laoDbwy.js';
+import { initBtns } from '/s/buss/acs/FANCY/j/agv/agv.info.conf.js';
 
 var agvId = currentAgvId;
-
 var currentTask = new Array();
-
 var _target;
 
 var getTargets = function () {
@@ -328,7 +327,6 @@ export var init = function (target) {
 		taskexe.addCtrlTask(agvId, $(this).attr("id"));
 	});
 
-	var initBtns = jQuery.parseJSON(localStorage.agvControl);
 	for (var btn of initBtns) {
 		if (!btn.hide) {
 			$(_target).append(`<td><div><button id='${btn.id}'`
