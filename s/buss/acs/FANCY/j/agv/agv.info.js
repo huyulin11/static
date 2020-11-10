@@ -2,9 +2,9 @@ import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { fetchTaskTaikaiJy, deleverTaskTaikaiJy } from '/s/buss/acs/FANCY/j/agv/agv.info.taikaiJy.js';
+import { fetchTaskTaikaiJy, deleverTaskTaikaiJy, waitHandler } from '/s/buss/acs/FANCY/j/agv/agv.info.taikaiJy.js';
 import { fetchTaskLaoFoxconn, deleverTaskLaoFoxconn } from '/s/buss/acs/FANCY/j/agv/agv.info.laoFoxconn.js';
-import { gotoInitLaoDbwy } from '/s/buss/acs/FANCY/j/agv/agv.info.laoDbwy.js';
+import { gotoInitLaoDbwy, deleverInitHandler, deleverStereotypeHandler, deleverPackHandler, gotoStereotypeHandler, gotoPackHandler } from '/s/buss/acs/FANCY/j/agv/agv.info.laoDbwy.js';
 import { initBtns } from '/s/buss/acs/FANCY/j/agv/agv.info.conf.js';
 
 var agvId = currentAgvId;
@@ -157,17 +157,6 @@ var deliverHandler = function (that) {
 	}
 }
 
-var waitHandler = function (that) {
-	allDisabled();
-	if (!confirm('是否确认执行该操作?')) { return; }
-	var agvbusstype = findIotInfo(agvId, "agvbusstype");
-	if (agvbusstype == 'TON_1') {
-		taskexe.addTaskToSite(agvId, "FETCH", 123);
-	} else if (agvbusstype == 'TON_2') {
-		taskexe.addTaskToSite(agvId, "DELIVER", 12);
-	}
-}
-
 var gotoInitHandler = function (that) {
 	allDisabled();
 	if (localStorage.projectKey == 'LAO_DBWY') {
@@ -176,117 +165,6 @@ var gotoInitHandler = function (that) {
 		if (!confirm('是否确认执行该操作?')) { return; }
 		taskexe.addCtrlTask(agvId, $(that).attr("id"));
 	}
-}
-
-var deleverInitHandler = function () {
-	allDisabled();
-	var targets = [];
-	for (var i = 3012; i <= 3053; i++) {
-		targets.push({ id: i });
-	}
-	var buttons = getButtonsHtml(targets);
-	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
-		btn: ['确定送料'],
-		area: '386px',
-		btn1: function () {
-			var arr = getTargets();
-			if (!arr || arr.length == 0) {
-				alert("无有效停车站点");
-				return;
-			}
-			var targetSite = arr.join("#");
-			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
-		},
-	});
-}
-
-var deleverStereotypeHandler = function () {
-	allDisabled();
-	var task = "DELIVER";
-	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地', {
-		btn: ['袜机线尾1号-4001', '袜机线尾2号-4002', '袜机线尾3号-4003', '定型1号-2054', '定型2号-2055', '定型3号-2056', '定型4号-2057'],
-		btn1: function () { taskexe.addTaskToSite(agvId, task, 4001); },
-		btn2: function () { taskexe.addTaskToSite(agvId, task, 4002); },
-		btn3: function () { taskexe.addTaskToSite(agvId, task, 4003); },
-		btn4: function () { taskexe.addTaskToSite(agvId, task, 2054); },
-		btn5: function () { taskexe.addTaskToSite(agvId, task, 2055); },
-		btn6: function () { taskexe.addTaskToSite(agvId, task, 2056); },
-		btn7: function () { taskexe.addTaskToSite(agvId, task, 2057); }
-	});
-}
-
-var deleverPackHandler = function () {
-	allDisabled();
-	var task = "DELIVER";
-	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地', {
-		btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
-		btn1: function () { taskexe.addTaskToSite(agvId, task, 2058); },
-		btn2: function () { taskexe.addTaskToSite(agvId, task, 2059); },
-		btn3: function () { taskexe.addTaskToSite(agvId, task, 2060); },
-		btn4: function () { taskexe.addTaskToSite(agvId, task, 2061); },
-		btn5: function () { taskexe.addTaskToSite(agvId, task, 2108); },
-		btn6: function () { taskexe.addTaskToSite(agvId, task, 2109); },
-		btn7: function () { taskexe.addTaskToSite(agvId, task, 2110); },
-		btn8: function () { taskexe.addTaskToSite(agvId, task, 2111); },
-		btn9: function () { taskexe.addTaskToSite(agvId, task, 2112); },
-		btn10: function () { taskexe.addTaskToSite(agvId, task, 2113); },
-		btn11: function () { taskexe.addTaskToSite(agvId, task, 2114); },
-		btn12: function () { taskexe.addTaskToSite(agvId, task, 2115); },
-		btn13: function () { taskexe.addTaskToSite(agvId, task, 2116); },
-		btn14: function () { taskexe.addTaskToSite(agvId, task, 2117); },
-		btn15: function () { taskexe.addTaskToSite(agvId, task, 2118); }
-	});
-}
-
-var gotoStereotypeHandler = function () {
-	allDisabled();
-	var targets = [];
-	for (var i = 2006; i <= 2053; i++) {
-		if (i == 2042) continue;
-		targets.push({ id: i });
-	}
-	var buttons = getButtonsHtml(targets);
-	var indexOfTips = gf.layer().confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
-		btn: ['确定前往'],
-		area: '386px',
-		btn1: function () {
-			var arr = getTargets();
-			if (!arr || arr.length == 0) {
-				alert("无有效停车站点");
-				return;
-			} else if (arr.length > 1) {
-				alert("只能选择1个点");
-				return;
-			}
-			var targetSite = arr.join("#");
-			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
-		}
-	});
-}
-
-var gotoPackHandler = function () {
-	allDisabled();
-	var targets = [];
-	for (var i = 2062; i <= 2107; i++) {
-		targets.push({ id: i });
-	}
-	var buttons = getButtonsHtml(targets);
-	var indexOfTips = gf.layer().confirm('请选择前往包装暂存区的目的地' + '<br/>' + buttons, {
-		btn: ['确定前往'],
-		area: '386px',
-		btn1: function () {
-			var arr = getTargets();
-			if (!arr || arr.length == 0) {
-				alert("无有效停车站点");
-				return;
-			} else if (arr.length > 1) {
-				alert("只能选择1个点");
-				return;
-			}
-			var targetSite = arr.join("#");
-			taskexe.addTaskToSite(agvId, "DELIVER", targetSite);
-		}
-	});
 }
 
 export var init = function (target) {

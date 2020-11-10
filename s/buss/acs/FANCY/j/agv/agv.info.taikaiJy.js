@@ -56,4 +56,15 @@ var deleverTaskTaikaiJy = function () {
 	});
 }
 
-export { fetchTaskTaikaiJy, deleverTaskTaikaiJy };
+var waitHandler = function (that) {
+	allDisabled();
+	if (!confirm('是否确认执行该操作?')) { return; }
+	var agvbusstype = findIotInfo(agvId, "agvbusstype");
+	if (agvbusstype == 'TON_1') {
+		taskexe.addTaskToSite(agvId, "FETCH", 123);
+	} else if (agvbusstype == 'TON_2') {
+		taskexe.addTaskToSite(agvId, "DELIVER", 12);
+	}
+}
+
+export { fetchTaskTaikaiJy, deleverTaskTaikaiJy, waitHandler };
