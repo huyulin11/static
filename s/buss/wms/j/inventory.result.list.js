@@ -1,7 +1,4 @@
-import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { dataGrid } from "/s/j/kf.grid.js";
-import { getInput } from "/s/buss/g/j/g.input.render.js";
 import { initConfList } from "/s/buss/g/j/template.conf.table.js";
 
 export let init = function () {
