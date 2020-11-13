@@ -1,5 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
+import { taskSiteLogic, taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var datas = {};
 
@@ -146,26 +147,6 @@ var dataPath = function (data) {
             }
         }
     }
-}
-
-var taskSiteLogic = function () {
-    $.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/sites/taskSiteLogic.json",
-        type: "get",
-        async: false,
-        dataType: "json",
-        success: dataLlogic
-    });
-}
-
-var taskSiteLocation = function () {
-    $.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/sites/taskSiteLocation.json",
-        type: "get",
-        async: false,
-        dataType: "json",
-        success: dataLocation
-    });
 }
 
 var taskPath = function () {
