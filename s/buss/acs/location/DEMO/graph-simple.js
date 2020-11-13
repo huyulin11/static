@@ -78,7 +78,7 @@ var initDatas = (sitedatas) => {
 gv.getSite(function (datas) {
     console.log(datas);
     let newDatas = go.transList(datas, o => {
-        return { name: o.sitename, x: Math.random(), y: Math.random() };
+        return { name: o.id, x: Math.random() * 2100, y: Math.random() * 1500 };
     });
     initDatas(newDatas);
     if (option && typeof option === "object") {
