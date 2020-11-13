@@ -3,6 +3,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 import { initConfList } from "/s/buss/g/j/template.conf.table.js";
+import {moment} from "/s/yzk/data.js";
 
 export let init = function () {
 	initConfList("task_site_location", {
@@ -44,6 +45,10 @@ export let init = function () {
 		}, {
 			colkey: "updatetime",
 			name: "更新时间",
+			renderData: function (rowindex, data, rowdata, column) {
+				var standardTime = moment(data);
+				return standardTime;
+			},
 		}],
 		fenyeInTail: true,
 	});
@@ -62,8 +67,8 @@ export let init = function () {
 		}
 		if (window.confirm(`是否要改变${key}的值为${targetShow}？`)) {
 			gf.doAjax({
-				url: `/app/conf/set-1.shtml`, type: "POST",
-				data: { table: "CONF_KEY", key: key, value: target }
+				url: `/app/conf/set.shtml`, type: "POST",
+				data: { table: "TASK_SITE_LOCATION", key: key, value: target }
 			});
 		}
 	});
