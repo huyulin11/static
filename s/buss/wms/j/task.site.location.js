@@ -3,7 +3,6 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 import { initConfList } from "/s/buss/g/j/template.conf.table.js";
-import {moment} from "/s/yzk/data.js";
 
 export let init = function () {
 	initConfList("task_site_location", {
@@ -46,7 +45,7 @@ export let init = function () {
 			colkey: "updatetime",
 			name: "更新时间",
 			renderData: function (rowindex, data, rowdata, column) {
-				var standardTime = moment(data);
+				var standardTime = new Date(data).toLocaleString();
 				return standardTime;
 			},
 		}],
