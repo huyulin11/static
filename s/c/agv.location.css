@@ -37,7 +37,7 @@ div#agvs {
 	height: 150px;
 	color: #FFF;
 	position: fixed;
-	background: rgba(168, 178, 196, 0.3);
+	/* background: rgba(168, 178, 196, 0.3); */
 }
 
 div.watch[data-id="3"] {
