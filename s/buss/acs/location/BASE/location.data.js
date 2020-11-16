@@ -167,7 +167,7 @@ var taskPath = function () {
 }
 
 datas.init = function () {
-    taskSiteLogic();
-    taskSiteLocation();
+    taskSiteLogic(dataLlogic);
+    taskSiteLocation(dataLocation);
     taskPath();
 }
