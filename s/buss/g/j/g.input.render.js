@@ -68,11 +68,11 @@ export var getInput = (item, option, datas) => {
     }
     if (option && option.rtnhtml) return obj[0].outerHTML;
     if (_class) {
-        $(obj).find("select,input").addClass(_class);
+        $(obj).find("select,input,textarea").addClass(_class);
     }
     if (datas) {
         for (let ii in datas) {
-            $(obj).find("select,input").attr("data-" + ii, datas[ii]);
+            $(obj).find("select,input,textarea").attr("data-" + ii, datas[ii]);
         }
     }
     return obj;
