@@ -6,7 +6,7 @@ var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
 var option = null;
-var initDatas = (sitedatas) => {
+var renderChart = (sitedatas, logicdatas) => {
     option = {
         title: {
             text: 'Graph 简单示例'
@@ -29,43 +29,7 @@ var initDatas = (sitedatas) => {
                     fontSize: 20
                 },
                 data: sitedatas,
-                // links: [],
-                links: [{
-                    source: 0,
-                    target: 1,
-                    symbolSize: [5, 20],
-                    label: {
-                        show: true
-                    },
-                    lineStyle: {
-                        width: 5,
-                        curveness: 0.2
-                    }
-                }, {
-                    source: '站点2',
-                    target: '站点1',
-                    label: {
-                        show: true
-                    },
-                    lineStyle: {
-                        curveness: 0.2
-                    }
-                }, {
-                    source: '站点1',
-                    target: '站点3',
-                    label: {
-                        show: true
-                    },
-                }, {
-                    source: '站点2',
-                    target: '站点3'
-                }, {
-                    source: '站点2',
-                    target: '站点4'
-                }, {
-                    source: '站点1',
-                    target: '站点4'
-                }],
+                links: logicdatas,
                 lineStyle: {
                     opacity: 0.9,
                     width: 2,
@@ -74,14 +38,30 @@ var initDatas = (sitedatas) => {
             }
         ]
     };
-};
-gv.getSite(function (datas) {
-    console.log(datas);
-    let newDatas = go.transList(datas, o => {
-        return { name: o.id, x: Math.random() * 2100, y: Math.random() * 1500 };
-    });
-    initDatas(newDatas);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
+};
+let renderBySites = (datas) => {
+    taskSiteLocation((locations) => {
+        datas.map((site) => {
+            let arr = locations.filter((location) => {
+                return location.id == site.id;
+            });
+            return Object.assign(site, arr[0]);
+        });
+        console.log(datas);
+        let newDatas = go.transList(datas, o => {
+            return { name: o.id, x: o.x | 0, y: o.y | 0 };
+        });
+        taskSiteLogic(function (logics) {
+            let newLogics = go.transList(logics, o => {
+                return { source: o.siteid, target: o.nextid };
+            });
+            renderChart(newDatas, newLogics);
+        });
+    });
+};
+gv.getSite(function (datas) {
+    renderBySites(datas);
 });
