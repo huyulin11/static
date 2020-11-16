@@ -547,12 +547,9 @@ class GF {
     layerParentMsg(content) {
         gf.layer().msg(content);
     };
-    layerMsg(content, end) {
-        layer.msg(content, {
-            time: 0, //...s后自动关闭
-            btn: ['关闭'],
-            shade: 0.1,
-        }, function () {
+    layerMsg(content, end, conf) {
+        conf = Object.assign({ time: 0, btn: ['关闭'], shade: 0.1, }, conf);
+        layer.msg(content, conf, function () {
             if (end && typeof end == 'function') { end(); }
         });
     };

@@ -141,7 +141,14 @@ export var initAcsControl = function () {
 		agvRunningLogs((datas) => {
 			if (!datas) { return; }
 			for (let data of datas) {
-				layer.msg(data.key + "号车辆：" + data.value, { offset: 'b' });
+				let title;
+				if ($.isNumeric(data.key)) {
+					title = data.key + "号车辆";
+					if (data.key == '0') title = "系统消息";
+				} else {
+					title = data.key;
+				}
+				gf.layerMsg(title + ':' + data.value, null, { offset: 'b' });
 			}
 		});
 	}, 5000);
