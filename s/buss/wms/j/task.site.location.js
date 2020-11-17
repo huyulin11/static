@@ -1,3 +1,4 @@
+import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { dataGrid } from "/s/j/kf.grid.js";
@@ -6,11 +7,11 @@ import { initConfList } from "/s/buss/g/j/template.conf.table.js";
 
 export let init = function () {
 	initConfList("task_site_location", {
-		checkbox: false,
+		checkbox: true,
 		jsonColumn: 'value',
 		columns: [{
 			colkey: "key",
-			name: "id",
+			name: "ID",
 		}, {
 			colkey: "value",
 			name: "x",
@@ -19,7 +20,7 @@ export let init = function () {
 					name: "键值", key: "key", notnull: true, type: "input"
 				};
 				let xPos = JSON.parse(data).x;
-				let html = getInput(col, { value: xPos, width: '50%', class: "x"});
+				let html = getInput(col, { value: xPos, width: '50%', class: "x" });
 				return html;
 			}
 		}, {
@@ -30,7 +31,7 @@ export let init = function () {
 					name: "键值", key: "key", notnull: true, type: "input"
 				};
 				let yPos = JSON.parse(data).y;
-				let html = getInput(col, { value: yPos, width: '50%',class: "y" });
+				let html = getInput(col, { value: yPos, width: '50%', class: "y" });
 				return html;
 			}
 		}, {
@@ -50,12 +51,16 @@ export let init = function () {
 			},
 		}],
 		fenyeInTail: true,
-	});
+	},`<label>
+	<span>ID:</span>
+	<input id="id" name="key">
+</label>`
+);
 	$("#paging").delegate(".edit", "click", function (e) {
 		let id = $(this).data("key");
 		let x = $(this).parents("tr").find("input.x").val();
 		let y = $(this).parents("tr").find("input.y").val();
-		let targetObj = {id,x,y};
+		let targetObj = { id, x, y };
 		let target = JSON.stringify(targetObj);
 		if (!x || !y) {
 			return layer.msg('x,y的值不能为空，请重新输入！！');

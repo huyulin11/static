@@ -19,8 +19,13 @@
 <script src="/s/j/xlsx/xlsx.core.min.js"></script>
 
 <header class="panel-heading">
-    <form class="form-inline" role="form" id="searchForm" name="searchForm" style="display: none;">
+    <form class="form-inline" role="form" id="searchForm" name="searchForm" >
         <div class="search-group">
+            <label>
+                <span>ID:</span>
+                <input id="id" name="key">
+            </label>
+            </tr>
         </div>
     </form>
 </header>
@@ -34,6 +39,7 @@
     init();
     import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
     renderAll();
+    import "/s/buss/wms/j/task.site.locationCRUD.js";
 </script>
 
 </html>
