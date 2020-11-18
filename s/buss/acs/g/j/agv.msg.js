@@ -7,8 +7,7 @@ var container = function () {
 
 var lastMsgMap = new Map();
 var msgLen = 0;
-var addMsg = function (msg, level, agvId) {
-
+export var addMsg = function (msg, level, agvId) {
     var w = "";
     if (agvId) {
         if (agvId > 0) {
@@ -37,27 +36,4 @@ var addMsg = function (msg, level, agvId) {
         $(tip).append("<span " + "class='tips " + fontClass + "' data-id='" + msgLen + "'" + ">**" + msg + "**<br/></span>");
         $(tip).find("span[data-id!=" + (msgLen++) + "]:gt(0)").addClass("greyFont");
     }
-}
-
-export var refreshAgvsInfo = function () {
-    jQuery.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/agv/allAgvsInfo.json",
-        type: "GET",
-        dataType: "json",
-        cache: false,
-        success: function (data) {
-            $.each(data, function (n, value) {
-                if (value.systemWarning) addMsg(value.systemWarning, 1, n);
-                if (n > 0) {
-                    if (value.currentTask != null && value.currentTask.length > 0) {
-                        var msg = (value.currentTask[0].opflag == "OVER" ? "执行结束：" : "正在执行：") + value.currentTask[0].taskText;
-                        addMsg(msg, 3, n);
-                    }
-                }
-            });
-        },
-        error: function (e) {
-        },
-        timeout: 5000
-    });
 }

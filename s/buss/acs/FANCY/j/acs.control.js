@@ -1,6 +1,7 @@
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { initAgvList } from "/s/buss/acs/FANCY/j/agv.list.js";
-import { refreshAgvsInfo } from "/s/buss/acs/g/j/agv.msg.js";
+import { addMsg } from "/s/buss/acs/g/j/agv.msg.js";
+import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
 import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
@@ -131,10 +132,21 @@ export var initAcsControl = function () {
 	});
 
 	initAgvList();
-	refreshAgvsInfo();
+	let refreshAcsInfo = function (data) {
+		$.each(data, function (n, value) {
+			if (value.systemWarning) addMsg(value.systemWarning, 1, n);
+			if (n > 0) {
+				if (value.currentTask != null && value.currentTask.length > 0) {
+					var msg = (value.currentTask[0].opflag == "OVER" ? "执行结束：" : "正在执行：") + value.currentTask[0].taskText;
+					addMsg(msg, 3, n);
+				}
+			}
+		});
+	};
+	allAgvsInfo(refreshAcsInfo);
 	setInterval(() => {
 		refreshAcsInfo(renderCtrlBtns);
-		refreshAgvsInfo();
+		allAgvsInfo(refreshAcsInfo);
 	}, 2000);
 
 	setInterval(() => {

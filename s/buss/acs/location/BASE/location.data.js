@@ -1,6 +1,7 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { taskSiteLogic, taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
+import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 
 export var datas = {};
 
@@ -149,25 +150,17 @@ var dataPath = function (data) {
     }
 }
 
-var taskPath = function () {
-    $.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/agv/allAgvsInfo.json",
-        type: "get",
-        dataType: "json",
-        cache: false,
-        success: function (data) {
-            dataPath(data);
-            if (datas.numInTask == 0) {
-                setTimeout(taskPath, 3000);
-            } else {
-                setTimeout(taskPath, datas.numInTask * 3000);
-            }
-        }
-    });
-}
+let allAgvsInfoTmp = () => allAgvsInfo(function (data) {
+    dataPath(data);
+    if (datas.numInTask == 0) {
+        setTimeout(allAgvsInfoTmp, 3000);
+    } else {
+        setTimeout(allAgvsInfoTmp, datas.numInTask * 3000);
+    }
+});
 
 datas.init = function () {
     taskSiteLogic(dataLlogic);
     taskSiteLocation(dataLocation);
-    taskPath();
+    allAgvsInfoTmp();
 }
