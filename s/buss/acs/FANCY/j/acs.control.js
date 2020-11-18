@@ -160,7 +160,7 @@ export var initAcsControl = function () {
 				} else {
 					title = data.key;
 				}
-				gf.layerMsg(title + ':' + data.value, null, { offset: 'b' });
+				gf.layerMsg(title + ':' + data.value, null, { offset: 'b', shade: 0.0, });
 			}
 		});
 	}, 5000);
