@@ -183,16 +183,10 @@ input.bigSearch {
 	}
 }
 
-/* #msgContainer {
-	border: 1px;
-	height: auto;
-	background-color: inherit;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
+#msgContainer {
+	overflow: auto;
 	text-align: left;
-} */
+}
 
 #op {
 	padding-top: 2%;
@@ -434,4 +428,10 @@ div.allocDiv{
 	border: #bfddce 1px;
 	border-style: dotted;
 	border-radius: 5px;
+}
+
+hr.gray{
+	border: 0;
+	height: 1px;
+	background-color: #f9f9f9;
 }

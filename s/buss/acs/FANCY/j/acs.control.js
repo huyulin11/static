@@ -132,7 +132,7 @@ export var initAcsControl = function () {
 	});
 
 	initAgvList();
-	let refreshAcsInfo = function (data) {
+	let refreshAgvsInfo = function (data) {
 		$.each(data, function (n, value) {
 			if (value.systemWarning) addMsg(value.systemWarning, 1, n);
 			if (n > 0) {
@@ -143,10 +143,10 @@ export var initAcsControl = function () {
 			}
 		});
 	};
-	allAgvsInfo(refreshAcsInfo);
+	allAgvsInfo(refreshAgvsInfo);
 	setInterval(() => {
 		refreshAcsInfo(renderCtrlBtns);
-		allAgvsInfo(refreshAcsInfo);
+		allAgvsInfo(refreshAgvsInfo);
 	}, 2000);
 
 	setInterval(() => {

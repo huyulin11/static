@@ -1,6 +1,6 @@
 var container = function () {
     if ($("#tipsOper").length == 0) {
-        $("#msgContainer").append("<fieldset><legend>系统消息</legend><div id='tipsOper'></div></fieldset>");
+        $("#msgContainer").append("<fieldset><legend>运行日志</legend><div id='tipsOper'></div></fieldset>");
     }
     return $("#tipsOper");
 }
@@ -13,7 +13,7 @@ export var addMsg = function (msg, level, agvId) {
         if (agvId > 0) {
             w = "<span class='redFont tips'>" + agvId + "号车：</span>";
         } else {
-            w = "<span class='redFont tips'>系统消息：</span>";
+            w = "<span class='redFont tips'>系统日志：</span>";
         }
     } else {
         agvId = 0;
@@ -22,7 +22,7 @@ export var addMsg = function (msg, level, agvId) {
     var tip = "div#tips" + agvId;
 
     if ($(tip).length <= 0) {
-        container().append("<div id='tips" + agvId + "'>" + w + "</div>");
+        container().append(`<div id='tips${agvId}'>${w}</div><hr class='gray'/>`);
     }
 
     if (msg != "" && (lastMsgMap.get(agvId) == null || lastMsgMap.get(agvId) != msg)) {
