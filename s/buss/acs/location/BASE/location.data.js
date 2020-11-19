@@ -15,6 +15,7 @@ datas.taskDetails = [];
 datas.datasetMap = [];
 datas.currentAgvs = [];
 datas.lastTaskPath = [];
+datas.id = [];
 
 var rectPoint = [
     [-21650, 3500], [-21650, -4600], [-3650, -4600], [-3650, 3500]
@@ -69,8 +70,9 @@ var dataLlogic = function (data) {
 
 var dataLocation = function (data) {
     for (var val of data) {
-        datas.udfPoints.push([val.x, val.y]);
+        datas.udfPoints.push([val.id, val.x, val.y]);
         datas.locations.push({ "id": val.id, "x": val.x, "y": val.y });
+        datas.id.push({"id": val.id});
         for (var value of datasLogic) {
             if (val.id === value.siteid) {
                 for (var next of data) {

@@ -190,9 +190,9 @@ function rect() {
         .style("stroke-width", "1px");
 }
 
-function drawPoints(dataset) {
-    conf.xScale = d3.scale.linear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
-    conf.yScale = d3.scale.linear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
+function drawPoints(dataset,cid) {
+    conf.xScale = d3.scaleLinear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
+    conf.yScale = d3.scaleLinear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
 
     var circleUpdate = conf.svg.selectAll("circle").data(dataset);
 
@@ -201,17 +201,20 @@ function drawPoints(dataset) {
     //update部分的处理方法  
     circleUpdate.transition()//更新数据时启动过渡  
         .duration(500).attr("cx", function (d) {
-            return conf.padding.left + conf.xScale(d[0]);
+            return conf.padding.left + conf.xScale(d[1]);
         }).attr("cy", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d[1]);
+            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
-            return (datas.inUdp(d)) ? 3 : (datas.inTaskPath(d) ? 4 : 2);
+            return (datas.inUdp(d)) ? 10 : (datas.inTaskPath(d) ? 4 : 2);
         });
 
     circleEnter.append("circle")
         .attr("fill", "red")
+        .attr("id",function(d){
+            return d[0];
+        })
         .attr("r", 20).transition().duration(500)
         .attr("class", function (d) {
             return datas.inAgv(d, 1) ? "agv1" : "agv2";
@@ -225,6 +228,7 @@ function drawPoints(dataset) {
         }).attr("r", function (d) {
             return (datas.inUdp(d)) ? 3 : 5;
         });
+
 
     circleExit.transition().duration(500).attr("fill", "white").remove();
 
@@ -256,15 +260,15 @@ function drawAxis() {
 
 }
 
-export var renderSvg = function () {
+export var renderSvg = function (callback) {
     if (document.hidden) { return; }
-    renderSvgFunc();
+    renderSvgFunc(callback);
 };
 
 var datasss = [].concat(datas.udfPoints);
 
 var isRunning = false;
-var renderSvgFunc = function () {
+var renderSvgFunc = function (callback) {
     if (isRunning) { return; }
     isRunning = true;
     for (var i in datas.datasetMap) {
@@ -288,6 +292,7 @@ var renderSvgFunc = function () {
         }
     }
     render(datas.lastTaskPath.concat(datasss));
+    if (callback) callback();
     isRunning = false;
 }
 

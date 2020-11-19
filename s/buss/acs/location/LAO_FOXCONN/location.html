@@ -33,9 +33,11 @@
     initAcsControl();
     import "/s/buss/acs/location/BASE/location.init.js";
     import "/s/buss/acs/location/LAO_FOXCONN/location.p.js";
+    import { move } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
     import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
-    renderSvg();
-    setInterval(renderSvg, 3000);
+    renderSvg(() => { move() });
+    setTimeout(renderSvg, 3000);
+    // setInterval(renderSvg, 3000);
 </script>
 
 </html>
