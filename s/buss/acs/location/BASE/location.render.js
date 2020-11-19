@@ -191,8 +191,8 @@ function rect() {
 }
 
 function drawPoints(dataset) {
-    conf.xScale = d3.scaleLinear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
-    conf.yScale = d3.scaleLinear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
+    conf.xScale = d3.scale.linear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
+    conf.yScale = d3.scale.linear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
 
     var circleUpdate = conf.svg.selectAll("circle").data(dataset);
 
@@ -207,13 +207,10 @@ function drawPoints(dataset) {
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
-            return (datas.inUdp(d)) ? 10 : (datas.inTaskPath(d) ? 4 : 2);
+            return (datas.inUdp(d)) ? 3 : (datas.inTaskPath(d) ? 4 : 2);
         });
 
     circleEnter.append("circle")
-        // .attr("id", function () {
-           
-        // })
         .attr("fill", "red")
         .attr("r", 20).transition().duration(500)
         .attr("class", function (d) {
@@ -259,15 +256,15 @@ function drawAxis() {
 
 }
 
-export var renderSvg = function (callback) {
+export var renderSvg = function () {
     if (document.hidden) { return; }
-    renderSvgFunc(callback);
+    renderSvgFunc();
 };
 
 var datasss = [].concat(datas.udfPoints);
 
 var isRunning = false;
-var renderSvgFunc = function (callback) {
+var renderSvgFunc = function () {
     if (isRunning) { return; }
     isRunning = true;
     for (var i in datas.datasetMap) {
@@ -291,7 +288,6 @@ var renderSvgFunc = function (callback) {
         }
     }
     render(datas.lastTaskPath.concat(datasss));
-    if (callback) callback();
     isRunning = false;
 }
 
