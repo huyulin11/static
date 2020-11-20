@@ -29,14 +29,15 @@ export var move = function () {
             .attr('cx', x)
             .attr('cy', y);
         var id = $(this).attr('id');
+        var ids = parseInt(id)
         var x1 = conf.xReScale(x - conf.padding.left);
         var y1 = conf.yReScale(conf.height - conf.padding.bottom - y);
         var arr = { id, x1, y1 };
         console.log(arr);
-        var result = JSON.stringify({ "id": id, "x": x1, "y": y1 });
+        var result = JSON.stringify({ "id": ids, "x": x1, "y": y1 });
         gf.doAjax({
             url: `/app/conf/set.shtml`, type: "POST",
-            data: { table: "TASK_SITE_LOCATION", key: id, value: result }
+            data: { table: "TASK_SITE_LOCATION", key: ids, value: result }
         });
     }
 
