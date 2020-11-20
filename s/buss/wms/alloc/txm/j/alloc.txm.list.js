@@ -42,7 +42,7 @@ let tempBtns = [{
 		});
 	},
 }];
-gfbtn.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);
 
 window.datagrid = dataGrid({
 	pagId: 'paging',

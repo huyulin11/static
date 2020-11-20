@@ -1,46 +1,43 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-let checkRes = (value, myRes) => {
-    return !value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0;
+let checkRes = (btn, myRes) => {
+    return !myRes || !btn.resKey || myRes.filter(function (res) { return res.resKey == btn.resKey; }).length > 0;
 }
 
 class GFBTN {
-    doBindBtns(target, btns, myRes) {
+    bindSimple(target, btns, myRes) {
         $.each(btns, function (i, btn) {
-            if (!btn.resKey || myRes.filter(function (res) { return res.resKey == btn.resKey; }).length > 0) {
-                let style = `${btn.style ? "style='" + btn.style + "'" : ""}`;
-                let isHide = gf.yesOrNo(btn.hide) ? "hidden" : "";
-                let color = (btn.color) ? (`data-backcolor='${btn.color}'`) : "";
-                let to = (btn.to) ? (`data-to='${btn.to}'`) : "";
-                $(target).append(`<button type="button" id="${btn.id}" 
+            if (!checkRes(btn, myRes)) {
+            }
+            let style = `${btn.style ? "style='" + btn.style + "'" : ""}`;
+            let isHide = gf.yesOrNo(btn.hide) ? "hidden" : "";
+            let color = (btn.color) ? (`data-backcolor='${btn.color}'`) : "";
+            let to = (btn.to) ? (`data-to='${btn.to}'`) : "";
+            $(target).append(`<button type="button" id="${btn.id}" 
                     class="btn marR10 ${btn.class} ${isHide}" ${style} ${color} ${to}>
                     ${btn.name}</button> `);
-                $(target).find(`#${btn.id}`).click("click", function () {
-                    btn.bind();
-                });
-            }
+            $(target).find(`#${btn.id}`).click("click", function () {
+                btn.bind();
+            });
         });
     };
-    bindBtns(target, btns) {
+    bindByRes(target, btns) {
         let doBind = function (myRes) {
-            gfbtn.doBindBtns(target, btns, myRes);
+            gfbtn.bindSimple(target, btns, myRes);
         };
         gf.getMyRes(doBind);
     };
-    renderBtnsByRes(conf, callback) {
+    renderToTableByRes(conf, callback) {
         gf.getMyRes(function (myRes) {
             let _conf = $.extend(conf, {
-                display: function (value) {
-                    if (checkRes(value, myRes)) {
-                        return true;
-                    }
-                    return false;
+                display: function (btn) {
+                    return checkRes(btn, myRes);
                 },
             });
             callback(gfbtn.btnsTable(_conf));
         });
     };
-    renderBtnsTable(conf, callback) {
+    renderToTable(conf, callback) {
         callback(gfbtn.btnsTable(conf));
     };
     btnsTable(conf) {

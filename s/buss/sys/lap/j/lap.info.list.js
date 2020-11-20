@@ -16,7 +16,7 @@ let tempBtns = [{
 		window.history.back();
 	}
 }];
-gfbtn.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);
 
 let _type = gf.urlParam("type");
 let _columns = [{

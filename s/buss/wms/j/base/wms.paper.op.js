@@ -154,7 +154,7 @@ var initPaperOp = function (tasktype, optype) {
             break;
         }
     }
-    gfbtn.bindBtns("div.doc-buttons", tempBtns);
+    gfbtn.bindByRes("div.doc-buttons", tempBtns);
 }
 
 export { initPaperOp };

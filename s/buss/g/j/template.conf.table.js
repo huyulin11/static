@@ -51,6 +51,6 @@ export var initConfList = function (table, params, searchHtml) {
         $("#searchForm").find("div.search-group").html(_searchHtml);
         $("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
     }
-    gfbtn.bindBtns("div.doc-buttons", tempBtns);
+    gfbtn.bindByRes("div.doc-buttons", tempBtns);
     doSearch();
 }

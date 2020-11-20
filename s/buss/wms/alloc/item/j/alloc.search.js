@@ -11,7 +11,7 @@ let tempBtns = [{
         window.history.back();
     }, style: "min-height:25px;width:60px;float:right;"
 }];
-gfbtn.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);
 
 let _conf = { numInLine: 5, target: "table.alloc" };
 let _search = {};

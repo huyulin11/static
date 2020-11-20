@@ -206,7 +206,7 @@ export var init = function (target) {
 		taskexe.addCtrlTask(agvId, $(this).attr("id"));
 	});
 
-	gfbtn.renderBtnsTable({ values: initBtns, numInLine: 4 }, function (btns) {
+	gfbtn.renderToTable({ values: initBtns, numInLine: 4 }, function (btns) {
 		$(_target).append(btns);
 	});
 

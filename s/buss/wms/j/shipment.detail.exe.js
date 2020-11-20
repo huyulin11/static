@@ -86,7 +86,7 @@ var doInit = function (target, json) {
     let tempBtns = [exe, back];//play, restore, save, 
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
-    gfbtn.bindBtns(btnContainer, tempBtns);
+    gfbtn.bindByRes(btnContainer, tempBtns);
 
     container.append(`<div>可选择货物↓↓↓↓↓↓</div>`);
     container.append(`<div><table class="alloc"></table></div>`);

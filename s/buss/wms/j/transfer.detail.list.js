@@ -24,7 +24,7 @@ let tempBtns = [{
 		});
 	},
 }];
-gfbtn.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);
 
 var paperid = gf.urlParam("transferMainFormMap.paperid");
 let _columns = [];

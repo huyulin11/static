@@ -69,7 +69,7 @@ var doInit = function (target, json) {
     let tempBtns = [play, restore, save, exe, back];
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
-    gfbtn.bindBtns(btnContainer, tempBtns);
+    gfbtn.bindByRes(btnContainer, tempBtns);
 }
 
 

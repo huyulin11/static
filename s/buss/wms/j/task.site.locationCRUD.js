@@ -38,4 +38,4 @@ let add = (that) => {
 		}
 	});
 }
-gfbtn.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);

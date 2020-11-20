@@ -141,4 +141,4 @@ let btnsDel = {
     },
 };
 let tempBtns = [btnAdd, btnUpload, btnsDel];
-gfbtn.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);

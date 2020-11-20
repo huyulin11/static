@@ -37,4 +37,4 @@ let doJob = (param, that, callback) => {
 
 let tempBtns = [clear, search];
 let btnContainer = $("div#btnss");
-gfbtn.doBindBtns(btnContainer, tempBtns);
+gfbtn.bindSimple(btnContainer, tempBtns);
