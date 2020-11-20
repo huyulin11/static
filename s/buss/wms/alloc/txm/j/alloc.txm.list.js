@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
@@ -41,7 +42,7 @@ let tempBtns = [{
 		});
 	},
 }];
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindBtns("div.doc-buttons", tempBtns);
 
 window.datagrid = dataGrid({
 	pagId: 'paging',

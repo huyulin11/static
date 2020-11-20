@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gu } from "/s/buss/g/j/g.u.js";
 import { doInitPaperOp, paperOp, btns } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { submit } from "/s/buss/g/j/g.xlsx.js";
@@ -89,11 +90,11 @@ var initPaperOp = function (tasktype, optype) {
         }
         case "YZBD_NRDW": {
             if (_tasktype == "inventory") {
-                tempBtns = [btns.add, btns.edit,btns.send,btns.refresh,];
+                tempBtns = [btns.add, btns.edit, btns.send, btns.refresh,];
                 tempBtns = tempBtns.concat(btns.del, btns.inventoryResult, btns.over);
-            }else {
+            } else {
                 tempBtns = [btns.add, btns.detail, btns.edit, btns.refresh,];
-            }  
+            }
             break;
         }
         case "BJJK_HUIRUI": {
@@ -153,7 +154,7 @@ var initPaperOp = function (tasktype, optype) {
             break;
         }
     }
-    gf.bindBtns("div.doc-buttons", tempBtns);
+    gfbtn.bindBtns("div.doc-buttons", tempBtns);
 }
 
 export { initPaperOp };

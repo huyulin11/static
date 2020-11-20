@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import "/s/j/vue/vue.min.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/manager.js"
@@ -62,7 +63,7 @@ var initMain = function () {
     if (localStorage.projectKey == 'YZBD_NRDW') {
         Object.assign(conf, { numInLine: 1 });
     }
-    gf.getButtonDomByRes(conf, function (btns) {
+    gfbtn.buttonsDomByRes(conf, function (btns) {
         $(container).append(btns);
     });
 };

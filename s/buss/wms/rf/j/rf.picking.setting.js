@@ -1,3 +1,6 @@
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
+import { gf } from "/s/buss/g/j/g.f.js";
+
 let _setting;
 let _type = gf.urlParam("type");
 
@@ -40,7 +43,7 @@ var render = function (laps, setting, callback) {
             obj.value.push({ id: "SIMPLE", name: "阴凉库", type: "WAREHOUSE", whid: 4 });
             obj.value.push({ id: "IRON", name: "钢平台", type: "WAREHOUSE", whid: 5 });
         }
-        let btnsStr = gf.getButtonsTable({
+        let btnsStr = gfbtn.buttonsTable({
             values: obj.value,
             numInLine: 4,
             choose: function (value) {

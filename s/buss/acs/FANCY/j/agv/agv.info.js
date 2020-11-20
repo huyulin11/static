@@ -2,6 +2,7 @@ import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { fetchTaskTaikaiJy, deleverTaskTaikaiJy, waitHandler } from '/s/buss/acs/FANCY/j/agv/agv.info.taikaiJy.js';
 import { fetchTaskLaoFoxconn, deleverTaskLaoFoxconn } from '/s/buss/acs/FANCY/j/agv/agv.info.laoFoxconn.js';
 import { gotoInitLaoDbwy, deleverInitHandler, deleverStereotypeHandler, deleverPackHandler, gotoStereotypeHandler, gotoPackHandler } from '/s/buss/acs/FANCY/j/agv/agv.info.laoDbwy.js';
@@ -20,7 +21,7 @@ var getTargets = function () {
 	return arr;
 }
 
-export var getButtonsHtml = (targets) => {
+export var bindSites = (targets) => {
 	var index = 1;
 	var numInLine = 7;
 	if (localStorage.projectKey == 'TAIKAI_JY')
@@ -205,6 +206,9 @@ export var init = function (target) {
 		taskexe.addCtrlTask(agvId, $(this).attr("id"));
 	});
 
+	// gfbtn.buttonsDomByRes({ value: initBtns }, function (btns) {
+	// 	$(_target).append(btns);
+	// });
 	for (var btn of initBtns) {
 		if (!btn.hide) {
 			$(_target).append(`<td><div><button id='${btn.id}'`

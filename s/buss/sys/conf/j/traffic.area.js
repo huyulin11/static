@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
@@ -140,4 +141,4 @@ let btnsDel = {
     },
 };
 let tempBtns = [btnAdd, btnUpload, btnsDel];
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindBtns("div.doc-buttons", tempBtns);

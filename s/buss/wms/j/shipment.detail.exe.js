@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
 import { allocRender } from "/s/buss/wms/alloc/item/j/alloc.render.list.work.js";
@@ -85,7 +86,7 @@ var doInit = function (target, json) {
     let tempBtns = [exe, back];//play, restore, save, 
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
-    gf.bindBtns(btnContainer, tempBtns);
+    gfbtn.bindBtns(btnContainer, tempBtns);
 
     container.append(`<div>可选择货物↓↓↓↓↓↓</div>`);
     container.append(`<div><table class="alloc"></table></div>`);

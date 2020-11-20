@@ -1,5 +1,5 @@
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
-import { getButtonsHtml, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
+import { bindSites, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
@@ -41,7 +41,7 @@ var deleverTaskTaikaiJy = function () {
 	} else if (agvbusstype == 'TON_2') {
 		targets = [{ id: 21, name: "1号" }, { id: 22, name: "2号" }, { id: 25, name: "3号" }, { id: 26, name: "4号" }, { id: 29, name: "5号" }, { id: 30, name: "6号" }, { id: 33, name: "7号" }, { id: 34, name: "8号" }, { id: 37, name: "9号" }, { id: 38, name: "10号" }, { id: 41, name: "11号" }, { id: 42, name: "12号" }];
 	}
-	var buttons = getButtonsHtml(targets);
+	var buttons = bindSites(targets);
 	var indexOfTips = layer.confirm('请选择送货任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
 		btn: ['确定送料'],
 		btn1: function () {

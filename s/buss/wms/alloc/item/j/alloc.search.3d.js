@@ -1,6 +1,7 @@
 import "/s/j/vue/vue.min.js";
 import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 
 let clear = {
     url: `/alloc/item/util/clearSearch.shtml`, style: "width:49%;",
@@ -36,4 +37,4 @@ let doJob = (param, that, callback) => {
 
 let tempBtns = [clear, search];
 let btnContainer = $("div#btnss");
-gf.doBindBtns(btnContainer, tempBtns);
+gfbtn.doBindBtns(btnContainer, tempBtns);

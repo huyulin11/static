@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gu } from "/s/buss/g/j/g.u.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
@@ -23,7 +24,7 @@ let tempBtns = [{
 		});
 	},
 }];
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindBtns("div.doc-buttons", tempBtns);
 
 var paperid = gf.urlParam("transferMainFormMap.paperid");
 let _columns = [];

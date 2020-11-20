@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
@@ -15,7 +16,7 @@ let tempBtns = [{
 		window.history.back();
 	}
 }];
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindBtns("div.doc-buttons", tempBtns);
 
 let _type = gf.urlParam("type");
 let _columns = [{
