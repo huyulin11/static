@@ -26,14 +26,14 @@ var render = function (laps, setting, callback) {
         tab.value.push(a);
         tabs.set(a.type, tab);
     }
-    let tabStrs = "";
+    let wrap = $(`<div class="wrap"></div>`);
     for (let m of tabs) {
         let obj = m[1];
-        tabStrs += (
-            `<label>
+        let label = $(`<label>
                 <input type="radio" name="tab" class='chooseRadio' data-id='${obj.key}'>
                 <span>${obj.key == 'PICK' ? "按拣配点" : "按生产线"}</span>
             </label>`);
+        $(wrap).append(label);
     }
 
     for (let m of tabs) {
@@ -43,7 +43,7 @@ var render = function (laps, setting, callback) {
             obj.value.push({ id: "SIMPLE", name: "阴凉库", type: "WAREHOUSE", whid: 4 });
             obj.value.push({ id: "IRON", name: "钢平台", type: "WAREHOUSE", whid: 5 });
         }
-        let btnsStr = gfbtn.buttonsTable({
+        let btnsStr = gfbtn.btnsTable({
             values: obj.value,
             numInLine: 4,
             choose: function (value) {
@@ -51,10 +51,11 @@ var render = function (laps, setting, callback) {
                 return false;
             },
         });
-        tabStrs += (`<div class='chooseDiv hidden' data-id='${obj.key}'>${btnsStr}</div>`);
+        let chooseDiv = $(`<div class='chooseDiv hidden' data-id='${obj.key}'></div>`);
+        $(chooseDiv).append(btnsStr);
+        $(wrap).append(chooseDiv);
     }
-    var tables = `<div class="wrap">${tabStrs}</div>`;
-    container().append(tables);
+    container().append(wrap);
     gf.resizeTable();
     if (callback) { callback(setting ? setting.TYPE : ""); }
 }

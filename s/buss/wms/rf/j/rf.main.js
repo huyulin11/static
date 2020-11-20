@@ -63,7 +63,7 @@ var initMain = function () {
     if (localStorage.projectKey == 'YZBD_NRDW') {
         Object.assign(conf, { numInLine: 1 });
     }
-    gfbtn.buttonsDomByRes(conf, function (btns) {
+    gfbtn.renderBtnsByRes(conf, function (btns) {
         $(container).append(btns);
     });
 };

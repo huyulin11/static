@@ -28,7 +28,7 @@
     import { showTaskexe } from "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
     import { init as initOp } from "/s/buss/acs/FANCY/j/agv/agv.op.js";
     gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#agvDetail", function () {
-        initInfo(".oneCtrlTr");
+        initInfo("#op");
         initOp("div#tempAgvMgr");
         initPlc();
         setInterval(function () { showTaskexe(currentTask); }, 500);

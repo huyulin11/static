@@ -206,17 +206,9 @@ export var init = function (target) {
 		taskexe.addCtrlTask(agvId, $(this).attr("id"));
 	});
 
-	// gfbtn.buttonsDomByRes({ value: initBtns }, function (btns) {
-	// 	$(_target).append(btns);
-	// });
-	for (var btn of initBtns) {
-		if (!btn.hide) {
-			$(_target).append(`<td><div><button id='${btn.id}'`
-				+ ((btn.color) ? (`data-backcolor='${btn.color}'`) : "")
-				+ ((btn.to) ? (`data-to='${btn.to}'`) : "")
-				+ `>${btn.name}</button></div></td>`);
-		}
-	}
+	gfbtn.renderBtnsTable({ values: initBtns, numInLine: 4 }, function (btns) {
+		$(_target).append(btns);
+	});
 
 	allDisabled();
 	gf.resizeTable();
