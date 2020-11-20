@@ -190,7 +190,7 @@ function rect() {
         .style("stroke-width", "1px");
 }
 
-function drawPoints(dataset,cid) {
+function drawPoints(dataset) {
     conf.xScale = d3.scaleLinear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
     conf.yScale = d3.scaleLinear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
 
@@ -220,9 +220,9 @@ function drawPoints(dataset,cid) {
             return datas.inAgv(d, 1) ? "agv1" : "agv2";
         })
         .attr("cx", function (d) {
-            return conf.padding.left + conf.xScale(d[0]);
+            return conf.padding.left + conf.xScale(d[1]);
         }).attr("cy", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d[1]);
+            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
