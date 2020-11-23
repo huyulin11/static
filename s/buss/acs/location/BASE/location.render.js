@@ -207,7 +207,7 @@ function drawPoints(dataset) {
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
-            return (datas.inUdp(d)) ? 10 : (datas.inTaskPath(d) ? 4 : 2);
+            return (datas.inUdp(d)) ? 5 : (datas.inTaskPath(d) ? 4 : 2);
         });
 
     circleEnter.append("circle")
