@@ -1,52 +1,57 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 
+var flag = false ;
 export let tempBtns = [{
-    id: "add", name: "新增", class: "btn-info",
+    id: "show", name: "坐标", class: "btn-show",
     bind: function () {
-        add(this);
-    }
-},/*{
-    url: `/app/conf/del.shtml`,
-    id: "del", name: "删除", class: "btn-danger",
-    bind: function () {
-		del(this);
-    },
- },*/{
-    id: "show", name: "显示", class: "btn-show",
-    bind: function () {
-        
+        flag = !flag;
+        if (flag) {
+            show();
+            return !flag;
+        }
+        hide();
+        return !flag;
     }
 }];
-// let del = (that) => {
-//     var cbox = gf.checkOnlyOne("key");
-//     if (!cbox) { return; }
-//     layer.confirm(`是否${that.name}${cbox}？`, function (index) {
-//         gf.doAjax({
-//             url: that.url, type: "POST",
-//             data: { table: "TASK_SITE_LOCATION", key: cbox }
-// 		});
-//     });
-// }
-let add = (that) => {
-    layer.prompt({ title: '输入id', formType: 0 }, function (key, index1) {
-        layer.close(index1);
-        layer.prompt({ title: '输入x', formType: 0 }, function (x1, index2) {
-            layer.close(index2);
-            layer.prompt({ title: '输入y', formType: 0 }, function (y1, index3) {
-                if (window.confirm(`确定新增id：${key},${x1},${y1}？`)) {
-                    layer.close(index3);
-                    let id = key;
-                    let x = x1;
-                    let y = y1;
-                    let value = { id, x, y };
-                    let text = JSON.stringify(value);
-                    gf.doAjax({
-                        url: `/app/conf/set.shtml`, type: "POST",
-                        data: { table: "TASK_SITE_LOCATION", key: id, value: text }
-                    });
-                }
-            })
-        })
-    });
+// flag = !flag;
+
+var hide = function () {
+    conf.svg.selectAll("text").remove();
 }
+
+var show = function () {
+    var datasss = [].concat(datas.udfPoints);
+    var dataset = datas.lastTaskPath.concat(datasss);
+    conf.svg.selectAll("text")
+        .data(dataset)
+        .attr("x", function (d) {
+            return conf.padding.left + conf.xScale(d[1]);
+        })
+        .attr("y", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
+        })
+        .attr("stroke", "black")
+        .attr("font-size", "15px")
+        .attr("font-family", "sans-serif")
+        .text(function (d) {
+            return d[0];
+        })
+        .enter()
+        .append("text")
+        .attr("x", function (d) {
+            return conf.padding.left + conf.xScale(d[1]);
+        })
+        .attr("y", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
+        })
+        .attr("stroke", "black")
+        .attr("font-size", "15px")
+        .attr("font-family", "sans-serif")
+        .text(function (d) {
+            return d[0];
+        });
+}
+
 gf.bindBtns("div.doc-buttons", tempBtns);

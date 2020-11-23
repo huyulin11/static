@@ -123,14 +123,14 @@ var rectPath = function (tempYfc) {
                 line().style("stroke", area.color);
             }
         }
-        conf.svg.append("text")
-            .attr("x", conf.padding.left + conf.xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
-            .attr("y", conf.height - conf.padding.bottom - conf.yScale((area.downYaxis + area.upYaxis) / 2) + 10)
-            .attr("class", "clashLine")
-            .style("stroke", "red")
-            .style("font-size", "22px")
-            .style("stroke-width", "1px")
-            .text(area.title);
+        // conf.svg.append("text")
+        //     .attr("x", conf.padding.left + conf.xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
+        //     .attr("y", conf.height - conf.padding.bottom - conf.yScale((area.downYaxis + area.upYaxis) / 2) + 10)
+        //     .attr("class", "clashLine")
+        //     .style("stroke", "red")
+        //     .style("font-size", "22px")
+        //     .style("stroke-width", "1px")
+        //     .text(area.title);
     }
 }
 
@@ -212,7 +212,7 @@ function drawPoints(dataset) {
 
     circleEnter.append("circle")
         .attr("fill", "red")
-        .attr("id",function(d){
+        .attr("id", function (d) {
             return d[0];
         })
         .attr("r", 20).transition().duration(500)
@@ -228,7 +228,6 @@ function drawPoints(dataset) {
         }).attr("r", function (d) {
             return (datas.inUdp(d)) ? 3 : 5;
         });
-
 
     circleExit.transition().duration(500).attr("fill", "white").remove();
 
