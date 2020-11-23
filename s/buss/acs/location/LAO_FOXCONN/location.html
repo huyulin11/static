@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="/s/c/agv.mgr.css">
     <link rel="stylesheet" href="/s/c/agv.location.css">
 </head>
-
+<div class="doc-buttons">
+</div>
 <body>
     <div id="agvs">
     </div>
     <div id="sysTitle">
         <span>南宁富士康AGV智能调度系统</span>
-    </div>
+    </div>  
     <div id="coordinate"></div>
     <div id="tipsOper"></div>
     <div id="rootContainer" class="hidden">
@@ -35,6 +36,7 @@
     import "/s/buss/acs/location/LAO_FOXCONN/location.p.js";
     import { move } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
     import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
+    import "/s/buss/acs/location/BASE/location.button.js"
     renderSvg(() => { move() });
     setTimeout(renderSvg, 3000);
     // setInterval(renderSvg, 3000);
