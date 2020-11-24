@@ -2,20 +2,21 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 
-var flag = false ;
+var flag = false;
 export let tempBtns = [{
-    id: "show", name: "坐标", class: "btn-show",
+    id: "show", name: "显示", class: "btn-show",
     bind: function () {
         flag = !flag;
         if (flag) {
             show();
+            d3.select(".doc-buttons").select("#show").text("隐藏");
             return !flag;
         }
         hide();
+        d3.select(".doc-buttons").select("#show").text("显示");
         return !flag;
     }
 }];
-// flag = !flag;
 
 var hide = function () {
     conf.svg.selectAll("text").remove();
