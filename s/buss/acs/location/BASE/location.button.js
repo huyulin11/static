@@ -27,6 +27,10 @@ var show = function () {
     var dataset = datas.lastTaskPath.concat(datasss);
     conf.svg.selectAll("text")
         .data(dataset)
+        .attr("id", function (d) {
+            var id = d[0] + 't';
+            return id;
+        })
         .attr("x", function (d) {
             return conf.padding.left + conf.xScale(d[1]);
         })
@@ -41,6 +45,10 @@ var show = function () {
         })
         .enter()
         .append("text")
+        .attr("id", function (d) {
+            var id = 't' + d[0];
+            return id;
+        })
         .attr("x", function (d) {
             return conf.padding.left + conf.xScale(d[1]);
         })

@@ -12,34 +12,6 @@ export var move = function () {
             .on('drag', draged)
     )
 }
-// function ticked() {
-//     d3.selectAll("line").attr("x1", function (d) {
-//         return d.source.x;
-//     })
-//         .attr("y1", function (d) {
-//             return d.source.y;
-//         })
-//         .attr("x2", function (d) {
-//             return d.target.x;
-//         })
-//         .attr("y2", function (d) {
-//             return d.target.y;
-//         });
-
-//     d3.selectAll("circle").attr("cx", function (d) {
-//         return d.x;
-//     })
-//         .attr("cy", function (d) {
-//             return d.y;
-//         });
-
-//     svg_texts.attr("x", function (d) {
-//         return d.x;
-//     })
-//         .attr("y", function (d) {
-//             return d.y;
-//         });
-// }
 function started() {
 }
 function draged() {
@@ -47,6 +19,9 @@ function draged() {
     d3.select(this)
         .attr('cx', x)
         .attr('cy', y)
+    d3.select("#t" + $(this).attr('id'))
+        .attr("x", x)
+        .attr("y", y)
 }
 function ended() {
     const { x, y } = d3.event;
@@ -54,7 +29,7 @@ function ended() {
         .attr('cx', x)
         .attr('cy', y);
     var id = $(this).attr('id');
-    var ids = parseInt(id)
+    var ids = parseInt(id);
     var x1 = conf.xReScale(x - conf.padding.left);
     var y1 = conf.yReScale(conf.height - conf.padding.bottom - y);
     var arr = { id, x1, y1 };
