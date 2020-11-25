@@ -94,44 +94,79 @@ var siteCode = function (locations) {
 }
 
 var rectPath = function (tempYfc) {
-    var line = function () {
-        return conf.svg.append("line")
-            .attr("x1", conf.padding.left + conf.xScale(point1[0]))
-            .attr("y1", conf.height - conf.padding.bottom - conf.yScale(point1[1]))
-            .attr("x2", conf.padding.left + conf.xScale(point2[0]))
-            .attr("y2", conf.height - conf.padding.bottom - conf.yScale(point2[1]))
-            .attr("class", "clashLine")
-            .style("stroke-width", "2px");
-    }
+    var line = conf.svg.selectAll("line").data(tempYfc)
+        .attr("x1", function (d) {
+            return conf.padding.left + conf.xScale(d.rightXaxis);
+        }).attr("y1", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
+        }).attr("x2", function (d) {
+            return conf.padding.left + conf.xScale(d.leftXaxis);
+        }).attr("y2", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
+        })
+        .enter()
+        .append("line")
+        .attr("id", function (d) {
+            return d.id;
+        })
+        .attr("from", function (d) {
+            return d.from;
+        })
+        .attr("to", function (d) {
+            return d.to;
+        }).attr("x1", function (d) {
+            return conf.padding.left + conf.xScale(d.rightXaxis);
+        }).attr("y1", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
+        }).attr("x2", function (d) {
+            return conf.padding.left + conf.xScale(d.leftXaxis);
+        }).attr("y2", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
+        }).attr("class", "clashLine")
+        .style("stroke", "black")
+        .style("stroke-width", "2px");
 
-    for (var a in tempYfc) {
-        if (a == tempYfc.length - 1 && tempYfc[a].color != conf.initColor) { break; }
-        var area = tempYfc[a];
-        var nextarea = tempYfc[parseInt(a) + 1];
-        var points = [[area.rightXaxis, area.upYaxis], [area.leftXaxis, area.downYaxis]];
+    // var line = function () {
+    //     return conf.svg.append("line")
+    //         .attr("id", point0.id)
+    //         .attr("from", point0.from)
+    //         .attr("to", point0.to)
+    //         .attr("x1", conf.padding.left + conf.xScale(point1[0]))
+    //         .attr("y1", conf.height - conf.padding.bottom - conf.yScale(point1[1]))
+    //         .attr("x2", conf.padding.left + conf.xScale(point2[0]))
+    //         .attr("y2", conf.height - conf.padding.bottom - conf.yScale(point2[1]))
+    //         .attr("class", "clashLine")
+    //         .style("stroke-width", "2px");
+    // }
 
-        for (var i = 0; i < points.length; i++) {
-            var point1 = points[i];
-            var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
+    // for (var a in tempYfc) {
+    //     if (a == tempYfc.length - 1 && tempYfc[a].color != conf.initColor) { break; }
+    //     var area = tempYfc[a];
+    //     var nextarea = tempYfc[parseInt(a) + 1];
+    //     var points = [[area.rightXaxis, area.upYaxis], [area.leftXaxis, area.downYaxis]];
 
-            if (nextarea && area.color != nextarea.color) {
-                line().style("stroke", tool.getPointColor());
-            } else if (area.color == conf.initColor) {
-                line().style("stroke", area.color)
-                    .style("stroke-dasharray", "4, 7");
-            } else if (area.color != conf.initColor) {
-                line().style("stroke", area.color);
-            }
-        }
-        // conf.svg.append("text")
-        //     .attr("x", conf.padding.left + conf.xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
-        //     .attr("y", conf.height - conf.padding.bottom - conf.yScale((area.downYaxis + area.upYaxis) / 2) + 10)
-        //     .attr("class", "clashLine")
-        //     .style("stroke", "red")
-        //     .style("font-size", "22px")
-        //     .style("stroke-width", "1px")
-        //     .text(area.title);
-    }
+    //     for (var i = 0; i < points.length; i++) {
+    //         var point0 = { id: area.id, from: area.from, to: area.to };
+    //         var point1 = points[i];
+    //         var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
+    //         if (nextarea && area.color != nextarea.color) {
+    //             line().style("stroke", tool.getPointColor());
+    //         } else if (area.color == conf.initColor) {
+    //             line().style("stroke", area.color)
+    //                 .style("stroke-dasharray", "4, 7");
+    //         } else if (area.color != conf.initColor) {
+    //             line().style("stroke", area.color);
+    //         }
+    //     }
+    //     // conf.svg.append("text")
+    //     //     .attr("x", conf.padding.left + conf.xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
+    //     //     .attr("y", conf.height - conf.padding.bottom - conf.yScale((area.downYaxis + area.upYaxis) / 2) + 10)
+    //     //     .attr("class", "clashLine")
+    //     //     .style("stroke", "red")
+    //     //     .style("font-size", "22px")
+    //     //     .style("stroke-width", "1px")
+    //     //     .text(area.title);
+    // }
 }
 
 var isSiteCode = false;

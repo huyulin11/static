@@ -23,6 +23,20 @@ export var move = function () {
         d3.select("#t" + id)
             .attr("x", x)
             .attr("y", y);
+        conf.svg.selectAll("line").data(datas.point)
+            .attr("x1", function (d) {
+                if (d.from == id) return x;
+                return conf.padding.left + conf.xScale(d.rightXaxis);
+            }).attr("y1", function (d) {
+                if (d.from == id) return y;
+                return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
+            }).attr("x2", function (d) {
+                if (d.to == id) return x;
+                return conf.padding.left + conf.xScale(d.leftXaxis);
+            }).attr("y2", function (d) {
+                if (d.to == id) return y;
+                return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
+            })
     }
     function ended() {
         const { x, y } = d3.event;
