@@ -1,6 +1,7 @@
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 
 var agvId = currentAgvId;
@@ -60,10 +61,10 @@ export var init = function (target) {
 	}
 
 	gv.getSite(function (data) {
-		let conf = { data: data, numInLine: _numInLine, render: renderSite, target: tableSite };
-		gf.renderBtnTable(conf, () => {
-			gf.resizeTable();
-		});
+		let conf = {
+			data: data, numInLine: _numInLine, render: renderSite, target: tableSite, callback: () => gf.resizeTable()
+		};
+		gfbtn.renderBtnTable(conf);
 	});
 
 	container.delegate("button.flag", "click", function () {

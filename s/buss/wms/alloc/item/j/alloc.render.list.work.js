@@ -1,5 +1,6 @@
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gcol } from "/s/buss/g/j/g.col.js";
 
 var renderOne = function (allocInfo) {
@@ -62,10 +63,9 @@ var renderOne = function (allocInfo) {
 let flag = false;
 var toRender = function (data, conf) {
     if (!data || data.length == 0) return;
-    let _conf = { data: data, numInLine: 4, numInPage: 1000, render: renderOne, target: "table.alloc" };
+    let _conf = { data: data, numInLine: 4, numInPage: 1000, render: renderOne, target: "table.alloc", callback: () => gf.resizeTable() };
     Object.assign(_conf, conf);
-    gf.renderBtnTable(_conf);
-    gf.resizeTable();
+    gfbtn.renderBtnTable(_conf);
 }
 
 export var allocRender = function (data, conf) {

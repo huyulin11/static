@@ -456,40 +456,6 @@ class GF {
             localStorage.layerAreaSmall = ["50%", "50%"];
         return localStorage.layerAreaSmall.split(",");
     };
-    renderBtnTable(conf, callback) {
-        var dealData = function (data) {
-            if (data.length > 1000) {
-                return data.slice(0, 1000);
-            }
-            return data;
-        }
-        var renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4,
-            numInPage = conf.numInPage ? conf.numInPage : 1000, clickFun = conf.click;
-        var filterData = dealData(conf.data, numInPage);
-        var datas = filterData;
-        var target = conf.target;
-        var index = 1;
-        var trObj = $('<tr></tr>');
-        for (var item of datas) {
-            var tmpItemStr = renderOne(item);
-            if (!tmpItemStr) continue;
-            let tdObj = $('<td></td>');
-            $(tdObj).append(tmpItemStr);
-            if (clickFun) { $(tdObj).find('button').bind("click", clickFun); }
-            $(trObj).append(tdObj);
-            if (index >= numInLine) {
-                $(target).append(trObj);
-                trObj = $('<tr></tr>');
-                index = 1;
-            } else {
-                index++;
-            }
-        }
-        if ($(trObj).find('td').length > 0) {
-            $(target).append(trObj);
-        }
-        if (callback) callback();
-    }
     getArray(target) {
         var arr = [];
         $(target).each(function () {
