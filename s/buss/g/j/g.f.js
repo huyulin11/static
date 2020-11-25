@@ -10,6 +10,7 @@ var defaultSucFun = function (data) {
     } else {
         layer.msg(data.msg);
     }
+    if (data.err) console.log(err);
 }, defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
