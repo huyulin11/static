@@ -42,29 +42,31 @@ export var init = function (target) {
 		chooedBtns.html(nameArr.join("→"));
 	}
 
-	var renderSite = function (item) {
-		let json = item.jsonObject;
-		if (json) {
-			let hide = json.hide;
-			if (hide) { return null; }
-		}
-		let currentFlag = item.id == _currentSite;
-		var tmpStr = ` class='flag ${currentFlag ? "current" : ""}' data-name='${item.sitename}' `;
-		var disabled = "";
-		for (let i in item) {
-			tmpStr += ` data-${i}='${item[i]}' `;
-		}
-		let btn = `<button ${tmpStr} ${disabled}>${item.sitename}<br/>${currentFlag ? "当前站点" : ""}</button>`;
-		// if (currentFlag) { targetArr.push($(btn)); showPath(); }
-		tmpStr = `<div>${btn}</div>`;
-		return tmpStr;
-	}
-
 	gv.getSite(function (data) {
-		let conf = {
-			data: data, numInLine: _numInLine, render: renderSite, target: tableSite, callback: () => gf.resizeTable()
-		};
-		gfbtn.renderBtnTable(conf);
+		var _renderSite = function (item) {
+			let json = item.jsonObject;
+			let inner = item.sitename;
+			let btn = $(`<button ${disabled}></button>`);
+			if (json) {
+				let hide = json.hide;
+				if (hide) { return null; }
+				let agvIds = json.agvIds;
+				if (agvIds) { inner += `<br/>AGV:${agvIds}`; $(btn).data('agvids', agvIds); }
+			}
+			let currentFlag = item.id == _currentSite;
+			$(btn).addClass('flag'); if (currentFlag) $(btn).addClass('current');
+			$(btn).data('name', item.sitename);
+			var disabled = "";
+			for (let i in item) {
+				$(btn).data(i, item[i]);
+			}
+			inner += `<br/>${currentFlag ? "当前站点" : ""}`;
+			$(btn).html(inner);
+			let div = $(`<div></div>`);
+			$(div).append(btn);
+			return div;
+		}
+		gfbtn.renderBtnTable({ data: data, numInLine: _numInLine, render: _renderSite, target: tableSite, callback: () => gf.resizeTable() });
 	});
 
 	container.delegate("button.flag", "click", function () {
@@ -79,7 +81,18 @@ export var init = function (target) {
 			let a = targetArr.indexOf(data);
 			targetArr.splice(a, 1);
 		} else {
-			if (targetArr.length >= _oneTimeLimit) { gf.layerMsg(`选中需要操作的站点数不能超过${_oneTimeLimit}个！`); return; }
+			let check = (obj) => {
+				return $(obj).data('agvids');
+			}
+			let thisAgvCheck = check(this);
+			if (thisAgvCheck && targetArr.some((e) => {
+				return check(e) && thisAgvCheck != check(e);
+			})) {
+				gf.layerMsg(`不能同时选择限定AGV不一致的站点！`); return;
+			}
+			if (targetArr.length >= _oneTimeLimit) {
+				gf.layerMsg(`选中需要操作的站点数不能超过${_oneTimeLimit}个！`); return;
+			}
 			$(that).addClass("choosed");
 			targetArr.push(data);
 		}
