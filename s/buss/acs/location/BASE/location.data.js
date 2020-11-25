@@ -78,6 +78,9 @@ var dataLocation = function (data) {
                 for (var next of data) {
                     if (value.nextid === next.id) {
                         datas.point.push({
+                            "id": val.id +""+ next.id, 
+                            "from":val.id,
+                            "to":next.id,
                             "leftXaxis": val.x,
                             "rightXaxis": next.x,
                             "downYaxis": val.y,

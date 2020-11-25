@@ -1,5 +1,6 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
@@ -10,25 +11,30 @@ export var move = function () {
             .on('start', started)
             .on('end', ended)
             .on('drag', draged)
-    )
+    );
+    function started() {
+    }
+    function draged() {
+        const { x, y } = d3.event;
+        var id = $(this).attr('id');
+        d3.select(this)
+            .attr('cx', x)
+            .attr('cy', y);
+        d3.select("#t" + id)
+            .attr("x", x)
+            .attr("y", y);
+    }
+    function ended() {
+        const { x, y } = d3.event;
+        d3.select(this)
+            .attr('cx', x)
+            .attr('cy', y);
+        var id = $(this).attr('id');
+        saveLocation(id, x, y);
+    }
 }
-function started() {
-}
-function draged() {
-    const { x, y } = d3.event
-    d3.select(this)
-        .attr('cx', x)
-        .attr('cy', y)
-    d3.select("#t" + $(this).attr('id'))
-        .attr("x", x)
-        .attr("y", y)
-}
-function ended() {
-    const { x, y } = d3.event;
-    d3.select(this)
-        .attr('cx', x)
-        .attr('cy', y);
-    var id = $(this).attr('id');
+
+function saveLocation(id, x, y) {
     var ids = parseInt(id);
     var x1 = conf.xReScale(x - conf.padding.left);
     var y1 = conf.yReScale(conf.height - conf.padding.bottom - y);
