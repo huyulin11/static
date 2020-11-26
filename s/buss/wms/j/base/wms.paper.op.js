@@ -90,7 +90,7 @@ var initPaperOp = function (tasktype, optype) {
         }
         case "YZBD_NRDW": {
             if (_tasktype == "inventory") {
-                tempBtns = [btns.add, btns.edit, btns.send, btns.refresh,];
+                tempBtns = [btns.add, btns.detail, btns.edit, btns.send, btns.refresh,];
                 tempBtns = tempBtns.concat(btns.del, btns.inventoryResult, btns.over);
             } else {
                 tempBtns = [btns.add, btns.detail, btns.edit, btns.refresh,];

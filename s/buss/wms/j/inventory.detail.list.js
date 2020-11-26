@@ -13,6 +13,15 @@ window.datagrid = dataGrid({
 		colkey: "paperid",
 		name: "盘点单号"
 	}, {
+		colkey: "supplier",
+		name: "供应商"
+	}, {
+		colkey: "item",
+		name: "货物类型"
+	}, {
+		colkey: "lot",
+		name: "批次号"
+	}, {
 		colkey: "userdef1",
 		name: "货位"
 	}, {
