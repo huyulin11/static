@@ -9,7 +9,7 @@ let _tasktype = null;
 let _paperid = null;
 let _paper = null;
 
-let _conf = {
+export let formConf = {
     container: "div#rows",
     targetClass: "item-group",
     addBtn: "div.addOne",
@@ -18,14 +18,14 @@ let _conf = {
 };
 
 export var hideAddFun = function () {
-    $("div.addOne").hide();
+    $(formConf.addBtn).hide();
 }, showAddFun = function () {
-    $("div.addOne").show();
+    $(formConf.addBtn).show();
 };
 
 export var init = function (tasktype) {
     _tasktype = tasktype;
-    initForm(_tasktype, _conf, _initRows);
+    initForm(_tasktype, formConf, _initRows);
 }
 
 var _initPage = function (obj) {
@@ -48,10 +48,10 @@ var _initRows = function () {
             sessionStorage.paper = "";
             _paper = JSON.parse(_paper);
             _initPage(_paper);
-            initRows(_conf, _paper.list);
+            initRows(formConf, _paper.list);
             return;
         } else {
-            initRows(_conf);
+            initRows(formConf);
             return;
         }
     }
@@ -71,7 +71,7 @@ var _initRows = function () {
             return;
         }
         _initPage(main);
-        initRows(_conf, details);
+        initRows(formConf, details);
     });
 }
 
