@@ -1,7 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import { initForm } from "./wms.paper.add.init.js";
+import { initForm } from "/s/buss/wms/j/base/wms.paper.add.init.js";
 
 let _receipttype = gf.urlParam("receipttype");
 
@@ -17,11 +17,14 @@ let _conf = {
     max: 200,
 };
 
+export var hideAddFun = function () {
+    $("div.addOne").hide();
+}, showAddFun = function () {
+    $("div.addOne").show();
+};
+
 export var init = function (tasktype) {
     _tasktype = tasktype;
-    if (_tasktype == "inventory" && localStorage.projectKey == "YZBD_NRDW") {
-        $("div.addOne").hide();
-    }
     initForm(_tasktype, _conf, _initRows);
 }
 
