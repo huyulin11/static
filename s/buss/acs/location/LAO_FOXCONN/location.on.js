@@ -30,17 +30,9 @@ export var move = function () {
                 return x;
             }).attr("y1", function (d) {
                 return y;
-            }).attr("x2", function (d) {
-                return conf.padding.left + conf.xScale(d.rightXaxis);
-            }).attr("y2", function (d) {
-                return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
             });
         conf.svg.selectAll("line").filter(function (e) { return e && e.to == id; })
-            .attr("x1", function (d) {
-                return conf.padding.left + conf.xScale(d.leftXaxis);
-            }).attr("y1", function (d) {
-                return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
-            }).attr("x2", function (d) {
+            .attr("x2", function (d) {
                 return x;
             }).attr("y2", function (d) {
                 return y;
@@ -53,7 +45,6 @@ export var move = function () {
             .attr('cy', y);
         var id = $(this).attr('id');
         saveLocation(id, x, y);
-        setTimeout(renderSvg, 10000);
     }
 }
 
@@ -64,9 +55,12 @@ function saveLocation(id, x, y) {
     var arr = { id, x1, y1 };
     console.log(arr);
     var result = { "id": ids, "x": x1, "y": y1 };
-    updateTaskSiteLocation(id, result);
     gf.doAjax({
         url: `/app/conf/set.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) }
+        data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
+        success: (obj) => {
+            updateTaskSiteLocation(id, result);
+            layer.msg(obj.msg ? obj.msg : '保存成功！');
+        }
     });
 }

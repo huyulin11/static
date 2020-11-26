@@ -5,6 +5,7 @@ export var taskSiteLogic = function (callback) {
         url: "/s/jsons/" + localStorage.projectKey + "/sites/taskSiteLogic.json",
         type: "get",
         async: false,
+        cache: false,
         dataType: "json",
         success: function (data) {
             if (callback) {
@@ -22,7 +23,6 @@ export var taskSiteLocation = function (callback) {
             callback(data);
         }
     };
-    debugger
     if (taskSiteLocationData) {
         call(taskSiteLocationData);
         return;
@@ -31,6 +31,7 @@ export var taskSiteLocation = function (callback) {
         url: "/s/jsons/" + localStorage.projectKey + "/sites/taskSiteLocation.json",
         type: "get",
         async: false,
+        cache: false,
         dataType: "json",
         success: function (data) {
             taskSiteLocationData = data;
@@ -43,9 +44,9 @@ export var taskSiteLocation = function (callback) {
 
 export var updateTaskSiteLocation = function (id, data) {
     if (!taskSiteLocationData) return;
-    taskSiteLocationData.forEach(e => {
+    taskSiteLocationData.forEach((e, i) => {
         if (e.id == id) {
-            taskSiteLocationData[id] = data;
+            taskSiteLocationData[i] = data;
         }
     });
 }

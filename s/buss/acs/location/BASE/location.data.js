@@ -4,18 +4,7 @@ import { taskSiteLogic, taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.in
 import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 
 export var datas = {};
-
-datas.clashArea = [];
-datas.udfPoints = [];
-datas.point = [];
-datas.path = [];
 let datasLogic = [];
-datas.locations = [];
-datas.taskDetails = [];
-datas.datasetMap = [];
-datas.currentAgvs = [];
-datas.lastTaskPath = [];
-datas.id = [];
 
 var rectPoint = [
     [-21650, 3500], [-21650, -4600], [-3650, -4600], [-3650, 3500]
@@ -72,15 +61,15 @@ export var dataLocation = function (data) {
     for (var val of data) {
         datas.udfPoints.push([val.id, val.x, val.y]);
         datas.locations.push({ "id": val.id, "x": val.x, "y": val.y });
-        datas.id.push({"id": val.id});
+        datas.id.push({ "id": val.id });
         for (var value of datasLogic) {
             if (val.id === value.siteid) {
                 for (var next of data) {
                     if (value.nextid === next.id) {
                         datas.point.push({
-                            "id": val.id +""+ next.id, 
-                            "from":val.id,
-                            "to":next.id,
+                            "id": val.id + "" + next.id,
+                            "from": val.id,
+                            "to": next.id,
                             "leftXaxis": val.x,
                             "rightXaxis": next.x,
                             "downYaxis": val.y,
@@ -165,6 +154,22 @@ let allAgvsInfoTmp = () => allAgvsInfo(function (data) {
 });
 
 datas.init = function () {
+    // $(".aspect").remove();
+    // $("defs").remove();
+    // $("image").remove();
+    // $(".clashLine").remove();
+    // $(".mainRoad").remove();
+    datas.clashArea = [];
+    datas.udfPoints = [];
+    datas.point = [];
+    datas.path = [];
+    datasLogic = [];
+    datas.locations = [];
+    datas.taskDetails = [];
+    datas.datasetMap = [];
+    datas.currentAgvs = [];
+    datas.lastTaskPath = [];
+    datas.id = [];
     taskSiteLogic(dataLlogic);
     taskSiteLocation(dataLocation);
     allAgvsInfoTmp();
