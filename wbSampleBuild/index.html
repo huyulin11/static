@@ -10,7 +10,11 @@
     <script src="Build/UnityLoader.js"></script>
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/HDBuild.json", {onProgress: UnityProgress});
-    </script>
+		function send2Js() {
+            let url = 'ws://' + location.hostname + ':9080/websocket/3d';
+            unityInstance.SendMessage("Main Camera", "ReciveJsMsg", url ? url : "");
+      }
+	</script>
   </head>
   <body>
     <div class="webgl-content">

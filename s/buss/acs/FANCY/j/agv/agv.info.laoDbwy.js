@@ -1,5 +1,5 @@
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
-import { getButtonsHtml, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
+import { bindSites, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { gf } from "/s/buss/g/j/g.f.js";
@@ -25,7 +25,7 @@ var deleverInitHandler = function () {
 	for (var i = 3012; i <= 3053; i++) {
 		targets.push({ id: i });
 	}
-	var buttons = getButtonsHtml(targets);
+	var buttons = bindSites(targets);
 	var indexOfTips = layer.confirm('请选择送料任务的目的地(点击变红色时为选中)' + '<br/>' + buttons, {
 		btn: ['确定送料'],
 		area: '386px',
@@ -86,7 +86,7 @@ var gotoStereotypeHandler = function () {
 		if (i == 2042) continue;
 		targets.push({ id: i });
 	}
-	var buttons = getButtonsHtml(targets);
+	var buttons = bindSites(targets);
 	var indexOfTips = layer.confirm('请选择前往定型暂存区的目的地' + '<br/>' + buttons, {
 		btn: ['确定前往'],
 		area: '386px',
@@ -111,7 +111,7 @@ var gotoPackHandler = function () {
 	for (var i = 2062; i <= 2107; i++) {
 		targets.push({ id: i });
 	}
-	var buttons = getButtonsHtml(targets);
+	var buttons = bindSites(targets);
 	var indexOfTips = layer.confirm('请选择前往包装暂存区的目的地' + '<br/>' + buttons, {
 		btn: ['确定前往'],
 		area: '386px',

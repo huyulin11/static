@@ -1,5 +1,6 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 
@@ -188,4 +189,4 @@ $("#searchForm").find("div.search-group").html(
 );
 $("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
 
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);

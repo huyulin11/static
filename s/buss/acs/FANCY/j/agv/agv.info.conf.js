@@ -1,4 +1,4 @@
-export var initBtns = jQuery.parseJSON(localStorage.agvControl);
+export var initBtns;
 switch (localStorage.projectKey) {
 	case "QDTY_SELF":
 		initBtns = [
@@ -9,5 +9,6 @@ switch (localStorage.projectKey) {
 		];
 		break;
 	default:
+		initBtns = jQuery.parseJSON(localStorage.agvControl);
 		break;
 }

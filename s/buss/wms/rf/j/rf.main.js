@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import "/s/j/vue/vue.min.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/manager.js"
@@ -23,7 +24,7 @@ if (localStorage.projectKey == 'BJJK_HUIRUI') {
         { resKey: "rf_receipt", id: "receipt", name: "冷库入库", "url": `/s/buss/wms/rf/h/rf.receipt.html` },
         { resKey: "rf_combine", id: "combine", name: "发料组盘", "url": `/s/buss/wms/rf/h/rf.combine.html` },
         { resKey: "rf_shipment", id: "stockOut", name: "冷库出库", "url": `/s/buss/wms/rf/h/rf.picking.html?type=PICKED_COLD` },
-        { resKey: "rf_trans", id: "trans", name: "发料撤回", "url": `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR` },
+        { resKey: "rf_trans", id: "trans", name: "发料撤销", "url": `/s/buss/wms/h/shipmentCombinedMgr.html?type=MGR` },
         { resKey: "rf_alloc", id: "alloc", name: "冷库库位", "url": `/s/buss/wms/alloc/item/h/alloc.html` },
         { resKey: "rf_fail", id: "failure", name: "产线设置", "url": `/s/buss/sys/lap/h/lapInfoMgr.html?type=PROD_LINE` },
         { resKey: "rf_priority", id: "priority", name: "优先等级", "url": ` /s/buss/wms/h/shipmentMainDetailMgr.html?type=PRIORITY&status=NEW:TOSEND:PICKING:PICKOVER:COMBINING:COMBOVER:ON_PCS:OVER_PCS` },
@@ -62,7 +63,7 @@ var initMain = function () {
     if (localStorage.projectKey == 'YZBD_NRDW') {
         Object.assign(conf, { numInLine: 1 });
     }
-    gf.getButtonDomByRes(conf, function (btns) {
+    gfbtn.renderToTableByRes(conf, function (btns) {
         $(container).append(btns);
     });
 };

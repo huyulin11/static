@@ -10,6 +10,7 @@ var defaultSucFun = function (data) {
     } else {
         layer.msg(data.msg);
     }
+    if (data.err) console.log(err);
 }, defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
@@ -343,25 +344,6 @@ class GF {
         if (typeof key == "function") return key();
         return "";
     };
-    doBindBtns(target, btns, myRes) {
-        $.each(btns, function (i, btn) {
-            if (!btn.resKey || myRes.filter(function (res) { return res.resKey == btn.resKey; }).length > 0) {
-                let style = `${btn.style ? "style='" + btn.style + "'" : ""}`;
-                $(target).append(`<button type="button" id="${btn.id}" 
-                    class="btn marR10 ${btn.class} ${gf.yesOrNo(btn.hide) ? "hidden" : ""}" 
-                    ${style}>${btn.name}</button> `);
-                $(target).find(`#${btn.id}`).click("click", function () {
-                    btn.bind();
-                });
-            }
-        });
-    };
-    bindBtns(target, btns) {
-        let doBind = function (myRes) {
-            gf.doBindBtns(target, btns, myRes);
-        };
-        gf.getMyRes(doBind);
-    };
     getMyRes(callback) {
         $.ajax({
             type: "POST",
@@ -375,150 +357,6 @@ class GF {
                 callback(myRes);
             }
         });
-    };
-    getButtonByRes(conf, callback) {
-        gf.getMyRes(function (myRes) {
-            let _conf = $.extend(conf, {
-                display: function (value) {
-                    if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
-                        return true;
-                    }
-                    return false;
-                },
-            });
-            callback(gf.getButtonsTable(_conf));
-        });
-    };
-    getButtonDomByRes(conf, callback) {
-        gf.getMyRes(function (myRes) {
-            let _conf = $.extend(conf, {
-                display: function (value) {
-                    if (!value.resKey || myRes.filter(function (res) { return res.resKey == value.resKey; }).length > 0) {
-                        return true;
-                    }
-                    return false;
-                },
-            });
-            callback(gf.getButtonsTableDom(_conf));
-        });
-    };
-    getButtonsTable(conf) {
-        var _numInLine = conf.numInLine ? conf.numInLine : 7;
-
-        var tmpStr = "";
-        var buttons = ``;
-        var index = 1;
-        for (var value of conf.values) {
-            var tmpItemStr;
-            var isChoosed = false;
-            var isDisplay = true;
-            if (conf.choose) {
-                isChoosed = typeof conf.choose == 'function' ? (conf.choose(value)) : conf.choose;
-            }
-            if (conf.display) {
-                isDisplay = typeof conf.display == 'function' ? (conf.display(value)) : conf.display;
-            }
-            if (!isDisplay) { continue; }
-            let choosedStr = isChoosed ? ("class='choosed'") : "";
-            if (typeof (value) == "number" || typeof (value) == "string") {
-                tmpItemStr = `<td><button data-id='${value}' id='${value}' ${choosedStr}>${value}</button></td>`;
-            } else {
-                let datas = "";
-                for (let ii in value) {
-                    datas += ` data-${ii}='${value[ii]}' `;
-                }
-                tmpItemStr = `<td><button ${datas} id='${value.id}' ${choosedStr}>${value.name}${conf.showId ? "-" + value.id : ""}</button></td>`;
-            }
-            tmpStr = tmpStr + tmpItemStr;
-            if (index >= _numInLine) {
-                buttons = `${buttons}<tr>${tmpStr}</tr>`;
-                index = 1;
-                tmpStr = "";
-            } else {
-                index++;
-            }
-        }
-        if (tmpStr) {
-            buttons = `${buttons}<tr>${tmpStr}</tr>`;
-        }
-        var rtn = `<div id='targets'><table ${conf.style ? conf.style : ""}>${buttons}</table></div>`;
-        return rtn;
-    };
-    getButtonsTableDom(conf) {
-        var _numInLine = conf.numInLine ? conf.numInLine : 7;
-
-        var rtn = $(`<div id='targets'></div>`);
-        var table = $(`<table ${conf.style ? conf.style : ""}></table>`);
-        var trBtns = $(`<tr></tr>`);
-        var index = 1;
-        for (var value of conf.values) {
-            var tdBtn = $("<td></td>");
-            var btn = $("<button></button>");
-            var isChoosed = false;
-            var isDisplay = true;
-            if (conf.choose) {
-                isChoosed = typeof conf.choose == 'function' ? (conf.choose(value)) : conf.choose;
-            }
-            if (conf.display) {
-                isDisplay = typeof conf.display == 'function' ? (conf.display(value)) : conf.display;
-            }
-            if (!isDisplay) { continue; }
-            if (isChoosed) $(btn).addClass('choosed');
-            if (typeof (value) == "number" || typeof (value) == "string") {
-                $(btn).attr("id", value);
-                $(btn).data("id", value);
-                $(btn).html(value);
-            } else {
-                for (let ii in value) {
-                    if (typeof value[ii] == 'function') {
-                        $(btn).bind(ii, value[ii]);
-                    } else {
-                        if (ii == 'url') {
-                            $(btn).bind("click", function () {
-                                window.location.href = $(this).data('url');
-                            });
-                        }
-                        $(btn).data(ii, value[ii]);
-                    }
-                }
-                $(btn).attr("id", value.id);
-                $(btn).data("id", value.id);
-                $(btn).html(`${value.name}${conf.showId ? "-" + value.id : ""}`);
-                if (value.nameRenderFun && conf.dataSupport) {
-                    let nameRenderFun = value.nameRenderFun;
-                    let obj = btn;
-                    let fun = () => {
-                        if (typeof conf.dataSupport == 'function') {
-                            conf.dataSupport((data) => {
-                                nameRenderFun(obj, data);
-                            });
-                        } else {
-                            let data = conf.dataSupport;
-                            nameRenderFun(obj, data);
-                        }
-                    };
-                    fun();
-                    if (value.interval) { setInterval(fun, value.interval); }
-                }
-            }
-            $(tdBtn).append(btn);
-            if (index >= _numInLine) {
-                $(trBtns).append(tdBtn);
-                $(table).append(trBtns);
-                trBtns = $(`<tr></tr>`);
-                index = 1;
-                tdBtn = "";
-            } else {
-                $(trBtns).append(tdBtn);
-                index++;
-            }
-        }
-        if (tdBtn) {
-            $(trBtns).append(tdBtn);
-            $(table).append(trBtns);
-        }
-        $(rtn).append(table);
-        return rtn;
     };
     getTargets() {
         var arr = [];
@@ -618,40 +456,6 @@ class GF {
             localStorage.layerAreaSmall = ["50%", "50%"];
         return localStorage.layerAreaSmall.split(",");
     };
-    renderBtnTable(conf, callback) {
-        var dealData = function (data) {
-            if (data.length > 1000) {
-                return data.slice(0, 1000);
-            }
-            return data;
-        }
-        var renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4,
-            numInPage = conf.numInPage ? conf.numInPage : 1000, clickFun = conf.click;
-        var filterData = dealData(conf.data, numInPage);
-        var datas = filterData;
-        var target = conf.target;
-        var index = 1;
-        var trObj = $('<tr></tr>');
-        for (var item of datas) {
-            var tmpItemStr = renderOne(item);
-            if (!tmpItemStr) continue;
-            let tdObj = $('<td></td>');
-            $(tdObj).append(tmpItemStr);
-            if (clickFun) { $(tdObj).find('button').bind("click", clickFun); }
-            $(trObj).append(tdObj);
-            if (index >= numInLine) {
-                $(target).append(trObj);
-                trObj = $('<tr></tr>');
-                index = 1;
-            } else {
-                index++;
-            }
-        }
-        if ($(trObj).find('td').length > 0) {
-            $(target).append(trObj);
-        }
-        if (callback) callback();
-    }
     getArray(target) {
         var arr = [];
         $(target).each(function () {

@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
+import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 var paperid = gf.urlParam("inventoryMainFormMap.paperid");
 window.datagrid = dataGrid({
@@ -12,6 +13,18 @@ window.datagrid = dataGrid({
 	}, {
 		colkey: "paperid",
 		name: "盘点单号"
+	}, {
+		colkey: "supplier",
+		name: "供应商"
+	}, {
+		colkey: "item",
+		name: "货物类型",
+		renderData: function (rowindex, data, rowdata, column) {
+			return sku.value(data);
+		}
+	}, {
+		colkey: "lot",
+		name: "批次号"
 	}, {
 		colkey: "userdef1",
 		name: "货位"

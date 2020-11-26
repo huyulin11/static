@@ -26,7 +26,7 @@
     import { init as initTransport } from '/s/buss/acs/FANCY/j/agv/agv.info.transport.js';
     import { showTaskexe } from "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
     gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#agvDetail", function () {
-        initInfo(".oneCtrlTr");
+        initInfo("#op");
         initTransport('div#transport');
         setInterval(function () { showTaskexe(currentTask); }, 500);
     });

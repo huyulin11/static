@@ -27,7 +27,7 @@ class sku {
     }
 
     static value(skuId) {
-        if (!skuId) return "普通货物";
+        if (!skuId) return "--";
         var tmpOpStr = "";
         $.each(sku.getSkuInfo(), function (sn, thisSkuInfo) {
             if (thisSkuInfo.id == skuId) { tmpOpStr = thisSkuInfo.name; return; }

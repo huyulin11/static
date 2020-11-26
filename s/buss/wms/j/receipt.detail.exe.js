@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
 var _detailid = gf.urlParam("detailid");
@@ -68,7 +69,7 @@ var doInit = function (target, json) {
     let tempBtns = [play, restore, save, exe, back];
     let btnContainer = $("<div id='btns'><div>");
     container.append(btnContainer);
-    gf.bindBtns(btnContainer, tempBtns);
+    gfbtn.bindByRes(btnContainer, tempBtns);
 }
 
 

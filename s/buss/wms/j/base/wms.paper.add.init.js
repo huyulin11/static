@@ -1,13 +1,14 @@
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
-import { initMainColsData } from "/s/buss/wms/j/base/wms.paper.add.init.form.main.js";
-import { initDetailColsData } from "/s/buss/wms/j/base/wms.paper.add.init.form.detail.js";
+import { initMainColsData, initDetailColsData } from "/s/buss/wms/j/base/wms.paper.add.init.form.conf.js";
 
-let _tasktype;
+export var initForm = function (_conf, callback) {
+    doInitForm(_conf, callback);
+}
 
-var _initCols = function () {
-    let _cols = initMainColsData(_tasktype);
+var doInitForm = function (_conf, callback) {
+    let _cols = initMainColsData(_conf.tasktype);
     for (let col of _cols) {
         let obj = $(`<div class="col"><label>${col.notnull ? "*" : ""}${col.name}</label></div>`);
         obj.append(getInput(col));
@@ -16,15 +17,6 @@ var _initCols = function () {
         $("#cols").append(obj);
     }
     renderAll();
-}
-
-export var initForm = function (tasktype, _conf, callback) {
-    doInitForm(tasktype, _conf, callback);
-}
-
-var doInitForm = function (tasktype, _conf, callback) {
-    _tasktype = tasktype;
-    _initCols();
-    initDetailColsData(_tasktype, _conf);
+    initDetailColsData(_conf);
     callback();
 }

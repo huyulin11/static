@@ -1,4 +1,5 @@
 import "/s/j/vue/vue.min.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
 import { allocRender } from "/s/buss/wms/alloc/item/j/alloc.render.list.work.js";
 import "/s/buss/wms/alloc/item/j/alloc.event.js";
@@ -10,7 +11,7 @@ let tempBtns = [{
         window.history.back();
     }, style: "min-height:25px;width:60px;float:right;"
 }];
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);
 
 let _conf = { numInLine: 5, target: "table.alloc" };
 let _search = {};
