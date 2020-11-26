@@ -63,10 +63,10 @@ function saveLocation(id, x, y) {
     var y1 = conf.yReScale(conf.height - conf.padding.bottom - y);
     var arr = { id, x1, y1 };
     console.log(arr);
-    var result = JSON.stringify({ "id": ids, "x": x1, "y": y1 });
+    var result = { "id": ids, "x": x1, "y": y1 };
     updateTaskSiteLocation(id, result);
     gf.doAjax({
         url: `/app/conf/set.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: ids, value: result }
+        data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) }
     });
 }

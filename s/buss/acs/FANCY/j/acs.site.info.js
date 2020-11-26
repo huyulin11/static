@@ -22,8 +22,10 @@ export var taskSiteLocation = function (callback) {
             callback(data);
         }
     };
+    debugger
     if (taskSiteLocationData) {
         call(taskSiteLocationData);
+        return;
     }
     $.ajax({
         url: "/s/jsons/" + localStorage.projectKey + "/sites/taskSiteLocation.json",
@@ -43,7 +45,7 @@ export var updateTaskSiteLocation = function (id, data) {
     if (!taskSiteLocationData) return;
     taskSiteLocationData.forEach(e => {
         if (e.id == id) {
-            e.value = data;
+            taskSiteLocationData[id] = data;
         }
     });
 }
