@@ -85,7 +85,7 @@ export var initMainColsData = function (_tasktype) {
                             name: "供应商",
                             notnull: true,
                         },];
-                    } else if ('BATCH' == inventorytype) {
+                    } else if ('LOT' == inventorytype) {
                         formConf.items = [{
                             key: "lot",
                             name: "批次号",
