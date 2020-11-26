@@ -2,7 +2,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas, dataLocation } from "/s/buss/acs/location/BASE/location.data.js";
 import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
-import { taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
+import { taskSiteLocation, updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
@@ -64,6 +64,7 @@ function saveLocation(id, x, y) {
     var arr = { id, x1, y1 };
     console.log(arr);
     var result = JSON.stringify({ "id": ids, "x": x1, "y": y1 });
+    updateTaskSiteLocation(id, result);
     gf.doAjax({
         url: `/app/conf/set.shtml`, type: "POST",
         data: { table: "TASK_SITE_LOCATION", key: ids, value: result }
