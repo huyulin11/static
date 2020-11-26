@@ -3,9 +3,8 @@ import { overlay } from '/s/buss/g/j/g.overlay.js';
 import { gf } from "/s/buss/g/j/g.f.js";
 import { ws } from "/s/buss/g/j/websocket.js";
 
-var reloadFlag = 0;
-var intervalVal;
 export var agvNum = 0;
+let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN", "TAIKAI_JY"].includes(localStorage.projectKey);
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
@@ -42,13 +41,10 @@ var whenSuccess = function (data) {
 }
 
 var doWhenSuccess = function (data) {
-    reloadFlag = 0;
     agvDiv().html("");
     renderList(data, agvDiv());
     gf.resizeTable();
 }
-
-let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN", "TAIKAI_JY"].includes(localStorage.projectKey);
 
 var openAGVMGR = function (tmpAgvId, layerName) {
     let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
@@ -81,7 +77,7 @@ export var initAgvList = function () {
         whenSuccess(json);
     }, null, () => {
         getAgvList();
-        intervalVal = setInterval(getAgvList, 3000);
+        setInterval(getAgvList, 3000);
     });
     if (localStorage.projectKey == 'TAIKAI_JY')
         setInterval(checkLogin, 5 * 60 * 1000);
@@ -96,7 +92,4 @@ export var initAgvList = function () {
             openAGVMGR(currentAgvId);
         }
     }
-
-    var height = "300px";
-    if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
 }

@@ -5,7 +5,7 @@ var numInLine = 1;
 let shortLength = 20;
 let showPlcstatus = ['CSY_DAJ'].includes(localStorage.projectKey);
 let showAgvbusstype = ['TAIKAI_JY'].includes(localStorage.projectKey);
-let showSiteStatusVal = ['CSY_DAJ', 'CSY_CDBP', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY'].includes(localStorage.projectKey);
+let showSiteStatusVal = ['CSY_DAJ', 'CSY_CDBP', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY', 'QDTY_SELF'].includes(localStorage.projectKey);
 let showBattery = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 let showSpeed = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 
@@ -71,7 +71,6 @@ var getShowVal = function (agvinfo) {
     val.currentsite = "站点:" + (agvinfo.currentsite ? (!site ? agvinfo.currentsite : site) : "");
     val.battery = "电量:" + (agvinfo.battery ? agvinfo.battery : "");
     val.speed = "速度:" + (agvinfo.speed != undefined ? agvinfo.speed : "");
-    if (agvinfo.id == 2) console.log(agvinfo.speed)
     val.agvstatus = "AGV反馈状态:" + (agvinfo.agvstatus ? agvinfo.agvstatus : "");
 
     if (localStorage.projectKey == 'TAIKAI_JY') {
