@@ -1,9 +1,10 @@
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
-import { hideAddFun, showAddFun, formConf } from "/s/buss/wms/j/base/wms.paper.add.js";
+import { hideAddFun, showAddFun, formConf, formPaperid } from "/s/buss/wms/j/base/wms.paper.add.js";
 
-export var initDetailColsData = function (_tasktype, _conf) {
+export var initDetailColsData = function (_conf) {
+    let _tasktype = _conf.tasktype;
     $("head").append("<style>.block-tips div.item-group {width: 288px;}</style>");
     $("#warehouse").data("notnull", false);
     let obj = {
@@ -11,6 +12,10 @@ export var initDetailColsData = function (_tasktype, _conf) {
     };
     if (_tasktype == 'inventory') {
         hideAddFun();
+        if (_conf.data) {
+            let inventorytype = _conf.data.main.inventorytype;
+            _initFormDetailByInventoryType(inventorytype);
+        }
     } else if (_tasktype == 'receipt') {
         obj.items = [{
             key: "item",
@@ -73,37 +78,7 @@ export var initMainColsData = function (_tasktype) {
                     let inventorytype = $(obj).find('select').val();
                     $(formConf.container).html("");
                     console.log(inventorytype);
-                    if ('FULL' == inventorytype) {
-                        hideAddFun();
-                        formConf.items = [];
-                        return;
-                    }
-                    showAddFun();
-                    if ('SUPPLIER' == inventorytype) {
-                        formConf.items = [{
-                            key: "supplier",
-                            name: "供应商",
-                            notnull: true,
-                        },];
-                    } else if ('LOT' == inventorytype) {
-                        formConf.items = [{
-                            key: "lot",
-                            name: "批次号",
-                            notnull: true,
-                        },];
-                    } else if ('SKU' == inventorytype) {
-                        formConf.items = [{
-                            key: "item",
-                            name: "类型",
-                            notnull: true,
-                            type: "associating-input",
-                            searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
-                            containerofinput: "#panelBody",
-                            showcol: 'name',
-                            storeKey: "id",
-                            showFun: (key) => { return sku.value(key); },
-                        },];
-                    }
+                    _initFormDetailByInventoryType(inventorytype);
                 }
             },
         },];
@@ -118,3 +93,37 @@ export var initMainColsData = function (_tasktype) {
     }
     return _cols;
 }
+
+let _initFormDetailByInventoryType = (inventorytype) => {
+    if ('FULL' == inventorytype) {
+        hideAddFun();
+        formConf.items = [];
+        return;
+    }
+    showAddFun();
+    if ('SUPPLIER' == inventorytype) {
+        formConf.items = [{
+            key: "supplier",
+            name: "供应商",
+            notnull: true,
+        },];
+    } else if ('LOT' == inventorytype) {
+        formConf.items = [{
+            key: "lot",
+            name: "批次号",
+            notnull: true,
+        },];
+    } else if ('SKU' == inventorytype) {
+        formConf.items = [{
+            key: "item",
+            name: "类型",
+            notnull: true,
+            type: "associating-input",
+            searchurl: "/sku/info/findByName.shtml?skuInfoFormMap.name=",
+            containerofinput: "#panelBody",
+            showcol: 'name',
+            storeKey: "id",
+            showFun: (key) => { return sku.value(key); },
+        },];
+    }
+};

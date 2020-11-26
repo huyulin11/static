@@ -2,7 +2,8 @@ import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
-export var initDetailColsData = function (_tasktype, _conf) {
+export var initDetailColsData = function (_conf) {
+    let _tasktype = _conf.tasktype;
     if (_tasktype == 'inventory') {
         _conf.items = [{
             key: "allocItem",

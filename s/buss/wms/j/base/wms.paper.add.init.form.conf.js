@@ -6,22 +6,22 @@ import { initMainColsData as initMainColsData_YZBD_NRDW, initDetailColsData as i
 import { initMainColsData as initMainColsData_BJJK_HUIRUI, initDetailColsData as initDetailColsData_BJJK_HUIRUI } from "/s/buss/wms/j/base/wms.paper.add.init.form.udf.BJJK_HUIRUI.js";
 import { initMainColsData as initMainColsData_DEFAULT, initDetailColsData as initDetailColsData_DEFAULT } from "/s/buss/wms/j/base/wms.paper.add.init.form.udf.DEFAULT.js";
 
-export var initDetailColsData = function (_tasktype, _conf) {
+export var initDetailColsData = function (_conf) {
     switch (localStorage.projectKey) {
         case "CSY_DAJ": {
-            initDetailColsData_CSY_DAJ(_tasktype, _conf);
+            initDetailColsData_CSY_DAJ(_conf);
             return;
         }
         case "YZBD_NRDW": {
-            initDetailColsData_YZBD_NRDW(_tasktype, _conf);
+            initDetailColsData_YZBD_NRDW(_conf);
             return;
         }
         case "BJJK_HUIRUI": {
-            initDetailColsData_BJJK_HUIRUI(_tasktype, _conf);
+            initDetailColsData_BJJK_HUIRUI(_conf);
             return;
         }
         default: {
-            initDetailColsData_DEFAULT(_tasktype, _conf);
+            initDetailColsData_DEFAULT(_conf);
             return;
         }
     }
