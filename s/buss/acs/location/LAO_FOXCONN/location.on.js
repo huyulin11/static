@@ -1,6 +1,8 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { datas, dataLocation } from "/s/buss/acs/location/BASE/location.data.js";
+import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
+import { taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
@@ -50,7 +52,8 @@ export var move = function () {
             .attr('cx', x)
             .attr('cy', y);
         var id = $(this).attr('id');
-        // saveLocation(id, x, y);
+        saveLocation(id, x, y);
+        setTimeout(renderSvg, 10000);
     }
 }
 

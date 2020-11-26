@@ -68,7 +68,7 @@ var dataLlogic = function (data) {
     }
 }
 
-var dataLocation = function (data) {
+export var dataLocation = function (data) {
     for (var val of data) {
         datas.udfPoints.push([val.id, val.x, val.y]);
         datas.locations.push({ "id": val.id, "x": val.x, "y": val.y });
