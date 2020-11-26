@@ -96,13 +96,13 @@ var siteCode = function (locations) {
 var rectPath = function (tempYfc) {
     var line = conf.svg.selectAll("line").data(tempYfc)
         .attr("x1", function (d) {
-            return conf.padding.left + conf.xScale(d.rightXaxis);
-        }).attr("y1", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
-        }).attr("x2", function (d) {
             return conf.padding.left + conf.xScale(d.leftXaxis);
-        }).attr("y2", function (d) {
+        }).attr("y1", function (d) {
             return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
+        }).attr("x2", function (d) {
+            return conf.padding.left + conf.xScale(d.rightXaxis);
+        }).attr("y2", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
         })
         .enter()
         .append("line")
@@ -115,13 +115,13 @@ var rectPath = function (tempYfc) {
         .attr("to", function (d) {
             return d.to;
         }).attr("x1", function (d) {
-            return conf.padding.left + conf.xScale(d.rightXaxis);
-        }).attr("y1", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
-        }).attr("x2", function (d) {
             return conf.padding.left + conf.xScale(d.leftXaxis);
-        }).attr("y2", function (d) {
+        }).attr("y1", function (d) {
             return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
+        }).attr("x2", function (d) {
+            return conf.padding.left + conf.xScale(d.rightXaxis);
+        }).attr("y2", function (d) {
+            return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
         }).attr("class", "clashLine")
         .style("stroke", "black")
         .style("stroke-width", "2px");

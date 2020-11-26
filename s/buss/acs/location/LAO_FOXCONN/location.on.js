@@ -23,20 +23,26 @@ export var move = function () {
         d3.select("#t" + id)
             .attr("x", x)
             .attr("y", y);
-        conf.svg.selectAll("line").data(datas.point)
+        conf.svg.selectAll("line").filter(function (e) { return e && e.from == id; })
             .attr("x1", function (d) {
-                if (d.from == id) return x;
-                return conf.padding.left + conf.xScale(d.rightXaxis);
+                return x;
             }).attr("y1", function (d) {
-                if (d.from == id) return y;
-                return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
+                return y;
             }).attr("x2", function (d) {
-                if (d.to == id) return x;
-                return conf.padding.left + conf.xScale(d.leftXaxis);
+                return conf.padding.left + conf.xScale(d.rightXaxis);
             }).attr("y2", function (d) {
-                if (d.to == id) return y;
+                return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
+            });
+        conf.svg.selectAll("line").filter(function (e) { return e && e.to == id; })
+            .attr("x1", function (d) {
+                return conf.padding.left + conf.xScale(d.leftXaxis);
+            }).attr("y1", function (d) {
                 return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
-            })
+            }).attr("x2", function (d) {
+                return x;
+            }).attr("y2", function (d) {
+                return y;
+            });
     }
     function ended() {
         const { x, y } = d3.event;
@@ -44,7 +50,7 @@ export var move = function () {
             .attr('cx', x)
             .attr('cy', y);
         var id = $(this).attr('id');
-        saveLocation(id, x, y);
+        // saveLocation(id, x, y);
     }
 }
 
