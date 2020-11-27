@@ -40,8 +40,8 @@ var whenSuccess = function (data) {
 }
 
 var doWhenSuccess = function (data) {
-    agvDiv().html("");
-    renderList(data, agvDiv(), agvDiv().width() < 500 ? 1 : '');
+    agvDiv().find("table.agv").remove();
+    renderList(data, agvDiv());
     gf.resizeTable();
 }
 
@@ -84,6 +84,18 @@ export var initAgvList = function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
 
+    if (agvDiv().find('#toggleShowAgvListDetail').length == 0) {
+        agvDiv().prepend(`<div style='font-size:10px;text-align:left;'><span>选中隐藏详情</span><input type="checkbox" 
+        id="toggleShowAgvListDetail" title="选中隐藏详情" ${localStorage.toggleShowAgvListDetail ? "checked" : ""}></div>`);
+        agvDiv().delegate("input:checkbox#toggleShowAgvListDetail", "change", function (e) {
+            if (this.checked) {
+                localStorage.toggleShowAgvListDetail = true;
+            } else {
+                localStorage.toggleShowAgvListDetail = "";
+            }
+            getAgvList();
+        });
+    }
     if (innerAgvDetail) {
         var currentAgvId = localStorage.currentAgvId;
         if (currentAgvId) {
