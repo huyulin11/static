@@ -8,6 +8,11 @@ switch (localStorage.projectKey) {
 			{ "id": "SHUTDOWN", "name": "取消任务", "color": "red" }
 		];
 		break;
+	case "YZBD_NRDW":
+		initBtns = [
+			{ "id": "SHUTDOWN", "name": "取消任务", "color": "red" }
+		];
+		break;
 	default:
 		initBtns = jQuery.parseJSON(localStorage.agvControl);
 		break;
