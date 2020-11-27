@@ -1,4 +1,4 @@
-import { gf } from "/s/buss/g/j/g.f.js";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 
@@ -61,4 +61,4 @@ var show = function () {
         });
 }
 
-gf.bindBtns("div.doc-buttons", tempBtns);
+gfbtn.bindByRes("div.doc-buttons", tempBtns);
