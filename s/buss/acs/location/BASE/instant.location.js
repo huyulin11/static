@@ -13,21 +13,21 @@ Vue.directive('focus', {
 
 var vm = new Vue({
     data: {
-        id: null,
+        siteid: null,
         x: null,
         y: null,
-        siteID: null,
+        preID: null,
         nextID: null,
     },
     el: container,
     methods: {
         saveBarCode() {
-            let id = parseInt(this.id);
+            let id = parseInt(this.siteid);
             let x = parseInt(this.x);
             let y = parseInt(this.y);
             // let preID = this.preID;
             // let nextID = this.nextID;
-            if (!this.id || !this.x || !this.y) {
+            if (!this.siteid || !this.x || !this.y) {
                 $("#barcode").focus();
                 layer.msg("ID,X坐标,Y坐标不能为空！");
                 return;
@@ -41,7 +41,7 @@ var vm = new Vue({
             this.clearBarCode();
         },
         clearBarCode() {
-            this.id = null;
+            this.siteid = null;
             this.x = null;
             this.y = null;
             $("#barcode").focus();
