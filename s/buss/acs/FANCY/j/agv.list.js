@@ -4,15 +4,14 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { ws } from "/s/buss/g/j/websocket.js";
 
 export var agvNum = 0;
-let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN", "TAIKAI_JY"].includes(localStorage.projectKey);
+let innerAgvDetail = ["CSY_DAJ", "TAIKAI_JY"].includes(localStorage.projectKey);
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
-        let agvDiv = $(`<div id='agvDiv' class='fixed' style='z-index:1;'>
-        <div id='agvDiv' class='withBorder'></div></div>`);
+        let agvDiv = $(`<div id='agvDiv' class='fixed withBorder'></div>`);
         $("body").prepend(agvDiv);
+        if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     }
-    if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     return $("div#agvDiv");
 }
 
@@ -54,14 +53,13 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         $("#mainPage").css("height", height).attr("src", url); return;
     }
-    console.log(url);
     layer.open({
         type: 2,
         title: '单车管理',
-        shadeClose: false,
+        shadeClose: true,
         shade: 0.5,
         maxmin: true,
-        area: gf.layerArea(),
+        area: gf.isPc() ? gf.layerArea() : ['95%', '70%'],
         content: url
     });
     return;
