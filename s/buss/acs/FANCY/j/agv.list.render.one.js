@@ -10,7 +10,7 @@ let showBattery = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 let showSpeed = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 
 export var renderList = function (agvs, agvDiv) {
-    if (agvNum >= 6) numInLine = 3;
+    if (agvNum >= 6) numInLine = 2;
     var numOfRow = agvNum >= numInLine ? numInLine : agvNum;
     $.each(agvs, function (n, agvinfo) {
         renderOne(numOfRow, agvinfo, agvDiv);

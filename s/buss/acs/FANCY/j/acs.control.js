@@ -39,7 +39,9 @@ let taskReady = () => {
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
-		renderModel('agvs', 'div#agvDiv');
+		if (localStorage.projectKey != 'LAO_FOXCONN') {
+			renderModel('agvs', 'div#agvDiv');
+		}
 		if (![''].includes(localStorage.projectKey))
 			renderModel('setup', 'div#controlContainer');
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
