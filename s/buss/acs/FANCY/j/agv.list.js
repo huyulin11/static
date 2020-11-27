@@ -41,7 +41,7 @@ var whenSuccess = function (data) {
 
 var doWhenSuccess = function (data) {
     agvDiv().html("");
-    renderList(data, agvDiv());
+    renderList(data, agvDiv(), agvDiv().width() < 500 ? 1 : '');
     gf.resizeTable();
 }
 
