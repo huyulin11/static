@@ -15,6 +15,15 @@ export var move = function () {
             .on('drag', draged)
     );
     function started() {
+        const { x, y } = d3.event;
+        conf.svg.append("text")
+            .attr("id", $(this).attr('id'))
+            .attr("x", x)
+            .attr("y", y)
+            .attr("stroke", "black")
+            .attr("font-size", "15px")
+            .attr("font-family", "sans-serif")
+            .text($(this).attr('id'));
     }
     function draged() {
         const { x, y } = d3.event;
@@ -37,6 +46,14 @@ export var move = function () {
             }).attr("y2", function (d) {
                 return y;
             });
+        conf.svg.select("text")
+            .attr("id", $(this).attr('id'))
+            .attr("x", x)
+            .attr("y", y)
+            .attr("stroke", "black")
+            .attr("font-size", "15px")
+            .attr("font-family", "sans-serif")
+            .text($(this).attr('id'));
     }
     function ended() {
         const { x, y } = d3.event;
@@ -45,6 +62,7 @@ export var move = function () {
             .attr('cy', y);
         var id = $(this).attr('id');
         saveLocation(id, x, y);
+        conf.svg.selectAll("text").remove();
     }
 }
 
