@@ -10,21 +10,23 @@
 
 <body style='display:none;'>
 	<div id="rootContainer">
+		<fieldset>
+			<iframe id="mainPage" frameborder="no" style="width:100%;height:15px;"></iframe>
+		</fieldset>
 		<div id='wmsContainer' class="fixed">
 			<fieldset>
-				<legend>货位控制</legend><iframe id="allocs" frameborder="no" style="width:100%;height:540px;"
-					src="/s/buss/wms/alloc/item/h/alloc.html"></iframe>
+				<legend>货位控制</legend><iframe id="allocs" frameborder="no" style="width:100%;height:540px;"></iframe>
 			</fieldset>
 		</div>
 		<div id='msgContainer' class="fixed" style="width:80%;height:400px;"></div>
-		<fieldset>
+		<!-- <fieldset>
 			<fieldset>
 				<legend>运输任务</legend>
 				<div id="transport">
 				</div>
 				<p></p>
 			</fieldset>
-		</fieldset>
+		</fieldset> -->
 		<div id='controlContainer' class="fixed"></div>
 	</div>
 	<div id="topCtrlContainer">
