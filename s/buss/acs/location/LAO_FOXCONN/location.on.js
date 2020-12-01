@@ -1,5 +1,5 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { started, draged, ended, createPoint } from "/s/buss/acs/location/YZK/create.newpoint.js";
+import { started, draged, ended, createPoint } from "/s/buss/acs/location/YZK/drag.create.point.js";
 
 
 export var move = function () {

@@ -2,6 +2,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { taskSiteLocation, updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
 
@@ -50,14 +51,13 @@ export var ended = function () {
     var id = $(this).attr('id');
     saveLocation(id, x, y);
     conf.svg.selectAll("#n" + id).remove();
-    var result = { "id": id, "x": x, "y": y }
-    updateTaskSiteLocation(id, result);
 }
 
 export var createPoint = function () {
     var id = getID();
     let x = d3.event.offsetX, y = d3.event.offsetY;
     conf.svg.append("circle")
+        .attr("id", id)
         .attr("fill", "blue")
         .attr("cx", x)
         .attr("cy", y)
@@ -88,7 +88,7 @@ function saveLocation(id, x, y) {
         url: `/app/conf/set.shtml`, type: "POST",
         data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
         success: (obj) => {
-            updateTaskSiteLocation(id, result);
+            updateTaskSiteLocation(id, result);;
             layer.msg(obj.msg ? obj.msg : '保存成功！');
         }
     });

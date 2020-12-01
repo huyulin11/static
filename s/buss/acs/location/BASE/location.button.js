@@ -23,10 +23,11 @@ var hide = function () {
 }
 
 var show = function () {
+    datas.init()
     conf.svg.selectAll("text")
         .data(datas.lastTaskPath.concat(datas.udfPoints))
         .attr("id", function (d) {
-            var id = d[0] + 't';
+            var id = 't' + d[0];
             return id;
         })
         .attr("x", function (d) {
