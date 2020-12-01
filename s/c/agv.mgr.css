@@ -435,3 +435,11 @@ hr.gray{
 	height: 1px;
 	background-color: #f9f9f9;
 }
+
+.doc-buttons{
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+	width: 300px;
+	z-index: 10;
+}
