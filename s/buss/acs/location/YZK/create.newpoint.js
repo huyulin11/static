@@ -9,7 +9,7 @@ conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainY
 export var started = function () {
     const { x, y } = d3.event;
     conf.svg.append("text")
-        .attr("id", $(this).attr('id'))
+        .attr("id", "n" + $(this).attr('id'))
         .attr("x", x)
         .attr("y", y)
         .attr("stroke", "black")
@@ -38,8 +38,7 @@ export var draged = function () {
         }).attr("y2", function (d) {
             return y;
         });
-    conf.svg.select("text")
-        .attr("id", id)
+    conf.svg.select("#n" + id)
         .attr("x", x)
         .attr("y", y);
 }
@@ -50,7 +49,9 @@ export var ended = function () {
         .attr('cy', y);
     var id = $(this).attr('id');
     saveLocation(id, x, y);
-    conf.svg.selectAll("text").remove();
+    conf.svg.selectAll("#n" + id).remove();
+    var result = { "id": id, "x": x, "y": y }
+    updateTaskSiteLocation(id, result);
 }
 
 export var createPoint = function () {
@@ -62,8 +63,6 @@ export var createPoint = function () {
         .attr("cy", y)
         .attr("r", 5)
     saveLocation(id, x, y);
-    datas.udfPoints.push([id, x, y]);
-    datas.locations.push({ "id": id, "x": x, "y": y });
 }
 
 var getID = function () {
