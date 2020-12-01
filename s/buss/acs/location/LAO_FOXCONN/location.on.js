@@ -14,11 +14,11 @@ export var move = function () {
         .select("#coordinate")
         .select("svg")
         .on("click", function () {
-            const { layerX, layerY } = d3.event;
+            let x=d3.event.offsetX,y=d3.event.offsetY;
             conf.svg.append("circle")
                 .attr("fill", "blue")
-                .attr("cx", layerX)
-                .attr("cy", layerY)
+                .attr("cx", x)
+                .attr("cy", y)
                 .attr("r", 5)
         })
 }
