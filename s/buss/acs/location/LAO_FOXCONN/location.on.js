@@ -37,5 +37,5 @@ export var addPoint = function () {
     d3.select("body")
         .select("#coordinate")
         .select("svg")
-        .on("click", createPoint);
+        .on("dblclick", createPoint);
 }
