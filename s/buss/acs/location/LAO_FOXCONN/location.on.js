@@ -4,19 +4,15 @@ import { updateID } from "/s/buss/acs/location/YZK/update.point.js";
 
 export var move = function () {
 
-    d3.selectAll("circle").call(
-        d3.drag()
-            .on('start', started)
-            .on('end', ended)
-            .on('drag', draged)
-    );
+    dragPoint();
 
-    d3.select("body")
-        .select("#coordinate")
-        .select("svg")
-        .on("click", createPoint);
+    addPoint();
 
+    updatePoint();
 
+}
+
+export var updatePoint = function () {
     conf.svg.selectAll("circle")
         .on("contextmenu", function (d, i) {
             d3.event.preventDefault();
@@ -28,3 +24,18 @@ export var move = function () {
         });
 }
 
+export var dragPoint = function () {
+    d3.selectAll("circle").call(
+        d3.drag()
+            .on('start', started)
+            .on('end', ended)
+            .on('drag', draged)
+    );
+}
+
+export var addPoint = function () {
+    d3.select("body")
+        .select("#coordinate")
+        .select("svg")
+        .on("click", createPoint);
+}
