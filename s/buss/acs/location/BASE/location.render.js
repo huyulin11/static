@@ -295,6 +295,7 @@ function drawAxis() {
 }
 
 export var renderSvg = function (callback) {
+    datas.init();
     if (document.hidden) { return; }
     renderSvgFunc(callback);
 };
@@ -325,6 +326,7 @@ var renderSvgFunc = function (callback) {
             }
         }
     }
+    datasss = [].concat(datas.udfPoints);
     render(datas.lastTaskPath.concat(datasss));
     if (callback) callback();
     isRunning = false;
