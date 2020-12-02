@@ -1,7 +1,8 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { taskSiteLocation, updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
+import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { windowToDB } from "/s/buss/acs/location/YZK/trans.location.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
@@ -62,7 +63,14 @@ export var createPoint = function () {
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 5)
+    d3.selectAll("circle").call(
+        d3.drag()
+            .on('start', started)
+            .on('end', ended)
+            .on('drag', draged)
+    );
     saveLocation(id, x, y);
+    datas.init();
 }
 
 var getID = function () {
@@ -73,17 +81,12 @@ var getID = function () {
             id++;
         }
     }
-    datas.id.push({ "id": id })
     return id;
 }
 
-function saveLocation(id, x, y) {
+export var saveLocation = function (id, x, y) {
     var ids = parseInt(id);
-    var x1 = conf.xReScale(x - conf.padding.left);
-    var y1 = conf.yReScale(conf.height - conf.padding.bottom - y);
-    var arr = { id, x1, y1 };
-    console.log(arr);
-    var result = { "id": ids, "x": x1, "y": y1 };
+    var result = windowToDB(id, x, y);
     gf.doAjax({
         url: `/app/conf/set.shtml`, type: "POST",
         data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
