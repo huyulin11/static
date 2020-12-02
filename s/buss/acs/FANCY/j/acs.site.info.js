@@ -17,7 +17,7 @@ export var taskSiteLogic = function (callback) {
     });
 }
 
-export var taskSiteLocation = function (callback) {
+export var taskSiteLocation = function (callback) { 
     let call = (data) => {
         if (callback) {
             callback(data);
@@ -46,7 +46,8 @@ export var updateTaskSiteLocation = function (id, data) {
     if (!taskSiteLocationData) return;
     taskSiteLocationData.forEach((e, i) => {
         if (e.id == id) {
-            taskSiteLocationData[i] = data;
+            return taskSiteLocationData[i] = data;
         }
     });
+    return taskSiteLocationData.push(data)
 }
