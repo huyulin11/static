@@ -3,6 +3,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { windowToDB } from "/s/buss/acs/location/YZK/trans.location.js";
+import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
@@ -63,21 +64,22 @@ export var createPoint = function () {
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 5)
-    d3.selectAll("circle").call(
-        d3.drag()
-            .on('start', started)
-            .on('end', ended)
-            .on('drag', draged)
-    );
+    dragPoint();
+    updatePoint();
     saveLocation(id, x, y);
-    datas.init();
 }
 
 var getID = function () {
+    datas.init();
     var ids = datas.id;
     var id = 1;
-    for (var i of ids) {
-        if (id == i.id) {
+    var arr = [];
+    ids.forEach((e) => {
+        arr.push(e.id);
+    })
+    arr.sort(function (a, b) { return a - b });
+    for (var i of arr) {
+        if (id == i) {
             id++;
         }
     }
@@ -91,7 +93,7 @@ export var saveLocation = function (id, x, y) {
         url: `/app/conf/set.shtml`, type: "POST",
         data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
         success: (obj) => {
-            updateTaskSiteLocation(id, result);;
+            updateTaskSiteLocation(id, result);
             layer.msg(obj.msg ? obj.msg : '保存成功！');
         }
     });
