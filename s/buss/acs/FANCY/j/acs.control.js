@@ -76,6 +76,8 @@ var container = function () {
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 			taskReady();
 			renderModel('task', 'div#taskContainer');
+		} else if (localStorage.projectKey == 'QDTY_SELF') {
+			renderModel('msg', 'div#msgContainer');
 		}
 	}
 	return $("#allCtrlTable");

@@ -109,7 +109,11 @@ export var init = function (target) {
 		for (let item of targetArr) {
 			let json = $(item).data("json");
 			let arrivedact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
-			if (!arrivedact) { arrivedact = "S"; }
+			if (!arrivedact) {
+				arrivedact = "S";
+				if (localStorage.projectKey == 'QDTY_SELF')
+					arrivedact = "W";
+			}
 			arrSub.push({
 				arrivedact: arrivedact, id: $(item).data("id")
 			});
