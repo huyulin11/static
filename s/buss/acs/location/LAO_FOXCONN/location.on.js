@@ -17,9 +17,10 @@ export var updatePoint = function () {
         .on("contextmenu", function (d, i) {
             d3.event.preventDefault();
             if (d3.event.button == 2) {
-                var id = $(this).attr('id')
-                let x = d3.event.offsetX, y = d3.event.offsetY;
-                updateID(id, x, y);
+                var id = $(this).attr('id');
+                var x = $(this).attr('cx'), y = $(this).attr('cy');
+                var circle = d3.select(this)
+                updateID(circle, id, x, y);
             }
         });
 }

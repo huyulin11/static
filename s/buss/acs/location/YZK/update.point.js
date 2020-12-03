@@ -1,12 +1,12 @@
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { windowToDB } from "/s/buss/acs/location/YZK/trans.location.js";
-// import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 
-export var updateID = function (id1, x, y) {
+export var updateID = function (circle, id1, x, y) {
     layer.prompt({ title: '输入id', formType: 0 }, function (id2, index) {
         layer.close(index);
         if (window.confirm(`确定将id：${id1}修改为id：${id2}？`)) {
+            debugger
             for (var i of datas.id) {
                 if (id2 == i.id) {
                     return layer.msg("存在相同站点，修改失败");
@@ -19,6 +19,7 @@ export var updateID = function (id1, x, y) {
                 success: (obj) => {
                     updateTaskSiteLocation(id1, result);
                     layer.msg(obj.msg ? obj.msg : '保存成功！');
+                    circle.attr("id",id2);
                 }
             });
         }
