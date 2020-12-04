@@ -4,6 +4,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { windowToDB } from "/s/buss/acs/location/YZK/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
+import { dbToWindow } from "/s/buss/acs/location/YZK/trans.location.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
@@ -29,17 +30,19 @@ export var draged = function () {
     d3.select("#t" + id)
         .attr("x", x)
         .attr("y", y);
-    conf.svg.selectAll("line").filter(function (e) { return e && e.from == id; })
-        .attr("x1", function (d) {
-            return x;
-        }).attr("y1", function (d) {
-            return y;
+    conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; })
+        .attr("d", function (d) {
+            var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
+            return "M" + x + "," + y +
+                "L" + (result2[0] + x) / 2 + "," + (result2[1] + y) / 2 +
+                "L" + result2[0] + "," + result2[1];
         });
-    conf.svg.selectAll("line").filter(function (e) { return e && e.to == id; })
-        .attr("x2", function (d) {
-            return x;
-        }).attr("y2", function (d) {
-            return y;
+    conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; })
+        .attr("d", function (d) {
+            var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
+            return "M" + result1[0] + "," + result1[1] +
+                "L" + (x + result1[0]) / 2 + "," + (y + result1[1]) / 2 +
+                "L" + x + "," + y;
         });
     conf.svg.select("#n" + id)
         .attr("x", x)
