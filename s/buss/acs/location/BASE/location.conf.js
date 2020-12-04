@@ -1,6 +1,6 @@
 var width = $(window).width();
 var height = $(window).height();//width * (domainYVal[1] - domainYVal[0]) / (domainXVal[1] - domainXVal[0]) * 4;
-var svg = d3.select("body").select("#coordinate").append("svg").attr("width", width).attr("fill", "white").attr("height", height).append("g");
+var svg = d3.select("body").select("#coordinate").append("svg").attr("width", width).attr("fill", "white").attr("height", height);
 var widthAgvs = $("#agvs").width();
 var widthFixed = widthAgvs * 15 / 24;
 var heightFixed = $("#agvs").height();
