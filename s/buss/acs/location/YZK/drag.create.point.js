@@ -2,9 +2,8 @@ import { taskSiteLocation, updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/ac
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { windowToDB } from "/s/buss/acs/location/YZK/trans.location.js";
+import { windowToDB, dbToWindow } from "/s/buss/acs/location/YZK/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
-import { dbToWindow } from "/s/buss/acs/location/YZK/trans.location.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
