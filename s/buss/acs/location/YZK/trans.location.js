@@ -21,3 +21,7 @@ export var dbToWindow = function (x1,y1) {
     var result = [x,y];
     return  result;
 }
+
+export var numToWindow = function (x1) {
+    return conf.padding.left + conf.xScale(x1);
+}
