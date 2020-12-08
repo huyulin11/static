@@ -8,6 +8,29 @@ import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCO
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
 conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
 
+var getMLL = function (x, y, s, flag) {
+    var m = s.indexOf('M');
+    var l1 = s.indexOf('L');
+    var l2 = s.lastIndexOf('L');
+    var M = s.substring(m, l1);
+    // var L1 = s.substring(l1, l2);
+    var L2 = s.slice(l2);
+    if (flag) {
+        var num = L2.indexOf(",");
+        var arr = [L2.substring(1, num), L2.slice(num+1)];
+        var a = (parseFloat(arr[0]) + x) / 2;
+        var b = (parseFloat(arr[1]) + y) / 2;
+        var s = "M" + x + "," + y + "L" + a + "," + b + L2;
+        return s;
+    } else {
+        var num = M.indexOf(",");
+        var arr = [M.substring(1, num), M.slice(num+1)];
+        var a = (parseFloat(arr[0]) + x) / 2;
+        var b = (parseFloat(arr[1]) + y) / 2;
+        var s = M + "L" + a + "," + b + "L" + x + "," + y;
+        return s;
+    }
+}
 
 export var started = function () {
     const { x, y } = d3.event;
@@ -31,17 +54,13 @@ export var draged = function () {
         .attr("y", y);
     conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; })
         .attr("d", function (d) {
-            var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
-            return "M" + x + "," + y +
-                "L" + (result2[0] + x) / 2 + "," + (result2[1] + y) / 2 +
-                "L" + result2[0] + "," + result2[1];
+            var s = $(this).attr("d");
+            return getMLL(x, y, s, true);
         });
     conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; })
         .attr("d", function (d) {
-            var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
-            return "M" + result1[0] + "," + result1[1] +
-                "L" + (x + result1[0]) / 2 + "," + (y + result1[1]) / 2 +
-                "L" + x + "," + y;
+            var s = $(this).attr("d");
+            return getMLL(x, y, s, false);
         });
     conf.svg.select("#n" + id)
         .attr("x", x)
