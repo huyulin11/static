@@ -1,7 +1,7 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { started, draged, ended, createPoint } from "/s/buss/acs/location/YZK/drag.create.point.js";
 import { updateID } from "/s/buss/acs/location/YZK/update.point.js";
-import { createLine } from "/s/buss/acs/location/YZK/add.drag.line.js";
+import { createPath } from "/s/buss/acs/location/YZK/add.drag.line.js";
 
 export var move = function () {
 
@@ -11,7 +11,7 @@ export var move = function () {
 
     updatePoint();
 
-    addLine();
+    // addLine();
 }
 
 var addLine = function () {
@@ -19,9 +19,7 @@ var addLine = function () {
         .on("mouseover", function () {
             var id = $(this).attr('id');
             var x = $(this).attr('cx'), y = $(this).attr('cy');
-            createLine(id, x, y)
-        }).on("mouseout", function () {
-            d3.select("#p" + $(this).attr('id')).remove();
+            createPath(id, x, y)
         });
 }
 
