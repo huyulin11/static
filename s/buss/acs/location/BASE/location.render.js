@@ -118,7 +118,7 @@ var rectPath = function (tempYfc) {
         .attr("fill", "none")
         .attr("stroke", "black")
         .attr("stroke-width", "2px")
-        .attr("style", "marker-mid:url(#triangle);");
+        .attr("style", "marker-end:url(#triangle);");
 
     // var line = function () {
     //     return conf.svg.append("line")
@@ -375,8 +375,8 @@ export var markerDef = function () {
         .attr("markerUnits", "strokeWidth")
         .attr("markerWidth", 5)
         .attr("markerHeight", 4)
-        .attr("refX", 0)
+        .attr("refX", 7.5)
         .attr("refY", 2)
         .attr("orient", "auto");
-    marker.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z").attr("fill", "black");
+    marker.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z M 5 2 L 7.2 2").attr("fill", "black");
 } 

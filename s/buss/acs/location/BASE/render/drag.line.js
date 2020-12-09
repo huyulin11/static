@@ -28,7 +28,7 @@ export var endedPath = function () {
                 "L" + (x1 + x2) * 0.5 + "," + (y1 + y2) * 0.5 +
                 getL2(x2, y2);
         })
-        .attr("style", "marker-mid:url(#triangle);");
+        .attr("style", "marker-end:url(#triangle);");
 }
 
 var getL2 = function (x, y) {
