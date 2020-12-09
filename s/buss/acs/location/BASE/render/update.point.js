@@ -6,7 +6,6 @@ export var updateID = function (circle, id1, x, y) {
     layer.prompt({ title: '输入id', formType: 0 }, function (id2, index) {
         layer.close(index);
         if (window.confirm(`确定将id：${id1}修改为id：${id2}？`)) {
-            debugger
             for (var i of datas.id) {
                 if (id2 == i.id) {
                     return layer.msg("存在相同站点，修改失败");
