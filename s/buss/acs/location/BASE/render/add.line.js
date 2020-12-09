@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dbToWindow, numToWindow } from "/s/buss/acs/location/YZK/trans.location.js";
+import { dbToWindow, numToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 
 export var createPath = function (id, x, y) {
@@ -14,19 +14,6 @@ export var removeLine = function (x1, y1, x2, y2) {
     if (distance > 100) {
         d3.selectAll(".post").remove();
     };
-}
-
-export var startedPath = function () {
-    d3.select(this).attr("d", function () {
-        console.log($(this).attr("d"));
-        return $(this).attr("d");
-    });
-}
-export var dragedPath = function () {
-
-}
-export var endedPath = function () {
-
 }
 
 var newPath = function (num, x, y) {

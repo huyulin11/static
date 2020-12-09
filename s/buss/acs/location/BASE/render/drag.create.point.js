@@ -2,7 +2,7 @@ import { taskSiteLocation, updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/ac
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { windowToDB, dbToWindow } from "/s/buss/acs/location/YZK/trans.location.js";
+import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 
 conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
@@ -17,16 +17,16 @@ var getMLL = function (x, y, s, flag) {
     var L2 = s.slice(l2);
     if (flag) {
         var num = L2.indexOf(",");
-        var arr = [L2.substring(1, num), L2.slice(num+1)];
-        var a = (parseFloat(arr[0]) + x) / 2;
-        var b = (parseFloat(arr[1]) + y) / 2;
+        var arr = [L2.substring(1, num), L2.slice(num + 1)];
+        var a = (parseFloat(arr[0]) + parseFloat(x)) / 2;
+        var b = (parseFloat(arr[1]) + parseFloat(y)) / 2;
         var s = "M" + x + "," + y + "L" + a + "," + b + L2;
         return s;
     } else {
         var num = M.indexOf(",");
-        var arr = [M.substring(1, num), M.slice(num+1)];
-        var a = (parseFloat(arr[0]) + x) / 2;
-        var b = (parseFloat(arr[1]) + y) / 2;
+        var arr = [M.substring(1, num), M.slice(num + 1)];
+        var a = (parseFloat(arr[0]) + parseFloat(x)) / 2;
+        var b = (parseFloat(arr[1]) + parseFloat(y)) / 2;
         var s = M + "L" + a + "," + b + "L" + x + "," + y;
         return s;
     }
@@ -34,7 +34,7 @@ var getMLL = function (x, y, s, flag) {
 
 export var started = function () {
     const { x, y } = d3.event;
-    conf.svg.append("text")
+    conf.textHome.append("text")
         .attr("id", "n" + $(this).attr('id'))
         .attr("x", x)
         .attr("y", y)

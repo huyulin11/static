@@ -1,6 +1,10 @@
 var width = $(window).width();
 var height = $(window).height();//width * (domainYVal[1] - domainYVal[0]) / (domainXVal[1] - domainXVal[0]) * 4;
 var svg = d3.select("body").select("#coordinate").append("svg").attr("width", width).attr("fill", "white").attr("height", height);
+var pathHome = svg.append('g').attr("id", "pathHome");
+var pointHome = svg.append('g').attr("id", "pointHome");
+var defsHome = svg.append('g').attr("id", "defsHome");
+var textHome = svg.append('g').attr("id", "textHome");
 var widthAgvs = $("#agvs").width();
 var widthFixed = widthAgvs * 15 / 24;
 var heightFixed = $("#agvs").height();
@@ -24,4 +28,8 @@ export var conf = {
     yAxisWidth: yAxisWidth,
     rectHeight: rectHeight,
     initColor: "#ddd",
+    pathHome: pathHome,
+    pointHome: pointHome,
+    defsHome, defsHome,
+    textHome: textHome,
 }

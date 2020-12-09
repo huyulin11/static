@@ -1,6 +1,6 @@
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
-import { windowToDB } from "/s/buss/acs/location/YZK/trans.location.js";
+import { windowToDB } from "/s/buss/acs/location/BASE/render/trans.location.js";
 
 export var updateID = function (circle, id1, x, y) {
     layer.prompt({ title: '输入id', formType: 0 }, function (id2, index) {

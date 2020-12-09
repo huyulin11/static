@@ -1,7 +1,8 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { started, draged, ended, createPoint } from "/s/buss/acs/location/YZK/drag.create.point.js";
-import { updateID } from "/s/buss/acs/location/YZK/update.point.js";
-import { createPath } from "/s/buss/acs/location/YZK/add.drag.line.js";
+import { started, draged, ended, createPoint } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
+import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
+import { createPath } from "/s/buss/acs/location/BASE/render/add.line.js";
+import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.line.js";
 
 export var move = function () {
 
@@ -13,6 +14,15 @@ export var move = function () {
 
     // addLine();
 }
+
+var dragLine = function () {
+    conf.svg.selectAll("path").call(
+        d3.drag()
+            .on('start', startedPath)
+            .on('end', endedPath)
+            .on('drag', dragedPath)
+    );
+};
 
 var addLine = function () {
     conf.svg.selectAll("circle")

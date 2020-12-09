@@ -1,7 +1,7 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dbToWindow } from "/s/buss/acs/location/YZK/trans.location.js";
+import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
@@ -95,7 +95,7 @@ var siteCode = function (locations) {
 }
 
 var rectPath = function (tempYfc) {
-    var path = conf.svg.selectAll("path").data(tempYfc)
+    var path = conf.pathHome.selectAll("path").data(tempYfc)
         .enter()
         .append("path")
         .attr("id", function (d) {
@@ -111,7 +111,7 @@ var rectPath = function (tempYfc) {
             var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
             var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
             return "M" + result1[0] + "," + result1[1] +
-                "L" + (result2[0]+result1[0]) / 2 + "," + (result2[1]+result1[1]) / 2 +
+                "L" + (result2[0] + result1[0]) / 2 + "," + (result2[1] + result1[1]) / 2 +
                 "L" + result2[0] + "," + result2[1];
         })
         .attr("class", "clashLine")
@@ -119,38 +119,6 @@ var rectPath = function (tempYfc) {
         .attr("stroke", "black")
         .attr("stroke-width", "2px")
         .attr("style", "marker-mid:url(#triangle);");
-
-    // var line = conf.svg.selectAll("line").data(tempYfc)
-    //     .attr("x1", function (d) {
-    //         return conf.padding.left + conf.xScale(d.leftXaxis);
-    //     }).attr("y1", function (d) {
-    //         return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
-    //     }).attr("x2", function (d) {
-    //         return conf.padding.left + conf.xScale(d.rightXaxis);
-    //     }).attr("y2", function (d) {
-    //         return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
-    //     })
-    //     .enter()
-    //     .append("line")
-    //     .attr("id", function (d) {
-    //         return d.id;
-    //     })
-    //     .attr("from", function (d) {
-    //         return d.from;
-    //     })
-    //     .attr("to", function (d) {
-    //         return d.to;
-    //     }).attr("x1", function (d) {
-    //         return conf.padding.left + conf.xScale(d.leftXaxis);
-    //     }).attr("y1", function (d) {
-    //         return conf.height - conf.padding.bottom - conf.yScale(d.downYaxis);
-    //     }).attr("x2", function (d) {
-    //         return conf.padding.left + conf.xScale(d.rightXaxis);
-    //     }).attr("y2", function (d) {
-    //         return conf.height - conf.padding.bottom - conf.yScale(d.upYaxis);
-    //     }).attr("class", "clashLine")
-    //     .style("stroke", "black")
-    //     .style("stroke-width", "2px");
 
     // var line = function () {
     //     return conf.svg.append("line")
@@ -199,7 +167,6 @@ var isSiteCode = false;
 function rect() {
     $(".clashLine").remove();
     $(".mainRoad").remove();
-
     rectPath(datas.point);
     if (!isSiteCode && datas.locations && localStorage.projectKey == "LAO_DBWY") {
         siteCode(datas.locations);
@@ -255,7 +222,7 @@ function drawPoints(dataset) {
     conf.xScale = d3.scaleLinear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
     conf.yScale = d3.scaleLinear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
 
-    var circleUpdate = conf.svg.selectAll("circle").data(dataset);
+    var circleUpdate = conf.pointHome.selectAll("circle").data(dataset);
 
     var circleEnter = circleUpdate.enter();
     var circleExit = circleUpdate.exit();
@@ -394,7 +361,16 @@ var drawAgvs = function () {
 }
 
 var render = function (tempdata) {
-    var marker = conf.svg.append("defs")
+    drawPoints(tempdata);
+    markerDef();
+    if (conf.withAxis) {
+        drawAxis();
+    }
+    drawAgvs();
+}
+
+var markerDef = function () {
+    var marker = conf.defsHome.append("defs")
         .append("marker")
         .attr("id", "triangle")
         .attr("markerUnits", "strokeWidth")
@@ -404,9 +380,4 @@ var render = function (tempdata) {
         .attr("refY", 2)
         .attr("orient", "auto");
     marker.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z").attr("fill", "black");
-    drawPoints(tempdata);
-    if (conf.withAxis) {
-        drawAxis();
-    }
-    drawAgvs();
-}
+} 
