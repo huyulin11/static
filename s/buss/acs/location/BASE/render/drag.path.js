@@ -1,5 +1,5 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.line.js";
+import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.path.js";
 import { getM, getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
 
 export var startedPath = function () {

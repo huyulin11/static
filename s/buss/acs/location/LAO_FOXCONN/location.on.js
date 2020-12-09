@@ -1,8 +1,8 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { started, draged, ended, createPoint } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
 import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
-import { createPath } from "/s/buss/acs/location/BASE/render/add.line.js";
-import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.line.js";
+import { createPath } from "/s/buss/acs/location/BASE/render/add.path.js";
+import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.path.js";
 
 export var move = function () {
 
@@ -12,7 +12,7 @@ export var move = function () {
 
     updatePoint();
 
-    // addPath();
+    addPath();
 
     dragPath();
 }

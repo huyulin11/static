@@ -369,8 +369,8 @@ var render = function (tempdata) {
 }
 
 export var markerDef = function () {
-    var marker = conf.defsHome.append("defs")
-        .append("marker")
+    var defs = conf.defsHome.append("defs");
+    var marker1 = defs.append("marker")
         .attr("id", "triangle")
         .attr("markerUnits", "strokeWidth")
         .attr("markerWidth", 5)
@@ -378,5 +378,15 @@ export var markerDef = function () {
         .attr("refX", 7.5)
         .attr("refY", 2)
         .attr("orient", "auto");
-    marker.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z M 5 2 L 7.2 2").attr("fill", "black");
+    marker1.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z M 5 2 L 7.5 2").attr("fill", "black");
+    var marker2 = defs.append("marker")
+        .attr("id", "triangle2")
+        .attr("markerUnits", "strokeWidth")
+        .attr("markerWidth", 5)
+        .attr("markerHeight", 4)
+        .attr("refX", 0)
+        .attr("refY", 2)
+        .attr("orient", "auto");
+    marker2.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z").attr("fill", "black");
+
 } 

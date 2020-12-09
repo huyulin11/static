@@ -9,7 +9,7 @@ export var createPath = function (id, x, y) {
     }
 }
 
-export var removeLine = function (x1, y1, x2, y2) {
+export var removePath = function (x1, y1, x2, y2) {
     var distance = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
     if (distance > 100) {
         d3.selectAll(".post").remove();
@@ -22,7 +22,7 @@ var newPath = function (num, x, y) {
         .attr("fill", "none")
         .attr("stroke", "blue")
         .attr("stroke-width", "2px")
-        .attr("style", "marker-end:url(#triangle);")
+        .attr("style", "marker-end:url(#triangle2);")
     if (num == 1) {
         paths.attr("d", function () {
             return "M" + x + "," + y
