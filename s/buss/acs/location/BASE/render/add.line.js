@@ -49,7 +49,7 @@ var newPath = function (num, x, y) {
     }
 }
 
-var getClosestPoint = function (id, x, y) {
+export var getClosestPoint = function (id, x, y) {
     var arr = [];
     datas.locations.forEach((e, i) => {
         if (e.id != id) {

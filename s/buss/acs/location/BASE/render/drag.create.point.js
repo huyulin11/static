@@ -5,9 +5,6 @@ import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 
-conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
-conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
-
 var getMLL = function (x, y, s, flag) {
     var m = s.indexOf('M');
     var l1 = s.indexOf('L');

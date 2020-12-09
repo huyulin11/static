@@ -12,19 +12,21 @@ export var move = function () {
 
     updatePoint();
 
-    // addLine();
+    // addPath();
+
+    dragPath();
 }
 
-var dragLine = function () {
+var dragPath = function () {
     conf.svg.selectAll("path").call(
         d3.drag()
-            .on('start', startedPath)
-            .on('end', endedPath)
-            .on('drag', dragedPath)
+            .on('start.a', startedPath)
+            .on('drag.a', dragedPath)
+            .on('end.a', endedPath)
     );
 };
 
-var addLine = function () {
+var addPath = function () {
     conf.svg.selectAll("circle")
         .on("mouseover", function () {
             var id = $(this).attr('id');
