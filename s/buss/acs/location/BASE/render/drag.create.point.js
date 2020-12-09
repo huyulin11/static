@@ -4,24 +4,19 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
+import { getM, getMPoint, getL2, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 
 var getMLL = function (x, y, s, flag) {
-    var m = s.indexOf('M');
-    var l1 = s.indexOf('L');
-    var l2 = s.lastIndexOf('L');
-    var M = s.substring(m, l1);
-    // var L1 = s.substring(l1, l2);
-    var L2 = s.slice(l2);
+    var M = getM(s);
+    var L2 = getL2(s);
     if (flag) {
-        var num = L2.indexOf(",");
-        var arr = [L2.substring(1, num), L2.slice(num + 1)];
+        var arr = getL2Point(s);
         var a = (parseFloat(arr[0]) + parseFloat(x)) / 2;
         var b = (parseFloat(arr[1]) + parseFloat(y)) / 2;
         var s = "M" + x + "," + y + "L" + a + "," + b + L2;
         return s;
     } else {
-        var num = M.indexOf(",");
-        var arr = [M.substring(1, num), M.slice(num + 1)];
+        var arr = getMPoint(s);
         var a = (parseFloat(arr[0]) + parseFloat(x)) / 2;
         var b = (parseFloat(arr[1]) + parseFloat(y)) / 2;
         var s = M + "L" + a + "," + b + "L" + x + "," + y;
