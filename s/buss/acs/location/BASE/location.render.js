@@ -165,7 +165,7 @@ var rectPath = function (tempYfc) {
 
 var isSiteCode = false;
 function rect() {
-    $(".clashLine").remove();
+    // $(".clashLine").remove();
     $(".mainRoad").remove();
     rectPath(datas.point);
     if (!isSiteCode && datas.locations && localStorage.projectKey == "LAO_DBWY") {
@@ -362,14 +362,13 @@ var drawAgvs = function () {
 
 var render = function (tempdata) {
     drawPoints(tempdata);
-    markerDef();
     if (conf.withAxis) {
         drawAxis();
     }
     drawAgvs();
 }
 
-var markerDef = function () {
+export var markerDef = function () {
     var marker = conf.defsHome.append("defs")
         .append("marker")
         .attr("id", "triangle")
