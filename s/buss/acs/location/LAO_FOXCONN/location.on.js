@@ -12,12 +12,12 @@ export var move = function () {
 
     updatePoint();
 
-    addPath();
+    // addPath();
 
     dragPath();
 }
 
-var dragPath = function () {
+export var dragPath = function () {
     conf.svg.selectAll("path").call(
         d3.drag()
             .on('start.a', startedPath)
@@ -41,9 +41,24 @@ export var updatePoint = function () {
             d3.event.preventDefault();
             if (d3.event.button == 2) {
                 var id = $(this).attr('id');
+                var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="修改站点"><br><input type="button" id="btn2" style="width: 76px;height: 30px" value="新增路径"><br><input type="button" id="btn3" style="width: 76px;height: 30px" value="删除站点">',
+                    '#' + id,
+                    {
+                        tips: [2, '#3595CC'],
+                        time: 400000
+                    });
+                d3.select("body").on("click", function () {
+                    return layer.close(tips);
+                });
                 var x = $(this).attr('cx'), y = $(this).attr('cy');
-                var circle = d3.select(this)
-                updateID(circle, id, x, y);
+                var circle = d3.select(this);
+                d3.select("#btn1").on("click", function () {
+                    updateID(circle, id, x, y);
+                });
+                d3.select("#btn2").on("click", function () {
+                    createPath(id, x, y);
+                    dragPath();
+                });
             }
         });
 }
