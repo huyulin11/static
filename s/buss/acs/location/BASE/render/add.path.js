@@ -6,7 +6,7 @@ import { dragPath } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 
 export var createPath = function (id, x, y) {
     for (var i = 1; i <= 4; i++) {
-        newPath(i, x, y);
+        newPath(i, x, y, id);
     }
     dragPath();
 }
@@ -18,8 +18,9 @@ export var removePath = function (x1, y1, x2, y2) {
     };
 }
 
-var newPath = function (num, x, y) {
+var newPath = function (num, x, y, id) {
     var paths = conf.svg.append("path")
+        .attr("from", id)
         .attr("class", "post")
         .attr("fill", "none")
         .attr("stroke", "blue")
@@ -75,7 +76,7 @@ export var getClosestPoint = function (id, x, y) {
             let result = dbToWindow(e.x, e.y);
             let x1 = parseFloat(x), y1 = parseFloat(y);
             let x2 = parseFloat(result[0]), y2 = parseFloat(result[1]);
-            point = { "x1": x1, "y1": y1, "x2": x2, "y2": y2 };
+            point = { "x1": x1, "y1": y1, "x2": x2, "y2": y2, "nextid": idMin };
         };
     });
     return point;
