@@ -3,62 +3,100 @@ import { gv } from "/s/buss/g/j/g.v.js";
 import { gu } from "/s/buss/g/j/g.u.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { submit } from "/s/buss/g/j/g.xlsx.js";
+import { getInput } from "/s/buss/g/j/g.input.render.js";
+
+let _columns = [{
+	colkey: "id",
+	name: "货位ID",
+	hide: true,
+}, {
+	colkey: "whid",
+	name: "仓库",
+	renderData: function (rowindex, data, rowdata, column) {
+		var whId = "";
+		whId = (data ? gv.get("WAREHOUSE", data) : "");
+		return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
+	}
+}, {
+	colkey: "text",
+	name: "货位名称",
+	renderData: function (rowindex, data, rowdata, column) {
+		if (rowdata.delflag != null) {
+			return data;
+		}
+		return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+			+ "<a class='editAllocName'><img src='/s/i/edit.png'/></a>" + "</div>";
+	}
+}, {
+	colkey: "sitename",
+	name: "对应站点",
+	hide: true,
+	renderData: function (rowindex, data, rowdata, column) {
+		if (rowdata.delflag == "1") {
+			return data;
+		}
+		return "<div class='changable'>" + "<span>" + data
+			+ "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
+			+ "<a class='editSite'><img src='/s/i/edit.png'/></a>" + "</div>";
+	}
+}, {
+	colkey: "userdef1",
+	name: "巷道",
+	hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; },
+	renderData: function (rowindex, data, rowdata, column) {
+		var lap = gv.getLap(data);
+		return lap ? lap.name : "N/A";
+	}
+}, {
+	colkey: "status",
+	name: "货位状态",
+	renderData: function (rowindex, data, rowdata, column) {
+		if (rowdata.delflag == "1") {
+			$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
+			return "已删除";
+		}
+		return gv.get("ALLOC_ITEM_STATUS", data);
+	}
+}];
+
+if (sessionStorage.editAllocSeq) {
+	_columns.push({
+		colkey: "sequence",
+		name: "顺序设置",
+		renderData: function (rowindex, data, rowdata, column) {
+			if (rowdata.whid != 2) { return data; }
+			let col = {
+				name: "顺序", key: "sequence", notnull: true, type: "input", id: rowdata.id,
+			};
+			data = data || "0";
+			let html = getInput(col, { value: data, width: '50%', class: "editSeqDiv", }, rowdata);
+			return html;
+		}
+	});
+	$("#paging").delegate(".editSeqDiv", "blur", function (e) {
+		let that = this;
+		let target = $(that).val();
+		if ($(that).data("sequence") == target) {
+			return;
+		}
+		if (!target || isNaN(target) || target < 0) {
+			gf.layerMsg("提交内容应为大于0的数值！");
+			return;
+		}
+		var json = {
+			"allocItemFormMap.id": $(that).data("id"),
+			"allocItemFormMap.json": `{"sequence":${target}}`
+		};
+		gf.ajax(`/alloc/item/editEntity.shtml`, json, "json", function (data) {
+			layer.msg(data.msg ? data.msg : "保存成功！");
+			$(that).data("userdef1", target);
+		});
+	});
+}
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
-	columns: [{
-		colkey: "id",
-		name: "货位ID",
-		hide: true,
-	}, {
-		colkey: "whid",
-		name: "仓库",
-		renderData: function (rowindex, data, rowdata, column) {
-			var whId = "";
-			whId = (data ? gv.get("WAREHOUSE", data) : "");
-			return "<div class='changable'>" + "<span>" + whId + "</span>" + "</div>";
-		}
-	}, {
-		colkey: "text",
-		name: "货位名称",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag != null) {
-				return data;
-			}
-			return "<div class='changable'>" + "<span>" + data + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<a class='editAllocName'><img src='/s/i/edit.png'/></a>" + "</div>";
-		}
-	}, {
-		colkey: "sitename",
-		name: "对应站点",
-		hide: true,
-		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
-				return data;
-			}
-			return "<div class='changable'>" + "<span>" + data
-				+ "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<a class='editSite'><img src='/s/i/edit.png'/></a>" + "</div>";
-		}
-	}, {
-		colkey: "userdef1",
-		name: "巷道",
-		hide: function () { return localStorage.projectKey != "BJJK_HUIRUI"; },
-		renderData: function (rowindex, data, rowdata, column) {
-			var lap = gv.getLap(data);
-			return lap ? lap.name : "N/A";
-		}
-	}, {
-		colkey: "status",
-		name: "货位状态",
-		renderData: function (rowindex, data, rowdata, column) {
-			if (rowdata.delflag == "1") {
-				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
-				return "已删除";
-			}
-			return gv.get("ALLOC_ITEM_STATUS", data);
-		}
-	}],
+	columns: _columns,
 	jsonUrl: '/alloc/item/findByPage.shtml',
 	checkbox: true,
 	checkone: false,
@@ -84,8 +122,8 @@ $("#searchForm").on("submit", function () {
 	return false;
 });
 
-$("#add").click("click", function () {
-	add();
+$("#editAllocSeq").click("click", function () {
+	editAllocSeq();
 });
 $("#edit").click("click", function () {
 	edit();
@@ -107,13 +145,9 @@ function edit() {
 		content: '/s/buss/wms/alloc/item/editUI.html?id=' + cbox
 	});
 }
-function add() {
-	window.pageii = layer.open({
-		title: "新增",
-		type: 2,
-		area: gf.layerArea(),
-		content: '/s/buss/wms/alloc/item/h/allocItemAddUI.html'
-	});
+function editAllocSeq() {
+	sessionStorage.editAllocSeq = true;
+	window.location.reload();
 }
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
