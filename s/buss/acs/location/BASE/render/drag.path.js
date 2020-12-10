@@ -3,7 +3,8 @@ import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.path.js";
 import { getM, getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
 
 export var startedPath = function () {
-
+    d3.select(this).attr("class","savaPath");
+    d3.selectAll(".post").remove();
 }
 export var dragedPath = function () {
     const { x, y } = d3.event;
