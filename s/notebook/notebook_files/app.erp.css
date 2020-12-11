@@ -153,6 +153,7 @@ div#rows {
 	border-style: dashed;
 	border-width: 1px;
 	border-color: #ececec;
+	padding-top: 5px;
 }
 
 .search-group {

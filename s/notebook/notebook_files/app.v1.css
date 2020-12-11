@@ -10692,6 +10692,7 @@ a:hover .caret-white {
 
 .form-control {
 	border-color: #d9d9d9;
+	border-style: solid;
 	border-radius: 2px;
 }
 
