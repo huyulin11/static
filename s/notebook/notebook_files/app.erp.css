@@ -156,6 +156,10 @@ div#rows {
 	padding-top: 5px;
 }
 
+.block-tips div.item-group:hover {
+    border-color: #B8DFCD;
+}
+
 .search-group {
 	display: -webkit-box;
 }
