@@ -447,14 +447,14 @@ class GF {
         return role;
     };
     layerArea() {
-        if (!localStorage.layerArea)
-            localStorage.layerArea = ["90%", "90%"];
-        return localStorage.layerArea.split(",");
+        if (!sessionStorage.layerArea)
+            sessionStorage.layerArea = ["95%", "70%"];
+        return sessionStorage.layerArea.split(",");
     };
     layerAreaSmall() {
-        if (!localStorage.layerAreaSmall)
-            localStorage.layerAreaSmall = ["50%", "50%"];
-        return localStorage.layerAreaSmall.split(",");
+        if (!sessionStorage.layerAreaSmall)
+            sessionStorage.layerAreaSmall = ["50%", "50%"];
+        return sessionStorage.layerAreaSmall.split(",");
     };
     getArray(target) {
         var arr = [];
