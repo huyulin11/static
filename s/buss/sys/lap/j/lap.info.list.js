@@ -153,10 +153,9 @@ $("#del").click("click", function () {
 	del();
 });
 function add() {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "新增",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/s/buss/sys/lap/h/lapInfoAddUI.html'
 	});
 }

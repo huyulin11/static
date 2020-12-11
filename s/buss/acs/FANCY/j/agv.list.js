@@ -53,13 +53,11 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         $("#mainPage").css("height", height).attr("src", url); return;
     }
-    layer.open({
+    gf.layerOpen({
         type: 2,
         title: '单车管理',
-        shadeClose: true,
         shade: 0.5,
         maxmin: true,
-        area: gf.isPc() ? gf.layerArea() : ['95%', '70%'],
         content: url
     });
     return;

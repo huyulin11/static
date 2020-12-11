@@ -36,7 +36,7 @@ var watch = function (v) {
         doWork(url);
         return;
     }
-    gf.layerOpen({ content: url, area: ["60%", "75%"], title: "监控" + v, offset: 'rb' });
+    gf.layerOpenBak({ content: url, area: ["60%", "75%"], title: "监控" + v, offset: 'rb' });
 }
 $("#toggleColor").on("click", toggleColor);
 $("div.watch").on("click", function () { watch($(this).data("id")); });

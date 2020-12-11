@@ -39,7 +39,7 @@ var loadPage = function (tip) {
             gf.appOpen(url);
             return;
         } else if (openType == "2") {
-            gf.layerOpen({
+            gf.layerOpenBak({
                 title: "AGV信息",
                 area: ["70%", "100%"],
                 offset: 'rb',
@@ -96,10 +96,9 @@ var loadPage = function (tip) {
 gf.loadPage = loadPage;
 
 $("a#editUI").on("click", function () {
-    window.pageii = layer.open({
+    window.pageii = gf.layerOpen({
         title: "编辑",
         type: 2,
-        area: gf.layerArea(),
         offset: "auto",
         content: '/user/selfInfo.shtml'
     });

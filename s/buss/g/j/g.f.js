@@ -18,7 +18,7 @@ var defaultSucFun = function (data) {
 };
 
 class GF {
-    layerOpen(confs) {
+    layerOpenBak(confs) {
         if ($(window).width() < 960) {
             if (confs.newTab) {
                 window.open(confs.content);
@@ -446,17 +446,27 @@ class GF {
         });
         return role;
     };
+    layerOpen(conf) {
+        Object.assign(conf, {
+            area: gf.layerArea(),
+            shadeClose: true,
+        });
+        layer.open(conf);
+    };
+    layerOpenSmall(conf) {
+        Object.assign(conf, {
+            area: gf.layerAreaSmall(),
+            shadeClose: true,
+        });
+        layer.open(conf);
+    };
     layerArea() {
-        if (!sessionStorage.layerArea) {
-            if (gf.isPc()) { sessionStorage.layerArea = ["95%", "90%"]; }
-            else { sessionStorage.layerArea = ["95%", "70%"]; }
-        }
-        return sessionStorage.layerArea.split(",");
+        if (gf.isPc()) { return ["95%", "90%"]; }
+        else { return ["95%", "70%"]; }
     };
     layerAreaSmall() {
-        if (!sessionStorage.layerAreaSmall)
-            sessionStorage.layerAreaSmall = ["50%", "50%"];
-        return sessionStorage.layerAreaSmall.split(",");
+        if (gf.isPc()) { return ["50%", "50%"]; }
+        else { return ["95%", "50%"]; }
     };
     getArray(target) {
         var arr = [];
