@@ -447,8 +447,10 @@ class GF {
         return role;
     };
     layerArea() {
-        if (!sessionStorage.layerArea)
-            sessionStorage.layerArea = ["95%", "70%"];
+        if (!sessionStorage.layerArea) {
+            if (gf.isPc()) { sessionStorage.layerArea = ["95%", "90%"]; }
+            else { sessionStorage.layerArea = ["95%", "70%"]; }
+        }
         return sessionStorage.layerArea.split(",");
     };
     layerAreaSmall() {
