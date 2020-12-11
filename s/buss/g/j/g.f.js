@@ -462,11 +462,11 @@ class GF {
     };
     layerArea() {
         if (gf.isPc()) { return ["95%", "90%"]; }
-        else { return ["95%", "70%"]; }
+        else { return ["99%", "70%"]; }
     };
     layerAreaSmall() {
         if (gf.isPc()) { return ["50%", "50%"]; }
-        else { return ["95%", "50%"]; }
+        else { return ["99%", "70%"]; }
     };
     getArray(target) {
         var arr = [];
