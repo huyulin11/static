@@ -1,6 +1,7 @@
 import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.path.js";
 import { getM, getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var startedPath = function () {
     d3.select(this).attr("class", "savaPath");
@@ -35,10 +36,18 @@ export var endedPath = function (id) {
                 getL2(x2, y2);
         })
         .attr("style", "marker-end:url(#triangle);");
-    saveLogic(siteid, nextid);
+    var oldnext = $(this).attr("to");
+    saveLogic(siteid, nextid, oldnext);
 }
 
-var saveLogic = function (siteid, nextid) {
+var deleteLogic = function (siteid, oldnext) {
+    gf.doAjax({
+        url: `/tasksitelogic/deleteEntity.shtml`, type: "POST",
+        dataType: "JSON", data: {json:{ "siteid": siteid, "nextid": oldnext }},
+    });
+};
+
+var saveLogic = function (siteid, nextid, oldnext) {
     var json = {
         "TaskSiteLogicFormMap.siteid": siteid,
         "TaskSiteLogicFormMap.nextid": nextid,
@@ -47,6 +56,9 @@ var saveLogic = function (siteid, nextid) {
     }
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
         layer.msg(data.msg ? data.msg : '保存成功！');
+        if (data.code > 0) {
+            deleteLogic(siteid, oldnext);
+        };
     });
 };
 
