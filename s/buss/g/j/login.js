@@ -44,6 +44,7 @@ var vm = new Vue({
     created: function () {
         this.calExpireTime();
         console.log('App is power by: ' + this.shortname);
+        if (from) return;
         switch (localStorage.projectKey) {
             case "BJJK_HUIRUI":
                 $("title").html("MFA");
