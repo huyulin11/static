@@ -10,7 +10,8 @@ let checkLoginError = false;
 if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
 
 let renderModel = (conf) => {
-	let { key, target, click } = conf;
+	let { init, key, target, click } = conf;
+	if (init) init();
 	let style = $(`<style id='${key}HideDiv_style'></style>`);
 	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
 		.append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
@@ -34,8 +35,17 @@ let taskReady = () => {
 	$(taskContainer).append("<iframe id='taskFrame'></iframe>");
 	let url = "/s/buss/sys/conf/h/agv.cache.html";
 	$(taskContainer).css("height", "50%").css("width", "80%");
-	$(taskContainer).find("iframe#taskFrame").css("height", "100%").css("width", "100%").attr("src", url);
+	$(taskContainer).find("iframe#taskFrame").css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
 	$("body").append(taskContainer);
+}
+
+let loginMiniReady = () => {
+	let loginContainer = $(`<div id="loginContainer" class="fixed"></div>`);
+	$(loginContainer).append("<iframe id='LOGIN'></iframe>");
+	let url = "/s/buss/g/h/loginSuccess.html";
+	$(loginContainer).css("height", "450px").css("width", "300px");
+	$(loginContainer).find("iframe#LOGIN").css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
+	$("body").append(loginContainer);
 }
 
 var container = function () {
@@ -50,7 +60,7 @@ var container = function () {
 			renderModel({ key: 'lift', target: 'div#liftContainer' });
 			renderModel({ key: 'door', target: 'div#autodoorContainer' });
 			renderModel({ key: 'msg', target: 'div#msgContainer' });
-			renderModel({ key: 'login', target: 'div#loginContainer' });
+			renderModel({ init: loginMiniReady, key: 'login', target: 'div#loginContainer' });
 		} else if (localStorage.projectKey == 'TAIKAI_JY') {
 			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		} else if (localStorage.projectKey == 'CSY_DAJ') {
@@ -81,7 +91,7 @@ var container = function () {
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 			taskReady();
 			renderModel({ key: 'task', target: 'div#taskContainer' });
-			renderModel({ key: 'login', target: 'div#loginContainer' });
+			renderModel({ init: loginMiniReady, key: 'login', target: 'div#loginContainer' });
 		} else if (localStorage.projectKey == 'QDTY_SELF') {
 			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		}
