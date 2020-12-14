@@ -1,0 +1,52 @@
+<html lang="en"
+    class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title></title>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/s/c/min.css">
+    <link rel="stylesheet" href="/s/c/login.css">
+    <link rel="stylesheet" href="/s/c/login2.css">
+    <link href="/s/c/css.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        #loginbox {
+            width: 80%;
+            text-align: center;
+            background-color: white;
+            font-size: 30px;
+            padding: 10% 0 10% 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loginbox">
+        <span>登录成功</span>
+    </div>
+    <div class="dynbg">
+        <div class="dynbg__bg dynbg__bg0"></div>
+        <div class="dynbg__bg dynbg__bg1"></div>
+        <div class="dynbg__bg dynbg__bg2"></div>
+        <div class="dynbg__bg dynbg__bg3"></div>
+        <div class="dynbg__bg dynbg__bg4"></div>
+    </div>
+</body>
+
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/jquery/jquery.form.js"></script>
+<script src="/s/j/layer/v3.1.3/layer.js"></script>
+<script type="module">
+    import { gf } from "/s/buss/g/j/g.f.js";
+    let check = () => {
+        gf.checkLoginError(() => { window.location.href = "/s/buss/g/h/login.html?from=frame"; });
+    };
+    check();
+    setInterval(() => {
+        check();
+    }, 5000);
+</script>
+
+</html>

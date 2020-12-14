@@ -7,12 +7,10 @@ var data = { shortname: "凯钒科技", expireTime: "" }
 let logingBtnStr = $("#loginBtn").html();
 var loginSuccess = function (data) {
     if (data.code >= 0) {
-        if (from) {
-            parent.location.reload();
-            return;
-        }
         let indexUrl;
-        if (data.object) {
+        if (from) {
+            indexUrl = "/s/buss/g/h/loginSuccess.html";
+        } else if (data.object) {
             indexUrl = data.object;
         } else if (!gf.isPc()) {
             indexUrl = "/s/buss/wms/rf/h/rf.mgr.html";
