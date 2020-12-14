@@ -2,8 +2,30 @@ import "/s/j/vue/vue.min.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gp } from "/s/buss/g/j/g.p.js";
 
+let from = gf.urlParam("from");
 var data = { shortname: "凯钒科技", expireTime: "" }
 let logingBtnStr = $("#loginBtn").html();
+var loginSuccess = function (data) {
+    if (data.code >= 0) {
+        if (from) {
+            parent.location.reload();
+            return;
+        }
+        let indexUrl;
+        if (data.object) {
+            indexUrl = data.object;
+        } else if (!gf.isPc()) {
+            indexUrl = "/s/buss/wms/rf/h/rf.mgr.html";
+        } else {
+            indexUrl = "/s/buss/g/h/manager.html";
+        }
+        location.assign(indexUrl);
+    } else {
+        layer.msg(data.msg);
+        $("#username").focus();
+        $("#loginBtn").html(logingBtnStr);
+    }
+}
 var login = function () {
     $("#loginBtn").html(logingBtnStr + "&nbsp;&nbsp;" + `<img style="width:12px;" src="/s/i/loading2.gif"/>`);
     $("#loginform").ajaxSubmit({
@@ -14,23 +36,7 @@ var login = function () {
             layer.msg("连接错误！");
             $("#loginBtn").html(logingBtnStr);
         },
-        success: function (data) {
-            if (data.code >= 0) {
-                let indexUrl;
-                if (data.object) {
-                    indexUrl = data.object;
-                } else if (!gf.isPc()) {
-                    indexUrl = "/s/buss/wms/rf/h/rf.mgr.html";
-                } else {
-                    indexUrl = "/s/buss/g/h/manager.html";
-                }
-                location.assign(indexUrl);
-            } else {
-                layer.msg(data.msg);
-                $("#username").focus();
-                $("#loginBtn").html(logingBtnStr);
-            }
-        }
+        success: loginSuccess
     });
 };
 

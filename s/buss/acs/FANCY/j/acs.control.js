@@ -9,7 +9,8 @@ import { gf } from "/s/buss/g/j/g.f.js";
 let checkLoginError = false;
 if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
 
-let renderModel = (key, target, click) => {
+let renderModel = (conf) => {
+	let { key, target, click } = conf;
 	let style = $(`<style id='${key}HideDiv_style'></style>`);
 	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
 		.append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
@@ -20,7 +21,8 @@ let renderModel = (key, target, click) => {
 	$("#topCtrlContainer").prepend(op);
 }
 
-let renderLink = (key, url, self) => {
+let renderLink = (conf) => {
+	let { key, url, self } = conf;
 	let style = $(`<style id='${key}HideDiv_style'></style>`);
 	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
 	$("head").append(style);
@@ -40,44 +42,48 @@ var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
 		if (localStorage.projectKey != 'LAO_FOXCONN') {
-			renderModel('agvs', 'div#agvDiv');
+			renderModel({ key: 'agvs', target: 'div#agvDiv' });
 		}
 		if (![''].includes(localStorage.projectKey))
-			renderModel('setup', 'div#controlContainer');
+			renderModel({ key: 'setup', target: 'div#controlContainer' });
 		if (localStorage.projectKey == 'LAO_FOXCONN') {
-			renderModel('lift', 'div#liftContainer');
-			renderModel('door', 'div#autodoorContainer');
-			renderModel('msg', 'div#msgContainer');
+			renderModel({ key: 'lift', target: 'div#liftContainer' });
+			renderModel({ key: 'door', target: 'div#autodoorContainer' });
+			renderModel({ key: 'msg', target: 'div#msgContainer' });
+			renderModel({ key: 'login', target: 'div#loginContainer' });
 		} else if (localStorage.projectKey == 'TAIKAI_JY') {
-			renderModel('msg', 'div#msgContainer');
+			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		} else if (localStorage.projectKey == 'CSY_DAJ') {
-			renderModel('charge', 'div#chargeContainer');
-			renderModel('windowCenter', 'div#windowCenterContainer');
-			renderModel('window', 'div#windowContainer');
-			renderModel('wms', 'div#wmsContainer');
-			renderModel('msg', 'div#msgContainer');
+			renderModel({ key: 'charge', target: 'div#chargeContainer' });
+			renderModel({ key: 'windowCenter', target: 'div#windowCenterContainer' });
+			renderModel({ key: 'window', target: 'div#windowContainer' });
+			renderModel({ key: 'wms', target: 'div#wmsContainer' });
+			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		} else if (localStorage.projectKey == 'CSY_CDBP') {
 			taskReady();
-			renderModel('task', 'div#taskContainer');
-			renderModel('msg', 'div#msgContainer');
+			renderModel({ key: 'task', target: 'div#taskContainer' });
+			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
-			renderModel('msg', 'div#msgContainer');
+			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		} else if (localStorage.projectKey == 'YZBD_NRDW') {
-			// renderModel('tongji', 'div#tongjiContainer');
-			renderModel('search', 'div#searchContainer');
-			renderModel('shipment', 'div#shipmentContainer');
-			renderModel('receipt', 'div#receiptContainer');
-			renderModel('POS', "none", function () {
-				let value = $(this).hasClass("close");
-				gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gf.layer().msg((value ? "显示" : "隐藏") + "坐标"); });
+			// renderModel({key:'tongji',target: 'div#tongjiContainer'});
+			renderModel({ key: 'search', target: 'div#searchContainer' });
+			renderModel({ key: 'shipment', target: 'div#shipmentContainer' });
+			renderModel({ key: 'receipt', target: 'div#receiptContainer' });
+			renderModel({
+				key: 'POS', target: "none", click: function () {
+					let value = $(this).hasClass("close");
+					gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gf.layer().msg((value ? "显示" : "隐藏") + "坐标"); });
+				}
 			});
-			renderModel('PDA', 'div#PDAContainer');
-			renderLink('manager', '/s/buss/g/h/manager.html', true);
+			renderModel({ key: 'PDA', target: 'div#PDAContainer' });
+			renderLink({ key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
 		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 			taskReady();
-			renderModel('task', 'div#taskContainer');
+			renderModel({ key: 'task', target: 'div#taskContainer' });
+			renderModel({ key: 'login', target: 'div#loginContainer' });
 		} else if (localStorage.projectKey == 'QDTY_SELF') {
-			renderModel('msg', 'div#msgContainer');
+			renderModel({ key: 'msg', target: 'div#msgContainer' });
 		}
 	}
 	return $("#allCtrlTable");
