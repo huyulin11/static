@@ -1,14 +1,11 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dbToWindow, numToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
-import { dragPath } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 
 export var createPath = function (id, x, y) {
     for (var i = 1; i <= 4; i++) {
         newPath(i, x, y, id);
     }
-    dragPath();
 }
 
 export var removePath = function (x1, y1, x2, y2) {

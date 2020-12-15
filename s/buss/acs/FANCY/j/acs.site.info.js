@@ -51,11 +51,11 @@ export var taskSiteLocation = function (callback) {
     });
 }
 
-export var updatetaskSiteLogic = function (id, data) {
+export var updatetaskSiteLogic = function (siteid, nextid, data) {
     var flag = true;
     if (!taskSiteLogicData) return;
     taskSiteLogicData.forEach((e, i) => {
-        if (e.id == id) {
+        if (e.siteid == siteid && e.nextid == nextid) {
             flag = false;
             return taskSiteLogicData[i] = data;
         }

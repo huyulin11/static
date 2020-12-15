@@ -26,15 +26,6 @@ export var dragPath = function () {
     );
 };
 
-var addPath = function () {
-    conf.svg.selectAll("circle")
-        .on("mouseover", function () {
-            var id = $(this).attr('id');
-            var x = $(this).attr('cx'), y = $(this).attr('cy');
-            createPath(id, x, y)
-        });
-}
-
 export var updatePoint = function () {
     conf.svg.selectAll("circle")
         .on("contextmenu", function (d, i) {
@@ -45,7 +36,7 @@ export var updatePoint = function () {
                     '#' + id,
                     {
                         tips: [2, '#3595CC'],
-                        time: 400000
+                        time: 10000
                     });
                 d3.select("body").on("click", function () {
                     return layer.close(tips);
