@@ -79,10 +79,9 @@ function editTask() {
 	});
 }
 function addTask() {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "新增",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/s/agvtasks/h/addDairyTaskUI.html'
 	});
 }

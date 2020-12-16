@@ -60,18 +60,16 @@ function edit() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "编辑",
 		type: 2,
-		area: ["600px", "80%"],
 		content: '/s/buss/iot/socketdev/editUI.html?id=' + cbox
 	});
 }
 function add() {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "新增",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/s/buss/iot/socketdev/h/addSocketdevUI.html'
 	});
 }

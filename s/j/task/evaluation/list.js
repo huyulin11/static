@@ -236,18 +236,16 @@ function assign() {
 		layer.msg("至少选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "分配任务",
 		type: 2,
-		area: ["900px", "80%"],
 		content: '/task/tasklist/assign.shtml?id=' + cbox + '&flag=0'
 	});
 }
 function bulksearcharrange(cbox) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "分配查看",
 		type: 2,
-		area: ["900px", "80%"],
 		content: '/task/tasklist/assign.shtml?id=' + cbox + '&flag=1'
 	});
 }
@@ -268,10 +266,9 @@ function bulkevaluation() {
 		layer.msg("至少选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "批量评鉴",
 		type: 2,
-		area: ["900px", "80%"],
 		content: '/task/tasklist/bulkevaluation.shtml?id=' + cbox
 	});
 }
@@ -292,10 +289,9 @@ function bulkreview() {
 		layer.msg("至少选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "批量复核",
 		type: 2,
-		area: ["900px", "80%"],
 		content: '/task/tasklist/bulkreview.shtml?id=' + cbox
 	});
 }
@@ -316,18 +312,16 @@ function bulksealing() {
 		layer.msg("至少选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "批量封箱",
 		type: 2,
-		area: ["900px", "80%"],
 		content: '/task/tasklist/bulksealing.shtml?id=' + cbox
 	});
 }
 function evaluation(innerno, aliasname) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "评鉴",
 		type: 2,
-		area: ["1100px", "90%"],
 		content: '/judge/judgelist.shtml?innerno=' + innerno
 	});
 }
@@ -336,18 +330,16 @@ function accepted(id) {
 	window.open("/deposit/depositEdit.shtml?id=" + id);
 }
 function review(innerno, aliasname) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "复核",
 		type: 2,
-		area: ["1100px", "90%"],
 		content: '/judge/confirm.shtml?innernoRe=' + innerno
 	});
 }
 function sealing(innerno, aliasname) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "封箱",
 		type: 2,
-		area: ["1100px", "90%"],
 		content: '/judge/package.shtml?innernoPa=' + innerno
 	});
 	$.ajax({

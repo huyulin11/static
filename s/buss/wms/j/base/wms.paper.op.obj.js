@@ -135,7 +135,7 @@ var initBtns = function () {
             var cbox = gf.checkOnlyOne("paperid");
             if (!cbox) { return; }
             this.url = `/s/buss/wms/h/inventory.result.list.html?paperid=${cbox}`;
-            paperOp.layerOpen(this);
+            paperOp.layerOpenBak(this);
         },
     }; btns.whichOne = {
         id: "whichOne", name: "经办", class: "btn-info",
@@ -254,10 +254,9 @@ class PaperOp {
                 gf.layerMsg(`该单无法${that.name}！`);
                 return;
             }
-            window.pageii = layer.open({
+            window.pageii = gf.layerOpen({
                 title: `${that.name}：` + cbox,
                 type: 2,
-                area: gf.layerArea(),
                 content: that.url + "?paperid=" + cbox
             });
         });
@@ -296,26 +295,23 @@ class PaperOp {
             window.location.href = that.url + "&paperid=" + cbox
         });
     }; add(that) {
-        window.pageii = layer.open({
+        window.pageii = gf.layerOpen({
             title: `${that.name}`,
             type: 2,
-            area: gf.layerArea(),
             content: that.url
         });
-    }; layerOpen(that) {
-        window.pageii = layer.open({
+    }; layerOpenBak(that) {
+        window.pageii = gf.layerOpenSmall({
             title: `${that.name}`,
             type: 2,
-            area: gf.layerAreaSmall(),
             content: that.url
         });
     }; detail(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }
-        window.pageii = layer.open({
+        window.pageii = gf.layerOpen({
             title: `${that.name}：` + cbox,
             type: 2,
-            area: gf.layerArea(),
             content: that.url + cbox
         });
     }; doJob(param, that, callback) {

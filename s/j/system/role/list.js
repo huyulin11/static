@@ -69,10 +69,9 @@ function editRole() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "编辑",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/role/editUI.shtml?id=' + cbox
 	});
 }
@@ -83,18 +82,16 @@ function permissions() {
 		return;
 	}
 	var url = '/resources/permissions.shtml?roleId=' + cbox;
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "分配权限",
 		type: 2,
-		area: gf.layerArea(),
 		content: url
 	});
 }
 function addRole() {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "新增",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/role/addUI.shtml'
 	});
 }

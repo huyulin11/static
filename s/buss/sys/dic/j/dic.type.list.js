@@ -29,14 +29,14 @@ window.datagrid = dataGrid({
 			}
 			var btns = "";
 			btns += `<button type='button' class='btn btn-info marR10 view' 
-						data-dictype='${ rowdata.dictype}'>查看</button>`;
+						data-dictype='${rowdata.dictype}'>查看</button>`;
 			btns += "&nbsp;&nbsp;";
 			btns += `<button type='button' class='btn btn-info marR10 detail' 
-						data-dictype='${ rowdata.dictype}'>维护数据</button>`;
+						data-dictype='${rowdata.dictype}'>维护数据</button>`;
 			if (localStorage.admin) {
 				btns += "&nbsp;&nbsp;";
 				btns += `<button type='button' class='btn btn-info marR10 mgr' 
-						data-dictype='${ rowdata.dictype}'>维护类型</button>`;
+						data-dictype='${rowdata.dictype}'>维护类型</button>`;
 			}
 			return btns;
 		}
@@ -89,37 +89,33 @@ $("#del").on("click", function () {
 	del();
 });
 function mgr(dictype) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "明细",
 		type: 2,
-		area: ["600px", "80%"],
 		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html?dictype=' + dictype
 	});
 }
 
 function detail(dictype) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "明细",
 		type: 2,
-		area: ["600px", "80%"],
 		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype
 	});
 }
 
 function view(dictype) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "明细",
 		type: 2,
-		area: ["600px", "80%"],
 		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype + '&model=VIEW'
 	});
 }
 
 function add() {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "新增",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html'
 	});
 }

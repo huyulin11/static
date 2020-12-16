@@ -122,7 +122,7 @@ var doAllocOpHongfu = function (that) {
     var changeNumBtn = "<button class='tck doChange' data-id='" + $(that).data("id") + "' "
         + "data-text='" + $(that).data("text") + "' data-status='" + $(that).data("status") + "'>确认</button>";
 
-    layer.open({
+    gf.layerOpen({
         type: 1,
         title: $(that).data("text") + ($(that).data("status") != 1 ? ("-<font style='color:red;'>" + sku.value($(that).data("skuid")) + "</font>") : ""),
         skin: 'layui-layer-demo',
@@ -130,7 +130,6 @@ var doAllocOpHongfu = function (that) {
         area: ['70%', '45%'],
         anim: 2,
         shade: 0.7,
-        shadeClose: true,
         offset: '10%',
         content: "<div style='text-align: center;'><table><tr><td width='50%'>" + changeNumForm + "</td></tr><tr><td>" + changeNumBtn + "</td></tr>" + "</table>"
             + "<hr>" + "<table>" + taskStr + "</table>" + "<hr>" + "<table>" + "<tr><td>" + "</td></tr></table></div>"
@@ -138,10 +137,9 @@ var doAllocOpHongfu = function (that) {
 }
 
 var doAllocOpBjjkHuirui = function (that) {
-    window.pageii = layer.open({
+    window.pageii = gf.layerOpen({
         title: `SU明细`,
         type: 2,
-        area: gf.layerArea(),
         content: `/s/buss/wms/alloc/txm/h/allocTxmMgr.html?type=alloc&alloc=${$(that).data("text")}`
     });
 }

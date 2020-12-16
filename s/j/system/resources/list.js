@@ -93,18 +93,16 @@ function editFun() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "编辑",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/resources/editUI.shtml?id=' + cbox
 	});
 }
 function addFun() {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "新增",
 		type: 2,
-		area: gf.layerArea(),
 		content: '/resources/addUI.shtml'
 	});
 }

@@ -4,15 +4,14 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { ws } from "/s/buss/g/j/websocket.js";
 
 export var agvNum = 0;
-let innerAgvDetail = ["CSY_DAJ", "LAO_FOXCONN", "TAIKAI_JY"].includes(localStorage.projectKey);
+let innerAgvDetail = ["CSY_DAJ", "TAIKAI_JY", "QDTY_SELF"].includes(localStorage.projectKey);
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
-        let agvDiv = $(`<div id='agvDiv' class='fixed' style='z-index:1;'>
-        <div id='agvDiv' class='withBorder'></div></div>`);
+        let agvDiv = $(`<div id='agvDiv' class='fixed withBorder'></div>`);
         $("body").prepend(agvDiv);
+        if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     }
-    if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     return $("div#agvDiv");
 }
 
@@ -41,7 +40,7 @@ var whenSuccess = function (data) {
 }
 
 var doWhenSuccess = function (data) {
-    agvDiv().html("");
+    agvDiv().find("table.agv").remove();
     renderList(data, agvDiv());
     gf.resizeTable();
 }
@@ -54,14 +53,11 @@ var openAGVMGR = function (tmpAgvId, layerName) {
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         $("#mainPage").css("height", height).attr("src", url); return;
     }
-    console.log(url);
-    layer.open({
+    gf.layerOpen({
         type: 2,
         title: '单车管理',
-        shadeClose: false,
         shade: 0.5,
         maxmin: true,
-        area: gf.layerArea(),
         content: url
     });
     return;
@@ -86,6 +82,18 @@ export var initAgvList = function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
 
+    if (agvDiv().find('#toggleShowAgvListDetail').length == 0) {
+        agvDiv().prepend(`<div style='font-size:10px;text-align:left;'><span>选中隐藏详情</span><input type="checkbox" 
+        id="toggleShowAgvListDetail" title="选中隐藏详情" ${localStorage.toggleShowAgvListDetail ? "checked" : ""}></div>`);
+        agvDiv().delegate("input:checkbox#toggleShowAgvListDetail", "change", function (e) {
+            if (this.checked) {
+                localStorage.toggleShowAgvListDetail = true;
+            } else {
+                localStorage.toggleShowAgvListDetail = "";
+            }
+            getAgvList();
+        });
+    }
     if (innerAgvDetail) {
         var currentAgvId = localStorage.currentAgvId;
         if (currentAgvId) {

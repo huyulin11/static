@@ -1,7 +1,7 @@
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { agvNum } from "/s/buss/acs/FANCY/j/agv.list.js";
 
-var numInLine = 1;
+var _numInLine;
 let shortLength = 20;
 let showPlcstatus = ['CSY_DAJ'].includes(localStorage.projectKey);
 let showAgvbusstype = ['TAIKAI_JY'].includes(localStorage.projectKey);
@@ -10,12 +10,16 @@ let showBattery = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 let showSpeed = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 
 export var renderList = function (agvs, agvDiv) {
-    if (agvNum >= 6) numInLine = 3;
-    var numOfRow = agvNum >= numInLine ? numInLine : agvNum;
+    _numInLine = (agvNum >= 6) ? (agvDiv.width() > 500 ? 3 : 2) : 1;
+    var numOfRow = agvNum >= _numInLine ? _numInLine : agvNum;
     $.each(agvs, function (n, agvinfo) {
         renderOne(numOfRow, agvinfo, agvDiv);
     });
 }
+
+let isHide = () => {
+    return localStorage.toggleShowAgvListDetail == 'true';
+};
 
 var renderOne = function (numOfRow, agvinfo, agvDiv) {
     var currentTable = `table.agv[data-area='${agvinfo.environment}']`;
@@ -33,7 +37,9 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
     var remark = agvinfo.msg ? agvinfo.msg : "";
 
     let name = findIotInfo(agvinfo.id, "name");
-    var tmpStr = `<td class='agv'><div>
+    var tmpStr;
+    if (!isHide()) {
+        tmpStr = `
     <button id='${agvinfo.id}' style='background-color:${showVal.colorStyle};'>
         <table cellspacing='0px' cellspadding='2px'>
         <tr><td>${name}</td><td>${showVal.moveStatusVal}</td></tr>
@@ -44,9 +50,16 @@ var renderOne = function (numOfRow, agvinfo, agvDiv) {
         ${relativeHD}
         ${agvbusstype}
         <tr><td colspan='2' title='${remark}'>${remark.length > shortLength ? remark.substr(0, shortLength) + "..." : remark}</td></tr>
-        </table></button>
-        </div></td>`;
-
+        </table></button>`;
+    } else {
+        tmpStr = `
+    <button id='${agvinfo.id}' style='background-color:${showVal.colorStyle};min-height:45px;'>
+        <table cellspacing='0px' cellspadding='2px'>
+        <tr><td>${name}</td><td>${showVal.moveStatusVal}</td></tr>
+        ${siteStatusVal}
+        </table></button>`;
+    }
+    tmpStr = `<td class='agv'><div>${tmpStr}</div></td>`;
     if ($(currentTable).find("tr.agvTr:last").find("td.agv").length >= numOfRow
         || $(currentTable).find("tr.agvTr:last").length == 0) {
         $(currentTable).append("<tr class='agvTr'></tr>");

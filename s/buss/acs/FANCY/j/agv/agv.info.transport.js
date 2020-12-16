@@ -51,7 +51,10 @@ export var init = function (target) {
 				let hide = json.hide;
 				if (hide) { return null; }
 				let agvIds = json.agvIds;
-				if (agvIds) { inner += `<br/>AGV:${agvIds}`; $(btn).data('agvids', agvIds); }
+				if (agvIds) {
+					inner += `<br/>AGV:${agvIds}`; $(btn).data('agvids', agvIds);
+					if (currentAgvId && !agvIds.split(',').includes('' + currentAgvId)) { return null; }
+				}
 			}
 			let currentFlag = item.id == _currentSite;
 			$(btn).addClass('flag'); if (currentFlag) $(btn).addClass('current');
@@ -106,7 +109,11 @@ export var init = function (target) {
 		for (let item of targetArr) {
 			let json = $(item).data("json");
 			let arrivedact = $("#chooedBtns").find(`span[data-id='${$(item).data("id")}']>select`).val();
-			if (!arrivedact) { arrivedact = "S"; }
+			if (!arrivedact) {
+				arrivedact = "S";
+				if (localStorage.projectKey == 'QDTY_SELF')
+					arrivedact = "W";
+			}
 			arrSub.push({
 				arrivedact: arrivedact, id: $(item).data("id")
 			});

@@ -199,19 +199,17 @@ function bulksealing() {
 		layer.msg("至少选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "批量封箱",
 		type: 2,
-		area: ["900px", "80%"],
 		content: '/task/tasklist/bulksealing.shtml?id=' + cbox
 	});
 }
 
 function sealing(requestid) {
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "封箱",
 		type: 2,
-		area: ["1100px", "90%"],
 		content: '/judge/packageJudge.shtml?requestid=' + requestid
 	});
 
@@ -233,10 +231,9 @@ function batchoperate() {
 		layer.msg("至少选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "批量操作",
 		type: 2,
-		area: ["1100px", "90%"],
 		content: '/p/package.shtml?requestid=' + cbox
 	});
 }

@@ -15,10 +15,9 @@ let tempBtns = [{
 	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html${_alloc ? "?alloc=" + _alloc : ""}`,
 	id: "add", name: `增加`, class: "btn-primary", hide: true,
 	bind: function () {
-		layer.open({
+		gf.layerOpen({
 			title: `${this.name}SU${_alloc ? "（货位:" + _alloc + "）" : ""}`,
 			type: 2,
-			area: gf.layerArea(),
 			content: this.url
 		});
 	},
@@ -102,10 +101,9 @@ function edit() {
 		gf.layerMsg("只能选中一个");
 		return;
 	}
-	window.pageii = layer.open({
+	window.pageii = gf.layerOpen({
 		title: "编辑",
 		type: 2,
-		area: ["600px", "80%"],
 		content: '/s/buss/wms/alloc/txm/editUI.html?id=' + cbox
 	});
 }
