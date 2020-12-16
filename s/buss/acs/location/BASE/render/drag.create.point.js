@@ -4,25 +4,8 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
-import { getM, getMPoint, getL2, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
-
-var getMLL = function (x, y, s, flag) {
-    var M = getM(s);
-    var L2 = getL2(s);
-    if (flag) {
-        var arr = getL2Point(s);
-        var a = (parseFloat(arr[0]) + parseFloat(x)) / 2;
-        var b = (parseFloat(arr[1]) + parseFloat(y)) / 2;
-        var s = "M" + x + "," + y + "L" + a + "," + b + L2;
-        return s;
-    } else {
-        var arr = getMPoint(s);
-        var a = (parseFloat(arr[0]) + parseFloat(x)) / 2;
-        var b = (parseFloat(arr[1]) + parseFloat(y)) / 2;
-        var s = M + "L" + a + "," + b + "L" + x + "," + y;
-        return s;
-    }
-}
+import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
+import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 
 export var started = function () {
     const { x, y } = d3.event;
@@ -47,12 +30,16 @@ export var draged = function () {
     conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; })
         .attr("d", function (d) {
             var s = $(this).attr("d");
-            return getMLL(x, y, s, true);
+            var l2Point = getL2Point(s);
+            var x2 = l2Point[0], y2 = l2Point[1];
+            return dToStrig(x, x2, y, y2);
         });
     conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; })
         .attr("d", function (d) {
             var s = $(this).attr("d");
-            return getMLL(x, y, s, false);
+            var mPoint = getMPoint(s);
+            var x1 = mPoint[0], y1 = mPoint[1];
+            return dToStrig(x1, x, y1, y);
         });
     conf.svg.select("#n" + id)
         .attr("x", x)
