@@ -95,7 +95,7 @@ var siteCode = function (locations) {
 }
 
 var rectPath = function (tempYfc) {
-    conf.pathHome.selectAll("path").data(tempYfc)
+    var path = conf.pathHome.selectAll("path").data(tempYfc)
         .enter()
         .append("path")
         .attr("id", function (d) {
@@ -110,65 +110,15 @@ var rectPath = function (tempYfc) {
         .attr("d", function (d) {
             var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
             var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
-            if (result2[1] >= result1[1]) {
-                if (result2[0] <= result1[0]) {
-                    return "M" + result1[0] + "," + result1[1] +
-                        "L" + (result2[0] + 20) + "," + result1[1] +
-                        "Q" + result2[0] + "," + result1[1] + " " + result2[0] + "," + (result1[1] + 20) +
-                        "L" + result2[0] + "," + result2[1];
-                } else {
-                    return "M" + result1[0] + "," + result1[1] +
-                        "L" + (result2[0] - 20) + "," + result1[1] +
-                        "Q" + result2[0] + "," + result1[1] + " " + result2[0] + "," + (result1[1] + 20) +
-                        "L" + result2[0] + "," + result2[1];
-                }
-            } else {
-                if (result2[0] <= result1[0]) {
-                    return "M" + result1[0] + "," + result1[1] +
-                        "L" + result1[0] + "," + (result2[1] + 20) +
-                        "Q" + result1[0] + "," + result2[1] + " " + (result1[0] - 20) + "," + result2[1] +
-                        "L" + result2[0] + "," + result2[1];
-                } else {
-                    return "M" + result1[0] + "," + result1[1] +
-                        "L" + result1[0] + "," + (result2[1] + 20) +
-                        "Q" + result1[0] + "," + result2[1] + " " + (result1[0] + 20) + "," + result2[1] +
-                        "L" + result2[0] + "," + result2[1];
-                }
-            }
+            return "M" + result1[0] + "," + result1[1] +
+                "L" + (result2[0] + result1[0]) / 2 + "," + (result2[1] + result1[1]) / 2 +
+                "L" + result2[0] + "," + result2[1];
         })
         .attr("class", "clashLine")
         .attr("fill", "none")
-        .attr("stroke", "#8a8a8a")
-        .attr("stroke-width", "4px")
+        .attr("stroke", "black")
+        .attr("stroke-width", "2px")
         .attr("style", "marker-end:url(#triangle);");
-
-
-
-    // conf.pathHome2.selectAll("path").data(tempYfc)
-    //     .enter()
-    //     .append("path")
-    //     .attr("id", function (d) {
-    //         return d.id;
-    //     })
-    //     .attr("from", function (d) {
-    //         return d.from;
-    //     })
-    //     .attr("to", function (d) {
-    //         return d.to;
-    //     })
-    //     .attr("d", function (d) {
-    //         var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
-    //         var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
-    //         return "M" + result1[0] + "," + result1[1] +
-    //             "L" + (result2[0] + result1[0]) / 2 + "," + (result2[1] + result1[1]) / 2 +
-    //             "L" + result2[0] + "," + result2[1];
-    //     })
-    //     .attr("class", "clashLine")
-    //     .attr("fill", "none")
-    //     .attr("stroke", "#ffffff")
-    //     .attr("stroke-width", "2px")
-    //     .attr("stroke-dasharray", "5,10")
-    //     .attr("style", "marker-end:url(#triangle);");
 
     // var line = function () {
     //     return conf.svg.append("line")
@@ -425,10 +375,10 @@ export var markerDef = function () {
         .attr("markerUnits", "strokeWidth")
         .attr("markerWidth", 5)
         .attr("markerHeight", 4)
-        .attr("refX", 5)
-        .attr("refY", 1.5)
+        .attr("refX", 7.5)
+        .attr("refY", 2)
         .attr("orient", "auto");
-    marker1.append("path").attr("d", "M 0 0 L 3.75 1.5 L 0 3 z").attr("fill", "black");
+    marker1.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z M 5 2 L 7.5 2").attr("fill", "black");
     var marker2 = defs.append("marker")
         .attr("id", "triangle2")
         .attr("markerUnits", "strokeWidth")

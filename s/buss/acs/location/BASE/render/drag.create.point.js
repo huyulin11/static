@@ -1,10 +1,10 @@
-import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
+import { taskSiteLocation, updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
-import { getM, getMPoint, getL2, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.MLL.js";
+import { getM, getMPoint, getL2, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 
 var getMLL = function (x, y, s, flag) {
     var M = getM(s);
