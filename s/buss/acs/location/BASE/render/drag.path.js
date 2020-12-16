@@ -3,6 +3,7 @@ import { getM, getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 
 export var startedPath = function () {
     datas.init();
@@ -12,9 +13,10 @@ export var startedPath = function () {
 export var dragedPath = function () {
     const { x, y } = d3.event;
     var s = $(this).attr("d");
+    var mPoint = getMPoint(s);
     d3.select(this)
         .attr("d", function (d) {
-            return getM(s) + "L" + parseFloat(x) + "," + parseFloat(y);
+            return dToStrig(mPoint[0], x, mPoint[1], y);
         })
         .attr("style", "marker-end:url(#triangle);");
 }
