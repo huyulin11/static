@@ -55,7 +55,7 @@ var saveLogic = function (siteid, nextid, oldnext) {
         "TaskSiteLogicFormMap.distance": 1,
     }
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
-        // layer.msg(data.msg ? data.msg : '保存成功！');
+        layer.msg(data.msg ? data.msg : '保存成功！');
         if (data.code > 0 && oldnext) {
             deleteLogic(siteid, oldnext);
         };
