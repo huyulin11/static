@@ -17,8 +17,11 @@ export var dragedPath = function () {
     d3.select(this)
         .attr("d", function (d) {
             return dToStrig(mPoint[0], x, mPoint[1], y);
+        });
+    d3.select("#w" + $(this).attr("id"))
+        .attr("d", function () {
+            return dToStrig(mPoint[0], x, mPoint[1], y);
         })
-        .attr("style", "marker-end:url(#triangle);");
 }
 export var endedPath = function (id) {
     var siteid = $(this).attr("from");
@@ -34,11 +37,12 @@ export var endedPath = function (id) {
         .attr("from", siteid)
         .attr("to", nextid)
         .attr("d", function () {
-            return getM(s) +
-                "L" + (x1 + x2) * 0.5 + "," + (y1 + y2) * 0.5 +
-                "L" + x2 + "," + y2;
+            return dToStrig(x1, x2, y1, y2);
         })
-        .attr("style", "marker-end:url(#triangle);");
+    d3.select("#w" + $(this).attr("id"))
+        .attr("d", function () {
+            return dToStrig(x1, x2, y1, y2);
+        })
     saveLogic(siteid, nextid, oldnext);
 }
 

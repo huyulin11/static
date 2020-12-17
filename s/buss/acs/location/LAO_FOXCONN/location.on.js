@@ -18,7 +18,7 @@ export var move = function () {
 }
 
 export var dragPath = function () {
-    conf.svg.selectAll("path").call(
+    conf.svg.selectAll(".clashLine").call(
         d3.drag()
             .on('start.a', startedPath)
             .on('drag.a', dragedPath)
