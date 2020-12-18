@@ -5,30 +5,7 @@ import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
 import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-
-let checkLoginError = false;
-if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
-
-let renderModel = (conf) => {
-	let { init, key, target, click } = conf;
-	if (init) init();
-	let style = $(`<style id='${key}HideDiv_style'></style>`);
-	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
-		.append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
-	$("head").append(style);
-	let op = $(`<div id='${key}HideDiv' class='close hideToggle'></div>`);
-	if (target) $(op).data("target", target);
-	if (click) $(op).bind("click", click);
-	$("#topCtrlContainer").prepend(op);
-}
-
-let renderLink = (conf) => {
-	let { key, url, self } = conf;
-	let style = $(`<style id='${key}HideDiv_style'></style>`);
-	$(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
-	$("head").append(style);
-	$("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-self='${self ? self : ""}'></div>`);
-}
+import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 
 let taskReady = () => {
 	let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
@@ -48,53 +25,63 @@ let loginMiniReady = () => {
 	$("body").append(loginContainer);
 }
 
-var container = function () {
-	if ($("#allCtrlTable").length == 0) {
-		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
-		if (localStorage.projectKey != 'LAO_FOXCONN') {
-			renderModel({ key: 'agvs', target: 'div#agvDiv' });
-		}
-		if (![''].includes(localStorage.projectKey))
-			renderModel({ key: 'setup', target: 'div#controlContainer' });
-		if (localStorage.projectKey == 'LAO_FOXCONN') {
-			renderModel({ key: 'lift', target: 'div#liftContainer' });
-			renderModel({ key: 'door', target: 'div#autodoorContainer' });
-			renderModel({ key: 'msg', target: 'div#msgContainer' });
-			renderModel({ init: loginMiniReady, key: 'login', target: 'div#loginContainer' });
-		} else if (localStorage.projectKey == 'TAIKAI_JY') {
-			renderModel({ key: 'msg', target: 'div#msgContainer' });
-		} else if (localStorage.projectKey == 'CSY_DAJ') {
-			renderModel({ key: 'charge', target: 'div#chargeContainer' });
-			renderModel({ key: 'windowCenter', target: 'div#windowCenterContainer' });
-			renderModel({ key: 'window', target: 'div#windowContainer' });
-			renderModel({ key: 'wms', target: 'div#wmsContainer' });
-			renderModel({ key: 'msg', target: 'div#msgContainer' });
-		} else if (localStorage.projectKey == 'CSY_CDBP') {
-			taskReady();
-			renderModel({ key: 'task', target: 'div#taskContainer' });
-			renderModel({ key: 'msg', target: 'div#msgContainer' });
-		} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
-			renderModel({ key: 'msg', target: 'div#msgContainer' });
-		} else if (localStorage.projectKey == 'YZBD_NRDW') {
-			// renderModel({key:'tongji',target: 'div#tongjiContainer'});
-			renderModel({ key: 'search', target: 'div#searchContainer' });
-			renderModel({ key: 'shipment', target: 'div#shipmentContainer' });
-			renderModel({ key: 'receipt', target: 'div#receiptContainer' });
-			renderModel({
+let renderAllModels = () => {
+	let confs = [];
+	if (localStorage.projectKey != 'LAO_FOXCONN') {
+		confs.push({ key: 'agvs', target: 'div#agvDiv' });
+	}
+	if (![''].includes(localStorage.projectKey))
+		confs.push({ key: 'setup', target: 'div#controlContainer' });
+	if (localStorage.projectKey == 'LAO_FOXCONN') {
+		confs.push(
+			{ key: 'lift', target: 'div#liftContainer' },
+			{ key: 'door', target: 'div#autodoorContainer' },
+			{ key: 'msg', target: 'div#msgContainer' },
+			{ init: loginMiniReady, key: 'login', target: 'div#loginContainer' }
+		);
+	} else if (localStorage.projectKey == 'TAIKAI_JY') {
+		confs.push({ key: 'msg', target: 'div#msgContainer' });
+	} else if (localStorage.projectKey == 'CSY_DAJ') {
+		confs.push(
+			{ key: 'charge', target: 'div#chargeContainer' },
+			{ key: 'windowCenter', target: 'div#windowCenterContainer' },
+			{ key: 'window', target: 'div#windowContainer' },
+			{ key: 'wms', target: 'div#wmsContainer' },
+			{ key: 'msg', target: 'div#msgContainer' }
+		);
+	} else if (localStorage.projectKey == 'CSY_CDBP') {
+		confs.push({ init: taskReady, key: 'task', target: 'div#taskContainer' });
+		confs.push({ key: 'msg', target: 'div#msgContainer' });
+	} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
+		confs.push({ key: 'msg', target: 'div#msgContainer' });
+	} else if (localStorage.projectKey == 'YZBD_NRDW') {
+		// confs.push({key:'tongji',target: 'div#tongjiContainer'});
+		confs.push({ key: 'search', target: 'div#searchContainer' },
+			{ key: 'shipment', target: 'div#shipmentContainer' },
+			{ key: 'receipt', target: 'div#receiptContainer' },
+			{
 				key: 'POS', target: "none", click: function () {
 					let value = $(this).hasClass("close");
 					gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gf.layer().msg((value ? "显示" : "隐藏") + "坐标"); });
 				}
-			});
-			renderModel({ key: 'PDA', target: 'div#PDAContainer' });
-			renderLink({ key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
-		} else if (localStorage.projectKey == 'YZBD_QSKJ') {
-			taskReady();
-			renderModel({ key: 'task', target: 'div#taskContainer' });
-			renderModel({ init: loginMiniReady, key: 'login', target: 'div#loginContainer' });
-		} else if (localStorage.projectKey == 'QDTY_SELF') {
-			renderModel({ key: 'msg', target: 'div#msgContainer' });
-		}
+			},
+			{ key: 'PDA', target: 'div#PDAContainer' },
+			{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
+	} else if (localStorage.projectKey == 'YZBD_QSKJ') {
+		confs.push({ init: taskReady, key: 'task', target: 'div#taskContainer' },
+			{ init: loginMiniReady, key: 'login', target: 'div#loginContainer' });
+	} else if (localStorage.projectKey == 'QDTY_SELF') {
+		confs.push({ key: 'msg', target: 'div#msgContainer' });
+	}
+	if (confs.length > 0) {
+		renderModel(confs);
+	}
+};
+
+var container = function () {
+	if ($("#allCtrlTable").length == 0) {
+		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
+		renderAllModels();
 	}
 	return $("#allCtrlTable");
 }
@@ -106,50 +93,6 @@ export var initAcsControl = function () {
 			container().append("<tr><td><div><button id='" + btn.id + "'>" + btn.name + "</button></div></td></tr>");
 	}
 	delegateEvent();
-
-	var showCtrl = function (that) {
-		var thatTarget = $(that).data("target");
-		$(thatTarget).show(100);
-		$(that).removeClass("close");
-		$(that).addClass("open");
-	}
-
-	var hideCtrl = function (that) {
-		var thatTarget = $(that).data("target");
-		$(thatTarget).hide(100);
-		$(that).removeClass("open");
-		$(that).addClass("close");
-	}
-
-	var hideAllCtrl = function (thatTarget) {
-		$("#topCtrlContainer").find("div.hideToggle").each(function () {
-			var target = $(this).data("target");
-			if (target && target != thatTarget) {
-				hideCtrl(this);
-			}
-		});
-	}
-
-	$("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
-		if (checkLoginError) {
-			gf.checkLoginError();
-		}
-		var target = $(this).data("target");
-		if (target) {
-			hideAllCtrl(target);
-			if ($(this).hasClass("open")) {
-				hideCtrl(this);
-			} else {
-				showCtrl(this);
-			}
-		} else {
-			var url = $(this).data("url");
-			var self = $(this).data("self");
-			if (url) {
-				window.open(url, self ? "_self" : false);
-			}
-		}
-	});
 
 	initAgvList();
 	let refreshAgvsInfo = function (data) {

@@ -164,3 +164,7 @@ div#rows {
 .search-group {
 	display: -webkit-box;
 }
+
+.pageTitle{
+	text-align: center;
+}
