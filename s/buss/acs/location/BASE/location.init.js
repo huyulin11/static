@@ -1,4 +1,9 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { renderModel } from "/s/buss/g/j/g.banner.control.js";
+
+let confs = [];
+confs.push({ init: true, url: "/s/buss/agv/site/cache/cache.html", key: 'cache', target: 'div#cacheContainer' });
+renderModel(confs);
 
 var keyNum = 1;
 var toggleColor = function () {
