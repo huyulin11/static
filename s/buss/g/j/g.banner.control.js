@@ -1,6 +1,10 @@
 let initEventFlag = false;
 
 export let renderModel = (confs) => {
+    if ($("#topCtrlContainer").length == 0) {
+        let topContainer = $(`<div id="topCtrlContainer"></div>`);
+        $("body").append(topContainer);
+    }
     if (confs instanceof Array) {
         for (let conf of confs) {
             doRenderModel(conf);
@@ -14,6 +18,14 @@ export let renderModel = (confs) => {
     }
 }
 
+let initReady = (key, url) => {
+    let container = $(`<div id="${key}Container" class="fixed"></div>`);
+    $(container).append(`<iframe id='${key}Frame'></iframe>`);
+    $(container).css("height", "50%").css("width", "80%");
+    $(container).find(`iframe#${key}Frame`).css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
+    $("body").append(container);
+}
+
 let doRenderModel = (conf) => {
     let { init, key, target, click, url, self, type } = conf;
     if (type === 'LINK') {
@@ -24,7 +36,13 @@ let doRenderModel = (conf) => {
         return;
     }
 
-    if (init) init();
+    if (init) {
+        if (init instanceof Function) {
+            init();
+        } else {
+            initReady(key, url);
+        }
+    }
     let style = $(`<style id='${key}HideDiv_style'></style>`);
     $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
         .append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
