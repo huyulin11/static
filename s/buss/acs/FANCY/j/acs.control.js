@@ -7,9 +7,6 @@ import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 
-let checkLoginError = false;
-if (localStorage.projectKey == 'YZBD_NRDW') { checkLoginError = true; }
-
 let taskReady = () => {
 	let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
 	$(taskContainer).append("<iframe id='taskFrame'></iframe>");
@@ -96,50 +93,6 @@ export var initAcsControl = function () {
 			container().append("<tr><td><div><button id='" + btn.id + "'>" + btn.name + "</button></div></td></tr>");
 	}
 	delegateEvent();
-
-	var showCtrl = function (that) {
-		var thatTarget = $(that).data("target");
-		$(thatTarget).show(100);
-		$(that).removeClass("close");
-		$(that).addClass("open");
-	}
-
-	var hideCtrl = function (that) {
-		var thatTarget = $(that).data("target");
-		$(thatTarget).hide(100);
-		$(that).removeClass("open");
-		$(that).addClass("close");
-	}
-
-	var hideAllCtrl = function (thatTarget) {
-		$("#topCtrlContainer").find("div.hideToggle").each(function () {
-			var target = $(this).data("target");
-			if (target && target != thatTarget) {
-				hideCtrl(this);
-			}
-		});
-	}
-
-	$("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
-		if (checkLoginError) {
-			gf.checkLoginError();
-		}
-		var target = $(this).data("target");
-		if (target) {
-			hideAllCtrl(target);
-			if ($(this).hasClass("open")) {
-				hideCtrl(this);
-			} else {
-				showCtrl(this);
-			}
-		} else {
-			var url = $(this).data("url");
-			var self = $(this).data("self");
-			if (url) {
-				window.open(url, self ? "_self" : false);
-			}
-		}
-	});
 
 	initAgvList();
 	let refreshAgvsInfo = function (data) {

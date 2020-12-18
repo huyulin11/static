@@ -1,3 +1,5 @@
+let initEventFlag = false;
+
 export let renderModel = (confs) => {
     if (confs instanceof Array) {
         for (let conf of confs) {
@@ -5,6 +7,10 @@ export let renderModel = (confs) => {
         }
     } else {
         doRenderModel(confs);
+    }
+    if (!initEventFlag) {
+        initEventFlag = true;
+        initEvent();
     }
 }
 
@@ -28,3 +34,46 @@ let doRenderModel = (conf) => {
     if (click) $(op).bind("click", click);
     $("#topCtrlContainer").prepend(op);
 }
+
+let initEvent = () => {
+    var showCtrl = function (that) {
+        var thatTarget = $(that).data("target");
+        $(thatTarget).show(100);
+        $(that).removeClass("close");
+        $(that).addClass("open");
+    }
+
+    var hideCtrl = function (that) {
+        var thatTarget = $(that).data("target");
+        $(thatTarget).hide(100);
+        $(that).removeClass("open");
+        $(that).addClass("close");
+    }
+
+    var hideAllCtrl = function (thatTarget) {
+        $("#topCtrlContainer").find("div.hideToggle").each(function () {
+            var target = $(this).data("target");
+            if (target && target != thatTarget) {
+                hideCtrl(this);
+            }
+        });
+    }
+
+    $("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
+        var target = $(this).data("target");
+        if (target) {
+            hideAllCtrl(target);
+            if ($(this).hasClass("open")) {
+                hideCtrl(this);
+            } else {
+                showCtrl(this);
+            }
+        } else {
+            var url = $(this).data("url");
+            var self = $(this).data("self");
+            if (url) {
+                window.open(url, self ? "_self" : false);
+            }
+        }
+    });
+};
