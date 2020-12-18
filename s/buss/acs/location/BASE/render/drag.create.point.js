@@ -98,3 +98,15 @@ export var saveLocation = function (id, x, y) {
         }
     });
 }
+
+export var deleteLocation = function (id) {
+    var ids = parseInt(id);
+    gf.doAjax({
+        url: `/app/conf/del.shtml`, type: "POST",
+        data: { table: "TASK_SITE_LOCATION", key: ids },
+        success: (obj) => {
+            updateTaskSiteLocation(id, "", true);
+            layer.msg(obj.msg ? obj.msg : '保存成功！');
+        }
+    });
+}

@@ -116,8 +116,8 @@ var rectPath = function (tempYfc) {
         .attr("class", "clashLine")
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
-        .attr("stroke-width", "6px");
-    // .attr("style", "marker-end:url(#triangle);");
+        .attr("stroke-width", "6px")
+    // .attr("style", "marker-mid:url(#triangle);");
 
     var path2 = conf.pathHome2.selectAll("path").data(tempYfc)
         .enter()
@@ -398,10 +398,10 @@ export var markerDef = function () {
         .attr("markerUnits", "strokeWidth")
         .attr("markerWidth", 5)
         .attr("markerHeight", 4)
-        .attr("refX", 7.5)
-        .attr("refY", 2)
+        .attr("refX", 3.75)
+        .attr("refY", 1)
         .attr("orient", "auto");
-    marker1.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z M 5 2 L 7.5 2").attr("fill", "black");
+    marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z M 2.5 1 L 3.75 1").attr("fill", "black");
     var marker2 = defs.append("marker")
         .attr("id", "triangle2")
         .attr("markerUnits", "strokeWidth")

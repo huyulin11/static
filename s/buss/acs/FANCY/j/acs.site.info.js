@@ -65,16 +65,26 @@ export var updatetaskSiteLogic = function (siteid, nextid, data) {
     }
 }
 
-export var updateTaskSiteLocation = function (id, data) {
-    var flag = true;
+export var updateTaskSiteLocation = function (id, data, bool) {
     if (!taskSiteLocationData) return;
-    taskSiteLocationData.forEach((e, i) => {
-        if (e.id == id) {
-            flag = false;
-            return taskSiteLocationData[i] = data;
+    if (bool) {
+        taskSiteLocationData.forEach((e, i) => {
+            if (e.id == id) {
+                var s = taskSiteLocationData.splice(i, 1);
+                return s;
+            }
+        });
+    } else {
+        var flag = true;
+        taskSiteLocationData.forEach((e, i) => {
+            if (e.id == id) {
+                flag = false;
+                return taskSiteLocationData[i] = data;
+            }
+        });
+        if (flag) {
+            return taskSiteLocationData.push(data)
         }
-    });
-    if (flag) {
-        return taskSiteLocationData.push(data)
     }
+
 }

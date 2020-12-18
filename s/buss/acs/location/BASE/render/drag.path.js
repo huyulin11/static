@@ -4,6 +4,8 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
+import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
+
 
 export var startedPath = function () {
     datas.init();
@@ -44,6 +46,7 @@ export var endedPath = function (id) {
             return dToStrig(x1, x2, y1, y2);
         })
     saveLogic(siteid, nextid, oldnext);
+    setTimeout(renderSvg, 3000);
 }
 
 var deleteLogic = function (siteid, oldnext) {

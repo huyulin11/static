@@ -1,8 +1,9 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { started, draged, ended, createPoint } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
+import { started, draged, ended, createPoint, deleteLocation } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
 import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
 import { createPath } from "/s/buss/acs/location/BASE/render/add.path.js";
 import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.path.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 export var move = function () {
 
@@ -11,8 +12,6 @@ export var move = function () {
     addPoint();
 
     updatePoint();
-
-    // addPath();
 
     dragPath();
 }
@@ -35,7 +34,7 @@ export var updatePoint = function () {
                 var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="修改站点"><br><input type="button" id="btn2" style="width: 76px;height: 30px" value="新增路径"><br><input type="button" id="btn3" style="width: 76px;height: 30px" value="删除站点">',
                     '#' + id,
                     {
-                        tips: [2, '#3595CC'],
+                        tips: [2, '#e6e6e6'],
                         time: 10000
                     });
                 d3.select("body").on("click", function () {
@@ -48,7 +47,19 @@ export var updatePoint = function () {
                 });
                 d3.select("#btn2").on("click", function () {
                     createPath(id, x, y);
-                    dragPath();
+                    conf.svg.selectAll(".post").call(
+                        d3.drag()
+                            .on('start.a', startedPath)
+                            .on('drag.a', dragedPath)
+                            .on('end.a', endedPath)
+                    );
+                });
+                d3.select("#btn3").on("click", function () {
+                    deleteLocation(id);
+                    datas.init();
+                    conf.svg.selectAll("circle").filter(function (e) { return e && e[0] == id; }).remove();
+                    conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; }).remove();
+                    conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; }).remove();
                 });
             }
         });
