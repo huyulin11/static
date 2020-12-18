@@ -24,7 +24,7 @@
 
 <body>
     <div id="loginbox">
-        <span>已登录</span>
+        <span id="showMsg">正在登录…</span>
     </div>
     <div class="dynbg">
         <div class="dynbg__bg dynbg__bg0"></div>
@@ -41,7 +41,7 @@
 <script type="module">
     import { gf } from "/s/buss/g/j/g.f.js";
     let check = () => {
-        gf.checkLoginError(() => { window.location.href = "/s/buss/g/h/login.html?from=frame"; });
+        gf.checkLogin(() => { $("#showMsg").html("已登录"); }, () => { window.location.href = "/s/buss/g/h/login.html?from=frame"; });
     };
     check();
     setInterval(() => {
