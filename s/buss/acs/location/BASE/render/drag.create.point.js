@@ -6,6 +6,7 @@ import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.l
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
+import { getPointByID } from "/s/buss/acs/location/BASE/point/ponit.coordinate.js";
 
 export var started = function () {
     const { x, y } = d3.event;
@@ -52,6 +53,8 @@ export var ended = function () {
         .attr('cy', y);
     var id = $(this).attr('id');
     saveLocation(id, x, y);
+    var to = $("[from=" + id + "]").attr("to");
+    var from = $("[to=" + id + "]").attr("from");
     conf.svg.selectAll("#n" + id).remove();
 }
 
@@ -86,6 +89,13 @@ var getID = function () {
     return id;
 }
 
+var editSideLogic = function (side) {
+    var json = {
+        "TaskSiteLogicFormMap.side": side,
+    }
+    gf.ajax(`/tasksitelogic/editEntity.shtml`, json, "json");
+}
+
 export var saveLocation = function (id, x, y) {
     var ids = parseInt(id);
     var result = windowToDB(id, x, y);
@@ -94,7 +104,7 @@ export var saveLocation = function (id, x, y) {
         data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
         success: (obj) => {
             updateTaskSiteLocation(id, result);
-            layer.msg(obj.msg ? obj.msg : '保存成功！');
+            layer.msg(obj.msg ? obj.msg : '');
         }
     });
 }
@@ -106,7 +116,7 @@ export var deleteLocation = function (id) {
         data: { table: "TASK_SITE_LOCATION", key: ids },
         success: (obj) => {
             updateTaskSiteLocation(id, "", true);
-            layer.msg(obj.msg ? obj.msg : '保存成功！');
+            layer.msg(obj.msg ? obj.msg : '');
         }
     });
 }

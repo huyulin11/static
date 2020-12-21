@@ -20,9 +20,9 @@ var newPath = function (num, x, y, id) {
         .attr("from", id)
         .attr("class", "post")
         .attr("fill", "none")
-        .attr("stroke", "blue")
-        .attr("stroke-width", "2px")
-        .attr("style", "marker-end:url(#triangle2);")
+        .attr("stroke", "#8a8a8a")
+        .attr("stroke-width", "6px")
+        .attr("style", "marker-end:url(#triangle2);");
     if (num == 1) {
         paths.attr("d", function () {
             return "M" + x + "," + y

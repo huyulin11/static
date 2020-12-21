@@ -116,8 +116,8 @@ var rectPath = function (tempYfc) {
         .attr("class", "clashLine")
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
-        .attr("stroke-width", "6px")
-    // .attr("style", "marker-mid:url(#triangle);");
+        .attr("stroke-width", "6.5px")
+        .attr("style", "marker-end:url(#triangle);");
 
     var path2 = conf.pathHome2.selectAll("path").data(tempYfc)
         .enter()
@@ -140,7 +140,7 @@ var rectPath = function (tempYfc) {
         .attr("fill", "none")
         .attr("stroke", "#ffffff")
         .style("stroke-dasharray", "10, 7")
-        .attr("stroke-width", "2px");
+        .attr("stroke-width", "1px");
     // .attr("style", "marker-end:url(#triangle);");
 
     // var line = function () {
@@ -258,7 +258,7 @@ function drawPoints(dataset) {
         }).attr("fill", function (d) {
             return tool.getColor(d);
         }).attr("r", function (d) {
-            return (datas.inUdp(d)) ? 5 : (datas.inTaskPath(d) ? 4 : 2);
+            return (datas.inUdp(d)) ? 6.5 : (datas.inTaskPath(d) ? 4 : 2);
         });
 
     circleEnter.append("circle")
@@ -396,20 +396,20 @@ export var markerDef = function () {
     var marker1 = defs.append("marker")
         .attr("id", "triangle")
         .attr("markerUnits", "strokeWidth")
-        .attr("markerWidth", 5)
-        .attr("markerHeight", 4)
-        .attr("refX", 3.75)
+        .attr("markerWidth", 2.5)
+        .attr("markerHeight", 2)
+        .attr("refX", 2.5)
         .attr("refY", 1)
         .attr("orient", "auto");
-    marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z M 2.5 1 L 3.75 1").attr("fill", "black");
+    marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
     var marker2 = defs.append("marker")
         .attr("id", "triangle2")
         .attr("markerUnits", "strokeWidth")
-        .attr("markerWidth", 5)
-        .attr("markerHeight", 4)
+        .attr("markerWidth", 2.5)
+        .attr("markerHeight", 2)
         .attr("refX", 0)
-        .attr("refY", 2)
+        .attr("refY", 1)
         .attr("orient", "auto");
-    marker2.append("path").attr("d", "M 0 0 L 5 2 L 0 4 z").attr("fill", "black");
+    marker2.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
 
 } 

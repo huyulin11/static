@@ -45,7 +45,8 @@ export var endedPath = function (id) {
         .attr("d", function () {
             return dToStrig(x1, x2, y1, y2);
         })
-    saveLogic(siteid, nextid, oldnext);
+    getSide(x1, x2, y1, y2);
+    saveLogic(side, siteid, nextid, oldnext);
     setTimeout(renderSvg, 3000);
 }
 
@@ -54,20 +55,37 @@ export var deleteLogic = function (value, bool) {
         url: `/tasksitelogic/deleteEntity.shtml`, type: "POST",
         dataType: "JSON", data: value,
         success: (obj) => {
-                updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
+            updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
         }
     });
 };
 
-var saveLogic = function (siteid, nextid, oldnext) {
+export var getSide = function (x1, x2, y1, y2) {
+    var side;
+    if (x1 < x2) {
+        if (y1 > y2) {
+            side = 2;
+        } else if (y1 < y2) {
+            side = 1;
+        }
+    } else if (x1 > x2) {
+        if (y1 > y2) {
+            side = 1;
+        } else if (y1 < y2) {
+            side = 2;
+        }
+    }
+    return side;
+};
+
+var saveLogic = function (side, siteid, nextid, oldnext) {
     var json = {
         "TaskSiteLogicFormMap.siteid": siteid,
         "TaskSiteLogicFormMap.nextid": nextid,
-        "TaskSiteLogicFormMap.side": 2,
+        "TaskSiteLogicFormMap.side": side,
         "TaskSiteLogicFormMap.distance": 1,
     }
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
-        layer.msg(data.msg ? data.msg : '保存成功！');
         if (data.code > 0 && oldnext) {
             var result = { "siteid": siteid, "nextid": oldnext };
             deleteLogic(result, true);
