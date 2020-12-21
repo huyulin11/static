@@ -49,10 +49,15 @@ export var endedPath = function (id) {
     setTimeout(renderSvg, 3000);
 }
 
-var deleteLogic = function (siteid, oldnext) {
+export var deleteLogic = function (value, bool) {
     gf.doAjax({
         url: `/tasksitelogic/deleteEntity.shtml`, type: "POST",
-        dataType: "JSON", data: { "siteid": siteid, "nextid": oldnext },
+        dataType: "JSON", data: value,
+        success: (obj) => {
+            value.forEach((e, i) => {
+                updatetaskSiteLogic(e.siteid, e.nextid, "", bool);
+            })
+        }
     });
 };
 
@@ -66,8 +71,9 @@ var saveLogic = function (siteid, nextid, oldnext) {
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
         layer.msg(data.msg ? data.msg : '保存成功！');
         if (data.code > 0 && oldnext) {
-            deleteLogic(siteid, oldnext);
+            var result = { "siteid": siteid, "nextid": oldnext };
+            deleteLogic(result, true);
+            updatetaskSiteLogic(siteid, oldnext, json);
         };
-        updatetaskSiteLogic(siteid, oldnext, json);
     });
 };

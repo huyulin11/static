@@ -2,7 +2,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { started, draged, ended, createPoint, deleteLocation } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
 import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
 import { createPath } from "/s/buss/acs/location/BASE/render/add.path.js";
-import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.path.js";
+import { dragedPath, endedPath, startedPath, deleteLogic } from "/s/buss/acs/location/BASE/render/drag.path.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 export var move = function () {
@@ -14,6 +14,34 @@ export var move = function () {
     updatePoint();
 
     dragPath();
+
+    rightClickPath();
+}
+
+var rightClickPath = function () {
+    conf.svg.selectAll("path")
+        .on("contextmenu", function (d, i) {
+            d3.event.preventDefault();
+            if (d3.event.button == 2) {
+                var id = $(this).attr('id');
+                var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="删除路径">>',
+                    '#' + id,
+                    {
+                        tips: [2, '#e6e6e6'],
+                        time: 10000
+                    });
+                d3.select("body").on("click", function () {
+                    return layer.close(tips);
+                });
+                var path = d3.select(this);
+                var siteid = $(this).attr('from'), nextid = $(this).attr('to');
+                d3.select("#btn1").on("click", function () {
+                    var value = { "siteid": siteid, "nextid": nextid };
+                    deleteLogic(value,true);
+                    path.remove();
+                });
+            }
+        });
 }
 
 export var dragPath = function () {

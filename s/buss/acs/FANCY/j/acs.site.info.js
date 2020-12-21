@@ -51,17 +51,26 @@ export var taskSiteLocation = function (callback) {
     });
 }
 
-export var updatetaskSiteLogic = function (siteid, nextid, data) {
-    var flag = true;
+export var updatetaskSiteLogic = function (siteid, nextid, data, bool) {
     if (!taskSiteLogicData) return;
-    taskSiteLogicData.forEach((e, i) => {
-        if (e.siteid == siteid && e.nextid == nextid) {
-            flag = false;
-            return taskSiteLogicData[i] = data;
+    if (bool) {
+        taskSiteLogicData.forEach((e, i) => {
+            if (e.siteid == siteid && e.nextid == nextid) {
+                var s = taskSiteLogicData.splice(i, 1);
+                return s;
+            }
+        })
+    } else {
+        var flag = true;
+        taskSiteLogicData.forEach((e, i) => {
+            if (e.siteid == siteid && e.nextid == nextid) {
+                flag = false;
+                return taskSiteLogicData[i] = data;
+            }
+        });
+        if (flag) {
+            return taskSiteLogicData.push(data);
         }
-    });
-    if (flag) {
-        return taskSiteLogicData.push(data)
     }
 }
 
