@@ -24,7 +24,7 @@ var rightClickPath = function () {
             d3.event.preventDefault();
             if (d3.event.button == 2) {
                 var id = $(this).attr('id');
-                var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="删除路径">>',
+                var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="删除路径">',
                     '#' + id,
                     {
                         tips: [2, '#e6e6e6'],

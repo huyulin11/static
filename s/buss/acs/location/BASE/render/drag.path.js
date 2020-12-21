@@ -54,9 +54,7 @@ export var deleteLogic = function (value, bool) {
         url: `/tasksitelogic/deleteEntity.shtml`, type: "POST",
         dataType: "JSON", data: value,
         success: (obj) => {
-            value.forEach((e, i) => {
                 updatetaskSiteLogic(e.siteid, e.nextid, "", bool);
-            })
         }
     });
 };
