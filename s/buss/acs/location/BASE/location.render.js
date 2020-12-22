@@ -3,6 +3,7 @@ import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
+import { show } from "/s/buss/acs/location/BASE/render/location.button.js";
 
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
@@ -143,6 +144,7 @@ var rectPath = function (tempYfc) {
         .attr("stroke-width", "1px");
     // .attr("style", "marker-end:url(#triangle);");
 
+    show();
     // var line = function () {
     //     return conf.svg.append("line")
     //         .attr("id", point0.id)
