@@ -53,8 +53,6 @@ export var ended = function () {
         .attr('cy', y);
     var id = $(this).attr('id');
     saveLocation(id, x, y);
-    var to = $("[from=" + id + "]").attr("to");
-    var from = $("[to=" + id + "]").attr("from");
     conf.svg.selectAll("#n" + id).remove();
 }
 
