@@ -94,7 +94,7 @@ export var saveLocation = function (id, x, y) {
         data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
         success: (obj) => {
             updateTaskSiteLocation(id, result);
-            layer.msg(obj.msg ? obj.msg : '');
+            if (obj.msg) layer.msg(obj.msg);
         }
     });
 }
@@ -106,7 +106,7 @@ export var deleteLocation = function (id) {
         data: { table: "TASK_SITE_LOCATION", key: ids },
         success: (obj) => {
             updateTaskSiteLocation(id, "", true);
-            layer.msg(obj.msg ? obj.msg : '');
+            if (obj.msg) layer.msg(obj.msg);
         }
     });
 }

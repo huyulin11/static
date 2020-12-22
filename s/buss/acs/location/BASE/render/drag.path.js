@@ -56,6 +56,7 @@ export var deleteLogic = function (value, bool) {
         dataType: "JSON", data: value,
         success: (obj) => {
             updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
+            if (obj.msg) layer.msg(obj.msg);
         }
     });
 };
@@ -90,6 +91,6 @@ var saveLogic = function (side, siteid, nextid, oldnext) {
             var result = { "siteid": siteid, "nextid": oldnext };
             deleteLogic(result, true);
             updatetaskSiteLogic(siteid, oldnext, json);
-        };
+        } else layer.msg('调整失败，与原路径相同');
     });
 };
