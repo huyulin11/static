@@ -2949,7 +2949,7 @@ table th[class*="col-"] {
 		overflow-y: hidden;
 		-webkit-overflow-scrolling: touch;
 		-ms-overflow-style: -ms-autohiding-scrollbar;
-		border: 1px solid #ddd;
+		border: 1px solid #428bca12;
 	}
 
 	.table-responsive>.table {
