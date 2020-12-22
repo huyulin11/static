@@ -3578,7 +3578,7 @@ fieldset[disabled] .btn {
 }
 
 .btn-default {
-	color: #333;
+	/* color: #333; */
 	background-color: #fff;
 	border-color: #ccc;
 }
@@ -10503,7 +10503,7 @@ button.close {
 body {
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
-	color: #717171;
+	color: #4282b6;
 	background-color: transparent;
 	-webkit-font-smoothing: antialiased;
 }
@@ -10518,7 +10518,7 @@ body {
 }
 
 a {
-	color: #2e3e4e;
+	/* color: #2e3e4e; */
 	text-decoration: none;
 }
 
@@ -12065,7 +12065,7 @@ nav li.current span {
 }
 
 .btn-default {
-	color: #717171 !important;
+	/* color: #717171 !important; */
 	background-color: #fafafa;
 	border-color: #dadada;
 	border-bottom-color: #ccc;
@@ -13144,7 +13144,7 @@ fieldset[disabled] .btn-gplus.active {
 }
 
 .bg-light {
-	background-color: #f1f1f1;
+	background-color: #ffffff;
 	color: #717171;
 }
 
