@@ -86,14 +86,6 @@ var getID = function () {
     }
     return id;
 }
-
-var editSideLogic = function (side) {
-    var json = {
-        "TaskSiteLogicFormMap.side": side,
-    }
-    gf.ajax(`/tasksitelogic/editEntity.shtml`, json, "json");
-}
-
 export var saveLocation = function (id, x, y) {
     var ids = parseInt(id);
     var result = windowToDB(id, x, y);

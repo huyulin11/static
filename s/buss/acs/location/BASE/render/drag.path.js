@@ -45,7 +45,7 @@ export var endedPath = function (id) {
         .attr("d", function () {
             return dToStrig(x1, x2, y1, y2);
         })
-    getSide(x1, x2, y1, y2);
+    var side = getSide(x1, x2, y1, y2);
     saveLogic(side, siteid, nextid, oldnext);
     setTimeout(renderSvg, 3000);
 }
@@ -64,15 +64,15 @@ export var getSide = function (x1, x2, y1, y2) {
     var side;
     if (x1 < x2) {
         if (y1 > y2) {
-            side = 2;
-        } else if (y1 < y2) {
             side = 1;
+        } else if (y1 < y2) {
+            side = 2;
         }
     } else if (x1 > x2) {
         if (y1 > y2) {
-            side = 1;
-        } else if (y1 < y2) {
             side = 2;
+        } else if (y1 < y2) {
+            side = 1;
         }
     }
     return side;
