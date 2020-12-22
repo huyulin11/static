@@ -6,20 +6,11 @@ import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.l
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { getPointByID } from "/s/buss/acs/location/BASE/point/ponit.coordinate.js";
 
 export var started = function () {
-    const { x, y } = d3.event;
-    conf.textHome.append("text")
-        .attr("id", "n" + $(this).attr('id'))
-        .attr("x", x)
-        .attr("y", y)
-        .attr("stroke", "black")
-        .attr("font-size", "15px")
-        .attr("font-family", "sans-serif")
-        .text($(this).attr('id'));
 }
 export var draged = function () {
+    datas.init();
     const { x, y } = d3.event;
     var id = $(this).attr('id');
     d3.select(this)
@@ -42,9 +33,9 @@ export var draged = function () {
             var x1 = mPoint[0], y1 = mPoint[1];
             return dToStrig(x1, x, y1, y);
         });
-    conf.svg.select("#n" + id)
-        .attr("x", x)
-        .attr("y", y);
+    conf.svg.select("#t" + id)
+        .attr("x", x + 7)
+        .attr("y", y - 7);
 }
 export var ended = function () {
     const { x, y } = d3.event;
@@ -53,7 +44,7 @@ export var ended = function () {
         .attr('cy', y);
     var id = $(this).attr('id');
     saveLocation(id, x, y);
-    conf.svg.selectAll("#n" + id).remove();
+    // conf.svg.selectAll("#n" + id).remove();
 }
 
 export var createPoint = function () {
@@ -64,10 +55,24 @@ export var createPoint = function () {
         .attr("fill", "blue")
         .attr("cx", x)
         .attr("cy", y)
-        .attr("r", 5)
+        .attr("r", 5);
     dragPoint();
     updatePoint();
     saveLocation(id, x, y);
+    conf.textHome.append("text")
+        .attr("id", function () {
+            return "t" + id;
+        }).attr("x", function (d) {
+            return x + 7;
+        })
+        .attr("y", function (d) {
+            return y - 7;
+        }).attr("stroke", "black")
+        .attr("font-size", "15px")
+        .attr("font-family", "sans-serif")
+        .text(function (d) {
+            return id;
+        })
 }
 
 var getID = function () {
