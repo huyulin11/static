@@ -41,11 +41,13 @@ export var endedPath = function (id) {
         .attr("d", function () {
             return dToStrig(x1, x2, y1, y2);
         })
+        .attr("style", "marker-end:url(#triangle);");
     d3.select("#w" + $(this).attr("id"))
         .attr("d", function () {
             return dToStrig(x1, x2, y1, y2);
         })
     var side = getSide(x1, x2, y1, y2);
+    
     saveLogic(side, siteid, nextid, oldnext);
     setTimeout(renderSvg, 3000);
 }
@@ -86,11 +88,14 @@ var saveLogic = function (side, siteid, nextid, oldnext) {
         "TaskSiteLogicFormMap.side": side,
         "TaskSiteLogicFormMap.distance": 1,
     }
-    gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
-        if (data.code > 0 && oldnext) {
-            var result = { "siteid": siteid, "nextid": oldnext };
-            deleteLogic(result, true);
-            updatetaskSiteLogic(siteid, oldnext, json);
-        } else layer.msg('调整失败，与原路径相同');
-    });
+    if (nextid != oldnext) {
+        gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
+            if (data.code > 0 && oldnext) {
+                var result = { "siteid": siteid, "nextid": oldnext };
+                deleteLogic(result, true);
+                updatetaskSiteLogic(siteid, oldnext, json);
+            };
+        });
+    } else layer.msg('调整失败，与原路径相同');
+
 };
