@@ -77,9 +77,9 @@ export var updatePoint = function () {
                     createPath(id, x, y);
                     conf.svg.selectAll(".post").call(
                         d3.drag()
-                            .on('start.a', startedPath)
-                            .on('drag.a', dragedPath)
-                            .on('end.a', endedPath)
+                            .on('start', startedPath)
+                            .on('drag', dragedPath)
+                            .on('end', endedPath)
                     );
                 });
                 d3.select("#btn3").on("click", function () {

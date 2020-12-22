@@ -12,13 +12,14 @@ export var updateID = function (circle, id1, x, y) {
                 }
             }
             var result = windowToDB(id2, x, y);
+            d3.select("#t" + id1).attr("id", "#t" + id2).text(id2);
             gf.doAjax({
                 url: `/app/location/update.shtml`, type: "POST",
                 data: { table: "TASK_SITE_LOCATION", key1: id1, key2: id2, value: JSON.stringify(result) },
                 success: (obj) => {
                     updateTaskSiteLocation(id1, result);
                     layer.msg(obj.msg ? obj.msg : '保存成功！');
-                    circle.attr("id",id2);
+                    circle.attr("id", id2);
                 }
             });
         }

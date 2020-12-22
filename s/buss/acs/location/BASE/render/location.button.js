@@ -4,16 +4,16 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 
 var flag = false;
 export let tempBtns = [{
-    id: "show", name: "显示", class: "btn-show",
+    id: "show", name: "隐藏", class: "btn-show",
     bind: function () {
         flag = !flag;
         if (flag) {
-            show();
-            d3.select(".doc-buttons").select("#show").text("隐藏");
+            hide();
+            d3.select(".doc-buttons").select("#show").text("显示");
             return !flag;
-        }
-        hide();
-        d3.select(".doc-buttons").select("#show").text("显示");
+        };
+        show();
+        d3.select(".doc-buttons").select("#show").text("隐藏");
         return !flag;
     }
 }];
@@ -22,7 +22,7 @@ var hide = function () {
     conf.svg.selectAll("text").remove();
 }
 
-var show = function () {
+export var show = function () {
     datas.init()
     conf.textHome.selectAll("text")
         .data(datas.lastTaskPath.concat(datas.udfPoints))
@@ -31,10 +31,10 @@ var show = function () {
             return id;
         })
         .attr("x", function (d) {
-            return conf.padding.left + conf.xScale(d[1]);
+            return conf.padding.left + conf.xScale(d[1]) + 7;
         })
         .attr("y", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
+            return conf.height - conf.padding.bottom - conf.yScale(d[2]) - 7;
         })
         .attr("stroke", "black")
         .attr("font-size", "15px")
@@ -49,10 +49,10 @@ var show = function () {
             return id;
         })
         .attr("x", function (d) {
-            return conf.padding.left + conf.xScale(d[1]);
+            return conf.padding.left + conf.xScale(d[1]) + 7;
         })
         .attr("y", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
+            return conf.height - conf.padding.bottom - conf.yScale(d[2]) - 7;
         })
         .attr("stroke", "black")
         .attr("font-size", "15px")
