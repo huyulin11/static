@@ -1,4 +1,7 @@
 import { gv } from "/s/buss/g/j/g.v.js";
+import { globalCss } from "/s/buss/g/j/g.css.js";
+
+globalCss();
 
 var defaultSucFun = function (data) {
     if (typeof data == "string") data = JSON.parse(data);

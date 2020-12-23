@@ -301,7 +301,7 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .btn-dark {
-	color: #fff !important;
+	color: #fff;
 	background-color: #2e3e4e;
 }
 
@@ -334,5 +334,43 @@ fieldset[disabled] .btn-dark:hover,
 fieldset[disabled] .btn-dark:focus,
 fieldset[disabled] .btn-dark:active,
 fieldset[disabled] .btn-dark.active {
+	background-color: gray;
+}
+
+
+.btn-grey {
+	color: #fff;
+	background-color: #8596a7;
+}
+
+.btn-grey:hover,
+.btn-grey:focus,
+.btn-grey:active,
+.btn-grey.active,
+.open .dropdown-toggle.btn-grey {
+	color: #333;
+}
+
+.btn-grey:active,
+.btn-grey.active,
+.open .dropdown-toggle.btn-grey {
+	background-image: none;
+}
+
+.btn-grey.disabled,
+.btn-grey.disabled:hover,
+.btn-grey.disabled:focus,
+.btn-grey.disabled:active,
+.btn-grey.disabled.active,
+.btn-grey[disabled],
+.btn-grey[disabled]:hover,
+.btn-grey[disabled]:focus,
+.btn-grey[disabled]:active,
+.btn-grey[disabled].active,
+fieldset[disabled] .btn-grey,
+fieldset[disabled] .btn-grey:hover,
+fieldset[disabled] .btn-grey:focus,
+fieldset[disabled] .btn-grey:active,
+fieldset[disabled] .btn-grey.active {
 	background-color: gray;
 }

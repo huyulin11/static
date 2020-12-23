@@ -3,7 +3,6 @@ import "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/g.p.js";
-import "/s/buss/g/j/g.css.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 gf.checkLoginError();
