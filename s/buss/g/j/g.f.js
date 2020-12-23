@@ -1,4 +1,7 @@
 import { gv } from "/s/buss/g/j/g.v.js";
+import { globalCss } from "/s/buss/g/j/g.css.js";
+
+globalCss();
 
 var defaultSucFun = function (data) {
     if (typeof data == "string") data = JSON.parse(data);
@@ -451,14 +454,14 @@ class GF {
             area: gf.layerArea(),
             shadeClose: true,
         });
-        layer.open(conf);
+        return layer.open(conf);
     };
     layerOpenSmall(conf) {
         Object.assign(conf, {
             area: gf.layerAreaSmall(),
             shadeClose: true,
         });
-        layer.open(conf);
+        return layer.open(conf);
     };
     layerArea() {
         if (gf.isPc()) { return ["95%", "90%"]; }

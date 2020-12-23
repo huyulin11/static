@@ -7,24 +7,6 @@ import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 
-let taskReady = () => {
-	let taskContainer = $(`<div id="taskContainer" class="fixed"></div>`);
-	$(taskContainer).append("<iframe id='taskFrame'></iframe>");
-	let url = "/s/buss/sys/conf/h/agv.cache.html";
-	$(taskContainer).css("height", "50%").css("width", "80%");
-	$(taskContainer).find("iframe#taskFrame").css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
-	$("body").append(taskContainer);
-}
-
-let loginMiniReady = () => {
-	let loginContainer = $(`<div id="loginContainer" class="fixed"></div>`);
-	$(loginContainer).append("<iframe id='LOGIN'></iframe>");
-	let url = "/s/buss/g/h/loginSuccess.html";
-	$(loginContainer).css("height", "450px").css("width", "300px");
-	$(loginContainer).find("iframe#LOGIN").css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
-	$("body").append(loginContainer);
-}
-
 let renderAllModels = () => {
 	let confs = [];
 	if (localStorage.projectKey != 'LAO_FOXCONN') {
@@ -37,7 +19,10 @@ let renderAllModels = () => {
 			{ key: 'lift', target: 'div#liftContainer' },
 			{ key: 'door', target: 'div#autodoorContainer' },
 			{ key: 'msg', target: 'div#msgContainer' },
-			{ init: loginMiniReady, key: 'login', target: 'div#loginContainer' }
+			{
+				key: 'login', url: "/s/buss/g/h/loginSuccess.html", init: true,
+				height: "450px", width: "300px", target: 'div#loginContainer'
+			}
 		);
 	} else if (localStorage.projectKey == 'TAIKAI_JY') {
 		confs.push({ key: 'msg', target: 'div#msgContainer' });
@@ -50,8 +35,10 @@ let renderAllModels = () => {
 			{ key: 'msg', target: 'div#msgContainer' }
 		);
 	} else if (localStorage.projectKey == 'CSY_CDBP') {
-		confs.push({ init: taskReady, key: 'task', target: 'div#taskContainer' });
-		confs.push({ key: 'msg', target: 'div#msgContainer' });
+		confs.push({
+			url: "/s/buss/sys/conf/h/agv.cache.html", init: true,
+			height: "50%", width: "80%", key: 'task', target: 'div#taskContainer'
+		}, { key: 'msg', target: 'div#msgContainer' });
 	} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
 		confs.push({ key: 'msg', target: 'div#msgContainer' });
 	} else if (localStorage.projectKey == 'YZBD_NRDW') {
@@ -68,8 +55,13 @@ let renderAllModels = () => {
 			{ key: 'PDA', target: 'div#PDAContainer' },
 			{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
 	} else if (localStorage.projectKey == 'YZBD_QSKJ') {
-		confs.push({ init: taskReady, key: 'task', target: 'div#taskContainer' },
-			{ init: loginMiniReady, key: 'login', target: 'div#loginContainer' });
+		confs.push({
+			url: "/s/buss/sys/conf/h/agv.cache.html", init: true,
+			height: "50%", width: "80%", key: 'task', target: 'div#taskContainer'
+		}, {
+			key: 'login', url: "/s/buss/g/h/loginSuccess.html", init: true,
+			height: "450px", width: "300px", target: 'div#loginContainer'
+		});
 	} else if (localStorage.projectKey == 'QDTY_SELF') {
 		confs.push({ key: 'msg', target: 'div#msgContainer' });
 	}

@@ -18,16 +18,16 @@ export let renderModel = (confs) => {
     }
 }
 
-let initReady = (key, url) => {
+let initReady = (key, url, width, height) => {
     let container = $(`<div id="${key}Container" class="fixed"></div>`);
     $(container).append(`<iframe id='${key}Frame'></iframe>`);
-    $(container).css("height", "50%").css("width", "80%");
+    $(container).css("height", height || "50%").css("width", width || "80%");
     $(container).find(`iframe#${key}Frame`).css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
     $("body").append(container);
 }
 
 let doRenderModel = (conf) => {
-    let { init, key, target, click, url, self, type } = conf;
+    let { init, key, target, click, url, self, type, width, height } = conf;
     if (type === 'LINK') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
         $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
@@ -40,7 +40,7 @@ let doRenderModel = (conf) => {
         if (init instanceof Function) {
             init();
         } else {
-            initReady(key, url);
+            initReady(key, url, width, height);
         }
     }
     let style = $(`<style id='${key}HideDiv_style'></style>`);

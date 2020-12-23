@@ -73,10 +73,10 @@ var loadPage = function (tip) {
         let a = $(`<a>${$(this).data("tip")}</a>`);
         $(a).data("seq", $(this).data("seq"));
         if (!$(this).hasClass("hidden"))
-            $(a).addClass("orange");
+            $(a).addClass("choosed");
         $(a).on("click", function () {
-            $("#topli").find("a").removeClass("orange");
-            $(this).addClass("orange");
+            $("#topli").find("a").removeClass("choosed");
+            $(this).addClass("choosed");
             let seq = $(this).data("seq");
             $(_container).find("iframe.loadhtml").each(function () {
                 if ($(this).data("seq") == seq) {

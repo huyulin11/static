@@ -2,6 +2,12 @@ html {
 	background-color: inherit;
 }
 
+body {
+	margin: 0;
+	/* background-color: #fff; */
+	color: #333;
+}
+
 .hidden {
 	display: none;
 }
@@ -91,7 +97,7 @@ select {
 	position: fixed;
 	right: 10px;
 	top: 10px;
-	background: white;
+	background: #ffffffb3;
 	border-radius: 10px;
 }
 

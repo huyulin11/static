@@ -121,6 +121,7 @@
 	padding: 0px 5px;
 	max-width: 1200px;
 	margin: 0 auto;
+	/* float: right; */
 }
 
 .panel {
@@ -138,4 +139,42 @@
 	float: left;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+.breadcrumb {
+	/*padding: 8px 15px;*/
+	margin-bottom: 20px;
+	list-style: none;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+}
+
+.breadcrumb>li {
+	display: inline-block;
+}
+
+.breadcrumb>li+li:before {
+	padding: 0 5px;
+	color: #ccc;
+	content: "|";
+}
+
+.breadcrumb>.active {
+	color: #777;
+}
+
+.breadcrumb {
+	background-color: #fff;
+	border: 1px solid #e8e8e8;
+	padding-left: 10px;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.breadcrumb a {
+	color: #bacad8;
+}
+
+.breadcrumb a.choosed {
+	color: #2e72ab;
 }

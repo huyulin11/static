@@ -1,19 +1,17 @@
-/* @import "compass";*/
-
-/* ---------- Base styles ---------- */
-/* ---------- Base styles ---------- */
-body {
-  background: #ffffff6b;
-  /* font-size: 11px; */
+a {
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
   }
 
-a {
-  color: #5B677D;
-  text-decoration: none; }
-
-a:hover {
+a:hover, a:focus{
   color: #06C;
-  text-decoration: none; }
+  text-decoration: underline;
+}
+
+a:active, a:hover {
+	outline: 0;
+}
 
 hr, .separator {
   border-color: #BFBFBF transparent #FFF;
