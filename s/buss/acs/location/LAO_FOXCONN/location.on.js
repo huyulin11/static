@@ -26,13 +26,14 @@ var rightClickPath = function () {
                 var path = d3.select(this);
                 var siteid = $(this).attr('from'), nextid = $(this).attr('to');
                 var value = { "siteid": siteid, "nextid": nextid };
-                layer.confirm('是否删除？', {
+                let ii = layer.confirm('是否删除？', {
                     btn: ['是', '否']
                 }, function (index) {
                     if (siteid && nextid) {
                         deleteLogic(value, true);
                     }
                     path.remove();
+                    layer.close(ii);
                 });
             }
         });
