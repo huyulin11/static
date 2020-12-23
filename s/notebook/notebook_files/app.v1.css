@@ -15,7 +15,7 @@ body {
 	background-color: #fff;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
-	color: #2e72ab;
+	color: #333;
 	background-color: transparent;
 	-webkit-font-smoothing: antialiased;
 }
@@ -60,16 +60,6 @@ audio:not ([controls]) {
 [hidden],
 template {
 	display: none;
-}
-
-a {
-	background: transparent;
-	cursor: pointer;
-}
-
-a:active,
-a:hover {
-	outline: 0;
 }
 
 abbr[title] {
@@ -1173,23 +1163,6 @@ textarea {
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
-}
-
-a {
-	color: #428bca;
-	text-decoration: none;
-}
-
-a:hover,
-a:focus {
-	color: #2a6496;
-	text-decoration: underline;
-}
-
-a:focus {
-	outline: thin dotted;
-	outline: 5px auto -webkit-focus-ring-color;
-	outline-offset: -2px;
 }
 
 figure {
@@ -10176,17 +10149,6 @@ button.close {
 .h5,
 .h6 {
 	margin: 0;
-}
-
-a {
-	/* color: #2e3e4e; */
-	text-decoration: none;
-}
-
-a:hover,
-a:focus {
-	color: #4a647e;
-	text-decoration: none;
 }
 
 .badge {
