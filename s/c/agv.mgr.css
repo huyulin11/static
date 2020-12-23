@@ -144,6 +144,7 @@ input.bigSearch {
 	width: auto;
 	box-shadow: grey 10px 10px 30px 5px;
 	z-index: 1;
+	border-radius: 10px;
 }
 
 #agvDiv.big {
