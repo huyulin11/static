@@ -2,7 +2,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 
 let confs = [];
-confs.push({ init: true, url: "/s/buss/agv/site/cache/cache.html", key: 'cache', target: 'div#cacheContainer' });
+confs.push({ init: true, url: "/s/buss/agv/site/cache/h/site.cache.html", key: 'cache', target: 'div#cacheContainer', height: "70%" });
 renderModel(confs);
 
 var keyNum = 1;
