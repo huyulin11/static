@@ -454,14 +454,14 @@ class GF {
             area: gf.layerArea(),
             shadeClose: true,
         });
-        layer.open(conf);
+        return layer.open(conf);
     };
     layerOpenSmall(conf) {
         Object.assign(conf, {
             area: gf.layerAreaSmall(),
             shadeClose: true,
         });
-        layer.open(conf);
+        return layer.open(conf);
     };
     layerArea() {
         if (gf.isPc()) { return ["95%", "90%"]; }

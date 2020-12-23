@@ -9,8 +9,8 @@
         $("head").append("<style id='associating-input'></style>");
         $("style#associating-input").html(
             `div.associating-input-container {height: auto;box-shadow: grey 10px 10px 30px 5px; position: fixed;display: none;background: #fff;}
-            div.associating-input-container a {font-size: 12px;}
-            div.associating-input-container a:hover div {font-size: 13px;background-color: #FFF;}`);
+            div.associating-input-container a {font-size: 14px;line-height:25px;}
+            div.associating-input-container a:hover div {font-size: 13px;background-color: #2e72ab;color:#FFF;cursor:point;}`);
         $("body").append(`<div id='${_div_id}' class='associating-input-container'></div>`);
 
         $("html").on("click", _dataarea, function (e) {
