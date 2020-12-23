@@ -15,7 +15,6 @@ body {
 	background-color: #fff;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
-	color: #333;
 	background-color: transparent;
 	-webkit-font-smoothing: antialiased;
 }
@@ -5454,7 +5453,7 @@ a.thumbnail.active {
 }
 
 .alert-warning {
-	color: #8a6d3b;
+	/* color: #8a6d3b; */
 	/* border-color: #faebcc; */
 }
 
