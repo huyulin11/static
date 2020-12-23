@@ -118,7 +118,7 @@ var rectPath = function (tempYfc) {
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
         .attr("stroke-width", "6.5px")
-        // .attr("style", "marker-mid:url(#triangle);");
+        .attr("style", "marker-end:url(#triangle);");
 
     var path2 = conf.pathHome2.selectAll("path").data(tempYfc)
         .enter()
@@ -394,29 +394,7 @@ var render = function (tempdata) {
 }
 
 export var markerDef = function () {
-    var defs = conf.defsHome;
-    datas.point.forEach((e, i) => {
-        var path = defs.append('path')
-            .attr("id", "animat" + e.id)
-            .attr("d", "M -20 -8 L0 0 L -20 8 z")
-            .attr("fill", "#8a8a8a");
-        path.append('animateMotion')
-            .attr('path', function () {
-                var result1 = dbToWindow(e.leftXaxis, e.downYaxis);
-                var result2 = dbToWindow(e.rightXaxis, e.upYaxis);
-                return dToStrig(result1[0], result2[0], result1[1], result2[1]);
-            })
-            .attr('begin', '0s')
-            .attr('dur', function () {
-                var result1 = dbToWindow(e.leftXaxis, e.downYaxis);
-                var result2 = dbToWindow(e.rightXaxis, e.upYaxis);
-                var s = (result1[0] - result2[0]) * (result1[0] - result2[0]) + (result1[1] + result2[1]) * (result1[1] + result2[1]);
-                return s / 100000 + "s";
-            })
-            .attr("rotate", "auto")
-            .attr('repeatCount', 'indefinite');
-
-    })
+    var defs = conf.defsHome.append("defs");
     var marker1 = defs.append("marker")
         .attr("id", "triangle")
         .attr("markerUnits", "strokeWidth")
