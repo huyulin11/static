@@ -181,12 +181,12 @@ if (localStorage.isTest) {
 }
 
 let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
-$("#searchForm").find("div.search-group").html(
+$("#searchForm").find("div.doc-buttons").html(
 	`<label>
 		<span>产线:</span>
 		<input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
 	</label>`
 );
-$("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
+$("#searchForm").find("div.doc-buttons").append(searchHtml).parents("form").show();
 
 gfbtn.bindByRes("div.doc-buttons", tempBtns);
