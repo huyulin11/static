@@ -30,7 +30,7 @@ let doSearch = function () {
 }
 
 export let tempBtns = [{
-    id: "refresh", name: "刷新", class: "btn-info",
+    id: "refresh", name: "刷新", class: "btn-default",
     bind: function () {
         window.datagrid.loadData();
     }

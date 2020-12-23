@@ -6,12 +6,12 @@ import { getInput } from "/s/buss/g/j/g.input.render.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 
 let tempBtns = [{
-	id: "refresh", name: "刷新", class: "btn-info",
+	id: "refresh", name: "刷新", class: "btn-default",
 	bind: function () {
 		window.datagrid.loadData();
 	}
 }, {
-	id: "back", name: "返回", class: "btn-info",
+	id: "back", name: "返回", class: "btn-default",
 	bind: function () {
 		window.history.back();
 	}

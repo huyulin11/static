@@ -129,7 +129,7 @@ let doSearch = function () {
 }
 
 let tempBtns = [{
-	id: "refresh", name: "刷新", class: "btn-info",
+	id: "refresh", name: "刷新", class: "btn-default",
 	bind: function () {
 		window.datagrid.loadData();
 	}
@@ -146,7 +146,7 @@ let tempBtns = [{
 		layer.confirm(`是否确定撤销托盘${cbox}？`, function (index) { work(index); });
 	},
 }, {
-	id: "back", name: "返回", class: "btn-info",
+	id: "back", name: "返回", class: "btn-default",
 	bind: function () {
 		window.history.back();
 	}

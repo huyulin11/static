@@ -76,7 +76,7 @@ var initBtns = function () {
             paperOp.doDeleteSure(this);
         },
     }; btns.refresh = {
-        id: "refresh", name: "刷新", class: "btn-info",
+        id: "refresh", name: "刷新", class: "btn-default",
         bind: function () {
             window.datagrid.loadData();
         },
@@ -176,7 +176,7 @@ var initBtns = function () {
             paperOp.pickOne(this);
         },
     }; btns.back = {
-        id: "back", name: "返回", class: "btn-info",
+        id: "back", name: "返回", class: "btn-default",
         bind: function () {
             window.history.back();
         },
