@@ -1,8 +1,23 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
+import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
 
 let confs = [];
 confs.push({ init: true, url: "/s/buss/agv/site/cache/cache.html", key: 'cache', target: 'div#cacheContainer' });
+confs.push({
+    key: 'id', click: function () {
+        let flag = $(this).hasClass("close");
+        if (flag) {
+            $(this).removeClass("close").addClass("open");
+            hide();
+            d3.select(".doc-buttons").select("#show").text("显示");
+        } else {
+            $(this).removeClass("open").addClass("close");
+            show();
+            d3.select(".doc-buttons").select("#show").text("隐藏");
+        }
+    }
+});
 renderModel(confs);
 
 var keyNum = 1;

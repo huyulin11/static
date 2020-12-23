@@ -18,7 +18,7 @@ export let tempBtns = [{
     }
 }];
 
-var hide = function () {
+export var hide = function () {
     conf.svg.selectAll("text").remove();
 }
 
