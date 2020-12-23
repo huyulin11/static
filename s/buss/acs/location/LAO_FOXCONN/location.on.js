@@ -81,6 +81,7 @@ export var updatePoint = function () {
                 d3.select("#btn3").on("click", function () {
                     deleteLocation(id);
                     datas.init();
+                    d3.select("#t" + id).remove();
                     conf.svg.selectAll("circle").filter(function (e) { return e && e[0] == id; }).remove();
                     conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; }).remove();
                     conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; }).remove();
