@@ -8,13 +8,6 @@ export var createPath = function (id, x, y) {
     }
 }
 
-export var removePath = function (x1, y1, x2, y2) {
-    var distance = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
-    if (distance > 100) {
-        d3.selectAll(".post").remove();
-    };
-}
-
 var newPath = function (num, x, y, id) {
     var paths = conf.svg.append("path")
         .attr("from", id)
