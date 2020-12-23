@@ -23,21 +23,15 @@ var rightClickPath = function () {
         .on("contextmenu", function (d, i) {
             d3.event.preventDefault();
             if (d3.event.button == 2) {
-                var id = $(this).attr('id');
-                var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="删除路径">',
-                    '#' + id,
-                    {
-                        tips: [2, '#e6e6e6'],
-                        time: 10000
-                    });
-                d3.select("body").on("click", function () {
-                    return layer.close(tips);
-                });
                 var path = d3.select(this);
                 var siteid = $(this).attr('from'), nextid = $(this).attr('to');
-                d3.select("#btn1").on("click", function () {
-                    var value = { "siteid": siteid, "nextid": nextid };
-                    deleteLogic(value,true);
+                var value = { "siteid": siteid, "nextid": nextid };
+                layer.confirm('是否删除？', {
+                    btn: ['是', '否']
+                }, function (index) {
+                    if (siteid && nextid) {
+                        deleteLogic(value, true);
+                    }
                     path.remove();
                 });
             }
@@ -81,6 +75,7 @@ export var updatePoint = function () {
                             .on('drag', dragedPath)
                             .on('end', endedPath)
                     );
+                    rightClickPath();
                 });
                 d3.select("#btn3").on("click", function () {
                     deleteLocation(id);

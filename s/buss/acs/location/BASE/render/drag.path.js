@@ -4,7 +4,6 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
 
 
 export var startedPath = function () {
@@ -25,7 +24,7 @@ export var dragedPath = function () {
             return dToStrig(mPoint[0], x, mPoint[1], y);
         })
 }
-export var endedPath = function (id) {
+export var endedPath = function () {
     var siteid = $(this).attr("from");
     var oldnext = $(this).attr("to");
     let s = $(this).attr("d");
@@ -35,21 +34,32 @@ export var endedPath = function (id) {
     var arr = getMPoint(s);
     var x1 = arr[0], y1 = arr[1];
     var x2 = point.x2, y2 = point.y2;
-    d3.select(this)
-        .attr("from", siteid)
-        .attr("to", nextid)
-        .attr("d", function () {
-            return dToStrig(x1, x2, y1, y2);
-        })
-        .attr("style", "marker-end:url(#triangle);");
-    d3.select("#w" + $(this).attr("id"))
-        .attr("d", function () {
-            return dToStrig(x1, x2, y1, y2);
-        })
+    var flag = $("#p" + siteid + nextid)[0];
     var side = getSide(x1, x2, y1, y2);
-    
-    saveLogic(side, siteid, nextid, oldnext);
-    setTimeout(renderSvg, 3000);
+    if (!flag) {
+        saveLogic(side, siteid, nextid, oldnext);
+        d3.select(this)
+            .attr("id", "p" + siteid + nextid)
+            .attr("from", siteid)
+            .attr("to", nextid)
+            .attr("d", function () {
+                return dToStrig(x1, x2, y1, y2);
+            })
+            .attr("style", "marker-end:url(#triangle);");
+        d3.select("#w" + $(this).attr("id"))
+            .attr("d", function () {
+                return dToStrig(x1, x2, y1, y2);
+            })
+    } else {
+        layer.msg('调整失败，与原路径相同');
+        if (oldnext) {
+            var xOld = $('#' + oldnext).attr('cx');
+            var yOld = $('#' + oldnext).attr('cy');
+            d3.select(this).attr('d', function () {
+                return dToStrig(x1, xOld, y1, yOld);
+            })
+        } else d3.select(this).remove();
+    }
 }
 
 export var deleteLogic = function (value, bool) {
@@ -88,14 +98,14 @@ var saveLogic = function (side, siteid, nextid, oldnext) {
         "TaskSiteLogicFormMap.side": side,
         "TaskSiteLogicFormMap.distance": 1,
     }
-    if (nextid != oldnext) {
-        gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
-            if (data.code > 0 && oldnext) {
-                var result = { "siteid": siteid, "nextid": oldnext };
-                deleteLogic(result, true);
-                updatetaskSiteLogic(siteid, oldnext, json);
-            };
-        });
-    } else layer.msg('调整失败，与原路径相同');
+    // if (nextid != oldnext) {
+    gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
+        if (data.code > 0 && oldnext) {
+            var result = { "siteid": siteid, "nextid": oldnext };
+            deleteLogic(result, true);
+            updatetaskSiteLogic(siteid, oldnext, json);
+        };
+    });
+    // } else layer.msg('调整失败，与原路径相同');
 
 };

@@ -101,7 +101,7 @@ var rectPath = function (tempYfc) {
         .enter()
         .append("path")
         .attr("id", function (d) {
-            return d.id;
+            return 'p' + d.id;
         })
         .attr("from", function (d) {
             return d.from;
