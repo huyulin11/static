@@ -335,15 +335,16 @@ form#searchForm label {
 
 div.doc-foot,
 div.doc-buttons {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   /* left: 100px; */
   top: 0px;
+  right: 0;
   background: #ffffff59;
   /* padding: 5 5 5 5; */
   margin: 0 auto;
   /* max-width: 1200px; */
-  /* text-align: right; */
+  text-align: right;
   /* float: right; */
 }
 
