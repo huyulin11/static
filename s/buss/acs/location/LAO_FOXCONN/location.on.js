@@ -2,10 +2,10 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { started, draged, ended, createPoint } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
 import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
 import { createPath } from "/s/buss/acs/location/BASE/render/add.path.js";
-import { dragedPath, endedPath, startedPath, deleteLogic } from "/s/buss/acs/location/BASE/render/drag.path.js";
+import { dragedPath, endedPath, startedPath} from "/s/buss/acs/location/BASE/render/drag.path.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { deleteLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
-
+import { deleteLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 
 export var move = function () {
 

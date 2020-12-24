@@ -60,15 +60,19 @@ var dataLlogic = function (data) {
 export var dataLocation = function (data) {
     for (var index of data) {
         var val;
-        if (index.json) {
-            val = JSON.parse(index.json);
+        if (index.location) {
+            val = JSON.parse(index.location);
         } else val = index;
         datas.udfPoints.push([val.id, val.x, val.y]);
         datas.locations.push({ "id": val.id, "x": val.x, "y": val.y });
         datas.id.push({ "id": val.id });
         for (var value of datasLogic) {
             if (val.id === value.siteid) {
-                for (var next of data) {
+                for (var index2 of data) {
+                    var next;
+                    if (index2.location) {
+                        next = JSON.parse(index2.location);
+                    } else next = index2;
                     if (value.nextid === next.id) {
                         datas.point.push({
                             "id": val.id + "" + next.id,

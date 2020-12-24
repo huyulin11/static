@@ -4,6 +4,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
+import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 
 
 export var startedPath = function () {
@@ -62,17 +63,6 @@ export var endedPath = function () {
     }
 }
 
-export var deleteLogic = function (value, bool) {
-    gf.doAjax({
-        url: `/tasksitelogic/deleteEntity.shtml`, type: "POST",
-        dataType: "JSON", data: value,
-        success: (obj) => {
-            updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
-            if (obj.msg) layer.msg(obj.msg);
-        }
-    });
-};
-
 export var getSide = function (x1, x2, y1, y2) {
     var side;
     if (x1 < x2) {
@@ -91,18 +81,3 @@ export var getSide = function (x1, x2, y1, y2) {
     return side;
 };
 
-var saveLogic = function (side, siteid, nextid, oldnext) {
-    var json = {
-        "TaskSiteLogicFormMap.siteid": siteid,
-        "TaskSiteLogicFormMap.nextid": nextid,
-        "TaskSiteLogicFormMap.side": side,
-        "TaskSiteLogicFormMap.distance": 1,
-    }
-    gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
-        if (data.code > 0 && oldnext) {
-            var result = { "siteid": siteid, "nextid": oldnext };
-            deleteLogic(result, true);
-            updatetaskSiteLogic(siteid, oldnext, json);
-        };
-    });
-};
