@@ -37,7 +37,7 @@ export var taskSiteLocation = function (callback) {
         return;
     }
     $.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/sites/taskSiteLocation.json",
+        url: "/s/jsons/" + localStorage.projectKey + "/sites.json",
         type: "get",
         async: false,
         cache: false,

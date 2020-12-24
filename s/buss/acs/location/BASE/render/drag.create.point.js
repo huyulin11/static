@@ -6,6 +6,7 @@ import { windowToDB, dbToWindow } from "/s/buss/acs/location/BASE/render/trans.l
 import { updatePoint, dragPoint, addPoint } from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
 import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
+import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
 
 export var started = function () {
 }
@@ -43,7 +44,7 @@ export var ended = function () {
         .attr('cx', x)
         .attr('cy', y);
     var id = $(this).attr('id');
-    saveLocation(id, x, y);
+    moveLocation(id, x, y);
     // conf.svg.selectAll("#n" + id).remove();
 }
 
@@ -58,7 +59,7 @@ export var createPoint = function () {
         .attr("r", 5);
     dragPoint();
     updatePoint();
-    saveLocation(id, x, y);
+    addLocation(id, x, y);
     conf.textHome.append("text")
         .attr("id", function () {
             return "t" + id;
@@ -90,28 +91,4 @@ var getID = function () {
         }
     }
     return id;
-}
-export var saveLocation = function (id, x, y) {
-    var ids = parseInt(id);
-    var result = windowToDB(id, x, y);
-    gf.doAjax({
-        url: `/app/conf/set.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: ids, value: JSON.stringify(result) },
-        success: (obj) => {
-            updateTaskSiteLocation(id, result);
-            if (obj.msg) layer.msg(obj.msg);
-        }
-    });
-}
-
-export var deleteLocation = function (id) {
-    var ids = parseInt(id);
-    gf.doAjax({
-        url: `/app/conf/del.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: ids },
-        success: (obj) => {
-            updateTaskSiteLocation(id, "", true);
-            if (obj.msg) layer.msg(obj.msg);
-        }
-    });
 }

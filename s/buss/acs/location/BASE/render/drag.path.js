@@ -98,7 +98,6 @@ var saveLogic = function (side, siteid, nextid, oldnext) {
         "TaskSiteLogicFormMap.side": side,
         "TaskSiteLogicFormMap.distance": 1,
     }
-    // if (nextid != oldnext) {
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
         if (data.code > 0 && oldnext) {
             var result = { "siteid": siteid, "nextid": oldnext };
@@ -106,6 +105,4 @@ var saveLogic = function (side, siteid, nextid, oldnext) {
             updatetaskSiteLogic(siteid, oldnext, json);
         };
     });
-    // } else layer.msg('调整失败，与原路径相同');
-
 };

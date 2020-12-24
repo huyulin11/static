@@ -58,7 +58,11 @@ var dataLlogic = function (data) {
 }
 
 export var dataLocation = function (data) {
-    for (var val of data) {
+    for (var index of data) {
+        var val;
+        if (index.json) {
+            val = JSON.parse(index.json);
+        } else val = index;
         datas.udfPoints.push([val.id, val.x, val.y]);
         datas.locations.push({ "id": val.id, "x": val.x, "y": val.y });
         datas.id.push({ "id": val.id });
