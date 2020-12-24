@@ -8,40 +8,19 @@
 <script type="module" src="/s/buss/agv/site/info/j/list.js"></script>
 <header class="panel-heading">
     <form class="form-inline" role="form" id="searchForm" name="searchForm">
-        <div class="form-group">
-            <table>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">站点名称:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <input class="input-medium ui-autocomplete-input" id="occurdate"
-                            name="taskSiteFormMap.sitename">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">
-                            <span class="font-thin v-middle">站点编码:</span>
-                        </label>
-                    </td>
-                    <td>
-                        <input class="input-medium ui-autocomplete-input" id="species" name="taskSiteFormMap.sitecode">
-                    </td>
-                    <td>
-                        <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
-                    </td>
-                </tr>
-            </table>
+        <div class="doc-buttons">
+            <label class="control-label">
+                <span class="font-thin v-middle">站点名称:</span>
+            </label>
+            <input class="input-medium ui-autocomplete-input" id="occurdate" name="taskSiteFormMap.sitename">
+            <label class="control-label">
+                <span class="font-thin v-middle">站点编码:</span>
+            </label>
+            <input class="input-medium ui-autocomplete-input" id="species" name="taskSiteFormMap.sitecode">
+            <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
         </div>
     </form>
 </header>
-<div class="doc-buttons">
-    <!-- <button type="button" id="add" class="btn btn-primary marR10">新增</button>
-            <button type="button" id="del" class="btn btn-danger marR10">删除</button> -->
-</div>
 <div class="table-responsive">
     <div id="paging" class="pagclass"></div>
 </div>

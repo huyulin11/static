@@ -129,7 +129,7 @@ let doSearch = function () {
 }
 
 let tempBtns = [{
-	id: "refresh", name: "刷新", class: "btn-info",
+	id: "refresh", name: "刷新", class: "btn-default",
 	bind: function () {
 		window.datagrid.loadData();
 	}
@@ -146,7 +146,7 @@ let tempBtns = [{
 		layer.confirm(`是否确定撤销托盘${cbox}？`, function (index) { work(index); });
 	},
 }, {
-	id: "back", name: "返回", class: "btn-info",
+	id: "back", name: "返回", class: "btn-default",
 	bind: function () {
 		window.history.back();
 	}
@@ -181,12 +181,12 @@ if (localStorage.isTest) {
 }
 
 let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
-$("#searchForm").find("div.search-group").html(
+$("#searchForm").find("div.doc-buttons").html(
 	`<label>
 		<span>产线:</span>
 		<input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
 	</label>`
 );
-$("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
+$("#searchForm").find("div.doc-buttons").append(searchHtml).parents("form").show();
 
 gfbtn.bindByRes("div.doc-buttons", tempBtns);

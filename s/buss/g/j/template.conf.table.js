@@ -30,7 +30,7 @@ let doSearch = function () {
 }
 
 export let tempBtns = [{
-    id: "refresh", name: "刷新", class: "btn-info",
+    id: "refresh", name: "刷新", class: "btn-default",
     bind: function () {
         window.datagrid.loadData();
     }
@@ -48,8 +48,8 @@ export var initConfList = function (table, params, searchHtml) {
     });
     if (_searchHtml) {
         let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
-        $("#searchForm").find("div.search-group").html(_searchHtml);
-        $("#searchForm").find("div.search-group").append(searchHtml).parents("form").show();
+        $("#searchForm").find("div.doc-buttons").append(_searchHtml);
+        $("#searchForm").find("div.doc-buttons").append(searchHtml).parents("form").show();
     }
     gfbtn.bindByRes("div.doc-buttons", tempBtns);
     doSearch();

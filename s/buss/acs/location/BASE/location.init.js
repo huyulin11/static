@@ -3,7 +3,7 @@ import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
 
 let confs = [];
-confs.push({ init: true, url: "/s/buss/agv/site/cache/cache.html", key: 'cache', target: 'div#cacheContainer' });
+confs.push({ init: true, url: "/s/buss/agv/site/cache/h/site.cache.html", key: 'cache', target: 'div#cacheContainer', height: "70%" });
 confs.push({
     key: 'id', click: function () {
         let flag = $(this).hasClass("close");

@@ -13,19 +13,6 @@ let _type = gf.urlParam("type");
 let _pick = gf.urlParam("PICK");
 let _warehouse = gf.urlParam("warehouse");
 
-if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "COMBINED", "PICKING"].includes(_type)) {
-	$("div.doc-buttons").append(`<span>选中查看日志</span><input type="checkbox" id="showTransLog" title="选中查看日志" ${localStorage.showTransLog ? "checked" : ""}>`);
-}
-$('div.doc-buttons').delegate("input:checkbox#showTransLog", "change", function (e) {
-	if (this.checked) {
-		localStorage.showTransLog = true;
-	} else {
-		localStorage.showTransLog = "";
-	}
-	location.reload();
-});
-
-
 let _columns = [{
 	colkey: "id",
 	name: "id",
@@ -112,46 +99,46 @@ if (localStorage.showTransLog) {
 		name: "下达人员",
 		defaultVal: '--'
 	}, {
-			colkey: "CRETATE.TIME",
-			jsonColumn: "operator",
-			name: "下达时间",
-			defaultVal: '--'
-		}, {
-			colkey: "PICKING.OPERATOR",
-			jsonColumn: "operator",
-			name: "拣配人员",
-			defaultVal: '--'
-		}, {
-			colkey: "PICKING.TIME",
-			jsonColumn: "operator",
-			name: "拣配时间",
-			defaultVal: '--'
-		}, {
-			colkey: "COMBINING.OPERATOR",
-			jsonColumn: "operator",
-			name: "组盘人员",
-			defaultVal: '--'
-		}, {
-			colkey: "COMBINING.TIME",
-			jsonColumn: "operator",
-			name: "组盘时间",
-			defaultVal: '--'
-		}, {
-			colkey: "ON_PCS.TIME",
-			jsonColumn: "operator",
-			name: "上PCS时间",
-			defaultVal: '--'
-		}, {
-			colkey: "OVER_PCS.TIME",
-			jsonColumn: "operator",
-			name: "出PCS时间",
-			defaultVal: '--'
-		}, {
-			colkey: "OVER.TIME",
-			jsonColumn: "operator",
-			name: "到达产线时间",
-			defaultVal: '--'
-		});
+		colkey: "CRETATE.TIME",
+		jsonColumn: "operator",
+		name: "下达时间",
+		defaultVal: '--'
+	}, {
+		colkey: "PICKING.OPERATOR",
+		jsonColumn: "operator",
+		name: "拣配人员",
+		defaultVal: '--'
+	}, {
+		colkey: "PICKING.TIME",
+		jsonColumn: "operator",
+		name: "拣配时间",
+		defaultVal: '--'
+	}, {
+		colkey: "COMBINING.OPERATOR",
+		jsonColumn: "operator",
+		name: "组盘人员",
+		defaultVal: '--'
+	}, {
+		colkey: "COMBINING.TIME",
+		jsonColumn: "operator",
+		name: "组盘时间",
+		defaultVal: '--'
+	}, {
+		colkey: "ON_PCS.TIME",
+		jsonColumn: "operator",
+		name: "上PCS时间",
+		defaultVal: '--'
+	}, {
+		colkey: "OVER_PCS.TIME",
+		jsonColumn: "operator",
+		name: "出PCS时间",
+		defaultVal: '--'
+	}, {
+		colkey: "OVER.TIME",
+		jsonColumn: "operator",
+		name: "到达产线时间",
+		defaultVal: '--'
+	});
 }
 
 if (["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "PRODUCT"].includes(_type)) {
@@ -317,16 +304,29 @@ var initSearch = function () {
 	let searchHtml = '<a class="btn btn-default" id="search">查询</a>';
 	let exportHtml = '<a class="btn btn-default" id="export">导出</a>';
 	if (["PRIORITY", "PRODUCT"].includes(_type)) {
-		$("#searchForm").find("div.search-group").html(
+		debugger
+		$("#searchForm").find("div.doc-buttons").html("");
+		$("#searchForm").find("div.doc-buttons").html(
 			`<label>
                 <span>产线:</span>
                 <input id="product" name="product" value='${localStorage.currentSearchProduct ? localStorage.currentSearchProduct : ""}'>
             </label>`
 		);
-		$("#searchForm").find("div.search-group").append(searchHtml);
+		$("#searchForm").find("div.doc-buttons").append(searchHtml);
 	} else {
-		$("#searchForm").find("div.search-group").append(searchHtml).append(exportHtml);
+		$("#searchForm").find("div.doc-buttons").append(searchHtml).append(exportHtml);
 	}
+	if (!["PRIORITY", "PICKED_COLD", "PICKED_NORMAL", "COMBINE", "COMBINED", "PICKING"].includes(_type)) {
+		$("div.doc-buttons").append(`<span>选中查看日志</span><input type="checkbox" id="showTransLog" style="width:auto;" title="选中查看日志" ${localStorage.showTransLog ? "checked" : ""}>`);
+	}
+	$('div.doc-buttons').delegate("input:checkbox#showTransLog", "change", function (e) {
+		if (this.checked) {
+			localStorage.showTransLog = true;
+		} else {
+			localStorage.showTransLog = "";
+		}
+		location.reload();
+	});
 	$("#searchForm").show();
 }
 
