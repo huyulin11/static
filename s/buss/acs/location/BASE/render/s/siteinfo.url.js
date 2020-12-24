@@ -9,7 +9,7 @@ export var addLocation = function (id, x, y) {
         data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
         success: (obj) => {
             updateTaskSiteLocation(id, result);
-            if (obj.msg) layer.msg(obj.msg);
+            if (obj.msg) layer.msg("增加失败");
         }
     });
 }
@@ -21,7 +21,7 @@ export var deleteLocation = function (id) {
         data: { table: "TASK_SITE_LOCATION", key: ids },
         success: (obj) => {
             updateTaskSiteLocation(id, "", true);
-            if (obj.msg) layer.msg(obj.msg);
+            if (obj.msg) layer.msg("删除失败");
         }
     });
 }
@@ -34,7 +34,7 @@ export var moveLocation = function (id, x, y) {
         data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
         success: (obj) => {
             updateTaskSiteLocation(id, result);
-            if (obj.msg) layer.msg(obj.msg);
+            if (obj.msg) layer.msg("拖动失败");
         }
     });
 }
@@ -45,6 +45,7 @@ export var editLocationID = function (id1, id2, result) {
         data: { oldID: id1, newID: id2, value: JSON.stringify(result) },
         success: (obj) => {
             updateTaskSiteLocation(id1, result);
+            if (obj.msg) layer.msg("修改失败");
         }
     });
 }
