@@ -1,4 +1,6 @@
-let taskSiteLocationData = null;
+import { gv } from "/s/buss/g/j/g.v.js";
+
+let taskSiteLocationData = [];
 let taskSiteLogicData = null;
 
 export var taskSiteLogic = function (callback) {
@@ -32,22 +34,17 @@ export var taskSiteLocation = function (callback) {
             callback(data);
         }
     };
-    if (taskSiteLocationData) {
+    if (taskSiteLocationData.length != 0) {
         call(taskSiteLocationData);
         return;
     }
-    $.ajax({
-        url: "/s/jsons/" + localStorage.projectKey + "/sites.json",
-        type: "get",
-        async: false,
-        cache: false,
-        dataType: "json",
-        success: function (data) {
-            taskSiteLocationData = data;
-            call(data);
-        },
-        complete: function (data) {
-        },
+    gv.getSite(function (data) {
+        for (let val of data) {
+            if (val.location) {
+                taskSiteLocationData.push(JSON.parse(val.location));
+            }
+        }
+        call(taskSiteLocationData);
     });
 }
 
