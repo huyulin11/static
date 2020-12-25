@@ -1,7 +1,5 @@
 import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.path.js";
 import { getM, getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
-import { gf } from "/s/buss/g/j/g.f.js";
-import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
@@ -20,7 +18,7 @@ export var dragedPath = function () {
         .attr("d", function (d) {
             return dToStrig(mPoint[0], x, mPoint[1], y);
         });
-    d3.select("#w" + $(this).attr("id"))
+    d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
         .attr("d", function () {
             return dToStrig(mPoint[0], x, mPoint[1], y);
         })
@@ -47,16 +45,20 @@ export var endedPath = function () {
                 return dToStrig(x1, x2, y1, y2);
             })
             .attr("style", "marker-end:url(#triangle);");
-        d3.select("#w" + $(this).attr("id"))
+        d3.select("#w" + siteid + oldnext)
+            .attr("id", "w" + siteid + nextid)
             .attr("d", function () {
                 return dToStrig(x1, x2, y1, y2);
             })
     } else {
         layer.msg('调整失败，与原路径相同');
         if (oldnext) {
-            var xOld = $('#' + oldnext).attr('cx');
-            var yOld = $('#' + oldnext).attr('cy');
+            var xOld = parseFloat($('#' + oldnext).attr('cx'));
+            var yOld = parseFloat($('#' + oldnext).attr('cy'));
             d3.select(this).attr('d', function () {
+                return dToStrig(x1, xOld, y1, yOld);
+            });
+            d3.select("#w" + $(this).attr("from") + $(this).attr("to")).attr("d", function () {
                 return dToStrig(x1, xOld, y1, yOld);
             })
         } else d3.select(this).remove();
