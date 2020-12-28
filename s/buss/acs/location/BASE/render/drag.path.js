@@ -7,7 +7,7 @@ import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 
 export var startedPath = function () {
     datas.init();
-    d3.select(this).attr("class", "savaPath");
+    d3.select(this).attr("class", "clashLine");
     d3.selectAll(".post").remove();
 }
 export var dragedPath = function () {

@@ -2,7 +2,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { started, draged, ended, createPoint } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
 import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
 import { createPath } from "/s/buss/acs/location/BASE/render/add.path.js";
-import { dragedPath, endedPath, startedPath} from "/s/buss/acs/location/BASE/render/drag.path.js";
+import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.path.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { deleteLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
 import { deleteLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
@@ -79,12 +79,13 @@ export var updatePoint = function () {
                 });
                 d3.select("#btn2").on("click", function () {
                     createPath(id, x, y);
-                    conf.svg.selectAll(".post").call(
-                        d3.drag()
-                            .on('start', startedPath)
-                            .on('drag', dragedPath)
-                            .on('end', endedPath)
-                    );
+                    dragPath();
+                    // conf.svg.selectAll(".post").call(
+                    //     d3.drag()
+                    //         .on('start', startedPath)
+                    //         .on('drag', dragedPath)
+                    //         .on('end', endedPath)
+                    // );
                     rightClickPath();
                 });
                 d3.select("#btn3").on("click", function () {
