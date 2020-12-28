@@ -10,8 +10,9 @@ export var createPath = function (id, x, y) {
 
 var newPath = function (num, x, y, id) {
     var paths = conf.svg.append("path")
+        .attr("id", "newpath")
         .attr("from", id)
-        .attr("class", "post")
+        .attr("class", "clashLine")
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
         .attr("stroke-width", "6px")

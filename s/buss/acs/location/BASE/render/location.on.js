@@ -28,11 +28,12 @@ var bandBodyClick = function () {
 }
 
 var rightClickPath = function () {
-    conf.svg.selectAll("path")
+    conf.svg.selectAll(".clashLine")
         .on("contextmenu", function (d, i) {
             d3.event.preventDefault();
             if (d3.event.button == 2) {
                 var path = d3.select(this);
+                var wPath = d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
                 var siteid = $(this).attr('from'), nextid = $(this).attr('to');
                 var value = { "siteid": siteid, "nextid": nextid };
                 let ii = layer.confirm('是否删除？', {
@@ -42,6 +43,7 @@ var rightClickPath = function () {
                         deleteLogic(value, true);
                     }
                     path.remove();
+                    wPath.remove();
                     layer.close(ii);
                 });
             }
@@ -80,12 +82,6 @@ export var updatePoint = function () {
                 d3.select("#btn2").on("click", function () {
                     createPath(id, x, y);
                     dragPath();
-                    // conf.svg.selectAll(".post").call(
-                    //     d3.drag()
-                    //         .on('start', startedPath)
-                    //         .on('drag', dragedPath)
-                    //         .on('end', endedPath)
-                    // );
                     rightClickPath();
                 });
                 d3.select("#btn3").on("click", function () {
