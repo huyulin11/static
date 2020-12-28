@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { updatePoint, dragPoint} from "/s/buss/acs/location/LAO_FOXCONN/location.on.js";
+import { move } from "/s/buss/acs/location/BASE/render/location.on.js";
 import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
