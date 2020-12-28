@@ -5,75 +5,16 @@ import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
 import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { renderModelConfs } from "/s/buss/acs/FANCY/j/acs.control.conf.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
-
-let renderAllModels = () => {
-	let confs = [];
-	if (localStorage.projectKey != 'LAO_FOXCONN') {
-		confs.push({ key: 'agvs', target: 'div#agvDiv' });
-	}
-	if (![''].includes(localStorage.projectKey))
-		confs.push({ key: 'setup', target: 'div#controlContainer' });
-	if (localStorage.projectKey == 'LAO_FOXCONN') {
-		confs.push(
-			{ key: 'lift', target: 'div#liftContainer' },
-			{ key: 'door', target: 'div#autodoorContainer' },
-			{ key: 'msg', target: 'div#msgContainer' },
-			{
-				key: 'login', url: "/s/buss/g/h/loginSuccess.html", init: true,
-				height: "450px", width: "300px", target: 'div#loginContainer'
-			}
-		);
-	} else if (localStorage.projectKey == 'TAIKAI_JY') {
-		confs.push({ key: 'msg', target: 'div#msgContainer' });
-	} else if (localStorage.projectKey == 'CSY_DAJ') {
-		confs.push(
-			{ key: 'charge', target: 'div#chargeContainer' },
-			{ key: 'windowCenter', target: 'div#windowCenterContainer' },
-			{ key: 'window', target: 'div#windowContainer' },
-			{ key: 'wms', target: 'div#wmsContainer' },
-			{ key: 'msg', target: 'div#msgContainer' }
-		);
-	} else if (localStorage.projectKey == 'CSY_CDBP') {
-		confs.push({
-			url: "/s/buss/sys/conf/h/agv.cache.html", init: true,
-			height: "50%", width: "80%", key: 'task', target: 'div#taskContainer'
-		}, { key: 'msg', target: 'div#msgContainer' });
-	} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
-		confs.push({ key: 'msg', target: 'div#msgContainer' });
-	} else if (localStorage.projectKey == 'YZBD_NRDW') {
-		// confs.push({key:'tongji',target: 'div#tongjiContainer'});
-		confs.push({ key: 'search', target: 'div#searchContainer' },
-			{ key: 'shipment', target: 'div#shipmentContainer' },
-			{ key: 'receipt', target: 'div#receiptContainer' },
-			{
-				key: 'POS', target: "none", click: function () {
-					let value = $(this).hasClass("close");
-					gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gf.layer().msg((value ? "显示" : "隐藏") + "坐标"); });
-				}
-			},
-			{ key: 'PDA', target: 'div#PDAContainer' },
-			{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
-	} else if (localStorage.projectKey == 'YZBD_QSKJ') {
-		confs.push({
-			url: "/s/buss/sys/conf/h/agv.cache.html", init: true,
-			height: "50%", width: "80%", key: 'task', target: 'div#taskContainer'
-		}, {
-			key: 'login', url: "/s/buss/g/h/loginSuccess.html", init: true,
-			height: "450px", width: "300px", target: 'div#loginContainer'
-		});
-	} else if (localStorage.projectKey == 'QDTY_SELF') {
-		confs.push({ key: 'msg', target: 'div#msgContainer' });
-	}
-	if (confs.length > 0) {
-		renderModel(confs);
-	}
-};
 
 var container = function () {
 	if ($("#allCtrlTable").length == 0) {
 		$("#controlContainer").append("<div><table id='allCtrlTable' class='task'></table></div>");
-		renderAllModels();
+		let confs = renderModelConfs();
+		if (confs.length > 0) {
+			renderModel(confs);
+		}
 	}
 	return $("#allCtrlTable");
 }
