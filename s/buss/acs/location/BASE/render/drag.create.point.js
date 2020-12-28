@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { move } from "/s/buss/acs/location/BASE/render/location.on.js";
+import { dragPoint, updatePoint } from "/s/buss/acs/location/BASE/render/location.on.js";
 import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
@@ -8,7 +8,6 @@ import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/si
 export var started = function () {
 }
 export var draged = function () {
-    datas.init();
     const { x, y } = d3.event;
     var id = $(this).attr('id');
     d3.select(this)
