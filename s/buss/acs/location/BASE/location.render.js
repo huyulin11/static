@@ -306,7 +306,7 @@ export var markerDef = function () {
         .attr("markerUnits", "strokeWidth")
         .attr("markerWidth", 2.5)
         .attr("markerHeight", 2)
-        .attr("refX", 2.5)
+        .attr("refX", 3.25)
         .attr("refY", 1)
         .attr("orient", "auto");
     marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
