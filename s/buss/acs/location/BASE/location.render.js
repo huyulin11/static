@@ -1,9 +1,7 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { show } from "/s/buss/acs/location/BASE/render/location.button.js";
+import { rectPath } from "/s/buss/acs/location/BASE/path/draw.path.js";
 
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
@@ -94,98 +92,6 @@ var siteCode = function (locations) {
             }
         }
     }
-}
-
-var rectPath = function (tempYfc) {
-    var path1 = conf.pathHome1.selectAll("path").data(tempYfc)
-        .enter()
-        .append("path")
-        .attr("id", function (d) {
-            return 'p' + d.id;
-        })
-        .attr("from", function (d) {
-            return d.from;
-        })
-        .attr("to", function (d) {
-            return d.to;
-        })
-        .attr("d", function (d) {
-            var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
-            var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
-            return dToStrig(result1[0], result2[0], result1[1], result2[1]);
-        })
-        .attr("class", "clashLine")
-        .attr("fill", "none")
-        .attr("stroke", "#8a8a8a")
-        .attr("stroke-width", "6.5px")
-        .attr("style", "marker-end:url(#triangle);");
-
-    var path2 = conf.pathHome2.selectAll("path").data(tempYfc)
-        .enter()
-        .append("path")
-        .attr("id", function (d) {
-            return "w" + d.id;
-        })
-        .attr("from", function (d) {
-            return d.from;
-        })
-        .attr("to", function (d) {
-            return d.to;
-        })
-        .attr("d", function (d) {
-            var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
-            var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
-            return dToStrig(result1[0], result2[0], result1[1], result2[1]);
-        })
-        .attr("class", "whiteLine")
-        .attr("fill", "none")
-        .attr("stroke", "#ffffff")
-        .style("stroke-dasharray", "10, 7")
-        .attr("stroke-width", "1px");
-    // .attr("style", "marker-end:url(#triangle);");
-
-    show();
-    // var line = function () {
-    //     return conf.svg.append("line")
-    //         .attr("id", point0.id)
-    //         .attr("from", point0.from)
-    //         .attr("to", point0.to)
-    //         .attr("x1", conf.padding.left + conf.xScale(point1[0]))
-    //         .attr("y1", conf.height - conf.padding.bottom - conf.yScale(point1[1]))
-    //         .attr("x2", conf.padding.left + conf.xScale(point2[0]))
-    //         .attr("y2", conf.height - conf.padding.bottom - conf.yScale(point2[1]))
-    //         .attr("class", "clashLine")
-    //         .style("stroke-width", "2px");
-    // }
-
-    // for (var a in tempYfc) {
-    //     if (a == tempYfc.length - 1 && tempYfc[a].color != conf.initColor) { break; }
-    //     var area = tempYfc[a];
-    //     var nextarea = tempYfc[parseInt(a) + 1];
-    //     var points = [[area.rightXaxis, area.upYaxis], [area.leftXaxis, area.downYaxis]];
-
-    //     for (var i = 0; i < points.length; i++) {
-    //         var point0 = { id: area.id, from: area.from, to: area.to };
-    //         var point1 = points[i];
-    //         var point2 = i + 1 >= points.length ? points[0] : points[i + 1];
-    //         if (nextarea && area.color != nextarea.color) {
-    //             line().style("stroke", tool.getPointColor());
-    //         } else if (area.color == conf.initColor) {
-    //             line().style("stroke", area.color)
-    //                 .style("stroke-dasharray", "4, 7");
-    //         } else if (area.color != conf.initColor) {
-    //             line().style("stroke", area.color);
-    //         }
-    //     }
-    //     // conf.svg.append("text")
-    //     //     .attr("x", conf.padding.left + conf.xScale((area.leftXaxis + area.rightXaxis) / 2) - 35)
-    //     //     .attr("y", conf.height - conf.padding.bottom - conf.yScale((area.downYaxis + area.upYaxis) / 2) + 10)
-    //     //     .attr("class", "clashLine")
-    //     //     .style("stroke", "red")
-    //     //     .style("font-size", "22px")
-    //     //     .style("stroke-width", "1px")
-    //     //     .text(area.title);
-    // }
 }
 
 var isSiteCode = false;
