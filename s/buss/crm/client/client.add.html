@@ -31,11 +31,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input id="phone" placeholder="输入电话" v-model="phone" @keyup.enter="enter" autocomplete="off" />
+                    <td><input id="company" placeholder="输入公司" v-model="company" @keyup.enter="enter"
+                            autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
-                    <td><select id="status" v-model="phone" autocomplete="off"></select>
+                    <td><select id="status" v-model="status" autocomplete="off">
+                            <option value="">----请选择----</option>
+                            <option value="1">基础</option>
+                            <option value="2">潜在</option>
+                            <option value="3">成功</option>
+                            <option value="4">冻结</option>
+                            <option value="5">失败</option>
+                        </select>
                     </td>
                 </tr>
             </tbody>

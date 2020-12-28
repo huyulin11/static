@@ -13,6 +13,8 @@ var vm = new Vue({
 	data: {
 		name: null,
 		phone: null,
+		company: null,
+		status: null,
 	},
 	el: container,
 	methods: {
@@ -22,7 +24,10 @@ var vm = new Vue({
 				layer.msg("姓名或电话不能为空！");
 				return;
 			};
-			let json = { 姓名: this.name, 电话: this.phone };
+			let json = {
+				姓名: this.name, 电话: this.phone,
+				公司: this.company, 状态: this.status
+			};
 			gf.doAjax({
 				url: '/app/conf/set.shtml',
 				data: {
