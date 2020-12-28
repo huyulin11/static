@@ -82,22 +82,40 @@ export var initAgvList = function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
 
-    if (agvDiv().find('#toggleShowAgvListDetail').length == 0) {
-        agvDiv().prepend(`<div style='font-size:10px;text-align:left;'><span>选中隐藏详情</span><input type="checkbox" 
-        id="toggleShowAgvListDetail" title="选中隐藏详情" ${localStorage.toggleShowAgvListDetail ? "checked" : ""}></div>`);
-        agvDiv().delegate("input:checkbox#toggleShowAgvListDetail", "change", function (e) {
-            if (this.checked) {
-                localStorage.toggleShowAgvListDetail = true;
-            } else {
-                localStorage.toggleShowAgvListDetail = "";
+    let checks = [
+        { key: "toggleShowAgvListDetail", name: "选中隐藏详情", },
+        { key: "toggleOnlyCurrent", name: "仅显示当前AGV", },
+        { key: "toggleAutoShow", name: "自动弹出", },
+    ];
+    if (agvDiv().find(`#agvListCtrl`).length == 0) {
+        agvDiv().prepend(`<div id='agvListCtrl' style='font-size:10px;text-align:left;'></div>`);
+    }
+    let $agvListCtrl = agvDiv().find(`#agvListCtrl`);
+    for (let check of checks) {
+        let key = check.key;
+        let name = check.name;
+        if (agvDiv().find(`#${key}`).length == 0) {
+            $($agvListCtrl).append(`<span>${name}</span><input type="checkbox" id="${key}" title="${name}" ${localStorage[key] ? "checked" : ""}>`);
+            let checkChangeFun = function (that) {
+                if (that.checked) {
+                    localStorage[key] = true;
+                } else {
+                    localStorage[key] = "";
+                }
+                getAgvList();
             }
-            getAgvList();
-        });
+            agvDiv().delegate(`input:checkbox#${key}`, "change", function (e) { checkChangeFun(this); });
+        }
     }
     if (innerAgvDetail) {
         var currentAgvId = localStorage.currentAgvId;
         if (currentAgvId) {
             openAGVMGR(currentAgvId);
+        }
+        if (localStorage.toggleAutoShow) {
+            setTimeout(() => {
+                $("#agvsHideDiv").trigger("click");
+            }, 3000);
         }
     }
 }
