@@ -19,9 +19,9 @@ var vm = new Vue({
 	el: container,
 	methods: {
 		save() {
-			if (!this.name || !this.phone) {
+			if (!this.name || !this.phone || !this.company || !this.status) {
 				$("#name").focus();
-				layer.msg("姓名或电话不能为空！");
+				layer.msg("姓名、电话、公司、状态不能为空！");
 				return;
 			};
 			let json = {
