@@ -7,8 +7,8 @@ export var getM = function (s) {
 
 export var getL1 = function (s) {
     var l1 = s.indexOf('L');
-    var l2 = s.lastIndexOf('L');
-    return s.substring(l1, l2);
+    var q = s.lastIndexOf('Q');
+    return s.substring(l1, q);
 };
 
 export var getL2 = function (s) {
