@@ -3,22 +3,28 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gcol } from "/s/buss/g/j/g.col.js";
 import { renderCss } from "/s/buss/g/j/g.css.js";
-import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 
-let confs = [];
-confs.push({ init: true, url: "/s/buss/crm/client/client.add.html", key: 'add', target: 'div#addContainer', height: "90%", width: "90%" });
-renderModel(confs);
 {
     let csss = [];
-    csss.push(
-        {
-            name: "table.alloc tr td button", content: {
-                "color": "#FFF",
-                "background": "#496E77",
-                "height": "auto",
-            }
+    csss.push({
+        name: "table.alloc tr td button", content: {
+            "color": "#FFF",
+            "background": "#496E77",
+            "height": "auto",
+        }
+    }, {
+        name: "table.alloc tr td button.潜力", content: {
+            "background": "#FA3744",
         },
-    );
+    }, {
+        name: "table.alloc tr td button.基础", content: {
+            "background": "#FE9900",
+        },
+    }, {
+        name: "table.alloc tr td button.成功", content: {
+            "background": "#7A6263",
+        },
+    });
     renderCss("clientcss", 'body', csss);
 }
 
@@ -26,8 +32,11 @@ var renderOne = function (item) {
     if (!item.value) { return; }
     let json = JSON.parse(item.value);
     let $btn = $(`<button class='item'></button>`);
+    $($btn).data('key', item.key);
+    $($btn).addClass(json.状态);
     let infos = [];
     for (let detail in json) {
+        $($btn).data(detail, json[detail]);
         infos.push(`<span>${detail}:${json[detail]}</span>`);
     }
     let allInfos;
@@ -44,7 +53,7 @@ var renderOne = function (item) {
 let flag = false;
 var toRender = function (data, conf) {
     if (!data || data.length == 0) return;
-    let _conf = { data: data, numInLine: 3, numInPage: 1000, render: renderOne, target: "table.alloc", callback: () => gf.resizeTable() };
+    let _conf = { data: data, numInLine: 2, numInPage: 1000, render: renderOne, target: "table.alloc", callback: () => gf.resizeTable() };
     Object.assign(_conf, conf);
     gfbtn.renderBtnTable(_conf);
 }

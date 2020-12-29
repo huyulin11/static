@@ -28,11 +28,11 @@ let initReady = (key, url, width, height) => {
 
 let doRenderModel = (conf) => {
     let { init, key, target, click, url, self, type, width, height } = conf;
-    if (type === 'LINK') {
+    if (type === 'LINK' || type === 'LAYER') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
         $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
         $("head").append(style);
-        $("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-self='${self ? self : ""}'></div>`);
+        $("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-type='${type}' data-self='${self ? self : ""}'></div>`);
         return;
     }
 
@@ -88,9 +88,17 @@ let initEvent = () => {
             }
         } else {
             var url = $(this).data("url");
+            var type = $(this).data("type");
             var self = $(this).data("self");
             if (url) {
-                window.open(url, self ? "_self" : false);
+                if (type === 'LAYER') {
+                    window.pageii = gf.layerOpen({
+                        type: 2,
+                        content: url
+                    });
+                } else {
+                    window.open(url, self ? "_self" : false);
+                }
             }
         }
     });

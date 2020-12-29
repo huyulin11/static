@@ -23,21 +23,20 @@
         <table cellspacing="10px" cellspadding="1px">
             <tbody>
                 <tr>
-                    <td><input id="name" placeholder="输入姓名" v-focus v-model="name" @keyup.enter="enter"
+                    <td><input id="姓名" placeholder="输入姓名" v-focus v-model="姓名" @keyup.enter="enter"
                             autocomplete="off" /></td>
                 </tr>
                 <tr>
-                    <td><input id="phone" placeholder="输入电话" v-model="phone" @keyup.enter="enter" autocomplete="off" />
+                    <td><input id="电话" placeholder="输入电话" v-model="电话" @keyup.enter="enter" autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
-                    <td><input id="company" placeholder="输入公司" v-model="company" @keyup.enter="enter"
-                            autocomplete="off" />
+                    <td><input id="公司" placeholder="输入公司" v-model="公司" @keyup.enter="enter" autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
-                    <td><select id="status" v-model="status" autocomplete="off">
-                            <option value="">----请选择----</option>
+                    <td><select id="状态" v-model="状态" autocomplete="off">
+                            <option value="" selected>----请选择----</option>
                             <option value="基础">基础</option>
                             <option value="潜在">潜在</option>
                             <option value="成功">成功</option>

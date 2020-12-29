@@ -2,16 +2,13 @@ import "/s/j/vue/vue.min.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { allocData } from "./client.render.list.data.js";
 import { allocRender } from "./client.render.list.work.js";
-import "/s/buss/wms/alloc/item/j/alloc.event.js";
+import "/s/buss/crm/client/client.event.js";
+import { renderModel } from "/s/buss/g/j/g.banner.control.js";
+import { ITEM_LOGIN } from "/s/buss/acs/FANCY/j/acs.control.conf.js";
 
-let tempBtns = [{
-	id: "back", name: "返回", class: "btn-info",
-	hide: () => localStorage.projectKey != 'BJJK_HUIRUI',
-	bind: function () {
-		window.history.back();
-	}, style: "min-height:25px;width:60px;float:right;"
-}];
-gfbtn.bindByRes("div.doc-buttons", tempBtns);
+let confs = [ITEM_LOGIN];
+confs.push({ type: "LAYER", url: "/s/buss/crm/client/client.add.html", key: 'add', target: 'div#addContainer', height: "90%", width: "90%" });
+renderModel(confs);
 
 let _conf = { numInLine: 2, target: "table.alloc" };
 let _search = {};
@@ -30,7 +27,6 @@ var vm = new Vue({
 		}
 	}, methods: {
 		inputFun: function (e) {
-			localStorage.setItem("bigSearchResult", e.target.value);
 			allocDataUdf();
 		}
 	}

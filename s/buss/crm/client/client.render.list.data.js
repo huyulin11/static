@@ -3,7 +3,7 @@ export var allocData = function (callback, condition) {
         $(".black_overlay").show();
         $("table.alloc").html("");
     }
-    let serach = { "allocItemFormMap.text": $("#kw").val() };
+    let serach = { "value": `%${$("#kw").val()}%` };
     if (condition) { serach = Object.assign(serach, condition, { "TABLE_KEY": "CRM_CLIENTS" }); }
     jQuery.ajax({
         url: "/app/conf/findByPage.shtml",

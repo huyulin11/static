@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gfconf } from "/s/buss/g/j/g.f.conf.js";
 import "/s/j/vue/vue.min.js";
 import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
 
@@ -9,13 +10,13 @@ let _alloc = gf.urlParam("alloc");
 let _paperid;
 
 var getCurrentReceiptPaperid = function (callback) {
-    gf.getConf("__currentReceiptPaperid", (p) => {
+    gfconf.getConf("__currentReceiptPaperid", (p) => {
         _paperid = p;
         callback();
     });
 };
 var setCurrentReceiptPaperid = function (val, callback) {
-    gf.setConf("__currentReceiptPaperid", val, (p) => {
+    gfconf.setConf("__currentReceiptPaperid", val, (p) => {
         _paperid = val;
         if (callback) { callback(); }
     });
