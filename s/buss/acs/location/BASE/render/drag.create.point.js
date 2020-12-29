@@ -4,32 +4,19 @@ import { dragPoint, updatePoint } from "/s/buss/acs/location/BASE/render/locatio
 import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
+import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/BASE/path/fillter.pathHome.js";
 
 export var started = function () {
 }
 export var draged = function () {
     const { x, y } = d3.event;
     var id = $(this).attr('id');
+    var s = $(this).attr("d");
     d3.select(this)
         .attr('cx', x)
         .attr('cy', y);
-    d3.select("#t" + id)
-        .attr("x", x)
-        .attr("y", y);
-    conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; })
-        .attr("d", function (d) {
-            var s = $(this).attr("d");
-            var l2Point = getL2Point(s);
-            var x2 = l2Point[0], y2 = l2Point[1];
-            return dToStrig(x, x2, y, y2);
-        });
-    conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; })
-        .attr("d", function (d) {
-            var s = $(this).attr("d");
-            var mPoint = getMPoint(s);
-            var x1 = mPoint[0], y1 = mPoint[1];
-            return dToStrig(x1, x, y1, y);
-        });
+    fillHome1(id, x, y, s);
+    fillHome2(id, x, y, s);
     conf.svg.select("#t" + id)
         .attr("x", x + 7)
         .attr("y", y - 7);
@@ -41,7 +28,6 @@ export var ended = function () {
         .attr('cy', y);
     var id = $(this).attr('id');
     moveLocation(id, x, y);
-    // conf.svg.selectAll("#n" + id).remove();
 }
 
 export var createPoint = function () {
