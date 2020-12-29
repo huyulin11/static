@@ -21,6 +21,9 @@ var defaultSucFun = function (data) {
 };
 
 class GF {
+    defaultSucFun(data) {
+        defaultSucFun(data);
+    }
     layerOpenBak(confs) {
         if ($(window).width() < 960) {
             if (confs.newTab) {

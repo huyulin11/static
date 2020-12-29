@@ -39,18 +39,18 @@ var vm = new Vue({
 			this.状态 = "基础";
 			return;
 		}
-		let that = this;
 		gf.doAjax({
 			url: '/app/conf/get.shtml',
 			data: {
 				table: 'CRM_CLIENTS', key: _key
-			}, success: function (data) {
+			},
+			success: function (data) {
 				let json = JSON.parse(data);
 				let value = JSON.parse(json[0].value);
-				that.姓名 = value.姓名;
-				that.电话 = value.电话;
-				that.公司 = value.公司;
-				that.状态 = value.状态;
+				vm.姓名 = value.姓名;
+				vm.电话 = value.电话;
+				vm.公司 = value.公司;
+				vm.状态 = value.状态;
 			}
 		});
 	},
@@ -69,12 +69,21 @@ var vm = new Vue({
 				url: '/app/conf/set.shtml',
 				data: {
 					table: 'CRM_CLIENTS', key: _key, value: JSON.stringify(json)
+				},
+				success: function (data) {
+					var newEvent = new CustomEvent('refresh');
+					parent.dispatchEvent(newEvent);
+					gf.defaultSucFun(data);
+					if (!_key) vm.clear();
 				}
 			});
 			this.clear();
 		},
 		clear() {
-			this.msg = null
+			vm.姓名 = null;
+			vm.电话 = null;
+			vm.公司 = null;
+			vm.状态 = "基础";
 		},
 		enter() {
 			this.save();

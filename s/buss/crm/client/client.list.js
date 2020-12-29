@@ -45,3 +45,7 @@ setTimeout(function () {
 setTimeout(function () {
 	gf.resizeTable();
 }, 1000);
+
+window.addEventListener("refresh", function (data) {
+	allocDataUdf();
+}, false);
