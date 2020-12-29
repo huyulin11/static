@@ -2,21 +2,6 @@ import "/s/j/vue/vue.min.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderCss } from "/s/buss/g/j/g.css.js";
 
-{
-	let csss = [];
-	csss.push({
-		name: "div.rf-op td", content: {
-			"height": "40px",
-		},
-	}, {
-		name: "div.rf-op input,div.rf-op select", content: {
-			"font-size": "20px",
-		},
-	}
-	);
-	renderCss("clientcss", 'body', csss);
-}
-
 let container = "#rootContainer";
 let _key = gf.urlParam("key");
 
@@ -32,6 +17,7 @@ var vm = new Vue({
 		电话: null,
 		公司: null,
 		状态: null,
+		备注: null,
 	},
 	el: container,
 	created: function () {
@@ -51,6 +37,7 @@ var vm = new Vue({
 				vm.电话 = value.电话;
 				vm.公司 = value.公司;
 				vm.状态 = value.状态;
+				vm.备注 = value.备注;
 			}
 		});
 	},
@@ -63,7 +50,7 @@ var vm = new Vue({
 			};
 			let json = {
 				姓名: this.姓名, 电话: this.电话,
-				公司: this.公司, 状态: this.状态
+				公司: this.公司, 状态: this.状态, 备注: this.备注
 			};
 			gf.doAjax({
 				url: '/app/conf/set.shtml',
@@ -81,6 +68,7 @@ var vm = new Vue({
 			vm.姓名 = null;
 			vm.电话 = null;
 			vm.公司 = null;
+			vm.备注 = null;
 			vm.状态 = "基础";
 		},
 		enter() {

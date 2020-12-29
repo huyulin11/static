@@ -15,6 +15,17 @@
     <link href="/s/i/ico/calculatedfun.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" href="/s/c/agv.mgr.css">
     <link rel="stylesheet" href="/s/buss/acs/g/c/datas.css">
+    <style>
+        div.rf-op td {
+            height: 20px;
+        }
+
+        div.rf-op input,
+        div.rf-op select,
+        div.rf-op textarea {
+            font-size: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -43,6 +54,11 @@
                             <option value="冻结">冻结</option>
                             <option value="失败">失败</option>
                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><textarea id="备注" placeholder="输入备注" v-model="备注" @keyup.enter="enter"
+                            autocomplete="off"></textarea>
                     </td>
                 </tr>
             </tbody>

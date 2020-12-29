@@ -18,7 +18,7 @@ $("table.alloc").delegate(".delete", "click", function (e) {
         btn: ['确定', '取消'],
         btn1: function () {
             gf.doAjax({
-                url: `/app/conf/del.shtml`, type: "POST",
+                url: `/app/conf/delByLogic.shtml`, type: "POST",
                 data: { table: "CRM_CLIENTS", key: _key }
             });
         },
