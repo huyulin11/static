@@ -174,13 +174,16 @@ export let dataAgvLocation = () => allAgvsInfo(function (data) {
                         break;
                 }
             }
-            for (var location of datas.locations) {
-                if (location.id == currentsite) {
-                    for (var location2 of datas.locations) {
-                        if (location2.id == nextsite) {
+            for (var current of datas.locations) {
+                if (current.id == currentsite) {
+                    for (var next of datas.locations) {
+                        if (next.id == nextsite) {
                             datas.agvLocation.push({
-                                "locationX": (location.x + location2.x) / 2,
-                                "locationY": (location.y + location2.y) / 2
+                                "isWorking": true,
+                                "currentX": current.x,
+                                "currentY": current.y,
+                                "nextX": next.x,
+                                "nextY": next.y
                             })
                             break;
                         }
@@ -190,11 +193,12 @@ export let dataAgvLocation = () => allAgvsInfo(function (data) {
             }
         } else {
             var currentsite = data[datas.taskDetails[i]].agvInfo.currentsite;
-            for (var value of datas.locations) {
-                if (value.id == currentsite) {
+            for (var current of datas.locations) {
+                if (current.id == currentsite) {
                     datas.agvLocation.push({
-                        "locationX": value.x,
-                        "locationY": value.y
+                        "isWorking": false,
+                        "currentX": current.x,
+                        "currentY": current.y
                     })
                     break;
                 }

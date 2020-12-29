@@ -7,8 +7,8 @@ export var renderAgvLocation = function () {
     $("image").remove();
     for (var location of datas.agvLocation) {
         conf.svg.append("image")
-            .attr("x", conf.padding.left + conf.xScale(location.locationX) - 40)
-            .attr("y", conf.height - conf.padding.bottom - conf.yScale(location.locationY) - 30)
+            .attr("x", conf.padding.left + conf.xScale(location.currentX) - 30)
+            .attr("y", conf.height - conf.padding.bottom - conf.yScale(location.currentY) - 30)
             .attr("width", 60)
             .attr("height", 60)
             .attr("xlink:href", "/s/i/agv.png")
@@ -310,4 +310,3 @@ var render = function (tempdata) {
     }
     drawAgvs();
 }
-
