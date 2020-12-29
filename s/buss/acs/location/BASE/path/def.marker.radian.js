@@ -31,5 +31,4 @@ export var markerDef = function () {
         .attr("refY", 1)
         .attr("orient", "auto");
     marker2.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
-
 } 

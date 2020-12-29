@@ -12,8 +12,8 @@ export var draged = function () {
     d3.select(this)
         .attr('cx', x)
         .attr('cy', y);
-    fillHome1(id, x, y, s);
-    fillHome2(id, x, y, s);
+    fillHome1(id, x, y);
+    fillHome2(id, x, y);
     conf.svg.select("#t" + id)
         .attr("x", x + 7)
         .attr("y", y - 7);
