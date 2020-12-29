@@ -1,5 +1,5 @@
 import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.path.js";
-import { getM, getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
+import { getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
