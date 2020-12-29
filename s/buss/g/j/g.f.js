@@ -217,6 +217,7 @@ class GF {
     };
     htmlspecialchars(str) {
         var s = "";
+        if (!str) return "";
         if (str.length == 0)
             return "";
         for (var i = 0; i < str.length; i++) {
