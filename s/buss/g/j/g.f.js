@@ -26,9 +26,9 @@ class GF {
     refreshEvent() {
         var newEvent = new CustomEvent('refresh');
         window.dispatchEvent(newEvent);
-        if (parent && parent != window) setTimeout(() => {
+        if (parent && parent != window) {
             parent.dispatchEvent(newEvent);
-        }, 200);
+        }
     };
     layerOpenBak(confs) {
         if ($(window).width() < 960) {
@@ -248,6 +248,7 @@ class GF {
                     break;
             }
         }
+        return s;
     };
     inArray(array, string) {
         for (var s = 0; s < array.length; s++) {

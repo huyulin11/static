@@ -47,5 +47,6 @@ setTimeout(function () {
 }, 1000);
 
 window.addEventListener("refresh", function (data) {
+	console.log("trigger event refresh");
 	allocDataUdf();
 }, false);
