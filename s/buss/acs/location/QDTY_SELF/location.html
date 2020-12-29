@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js" lang="zh" style="overflow-x: hidden;" data-key=1>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>AGV即时位置</title>
+    <link rel="stylesheet" href="/s/c/agv.mgr.css">
+    <link rel="stylesheet" href="/s/c/agv.location.css">
+</head>
+
+<body>
+    <!-- <div id="agvs">
+    </div> -->
+    <div id="sysTitle">
+        <span>青岛天赢AGV调度系统</span>
+    </div>
+    <div id="coordinate"></div>
+    <div id="rootContainer" class="hidden">
+        <div id="agvDetail"></div>
+    </div>
+    <div id="topCtrlContainer"></div>
+</body>
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/d3/d3.min.js"></script>
+<script src="/s/j/layer/v3.1.1/layer.js"></script>
+
+<script type="module">
+    import { gf } from "/s/buss/g/j/g.f.js";
+    import { gp } from "/s/buss/g/j/g.p.js";
+    import "/s/buss/acs/location/BASE/location.init.js";
+    import "/s/buss/acs/location/BASE/location.p.js";
+    import { move } from "/s/buss/acs/location/BASE/render/location.on.js";
+    import { renderSvg, renderAgvLocation } from "/s/buss/acs/location/BASE/location.render.js";
+    import "/s/buss/acs/location/BASE/render/location.button.js"
+    import { markerDef } from "/s/buss/acs/location/BASE/path/def.marker.radian.js";
+    import { dataAgvLocation } from "/s/buss/acs/location/BASE/location.data.js";
+    markerDef();
+    renderSvg(() => { move() });
+    setTimeout(renderSvg, 3000);
+    // setInterval(renderSvg, 3000);
+
+    dataAgvLocation();
+    renderAgvLocation();
+    setInterval(() => {
+        // allAgvsInfoTmp();
+        dataAgvLocation();
+        renderAgvLocation();
+    }, 3000);
+</script>
+
+</html>
