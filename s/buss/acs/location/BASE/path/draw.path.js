@@ -25,7 +25,9 @@ export var rectPath = function (tempYfc) {
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
         .attr("stroke-width", "6.5px")
-        .attr("style", "marker-end:url(#triangle);");
+        .attr("style", function (d) {
+            return "marker-end:url(#mar" + d.id + ");"
+        });
 
     conf.pathHome2.selectAll("path").data(tempYfc)
         .enter()
