@@ -71,8 +71,6 @@ var vm = new Vue({
 					table: 'CRM_CLIENTS', key: _key, value: JSON.stringify(json)
 				},
 				success: function (data) {
-					var newEvent = new CustomEvent('refresh');
-					parent.dispatchEvent(newEvent);
 					gf.defaultSucFun(data);
 					if (!_key) vm.clear();
 				}

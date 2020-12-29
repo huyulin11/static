@@ -46,6 +46,13 @@ var renderOne = function (item) {
     }
     let $div = $(`<div></div>`);
     $($div).append($btn);
+    $($div).append(`<a class='call' href='tel:${json.电话}'><img src='/s//i/icon/call.png'></a>`);
+    let $delete = $(`<a class='delete'><img src='/s//i/icon/delete.png'></a>`);
+    for (let detail in json) {
+        $($delete).data(detail, json[detail]);
+    }
+    $($delete).data("key", item.key);
+    $($div).append($delete);
     return $div;
 }
 

@@ -270,6 +270,11 @@ table.task tr.taskTr td button {
 	background-color: rgb(0, 153, 255);
 }
 
+table.alloc tr td {
+	border: #e3dede 1px;
+	border-style: dotted;
+}
+
 table.alloc tr td button {
 	background-color: rgb(250, 0, 0);
 	font-size: 12px;
@@ -301,7 +306,22 @@ table.alloc tr td button[data-status='4'] {
 	color: rgb(222, 222, 222);
 	height: 150px;
 }
-
+ a.call,a.delete{
+	position: absolute;
+	margin-left: -25px;
+}
+	
+a.call{
+	margin-top: 0;
+} 
+a.delete  {
+	margin-top: 50px;
+}
+a.call>img,a.delete>img  {
+	width: 20px;
+	height: 20px;
+} 
+		
 table.task tr td button:DISABLED {
 	color: #FFF;
 	cursor: not-allowed;

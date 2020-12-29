@@ -3,18 +3,7 @@ import { globalCss } from "/s/buss/g/j/g.css.js";
 
 globalCss();
 
-var defaultSucFun = function (data) {
-    if (typeof data == "string") data = JSON.parse(data);
-    if (data.code >= 0) {
-        gf.layerMsg(data.msg ? data.msg : "保存成功！");
-        if (window.datagrid && window.datagrid.loadData) {
-            window.datagrid.loadData();
-        }
-    } else {
-        layer.msg(data.msg);
-    }
-    if (data.err) console.log(err);
-}, defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
+var defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
     gf.layerMsg(msg);
@@ -22,8 +11,25 @@ var defaultSucFun = function (data) {
 
 class GF {
     defaultSucFun(data) {
-        defaultSucFun(data);
-    }
+        if (typeof data == "string") data = JSON.parse(data);
+        if (data.code >= 0) {
+            gf.layerMsg(data.msg ? data.msg : "保存成功！");
+            if (window.datagrid && window.datagrid.loadData) {
+                window.datagrid.loadData();
+            }
+            gf.refreshEvent();
+        } else {
+            layer.msg(data.msg);
+        }
+        if (data.err) console.log(err);
+    };
+    refreshEvent() {
+        var newEvent = new CustomEvent('refresh');
+        window.dispatchEvent(newEvent);
+        if (parent && parent != window) setTimeout(() => {
+            parent.dispatchEvent(newEvent);
+        }, 200);
+    };
     layerOpenBak(confs) {
         if ($(window).width() < 960) {
             if (confs.newTab) {
@@ -128,7 +134,7 @@ class GF {
     doAjax(params) {
         var pp = {
             error: defaultErr,
-            success: defaultSucFun,
+            success: gf.defaultSucFun,
             timeout: 5000
         };
         $.extend(pp, params);
@@ -137,7 +143,7 @@ class GF {
     doAjaxSubmit(form, params) {
         var pp = {
             error: defaultErr,
-            success: defaultSucFun,
+            success: gf.defaultSucFun,
             timeout: 5000
         };
         $.extend(pp, params);
@@ -168,7 +174,7 @@ class GF {
             timeout: 5000,
             success: function (data) {
                 html = data;
-                if (callback) { callback(data); } else { defaultSucFun(data); }
+                if (callback) { callback(data); } else { gf.defaultSucFun(data); }
             }
         });
         return html;
