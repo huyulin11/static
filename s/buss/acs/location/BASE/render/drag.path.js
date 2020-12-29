@@ -7,8 +7,10 @@ import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 
 export var startedPath = function () {
     datas.init();
-    d3.select(this).attr("class", "tempSave");
-    d3.select("#pathHome3").selectAll(".clashLine").remove();
+    var num = $(this).attr("num");
+    for (var i = 1; i <= 4; i++) {
+        if (i != num) d3.select("#new" + i).remove();
+    }
 }
 export var dragedPath = function () {
     const { x, y } = d3.event;

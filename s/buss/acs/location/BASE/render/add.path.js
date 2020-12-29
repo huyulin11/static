@@ -10,7 +10,7 @@ export var createPath = function (id, x, y) {
 
 var newPath = function (num, x, y, id) {
     var paths = conf.pathHome3.append("path")
-        .attr("id", "newpath")
+        .attr("num", num)
         .attr("from", id)
         .attr("class", "clashLine")
         .attr("fill", "none")
@@ -18,28 +18,32 @@ var newPath = function (num, x, y, id) {
         .attr("stroke-width", "6px")
         .attr("style", "marker-end:url(#triangle2);");
     if (num == 1) {
-        paths.attr("d", function () {
-            return "M" + x + "," + y
-                + "L" + (parseFloat(x) + 20) + "," + y;
-        });
+        paths.attr("id", "new" + num)
+            .attr("d", function () {
+                return "M" + x + "," + y
+                    + "L" + (parseFloat(x) + 20) + "," + y;
+            });
     }
     if (num == 2) {
-        paths.attr("d", function () {
-            return "M" + x + "," + y
-                + "L" + (parseFloat(x) - 20) + "," + y;
-        });
+        paths.attr("id", "new" + num)
+            .attr("d", function () {
+                return "M" + x + "," + y
+                    + "L" + (parseFloat(x) - 20) + "," + y;
+            });
     }
     if (num == 3) {
-        paths.attr("d", function () {
-            return "M" + x + "," + y
-                + "L" + x + "," + (parseFloat(y) + 20);
-        });
+        paths.attr("id", "new" + num)
+            .attr("d", function () {
+                return "M" + x + "," + y
+                    + "L" + x + "," + (parseFloat(y) + 20);
+            });
     }
     if (num == 4) {
-        paths.attr("d", function () {
-            return "M" + x + "," + y
-                + "L" + x + "," + (parseFloat(y) - 20);
-        });
+        paths.attr("id", "new" + num)
+            .attr("d", function () {
+                return "M" + x + "," + y
+                    + "L" + x + "," + (parseFloat(y) - 20);
+            });
     }
 }
 
