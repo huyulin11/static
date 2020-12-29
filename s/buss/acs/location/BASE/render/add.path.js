@@ -9,7 +9,7 @@ export var createPath = function (id, x, y) {
 }
 
 var newPath = function (num, x, y, id) {
-    var paths = conf.svg.append("path")
+    var paths = conf.pathHome3.append("path")
         .attr("id", "newpath")
         .attr("from", id)
         .attr("class", "clashLine")

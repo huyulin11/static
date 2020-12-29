@@ -7,8 +7,8 @@ import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 
 export var startedPath = function () {
     datas.init();
-    d3.select(this).attr("id", "temp");
-    d3.selectAll("#newpath").remove();
+    d3.select(this).attr("class", "tempSave");
+    d3.select("#pathHome3").selectAll(".clashLine").remove();
 }
 export var dragedPath = function () {
     const { x, y } = d3.event;
@@ -38,6 +38,7 @@ export var endedPath = function () {
     if (!flag) {
         saveLogic(side, siteid, nextid, oldnext);
         d3.select(this)
+            .attr("class", "clashLine")
             .attr("id", "p" + siteid + nextid)
             .attr("from", siteid)
             .attr("to", nextid)
@@ -55,7 +56,7 @@ export var endedPath = function () {
         if (oldnext) {
             var xOld = parseFloat($('#' + oldnext).attr('cx'));
             var yOld = parseFloat($('#' + oldnext).attr('cy'));
-            d3.select(this).attr('d', function () {
+            d3.select(this).attr("class", "clashLine").attr('d', function () {
                 return dToStrig(x1, xOld, y1, yOld);
             });
             d3.select("#w" + $(this).attr("from") + $(this).attr("to")).attr("d", function () {
