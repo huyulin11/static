@@ -306,20 +306,10 @@ table.alloc tr td button[data-status='4'] {
 	color: rgb(222, 222, 222);
 	height: 150px;
 }
- a.call,a.delete{
-	position: absolute;
-	margin-left: -25px;
-}
-	
-a.call{
-	margin-top: 0;
-} 
-a.delete  {
-	margin-top: 50px;
-}
-a.call>img,a.delete>img  {
-	width: 20px;
-	height: 20px;
+
+table.alloc tr td .call>img,table.alloc tr td .delete>img  {
+	width: 25px;
+	height: 25px;
 } 
 		
 table.task tr td button:DISABLED {

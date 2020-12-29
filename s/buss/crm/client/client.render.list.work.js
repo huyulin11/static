@@ -7,22 +7,36 @@ import { renderCss } from "/s/buss/g/j/g.css.js";
 {
     let csss = [];
     csss.push({
-        name: "table.alloc tr td button", content: {
-            "color": "#FFF",
-            "background": "#496E77",
-            "height": "auto",
+        name: "table.alloc tr td div", content: {
+            "border-radius": "4px",
         }
     }, {
-        name: "table.alloc tr td button.潜力", content: {
-            "background": "#FA3744",
+        name: "table.alloc tr td button", content: {
+            "color": "#FFF",
+            "background": "inherit",
+            "height": "auto",
+            "min-height": "10px",
+            "border": "none",
+        }
+    }, {
+        name: "table.alloc tr td div.潜在", content: {
+            "background": "#A8CD87",
         },
     }, {
-        name: "table.alloc tr td button.基础", content: {
+        name: "table.alloc tr td div.基础", content: {
             "background": "#FE9900",
         },
     }, {
-        name: "table.alloc tr td button.成功", content: {
+        name: "table.alloc tr td div.成功", content: {
+            "background": "#26421C",
+        },
+    }, {
+        name: "table.alloc tr td div.冻结", content: {
             "background": "#7A6263",
+        },
+    }, {
+        name: "table.alloc tr td div.失败", content: {
+            "background": "#3F3F3F",
         },
     });
     renderCss("clientcss", 'body', csss);
@@ -32,11 +46,16 @@ var renderOne = function (item) {
     if (!item.value) { return; }
     let json = JSON.parse(item.value);
     let $btn = $(`<button class='item'></button>`);
+    let $delBtn = $(`<button class='delete'><img src='/s//i/icon/delete.png'></button>`);
+    let $callBtn = $(`<button class='call'><img src='/s//i/icon/call.png'></button>`);
     $($btn).data('key', item.key);
-    $($btn).addClass(json.状态);
+    $($delBtn).css("width", "49%");
+    $($callBtn).css("width", "49%");
     let infos = [];
     for (let detail in json) {
         $($btn).data(detail, json[detail]);
+        $($delBtn).data(detail, json[detail]);
+        $($callBtn).data(detail, json[detail]);
         infos.push(`<span>${detail}:${json[detail]}</span>`);
     }
     let allInfos;
@@ -44,15 +63,18 @@ var renderOne = function (item) {
         allInfos = infos.join("<hr/>");
         $($btn).append(allInfos);
     }
+    $($btn).append("<hr/>");
     let $div = $(`<div></div>`);
     $($div).append($btn);
-    $($div).append(`<a class='call' href='tel:${json.电话}'><img src='/s//i/icon/call.png'></a>`);
-    let $delete = $(`<a class='delete'><img src='/s//i/icon/delete.png'></a>`);
+    let $callA = $(`<a class='call' href='tel:${json.电话}'></a>`);
+    $($callA).append($callBtn);
+    $($div).append($callA);
     for (let detail in json) {
-        $($delete).data(detail, json[detail]);
+        $($delBtn).data(detail, json[detail]);
     }
-    $($delete).data("key", item.key);
-    $($div).append($delete);
+    $($delBtn).data("key", item.key);
+    $($div).append($delBtn);
+    $($div).addClass(json.状态);
     return $div;
 }
 

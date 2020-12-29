@@ -12,7 +12,7 @@ $("table.alloc").delegate("button.item", "click", function () {
     });
 });
 
-$("table.alloc").delegate("a.delete", "click", function (e) {
+$("table.alloc").delegate(".delete", "click", function (e) {
     let _key = $(this).data("key");
     layer.confirm(`确认删除该联系人？（${$(this).data("姓名")}-${$(this).data("电话")}）`, {
         btn: ['确定', '取消'],
