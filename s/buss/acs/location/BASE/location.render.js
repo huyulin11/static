@@ -3,6 +3,18 @@ import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { rectPath } from "/s/buss/acs/location/BASE/path/draw.path.js";
 
+export var renderAgvLocation = function () {
+    $("image").remove();
+    for (var location of datas.agvLocation) {
+        conf.svg.append("image")
+            .attr("x", conf.padding.left + conf.xScale(location.locationX) - 15)
+            .attr("y", conf.height - conf.padding.bottom - conf.yScale(location.locationY) - 15)
+            .attr("width", 30)
+            .attr("height", 30)
+            .attr("xlink:href", "/s/i/agv.png")
+    }
+}
+
 var arrow = function (arrow) {
     var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
     return arrow.attr("markerUnits", "strokeWidth")

@@ -4,6 +4,7 @@ import { taskSiteLogic, taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.in
 import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 
 export var datas = {};
+datas.agvLocation = [];
 let datasLogic = [];
 
 var rectPoint = [
@@ -144,12 +145,61 @@ var dataPath = function (data) {
     }
 }
 
-let allAgvsInfoTmp = () => allAgvsInfo(function (data) {
+export let allAgvsInfoTmp = () => allAgvsInfo(function (data) {
     dataPath(data);
     if (datas.numInTask == 0) {
         setTimeout(allAgvsInfoTmp, 3000);
     } else {
         setTimeout(allAgvsInfoTmp, datas.numInTask * 3000);
+    }
+});
+
+export let dataAgvLocation = () => allAgvsInfo(function (data) {
+    datas.agvLocation = [];
+    datas.taskDetails = Object.keys(data);
+    for (var i = 1; i < datas.taskDetails.length; i++) {
+        var object = data[datas.taskDetails[i]].currentTask.object;
+        if (object) {
+            var currentsite = data[datas.taskDetails[i]].agvInfo.currentsite;
+            for (var detail of object.detail) {
+                if (detail.siteid == currentsite && detail.opflag != 'NEW') {
+                    for (var detail2 of object.detail) {
+                        if (detail.detailsequence + 1 == detail2.detailsequence && detail2.opflag == 'NEW') {
+                            var nextsite = detail2.siteid;
+                            var isNextsite = true;
+                            break;
+                        }
+                    }
+                    if (isNextsite)
+                        break;
+                }
+            }
+            for (var location of datas.locations) {
+                if (location.id == currentsite) {
+                    for (var location2 of datas.locations) {
+                        if (location2.id == nextsite) {
+                            datas.agvLocation.push({
+                                "locationX": (location.x + location2.x) / 2,
+                                "locationY": (location.y + location2.y) / 2
+                            })
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        } else {
+            var currentsite = data[datas.taskDetails[i]].agvInfo.currentsite;
+            for (var value of datas.locations) {
+                if (value.id == currentsite) {
+                    datas.agvLocation.push({
+                        "locationX": value.x,
+                        "locationY": value.y
+                    })
+                    break;
+                }
+            }
+        }
     }
 });
 
@@ -172,5 +222,4 @@ datas.init = function () {
     datas.id = [];
     taskSiteLogic(dataLlogic);
     taskSiteLocation(dataLocation);
-    allAgvsInfoTmp();
 }
