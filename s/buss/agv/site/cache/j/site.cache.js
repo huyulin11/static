@@ -8,11 +8,11 @@ let params = {
 		hide: true
 	}, {
 		colkey: "key",
-		name: "站点"
+		name: "站点路径"
 
 	}, {
 		colkey: "value",
-		name: "指令"
+		name: "缓存指令"
 	}, {
 		colkey: "updatetime",
 		name: "时间",

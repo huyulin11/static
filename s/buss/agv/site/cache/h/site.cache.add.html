@@ -23,7 +23,7 @@
         <table cellspacing="10px" cellspadding="1px">
             <tbody>
                 <tr>
-                    <td><label>站点</label></td>
+                    <td><label>站点路径</label></td>
                     <td><input id="path" v-focus v-model="path" @keyup.enter="pathEnter" @blur="" autocomplete="off" />
                     </td>
                 </tr>
@@ -32,9 +32,8 @@
         <table cellspacing="10px" cellspadding="1px">
             <tbody>
                 <tr>
-                    <td><label>指令</label></td>
-                    <td><input id="acts" v-model="acts" @keyup.enter="sub" @blur="" autocomplete="off" />
-                    </td>
+                    <td><label>缓存指令</label></td>
+                    <td><input id="acts" v-model="acts" @keyup.enter="sub" @blur="" autocomplete="off" /></td>
                 </tr>
             </tbody>
         </table>
@@ -46,6 +45,13 @@
                 </tr>
             </tbody>
         </table>
+        <p style="text-align:left">站点路径例：{"path":[1,{"id":2,"current":true},3,4]}。前个站点1，当前站点2，后两个站点3、4组成的路径。</p>
+        <p style="text-align:left">缓存指令例：{"acts":[{"1-ACT":"0700","3-SPEED":"0164"}]}。根据需求选取指定指令，指令集合如下：<br>
+            "1-ACT"停车:"0500"急刹、"0600"停车、"0700"慢停；<br>
+            "2-TURN"转向:"0900"左转、"0901"右转；<br>
+            "3-SPEED"速度:"0114"20%、"0132"50%、"0164"100%；<br>
+            "4-CHANNEL"避障:"0B0A"或"0B01"长避障、"0B0B"或"0B00"短避障。
+        </p>
     </div>
     <script src="/s/j/jquery-1.12.2.min.js"></script>
     <script src="/s/j/layer/v3.1.1/layer.js"></script>
