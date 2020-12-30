@@ -11,10 +11,10 @@ export var drawAgv = function () {
         .attr("id", function (d) {
             return "agv" + d.currentsite;
         })
-        .attr("x", -30)
-        .attr("y", -30)
-        .attr("width", 60)
-        .attr("height", 60)
+        .attr("x", -25)
+        .attr("y", -25)
+        .attr("width", 50)
+        .attr("height", 50)
         .attr("xlink:href", "/s/i/agv.png");
     image.append("animateMotion")
         .attr("id", function (d) {
@@ -36,8 +36,8 @@ export var drawAgv = function () {
             d3.select("#animate" + value.currentsite).remove();
         } else {
             d3.select("#agv" + value.currentsite)
-                .attr("x", -30)
-                .attr("y", -30);
+                .attr("x", -25)
+                .attr("y", -25);
             var agvSerch = d3.select("#agv" + value.currentsite)
             agvSerch.selectAll("#animate" + value.currentsite).remove();
             agvSerch.append("animateMotion")
