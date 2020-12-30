@@ -307,11 +307,6 @@ table.alloc tr td button[data-status='4'] {
 	height: 150px;
 }
 
-table.alloc tr td .call>img,table.alloc tr td .delete>img  {
-	width: 25px;
-	height: 25px;
-} 
-		
 table.task tr td button:DISABLED {
 	color: #FFF;
 	cursor: not-allowed;
@@ -395,27 +390,21 @@ button.choosed {
 }
 
 .rf-op input {
-	width: 100%;
-	height: 45px;
-	border-radius: 10px;
-	border-width: 1px;
-	font-size: 30px;
 }
 
 .rf-op select {
-    width: 100%;
-    height: 45px;
-    border-radius: 10px;
-    border-width: 1px;
-    font-size: 30px;
 }
 
 .rf-op textarea {
+}
+
+.rf-op input,.rf-op select ,.rf-op textarea {
     width: 100%;
     height: 45px;
     border-radius: 10px;
     border-width: 1px;
     font-size: 30px;
+    border-color: #2e72abb0;
 }
 
 .rf-op label {

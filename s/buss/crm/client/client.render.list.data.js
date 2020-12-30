@@ -1,7 +1,7 @@
-export var allocData = function (callback, condition) {
+export var data = function (callback, condition) {
     if (callback) {
         $(".black_overlay").show();
-        $("table.alloc").html("");
+        $("div#target").html("");
     }
     let serach = { "value": `%${$("#kw").val()}%`, 'delflag': 0 };
     if (condition) { serach = Object.assign(serach, condition, { "TABLE_KEY": "CRM_CLIENTS" }); }

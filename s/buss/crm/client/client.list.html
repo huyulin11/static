@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>凯钒科技—CRM</title>
     <link rel="stylesheet" href="/s/c/agv.mgr.css">
+    <link rel="stylesheet" href="/s/c/buss.single.css">
     <link rel="stylesheet" href="/s/buss/acs/g/c/checkbox.css">
     <style>
         #topCtrlContainer {
@@ -17,6 +18,45 @@
         #loginContainer {
             top: auto;
             bottom: 65px;
+        }
+
+        #target div.td div {
+            color: white;
+            background: #fefefe;
+        }
+
+        #target div.td button {
+            color: inherit;
+            background: inherit;
+            height: auto;
+            min-height: 10px;
+            border: none;
+        }
+
+        #target div.td div.潜在 {
+            background: #A8CD87;
+        }
+
+        #target div.td div.基础 {
+            background: #FE9900;
+        }
+
+        #target div.td div.成功 {
+            background: #721940;
+        }
+
+        #target div.td div.冻结 {
+            background: #e5e5e5;
+            color: gray;
+        }
+
+        #target div.td div.失败 {
+            background: whitesmoke;
+            color: gray;
+        }
+
+        #target div.td div.失败 span {
+            text-decoration: line-through;
         }
     </style>
 </head>
@@ -32,14 +72,7 @@
             <input id="kw" name="wd" class="bigSearch" :value="bigSearchResult" @input="inputFun" maxlength="255"
                 autocomplete="off" placeholder="输入任意内容过滤">
         </div>
-        <div>
-            <table class="allocCol">
-            </table>
-        </div>
-        <div>
-            <table class="alloc">
-            </table>
-        </div>
+        <div id="target"></div>
     </div>
 </body>
 

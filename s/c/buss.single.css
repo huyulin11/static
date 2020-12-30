@@ -2,3 +2,25 @@
 html.single body{
     margin: auto;	
 }
+
+div.td .call>img,div.td .delete>img  {
+	width: 25px;
+	height: 25px;
+}
+ 
+div.td{
+    width: 100%;
+}
+
+div.td hr  {
+	/* color: #bab1b1; */
+	/* background: #EEE; */
+	border: #eee solid 1px;
+}
+div.tr {
+	border: #eee solid 1px;
+	margin-bottom: 10px;
+	background-color: #f2f2f2;
+	display: flex;
+	width: 100%;
+}

@@ -13,7 +13,7 @@ confs.push({ type: "LAYER", area: layerArea, url: "/s/buss/crm/client/client.add
 renderModel(confs);
 
 
-$("table.alloc").delegate("button.item", "click", function () {
+$("div#target").delegate("button.item", "click", function () {
     let _key = $(this).data('key');
     window.pageii = gf.layerOpen({
         area: layerArea(),
@@ -23,7 +23,7 @@ $("table.alloc").delegate("button.item", "click", function () {
     });
 });
 
-$("table.alloc").delegate(".delete", "click", function (e) {
+$("div#target").delegate(".delete", "click", function (e) {
     let _key = $(this).data("key");
     layer.confirm(`确认删除该联系人？（${$(this).data("姓名")}-${$(this).data("电话")}）`, {
         btn: ['确定', '取消'],

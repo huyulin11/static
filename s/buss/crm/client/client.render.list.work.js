@@ -1,44 +1,8 @@
 import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
-import { gfbtn } from "/s/buss/g/j/g.f.btn.js?f=crmv000001";
-import { renderCss } from "/s/buss/g/j/g.css.js?f=crmv000001";
+import { gfdiv } from "/s/buss/g/j/g.f.divs.js?f=crmv000001";
 
-{
-    let csss = [];
-    csss.push({
-        name: "table.alloc tr td div", content: {
-            "border-radius": "4px",
-        }
-    }, {
-        name: "table.alloc tr td button", content: {
-            "color": "#FFF",
-            "background": "inherit",
-            "height": "auto",
-            "min-height": "10px",
-            "border": "none",
-        }
-    }, {
-        name: "table.alloc tr td div.潜在", content: {
-            "background": "#A8CD87",
-        },
-    }, {
-        name: "table.alloc tr td div.基础", content: {
-            "background": "#FE9900",
-        },
-    }, {
-        name: "table.alloc tr td div.成功", content: {
-            "background": "#26421C",
-        },
-    }, {
-        name: "table.alloc tr td div.冻结", content: {
-            "background": "#7A6263",
-        },
-    }, {
-        name: "table.alloc tr td div.失败", content: {
-            "background": "#3F3F3F",
-        },
-    });
-    renderCss("clientcss", 'body', csss);
-}
+let separator = `<span style='color:#EEE;'> | </span>`;
+
 
 var renderOne = function (item) {
     if (!item.value) { return; }
@@ -50,12 +14,19 @@ var renderOne = function (item) {
     $($delBtn).css("width", "49%");
     $($callBtn).css("width", "49%");
     let infos = [];
+    let infos1 = [];
     for (let detail in json) {
         $($btn).data(detail, json[detail]);
         $($delBtn).data(detail, json[detail]);
         $($callBtn).data(detail, json[detail]);
-        infos.push(`<span>${detail}:${json[detail]}</span>`);
+        if (detail != '备注') {
+            infos1.push(`<span>${json[detail]}</span>`);
+        }
     }
+    infos.push(infos1.join(separator));
+    let remark = json.备注;
+    if (remark === null || remark === undefined) remark = "--";
+    infos.push(`<span>备注:${remark}</span>`);
     let allInfos;
     if (infos) {
         allInfos = infos.join("<hr/>");
@@ -80,12 +51,12 @@ var renderOne = function (item) {
 let flag = false;
 var toRender = function (data, conf) {
     if (!data || data.length == 0) return;
-    let _conf = { data: data, numInLine: 2, numInPage: 1000, render: renderOne, target: "table.alloc", callback: () => gf.resizeTable() };
+    let _conf = { data: data, numInPage: 1000, render: renderOne, target: "div#target", callback: () => gf.resizeTable() };
     Object.assign(_conf, conf);
-    gfbtn.renderBtnTable(_conf);
+    gfdiv.renderDivs(_conf);
 }
 
-export var allocRender = function (data, conf) {
+export var render = function (data, conf) {
     if (flag) return;
     try {
         flag = true;

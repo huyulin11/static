@@ -1,13 +1,13 @@
 import "/s/j/vue/vue.min.js";
-import { allocData } from "./client.render.list.data.js?f=crmv000001";
-import { allocRender } from "./client.render.list.work.js?f=crmv000001";
+import { data } from "./client.render.list.data.js?f=crmv000001";
+import { render } from "./client.render.list.work.js?f=crmv000001";
 import "/s/buss/crm/client/client.list.event.js?f=crmv000001";
 
-let _conf = { numInLine: 2, target: "table.alloc" };
+let _conf = { numInLine: 1, target: "div#target" };
 let _search = {};
-let allocDataUdf = () => {
-	allocData((data) => {
-		allocRender(data, _conf);
+let dataUdf = () => {
+	data((data) => {
+		render(data, _conf);
 	}, _search);
 };
 
@@ -20,19 +20,19 @@ var vm = new Vue({
 		}
 	}, methods: {
 		inputFun: function (e) {
-			allocDataUdf();
+			dataUdf();
 		}
 	}
 });
 
 setInterval(function () {
 	if ($("#simple-2").is(":checked")) {
-		allocDataUdf();
+		dataUdf();
 	}
 }, 5000);
 
 setTimeout(function () {
-	allocDataUdf();
+	dataUdf();
 }, 500);
 
 setTimeout(function () {
@@ -41,5 +41,5 @@ setTimeout(function () {
 
 window.addEventListener("refresh", function (data) {
 	console.log("trigger event refresh");
-	allocDataUdf();
+	dataUdf();
 }, false);
