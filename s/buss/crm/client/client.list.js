@@ -3,7 +3,7 @@ import { data } from "./client.render.list.data.js?f=crmv000001";
 import { render } from "./client.render.list.work.js?f=crmv000001";
 import "/s/buss/crm/client/client.list.event.js?f=crmv000001";
 
-let _conf = { numInLine: 1, target: "div#target" };
+let _conf = { numInLine: gf.isPc() ? 2 : 1, target: "div#target" };
 let _search = {};
 let dataUdf = () => {
 	data((data) => {
@@ -41,5 +41,10 @@ setTimeout(function () {
 
 window.addEventListener("refresh", function (data) {
 	console.log("trigger event refresh");
+	dataUdf();
+}, false);
+window.addEventListener("loginSuccess", function (data) {
+	console.log("loginSuccess event refresh");
+	$("#loginHideDiv").trigger("click");
 	dataUdf();
 }, false);

@@ -18,7 +18,7 @@ var loginSuccess = function (data) {
             indexUrl = "/s/buss/g/h/manager.html";
         }
         location.assign(indexUrl);
-        gf.refreshEvent();
+        gf.loginSuccessEvent();
     } else {
         layer.msg(data.msg);
         $("#username").focus();

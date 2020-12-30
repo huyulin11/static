@@ -30,6 +30,13 @@ class GF {
             parent.dispatchEvent(newEvent);
         }
     };
+    loginSuccessEvent() {
+        var newEvent = new CustomEvent('loginSuccess');
+        window.dispatchEvent(newEvent);
+        if (parent && parent != window) {
+            parent.dispatchEvent(newEvent);
+        }
+    };
     layerOpenBak(confs) {
         if ($(window).width() < 960) {
             if (confs.newTab) {
