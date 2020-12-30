@@ -523,6 +523,9 @@ class GF {
         return null;
     };
     addChooseFlag(conf) {
+        if ($("link#checkboxcss").length == 0) {
+            $("head").append(`<link id="checkboxcss" rel="stylesheet" href="/s/buss/acs/g/c/checkbox.css">`);
+        }
         let { container, id, name, click } = conf;
         let checkbox = $(`<input type="checkbox" id="${id}" class="checkbox">`);
         let chooseflag = $(`<div class='chooseflag'></div>`);
