@@ -13,7 +13,7 @@ export var renderList = function (agvs, agvDiv) {
     _numInLine = (agvNum >= 6) ? (agvDiv.width() > 500 ? 3 : 2) : 1;
     var numOfRow = agvNum >= _numInLine ? _numInLine : agvNum;
     $.each(agvs, function (n, agvinfo) {
-        if (!localStorage.toggleOnlyCurrent || localStorage.currentAgvId == agvinfo.id) {
+        if (!localStorage.toggleOnlyCurrent || !localStorage.currentAgvId || localStorage.currentAgvId == agvinfo.id) {
             renderOne(numOfRow, agvinfo, agvDiv);
         }
     });

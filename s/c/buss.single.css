@@ -11,12 +11,7 @@ div.td .call>img,div.td .delete>img  {
 div.td{
     width: 100%;
 }
-div.td p.desc{
-    position: absolute;
-    left: 5%;
-    z-index: 2;
-    background-color: inherit;
-}
+
 div.td>div{
     border-radius: 10px;
 }
@@ -25,7 +20,7 @@ div.td hr  {
 	/* color: #bab1b1; */
 	/* background: #EEE; */
 	border: solid 1px;
-	border-style: dotted;
+	border-style: double;
 	border-color: inherit;
 }
 div.tr {
