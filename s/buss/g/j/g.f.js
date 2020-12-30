@@ -522,6 +522,17 @@ class GF {
         }
         return null;
     };
+    addChooseFlag(conf) {
+        let { container, id, name, click } = conf;
+        let checkbox = $(`<input type="checkbox" id="${id}" class="checkbox">`);
+        let chooseflag = $(`<div class='chooseflag'></div>`);
+        if (click) { $(checkbox).on("click", function (e) { click(); }); }
+        $(chooseflag).append(checkbox);
+        $(chooseflag).append(`
+            <label for="${id}" class="red" title="${name}"></label>
+            <label>${name}</label>`);
+        $(container).append(chooseflag);
+    }
 }
 
 var gf = new GF();

@@ -1,3 +1,8 @@
+.chooseflag{
+    display: inline-grid;
+    font-size: 10px;
+    color: #ddd;
+}
 
 input[type="checkbox"] {
     display: none;
@@ -28,47 +33,33 @@ input[type="checkbox"]+label:before {
     cursor: pointer;
 }
 
-#simple-1:checked+label.red,
-#simple-2:checked+label.red,
-#simple-3:checked+label.red {
+div.chooseflag>.checkbox:checked+label.red {
     background: #AEDCAE;
 }
 
-#simple-1:checked+label.red:after,
-#simple-2:checked+label.red:after,
-#simple-3:checked+label.red:after {
+div.chooseflag>.checkbox:checked+label.red:after {
     background: #84AF9B;
 }
 
-#simple-1:checked+label.green,
-#simple-2:checked+label.green,
-#simple-3:checked+label.green {
+div.chooseflag>.checkbox:checked+label.green {
     background: #AEDCAE;
 }
 
-#simple-1:checked+label.green:after,
-#simple-2:checked+label.green:after,
-#simple-3:checked+label.green:after {
+div.chooseflag>.checkbox:checked+label.green:after {
     background: #5CB85C;
 }
 
-#simple-1:checked+label:after,
-#simple-2:checked+label:after,
-#simple-3:checked+label:after {
+div.chooseflag>.checkbox:checked+label:after {
     left: calc(100% - 20px);
 }
 
-#simple-1+label,
-#simple-2+label,
-#simple-3+label {
+div.chooseflag>.checkbox+label {
     background: #ddd;
     border-radius: 20px;
     box-shadow: 1px 1px 3px #aaa;
 }
 
-#simple-1+label:after,
-#simple-2+label:after,
-#simple-3+label:after {
+div.chooseflag>.checkbox+label:after {
     background: #fff;
     border-radius: 50%;
     box-shadow: 1px 1px 3px #aaa;

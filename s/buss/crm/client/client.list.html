@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>凯钒科技—CRM</title>
@@ -66,9 +69,7 @@
     </div>
     <div id="rootContainer">
         <div id="ctrl">
-            <div><input type="checkbox" id="simple-2">
-                <label for="simple-2" class="red" title="定时刷新">
-            </div>
+            <div id="chooseflags"></div>
             <input id="kw" name="wd" class="bigSearch" :value="bigSearchResult" @input="inputFun" maxlength="255"
                 autocomplete="off" placeholder="输入任意内容过滤">
         </div>

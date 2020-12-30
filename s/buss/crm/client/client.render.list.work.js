@@ -9,6 +9,7 @@ var renderOne = function (item) {
     let json = JSON.parse(item.value);
     let $btn = $(`<button class='item'></button>`);
     let $delBtn = $(`<button class='delete'><img src='/s//i/icon/delete.png'></button>`);
+    if (item.delflag == 1) $($delBtn).html("已删除");
     let $callBtn = $(`<button class='call'><img src='/s//i/icon/call.png'></button>`);
     $($btn).data('key', item.key);
     $($delBtn).css("width", "49%");
@@ -38,9 +39,6 @@ var renderOne = function (item) {
     let $callA = $(`<a class='call' href='tel:${json.电话}'></a>`);
     $($callA).append($callBtn);
     $($div).append($callA);
-    for (let detail in json) {
-        $($delBtn).data(detail, json[detail]);
-    }
     $($delBtn).data("key", item.key);
     $($div).append($delBtn);
     $($div).addClass(json.状态);

@@ -15,8 +15,10 @@
 	</div>
 	<div id="rootContainer">
 		<div id="ctrl">
-			<div><input type="checkbox" id="simple-2">
-				<label for="simple-2" class="red" title="定时刷新">
+			<div class="chooseflag">
+				<input type="checkbox" id="simple-2" class="checkbox">
+				<label for="simple-2" class="red" title="定时刷新"></label>
+				<label>定时刷新</label>
 			</div>
 			<input id="kw" name="wd" class="bigSearch" :value="bigSearchResult" @input="inputFun" maxlength="255"
 				autocomplete="off" placeholder="输入货位名称过滤查询结果">

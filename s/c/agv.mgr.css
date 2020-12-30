@@ -459,7 +459,7 @@ hr.gray{
 
 .doc-buttons{
 	position: fixed;
-	bottom: 5px;
+	top: 5px;
 	right: 5px;
 	width: 300px;
 	z-index: 10;
