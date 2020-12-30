@@ -1,6 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
+import { move } from "/s/buss/acs/location/BASE/render/location.on.js";
 
 let confs = [];
 confs.push({ init: true, url: "/s/buss/agv/site/cache/h/site.cache.html", key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%" });
@@ -15,6 +16,17 @@ confs.push({
             $(this).removeClass("open").addClass("close");
             show();
             d3.select(".doc-buttons").select("#show").text("隐藏");
+        }
+    }
+});
+confs.push({
+    key: 'mouse', click: function () {
+        let flag = $(this).hasClass("close");
+        if (flag) {
+            $(this).removeClass("close").addClass("open");
+        } else {
+            $(this).removeClass("open").addClass("close");
+            move();
         }
     }
 });
