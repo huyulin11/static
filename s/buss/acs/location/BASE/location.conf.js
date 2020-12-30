@@ -7,6 +7,7 @@ var pathHome3 = svg.append('g').attr("id", "pathHome3");
 var pointHome = svg.append('g').attr("id", "pointHome");
 var defsHome = svg.append('g').attr("id", "defsHome");
 var textHome = svg.append('g').attr("id", "textHome");
+var agvHome = svg.append('g').attr("id", "agvHome");
 var widthAgvs = $("#agvs").width();
 var widthFixed = widthAgvs * 15 / 24;
 var heightFixed = $("#agvs").height();
@@ -36,4 +37,5 @@ export var conf = {
     pointHome: pointHome,
     defsHome, defsHome,
     textHome: textHome,
+    agvHome: agvHome,
 }
