@@ -158,15 +158,16 @@ export let dataAgvLocation = () => allAgvsInfo(function (data) {
     datas.agvLocation = [];
     datas.taskDetails = Object.keys(data);
     for (var i = 1; i < datas.taskDetails.length; i++) {
+        var currentsite = data[datas.taskDetails[i]].agvInfo.currentsite;
         var object = data[datas.taskDetails[i]].currentTask.object;
         if (object) {
-            var currentsite = data[datas.taskDetails[i]].agvInfo.currentsite;
             for (var detail of object.detail) {
                 if (detail.siteid == currentsite && detail.opflag != 'NEW') {
+                    var isNextsite = false;
                     for (var detail2 of object.detail) {
                         if (detail.detailsequence + 1 == detail2.detailsequence && detail2.opflag == 'NEW') {
                             var nextsite = detail2.siteid;
-                            var isNextsite = true;
+                            isNextsite = true;
                             break;
                         }
                     }
@@ -180,6 +181,7 @@ export let dataAgvLocation = () => allAgvsInfo(function (data) {
                         if (next.id == nextsite) {
                             datas.agvLocation.push({
                                 "isWorking": true,
+                                "currentsite": currentsite,
                                 "currentX": current.x,
                                 "currentY": current.y,
                                 "nextX": next.x,
@@ -192,11 +194,11 @@ export let dataAgvLocation = () => allAgvsInfo(function (data) {
                 }
             }
         } else {
-            var currentsite = data[datas.taskDetails[i]].agvInfo.currentsite;
             for (var current of datas.locations) {
                 if (current.id == currentsite) {
                     datas.agvLocation.push({
                         "isWorking": false,
+                        "currentsite": currentsite,
                         "currentX": current.x,
                         "currentY": current.y
                     })
