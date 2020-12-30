@@ -1,6 +1,6 @@
 import "/s/j/vue/vue.min.js";
 import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
-import { renderCss } from "/s/buss/g/j/g.css.js?f=crmv000001";
+import { StringUtils } from "/s/buss/g/j/g.string.util.js";
 
 let container = "#rootContainer";
 let _key = gf.urlParam("key");
@@ -49,7 +49,7 @@ var vm = new Vue({
 				return;
 			};
 			let json = {
-				姓名: this.姓名, 电话: this.电话,
+				姓名: this.姓名, 电话: StringUtils.trimAll(this.电话),
 				公司: this.公司, 状态: this.状态, 备注: gf.htmlspecialchars(this.备注)
 			};
 			gf.doAjax({
