@@ -4,6 +4,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 
 export var drawAgv = function () {
+    conf.agvHome.selectAll("image").remove();
     var image = conf.agvHome.selectAll("image").data(datas.agvLocation)
         .enter()
         .append("image")
