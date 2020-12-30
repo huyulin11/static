@@ -1,8 +1,6 @@
-import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
-import { gf } from "/s/buss/g/j/g.f.js";
-import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
-import { gcol } from "/s/buss/g/j/g.col.js";
-import { renderCss } from "/s/buss/g/j/g.css.js";
+import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
+import { gfbtn } from "/s/buss/g/j/g.f.btn.js?f=crmv000001";
+import { renderCss } from "/s/buss/g/j/g.css.js?f=crmv000001";
 
 {
     let csss = [];

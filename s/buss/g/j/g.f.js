@@ -461,18 +461,18 @@ class GF {
         return role;
     };
     layerOpen(conf) {
-        Object.assign(conf, {
+        let newConf = Object.assign({
             area: gf.layerArea(),
             shadeClose: true,
-        });
-        return layer.open(conf);
+        }, conf);
+        return layer.open(newConf);
     };
     layerOpenSmall(conf) {
-        Object.assign(conf, {
+        let newConf = Object.assign({
             area: gf.layerAreaSmall(),
             shadeClose: true,
-        });
-        return layer.open(conf);
+        }, conf);
+        return layer.open(newConf);
     };
     layerArea() {
         if (gf.isPc()) { return ["95%", "90%"]; }

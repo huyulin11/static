@@ -92,10 +92,15 @@ let initEvent = () => {
             var self = $(this).data("self");
             if (url) {
                 if (type === 'LAYER') {
-                    window.pageii = gf.layerOpen({
+                    let _conf = {
                         type: 2,
                         content: url
-                    });
+                    };
+                    let _layerArea = window.layerArea;
+                    if (_layerArea) {
+                        _conf.area = typeof layerArea == 'function' ? _layerArea() : _layerArea;
+                    }
+                    window.pageii = gf.layerOpen(_conf);
                 } else {
                     window.open(url, self ? "_self" : false);
                 }

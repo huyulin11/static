@@ -1,6 +1,6 @@
 import "/s/j/vue/vue.min.js";
-import { gf } from "/s/buss/g/j/g.f.js";
-import { renderCss } from "/s/buss/g/j/g.css.js";
+import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
+import { renderCss } from "/s/buss/g/j/g.css.js?f=crmv000001";
 
 let container = "#rootContainer";
 let _key = gf.urlParam("key");
@@ -62,7 +62,6 @@ var vm = new Vue({
 					if (!_key) vm.clear();
 				}
 			});
-			this.clear();
 		},
 		clear() {
 			vm.姓名 = null;
@@ -70,6 +69,9 @@ var vm = new Vue({
 			vm.公司 = null;
 			vm.备注 = null;
 			vm.状态 = "基础";
+		},
+		close() {
+			parent.layer.close(parent.pageii);
 		},
 		enter() {
 			this.save();
