@@ -2,13 +2,14 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { rectPath } from "/s/buss/acs/location/BASE/path/draw.path.js";
+import { xnumToWindow,ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 
 export var renderAgvLocation = function () {
     $("image").remove();
     for (var location of datas.agvLocation) {
-        conf.svg.append("image")
-            .attr("x", conf.padding.left + conf.xScale(location.currentX) - 30)
-            .attr("y", conf.height - conf.padding.bottom - conf.yScale(location.currentY) - 30)
+        conf.agvHome.append("image")
+            .attr("x", xnumToWindow(location.currentX) - 30)
+            .attr("y", ynumToWindow(location.currentY) - 30)
             .attr("width", 60)
             .attr("height", 60)
             .attr("xlink:href", "/s/i/agv.png")
