@@ -31,13 +31,12 @@
     import { gp } from "/s/buss/g/j/g.p.js";
     import "/s/buss/acs/location/BASE/location.init.js";
     import "/s/buss/acs/location/BASE/location.p.js";
-    import { move } from "/s/buss/acs/location/BASE/render/location.on.js";
     import { renderSvg, renderAgvLocation } from "/s/buss/acs/location/BASE/location.render.js";
     import "/s/buss/acs/location/BASE/render/location.button.js"
     import { markerDef } from "/s/buss/acs/location/BASE/path/def.marker.radian.js";
     import { dataAgvLocation } from "/s/buss/acs/location/BASE/location.data.js";
     markerDef();
-    renderSvg(() => { move() });
+    renderSvg(() => { });
     setTimeout(renderSvg, 3000);
     // setInterval(renderSvg, 3000);
 
