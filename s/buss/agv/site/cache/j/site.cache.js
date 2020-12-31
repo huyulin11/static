@@ -47,18 +47,20 @@ function add() {
 	});
 }
 
+function del() {
+	var cbox = gf.checkOnlyOne("key");
+	if (!cbox) { return; }
+	layer.confirm('是否删除？', function (index) {
+		var url = '/app/conf/del.shtml';
+		gf.ajax(url, { "table": "FANCY_CACHE_CONF", key: JSON.stringify(cbox) }, "json");
+	});
+}
+
 function refresh() {
 	window.datagrid.loadData();
 }
 
-$("#search").on("click", function () {
-	doSearch();
-});
-
-$("#add").click("click", function () {
-	add();
-});
-
-$("#refresh").click("click", function () {
-	refresh();
-});
+$("#search").on("click", function () { doSearch(); });
+$("#add").click("click", function () { add(); });
+$("#del").click("click", function () { del(); });
+$("#refresh").click("click", function () { refresh(); });
