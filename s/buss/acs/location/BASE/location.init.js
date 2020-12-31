@@ -1,7 +1,7 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
-import { move, bandBodyClick } from "/s/buss/acs/location/BASE/render/location.on.js";
+import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/BASE/render/location.on.js";
 
 let confs = [];
 bandBodyClick();

@@ -7,7 +7,7 @@ import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { deleteLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
 import { deleteLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 
-export var move = function (flag) {
+export var mouseEvent = function (flag) {
     dragPoint(flag);
 
     dblclickAddPoint(flag);
