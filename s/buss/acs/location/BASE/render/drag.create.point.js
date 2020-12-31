@@ -36,8 +36,8 @@ export var createPoint = function () {
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 5);
-    dragPoint();
-    updatePoint();
+    dragPoint(true);
+    updatePoint(true);
     addLocation(id, x, y);
     conf.textHome.append("text")
         .attr("id", function () {

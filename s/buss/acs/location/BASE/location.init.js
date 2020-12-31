@@ -24,9 +24,12 @@ confs.push({
         let flag = $(this).hasClass("close");
         if (flag) {
             $(this).removeClass("close").addClass("open");
+            move(flag);
+            layer.msg('编辑模式');
         } else {
             $(this).removeClass("open").addClass("close");
-            move();
+            move(flag);
+            layer.msg('查看模式');
         }
     }
 });
