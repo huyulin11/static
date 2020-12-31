@@ -10,9 +10,9 @@ import { deleteLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 export var move = function (flag) {
     dragPoint(flag);
 
-    addPoint(flag);
+    dblclickAddPoint(flag);
 
-    updatePoint(flag);
+    rightClickPoint(flag);
 
     dragPath(flag);
 
@@ -72,7 +72,7 @@ export var dragPath = function (flag) {
     }
 };
 
-export var updatePoint = function (flag) {
+export var rightClickPoint = function (flag) {
     if (flag) {
         conf.svg.selectAll("circle")
             .on("contextmenu", function (d, i) {
@@ -133,7 +133,7 @@ export var dragPoint = function (flag) {
 
 }
 
-export var addPoint = function (flag) {
+export var dblclickAddPoint = function (flag) {
     if (flag) {
         d3.select("body")
             .select("#coordinate")

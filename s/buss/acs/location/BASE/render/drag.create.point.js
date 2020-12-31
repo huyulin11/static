@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dragPoint, updatePoint } from "/s/buss/acs/location/BASE/render/location.on.js";
+import { dragPoint, rightClickPoint } from "/s/buss/acs/location/BASE/render/location.on.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
 import { fillHome1, fillHome2 } from "/s/buss/acs/location/BASE/path/fillter.pathHome.js";
 
@@ -37,7 +37,7 @@ export var createPoint = function () {
         .attr("cy", y)
         .attr("r", 5);
     dragPoint(true);
-    updatePoint(true);
+    rightClickPoint(true);
     addLocation(id, x, y);
     conf.textHome.append("text")
         .attr("id", function () {
