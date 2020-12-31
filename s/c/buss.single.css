@@ -22,7 +22,7 @@ div.td hr  {
 	/* background: #EEE; */
 	border: solid 1px;
 	border-style: double;
-	border-color: inherit;
+	border-color: #eeeeee2e;
 }
 div.tr {
 	border: #eee solid 1px;

@@ -4,7 +4,7 @@ import { ITEM_LOGIN } from "/s/buss/acs/FANCY/j/acs.control.conf.js?f=crmv000001
 
 let layerArea = () => {
     if (gf.isPc()) { return ["95%", "90%"]; }
-    else { return ["99%", "90%"]; }
+    else { return ["99%", "99%"]; }
 };
 window.layerArea = layerArea;
 
@@ -30,7 +30,10 @@ $("div#target").delegate(".delete", "click", function (e) {
         btn1: function () {
             gf.doAjax({
                 url: `/app/conf/delByLogic.shtml`, type: "POST",
-                data: { table: "CRM_CLIENTS", key: _key }
+                data: { table: "CRM_CLIENTS", key: _key },
+                whenSuccess: () => {
+                    gf.refreshEvent();
+                }
             });
         },
     });

@@ -10,14 +10,23 @@ var defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
 };
 
 class GF {
-    defaultSucFun(data) {
-        if (typeof data == "string") data = JSON.parse(data);
+    defaultSucFun(data, whenSuccess) {
+        if (typeof data == "string") {
+            try {
+                data = JSON.parse(data);
+            } catch (error) {
+                layer.msg("连接失败！");
+                return;
+            }
+        }
         if (data.code >= 0) {
             gf.layerMsg(data.msg ? data.msg : "保存成功！");
             if (window.datagrid && window.datagrid.loadData) {
                 window.datagrid.loadData();
             }
-            gf.refreshEvent();
+            if (whenSuccess) {
+                whenSuccess();
+            }
         } else {
             layer.msg(data.msg);
         }
@@ -144,7 +153,9 @@ class GF {
     doAjax(params) {
         var pp = {
             error: defaultErr,
-            success: gf.defaultSucFun,
+            success: function (data) {
+                gf.defaultSucFun(data, params.whenSuccess);
+            },
             timeout: 5000
         };
         $.extend(pp, params);
@@ -153,7 +164,9 @@ class GF {
     doAjaxSubmit(form, params) {
         var pp = {
             error: defaultErr,
-            success: gf.defaultSucFun,
+            success: function (data) {
+                gf.defaultSucFun(data, params.whenSuccess);
+            },
             timeout: 5000
         };
         $.extend(pp, params);

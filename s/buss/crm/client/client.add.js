@@ -57,9 +57,10 @@ var vm = new Vue({
 				data: {
 					table: 'CRM_CLIENTS', key: _key, value: JSON.stringify(json)
 				},
-				success: function (data) {
-					gf.defaultSucFun(data);
-					if (!_key) vm.clear();
+				whenSuccess: () => {
+					gf.refreshEvent();
+					// if (!_key) vm.clear();
+					parent.layer.close(parent.pageii);
 				}
 			});
 		},
