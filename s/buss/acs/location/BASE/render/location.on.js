@@ -18,16 +18,12 @@ export var move = function (flag) {
 
     rightClickPath(flag);
 
-    bandBodyClick(flag);
+    bandBodyClick();
 }
-var bandBodyClick = function (flag) {
-    if (flag) {
-        conf.svg.on("contextmenu", function (d, i) {
-            d3.event.preventDefault();
-        })
-    } else {
-        conf.svg.on("contextmenu", null);
-    }
+var bandBodyClick = function () {
+    conf.svg.on("contextmenu", function (d, i) {
+        d3.event.preventDefault();
+    })
 }
 
 var rightClickPath = function (flag) {
