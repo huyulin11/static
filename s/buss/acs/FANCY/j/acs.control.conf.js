@@ -8,7 +8,12 @@ export const
 		key: 'task', target: 'div#taskContainer', url: "/s/buss/sys/conf/h/agv.cache.html", init: true, height: "50%", width: "80%",
 	},
 	ITEM_LOGIN = {
-		key: 'login', target: 'div#loginContainer', url: "/s/buss/g/h/loginSuccess.html", init: true, height: "450px", width: "300px",
+		key: 'login', target: 'div#loginContainer', url: "/s/buss/g/h/loginSuccess.html", init: true, height: "450px", width: "300px", whenInit: () => {
+			window.addEventListener("loginFail", function (data) {
+				if ($("#loginHideDiv").hasClass("close"))
+					$("#loginHideDiv").trigger("click");
+			}, false);
+		},
 	};
 
 export let renderModelConfs = () => {

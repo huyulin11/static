@@ -27,7 +27,7 @@ let initReady = (key, url, width, height) => {
 }
 
 let doRenderModel = (conf) => {
-    let { init, key, target, click, url, self, type, width, height } = conf;
+    let { init, whenInit, key, target, click, url, self, type, width, height } = conf;
     if (type === 'LINK' || type === 'LAYER') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
         $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
@@ -36,6 +36,7 @@ let doRenderModel = (conf) => {
         return;
     }
 
+    if (whenInit) { whenInit(); }
     if (init) {
         if (init instanceof Function) {
             init();

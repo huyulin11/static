@@ -44,11 +44,9 @@ setTimeout(function () {
 }, 1000);
 
 window.addEventListener("refresh", function (data) {
-	console.log("trigger event refresh");
 	dataUdf();
 }, false);
 window.addEventListener("loginSuccess", function (data) {
-	console.log("loginSuccess event refresh");
 	$("#loginHideDiv").trigger("click");
 	dataUdf();
 }, false);
