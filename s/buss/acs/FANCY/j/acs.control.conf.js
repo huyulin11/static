@@ -1,13 +1,14 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 
-export const ITEM_MSG = { key: 'msg', target: 'div#msgContainer' },
+export const
+	ITEM_MSG = {
+		key: 'msg', target: 'div#msgContainer'
+	},
 	ITEM_TASK = {
-		url: "/s/buss/sys/conf/h/agv.cache.html", init: true,
-		height: "50%", width: "80%", key: 'task', target: 'div#taskContainer'
+		key: 'task', target: 'div#taskContainer', url: "/s/buss/sys/conf/h/agv.cache.html", init: true, height: "50%", width: "80%",
 	},
 	ITEM_LOGIN = {
-		key: 'login', url: "/s/buss/g/h/loginSuccess.html", init: true,
-		height: "450px", width: "300px", target: 'div#loginContainer'
+		key: 'login', target: 'div#loginContainer', url: "/s/buss/g/h/loginSuccess.html", init: true, height: "450px", width: "300px",
 	};
 
 export let renderModelConfs = () => {

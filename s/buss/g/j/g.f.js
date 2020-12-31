@@ -23,19 +23,22 @@ class GF {
         }
         if (data.err) console.log(err);
     };
-    refreshEvent() {
-        var newEvent = new CustomEvent('refresh');
+    bussEvent(name) {
+        console.log(`trigger ${name} event`);
+        var newEvent = new CustomEvent(name);
         window.dispatchEvent(newEvent);
         if (parent && parent != window) {
             parent.dispatchEvent(newEvent);
         }
     };
+    refreshEvent() {
+        gf.bussEvent("refresh");
+    };
     loginSuccessEvent() {
-        var newEvent = new CustomEvent('loginSuccess');
-        window.dispatchEvent(newEvent);
-        if (parent && parent != window) {
-            parent.dispatchEvent(newEvent);
-        }
+        gf.bussEvent("loginSuccess");
+    };
+    loginFailEvent() {
+        gf.bussEvent("loginFail");
     };
     layerOpenBak(confs) {
         if ($(window).width() < 960) {
@@ -426,6 +429,7 @@ class GF {
                 }
             }, error: function () {
                 if (no) { no(); }
+                gf.loginFailEvent();
             }
         });
     };
