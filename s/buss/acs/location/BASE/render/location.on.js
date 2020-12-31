@@ -20,7 +20,7 @@ export var move = function (flag) {
 
     bandBodyClick();
 }
-var bandBodyClick = function () {
+export var bandBodyClick = function () {
     conf.svg.on("contextmenu", function (d, i) {
         d3.event.preventDefault();
     })
