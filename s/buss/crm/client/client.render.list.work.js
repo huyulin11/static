@@ -27,7 +27,9 @@ var renderOne = function (item) {
     infos.push(infos1.join(separator));
     let remark = json.备注;
     if (remark === null || remark === undefined) remark = "--";
-    infos.push(`<span>备注:${remark}</span>`);
+    if (!$("#showList").is(":checked")) {
+        infos.push(`<span>备注:${remark}</span>`);
+    }
     let allInfos;
     if (infos) {
         allInfos = infos.join("<hr/>");
@@ -38,9 +40,11 @@ var renderOne = function (item) {
     $($div).append($btn);
     let $callA = $(`<a class='call' href='tel:${json.电话}'></a>`);
     $($callA).append($callBtn);
-    $($div).append($callA);
     $($delBtn).data("key", item.key);
-    $($div).append($delBtn);
+    if (!$("#showList").is(":checked")) {
+        $($div).append($callA);
+        $($div).append($delBtn);
+    }
     $($div).addClass(json.状态);
     return $div;
 }
