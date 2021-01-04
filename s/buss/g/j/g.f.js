@@ -9,6 +9,11 @@ var defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     gf.layerMsg(msg);
 };
 
+var checkLoginFunNo = (no) => {
+    gf.loginFailEvent();
+    if (no) { no(); }
+}
+
 class GF {
     defaultSucFun(data, whenSuccess) {
         if (typeof data == "string") {
@@ -434,15 +439,18 @@ class GF {
             timeout: 5000,
             dataType: "JSON",
             success: function (json) {
-                if (json) {
-                    if (json.success) { if (yes) { yes(); } }
-                    else { if (no) { no(); } }
-                } else {
-                    if (yes) { yes(); }
+                try {
+                    if (json) {
+                        if (json.success) { if (yes) { yes(); } }
+                        else { checkLoginFunNo(no); }
+                    } else {
+                        if (yes) { yes(); }
+                    }
+                } catch (error) {
+                    checkLoginFunNo(no);
                 }
             }, error: function () {
-                if (no) { no(); }
-                gf.loginFailEvent();
+                checkLoginFunNo(no);
             }
         });
     };
