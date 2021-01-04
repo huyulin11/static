@@ -45,16 +45,16 @@
                             autocomplete="off" /></td>
                 </tr>
                 <tr>
-                    <td><input id="电话" placeholder="输入电话" v-model="电话" @keyup.enter="enter" autocomplete="off" />
-                    </td>
+                    <td><input id="职位" placeholder="输入职位" v-model="职位" @keyup.enter="enter" autocomplete="off" /></td>
                 </tr>
                 <tr>
-                    <td><input id="公司" placeholder="输入公司" v-model="公司" @keyup.enter="enter" autocomplete="off" />
-                    </td>
+                    <td><input id="电话" placeholder="输入电话" v-model="电话" @keyup.enter="enter" autocomplete="off" /></td>
+                </tr>
+                <tr>
+                    <td><input id="公司" placeholder="输入公司" v-model="公司" @keyup.enter="enter" autocomplete="off" /></td>
                 </tr>
                 <tr>
                     <td><select id="状态" v-model="状态" autocomplete="off">
-                            <option value="" selected>----请选择----</option>
                             <option value="基础">基础</option>
                             <option value="潜在">潜在</option>
                             <option value="成功">成功</option>
@@ -64,9 +64,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><textarea id="备注" placeholder="输入备注" v-model="备注" @keyup.enter="enter"
-                            autocomplete="off"></textarea>
-                    </td>
+                    <td><textarea id="备注" placeholder="输入备注" v-model="备注" autocomplete="off"></textarea></td>
                 </tr>
             </tbody>
         </table>

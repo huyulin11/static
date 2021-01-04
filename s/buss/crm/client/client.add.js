@@ -14,6 +14,7 @@ Vue.directive('focus', {
 var vm = new Vue({
 	data: {
 		姓名: null,
+		职位: null,
 		电话: null,
 		公司: null,
 		状态: null,
@@ -34,23 +35,39 @@ var vm = new Vue({
 				let json = JSON.parse(data);
 				let value = JSON.parse(json[0].value);
 				vm.姓名 = value.姓名;
+				vm.职位 = value.职位;
 				vm.电话 = value.电话;
 				vm.公司 = value.公司;
 				vm.状态 = value.状态;
-				vm.备注 = value.备注;
+				vm.备注 = StringUtils.textShow(value.备注);
 			}
 		});
 	},
 	methods: {
+		checkNull() {
+			if (!this.姓名 || !this.电话 || !this.公司 || !this.职位) {
+				if (!this.姓名) {
+					$("#姓名").focus();
+				} else if (!this.职位) {
+					$("#职位").focus();
+				} else if (!this.电话) {
+					$("#电话").focus();
+				} else if (!this.公司) {
+					$("#公司").focus();
+				}
+				layer.msg("姓名、电话、公司、职位不能为空！");
+				return false;
+			};
+			return true;
+		},
 		save() {
-			if (!this.姓名 || !this.电话 || !this.公司 || !this.状态) {
-				$("#姓名").focus();
-				layer.msg("姓名、电话、公司、状态不能为空！");
+			let checkNullFlag = this.checkNull();
+			if (!checkNullFlag) {
 				return;
 			};
 			let json = {
-				姓名: this.姓名, 电话: StringUtils.trimAll(this.电话),
-				公司: this.公司, 状态: this.状态, 备注: gf.htmlspecialchars(this.备注)
+				姓名: this.姓名, 职位: this.职位, 电话: StringUtils.trimAll(this.电话),
+				公司: this.公司, 状态: this.状态, 备注: StringUtils.textSave(this.备注),
 			};
 			gf.doAjax({
 				url: '/app/conf/set.shtml',
@@ -66,6 +83,7 @@ var vm = new Vue({
 		},
 		clear() {
 			vm.姓名 = null;
+			vm.职位 = null;
 			vm.电话 = null;
 			vm.公司 = null;
 			vm.备注 = null;

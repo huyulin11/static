@@ -434,5 +434,11 @@ export let StringUtils = {
     //转义字符串中的元字符
     escapeMetacharacterOfStr: function (input) {
         return input.replace(/[\^\$\(\)\*\+\.\[\]\|\\\-\?\{\}\|]/gm, "\\$&");
-    }
+    },
+    textSave: function (s) {
+        return (s ? (s.replace(/\r\n/g, '<br/>').replace(/\n/g, '<br/>').replace(/\s/g, ' ')) : "");
+    },
+    textShow: function (s) {
+        return s ? (s.replace(/<br\/>/g, '\r\n')) : "";
+    },
 };
