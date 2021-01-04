@@ -3,7 +3,7 @@ import { getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
-
+import { drawArrow } from "/s/buss/acs/location/BASE/path/radian.def.js";
 
 export var startedPath = function () {
     datas.init();
@@ -23,6 +23,10 @@ export var dragedPath = function () {
     d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
         .attr("d", function () {
             return dToStrig(mPoint[0], x, mPoint[1], y);
+        })
+    d3.select("#mar" + $(this).attr("from") + $(this).attr("to"))
+        .attr("orient", function () {
+            return drawArrow(mPoint[0], x, mPoint[1], y);
         })
 }
 export var endedPath = function () {
@@ -46,12 +50,15 @@ export var endedPath = function () {
             .attr("to", nextid)
             .attr("d", function () {
                 return dToStrig(x1, x2, y1, y2);
-            })
-            .attr("style", "marker-end:url(#triangle);");
+            });
         d3.select("#w" + siteid + oldnext)
             .attr("id", "w" + siteid + nextid)
             .attr("d", function () {
                 return dToStrig(x1, x2, y1, y2);
+            });
+        d3.select("#mar" + siteid + oldnext)
+            .attr("orient", function () {
+                return drawArrow(x1, x2, y1, y2);
             })
     } else {
         layer.msg('调整失败，与原路径相同');
@@ -63,7 +70,10 @@ export var endedPath = function () {
             });
             d3.select("#w" + $(this).attr("from") + $(this).attr("to")).attr("d", function () {
                 return dToStrig(x1, xOld, y1, yOld);
-            })
+            });
+            d3.select("#mar" + $(this).attr("from") + $(this).attr("to")).attr("orient", function () {
+                return drawArrow(x1, xOld, y1, yOld);
+            });
         } else d3.select(this).remove();
     }
 }
