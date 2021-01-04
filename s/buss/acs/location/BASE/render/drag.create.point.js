@@ -2,7 +2,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dragPoint, rightClickPoint } from "/s/buss/acs/location/BASE/render/location.on.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
-import { fillHome1, fillHome2 } from "/s/buss/acs/location/BASE/path/fillter.pathHome.js";
+import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/BASE/path/fillter.pathHome.js";
 
 export var started = function () {
 }
@@ -14,6 +14,7 @@ export var draged = function () {
         .attr('cy', y);
     fillHome1(id, x, y);
     fillHome2(id, x, y);
+    fillMarkerPath(id, x, y);
     conf.svg.select("#t" + id)
         .attr("x", x + 7)
         .attr("y", y - 7);
