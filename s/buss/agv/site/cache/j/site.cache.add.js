@@ -30,8 +30,13 @@ var vm = new Vue({
                 layer.msg("站点或指令不能为空！");
                 return;
             };
-            acts = JSON.parse(acts);
-            $.extend(acts, JSON.parse(path));
+            try {
+                acts = JSON.parse(acts);
+                $.extend(acts, JSON.parse(path));
+            } catch (error) {
+                layer.msg("新增失败，格式不正确，请检查格式！");
+                return;
+            }
             let value = JSON.stringify(acts);
             gf.doAjax({
                 url: `/app/conf/set.shtml`, type: "POST",

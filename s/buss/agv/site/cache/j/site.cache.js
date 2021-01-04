@@ -12,7 +12,12 @@ let params = {
 
 	}, {
 		colkey: "value",
-		name: "缓存指令"
+		name: "缓存指令",
+		renderData: function (rowindex, data, rowdata, column) {
+			let value = JSON.parse(data).acts;
+			let json = { acts: value };
+			return JSON.stringify(json);
+		}
 	}, {
 		colkey: "updatetime",
 		name: "时间",
