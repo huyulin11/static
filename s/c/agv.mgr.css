@@ -486,8 +486,8 @@ span.currenttip {
     float: right;
     top: 96%;
     position: sticky;
-	border-radius: 50%;
-	width: 15px;
-	height: 15px;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-right: 2px;
     border: #fefefe82 1px solid;
 }
