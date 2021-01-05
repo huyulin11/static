@@ -10,8 +10,12 @@ export let globalCss = (target) => {
         csss.push(
             { name: "body", content: { "color": "#2e72ab" } },
             { name: "a", content: { "color": "#2e72ab" } },
-            { name: "button", content: { "background-color": "#2e72ab", "color": "#FFF" } },
         );
+        if (window.IN_THE_MGR || parent.IN_THE_MGR) {
+            csss.push(
+                { name: "button", content: { "background-color": "#2e72ab", "color": "#FFF" } },
+            );
+        }
     }
     renderCss('globalCss', target, csss);
 };

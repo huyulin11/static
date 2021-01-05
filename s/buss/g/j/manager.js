@@ -13,6 +13,8 @@ var _menuContainer = "#menuContainer";
 let _seq = 0;
 let _num = 3;
 
+window.IN_THE_MGR = true;
+
 var frameLoad = function (params) {
     $(this).contents().find("html").addClass("frame");
     let key = Math.random(0, 1);
