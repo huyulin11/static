@@ -14,16 +14,22 @@ export var deleteLogic = function (value, bool) {
 
 export var saveLogic = function (side, siteid, nextid, oldnext) {
     var json = {
-        "TaskSiteLogicFormMap.siteid": siteid,
+        "TaskSiteLogicFormMap.siteid": parseInt(siteid),
         "TaskSiteLogicFormMap.nextid": nextid,
         "TaskSiteLogicFormMap.side": side,
         "TaskSiteLogicFormMap.distance": 1,
-    }
+    };
+    var json2 = {
+        "siteid": parseInt(siteid),
+        "nextid": nextid,
+        "side": side,
+        "distance": 1,
+    };
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
         if (data.code > 0 && oldnext) {
-            var result = { "siteid": siteid, "nextid": oldnext };
+            var result = { "siteid": parseInt(siteid), "nextid": oldnext };
             deleteLogic(result, true);
-            updatetaskSiteLogic(siteid, oldnext, json);
         };
+        updatetaskSiteLogic(siteid, oldnext, json2);
     });
 };

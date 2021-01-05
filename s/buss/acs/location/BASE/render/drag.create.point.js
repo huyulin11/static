@@ -5,6 +5,7 @@ import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/si
 import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/BASE/path/fillter.pathHome.js";
 
 export var started = function () {
+    datas.init();
 }
 export var draged = function () {
     const { x, y } = d3.event;

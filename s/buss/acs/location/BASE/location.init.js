@@ -6,6 +6,7 @@ import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 let confs = [];
 bandBodyClick();
@@ -27,11 +28,12 @@ confs.push({
 confs.push({
     key: 'mouse', click: function () {
         let flag = $(this).hasClass("close");
+        datas.init();
         if (flag) {
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);
             layer.msg('编辑模式');
-            conf.pathHome1.selectAll("path").attr("d", function (d) {
+            conf.pathHome1.selectAll("path").data(datas.point).attr("d", function (d) {
                 var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
                 return dToStrig(result1[0], result2[0], result1[1], result2[1]);
@@ -40,7 +42,7 @@ confs.push({
             $(this).removeClass("open").addClass("close");
             mouseEvent(flag);
             layer.msg('查看模式');
-            conf.pathHome1.selectAll("path").attr("d", function (d) {
+            conf.pathHome1.selectAll("path").data(datas.point).attr("d", function (d) {
                 var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
                 if (!d.isDouble) {
