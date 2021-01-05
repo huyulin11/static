@@ -111,6 +111,12 @@ select {
 	box-shadow: #d9d9d9 10px 10px 30px 10px;
 }
 
+.frameInContainer{
+	height:100%;
+	width: 100%;
+	border-radius: 10px;
+}
+
 .close,
 .open {
 	background-size: 75%;
@@ -154,6 +160,8 @@ input.bigSearch {
 	box-shadow: grey 10px 10px 30px 5px;
 	z-index: 1;
 	border-radius: 10px;
+	align-items: center;
+	text-align: center;
 }
 
 #agvDiv.big {

@@ -32,9 +32,9 @@ export let renderModel = (confs) => {
 
 let _initReady = (key, url, width, height) => {
     let eleContainer = $(`<div id="${key}Container" class="fixed"></div>`);
-    $(eleContainer).append(`<iframe id='${key}Frame'></iframe>`);
+    $(eleContainer).append(`<iframe id='${key}Frame' class='frameInContainer'></iframe>`);
     $(eleContainer).css("height", height || "50%").css("width", width || "80%");
-    $(eleContainer).find(`iframe#${key}Frame`).css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
+    $(eleContainer).find(`iframe#${key}Frame`).attr("src", url).attr("frameborder", "no");
     $("body").append(eleContainer);
 }
 

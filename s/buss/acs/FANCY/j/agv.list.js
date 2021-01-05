@@ -86,7 +86,7 @@ export var initAgvList = function () {
     let checks = [
         { key: "toggleShowAgvListDetail", name: "选中隐藏详情", },
         { key: "toggleOnlyCurrent", name: "仅显示当前AGV", hide: hideFlag, },
-        { key: "toggleAutoShow", name: "自动弹出", hide: hideFlag, },
+        { key: "toggleAutoShow", name: "自动展现", hide: hideFlag, },
     ];
     if (agvDiv().find(`#agvListCtrl`).length == 0) {
         agvDiv().prepend(`<div id='agvListCtrl' style='font-size:10px;text-align:left;'></div>`);
@@ -116,6 +116,7 @@ export var initAgvList = function () {
         }
         if (localStorage.toggleAutoShow) {
             setTimeout(() => {
+                if ($("#taskHideDiv").hasClass('close')) $("#taskHideDiv").trigger("click");
                 if ($("#agvsHideDiv").hasClass('close')) $("#agvsHideDiv").trigger("click");
             }, 3000);
         }
