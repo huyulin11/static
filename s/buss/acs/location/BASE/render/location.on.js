@@ -6,6 +6,7 @@ import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/re
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { deleteLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
 import { deleteLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
+import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/location/BASE/path/new.path.drag.js";
 
 export var mouseEvent = function (flag) {
     dragPoint(flag);
@@ -97,7 +98,12 @@ export var rightClickPoint = function (flag) {
                     });
                     d3.select("#btn2").on("click", function () {
                         createPath(id, x, y);
-                        dragPath(true);
+                        d3.selectAll(".newLine").call(
+                            d3.drag()
+                                .on("start", startedNewPath)
+                                .on("drag", dragedNewPath)
+                                .on("end", endedNewPath)
+                        );
                         rightClickPath(true);
                     });
                     d3.select("#btn3").on("click", function () {

@@ -12,7 +12,7 @@ var newPath = function (num, x, y, id) {
     var paths = conf.pathHome3.append("path")
         .attr("num", num)
         .attr("from", id)
-        .attr("class", "clashLine")
+        .attr("class", "newLine")
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
         .attr("stroke-width", "6px")
