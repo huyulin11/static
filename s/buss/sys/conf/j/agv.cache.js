@@ -18,14 +18,14 @@ let _columns = [{
     name: "任务信息",
     renderData: function (rowindex, data, rowdata, column) {
         try {
+            let divider = window.innerWidth < 960 ? "<hr/>" : "";
             let json = JSON.parse(data);
-            let info = "";
+            let info = [];
             if (json.agvId) {
-                info += "指定执行车辆：" + json.agvId + ";";
+                info.push("指定执行车辆：" + json.agvId + ";");
             }
-            info += "类型：" + json.tasktype + ";";
+            info.push("类型：" + json.tasktype + ";");
             let jsonTo = json.to;
-            info += "路线:";
             let path = [];
             if (typeof jsonTo == 'string') {
                 jsonTo = jsonTo.split(",");
@@ -38,8 +38,8 @@ let _columns = [{
                     path.push((!site ? item.id : site) + "[" + gv.get("ARRIVED_SITE_ACT_TYPE", item.arrivedact) + "]");
                 }
             }
-            info += path.join("->");
-            return info;
+            info.push("路线:" + path.join("->"));
+            return info.join(divider);
         } catch (error) {
         }
     }

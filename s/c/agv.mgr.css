@@ -490,5 +490,17 @@ span.currenttip {
 	padding-left: 2px;
 	padding-right: 2px;
 	color: #DDD;
+	font-size: 10px;
     border: #fefefe82 1px solid;
+}
+
+span.currentsite {
+    float: left;
+    top: 96%;
+    position: sticky;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-right: 2px;
+	color: #DDD;
+	font-size: 10px;
 }

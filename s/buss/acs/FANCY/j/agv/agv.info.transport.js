@@ -65,7 +65,7 @@ export var init = function (target) {
 			for (let i in item) {
 				$(btn).data(i, item[i]);
 			}
-			inner += `<br/>${currentFlag ? "当前站点" : ""}`;
+			inner += `<br/><span class='currentsite'>${currentFlag ? "当前站点" : ""}</span>`;
 			$(btn).html(inner);
 			let div = $(`<div></div>`);
 			$(div).append(btn);
