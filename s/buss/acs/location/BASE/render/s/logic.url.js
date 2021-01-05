@@ -14,7 +14,7 @@ export var deleteLogic = function (value, bool) {
 
 export var saveLogic = function (side, siteid, nextid, oldnext) {
     var json = {
-        "TaskSiteLogicFormMap.siteid": parseInt(siteid),
+        "TaskSiteLogicFormMap.siteid": siteid,
         "TaskSiteLogicFormMap.nextid": nextid,
         "TaskSiteLogicFormMap.side": side,
         "TaskSiteLogicFormMap.distance": 1,
@@ -25,11 +25,11 @@ export var saveLogic = function (side, siteid, nextid, oldnext) {
         "side": side,
         "distance": 1,
     };
+    updatetaskSiteLogic(siteid, oldnext, json2);
     gf.ajax(`/tasksitelogic/addEntity.shtml`, json, "json", function (data) {
         if (data.code > 0 && oldnext) {
             var result = { "siteid": parseInt(siteid), "nextid": oldnext };
             deleteLogic(result, true);
         };
-        updatetaskSiteLogic(siteid, oldnext, json2);
     });
 };

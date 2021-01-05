@@ -98,7 +98,7 @@ export var rightClickPoint = function (flag) {
                     });
                     d3.select("#btn2").on("click", function () {
                         createPath(id, x, y);
-                        d3.selectAll(".newLine").call(
+                        d3.selectAll(".clashLine").call(
                             d3.drag()
                                 .on("start", startedNewPath)
                                 .on("drag", dragedNewPath)

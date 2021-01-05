@@ -60,7 +60,7 @@ export var endedNewPath = function () {
             });
         d3.select(this).remove();
     } else {
-        d3.select(this).remove;
+        d3.select(this).remove();
     }
 }
 
