@@ -2,6 +2,10 @@ import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
 import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/BASE/render/location.on.js";
+import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
+import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 
 let confs = [];
 bandBodyClick();
@@ -27,10 +31,24 @@ confs.push({
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);
             layer.msg('编辑模式');
+            conf.pathHome1.selectAll("path").attr("d", function (d) {
+                var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
+                var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
+                return dToStrig(result1[0], result2[0], result1[1], result2[1]);
+            });
         } else {
             $(this).removeClass("open").addClass("close");
             mouseEvent(flag);
             layer.msg('查看模式');
+            conf.pathHome1.selectAll("path").attr("d", function (d) {
+                var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
+                var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
+                if (!d.isDouble) {
+                    return dToStrig(result1[0], result2[0], result1[1], result2[1]);
+                } else {
+                    return doubleDToStrig(result1[0], result2[0], result1[1], result2[1]);
+                }
+            });
         }
     }
 });
