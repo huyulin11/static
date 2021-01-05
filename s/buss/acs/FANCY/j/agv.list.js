@@ -1,4 +1,5 @@
 import { renderList } from '/s/buss/acs/FANCY/j/agv.list.render.one.js';
+import { renderListCtrl } from '/s/buss/acs/FANCY/j/agv.list.ctrl.js';
 import { overlay } from '/s/buss/g/j/g.overlay.js';
 import { gf } from "/s/buss/g/j/g.f.js";
 import { ws } from "/s/buss/g/j/websocket.js";
@@ -15,7 +16,7 @@ var agvDiv = function () {
     return $("div#agvDiv");
 }
 
-var getAgvList = function () {
+export var getAgvList = function () {
     jQuery.ajax({
         url: "/s/jsons/" + localStorage.projectKey + "/agv/agvList.json",
         type: "GET",
@@ -45,7 +46,7 @@ var doWhenSuccess = function (data) {
     gf.resizeTable();
 }
 
-var openAGVMGR = function (tmpAgvId, layerName) {
+export var openAGVMGR = function (tmpAgvId, layerName) {
     let url = "/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.html?agvId=" + tmpAgvId;
     if (innerAgvDetail) {
         localStorage.currentAgvId = tmpAgvId;
@@ -81,44 +82,5 @@ export var initAgvList = function () {
     agvDiv().delegate("button", "click", function () {
         openAGVMGR($(this).attr("id"), $(this).html());
     });
-
-    let hideFlag = ($("#topCtrlContainer").find("#agvsHideDiv").length == 0);
-    let checks = [
-        { key: "toggleShowAgvListDetail", name: "选中隐藏详情", },
-        { key: "toggleOnlyCurrent", name: "仅显示当前AGV", hide: hideFlag, },
-        { key: "toggleAutoShow", name: "自动展现", hide: hideFlag, },
-    ];
-    if (agvDiv().find(`#agvListCtrl`).length == 0) {
-        agvDiv().prepend(`<div id='agvListCtrl' style='font-size:10px;text-align:left;'></div>`);
-    }
-    let $agvListCtrl = agvDiv().find(`#agvListCtrl`);
-    for (let check of checks) {
-        if (check.hide) { continue; }
-        let key = check.key;
-        let name = check.name;
-        if (agvDiv().find(`#${key}`).length == 0) {
-            $($agvListCtrl).append(`<span>${name}</span><input type="checkbox" id="${key}" title="${name}" ${localStorage[key] ? "checked" : ""}>`);
-            let checkChangeFun = function (that) {
-                if (that.checked) {
-                    localStorage[key] = true;
-                } else {
-                    localStorage[key] = "";
-                }
-                getAgvList();
-            }
-            agvDiv().delegate(`input:checkbox#${key}`, "change", function (e) { checkChangeFun(this); });
-        }
-    }
-    if (innerAgvDetail) {
-        var currentAgvId = localStorage.currentAgvId;
-        if (currentAgvId) {
-            openAGVMGR(currentAgvId);
-        }
-        if (localStorage.toggleAutoShow) {
-            setTimeout(() => {
-                if ($("#taskHideDiv").hasClass('close')) $("#taskHideDiv").trigger("click");
-                if ($("#agvsHideDiv").hasClass('close')) $("#agvsHideDiv").trigger("click");
-            }, 3000);
-        }
-    }
+    renderListCtrl(agvDiv(), innerAgvDetail);
 }
