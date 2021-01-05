@@ -1,38 +1,51 @@
 let initEventFlag = false;
 
+let _container = (confs) => {
+    if (confs.container) return confs.container;
+    return "topCtrlContainer";
+};
+
 export let renderModel = (confs) => {
-    if ($("#topCtrlContainer").length == 0) {
-        let topContainer = $(`<div id="topCtrlContainer"></div>`);
-        $("body").append(topContainer);
-    }
+    let containers = [];
     if (confs instanceof Array) {
         for (let conf of confs) {
-            doRenderModel(conf);
+            let container = _container(conf);
+            if (!containers.includes(container)) { containers.push(container); }
+            if ($("#" + container).length == 0) {
+                let topContainer = $(`<div id="${container}"></div>`);
+                $("body").append(topContainer);
+            }
+            _doRenderModel(conf, container);
         }
     } else {
-        doRenderModel(confs);
+        let container = _container(confs);
+        if (!containers.includes(container)) { containers.push(container); }
+        _doRenderModel(confs, container);
     }
     if (!initEventFlag) {
         initEventFlag = true;
-        initEvent();
+        for (let __container of containers) {
+            _initEvent(__container);
+        }
     }
 }
 
-let initReady = (key, url, width, height) => {
-    let container = $(`<div id="${key}Container" class="fixed"></div>`);
-    $(container).append(`<iframe id='${key}Frame'></iframe>`);
-    $(container).css("height", height || "50%").css("width", width || "80%");
-    $(container).find(`iframe#${key}Frame`).css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
-    $("body").append(container);
+let _initReady = (key, url, width, height) => {
+    let eleContainer = $(`<div id="${key}Container" class="fixed"></div>`);
+    $(eleContainer).append(`<iframe id='${key}Frame'></iframe>`);
+    $(eleContainer).css("height", height || "50%").css("width", width || "80%");
+    $(eleContainer).find(`iframe#${key}Frame`).css("height", "100%").css("width", "100%").attr("src", url).attr("frameborder", "no");
+    $("body").append(eleContainer);
 }
 
-let doRenderModel = (conf) => {
+let _doRenderModel = (conf, container) => {
     let { init, whenInit, key, target, click, url, self, type, width, height } = conf;
+    if (!container) { container = _container(conf); }
     if (type === 'LINK' || type === 'LAYER') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
         $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
         $("head").append(style);
-        $("#topCtrlContainer").prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-type='${type}' data-self='${self ? self : ""}'></div>`);
+        $("#" + container).prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-type='${type}' data-self='${self ? self : ""}'></div>`);
         return;
     }
 
@@ -41,7 +54,7 @@ let doRenderModel = (conf) => {
         if (init instanceof Function) {
             init();
         } else {
-            initReady(key, url, width, height);
+            _initReady(key, url, width, height);
         }
     }
     let style = $(`<style id='${key}HideDiv_style'></style>`);
@@ -51,10 +64,10 @@ let doRenderModel = (conf) => {
     let op = $(`<div id='${key}HideDiv' class='close hideToggle'></div>`);
     if (target) $(op).data("target", target);
     if (click) $(op).bind("click", click);
-    $("#topCtrlContainer").prepend(op);
+    $("#" + container).prepend(op);
 }
 
-let initEvent = () => {
+let _initEvent = (container) => {
     var showCtrl = function (that) {
         var thatTarget = $(that).data("target");
         $(thatTarget).show(100);
@@ -70,7 +83,7 @@ let initEvent = () => {
     }
 
     var hideAllCtrl = function (thatTarget) {
-        $("#topCtrlContainer").find("div.hideToggle").each(function () {
+        $("#" + container).find("div.hideToggle").each(function () {
             var target = $(this).data("target");
             if (target && target != thatTarget) {
                 hideCtrl(this);
@@ -78,7 +91,7 @@ let initEvent = () => {
         });
     }
 
-    $("#topCtrlContainer").delegate("div.hideToggle", "click", function () {
+    $("#" + container).delegate("div.hideToggle", "click", function () {
         var target = $(this).data("target");
         if (target) {
             hideAllCtrl(target);

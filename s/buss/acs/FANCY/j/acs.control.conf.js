@@ -55,7 +55,9 @@ export let renderModelConfs = () => {
 	} else if (localStorage.projectKey == 'YZBD_QSKJ') {
 		confs.push(ITEM_TASK, ITEM_LOGIN);
 	} else if (localStorage.projectKey == 'QDTY_SELF') {
-		confs.push(ITEM_TASK, ITEM_MSG);
+		ITEM_TASK.container = "bottomCtrlContainer";
+		ITEM_TASK.width = "35%";
+		confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
 	}
 	return confs;
 };
