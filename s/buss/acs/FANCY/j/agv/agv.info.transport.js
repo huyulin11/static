@@ -52,7 +52,9 @@ export var init = function (target) {
 				if (hide) { return null; }
 				let agvIds = json.agvIds;
 				if (agvIds) {
-					inner += `<br/>AGV:${agvIds}`; $(btn).data('agvids', agvIds);
+					inner += `<br/><span class='currenttip'>${agvIds}</span>`;
+					$(btn).attr("title", `限制AGV执行：${agvIds}`);
+					$(btn).data('agvids', agvIds);
 					if (currentAgvId && !agvIds.split(',').includes('' + currentAgvId)) { return null; }
 				}
 			}

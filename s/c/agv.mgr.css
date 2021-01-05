@@ -481,3 +481,13 @@ hr.gray{
 	width: 300px;
 	z-index: 10;
 }
+
+span.currenttip {
+    float: right;
+    top: 96%;
+    position: sticky;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+    border: #fefefe82 1px solid;
+}
