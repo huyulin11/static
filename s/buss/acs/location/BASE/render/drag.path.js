@@ -4,6 +4,7 @@ import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
 import { drawArrow } from "/s/buss/acs/location/BASE/path/radian.def.js";
+import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
 
 export var startedPath = function () {
     datas.init();
@@ -18,11 +19,19 @@ export var dragedPath = function () {
     var mPoint = getMPoint(s);
     d3.select(this)
         .attr("d", function (d) {
-            return dToStrig(mPoint[0], x, mPoint[1], y);
+            if (!d.isDouble) {
+                return dToStrig(mPoint[0], x, mPoint[1], y);
+            } else {
+                return doubleDToStrig(mPoint[0], x, mPoint[1], y);
+            }
         });
     d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
         .attr("d", function () {
-            return dToStrig(mPoint[0], x, mPoint[1], y);
+            if (!d.isDouble) {
+                return dToStrig(mPoint[0], x, mPoint[1], y);
+            } else {
+                return doubleDToStrig(mPoint[0], x, mPoint[1], y);
+            }
         })
     d3.select("#mar" + $(this).attr("from") + $(this).attr("to"))
         .attr("orient", function () {
@@ -49,12 +58,20 @@ export var endedPath = function () {
             .attr("from", siteid)
             .attr("to", nextid)
             .attr("d", function () {
-                return dToStrig(x1, x2, y1, y2);
+                if (!d.isDouble) {
+                    return dToStrig(x1, x2, y1, y2);
+                } else {
+                    return doubleDToStrig(x1, x2, y1, y2);
+                }
             });
         d3.select("#w" + siteid + oldnext)
             .attr("id", "w" + siteid + nextid)
             .attr("d", function () {
-                return dToStrig(x1, x2, y1, y2);
+                if (!d.isDouble) {
+                    return dToStrig(x1, x2, y1, y2);
+                } else {
+                    return doubleDToStrig(x1, x2, y1, y2);
+                }
             });
         d3.select("#mar" + siteid + oldnext)
             .attr("orient", function () {
@@ -66,10 +83,18 @@ export var endedPath = function () {
             var xOld = parseFloat($('#' + oldnext).attr('cx'));
             var yOld = parseFloat($('#' + oldnext).attr('cy'));
             d3.select(this).attr("class", "clashLine").attr('d', function () {
-                return dToStrig(x1, xOld, y1, yOld);
+                if (!d.isDouble) {
+                    return dToStrig(x1, xOld, y1, yOld);
+                } else {
+                    return doubleDToStrig(x1, xOld, y1, yOld);
+                }
             });
             d3.select("#w" + $(this).attr("from") + $(this).attr("to")).attr("d", function () {
-                return dToStrig(x1, xOld, y1, yOld);
+                if (!d.isDouble) {
+                    return dToStrig(x1, xOld, y1, yOld);
+                } else {
+                    return doubleDToStrig(x1, xOld, y1, yOld);
+                }
             });
             d3.select("#mar" + $(this).attr("from") + $(this).attr("to")).attr("orient", function () {
                 return drawArrow(x1, xOld, y1, yOld);

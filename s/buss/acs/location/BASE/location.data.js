@@ -75,12 +75,19 @@ export var dataLocation = function (data) {
                             "rightXaxis": next.x,
                             "downYaxis": val.y,
                             "upYaxis": next.y,
+                            "isDouble": false,
                             color: conf.initColor
                         });
                         break;
                     }
                 }
             }
+        }
+    }
+    for (let i of datas.point) {
+        var flag = datas.point.filter((ii) => ii.from == i.to && ii.to == i.from && ii.isDouble == false).length > 0;
+        if (flag) {
+            i.isDouble = true;
         }
     }
 }
