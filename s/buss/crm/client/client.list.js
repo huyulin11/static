@@ -15,6 +15,7 @@ let dataUdf = () => {
 gf.addChooseFlag({ container: "#chooseflags", id: 'timeRefresh', name: '定时刷新' });
 gf.addChooseFlag({ container: "#chooseflags", id: 'showDel', name: '显示删除', click: dataUdf });
 gf.addChooseFlag({ container: "#chooseflags", id: 'showList', name: '显示清单', click: dataUdf });
+gf.addChooseFlag({ container: "#chooseflags", id: 'showSelf', name: '仅看自己', defaultValue: true, click: dataUdf });
 
 var vm = new Vue({
 	el: "#kw",

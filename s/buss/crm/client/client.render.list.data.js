@@ -5,6 +5,7 @@ export var data = function (callback, condition) {
     }
     let serach = { "value": `%${$("#kw").val()}%`, 'delflag': 0 };
     if ($("#showDel").is(":checked")) { serach.delflag = '0:1'; }
+    if ($("#showSelf").is(":checked")) { serach.JSON_VALUE = JSON.stringify([{ column: 'value', item: 'manager', value: 3 }]); }
     if (condition) { serach = Object.assign(serach, condition, { "TABLE_KEY": "CRM_CLIENTS" }); }
     jQuery.ajax({
         url: "/app/conf/findByPage.shtml",

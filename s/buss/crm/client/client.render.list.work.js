@@ -3,6 +3,18 @@ import { gfdiv } from "/s/buss/g/j/g.f.divs.js?f=crmv000001";
 
 let separator = `<span style='color:#EEE;'> | </span>`;
 
+let map = {};
+let findManager = (id, call) => {
+    // if (map[id]) { call(map[id]); return; }
+    gf.doAjax({
+        dataType: 'json',
+        url: '/user/findOne.shtml',
+        data: {
+            "UserFormMap.id": id
+        },
+        success: (data) => { map[id] = data; call(data); console.log(id); }
+    });
+};
 
 var renderOne = function (item) {
     if (!item.value) { return; }
@@ -23,16 +35,7 @@ var renderOne = function (item) {
         $($delBtn).data(detail, value);
         $($callBtn).data(detail, value);
         if (['manager'].includes(detail)) {
-            gf.doAjax({
-                dataType: 'json',
-                url: '/user/findOne.shtml',
-                data: {
-                    "UserFormMap.id": value
-                },
-                success: (data) => {
-                    $($div).append(`<span class='currenttip'>责任人：${data.userName}</span>`);
-                }
-            });
+            findManager(value, (data) => { $($div).append(`<span class='currenttip'>责任人：${data.userName}</span>`); });
         } else if (!['备注', 'manager'].includes(detail)) {
             infos1.push(`<span>${value}</span>`);
         }

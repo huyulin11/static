@@ -474,8 +474,8 @@ class GF {
         if ($("link#checkboxcss").length == 0) {
             $("head").append(`<link id="checkboxcss" rel="stylesheet" href="/s/buss/acs/g/c/checkbox.css">`);
         }
-        let { container, id, name, click } = conf;
-        let checkbox = $(`<input type="checkbox" id="${id}" class="checkbox">`);
+        let { container, id, name, click, defaultValue } = conf;
+        let checkbox = $(`<input type="checkbox" id="${id}" class="checkbox" ${defaultValue ? "checked" : ""}>`);
         let chooseflag = $(`<div class='chooseflag'></div>`);
         if (click) { $(checkbox).on("click", function (e) { click(); }); }
         $(chooseflag).append(checkbox);
