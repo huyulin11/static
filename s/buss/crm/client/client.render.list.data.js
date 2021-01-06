@@ -1,4 +1,4 @@
-export var data = function (callback, condition) {
+export var data = function (callback, condition, manager) {
     if (callback) {
         $(".black_overlay").show();
         $("div#target").html("");
@@ -6,7 +6,7 @@ export var data = function (callback, condition) {
     let serach = { "value": `%${$("#kw").val()}%`, 'delflag': 0 };
     if ($("#showDel").is(":checked")) { serach.delflag = '0:1'; }
     let jsonValueSearchs = [];
-    if ($("#showSelf").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: 'manager', value: 3 }); }
+    if ($("#showSelf").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: 'manager', value: manager }); }
     if ($("#showType1").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: '状态', value: '基础' }); }
     if (jsonValueSearchs.length > 0) { serach.JSON_VALUE = JSON.stringify(jsonValueSearchs); }
     if (condition) { serach = Object.assign(serach, condition, { "TABLE_KEY": "CRM_CLIENTS" }); }

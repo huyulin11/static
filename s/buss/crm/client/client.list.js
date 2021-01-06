@@ -7,6 +7,13 @@ import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
 let _conf = { numInLine: gf.isPc() ? 2 : 1, target: "div#target" };
 let _search = {};
 let dataUdf = () => {
+	if ($("#showSelf").is(":checked")) {
+		gf.currentUser((u) => {
+			data((data) => {
+				render(data, _conf);
+			}, _search, u.id);
+		});
+	}
 	data((data) => {
 		render(data, _conf);
 	}, _search);
