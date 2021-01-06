@@ -14,29 +14,19 @@
 <body>
     <header class="panel-heading">
         <form class="form-inline" role="form" id="searchForm" name="searchForm">
-            <div class="form-group">
-                <table>
-                    <tr>
-                        <td>
-                            <label class="control-label">
-                                <span class="font-thin v-middle">类型:</span>
-                            </label>
-                        </td>
-                        <td>
-                            <input class="input-medium ui-autocomplete-input" id="dictype" name="dictype">
-                        </td>
-                        <td>
-                            <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
-                        </td>
-                    </tr>
+            <div class="doc-buttons">
+                <label class="control-label">
+                    <span class="font-thin v-middle">类型:</span>
+                </label>
+                <input class="input-medium ui-autocomplete-input" id="dictype" name="dictype">
+                <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
+                <button type="button" id="add" class="btn btn-primary marR10">新增</button>
+                <button type="button" id="del" class="btn btn-danger marR10">删除</button>
+                </tr>
                 </table>
             </div>
         </form>
     </header>
-    <div class="doc-buttons">
-        <button type="button" id="add" class="btn btn-primary marR10">新增</button>
-        <button type="button" id="del" class="btn btn-danger marR10">删除</button>
-    </div>
     <div class="table-responsive">
         <div id="paging" class="pagclass"></div>
     </div>
