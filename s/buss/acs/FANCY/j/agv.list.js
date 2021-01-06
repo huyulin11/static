@@ -11,7 +11,6 @@ var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {
         let agvDiv = $(`<div id='agvDiv' class='fixed withBorder'></div>`);
         $("body").prepend(agvDiv);
-        if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     }
     return $("div#agvDiv");
 }
@@ -37,6 +36,7 @@ export var getAgvList = function () {
 var whenSuccess = function (data) {
     overlay.show();
     agvNum = data.length;
+    if (agvNum >= 6) { $("div#agvDiv").addClass("big"); }
     doWhenSuccess(data);
 }
 
