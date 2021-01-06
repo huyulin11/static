@@ -1,5 +1,6 @@
 import { findIotInfo } from "/s/buss/acs/FANCY/j/iot.info.js";
 import { agvNum } from "/s/buss/acs/FANCY/j/agv.list.js";
+import { gv } from "/s/buss/g/j/g.v.js";
 
 var _numInLine;
 let shortLength = 20;
