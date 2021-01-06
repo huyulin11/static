@@ -1,8 +1,8 @@
 import "/s/j/vue/vue.min.js";
-import { data } from "./client.render.list.data.js?f=crmv000001";
-import { render } from "./client.render.list.work.js?f=crmv000001";
-import "/s/buss/crm/client/client.list.event.js?f=crmv000001";
-import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
+import { data } from "./client.render.list.data.js?f=crmv000002";
+import { render } from "./client.render.list.work.js?f=crmv000002";
+import "/s/buss/crm/client/client.list.event.js?f=crmv000002";
+import { gf } from "/s/buss/g/j/g.f.js?f=crmv000002";
 
 let _conf = { numInLine: gf.isPc() ? 2 : 1, target: "div#target" };
 let _search = {};

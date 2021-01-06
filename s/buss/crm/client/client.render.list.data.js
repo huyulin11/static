@@ -4,15 +4,20 @@ export var data = function (callback, condition, manager) {
         $("div#target").html("");
     }
     let serach = { "value": `%${$("#kw").val()}%`, 'delflag': 0 };
-    if ($("#showDel").is(":checked")) { serach.delflag = '0:1'; }
+    if ($("#showDel").is(":checked")) { serach.delflag = 1; }
     let jsonValueSearchs = [];
     if ($("#showSelf").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: 'manager', value: manager }); }
     if ($("#showType1").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: '状态', value: '基础' }); }
     if (jsonValueSearchs.length > 0) { serach.JSON_VALUE = JSON.stringify(jsonValueSearchs); }
-    if (condition) { serach = Object.assign(serach, condition, { "TABLE_KEY": "CRM_CLIENTS" }); }
+    if (condition) { serach = Object.assign(serach, condition); }
+    dataFull(callback, serach);
+}
+
+export var dataFull = function (callback, condition) {
+    condition["TABLE_KEY"] = "CRM_CLIENTS";
     jQuery.ajax({
         url: "/app/conf/findByPage.shtml",
-        data: serach,
+        data: condition,
         type: "POST",
         dataType: "json",
         success: function (data) {

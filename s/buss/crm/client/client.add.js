@@ -1,6 +1,7 @@
 import "/s/j/vue/vue.min.js";
-import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
+import { gf } from "/s/buss/g/j/g.f.js?f=crmv000002";
 import { StringUtils } from "/s/buss/g/j/g.string.util.js";
+import { dataFull } from "./client.render.list.data.js?f=crmv000002";
 
 let container = "#rootContainer";
 let _key = gf.urlParam("key");
@@ -17,6 +18,7 @@ var vm = new Vue({
 		职位: null,
 		电话: null,
 		公司: null,
+		位置: null,
 		状态: null,
 		备注: null,
 		manager: null,
@@ -40,6 +42,7 @@ var vm = new Vue({
 				vm.职位 = value.职位;
 				vm.电话 = value.电话;
 				vm.公司 = value.公司;
+				vm.位置 = value.位置;
 				vm.状态 = value.状态;
 				vm.manager = value.manager;
 				vm.备注 = StringUtils.textShow(value.备注);
@@ -51,7 +54,7 @@ var vm = new Vue({
 							"UserFormMap.id": vm.manager
 						},
 						success: (data) => {
-							$("#rootContainer>h2").append(`（责任人：${data.userName}）`);
+							$("#rootContainer>h2").append(`<br/>（责任人：${data.userName}）`);
 						}
 					});
 				}
@@ -60,7 +63,7 @@ var vm = new Vue({
 	},
 	methods: {
 		checkNull() {
-			if (!this.姓名 || !this.电话 || !this.公司 || !this.职位) {
+			if (!this.姓名 || !this.电话 || !this.公司 || !this.位置 || !this.职位) {
 				if (!this.姓名) {
 					$("#姓名").focus();
 				} else if (!this.职位) {
@@ -69,11 +72,21 @@ var vm = new Vue({
 					$("#电话").focus();
 				} else if (!this.公司) {
 					$("#公司").focus();
+				} else if (!this.位置) {
+					$("#位置").focus();
 				}
-				layer.msg("姓名、电话、公司、职位不能为空！");
+				layer.msg("姓名、职位、电话、公司、位置不能为空！");
 				return false;
 			};
 			return true;
+		},
+		checkNum() {
+			if (!vm.电话) return;
+			dataFull((data) => { if (data.length > 0) layer.msg("该手机号码在系统中已存在相关记录！"); },
+				{
+					JSON_VALUE: JSON.stringify([{ column: 'value', item: '电话', value: vm.电话 }]),
+					ADDED_SQL_KEY: `\`key\`!='${_key}'`
+				});
 		},
 		save() {
 			let checkNullFlag = this.checkNull();
@@ -82,7 +95,7 @@ var vm = new Vue({
 			};
 			let json = {
 				姓名: this.姓名, 职位: this.职位, 电话: StringUtils.trimAll(this.电话),
-				公司: this.公司, 状态: this.状态, 备注: StringUtils.textSave(this.备注),
+				公司: this.公司, 位置: this.位置, 状态: this.状态, 备注: StringUtils.textSave(this.备注),
 			};
 			let update = () => {
 				gf.doAjax({
@@ -112,6 +125,7 @@ var vm = new Vue({
 			vm.职位 = null;
 			vm.电话 = null;
 			vm.公司 = null;
+			vm.位置 = null;
 			vm.备注 = null;
 			vm.状态 = "基础";
 		},

@@ -1,7 +1,7 @@
-import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
+import { gf } from "/s/buss/g/j/g.f.js?f=crmv000002";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
-import { renderModel } from "/s/buss/g/j/g.banner.control.js?f=crmv000001";
-import { ITEM_LOGIN } from "/s/buss/acs/FANCY/j/acs.control.conf.js?f=crmv000001";
+import { renderModel } from "/s/buss/g/j/g.banner.control.js?f=crmv000002";
+import { ITEM_LOGIN } from "/s/buss/acs/FANCY/j/acs.control.conf.js?f=crmv000002";
 
 let layerArea = () => {
     if (gf.isPc()) { return ["95%", "90%"]; }
