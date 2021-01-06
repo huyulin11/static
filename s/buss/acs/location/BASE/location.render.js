@@ -3,6 +3,7 @@ import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { rectPath } from "/s/buss/acs/location/BASE/path/draw.path.js";
 import { xnumToWindow,ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { drawRect } from "/s/buss/acs/location/BASE/rect/draw.rect.js";
 
 export var renderAgvLocation = function () {
     $("image").remove();
@@ -306,6 +307,7 @@ var drawAgvs = function () {
 
 var render = function (tempdata) {
     drawPoints(tempdata);
+    drawRect(datas.rect);
     if (conf.withAxis) {
         drawAxis();
     }

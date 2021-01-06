@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
-import { taskSiteLogic, taskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
+import { taskSiteLogic, taskSiteLocation, taskSiteRect } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 
 export var datas = {};
@@ -216,6 +216,17 @@ export let dataAgvLocation = () => allAgvsInfo(function (data) {
     }
 });
 
+var dataRect = function (data) {
+    var arr = [];
+    for (var val of data) {
+        arr.push([val.id]);
+        datas.rect.push({
+            'id': val.id, 'x': val.x, 'y': val.y, 'width': val.width, 'height': val.height
+        });
+    }
+    datas.rectid = arr.sort();
+}
+
 datas.init = function () {
     // $(".aspect").remove();
     // $("defs").remove();
@@ -233,6 +244,9 @@ datas.init = function () {
     datas.currentAgvs = [];
     datas.lastTaskPath = [];
     datas.id = [];
+    datas.rect = [];
+    datas.rectid = [];
+    taskSiteRect(dataRect);
     taskSiteLogic(dataLlogic);
     taskSiteLocation(dataLocation);
 }

@@ -1,4 +1,3 @@
-import { gf } from "/s/buss/g/j/g.f.js";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
@@ -8,7 +7,7 @@ import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { addRect } from "/s/buss/acs/location/BASE/rect/rect.event.js";
+import { addRect } from "/s/buss/acs/location/BASE/rect/rect.add.js";
 
 let confs = [];
 bandBodyClick();
