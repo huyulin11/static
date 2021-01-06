@@ -24,5 +24,6 @@ export var drawRect = function (rectdata) {
             .attr('fill', '#e0e053')
             .attr('stroke', 'orange')
             .attr('stroke-width', 3)
+            .attr('opacity',0.5)
     }
 }

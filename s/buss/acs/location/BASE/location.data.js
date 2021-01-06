@@ -224,7 +224,9 @@ var dataRect = function (data) {
             'id': val.id, 'x': val.x, 'y': val.y, 'width': val.width, 'height': val.height
         });
     }
-    datas.rectid = arr.sort();
+    datas.rectid = arr.sort(function (a, b) {
+        return a - b;
+    });
 }
 
 datas.init = function () {
