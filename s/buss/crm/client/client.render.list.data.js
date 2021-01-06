@@ -5,7 +5,10 @@ export var data = function (callback, condition) {
     }
     let serach = { "value": `%${$("#kw").val()}%`, 'delflag': 0 };
     if ($("#showDel").is(":checked")) { serach.delflag = '0:1'; }
-    if ($("#showSelf").is(":checked")) { serach.JSON_VALUE = JSON.stringify([{ column: 'value', item: 'manager', value: 3 }]); }
+    let jsonValueSearchs = [];
+    if ($("#showSelf").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: 'manager', value: 3 }); }
+    if ($("#showType1").is(":checked")) { jsonValueSearchs.push({ column: 'value', item: '状态', value: '基础' }); }
+    if (jsonValueSearchs.length > 0) { serach.JSON_VALUE = JSON.stringify(jsonValueSearchs); }
     if (condition) { serach = Object.assign(serach, condition, { "TABLE_KEY": "CRM_CLIENTS" }); }
     jQuery.ajax({
         url: "/app/conf/findByPage.shtml",
