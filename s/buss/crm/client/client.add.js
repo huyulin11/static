@@ -103,6 +103,7 @@ var vm = new Vue({
 					update();
 				});
 			} else {
+				json.manager = vm.manager;
 				update();
 			}
 		},
