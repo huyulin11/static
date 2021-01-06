@@ -7,6 +7,7 @@ let separator = `<span style='color:#EEE;'> | </span>`;
 var renderOne = function (item) {
     if (!item.value) { return; }
     let json = JSON.parse(item.value);
+    let $div = $(`<div></div>`);
     let $btn = $(`<button class='item'></button>`);
     let $delBtn = $(`<button class='delete'><img src='/s//i/icon/delete.png'></button>`);
     if (item.delflag == 1) $($delBtn).html("已删除");
@@ -17,11 +18,23 @@ var renderOne = function (item) {
     let infos = [];
     let infos1 = [];
     for (let detail in json) {
-        $($btn).data(detail, json[detail]);
-        $($delBtn).data(detail, json[detail]);
-        $($callBtn).data(detail, json[detail]);
-        if (detail != '备注') {
-            infos1.push(`<span>${json[detail]}</span>`);
+        let value = json[detail];
+        $($btn).data(detail, value);
+        $($delBtn).data(detail, value);
+        $($callBtn).data(detail, value);
+        if (['manager'].includes(detail)) {
+            gf.doAjax({
+                dataType: 'json',
+                url: '/user/findOne.shtml',
+                data: {
+                    "UserFormMap.id": value
+                },
+                success: (data) => {
+                    $($div).append(`<span class='currenttip'>责任人：${data.userName}</span>`);
+                }
+            });
+        } else if (!['备注', 'manager'].includes(detail)) {
+            infos1.push(`<span>${value}</span>`);
         }
     }
     infos.push(infos1.join(separator));
@@ -36,7 +49,6 @@ var renderOne = function (item) {
         $($btn).append(allInfos);
     }
     $($btn).append("<hr/>");
-    let $div = $(`<div></div>`);
     $($div).append($btn);
     let $callA = $(`<a class='call' href='tel:${json.电话}'></a>`);
     $($callA).append($callBtn);

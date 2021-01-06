@@ -7,7 +7,13 @@ import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
 
 gf.checkLoginError();
-gf.currentUser(function (data) { $("#currentUser").html(data) });
+gf.currentUser(function (data) {
+    if (typeof data == 'object') {
+        $("#currentUser").html(data.userName);
+    } else {
+        $("#currentUser").html(data);
+    }
+});
 
 var _container = "#frames";
 var _menuContainer = "#menuContainer";

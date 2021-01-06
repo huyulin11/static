@@ -19,6 +19,8 @@ var vm = new Vue({
 		公司: null,
 		状态: null,
 		备注: null,
+		manager: null,
+		责任人: null,
 	},
 	el: container,
 	created: function () {
@@ -39,7 +41,20 @@ var vm = new Vue({
 				vm.电话 = value.电话;
 				vm.公司 = value.公司;
 				vm.状态 = value.状态;
+				vm.manager = value.manager;
 				vm.备注 = StringUtils.textShow(value.备注);
+				if (vm.manager) {
+					gf.doAjax({
+						dataType: 'json',
+						url: '/user/findOne.shtml',
+						data: {
+							"UserFormMap.id": vm.manager
+						},
+						success: (data) => {
+							$("#rootContainer>h2").append(`（责任人：${data.userName}）`);
+						}
+					});
+				}
 			}
 		});
 	},
@@ -69,17 +84,27 @@ var vm = new Vue({
 				姓名: this.姓名, 职位: this.职位, 电话: StringUtils.trimAll(this.电话),
 				公司: this.公司, 状态: this.状态, 备注: StringUtils.textSave(this.备注),
 			};
-			gf.doAjax({
-				url: '/app/conf/set.shtml',
-				data: {
-					table: 'CRM_CLIENTS', key: _key, value: JSON.stringify(json)
-				},
-				whenSuccess: () => {
-					gf.refreshEvent();
-					// if (!_key) vm.clear();
-					parent.layer.close(parent.pageii);
-				}
-			});
+			let update = () => {
+				gf.doAjax({
+					url: '/app/conf/set.shtml',
+					data: {
+						table: 'CRM_CLIENTS', key: _key, value: JSON.stringify(json)
+					},
+					whenSuccess: () => {
+						gf.refreshEvent();
+						// if (!_key) vm.clear();
+						parent.layer.close(parent.pageii);
+					}
+				});
+			};
+			if (!vm.manager) {
+				gf.currentUser((user) => {
+					json.manager = user.id;
+					update();
+				});
+			} else {
+				update();
+			}
 		},
 		clear() {
 			vm.姓名 = null;

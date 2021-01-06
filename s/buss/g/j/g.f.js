@@ -30,7 +30,7 @@ class GF {
                 window.datagrid.loadData();
             }
             if (whenSuccess) {
-                whenSuccess();
+                whenSuccess(data);
             }
         } else {
             layer.msg(data.msg);
@@ -418,7 +418,6 @@ class GF {
         gf.checkLogin(null, no);
     };
     currentRole(callback) {
-        var role = '';
         jQuery.ajax({
             url: "/getRole.shtml",
             type: "post",
@@ -427,10 +426,8 @@ class GF {
                 callback(data);
             }
         });
-        return role;
     };
     currentUser(callback) {
-        var role = '';
         jQuery.ajax({
             url: "/currentUser.shtml",
             type: "post",
@@ -439,7 +436,6 @@ class GF {
                 callback(data);
             }
         });
-        return role;
     };
     getArray(target) {
         var arr = [];
