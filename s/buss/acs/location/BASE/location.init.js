@@ -8,6 +8,7 @@ import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { addRect } from "/s/buss/acs/location/BASE/rect/rect.event.js";
 
 let confs = [];
 bandBodyClick();
@@ -52,6 +53,18 @@ confs.push({
                     return doubleDToStrig(result1[0], result2[0], result1[1], result2[1]);
                 }
             });
+        }
+    }
+});
+confs.push({
+    key: 'build', click: function () {
+        let flag = $(this).hasClass("close");
+        if (flag) {
+            $(this).removeClass("close").addClass("open");
+            addRect(flag);
+        } else {
+            $(this).removeClass("open").addClass("close");
+            addRect(flag);
         }
     }
 });
