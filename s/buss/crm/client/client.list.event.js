@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js?f=crmv000001";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js?f=crmv000001";
 import { ITEM_LOGIN } from "/s/buss/acs/FANCY/j/acs.control.conf.js?f=crmv000001";
 
@@ -15,7 +16,7 @@ renderModel(confs);
 
 $("div#target").delegate("button.item", "click", function () {
     let _key = $(this).data('key');
-    window.pageii = gf.layerOpen({
+    window.pageii = gflayer.open({
         area: layerArea(),
         title: "编辑",
         type: 2,

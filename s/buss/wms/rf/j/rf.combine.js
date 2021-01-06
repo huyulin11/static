@@ -1,5 +1,6 @@
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initSetting } from "/s/buss/wms/rf/j/rf.picking.setting.js";
@@ -43,7 +44,7 @@ var sub = function () {
         success: function (data) {
             if (typeof data == "string") data = JSON.parse(data);
             if (data.code >= 0) {
-                gf.layerMsg(data.msg, function () {
+                gflayer.msg(data.msg, function () {
                     var isFocus = $("#su").is(":focus");
                     if (isFocus != true)
                         $("#tu").focus();
@@ -57,12 +58,12 @@ var sub = function () {
             } else if (data.code == -100) {
                 $("#toTr").removeClass("hidden");
                 $("#sub").focus();
-                gf.layerMsg(data.msg, function () {
+                gflayer.msg(data.msg, function () {
                     $("#to").focus();
                 });
             } else {
                 $("#sub").focus();
-                gf.layerMsg(data.msg, function () {
+                gflayer.msg(data.msg, function () {
                     $("#tu").focus();
                     $("#tu").val("");
                     $("#su").val("");

@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfconf } from "/s/buss/g/j/g.f.conf.js";
 import "/s/j/vue/vue.min.js";
 import { findAlloc } from "/s/buss/wms/j/receipt.main.fun.js";
@@ -38,14 +39,14 @@ var initReceipt = function () {
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
             if (s.code < 0) {
                 setCurrentReceiptPaperid("", () => {
-                    gf.layerMsg(_paperid + s.msg, () => { window.location.reload(); });
+                    gflayer.msg(_paperid + s.msg, () => { window.location.reload(); });
                 });
                 return;
             }
             let main = s.object.main;
             if (!main || main["status"] != "NEW" || main["delflag"] != "0") {
                 setCurrentReceiptPaperid("", () => {
-                    gf.layerMsg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！", () => { window.location.reload(); });
+                    gflayer.msg(_paperid + "该单无法继续操作，如需查看请移步入库单管理！", () => { window.location.reload(); });
                 });
                 return;
             } else {
@@ -65,7 +66,7 @@ var initReceipt = function () {
     $("#tu").focus();
 }, start = function (alloc) {
     if (_paperid) {
-        gf.layerMsg("当前入库单尚未处理完成，不能再呼叫空车！");
+        gflayer.msg("当前入库单尚未处理完成，不能再呼叫空车！");
         return;
     }
     gf.doAjax({
@@ -73,7 +74,7 @@ var initReceipt = function () {
         data: { warehouse: 2 },
         success: function (data) {
             data = JSON.parse(data);
-            gf.layerMsg(data.msg);
+            gflayer.msg(data.msg);
             if (data.code >= 0) {
                 setCurrentReceiptPaperid(data.object, () => {
                     window.location.reload();
@@ -83,14 +84,14 @@ var initReceipt = function () {
     });
 }, send = function () {
     if (!_paperid) {
-        gf.layerMsg("没有生成对应入库单，不能进行执行操作！");
+        gflayer.msg("没有生成对应入库单，不能进行执行操作！");
         return;
     }
     gf.doAjax({
         url: `/receipt/main/send.shtml?paperid=${_paperid}`,
         success: function (data) {
             data = JSON.parse(data);
-            gf.layerMsg(data.msg);
+            gflayer.msg(data.msg);
             if (data.code >= 0) {
                 setCurrentReceiptPaperid("", () => {
                     if (_alloc) {
@@ -104,14 +105,14 @@ var initReceipt = function () {
     });
 }, execute = function () {
     if (!_paperid) {
-        gf.layerMsg("没有生成对应入库单，不能进行执行操作！");
+        gflayer.msg("没有生成对应入库单，不能进行执行操作！");
         return;
     }
     gf.doAjax({
         url: `/receipt/main/execute.shtml?paperid=${_paperid}`,
         success: function (data) {
             data = JSON.parse(data);
-            gf.layerMsg(data.msg);
+            gflayer.msg(data.msg);
             if (data.code >= 0) {
                 setCurrentReceiptPaperid("", () => {
                     if (_alloc) {
@@ -125,7 +126,7 @@ var initReceipt = function () {
     });
 }, cancel = function () {
     if (!_paperid) {
-        gf.layerMsg("没有生成对应入库单，不能进行撤销操作！");
+        gflayer.msg("没有生成对应入库单，不能进行撤销操作！");
         return;
     }
     if (window.confirm("撤销操作将清除当前正在操作的入库单，是否继续？")) {
@@ -133,7 +134,7 @@ var initReceipt = function () {
             url: `/receipt/main/deleteEntity.shtml?paperid=${_paperid}`,
             success: function (data) {
                 data = JSON.parse(data);
-                gf.layerMsg(data.msg);
+                gflayer.msg(data.msg);
                 if (data.code >= 0) {
                     setCurrentReceiptPaperid("", () => {
                         if (_alloc) {
@@ -169,7 +170,7 @@ var initReceipt = function () {
             data: { item: su, userdef3: tu },
             success: function (data) {
                 if (typeof data == "string") data = JSON.parse(data);
-                gf.layerMsg(data.msg, function () {
+                gflayer.msg(data.msg, function () {
                     $("#tu").focus();
                 });
                 $("#tu").val("");
@@ -178,7 +179,7 @@ var initReceipt = function () {
             }
         });
     } else {
-        gf.layerMsg("无有效入库单，请先呼叫料架生成入库单！");
+        gflayer.msg("无有效入库单，请先呼叫料架生成入库单！");
         setCurrentReceiptPaperid("", () => {
             window.location.reload();
         });

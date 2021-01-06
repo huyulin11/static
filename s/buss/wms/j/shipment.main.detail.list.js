@@ -1,5 +1,6 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import "./shipment.main.detail.edit.seq.js";
@@ -250,7 +251,7 @@ if (sessionStorage.editSeq && ["PRIORITY"].includes(_type)) {
 			return;
 		}
 		if (!target || isNaN(target) || target < 0 || target >= 100) {
-			gf.layerMsg("提交内容应为大于0小于100的数值！");
+			gflayer.msg("提交内容应为大于0小于100的数值！");
 			return;
 		}
 		json.detailSeq = target;
@@ -374,7 +375,7 @@ let doSearch = function () {
 	if (["PRIORITY", "PRODUCT"].includes(_type)) {
 		let product = $("#product").val();
 		if (!product) {
-			// gf.layerMsg("需指定查询数据的产线名称！");
+			// gflayer.msg("需指定查询数据的产线名称！");
 			// return;
 		}
 		// localStorage.currentSearchProduct = product;

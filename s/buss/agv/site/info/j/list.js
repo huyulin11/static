@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
@@ -48,7 +49,7 @@ $("#paging").delegate(".editSiteName", "click", function (e) {
 	let name = $(this).data("name");
 	let id = $(this).data("id");
 	let targetVal = $(this).parents("td").find("input#siteName").val();
-	if (name == targetVal) { gf.layerMsg("名称无修改！"); return; }
+	if (name == targetVal) { gflayer.msg("名称无修改！"); return; }
 	if (window.confirm(`是否要改变该站点(原名称：${name})名称为${targetVal}？`)) {
 		gf.doAjax({
 			url: `/tasksite/editName.shtml`,
@@ -88,14 +89,14 @@ function edit() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "编辑",
 		type: 2,
 		content: '/s/buss/site/info/editUI.html?id=' + cbox
 	});
 }
 function add() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/buss/agv/site/info/h/addSiteUI.html'

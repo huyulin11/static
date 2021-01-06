@@ -1,5 +1,6 @@
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { getInput } from "/s/buss/g/j/g.input.render.js";
@@ -100,7 +101,7 @@ $("#paging").delegate(".edit", "click", function (e) {
 	let id = $(this).data("id");
 	let target = $(this).parent("td").find("input").val();
 	if (!target || isNaN(target) || target < 0 || target >= 100) {
-		gf.layerMsg("提交内容应为大于0小于100的数值！");
+		gflayer.msg("提交内容应为大于0小于100的数值！");
 		return;
 	}
 	if (window.confirm(`是否要将该数据的顺序值改为${target}？`)) {
@@ -119,7 +120,7 @@ let doSearch = function () {
 	var searchParams = $("#searchForm").serializeObject();
 	let product = $("#product").val();
 	if (!product) {
-		// gf.layerMsg("需指定查询数据的产线名称！");
+		// gflayer.msg("需指定查询数据的产线名称！");
 		// return;
 	}
 	// localStorage.currentSearchProduct = product;

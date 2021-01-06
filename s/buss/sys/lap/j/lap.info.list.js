@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
@@ -108,7 +109,7 @@ $("#paging").delegate(".editLineName", "click", function (e) {
 	let name = $(this).data("name");
 	let id = $(this).data("id");
 	let targetVal = $(this).parents("td").find("input#lineName").val();
-	if (name == targetVal) { gf.layerMsg("名称无修改！"); return; }
+	if (name == targetVal) { gflayer.msg("名称无修改！"); return; }
 	if (window.confirm(`是否要改变该产线(原名称：${name})名称为${targetVal}？`)) {
 		gf.doAjax({
 			url: `/sys/lap/bjjk/huirui/editName.shtml`,
@@ -153,7 +154,7 @@ $("#del").click("click", function () {
 	del();
 });
 function add() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/buss/sys/lap/h/lapInfoAddUI.html'

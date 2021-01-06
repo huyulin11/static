@@ -1,3 +1,5 @@
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
+
 let initEventFlag = false;
 
 let _container = (confs) => {
@@ -114,7 +116,7 @@ let _initEvent = (container) => {
                     if (_layerArea) {
                         _conf.area = typeof layerArea == 'function' ? _layerArea() : _layerArea;
                     }
-                    window.pageii = gf.layerOpen(_conf);
+                    window.pageii = gflayer.open(_conf);
                 } else {
                     window.open(url, self ? "_self" : false);
                 }

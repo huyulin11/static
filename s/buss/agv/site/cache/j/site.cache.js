@@ -1,4 +1,5 @@
 import { dataGrid } from "/s/j/kf.grid.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 let params = {
 	pagId: 'paging',
@@ -45,7 +46,7 @@ let doSearch = function () {
 }
 
 function add() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/buss/agv/site/cache/h/site.cache.add.html'

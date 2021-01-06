@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
@@ -81,17 +82,17 @@ $("#scan").click("click", function () {
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
-		gf.layerMsg("只能选中一个");
+		gflayer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "编辑",
 		type: 2,
 		content: '/s/buss/wms/sku/info/editUI.html?id=' + cbox
 	});
 }
 function add() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/buss/wms/sku/info/h/skuInfoAddUI.html'
@@ -100,7 +101,7 @@ function add() {
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
-		gf.layerMsg("请选择删除项！！");
+		gflayer.msg("请选择删除项！！");
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
@@ -114,7 +115,7 @@ function scan() {
 	var detailid = gf.checkOnlyOne("id");
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
-		gf.layerMsg("请选择扫描项！！");
+		gflayer.msg("请选择扫描项！！");
 		return;
 	}
 	layer.confirm('是否扫描？', function () {

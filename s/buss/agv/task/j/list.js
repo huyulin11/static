@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
@@ -79,7 +80,7 @@ function editTask() {
 	});
 }
 function addTask() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/agvtasks/h/addDairyTaskUI.html'

@@ -1,6 +1,7 @@
 import "/s/j/vue/vue.min.js";
 import { allocData } from "/s/buss/wms/alloc/item/j/alloc.render.list.data.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 
 let clear = {
@@ -15,7 +16,7 @@ let clear = {
     id: "find", name: "查询", class: "btn-warning",
     bind: function () {
         allocData(() => {
-            gf.layerParentMsg("已提交查询");
+            gflayer.parentMsg("已提交查询");
         }, $("form").serializeObject());
     },
 };
@@ -24,11 +25,11 @@ let doJob = (param, that, callback) => {
     let tmpJob = function (index) {
         gf.ajax(that.url, null, "json", function (s) {
             if (s.code >= 0) {
-                gf.layerParentMsg(`成功${that.name}！`);
+                gflayer.parentMsg(`成功${that.name}！`);
                 if (window.datagrid) window.datagrid.loadData();
                 else if (parent.datagrid) parent.datagrid.loadData();
             } else {
-                gf.layerParentMsg(`${that.name}失败！` + s.msg);
+                gflayer.parentMsg(`${that.name}失败！` + s.msg);
             }
         });
     };

@@ -5,6 +5,7 @@ import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 import { refreshAcsInfo } from "/s/buss/acs/FANCY/j/acs.info.js";
 import { agvRunningLogs } from "/s/buss/acs/FANCY/j/agv.running.logs.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModelConfs } from "/s/buss/acs/FANCY/j/acs.control.conf.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 
@@ -56,7 +57,7 @@ export var initAcsControl = function () {
 				} else {
 					title = data.key;
 				}
-				gf.layerMsg(title + ':' + data.value, null, { offset: 'b', shade: 0.0, });
+				gflayer.msg(title + ':' + data.value, null, { offset: 'b', shade: 0.0, });
 			}
 		});
 	}, 5000);

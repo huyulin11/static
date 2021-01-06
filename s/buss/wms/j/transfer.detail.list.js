@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gu } from "/s/buss/g/j/g.u.js";
 import { gv } from "/s/buss/g/j/g.v.js";
@@ -14,11 +15,11 @@ let tempBtns = [{
 		layer.confirm(`是否${that.name}${detailid}？`, function (index) {
 			gf.ajax(that.url, { detailid: detailid }, "json", function (s) {
 				if (s.code >= 0) {
-					gf.layerMsg(`成功${that.name}！`);
+					gflayer.msg(`成功${that.name}！`);
 					if (window.datagrid) window.datagrid.loadData();
 					else if (parent.datagrid) parent.datagrid.loadData();
 				} else {
-					gf.layerMsg(`${that.name}失败！` + s.msg);
+					gflayer.msg(`${that.name}失败！` + s.msg);
 				}
 			});
 		});

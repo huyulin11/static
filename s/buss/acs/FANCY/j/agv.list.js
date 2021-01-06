@@ -2,6 +2,7 @@ import { renderList } from '/s/buss/acs/FANCY/j/agv.list.render.one.js';
 import { renderListCtrl } from '/s/buss/acs/FANCY/j/agv.list.ctrl.js';
 import { overlay } from '/s/buss/g/j/g.overlay.js';
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { ws } from "/s/buss/g/j/websocket.js";
 
 export var agvNum = 0;
@@ -54,7 +55,7 @@ export var openAGVMGR = function (tmpAgvId, layerName) {
         if (localStorage.projectKey != 'HONGFU_ZHENMU') height = $(window).height();
         $("#mainPage").css("height", height).attr("src", url); return;
     }
-    gf.layerOpen({
+    gflayer.open({
         type: 2,
         title: '单车管理',
         shade: 0.5,

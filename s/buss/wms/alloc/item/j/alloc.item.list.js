@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { gu } from "/s/buss/g/j/g.u.js";
 import { dataGrid } from "/s/j/kf.grid.js";
@@ -80,7 +81,7 @@ if (sessionStorage.editAllocSeq) {
 			return;
 		}
 		if (!target || isNaN(target) || target < 0) {
-			gf.layerMsg("提交内容应为大于0的数值！");
+			gflayer.msg("提交内容应为大于0的数值！");
 			return;
 		}
 		var json = {
@@ -135,7 +136,7 @@ $("#del").click("click", function () {
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
-		gf.layerMsg("只能选中一个");
+		gflayer.msg("只能选中一个");
 		return;
 	}
 	window.pageii = layer.open({
@@ -152,7 +153,7 @@ function editAllocSeq() {
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
-		gf.layerMsg("请选择删除项！！");
+		gflayer.msg("请选择删除项！！");
 		return;
 	}
 	layer.confirm('是否删除？', function (index) {
@@ -171,7 +172,7 @@ var dealSheet = function (sheet) {
 	};
 	let submitSuc = (_paper, i, goon) => {
 		_paper = {};
-		gf.layerMsg(`${goon ? "前" + (i - 1) + "行完成提交（刷新界面中断导入）" : "全部" + (i - 1) + "行提交成功！"}`, () => { window.datagrid.loadData(); });
+		gflayer.msg(`${goon ? "前" + (i - 1) + "行完成提交（刷新界面中断导入）" : "全部" + (i - 1) + "行提交成功！"}`, () => { window.datagrid.loadData(); });
 		if (goon) fun(i);
 	};
 	let times = 1;
@@ -199,7 +200,7 @@ var dealSheet = function (sheet) {
 	}
 	fun(1);
 	$('#upload').val("");
-	gf.layerMsg("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
+	gflayer.msg("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
 }
 
 let importStr = `<label class="ui-upload">
@@ -209,7 +210,7 @@ $("div.doc-buttons").append(importStr);
 $('#upload').on("change", function (e) {
 	var files = e.target.files;
 	if (files.length > 1 && localStorage.importThenEdit) {
-		gf.layerMsg("编辑模式下仅能单个导入");
+		gflayer.msg("编辑模式下仅能单个导入");
 		$('#upload').val("");
 		return;
 	}

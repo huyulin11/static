@@ -1,6 +1,7 @@
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 
@@ -93,10 +94,10 @@ export var init = function (target) {
 			if (thisAgvCheck && targetArr.some((e) => {
 				return check(e) && thisAgvCheck != check(e);
 			})) {
-				gf.layerMsg(`不能同时选择限定AGV不一致的站点！`); return;
+				gflayer.msg(`不能同时选择限定AGV不一致的站点！`); return;
 			}
 			if (targetArr.length >= _oneTimeLimit) {
-				gf.layerMsg(`选中需要操作的站点数不能超过${_oneTimeLimit}个！`); return;
+				gflayer.msg(`选中需要操作的站点数不能超过${_oneTimeLimit}个！`); return;
 			}
 			$(that).addClass("choosed");
 			targetArr.push(data);
@@ -105,8 +106,8 @@ export var init = function (target) {
 	});
 
 	var transportHandler = function (that) {
-		if (targetArr.length <= 0) { gf.layerMsg("没有选中需要操作的站点！"); return; }
-		if (targetArr.length > _oneTimeLimit) { gf.layerMsg(`操作的站点数不能超过${_oneTimeLimit}个！`); return; }
+		if (targetArr.length <= 0) { gflayer.msg("没有选中需要操作的站点！"); return; }
+		if (targetArr.length > _oneTimeLimit) { gflayer.msg(`操作的站点数不能超过${_oneTimeLimit}个！`); return; }
 		let arrSub = [];
 		for (let item of targetArr) {
 			let json = $(item).data("json");

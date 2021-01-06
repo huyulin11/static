@@ -42,11 +42,12 @@
     <script src="/s/j/layer/v3.1.3/layer.js"></script>
     <script type="module">
         import { gf } from "/s/buss/g/j/g.f.js";
+        import { gflayer } from "/s/buss/g/j/g.f.layer.js";
         $("#rootContainer").find("#layout").on("click", function () {
             window.location.href = "/logout.shtml";
         });
         $("#rootContainer").find("button[id!='layout']").on("click", function () {
-            gf.layerOpenBak({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
+            gflayer.openBak({ content: `/s/buss/wms/rf/h/${$(this).attr('id')}.html` });
         });
     </script>
 </body>

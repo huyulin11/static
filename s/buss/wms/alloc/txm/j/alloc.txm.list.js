@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { dataGrid } from "/s/j/kf.grid.js";
@@ -15,7 +16,7 @@ let tempBtns = [{
 	url: `/s/buss/wms/alloc/txm/h/allocTxmAddUI.html${_alloc ? "?alloc=" + _alloc : ""}`,
 	id: "add", name: `增加`, class: "btn-primary", hide: true,
 	bind: function () {
-		gf.layerOpen({
+		gflayer.open({
 			title: `${this.name}SU${_alloc ? "（货位:" + _alloc + "）" : ""}`,
 			type: 2,
 			content: this.url
@@ -35,7 +36,7 @@ let tempBtns = [{
 		if (!txm) { return; }
 		layer.confirm(`是否${this.name}${txm}？`, function (index) {
 			gf.ajax(`/alloc/txm/deleteEntity.shtml`, { txm: txm, alloc: alloc }, "json", function (s) {
-				gf.layerMsg(s.msg);
+				gflayer.msg(s.msg);
 				window.datagrid.loadData();
 			});
 		});
@@ -98,10 +99,10 @@ $("#edit").click("click", function () {
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
-		gf.layerMsg("只能选中一个");
+		gflayer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "编辑",
 		type: 2,
 		content: '/s/buss/wms/alloc/txm/editUI.html?id=' + cbox

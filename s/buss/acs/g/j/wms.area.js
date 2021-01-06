@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 var getAreaList = function () {
 	jQuery.ajax({
@@ -43,7 +44,7 @@ var init = function () {
 }
 
 var openAlloc = function (areaId, layerName) {
-	gf.layerOpenBak({
+	gflayer.openBak({
 		content: '/s/buss/wms/alloc/item/h/alloc.html?areaId=' + areaId,
 		title: layerName,
 		area: ['50%', '70%']

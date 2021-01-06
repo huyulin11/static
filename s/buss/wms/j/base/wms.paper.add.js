@@ -1,6 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { initForm } from "/s/buss/wms/j/base/wms.paper.add.init.js";
 
 let _receipttype = gf.urlParam("receipttype");
@@ -57,7 +58,7 @@ let _initEditPage = () => {
         let main = s.object.main;
         let details = s.object.detail;
         if (main["status"] != "NEW" || main["delflag"] != "0") {
-            gf.layerMsg("该单无法修改！");
+            gflayer.msg("该单无法修改！");
             parent.layer.close(parent.pageii);
             return;
         }

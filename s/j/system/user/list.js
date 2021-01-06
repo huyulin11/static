@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
@@ -91,14 +92,14 @@ function editAccount() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "编辑",
 		type: 2,
 		content: '/user/editUI.shtml?id=' + cbox
 	});
 }
 function addAccount() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/user/addUI.shtml'
@@ -124,7 +125,7 @@ function permissions() {
 		return;
 	}
 	var url = '/resources/permissions.shtml?userId=' + cbox;
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "分配权限",
 		type: 2,
 		content: url

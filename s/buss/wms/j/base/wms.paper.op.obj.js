@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { currentShipmentPaperid, setCurrentShipmentPaperid } from "/s/buss/wms/rf/j/rf.main.js";
 
@@ -92,7 +93,7 @@ var initBtns = function () {
                     var layerMsg = "下发呼叫指令成功！"
                     if (s.msg)
                         layerMsg = s.msg;
-                    gf.layerMsg(layerMsg);
+                    gflayer.msg(layerMsg);
                 });
             }
             layer.confirm(`对${cbox}，确定呼叫AGV送出料架？`, function (index) { work(index); });
@@ -109,7 +110,7 @@ var initBtns = function () {
                     var layerMsg = "下发呼叫指令成功！"
                     if (s.msg)
                         layerMsg = s.msg;
-                    gf.layerMsg(layerMsg);
+                    gflayer.msg(layerMsg);
                 });
             }
             layer.confirm(`对${cbox}，确定让AGV送料架返库？`, function (index) { work(index); });
@@ -126,7 +127,7 @@ var initBtns = function () {
                     info = info + item.key + ":" + item.value + "<br/>";
                 }
                 if (!info) { info = "未找到执行信息！"; }
-                gf.layerMsg(info);
+                gflayer.msg(info);
             });
         },
     }; btns.inventoryResult = {
@@ -149,7 +150,7 @@ var initBtns = function () {
                 });
             }
             if (!info) { info = "未找到相关信息！"; }
-            gf.layerMsg(info);
+            gflayer.msg(info);
         },
     }; btns.stockOut = {
         url: `/s/buss/wms/h/shipmentMainMgr.html?status=2:TAKED:PICKED&type=RF${escape("出库")}`,
@@ -235,7 +236,7 @@ class PaperOp {
         if (!cbox) { return; }
         layer.confirm(`是否${that.name}${cbox}？`, function (index) {
             gf.ajax(that.url, { paperids: cbox.join(":") }, "json", function (s) {
-                gf.layerMsg(s.msg);
+                gflayer.msg(s.msg);
                 window.datagrid.loadData();
             });
         });
@@ -246,15 +247,15 @@ class PaperOp {
         let url = `/${_tasktype}/main/findOneData.shtml`;
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (!s.object) {
-                gf.layerMsg(`该单无法${that.name}！`);
+                gflayer.msg(`该单无法${that.name}！`);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "NEW") || main["delflag"] != "0") {
-                gf.layerMsg(`该单无法${that.name}！`);
+                gflayer.msg(`该单无法${that.name}！`);
                 return;
             }
-            window.pageii = gf.layerOpen({
+            window.pageii = gflayer.open({
                 title: `${that.name}：` + cbox,
                 type: 2,
                 content: that.url + "?paperid=" + cbox
@@ -267,12 +268,12 @@ class PaperOp {
         let url = `/${_tasktype}/main/findOneData.shtml`;
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (!s.object) {
-                gf.layerMsg(`该单无法${that.name}！`);
+                gflayer.msg(`该单无法${that.name}！`);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "TOSEND" && main["status"] != "PICKING") || main["delflag"] != "0") {
-                gf.layerMsg(`该单无法${that.name}！`);
+                gflayer.msg(`该单无法${that.name}！`);
                 return;
             }
             window.location.href = that.url + "?paperid=" + cbox
@@ -284,24 +285,24 @@ class PaperOp {
         let url = `/${_tasktype}/main/findOneData.shtml`;
         gf.ajax(url, { paperid: cbox }, "json", function (s) {
             if (!s.object) {
-                gf.layerMsg(`该单无法${that.name}！`);
+                gflayer.msg(`该单无法${that.name}！`);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "NEW") || main["delflag"] != "0") {
-                gf.layerMsg(`该单无法${that.name}！`);
+                gflayer.msg(`该单无法${that.name}！`);
                 return;
             }
             window.location.href = that.url + "&paperid=" + cbox
         });
     }; add(that) {
-        window.pageii = gf.layerOpen({
+        window.pageii = gflayer.open({
             title: `${that.name}`,
             type: 2,
             content: that.url
         });
     }; layerOpenBak(that) {
-        window.pageii = gf.layerOpenSmall({
+        window.pageii = gflayer.openSmall({
             title: `${that.name}`,
             type: 2,
             content: that.url
@@ -309,7 +310,7 @@ class PaperOp {
     }; detail(that) {
         var cbox = gf.checkOnlyOne("paperid");
         if (!cbox) { return; }
-        window.pageii = gf.layerOpen({
+        window.pageii = gflayer.open({
             title: `${that.name}：` + cbox,
             type: 2,
             content: that.url + cbox
@@ -328,12 +329,12 @@ class PaperOp {
                 lock = true;
                 gf.ajax(that.url, { paperid: paperid }, "json", function (s) {
                     if (s.code >= 0) {
-                        gf.layerMsg(`成功${that.name}！`);
+                        gflayer.msg(`成功${that.name}！`);
                         if (window.datagrid) window.datagrid.loadData();
                         else if (parent.datagrid) parent.datagrid.loadData();
                         if (callback) { callback(paperid); }
                     } else {
-                        gf.layerMsg(`${that.name}失败！` + s.msg);
+                        gflayer.msg(`${that.name}失败！` + s.msg);
                     }
                 });
             }
@@ -363,7 +364,7 @@ class PaperOp {
         if (detailFlag) {
             layer.prompt({ title: "请输入需要调整的顺序" }, function (target, index) {
                 if (!target || isNaN(target) || target < 0 || target >= 100) {
-                    gf.layerMsg("提交内容应为大于0小于100的数值！");
+                    gflayer.msg("提交内容应为大于0小于100的数值！");
                     return;
                 }
                 json.detailSeq = target;

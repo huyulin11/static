@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
@@ -89,7 +90,7 @@ $("#del").on("click", function () {
 	del();
 });
 function mgr(dictype) {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
 		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html?dictype=' + dictype
@@ -97,7 +98,7 @@ function mgr(dictype) {
 }
 
 function detail(dictype) {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
 		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype
@@ -105,7 +106,7 @@ function detail(dictype) {
 }
 
 function view(dictype) {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
 		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype + '&model=VIEW'
@@ -113,7 +114,7 @@ function view(dictype) {
 }
 
 function add() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html'

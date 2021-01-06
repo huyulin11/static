@@ -2,6 +2,7 @@ import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 import { getSingleTask } from "/s/buss/acs/g/j/singletask.js";
 import { allocOp } from "/s/buss/wms/alloc/item/j/alloc.op.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 var initTask = function (allocId) {
     var rtn = null;
@@ -67,7 +68,7 @@ if (['HONGFU_ZHENMU', "CSY_CDBP", 'BJJK_HUIRUI'].includes(localStorage.projectKe
                         var layerMsg = "下发呼叫指令成功！"
                         if (s.msg)
                             layerMsg = s.msg;
-                        gf.layerMsg(layerMsg);
+                        gflayer.msg(layerMsg);
                     });
                 }
                 layer.confirm(`对${allocName}，确定呼叫AGV送出料架？`, function (index) { work(index); });
@@ -84,7 +85,7 @@ if (['HONGFU_ZHENMU', "CSY_CDBP", 'BJJK_HUIRUI'].includes(localStorage.projectKe
                         var layerMsg = "下发呼叫指令成功！"
                         if (s.msg)
                             layerMsg = s.msg;
-                        gf.layerMsg(layerMsg);
+                        gflayer.msg(layerMsg);
                     });
                 }
                 layer.confirm(`对${allocName}，确定让AGV送料架返库？`, function (index) { work(index); });
@@ -122,7 +123,7 @@ var doAllocOpHongfu = function (that) {
     var changeNumBtn = "<button class='tck doChange' data-id='" + $(that).data("id") + "' "
         + "data-text='" + $(that).data("text") + "' data-status='" + $(that).data("status") + "'>确认</button>";
 
-    gf.layerOpen({
+    gflayer.open({
         type: 1,
         title: $(that).data("text") + ($(that).data("status") != 1 ? ("-<font style='color:red;'>" + sku.value($(that).data("skuid")) + "</font>") : ""),
         skin: 'layui-layer-demo',
@@ -137,7 +138,7 @@ var doAllocOpHongfu = function (that) {
 }
 
 var doAllocOpBjjkHuirui = function (that) {
-    window.pageii = gf.layerOpen({
+    window.pageii = gflayer.open({
         title: `SU明细`,
         type: 2,
         content: `/s/buss/wms/alloc/txm/h/allocTxmMgr.html?type=alloc&alloc=${$(that).data("text")}`

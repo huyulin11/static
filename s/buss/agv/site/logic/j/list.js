@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
@@ -70,14 +71,14 @@ function edit() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "编辑",
 		type: 2,
 		content: '/s/buss/site/logic/editUI.html?id=' + cbox
 	});
 }
 function add() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/s/buss/agv/site/logic/h/addLogicUI.html'

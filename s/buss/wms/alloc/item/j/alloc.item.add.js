@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
 
 renderAll();
@@ -14,7 +15,7 @@ checkDel();
 
 $("a.addOne").on("click", function () {
     if ($("div.item-group").length >= 8) {
-        gf.layerMsg('最大取货量不能多于8个');
+        gflayer.msg('最大取货量不能多于8个');
         return;
     }
     var apBody = $("div.item-group").first().clone()

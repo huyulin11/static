@@ -1,6 +1,7 @@
 import { initPaperOp } from "/s/buss/wms/j/base/wms.paper.op.js";
 import { overPaper } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { initSetting } from "/s/buss/wms/rf/j/rf.picking.setting.js";
 
 gf.checkLoginError();
@@ -38,7 +39,7 @@ var sub = function () {
                 initDatas();
             }
             $("#tu").focus();
-            gf.layerMsg(data.msg, function () {
+            gflayer.msg(data.msg, function () {
                 $("#tu").val("");
                 $("#su").val("");
                 $("#tu").focus();
@@ -64,12 +65,12 @@ var initPick = function () {
         let url = `/shipment/main/findOneData.shtml`;
         gf.ajax(url, { paperid: _paperid }, "json", function (s) {
             if (s.code < 0) {
-                gf.layerMsg(_paperid + s.msg);
+                gflayer.msg(_paperid + s.msg);
                 return;
             }
             let main = s.object.main;
             if (!main || (main["status"] != "TOSEND" && main["status"] != "PICKING") || main["delflag"] != "0") {
-                gf.layerMsg(_paperid + "该单无法继续操作，如需查看详情，请移步出库管理！");
+                gflayer.msg(_paperid + "该单无法继续操作，如需查看详情，请移步出库管理！");
                 return;
             }
         });

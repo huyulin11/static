@@ -1,10 +1,11 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { initConfList } from "/s/buss/g/j/template.conf.table.js";
 
 export let init = function () {
 	let paperid = gf.urlParam("paperid");
 	if (!paperid) {
-		gf.layerMsg("请定义盘点单号！");
+		gflayer.msg("请定义盘点单号！");
 		return;
 	}
 	initConfList("inventory_result_" + paperid, {

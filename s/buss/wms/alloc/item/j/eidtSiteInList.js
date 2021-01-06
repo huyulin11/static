@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 var $currentTd;
 $("html").on("click", "a.editSite", function (e) {
@@ -47,7 +48,7 @@ var editSiteInputEnter = function () {
     var tr = $currentTd.parents("tr");
     var data = $currentTd.find("input").data("vvvvId");
     if (!data) {
-        gf.layerMsg("数据需从下拉列表中选取！");
+        gflayer.msg("数据需从下拉列表中选取！");
         $currentTd.find("input").focus();
         return;
     }
@@ -58,12 +59,12 @@ var editSiteInputEnter = function () {
         "allocItemFormMap.siteid": data
     }, "json", function (s) {
         if (s.code >= 0) {
-            gf.layerMsg('修改成功！');
+            gflayer.msg('修改成功！');
             $currentTd.find("div.changable").find("span").html(data);
             _toggle();
             window.datagrid.loadData();
         } else {
-            gf.layerMsg('修改失败：' + s.msg);
+            gflayer.msg('修改失败：' + s.msg);
             $currentTd.find("input").focus();
         }
     });

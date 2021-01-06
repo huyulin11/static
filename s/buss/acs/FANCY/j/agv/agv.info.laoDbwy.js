@@ -3,12 +3,13 @@ import { bindSites, allDisabled } from '/s/buss/acs/FANCY/j/agv/agv.info.js';
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
 import { currentAgvId } from '/s/buss/acs/FANCY/j/agv/agv.id.js';
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 var agvId = currentAgvId;
 
 var gotoInitLaoDbwy = function () {
 	var task = "TRANSPORT";
-	var indexOfTips = gf.layer().confirm('请选择返回原料库的目的地', {
+	var indexOfTips = gflayer.obj().confirm('请选择返回原料库的目的地', {
 		btn: ['原料库1号-3054', '原料库2号-3055', '原料库3号-3056', '原料库4号-3057', '原料库5号-3058', '原料库6号-3059'],
 		btn1: function () { taskexe.addTaskToSite(agvId, task, 3054); },
 		btn2: function () { taskexe.addTaskToSite(agvId, task, 3055); },
@@ -44,7 +45,7 @@ var deleverInitHandler = function () {
 var deleverStereotypeHandler = function () {
 	allDisabled();
 	var task = "DELIVER";
-	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地', {
+	var indexOfTips = gflayer.obj().confirm('请选择送料任务的目的地', {
 		btn: ['袜机线尾1号-4001', '袜机线尾2号-4002', '袜机线尾3号-4003', '定型1号-2054', '定型2号-2055', '定型3号-2056', '定型4号-2057'],
 		btn1: function () { taskexe.addTaskToSite(agvId, task, 4001); },
 		btn2: function () { taskexe.addTaskToSite(agvId, task, 4002); },
@@ -59,7 +60,7 @@ var deleverStereotypeHandler = function () {
 var deleverPackHandler = function () {
 	allDisabled();
 	var task = "DELIVER";
-	var indexOfTips = gf.layer().confirm('请选择送料任务的目的地', {
+	var indexOfTips = gflayer.obj().confirm('请选择送料任务的目的地', {
 		btn: ['定型区线尾1号', '定型区线尾2号', '定型区线尾3号', '定型区线尾4号', '包装区1号', '包装区2号', '包装区3号', '包装区4号', '包装区5号', '包装区6号', '包装区7号', '包装区8号', '包装区9号', '包装区10号', '包装区11号'],
 		btn1: function () { taskexe.addTaskToSite(agvId, task, 2058); },
 		btn2: function () { taskexe.addTaskToSite(agvId, task, 2059); },

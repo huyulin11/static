@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 export const
 	ITEM_MSG = {
@@ -47,7 +48,7 @@ export let renderModelConfs = () => {
 			{
 				key: 'POS', target: "none", click: function () {
 					let value = $(this).hasClass("close");
-					gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gf.layer().msg((value ? "显示" : "隐藏") + "坐标"); });
+					gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gflayer.obj().msg((value ? "显示" : "隐藏") + "坐标"); });
 				}
 			},
 			{ key: 'PDA', target: 'div#PDAContainer' },

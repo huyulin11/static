@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { sku } from "/s/buss/wms/sku/info/j/wms.sku.js";
 
@@ -42,12 +43,12 @@ let doJob = (param, that, callback) => {
     let tmpJob = function (index) {
         gf.ajax(that.url, { detailid: _detailid }, "json", function (s) {
             if (s.code >= 0) {
-                gf.layerMsg(`成功${that.name}！`);
+                gflayer.msg(`成功${that.name}！`);
                 if (window.datagrid) window.datagrid.loadData();
                 else if (parent.datagrid) parent.datagrid.loadData();
                 if (callback) { callback(_detailid); }
             } else {
-                gf.layerMsg(`${that.name}失败！` + s.msg);
+                gflayer.msg(`${that.name}失败！` + s.msg);
             }
         });
     };

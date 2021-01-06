@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
 import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/BASE/render/location.on.js";
@@ -92,7 +93,7 @@ var watch = function (v) {
         doWork(url);
         return;
     }
-    gf.layerOpenBak({ content: url, area: ["60%", "75%"], title: "监控" + v, offset: 'rb' });
+    gflayer.openBak({ content: url, area: ["60%", "75%"], title: "监控" + v, offset: 'rb' });
 }
 $("#toggleColor").on("click", toggleColor);
 $("div.watch").on("click", function () { watch($(this).data("id")); });

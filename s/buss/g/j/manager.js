@@ -1,6 +1,7 @@
 import "/s/buss/wms/sku/info/j/wms.sku.js";
 import "/s/buss/g/j/g.v.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import "/s/buss/g/j/g.p.js";
 import "/s/buss/g/j/jquery/jquery.autofill.js";
@@ -41,7 +42,7 @@ var loadPage = function (tip) {
             gf.appOpen(url);
             return;
         } else if (openType == "2") {
-            gf.layerOpenBak({
+            gflayer.openBak({
                 title: "AGV信息",
                 area: ["70%", "100%"],
                 offset: 'rb',
@@ -98,7 +99,7 @@ var loadPage = function (tip) {
 gf.loadPage = loadPage;
 
 $("a#editUI").on("click", function () {
-    window.pageii = gf.layerOpen({
+    window.pageii = gflayer.open({
         title: "编辑",
         type: 2,
         offset: "auto",

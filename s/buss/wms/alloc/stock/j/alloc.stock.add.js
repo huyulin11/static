@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 var checkDel = function () {
     if ($("div.item-group").length <= 1) {
@@ -12,7 +13,7 @@ checkDel();
 
 $("a.addOne").on("click", function () {
     if ($("div.item-group").length >= 8) {
-        gf.layerMsg('最大取货量不能多于8个');
+        gflayer.msg('最大取货量不能多于8个');
         return;
     }
     var apBody = $("div.item-group").first().clone()
@@ -52,7 +53,7 @@ var demo = $("#form").Validform({
                 btn: ['继续', '关闭']
             }, function () {
                 clearTimeout(to);
-                gf.layerMsg('继续添加！');
+                gflayer.msg('继续添加！');
                 window.location.reload();
             }, function () {
                 parent.layer.close(parent.pageii);

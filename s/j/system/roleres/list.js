@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
@@ -56,7 +57,7 @@ function editRole() {
 		layer.msg("只能选中一个");
 		return;
 	}
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "编辑",
 		type: 2,
 		content: '/roleres/editUI.shtml?id=' + cbox
@@ -69,14 +70,14 @@ function permissions() {
 		return;
 	}
 	var url = '/resources/permissions.shtml?roleId=' + cbox;
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "分配权限",
 		type: 2,
 		content: url
 	});
 }
 function addRole() {
-	window.pageii = gf.layerOpen({
+	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
 		content: '/roleres/addUI.shtml'

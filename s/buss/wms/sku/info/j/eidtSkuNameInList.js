@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 $("html").on("click", "a.editSkuName", function () {
     doEdit(this);
@@ -39,10 +40,10 @@ var whenEditInputEnter = function (that) {
     }, "json", function (s) {
         localStorage.refreshSkuInfo = 1;
         if (s.code >= 0) {
-            gf.layerMsg('修改成功！');
+            gflayer.msg('修改成功！');
             window.datagrid.loadData();
         } else {
-            gf.layerMsg('修改失败：' + s.msg);
+            gflayer.msg('修改失败：' + s.msg);
             td.find("input").focus();
         }
     });

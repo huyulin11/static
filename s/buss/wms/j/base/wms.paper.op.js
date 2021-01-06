@@ -1,4 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
 import { gu } from "/s/buss/g/j/g.u.js";
 import { doInitPaperOp, paperOp, btns } from "/s/buss/wms/j/base/wms.paper.op.obj.js";
@@ -72,7 +73,7 @@ var dealSheet = function (sheet) {
             data: _paper, dataType: "json", type: "POST"
         });
     }
-    gf.layerMsg("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
+    gflayer.msg("数据导入操作已提交，请在本页面等待提交结果，数据过多时等待的时间会比较久！");
 }
 
 var initPaperOp = function (tasktype, optype) {
@@ -140,7 +141,7 @@ var initPaperOp = function (tasktype, optype) {
                 $('#upload').on("change", function (e) {
                     var files = e.target.files;
                     if (files.length > 1 && localStorage.importThenEdit) {
-                        gf.layerMsg("编辑模式下仅能单个导入");
+                        gflayer.msg("编辑模式下仅能单个导入");
                         $('#upload').val("");
                         return;
                     }

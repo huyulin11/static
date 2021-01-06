@@ -1,4 +1,4 @@
-import { gv } from "/s/buss/g/j/g.v.js";
+import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { globalCss } from "/s/buss/g/j/g.css.js";
 
 globalCss();
@@ -6,7 +6,7 @@ globalCss();
 var defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
-    gf.layerMsg(msg);
+    gflayer.msg(msg);
 };
 
 var checkLoginFunNo = (no) => {
@@ -25,7 +25,7 @@ class GF {
             }
         }
         if (data.code >= 0) {
-            gf.layerMsg(data.msg ? data.msg : "保存成功！");
+            gflayer.msg(data.msg ? data.msg : "保存成功！");
             if (window.datagrid && window.datagrid.loadData) {
                 window.datagrid.loadData();
             }
@@ -53,41 +53,6 @@ class GF {
     };
     loginFailEvent() {
         gf.bussEvent("loginFail");
-    };
-    layerOpenBak(confs) {
-        if ($(window).width() < 960) {
-            if (confs.newTab) {
-                window.open(confs.content);
-            } else {
-                window.location.href = confs.content;
-            }
-            return;
-        }
-        var initConf = {
-            type: 2,
-            shade: 0,
-            maxmin: true,
-            area: gf.layerArea(),
-            zIndex: layer.zIndex,
-            success: function (layero) {
-                layer.setTop(layero);
-            }
-        };
-        var conf;
-        if (typeof confs == "string") {
-            conf = $.extend(initConf, { content: confs });
-        } else {
-            conf = $.extend(initConf, confs);
-        }
-        if (!conf.area) { conf.area = ['60%', '60%']; }
-        if (!conf.offset) {
-            conf.offset = [
-                Math.random() * $(window).height() * 0.2,
-                Math.random() * $(window).width() * 0.2
-            ];
-            conf.offset = 'cb';
-        }
-        window.pageii = layer.open(conf);
     };
     resizeTable() {
         $("table").each(function () {
@@ -417,22 +382,6 @@ class GF {
         }
         return flag;
     };
-    layer() {
-        let layerCurrent = layer;
-        if (parent && parent.layer) {
-            layerCurrent = parent.layer;
-        }
-        return layerCurrent;
-    };
-    layerParentMsg(content) {
-        gf.layer().msg(content);
-    };
-    layerMsg(content, end, conf) {
-        conf = Object.assign({ time: 0, btn: ['关闭'], shade: 0.1, }, conf);
-        layer.msg(content, conf, function () {
-            if (end && typeof end == 'function') { end(); }
-        });
-    };
     checkLogin(yes, no) {
         gf.doAjax({
             url: "/checkLogin.shtml",
@@ -491,28 +440,6 @@ class GF {
             }
         });
         return role;
-    };
-    layerOpen(conf) {
-        let newConf = Object.assign({
-            area: gf.layerArea(),
-            shadeClose: true,
-        }, conf);
-        return layer.open(newConf);
-    };
-    layerOpenSmall(conf) {
-        let newConf = Object.assign({
-            area: gf.layerAreaSmall(),
-            shadeClose: true,
-        }, conf);
-        return layer.open(newConf);
-    };
-    layerArea() {
-        if (gf.isPc()) { return ["95%", "90%"]; }
-        else { return ["99%", "70%"]; }
-    };
-    layerAreaSmall() {
-        if (gf.isPc()) { return ["50%", "50%"]; }
-        else { return ["99%", "70%"]; }
     };
     getArray(target) {
         var arr = [];
