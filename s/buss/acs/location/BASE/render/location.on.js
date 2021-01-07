@@ -110,7 +110,7 @@ export var rightClickPoint = function (flag) {
                         deleteLocation(id);
                         datas.init();
                         d3.select("#t" + id).remove();
-                        conf.svg.selectAll("circle").filter(function (e) { return e && e[0] == id; }).remove();
+                        circle.remove();
                         conf.svg.selectAll("path").filter(function (e) { return e && e.to == id; }).remove();
                         conf.svg.selectAll("path").filter(function (e) { return e && e.from == id; }).remove();
                     });
