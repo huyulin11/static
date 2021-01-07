@@ -85,14 +85,22 @@ var rectDrag = function () {
 }
 var rectEnd = function () {
     var id = getid();
-    let x = $("#drag" + id).attr('x'),
-        y = $("#drag" + id).attr('y'),
-        width = $("#drag" + id).attr('width'),
-        height = $("#drag" + id).attr('height');
+    let x = parseInt($("#drag" + id).attr('x')),
+        y = parseInt($("#drag" + id).attr('y')),
+        width = parseInt($("#drag" + id).attr('width')),
+        height = parseInt($("#drag" + id).attr('height'));
     d3.select("#drag" + id)
         .attr('fill', '#e0e053')
         .attr('stroke', 'orange')
         .attr('opacity', 0.5)
         .attr('stroke-width', 3);
+    conf.rectHome.append('text')
+        .attr('x', x + width / 3)
+        .attr('y', y - 10)
+        .attr('id', 'retext' + id)
+        .attr("stroke", "black")
+        .attr("font-size", "15px")
+        .attr("font-family", "sans-serif")
+        .text('建筑')
     crateRect(id, x, y, width, height);
 }

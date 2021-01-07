@@ -24,6 +24,24 @@ export var drawRect = function (rectdata) {
             .attr('fill', '#e0e053')
             .attr('stroke', 'orange')
             .attr('stroke-width', 3)
-            .attr('opacity',0.5)
+            .attr('opacity', 0.5)
+        conf.rectHome.selectAll("text").data(rectdata)
+            .enter()
+            .append('text')
+            .attr('x', function (d) {
+                return xnumToWindow(d.x) + d.width / 3;
+            })
+            .attr('y', function (d) {
+                return ynumToWindow(d.y) - 10;
+            })
+            .attr('id', function (d) {
+                return 'retext' + d.id;
+            })
+            .attr("stroke", "black")
+            .attr("font-size", "15px")
+            .attr("font-family", "sans-serif")
+            .text(function (d) {
+                return d.buildname;
+            })
     }
 }

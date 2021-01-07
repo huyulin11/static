@@ -221,7 +221,7 @@ var dataRect = function (data) {
     for (var val of data) {
         arr.push([val.id]);
         datas.rect.push({
-            'id': val.id, 'x': val.x, 'y': val.y, 'width': val.width, 'height': val.height
+            'id': val.id, 'x': val.x, 'y': val.y, 'width': val.width, 'height': val.height, 'buildname': val.buildname
         });
     }
     datas.rectid = arr.sort(function (a, b) {
