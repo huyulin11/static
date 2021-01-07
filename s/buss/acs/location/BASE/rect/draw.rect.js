@@ -33,14 +33,13 @@ export var drawRect = function (rectdata) {
                 return xnumToWindow(d.x) + d.width / 3;
             })
             .attr('y', function (d) {
-                return ynumToWindow(d.y) - 10;
+                return ynumToWindow(d.y) + d.height + 20;
             })
             .attr('id', function (d) {
                 return 'retext' + d.id;
             })
-            .attr("stroke", "black")
-            .attr("font-size", "15px")
-            .attr("font-family", "sans-serif")
+            .attr("font-size", "13px")
+            .attr('fill', 'black')
             .text(function (d) {
                 return d.buildname;
             })

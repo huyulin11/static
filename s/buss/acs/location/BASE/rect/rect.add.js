@@ -90,20 +90,25 @@ var rectEnd = function () {
         width = parseInt($("#drag" + id).attr('width')),
         height = parseInt($("#drag" + id).attr('height'));
     d3.select("#start" + id).remove();
-    d3.select("#drag" + id)
-        .attr('class', 'classRect')
-        .attr('fill', '#e0e053')
-        .attr('stroke', 'orange')
-        .attr('opacity', 0.5)
-        .attr('stroke-width', 3);
-    conf.rectHome.append('text')
-        .attr('x', x + width / 3)
-        .attr('y', y - 10)
-        .attr('id', 'retext' + id)
-        .attr("stroke", "black")
-        .attr("font-size", "15px")
-        .attr("font-family", "sans-serif")
-        .text('建筑');
-    crateRect(id, x, y, width, height);
-    rightClickRect(true);
+    if (width < 20 || height < 20) {
+        d3.select("#drag" + id).remove();
+        layer.msg('建筑长或宽过小！请重新添加！');
+    } else {
+        d3.select("#drag" + id)
+            .attr('class', 'classRect')
+            .attr('fill', '#e0e053')
+            .attr('stroke', 'orange')
+            .attr('opacity', 0.5)
+            .attr('stroke-width', 3);
+        conf.rectHome.append('text')
+            .attr('x', x + width / 3)
+            .attr('y', y + 20 + height)
+            .attr('id', 'retext' + id)
+            .attr("font-size", "13px")
+            .attr('fill', 'black')
+            .text('建筑');
+        crateRect(id, x, y, width, height);
+        rightClickRect(true);
+    }
+
 }
