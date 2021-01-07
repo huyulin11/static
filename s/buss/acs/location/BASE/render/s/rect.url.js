@@ -3,7 +3,7 @@ import { updateTaskSiteRect } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var crateRect = function (id, x, y, width, height) {
     var key = parseInt(id);
-    var result = { 'id': key, 'x': xnumToDB(x), 'y': ynumToDb(y), 'width': width, 'height': height };
+    var result = { 'id': key, 'x': xnumToDB(x), 'y': ynumToDb(y), 'width': width, 'height': height, 'buildname': '建筑' };
     gf.doAjax({
         url: `/rect/conf/addRect.shtml`, type: "POST",
         data: { table: "MAP_DECORATE", key: key, value: JSON.stringify(result) },
@@ -26,15 +26,14 @@ export var delRect = function (id) {
     });
 }
 
-export var moveLocation = function (id, x, y) {
+export var editBuildName = function (id, value) {
     var key = parseInt(id);
-    var result = windowToDB(id, x, y);
     gf.doAjax({
-        url: `/tasksite/updateLocation.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
+        url: `/rect/conf/editBuildName.shtml`, type: "POST",
+        data: { table: "MAP_DECORATE", key: key, value: value },
         success: (obj) => {
-            updateTaskSiteLocation(id, result);
-            if (obj.msg) layer.msg("拖动失败");
+            updateTaskSiteRect(id, value);
+            if (obj.msg) layer.msg("修改失败");
         }
     });
 }
