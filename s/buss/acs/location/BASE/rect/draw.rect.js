@@ -24,7 +24,7 @@ export var drawRect = function (rectdata) {
             .attr('class', 'classRect')
             .attr('fill', '#e0e053')
             .attr('stroke', 'orange')
-            .attr('stroke-width', 3)
+            .attr('stroke-width', 1.5)
             .attr('opacity', 0.5)
         conf.rectHome.selectAll("text").data(rectdata)
             .enter()

@@ -33,10 +33,7 @@ export var editBuildName = function (id, value) {
         url: `/rect/conf/editBuildName.shtml`, type: "POST",
         data: { table: "MAP_DECORATE", key: key, value: JSON.stringify(value) },
         success: (obj) => {
-            console.log(datas.rect);
             updateTaskSiteRect(id, value);
-            datas.init();
-            console.log(datas.rect);
             if (obj.msg) layer.msg("修改失败");
         }
     });
