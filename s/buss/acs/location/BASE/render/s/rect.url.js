@@ -5,7 +5,7 @@ export var crateRect = function (id, x, y, width, height) {
     var key = parseInt(id);
     var result = { 'id': key, 'x': xnumToDB(x), 'y': ynumToDb(y), 'width': width, 'height': height };
     gf.doAjax({
-        url: `/app/conf/addRect.shtml`, type: "POST",
+        url: `/rect/conf/addRect.shtml`, type: "POST",
         data: { table: "MAP_DECORATE", key: key, value: JSON.stringify(result) },
         success: (obj) => {
             updateTaskSiteRect(id, result);
@@ -14,13 +14,13 @@ export var crateRect = function (id, x, y, width, height) {
     });
 }
 
-export var deleteLocation = function (id) {
+export var delRect = function (id) {
     var ids = parseInt(id);
     gf.doAjax({
-        url: `/tasksite/deleteLocation.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: ids },
+        url: `/rect/conf/deleteRect.shtml`, type: "POST",
+        data: { table: "MAP_DECORATE", key: ids },
         success: (obj) => {
-            updateTaskSiteLocation(id, "", true);
+            updateTaskSiteRect(id, "", true);
             if (obj.msg) layer.msg("删除失败");
         }
     });

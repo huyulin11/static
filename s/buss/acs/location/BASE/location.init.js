@@ -7,7 +7,7 @@ import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
 import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { addRect } from "/s/buss/acs/location/BASE/rect/rect.add.js";
+import { rectEvent } from "/s/buss/acs/location/BASE/rect/rect.event.js";
 
 let confs = [];
 bandBodyClick();
@@ -60,10 +60,10 @@ confs.push({
         let flag = $(this).hasClass("close");
         if (flag) {
             $(this).removeClass("close").addClass("open");
-            addRect(flag);
+            rectEvent(flag);
         } else {
             $(this).removeClass("open").addClass("close");
-            addRect(flag);
+            rectEvent(flag);
         }
     }
 });
