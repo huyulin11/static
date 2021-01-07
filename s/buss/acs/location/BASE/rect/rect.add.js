@@ -1,6 +1,7 @@
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { crateRect } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { rightClickRect } from "/s/buss/acs/location/BASE/rect/rect.rightclick.js";
 
 export var addRect = function (flag) {
     if (flag) {
@@ -81,7 +82,6 @@ var rectDrag = function () {
             .attr('width', x1 - x2)
             .attr('height', y1 - y2)
     }
-
 }
 var rectEnd = function () {
     var id = getid();
@@ -89,7 +89,9 @@ var rectEnd = function () {
         y = parseInt($("#drag" + id).attr('y')),
         width = parseInt($("#drag" + id).attr('width')),
         height = parseInt($("#drag" + id).attr('height'));
+    d3.select("#start" + id).remove();
     d3.select("#drag" + id)
+        .attr('class', 'classRect')
         .attr('fill', '#e0e053')
         .attr('stroke', 'orange')
         .attr('opacity', 0.5)
@@ -103,4 +105,5 @@ var rectEnd = function () {
         .attr("font-family", "sans-serif")
         .text('建筑')
     crateRect(id, x, y, width, height);
+    rightClickRect(true);
 }

@@ -21,6 +21,7 @@ export var drawRect = function (rectdata) {
             .attr('height', function (d) {
                 return d.height;
             })
+            .attr('class', 'classRect')
             .attr('fill', '#e0e053')
             .attr('stroke', 'orange')
             .attr('stroke-width', 3)
