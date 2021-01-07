@@ -40,9 +40,12 @@ var vm = new Vue({
             let value = JSON.stringify(acts);
             gf.doAjax({
                 url: `/app/conf/set.shtml`, type: "POST",
-                data: { table: "FANCY_CACHE_CONF", key: path, value: value }
+                data: { table: "FANCY_CACHE_CONF", key: path, value: value },
+                whenSuccess: () => {
+                    vm.clear();
+                    parent.datagrid.loadData();
+                }
             });
-            this.clear();
         },
         clear() {
             this.path = null;
