@@ -1,7 +1,6 @@
 import { delRect, editBuildName } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { xnumToDB, ynumToDb } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 export var rightClickRect = function (flag) {
     if (flag) {
@@ -15,7 +14,7 @@ export var rightClickRect = function (flag) {
                         width = $(this).attr('width'),
                         height = $(this).attr('height');
                     var rect = d3.select(this);
-                    var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="修改名称"><br><input type="button" id="btn2" style="width: 76px;height: 30px" value="删除建筑"><br><input type="button" id="btn3" style="width: 76px;height: 30px" value="删除站点">',
+                    var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="修改名称"><br><input type="button" id="btn2" style="width: 76px;height: 30px" value="删除建筑"><br><input type="button" id="btn3" style="width: 76px;height: 30px" value="">',
                         '#' + id,
                         {
                             tips: [2, '#e6e6e6'],
@@ -29,7 +28,7 @@ export var rightClickRect = function (flag) {
                         layer.prompt(function (val, index) {
                             layer.msg('建筑名修改为' + val);
                             d3.select('#retext' + key).text(val);
-                            var value = JSON.stringify({ 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': val });
+                            var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': val };
                             editBuildName(key, value);
                             layer.close(index);
                         });

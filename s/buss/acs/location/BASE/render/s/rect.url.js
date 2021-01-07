@@ -1,5 +1,6 @@
 import { xnumToDB, ynumToDb } from "/s/buss/acs/location/BASE/render/trans.location.js";
 import { updateTaskSiteRect } from "/s/buss/acs/FANCY/j/acs.site.info.js";
+import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 
 export var crateRect = function (id, x, y, width, height) {
     var key = parseInt(id);
@@ -30,9 +31,12 @@ export var editBuildName = function (id, value) {
     var key = parseInt(id);
     gf.doAjax({
         url: `/rect/conf/editBuildName.shtml`, type: "POST",
-        data: { table: "MAP_DECORATE", key: key, value: value },
+        data: { table: "MAP_DECORATE", key: key, value: JSON.stringify(value) },
         success: (obj) => {
+            console.log(datas.rect);
             updateTaskSiteRect(id, value);
+            datas.init();
+            console.log(datas.rect);
             if (obj.msg) layer.msg("修改失败");
         }
     });

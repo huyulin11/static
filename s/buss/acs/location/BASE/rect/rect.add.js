@@ -103,7 +103,7 @@ var rectEnd = function () {
         .attr("stroke", "black")
         .attr("font-size", "15px")
         .attr("font-family", "sans-serif")
-        .text('建筑')
+        .text('建筑');
     crateRect(id, x, y, width, height);
     rightClickRect(true);
 }
