@@ -118,23 +118,24 @@ class GFDIV {
         return rtn;
     };
     renderDivs(conf) {
-        var dealData = function (data) {
-            if (data.length > 1000) {
-                return data.slice(0, 1000);
+        debugger
+        var dealData = function (data, numInPage) {
+            if (data.records.length > numInPage) {
+                return data.records.slice(0, numInPage);
             }
-            return data;
+            return data.records;
         }
         var renderOne = conf.render, numInLine = conf.numInLine ? conf.numInLine : 4,
-            numInPage = conf.numInPage ? conf.numInPage : 1000, clickFun = conf.click;
-        var filterData = dealData(conf.data, numInPage);
-        var datas = filterData;
+            _numInPage = conf.numInPage ? conf.numInPage : 1000, clickFun = conf.click;
         var target = conf.target;
-        debugger
-        let desc = $(`<span class='datatabledesc'>本页${datas.records.length},共${datas.rowCount}</span>`);
-        $(target).append(desc);
+        if (conf.data.records && conf.data.rowCount) {
+            let desc = $(`<span class='datatabledesc'>本页${conf.data.records.length}条,共${conf.data.rowCount}条</span>`);
+            $(target).append(desc);
+        }
         var index = 1;
         var trObj = $(`<div class='tr'></div>`);
-        for (var item of (datas.records ? datas.records : datas)) {
+        let datas = dealData(conf.data, _numInPage);
+        for (var item of datas) {
             var tmpItemStr = renderOne(item);
             if (!tmpItemStr) continue;
             let tdObj = $("<div class='td'></div>");
