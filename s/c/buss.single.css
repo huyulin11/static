@@ -37,3 +37,8 @@ div.tr {
 	/* padding-left: 5px; */
 	/* padding-right: 2px; */
 }
+
+span.datatabledesc{
+	color: #888;
+	font-size: 12px;
+}

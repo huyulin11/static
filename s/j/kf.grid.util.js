@@ -14,7 +14,7 @@ var _defaultConf = {
     pageNow: 'pageNow',// 当前页码 或 当前第几页a
     totalPages: 'pageCount',// 总页数
     totalRecords: 'rowCount',// 总记录数
-    pagecode: '20',// 分页时，最多显示几个页码
+    pagecode: '10',// 分页时，最多显示几个页码
     async: true, // 默认为同步
     data: '', // 发送给后台的数据 是json数据 例如{nama:"a",age:"100"}....
     pageSize: 40, // 每页显示多少条数据

@@ -4,7 +4,7 @@ import { render } from "./client.render.list.work.js?f=crmv000002";
 import "/s/buss/crm/client/client.list.event.js?f=crmv000002";
 import { gf } from "/s/buss/g/j/g.f.js?f=crmv000002";
 
-let _conf = { numInLine: gf.isPc() ? 2 : 1, target: "div#target" };
+let _conf = { numInLine: gf.isPc() ? 2 : 1, target: "div#target", pageSize: 4 };
 let _search = {};
 let dataUdf = () => {
 	if ($("#showSelf").is(":checked")) {
@@ -22,7 +22,7 @@ let dataUdf = () => {
 // gf.addChooseFlag({ container: "#chooseflags", id: 'timeRefresh', name: '定时刷新' });
 gf.addChooseFlag({ container: "#chooseflags", id: 'showDel', name: '显示删除', click: dataUdf });
 gf.addChooseFlag({ container: "#chooseflags", id: 'showList', name: '显示清单', click: dataUdf });
-gf.addChooseFlag({ container: "#chooseflags", id: 'showSelf', name: '仅看自己', defaultValue: true, click: dataUdf });
+gf.addChooseFlag({ container: "#chooseflags", id: 'showSelf', name: '仅看自己', defaultValue: false, click: dataUdf });
 gf.addChooseFlag({ container: "#chooseflags", id: 'showType1', name: '仅看基础', click: dataUdf });
 
 var vm = new Vue({

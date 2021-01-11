@@ -129,9 +129,12 @@ class GFDIV {
         var filterData = dealData(conf.data, numInPage);
         var datas = filterData;
         var target = conf.target;
+        debugger
+        let desc = $(`<span class='datatabledesc'>本页${datas.records.length},共${datas.rowCount}</span>`);
+        $(target).append(desc);
         var index = 1;
         var trObj = $(`<div class='tr'></div>`);
-        for (var item of datas) {
+        for (var item of (datas.records ? datas.records : datas)) {
             var tmpItemStr = renderOne(item);
             if (!tmpItemStr) continue;
             let tdObj = $("<div class='td'></div>");

@@ -15,14 +15,14 @@ export var data = function (callback, condition, manager) {
 
 export var dataFull = function (callback, condition) {
     condition["TABLE_KEY"] = "CRM_CLIENTS";
-    jQuery.ajax({
+    let _condition = {
         url: "/app/conf/findByPage.shtml",
         data: condition,
         type: "POST",
         dataType: "json",
         success: function (data) {
             if (callback) {
-                callback(data.records);
+                callback(data);
             }
         },
         complete: function (data) {
@@ -31,5 +31,6 @@ export var dataFull = function (callback, condition) {
             }, 100);
         },
         timeout: 5000
-    });
+    };
+    jQuery.ajax(_condition);
 }
