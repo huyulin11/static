@@ -35,17 +35,15 @@
     import "/s/buss/acs/location/BASE/render/location.button.js"
     import { markerDef } from "/s/buss/acs/location/BASE/path/def.marker.radian.js";
     import { dataAgvLocation } from "/s/buss/acs/location/BASE/location.data.js";
+    import { drawAgv } from "/s/buss/acs/location/BASE/agv/draw.agv.js";
     markerDef();
-    renderSvg(() => { });
+    renderSvg();
     setTimeout(renderSvg, 3000);
-    // setInterval(renderSvg, 3000);
-
     dataAgvLocation();
     renderAgvLocation();
     setInterval(() => {
-        // allAgvsInfoTmp();
         dataAgvLocation();
-        renderAgvLocation();
+        drawAgv();
     }, 3000);
 </script>
 
