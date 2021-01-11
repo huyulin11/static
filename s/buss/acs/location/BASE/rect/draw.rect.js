@@ -21,16 +21,17 @@ export var drawRect = function (rectdata) {
             .attr('height', function (d) {
                 return d.height;
             })
+            .attr('buildname', function (d) {
+                return d.buildname;
+            })
             .attr('class', 'classRect')
             .attr('fill', '#e0e053')
-            .attr('stroke', 'orange')
-            .attr('stroke-width', 1.5)
             .attr('opacity', 0.5)
         conf.rectHome.selectAll("text").data(rectdata)
             .enter()
             .append('text')
             .attr('x', function (d) {
-                return xnumToWindow(d.x) + d.width / 3;
+                return xnumToWindow(d.x);
             })
             .attr('y', function (d) {
                 return ynumToWindow(d.y) + d.height + 20;

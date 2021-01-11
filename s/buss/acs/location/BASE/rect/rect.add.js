@@ -13,7 +13,8 @@ export var addRect = function (flag) {
     };
 }
 
-var setRect = function () {
+export var setRect = function () {
+    d3.event.preventDefault();
     var id = getid();
     let x = d3.event.offsetX,
         y = d3.event.offsetY;
@@ -24,9 +25,7 @@ var setRect = function () {
         .attr('width', 20)
         .attr('height', 20)
         .attr('fill', '#e0e053')
-        .attr('stroke', 'orange')
-        .attr('opacity', 0.5)
-        .attr('stroke-width', 1.5);
+        .attr('opacity', 0.5);
     conf.rectHome.append('text')
         .attr('x', x - 10)
         .attr('y', y + 30)
