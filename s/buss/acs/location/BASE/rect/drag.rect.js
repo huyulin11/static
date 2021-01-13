@@ -34,7 +34,6 @@ var startR = function () {
 }
 
 var dargR = function () {
-    console.log(rectData);
     let x1 = event.offsetX,
         y1 = event.offsetY;
     let width = parseFloat($(this).attr('width')),
