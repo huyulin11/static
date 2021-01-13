@@ -1,7 +1,7 @@
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { editBuildName } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
 import { xnumToDB, ynumToDb } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/BASE/rect/drag.dash.point1.js";
+import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/BASE/rect/drag.dash.point.js";
 
 export var dragDashRect = function (flag) {
     if (flag) {
@@ -28,8 +28,10 @@ var startR = function () {
         y1 = event.offsetY,
         x2 = parseFloat($(this).attr('x')),
         y2 = parseFloat($(this).attr('y')),
+        id = $(this).attr('id').slice(4),
         width = x1 - x2,
         height = y1 - y2;
+    d3.selectAll('#dashC' + id).style('display', 'block')
     rectData = { 'width': width, 'height': height };
 }
 
@@ -40,7 +42,7 @@ var dargR = function () {
         height = parseFloat($(this).attr('height')),
         x = x1 - rectData.width,
         y = y1 - rectData.height,
-        id = $(this).attr('id');
+        id = $(this).attr('id').slice(4);
     d3.select(this)
         .attr('x', x)
         .attr('y', y);
@@ -52,23 +54,23 @@ var dargR = function () {
     point.push([2, x + width, y]);
     point.push([3, x, y + height]);
     point.push([4, x + width, y + height]);
-    d3.selectAll('.changeCircle').data(point)
+    d3.selectAll('#dashC' + id).data(point)
         .attr('cx', function (d) {
             return d[1];
         })
         .attr('cy', function (d) {
             return d[2];
         });
-    d3.select('#retext' + id.slice(4)).attr('x', x).attr('y', y + height + 20);
+    d3.select('#retext' + id).attr('x', x).attr('y', y + height + 20);
 }
 var endR = function () {
-    let id = $(this).attr('id'),
+    let id = $(this).attr('id').slice(4),
         x = xnumToDB($(this).attr('x')),
         y = ynumToDb($(this).attr('y')),
         width = parseFloat($(this).attr('width')),
         height = parseFloat($(this).attr('height')),
         buildName = $(this).attr('buildname');
-    var key = id.slice(4);
+    var key = id;
     var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName }
     editBuildName(key, value);
 }
@@ -100,13 +102,13 @@ var dargC = function () {
         num = $(this).attr('num'),
         id = $(this).attr('id').slice(5),
         height = parseFloat($('#rect' + id).attr('height'));
-    if (num == 1) {
+    if (num == id + 1) {
         dragDashPoint1(id, x, y);
-    } else if (num == 2) {
+    } else if (num == id + 2) {
         dragDashPoint2(id, x, y);
-    } else if (num == 3) {
+    } else if (num == id + 3) {
         dragDashPoint3(id, x, y);
-    } else if (num == 4) {
+    } else if (num == id + 4) {
         dragDashPoint4(id, x, y);
     }
     d3.select('#retext' + id)

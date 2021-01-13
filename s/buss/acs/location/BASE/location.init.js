@@ -64,6 +64,7 @@ confs.push({
         } else {
             $(this).removeClass("open").addClass("close");
             rectEvent(flag);
+            d3.selectAll('.changeCircle').remove();
         }
     }
 });
