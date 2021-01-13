@@ -117,8 +117,8 @@ var dargC = function () {
 }
 var endC = function () {
     let key = $(this).attr('id').slice(5),
-        x = xnumToDB($('[num=1]').attr('cx')),
-        y = ynumToDb($('[num=1]').attr('cy')),
+        x = xnumToDB($('[num=' + key + '1]').attr('cx')),
+        y = ynumToDb($('[num=' + key + '1]').attr('cy')),
         width = parseFloat($('#rect' + key).attr('width')),
         height = parseFloat($('#rect' + key).attr('height')),
         buildName = $('#rect' + key).attr('buildname');
