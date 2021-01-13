@@ -31,7 +31,7 @@ export var drawRect = function (rectdata) {
             .enter()
             .append('text')
             .attr('x', function (d) {
-                return xnumToWindow(d.x);
+                return xnumToWindow(d.x) + d.width / 2;
             })
             .attr('y', function (d) {
                 return ynumToWindow(d.y) + d.height + 20;
@@ -41,8 +41,9 @@ export var drawRect = function (rectdata) {
             })
             .attr("font-size", "13px")
             .attr('fill', 'black')
+            .style('text-anchor', 'middle')
             .text(function (d) {
-                return d.buildname + d.id;
+                return d.buildname;
             });
         var point = [];
         for (let rect of rectdata) {
@@ -62,6 +63,9 @@ export var drawRect = function (rectdata) {
             })
             .attr('num', function (d) {
                 return d[3] + "" + d[0];
+            })
+            .attr('direction', function (d) {
+                return d[0];
             })
             .attr('cx', function (d) {
                 return d[1];

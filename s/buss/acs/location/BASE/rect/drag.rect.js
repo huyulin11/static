@@ -24,6 +24,7 @@ export var dragDashRect = function (flag) {
 var rectData = {};
 var startR = function () {
     datas.init();
+    d3.selectAll('.changeCircle').style('display', 'none');
     let x1 = event.offsetX,
         y1 = event.offsetY,
         x2 = parseFloat($(this).attr('x')),
@@ -31,7 +32,8 @@ var startR = function () {
         id = $(this).attr('id').slice(4),
         width = x1 - x2,
         height = y1 - y2;
-    d3.selectAll('#dashC' + id).style('display', 'block')
+    d3.selectAll('#dashC' + id).style('display', 'block');
+    d3.select(this).style('cursor', 'move');
     rectData = { 'width': width, 'height': height };
 }
 
@@ -61,7 +63,7 @@ var dargR = function () {
         .attr('cy', function (d) {
             return d[2];
         });
-    d3.select('#retext' + id).attr('x', x).attr('y', y + height + 20);
+    d3.select('#retext' + id).attr('x', x + width / 2).attr('y', y + height + 20);
 }
 var endR = function () {
     let id = $(this).attr('id').slice(4),
@@ -101,6 +103,7 @@ var dargC = function () {
         y = event.offsetY,
         num = $(this).attr('num'),
         id = $(this).attr('id').slice(5),
+        width = parseFloat($('#rect' + id).attr('width')),
         height = parseFloat($('#rect' + id).attr('height'));
     if (num == id + 1) {
         dragDashPoint1(id, x, y);
@@ -112,7 +115,7 @@ var dargC = function () {
         dragDashPoint4(id, x, y);
     }
     d3.select('#retext' + id)
-        .attr('x', $('#rect' + id).attr('x'))
+        .attr('x', parseFloat($('#rect' + id).attr('x')) + width / 2)
         .attr('y', parseFloat($('#rect' + id).attr('y')) + height + 20);
 }
 var endC = function () {
