@@ -1,6 +1,7 @@
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { editBuildName } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
 import { xnumToDB, ynumToDb } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/BASE/rect/drag.dash.point1.js";
 
 export var dragDashRect = function (flag) {
     if (flag) {
@@ -20,28 +21,37 @@ export var dragDashRect = function (flag) {
     }
 }
 
-
+var rectData = {};
 var startR = function () {
     datas.init();
+    let x1 = event.offsetX,
+        y1 = event.offsetY,
+        x2 = parseFloat($(this).attr('x')),
+        y2 = parseFloat($(this).attr('y')),
+        width = x1 - x2,
+        height = y1 - y2;
+    rectData = { 'width': width, 'height': height };
 }
+
 var dargR = function () {
+    console.log(rectData);
     let x1 = event.offsetX,
         y1 = event.offsetY;
     let width = parseFloat($(this).attr('width')),
         height = parseFloat($(this).attr('height')),
-        x = x1 - width / 2,
-        y = y1 - height / 2,
+        x = x1 - rectData.width,
+        y = y1 - rectData.height,
         id = $(this).attr('id');
     d3.select(this)
-        .attr('x', x1 - width / 2)
-        .attr('y', y1 - height / 2);
-    d3.select('.dashRect')
-        .attr('x', x1 - width / 2)
-        .attr('y', y1 - height / 2);
+        .attr('x', x)
+        .attr('y', y);
+    // d3.select('.dashRect')
+    //     .attr('x', x1 - width / 2)
+    //     .attr('y', y1 - height / 2);
     var point = [];
     point.push([1, x, y]);
     point.push([2, x + width, y]);
-    point.push([3, x, y + width]);
+    point.push([3, x, y + height]);
     point.push([4, x + width, y + height]);
     d3.selectAll('.changeCircle').data(point)
         .attr('cx', function (d) {
@@ -64,19 +74,54 @@ var endR = function () {
     editBuildName(key, value);
 }
 
-d3.select('.changeCircle').call(
-    d3.drag()
-        .on('start', startC)
-        .on('drag', dargC)
-        .on('end', endC)
-);
+export var dragDashCircle = function (flag) {
+    if (flag) {
+        d3.selectAll('.changeCircle').call(
+            d3.drag()
+                .on('start', startC)
+                .on('drag', dargC)
+                .on('end', endC)
+        );
+    } else {
+        d3.selectAll('.changeCircle').call(
+            d3.drag()
+                .on('start', null)
+                .on('drag', null)
+                .on('end', null)
+        );
+    }
+}
 
 var startC = function () {
     datas.init();
 }
 var dargC = function () {
-
+    let x = event.offsetX,
+        y = event.offsetY,
+        num = $(this).attr('num'),
+        id = $(this).attr('id').slice(5),
+        height = parseFloat($('#rect' + id).attr('height'));
+    if (num == 1) {
+        dragDashPoint1(id, x, y);
+    } else if (num == 2) {
+        dragDashPoint2(id, x, y);
+    } else if (num == 3) {
+        dragDashPoint3(id, x, y);
+    } else if (num == 4) {
+        dragDashPoint4(id, x, y);
+    }
+    d3.select('#retext' + id)
+        .attr('x', $('#rect' + id).attr('x'))
+        .attr('y', parseFloat($('#rect' + id).attr('y')) + height + 20);
 }
 var endC = function () {
-
+    let key = $(this).attr('id').slice(5),
+        x = xnumToDB($('[num=1]').attr('cx')),
+        y = ynumToDb($('[num=1]').attr('cy')),
+        width = parseFloat($('#rect' + key).attr('width')),
+        height = parseFloat($('#rect' + key).attr('height')),
+        buildName = $('#rect' + key).attr('buildname');
+    var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName }
+    editBuildName(key, value);
 }
+

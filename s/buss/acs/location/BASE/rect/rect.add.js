@@ -32,7 +32,7 @@ export var setRect = function () {
         .attr('id', 'retext' + id)
         .attr("font-size", "13px")
         .attr('fill', 'black')
-        .text('建筑');
+        .text('建筑' + id);
     crateRect(id, x - 10, y - 10, 20, 20);
     rightClickRect(true);
 }

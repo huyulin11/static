@@ -42,7 +42,7 @@ export var drawRect = function (rectdata) {
             .attr("font-size", "13px")
             .attr('fill', 'black')
             .text(function (d) {
-                return d.buildname;
+                return d.buildname + d.id;
             })
     }
 }
