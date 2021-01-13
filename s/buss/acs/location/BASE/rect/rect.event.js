@@ -9,6 +9,11 @@ export var rectEvent = function (flag) {
     dragDashRect(flag);
     dragDashCircle(flag);
     delBankDash(flag);
+    mouseStyle(flag);
+    bankDefaultEvent();
+
+}
+export var bankDefaultEvent = function () {
     d3.selectAll('rect').on('dblclick', function () {
         d3.event.stopPropagation();
         return null;
@@ -17,17 +22,24 @@ export var rectEvent = function (flag) {
         d3.event.stopPropagation();
         return null;
     });
-    d3.selectAll('rect').on('mousemove', function () {
-
-    });
-    d3.selectAll('.changeCircle').on('mousemove', function () {
-        var num = d3.select(this).attr('direction');
-        if (num == 1 || num == 4) {
-            d3.select(this).style('cursor', 'nw-resize');
-        } else {
-            d3.select(this).style('cursor', 'sw-resize');
-        }
-    })
+}
+export var mouseStyle = function (flag) {
+    if (flag) {
+        d3.selectAll('rect').on('mousemove', function () {
+            d3.select(this).style('cursor', 'move');
+        });
+        d3.selectAll('.changeCircle').on('mousemove', function () {
+            var num = d3.select(this).attr('direction');
+            if (num == 1 || num == 4) {
+                d3.select(this).style('cursor', 'nw-resize');
+            } else {
+                d3.select(this).style('cursor', 'sw-resize');
+            }
+        });
+    } else {
+        d3.selectAll('rect').on('mousemove', null);
+        d3.selectAll('.changeCircle').on('mousemove', null);
+    }
 }
 
 var delBankDash = function (flag) {

@@ -3,6 +3,7 @@ import { crateRect } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
 import { datas } from "/s/buss/acs/location/BASE/location.data.js";
 import { rightClickRect } from "/s/buss/acs/location/BASE/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/BASE/rect/drag.rect.js";
+import { mouseStyle, bankDefaultEvent } from "/s/buss/acs/location/BASE/rect/rect.event.js";
 
 export var addRect = function (flag) {
     if (flag) {
@@ -44,7 +45,9 @@ export var setRect = function () {
     point.push([4, x + 10, y + 10, id]);
     addPoint(point);
     crateRect(id, x - 10, y - 10, 20, 20);
+    bankDefaultEvent();
     rightClickRect(true);
+    mouseStyle(true)
     dragDashRect(true);
     dragDashCircle(true);
 }
@@ -59,6 +62,9 @@ var addPoint = function (point) {
             .attr('cy', rect[2])
             .attr('xx', rect[1])
             .attr('yy', rect[2])
+            .attr('direction', function (d) {
+                return rect[0];
+            })
             .attr('r', 3)
             .attr('stroke', '#8e8e8e')
             .attr('stroke-width', 1)
