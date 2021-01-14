@@ -31,6 +31,7 @@ export var rightClickRect = function (flag) {
                             var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': val };
                             editBuildName(key, value);
                             layer.close(index);
+                            d3.selectAll('.changeCircle').style('display', 'none');
                         });
                     });
                     d3.select("#btn2").on("click", function () {
@@ -38,6 +39,7 @@ export var rightClickRect = function (flag) {
                         rect.remove();
                         d3.select("#retext" + key).remove();
                         delRect(key);
+                        d3.selectAll('#dashC' + key).remove();
                     });
                 }
             });
