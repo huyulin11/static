@@ -24,6 +24,7 @@ export var dragDashRect = function (flag) {
 var rectData = {};
 var startR = function () {
     datas.init();
+    d3.selectAll('.layui-layer-content').remove();
     d3.selectAll('.changeCircle').style('display', 'none');
     let x1 = event.offsetX,
         y1 = event.offsetY,
@@ -97,6 +98,7 @@ export var dragDashCircle = function (flag) {
 
 var startC = function () {
     datas.init();
+    d3.selectAll('.layui-layer-content').remove();
 }
 var dargC = function () {
     let x = event.offsetX,
