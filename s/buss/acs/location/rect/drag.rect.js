@@ -1,5 +1,5 @@
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { editBuildName } from "/s/buss/acs/location/render/s/rect.url.js";
+import { editBuildName } from "/s/buss/acs/location/url/rect.url.js";
 import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
 import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/rect/drag.dash.point.js";
 

@@ -1,5 +1,5 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { crateRect } from "/s/buss/acs/location/render/s/rect.url.js";
+import { crateRect } from "/s/buss/acs/location/url/rect.url.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";

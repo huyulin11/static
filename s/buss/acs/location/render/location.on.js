@@ -4,8 +4,8 @@ import { updateID } from "/s/buss/acs/location/render/update.point.js";
 import { createPath } from "/s/buss/acs/location/render/add.path.js";
 import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/render/drag.path.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { deleteLocation } from "/s/buss/acs/location/render/s/siteinfo.url.js";
-import { deleteLogic } from "/s/buss/acs/location/render/s/logic.url.js";
+import { deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/location/path/new.path.drag.js";
 
 export var mouseEvent = function (flag) {

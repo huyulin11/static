@@ -1,4 +1,4 @@
-import { delRect, editBuildName } from "/s/buss/acs/location/render/s/rect.url.js";
+import { delRect, editBuildName } from "/s/buss/acs/location/url/rect.url.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
 
