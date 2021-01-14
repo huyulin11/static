@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="/s/c/agv.location.css">
 </head>
 
-
 <body>
-    <div id="agvs">
-    </div>
+    <div id="agvs"></div>
     <div id="sysTitle">
         <span>吉林袜业AGV调度系统</span>
     </div>
@@ -37,6 +35,8 @@
     import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
     renderSvg();
     setInterval(renderSvg, 3000);
+    var domainYVal = [17500, 46000];
+    var domainXVal = [28500, 169000];
 </script>
 
 </html>
