@@ -1,6 +1,6 @@
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
 
 var flag = false;
 export let tempBtns = [{

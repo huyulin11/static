@@ -1,7 +1,7 @@
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { getPath } from "/s/buss/acs/location/BASE/agv/control.agv.run.js";
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { getPath } from "/s/buss/acs/location/agv/control.agv.run.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
 
 export var drawAgv = function () {
     conf.agvHome.selectAll("image").remove();

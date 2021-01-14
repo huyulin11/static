@@ -1,9 +1,9 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { getMPoint, getL2Point } from "/s/buss/acs/location/BASE/render/render.d.js";
-import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { drawArrow } from "/s/buss/acs/location/BASE/path/radian.def.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { getMPoint, getL2Point } from "/s/buss/acs/location/render/render.d.js";
+import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
+import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
+import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
 
 export var fillHome1 = function (id, x, y) {
     conf.pathHome1.selectAll("path").filter(function (e) { return e && e.from == id; })

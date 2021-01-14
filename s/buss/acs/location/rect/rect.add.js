@@ -1,9 +1,9 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { crateRect } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { rightClickRect } from "/s/buss/acs/location/BASE/rect/rect.rightclick.js";
-import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/BASE/rect/drag.rect.js";
-import { mouseStyle, bankDefaultEvent } from "/s/buss/acs/location/BASE/rect/rect.event.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { crateRect } from "/s/buss/acs/location/render/s/rect.url.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
+import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
+import { mouseStyle, bankDefaultEvent } from "/s/buss/acs/location/rect/rect.event.js";
 
 export var addRect = function (flag) {
     if (flag) {

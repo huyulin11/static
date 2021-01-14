@@ -1,4 +1,4 @@
-import { windowToDB } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { windowToDB } from "/s/buss/acs/location/render/trans.location.js";
 import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var addLocation = function (id, x, y) {

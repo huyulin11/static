@@ -1,9 +1,9 @@
-import { getClosestPoint } from "/s/buss/acs/location/BASE/render/add.path.js";
-import { getMPoint } from "/s/buss/acs/location/BASE/render/render.d.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { saveLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
-import { drawArrow } from "/s/buss/acs/location/BASE/path/radian.def.js";
+import { getClosestPoint } from "/s/buss/acs/location/render/add.path.js";
+import { getMPoint } from "/s/buss/acs/location/render/render.d.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
+import { saveLogic } from "/s/buss/acs/location/render/s/logic.url.js";
+import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
 
 export var startedPath = function () {
     datas.init();

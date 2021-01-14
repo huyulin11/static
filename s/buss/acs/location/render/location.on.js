@@ -1,12 +1,12 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { started, draged, ended, createPoint } from "/s/buss/acs/location/BASE/render/drag.create.point.js";
-import { updateID } from "/s/buss/acs/location/BASE/render/update.point.js";
-import { createPath } from "/s/buss/acs/location/BASE/render/add.path.js";
-import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/BASE/render/drag.path.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { deleteLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
-import { deleteLogic } from "/s/buss/acs/location/BASE/render/s/logic.url.js";
-import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/location/BASE/path/new.path.drag.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { started, draged, ended, createPoint } from "/s/buss/acs/location/render/drag.create.point.js";
+import { updateID } from "/s/buss/acs/location/render/update.point.js";
+import { createPath } from "/s/buss/acs/location/render/add.path.js";
+import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/render/drag.path.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { deleteLocation } from "/s/buss/acs/location/render/s/siteinfo.url.js";
+import { deleteLogic } from "/s/buss/acs/location/render/s/logic.url.js";
+import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/location/path/new.path.drag.js";
 
 export var mouseEvent = function (flag) {
     dragPoint(flag);

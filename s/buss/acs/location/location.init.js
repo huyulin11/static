@@ -1,13 +1,13 @@
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
-import { show, hide } from "/s/buss/acs/location/BASE/render/location.button.js";
-import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/BASE/render/location.on.js";
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
-import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { rectEvent } from "/s/buss/acs/location/BASE/rect/rect.event.js";
+import { show, hide } from "/s/buss/acs/location/render/location.button.js";
+import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/render/location.on.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { doubleDToStrig } from "/s/buss/acs/location/path/double.path.draw.js";
+import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
 
 let confs = [];
 bandBodyClick();

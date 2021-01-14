@@ -1,6 +1,6 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
 
 export var createPath = function (id, x, y) {
     for (var i = 1; i <= 4; i++) {

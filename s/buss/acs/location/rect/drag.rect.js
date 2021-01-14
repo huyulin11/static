@@ -1,7 +1,7 @@
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { editBuildName } from "/s/buss/acs/location/BASE/render/s/rect.url.js";
-import { xnumToDB, ynumToDb } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/BASE/rect/drag.dash.point.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { editBuildName } from "/s/buss/acs/location/render/s/rect.url.js";
+import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
+import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/rect/drag.dash.point.js";
 
 export var dragDashRect = function (flag) {
     if (flag) {

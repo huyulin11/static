@@ -1,5 +1,5 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 import { taskSiteLogic, taskSiteLocation, taskSiteRect } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { allAgvsInfo } from "/s/buss/acs/g/j/agv.msg.json.js";
 

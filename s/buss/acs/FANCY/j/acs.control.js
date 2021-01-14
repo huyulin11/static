@@ -99,7 +99,7 @@ var delegateEvent = () => {
 		taskexe.addCtrlTask(0, "CONTINUE");
 	});
 	container().delegate("button#sysLocation", "click", function () {
-		window.open("/s/buss/acs/location/" + localStorage.projectKey + "/location.html");
+		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/location.html");
 	});
 	container().delegate("button#taskQuantityBtn", "click", function () {
 		window.open("/s/buss/acs/" + localStorage.projectKey + "/h/task.quantity.html");

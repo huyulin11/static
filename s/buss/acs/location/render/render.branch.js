@@ -1,7 +1,7 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
 
 var drawLine = function () {
     conf.svg.append("line")

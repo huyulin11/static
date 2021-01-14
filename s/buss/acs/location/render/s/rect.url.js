@@ -1,4 +1,4 @@
-import { xnumToDB, ynumToDb } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
 import { updateTaskSiteRect } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var crateRect = function (id, x, y, width, height) {

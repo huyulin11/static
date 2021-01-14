@@ -1,5 +1,5 @@
-import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
+import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
 
 export var getAgvLocation = function () {
 }

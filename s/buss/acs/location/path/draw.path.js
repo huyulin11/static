@@ -1,8 +1,8 @@
-import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { dToStrig } from "/s/buss/acs/location/BASE/render/path.direction.js";
-import { show } from "/s/buss/acs/location/BASE/render/location.button.js";
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
+import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
+import { show } from "/s/buss/acs/location/render/location.button.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { doubleDToStrig } from "/s/buss/acs/location/path/double.path.draw.js";
 
 export var drawPath = function (data) {
     conf.pathHome1.selectAll("path").data(data)

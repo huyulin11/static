@@ -1,8 +1,8 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { dragPoint, rightClickPoint } from "/s/buss/acs/location/BASE/render/location.on.js";
-import { addLocation, moveLocation } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
-import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/BASE/path/fillter.pathHome.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { dragPoint, rightClickPoint } from "/s/buss/acs/location/render/location.on.js";
+import { addLocation, moveLocation } from "/s/buss/acs/location/render/s/siteinfo.url.js";
+import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
 
 export var started = function () {
     datas.init();

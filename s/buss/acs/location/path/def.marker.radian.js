@@ -1,7 +1,7 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { drawArrow } from "/s/buss/acs/location/BASE/path/radian.def.js";
-import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
+import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
 
 export var markerDef = function () {
     var defs = conf.defsHome.append("defs");

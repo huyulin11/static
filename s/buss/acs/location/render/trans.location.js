@@ -1,4 +1,4 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
 
 export var windowToDB = function (id, x, y) {
     var ids = parseInt(id);

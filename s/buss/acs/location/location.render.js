@@ -1,8 +1,8 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { tool } from "/s/buss/acs/location/BASE/location.tool.js";
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
-import { drawPath } from "/s/buss/acs/location/BASE/path/draw.path.js";
-import { drawRect } from "/s/buss/acs/location/BASE/rect/draw.rect.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { drawPath } from "/s/buss/acs/location/path/draw.path.js";
+import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 
 //绘制坐标轴  
 function drawAxis() {

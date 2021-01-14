@@ -1,7 +1,7 @@
-import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
 import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
-import { windowToDB } from "/s/buss/acs/location/BASE/render/trans.location.js";
-import { editLocationID } from "/s/buss/acs/location/BASE/render/s/siteinfo.url.js";
+import { windowToDB } from "/s/buss/acs/location/render/trans.location.js";
+import { editLocationID } from "/s/buss/acs/location/render/s/siteinfo.url.js";
 
 export var updateID = function (circle, id1, x, y) {
     datas.init();

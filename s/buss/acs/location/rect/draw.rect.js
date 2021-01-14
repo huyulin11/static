@@ -1,5 +1,5 @@
-import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
 
 export var drawRect = function (rectdata) {
     if (rectdata.length > 0) {

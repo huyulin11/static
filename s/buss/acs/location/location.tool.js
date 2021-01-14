@@ -1,4 +1,4 @@
-﻿import { datas } from "/s/buss/acs/location/BASE/location.data.js";
+﻿import { datas } from "/s/buss/acs/location/location.data.js";
 
 export var tool = {};
 
