@@ -11,7 +11,10 @@ import { rectEvent } from "/s/buss/acs/location/BASE/rect/rect.event.js";
 
 let confs = [];
 bandBodyClick();
-confs.push({ init: true, url: "/s/buss/agv/site/cache/h/site.cache.html", key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%" });
+confs.push({
+    init: true, url: "/s/buss/agv/site/cache/h/site.cache.html",
+    key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%"
+});
 confs.push({
     key: 'id', click: function () {
         let flag = $(this).hasClass("close");
@@ -34,7 +37,7 @@ confs.push({
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);
             layer.msg('编辑模式');
-            conf.pathHome1.selectAll("path").data(datas.point).attr("d", function (d) {
+            conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
                 return dToStrig(result1[0], result2[0], result1[1], result2[1]);
@@ -43,7 +46,7 @@ confs.push({
             $(this).removeClass("open").addClass("close");
             mouseEvent(flag);
             layer.msg('查看模式');
-            conf.pathHome1.selectAll("path").data(datas.point).attr("d", function (d) {
+            conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
                 if (!d.isDouble) {
@@ -86,6 +89,18 @@ var toggleColor = function () {
     $("html").data("key", keyNum++);
 }
 
+var doWork = function (url) {
+    jQuery.ajax({
+        url: url,
+        type: "post",
+        dataType: "json",
+        success: function (data) {
+            alert(data);
+        },
+        timeout: 6000
+    });
+}
+
 var watch = function (v) {
     var url;
     if (v == 1) {
@@ -108,18 +123,14 @@ var watch = function (v) {
     }
     gflayer.openBak({ content: url, area: ["60%", "75%"], title: "监控" + v, offset: 'rb' });
 }
+
+toggleColor();
 $("#toggleColor").on("click", toggleColor);
 $("div.watch").on("click", function () { watch($(this).data("id")); });
-toggleColor();
 
-var doWork = function (url) {
-    jQuery.ajax({
-        url: url,
-        type: "post",
-        dataType: "json",
-        success: function (data) {
-            alert(data);
-        },
-        timeout: 6000
-    });
+$("body").append("<div id='msgOfAgv' style='display:none;color:white;position:fixed;right:2%;top:20%;'></div>");
+for (let i in datas.color) {
+    if (i.startsWith("agv")) {
+        $("div#msgOfAgv").append("<span style='color:" + datas.color[i] + ";'>" + i + "----" + "</span><br/>");
+    }
 }

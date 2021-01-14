@@ -5,7 +5,7 @@ import { dbToWindow } from "/s/buss/acs/location/BASE/render/trans.location.js";
 
 export var markerDef = function () {
     var defs = conf.defsHome.append("defs");
-    var marker1 = defs.selectAll("marker").data(datas.point)
+    var marker1 = defs.selectAll("marker").data(datas.path)
         .enter()
         .append("marker")
         .attr("id", function (d) {

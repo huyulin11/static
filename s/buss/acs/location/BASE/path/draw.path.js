@@ -4,8 +4,8 @@ import { show } from "/s/buss/acs/location/BASE/render/location.button.js";
 import { conf } from "/s/buss/acs/location/BASE/location.conf.js";
 import { doubleDToStrig } from "/s/buss/acs/location/BASE/path/double.path.draw.js";
 
-export var rectPath = function (tempYfc) {
-    conf.pathHome1.selectAll("path").data(tempYfc)
+export var drawPath = function (data) {
+    conf.pathHome1.selectAll("path").data(data)
         .enter()
         .append("path")
         .attr("id", function (d) {
@@ -34,7 +34,7 @@ export var rectPath = function (tempYfc) {
             return "marker-end:url(#mar" + d.id + ");"
         });
 
-    // conf.pathHome2.selectAll("path").data(tempYfc)
+    // conf.pathHome2.selectAll("path").data(data)
     //     .enter()
     //     .append("path")
     //     .attr("id", function (d) {

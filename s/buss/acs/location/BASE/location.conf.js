@@ -1,6 +1,6 @@
 var width = $(window).width();
 var height = $(window).height();//width * (domainYVal[1] - domainYVal[0]) / (domainXVal[1] - domainXVal[0]) * 4;
-var svg = d3.select("body").select("#coordinate").append("svg").attr("width", width).attr("fill", "white").attr("height", height);
+var svg = d3.select("body").select("#coordinate").append("svg").attr("width", width).attr("height", height).attr("fill", "white");
 var pathHome1 = svg.append('g').attr("id", "pathHome1");
 var pathHome2 = svg.append('g').attr("id", "pathHome2");
 var pathHome3 = svg.append('g').attr("id", "pathHome3");
@@ -12,7 +12,7 @@ var rectHome = svg.append('g').attr("id", "rectHome");
 var widthAgvs = $("#agvs").width();
 var widthFixed = widthAgvs * 15 / 24;
 var heightFixed = $("#agvs").height();
-var svgFixed = d3.select("body").select("#agvs").append("svg").attr("width", widthFixed).attr("fill", "white").attr("height", heightFixed);
+var svgFixed = d3.select("body").select("#agvs").append("svg").attr("width", widthFixed).attr("height", heightFixed).attr("fill", "white");
 
 var padding = { left: 80, right: 30, top: 50, bottom: 100 };
 var xAxisWidth = width - (padding.left + padding.right) * 2;

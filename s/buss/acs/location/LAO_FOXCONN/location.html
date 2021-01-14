@@ -11,8 +11,7 @@
 </head>
 
 <body>
-    <!-- <div id="agvs">
-    </div> -->
+    <!-- <div id="agvs"></div> -->
     <div id="sysTitle">
         <span>南宁富士康AGV智能调度系统</span>
     </div>
@@ -31,16 +30,14 @@
     import { gp } from "/s/buss/g/j/g.p.js";
     import "/s/buss/acs/location/BASE/location.p.js";
     import "/s/buss/acs/location/BASE/location.init.js";
-    import { renderSvg, renderAgvLocation } from "/s/buss/acs/location/BASE/location.render.js";
+    import { renderSvg } from "/s/buss/acs/location/BASE/location.render.js";
     import "/s/buss/acs/location/BASE/render/location.button.js"
     import { markerDef } from "/s/buss/acs/location/BASE/path/def.marker.radian.js";
     import { dataAgvLocation } from "/s/buss/acs/location/BASE/location.data.js";
     import { drawAgv } from "/s/buss/acs/location/BASE/agv/draw.agv.js";
     markerDef();
     renderSvg();
-    setTimeout(renderSvg, 3000);
     dataAgvLocation();
-    renderAgvLocation();
     setInterval(() => {
         dataAgvLocation();
         drawAgv();

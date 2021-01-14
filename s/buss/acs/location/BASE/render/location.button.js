@@ -26,22 +26,6 @@ export var show = function () {
     datas.init()
     conf.textHome.selectAll("text")
         .data(datas.lastTaskPath.concat(datas.udfPoints))
-        .attr("id", function (d) {
-            var id = 't' + d[0];
-            return id;
-        })
-        .attr("x", function (d) {
-            return conf.padding.left + conf.xScale(d[1]) + 7;
-        })
-        .attr("y", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d[2]) - 7;
-        })
-        .attr("stroke", "black")
-        .attr("font-size", "15px")
-        .attr("font-family", "sans-serif")
-        .text(function (d) {
-            return d[0];
-        })
         .enter()
         .append("text")
         .attr("id", function (d) {
