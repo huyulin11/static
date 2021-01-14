@@ -99,6 +99,12 @@ export var dragDashCircle = function (flag) {
 var startC = function () {
     datas.init();
     d3.selectAll('.layui-layer-content').remove();
+    var target = $(this).attr('direction');
+    if (target == 1 || target == 4) {
+        d3.select('body').style('cursor', 'nw-resize');
+    } else {
+        d3.select('body').style('cursor', 'sw-resize');
+    };
 }
 var dargC = function () {
     let x = event.offsetX,
