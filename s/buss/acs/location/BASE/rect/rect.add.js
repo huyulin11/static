@@ -15,8 +15,8 @@ export var addRect = function (flag) {
     };
 }
 
-var point = [];
 export var setRect = function () {
+    var point = [];
     d3.event.preventDefault();
     var id = getid();
     let x = d3.event.offsetX,
@@ -38,7 +38,7 @@ export var setRect = function () {
         .attr("font-size", "13px")
         .attr('fill', 'black')
         .style('text-anchor', 'middle')
-        .text('建筑');
+        .text('建筑' + id);
     point.push([1, x - 10, y - 10, id]);
     point.push([2, x + 10, y - 10, id]);
     point.push([3, x - 10, y + 10, id]);
