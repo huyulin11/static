@@ -118,7 +118,6 @@ class GFDIV {
         return rtn;
     };
     renderDivs(conf) {
-        debugger
         var dealData = function (data, numInPage) {
             if (data.records.length > numInPage) {
                 return data.records.slice(0, numInPage);
