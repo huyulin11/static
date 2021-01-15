@@ -63,10 +63,12 @@ confs.push({
         let flag = $(this).hasClass("close");
         if (flag) {
             $(this).removeClass("close").addClass("open");
+            d3.selectAll('rect').style('cursor', 'move');
             rectEvent(flag);
         } else {
             $(this).removeClass("open").addClass("close");
             rectEvent(flag);
+            d3.selectAll('rect').style('cursor', 'default');
             d3.selectAll('.changeCircle').style('display', 'none');
         }
     }

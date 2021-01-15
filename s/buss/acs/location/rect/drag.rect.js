@@ -34,7 +34,6 @@ var startR = function () {
         width = x1 - x2,
         height = y1 - y2;
     d3.selectAll('#dashC' + id).style('display', 'block');
-    d3.select(this).style('cursor', 'move');
     rectData = { 'width': width, 'height': height };
 }
 
@@ -135,5 +134,12 @@ var endC = function () {
         buildName = $('#rect' + key).attr('buildname');
     var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName }
     editBuildName(key, value);
+    var target = $(this).attr('direction');
+    if (target == 1 || target == 4) {
+        d3.select('body').style('cursor', 'default');
+    } else {
+        d3.select('body').style('cursor', 'default');
+    };
+    d3.selectAll('rect').style('cursor', 'move');
 }
 

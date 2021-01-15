@@ -23,23 +23,15 @@ export var bankDefaultEvent = function () {
         return null;
     });
 }
-export var mouseStyle = function (flag) {
-    if (flag) {
-        d3.selectAll('rect').on('mousemove', function () {
-            d3.select(this).style('cursor', 'move');
-        });
-        d3.selectAll('.changeCircle').on('mousemove', function () {
-            var num = d3.select(this).attr('direction');
-            if (num == 1 || num == 4) {
-                d3.select(this).style('cursor', 'nw-resize');
-            } else {
-                d3.select(this).style('cursor', 'sw-resize');
-            }
-        });
-    } else {
-        d3.selectAll('rect').on('mousemove', null);
-        d3.selectAll('.changeCircle').on('mousemove', null);
-    }
+export var mouseStyle = function () {
+    d3.selectAll('.changeCircle').on('mousemove', function () {
+        var num = d3.select(this).attr('direction');
+        if (num == 1 || num == 4) {
+            d3.select(this).style('cursor', 'nw-resize');
+        } else {
+            d3.select(this).style('cursor', 'sw-resize');
+        }
+    });
 }
 
 var delBankDash = function (flag) {
