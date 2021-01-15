@@ -1,8 +1,8 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { getMPoint, getL2Point } from "/s/buss/acs/location/render/render.d.js";
-import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
+import { getMPoint, getL2Point } from "/s/buss/acs/location/path/render.d.js";
+import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
 import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 
 export var fillHome1 = function (id, x, y) {
@@ -43,12 +43,12 @@ export var fillMarkerPath = function (id, x, y) {
     datas.init();
     conf.defsHome.selectAll("marker").filter(function (e) { return e && e.from == id; })
         .attr("orient", function (d) {
-            var x2 = xnumToWindow(d.rightXaxis), y2 = ynumToWindow(d.upYaxis);
+            var x2 = tool.xnumToWindow(d.rightXaxis), y2 = ynumToWindow(d.upYaxis);
             return drawArrow(x, x2, y, y2);
         });
     conf.defsHome.selectAll("marker").filter(function (e) { return e && e.to == id; })
         .attr("orient", function (d) {
-            var x1 = xnumToWindow(d.leftXaxis), y1 = ynumToWindow(d.downYaxis);
+            var x1 = tool.xnumToWindow(d.leftXaxis), y1 = ynumToWindow(d.downYaxis);
             return drawArrow(x1, x, y1, y);
         });
 } 

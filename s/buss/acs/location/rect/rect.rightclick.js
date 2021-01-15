@@ -1,6 +1,6 @@
 import { delRect, editBuildName } from "/s/buss/acs/location/url/rect.url.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var rightClickRect = function (flag) {
     if (flag) {
@@ -9,8 +9,8 @@ export var rightClickRect = function (flag) {
                 d3.event.preventDefault();
                 if (d3.event.button == 2) {
                     let id = $(this).attr('id'),
-                        x = xnumToDB($(this).attr('x')),
-                        y = ynumToDb($(this).attr('y')),
+                        x = tool.xnumToDB($(this).attr('x')),
+                        y = tool.ynumToDb($(this).attr('y')),
                         width = $(this).attr('width'),
                         height = $(this).attr('height');
                     var rect = d3.select(this);

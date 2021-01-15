@@ -156,6 +156,16 @@ datas.init = function () {
     taskSiteRect(dataRect);
 }
 
+export var init = function () {
+    datas.init();
+    conf.domainYVal = [-1700, 100];
+    conf.domainXVal = [-100, 3000];
+    conf.xScale = d3.scaleLinear().domain(conf.domainXVal).range([0, conf.xAxisWidth]);
+    conf.yScale = d3.scaleLinear().domain(conf.domainYVal).range([0, conf.yAxisWidth]);
+    conf.xReScale = d3.scaleLinear().domain([0, conf.xAxisWidth]).range(conf.domainXVal);
+    conf.yReScale = d3.scaleLinear().domain([0, conf.yAxisWidth]).range(conf.domainYVal);
+}
+
 
 
 var rectPoint = [[-21650, 3500], [-21650, -4600], [-3650, -4600], [-3650, 3500]];

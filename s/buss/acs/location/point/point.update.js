@@ -1,6 +1,5 @@
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
-import { windowToDB } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 import { editLocationID } from "/s/buss/acs/location/url/siteinfo.url.js";
 
 export var updateID = function (circle, id1, x, y) {
@@ -17,7 +16,7 @@ export var updateID = function (circle, id1, x, y) {
             }
             if (flag) {
                 d3.select("#t" + id1).attr("id", "t" + id2).text(id2);
-                var result = windowToDB(id2, x, y);
+                var result = tool.windowToDB(id2, x, y);
                 editLocationID(id1, id2, result);
                 circle.attr("id", id2);
                 d3.selectAll("path")
@@ -36,4 +35,3 @@ export var updateID = function (circle, id1, x, y) {
         }
     })
 }
-

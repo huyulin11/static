@@ -1,12 +1,11 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { dragPoint, rightClickPoint } from "/s/buss/acs/location/render/location.on.js";
+import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
 
-export var started = function () {
-    datas.init();
-}
+export var started = function () { }
+
 export var draged = function () {
     const { x, y } = d3.event;
     var id = $(this).attr('id');
@@ -20,11 +19,9 @@ export var draged = function () {
         .attr("x", x + 7)
         .attr("y", y - 7);
 }
+
 export var ended = function () {
     const { x, y } = d3.event;
-    d3.select(this)
-        .attr('cx', x)
-        .attr('cy', y);
     var id = $(this).attr('id');
     moveLocation(id, x, y);
 }

@@ -1,6 +1,5 @@
-import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
-import { dToStrig } from "/s/buss/acs/location/render/path.direction.js";
-import { show } from "/s/buss/acs/location/render/location.button.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
+import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { doubleDToStrig } from "/s/buss/acs/location/path/double.path.draw.js";
 
@@ -18,8 +17,8 @@ export var drawPath = function (data) {
             return d.to;
         })
         .attr("d", function (d) {
-            var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
-            var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
+            var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
+            var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
             if (!d.isDouble) {
                 return dToStrig(result1[0], result2[0], result1[1], result2[1]);
             } else {
@@ -56,7 +55,4 @@ export var drawPath = function (data) {
     //     .attr("stroke", "#ffffff")
     //     .style("stroke-dasharray", "10, 7")
     //     .attr("stroke-width", "1px");
-
-    show();
-
 }

@@ -1,6 +1,7 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
+import { drawPointId } from "/s/buss/acs/location/point/point.id.draw.js";
 import { drawPath } from "/s/buss/acs/location/path/draw.path.js";
 import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 
@@ -43,9 +44,9 @@ function drawPoints(data) {
         }).attr("class", function (d) {
             return tool.inAgv(d, 1) ? "agv1" : "agv2";
         }).attr("cx", function (d) {
-            return conf.padding.left + conf.xScale(d[1]);
+            return tool.xnumToWindow(d[1]);
         }).attr("cy", function (d) {
-            return conf.height - conf.padding.bottom - conf.yScale(d[2]);
+            return tool.ynumToWindow(d[2]);
         }).attr("r", 3)
         .attr("fill", tool.getPointColor());
 
@@ -55,6 +56,7 @@ function drawPoints(data) {
 var render = function () {
     drawPoints(datas.udfPoints);
     setTimeout(() => drawPoints(datas.udfPoints), 3000);
+    drawPointId(datas.udfPoints);
     drawPath(datas.path);
     drawRect(datas.rect);
     if (conf.withAxis) { drawAxis(); }
@@ -91,7 +93,6 @@ var renderSvgFunc = function (callback) {
 }
 
 export var renderSvg = function (callback) {
-    datas.init();
     if (document.hidden) { return; }
     renderSvgFunc(callback);
 };

@@ -1,4 +1,5 @@
 ﻿import { datas } from "/s/buss/acs/location/location.data.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
 
 export var tool = {};
 
@@ -21,7 +22,7 @@ tool.inTaskPath = function (d) {
 }
 
 tool.inUdp = function (d) {
-    return inArr(d, datas.udfPoints);//属于，当是数组一项是如何判断是数组子项，子项若为对象，一一判断里属性吗，java中对象的equals方法源码如何判断
+    return inArr(d, datas.udfPoints);
 }
 
 tool.color = function (val, object) {
@@ -72,3 +73,35 @@ tool.randomColor = function () {
                 && (color.length == 6) ? color : arguments.callee(color);
         })('');
 };
+
+tool.windowToDB = function (id, x, y) {
+    var ids = parseInt(id);
+    var x1 = tool.xnumToDB(x);
+    var y1 = tool.ynumToDb(y);
+    var result = { "id": ids, "x": x1, "y": y1 };
+    console.log(result);
+    return result;
+}
+
+tool.xnumToDB = function (x) {
+    return conf.xReScale(x - conf.padding.left);
+}
+
+tool.ynumToDb = function (y) {
+    return conf.yReScale(conf.height - conf.padding.bottom - y);
+}
+
+tool.dbToWindow = function (x1, y1) {
+    var x = tool.xnumToWindow(x1);
+    var y = tool.ynumToWindow(y1);
+    var result = [x, y];
+    return result;
+}
+
+tool.xnumToWindow = function (x) {
+    return conf.padding.left + conf.xScale(x);
+}
+
+tool.ynumToWindow = function (y) {
+    return conf.height - conf.padding.bottom - conf.yScale(y);
+}

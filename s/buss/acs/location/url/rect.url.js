@@ -1,9 +1,9 @@
-import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 import { updateTaskSiteRect } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var crateRect = function (id, x, y, width, height) {
     var key = parseInt(id);
-    var result = { 'id': key, 'x': xnumToDB(x), 'y': ynumToDb(y), 'width': width, 'height': height, 'buildname': '建筑' };
+    var result = { 'id': key, 'x': tool.xnumToDB(x), 'y': tool.ynumToDb(y), 'width': width, 'height': height, 'buildname': '建筑' };
     gf.doAjax({
         url: `/rect/conf/addRect.shtml`, type: "POST",
         data: { table: "MAP_DECORATE", key: key, value: JSON.stringify(result) },

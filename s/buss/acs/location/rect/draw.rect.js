@@ -1,5 +1,5 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var drawRect = function (rectdata) {
     if (rectdata.length > 0) {
@@ -7,10 +7,10 @@ export var drawRect = function (rectdata) {
             .enter()
             .append("rect")
             .attr('x', function (d) {
-                return xnumToWindow(d.x);
+                return tool.xnumToWindow(d.x);
             })
             .attr('y', function (d) {
-                return ynumToWindow(d.y);
+                return tool.ynumToWindow(d.y);
             })
             .attr('id', function (d) {
                 return 'rect' + d.id;
@@ -31,10 +31,10 @@ export var drawRect = function (rectdata) {
             .enter()
             .append('text')
             .attr('x', function (d) {
-                return xnumToWindow(d.x) + d.width / 2;
+                return tool.xnumToWindow(d.x) + d.width / 2;
             })
             .attr('y', function (d) {
-                return ynumToWindow(d.y) + d.height + 20;
+                return tool.ynumToWindow(d.y) + d.height + 20;
             })
             .attr('id', function (d) {
                 return 'retext' + d.id;
@@ -47,8 +47,8 @@ export var drawRect = function (rectdata) {
             });
         var point = [];
         for (let rect of rectdata) {
-            let x = xnumToWindow(rect.x),
-                y = ynumToWindow(rect.y);
+            let x = tool.xnumToWindow(rect.x),
+                y = tool.ynumToWindow(rect.y);
             point.push([1, x, y, rect.id]);
             point.push([2, x + rect.width, y, rect.id]);
             point.push([3, x, y + rect.height, rect.id]);

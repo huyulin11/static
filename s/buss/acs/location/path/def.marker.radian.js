@@ -1,7 +1,7 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
-import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var markerDef = function () {
     var defs = conf.defsHome.append("defs");
@@ -17,8 +17,8 @@ export var markerDef = function () {
         .attr("refX", 3)
         .attr("refY", 1)
         .attr("orient", function (d) {
-            var result1 = dbToWindow(d.leftXaxis, d.downYaxis);
-            var result2 = dbToWindow(d.rightXaxis, d.upYaxis);
+            var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
+            var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
             return drawArrow(result1[0], result2[0], result1[1], result2[1]);
         });
     marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");

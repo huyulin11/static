@@ -1,8 +1,8 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { started, draged, ended, createPoint } from "/s/buss/acs/location/render/drag.create.point.js";
-import { updateID } from "/s/buss/acs/location/render/update.point.js";
-import { createPath } from "/s/buss/acs/location/render/add.path.js";
-import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/render/drag.path.js";
+import { started, draged, ended, createPoint } from "/s/buss/acs/location/point/point.event.js";
+import { updateID } from "/s/buss/acs/location/point/point.update.js";
+import { createPath } from "/s/buss/acs/location/path/add.path.js";
+import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/path/drag.path.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
@@ -10,15 +10,10 @@ import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/locatio
 
 export var mouseEvent = function (flag) {
     dragPoint(flag);
-
     dblclickAddPoint(flag);
-
     rightClickPoint(flag);
-
     dragPath(flag);
-
     rightClickPath(flag);
-
     bandBodyClick();
 }
 export var bandBodyClick = function () {
@@ -138,7 +133,6 @@ export var dragPoint = function (flag) {
                 .on('drag', null)
         )
     }
-
 }
 
 export var dblclickAddPoint = function (flag) {

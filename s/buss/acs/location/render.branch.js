@@ -1,7 +1,7 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 var drawLine = function () {
     conf.svg.append("line")
@@ -18,8 +18,8 @@ var renderAgvLocation = function () {
     $("image").remove();
     for (var location of datas.agvLocation) {
         conf.agvHome.append("image")
-            .attr("x", xnumToWindow(location.currentX) - 30)
-            .attr("y", ynumToWindow(location.currentY) - 30)
+            .attr("x", tool.xnumToWindow(location.currentX) - 30)
+            .attr("y", tool.ynumToWindow(location.currentY) - 30)
             .attr("width", 60)
             .attr("height", 60)
             .attr("xlink:href", "/s/i/agv.png")

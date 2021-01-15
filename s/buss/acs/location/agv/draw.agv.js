@@ -1,7 +1,7 @@
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { getPath } from "/s/buss/acs/location/agv/control.agv.run.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { xnumToWindow, ynumToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var drawAgv = function () {
     conf.agvHome.selectAll("image").remove();
@@ -31,8 +31,8 @@ export var drawAgv = function () {
     for (var value of datas.agvLocation) {
         if (!value.isWorking) {
             d3.select("#agv" + value.currentsite)
-                .attr("x", xnumToWindow(value.currentX) - 30)
-                .attr("y", ynumToWindow(value.currentY) - 30);
+                .attr("x", tool.xnumToWindow(value.currentX) - 30)
+                .attr("y", tool.ynumToWindow(value.currentY) - 30);
             d3.select("#animate" + value.currentsite).remove();
         } else {
             d3.select("#agv" + value.currentsite)

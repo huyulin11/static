@@ -1,6 +1,6 @@
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { editBuildName } from "/s/buss/acs/location/url/rect.url.js";
-import { xnumToDB, ynumToDb } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/rect/drag.dash.point.js";
 
 export var dragDashRect = function (flag) {
@@ -67,8 +67,8 @@ var dargR = function () {
 }
 var endR = function () {
     let id = $(this).attr('id').slice(4),
-        x = xnumToDB($(this).attr('x')),
-        y = ynumToDb($(this).attr('y')),
+        x = tool.xnumToDB($(this).attr('x')),
+        y = tool.ynumToDb($(this).attr('y')),
         width = parseFloat($(this).attr('width')),
         height = parseFloat($(this).attr('height')),
         buildName = $(this).attr('buildname');
@@ -127,8 +127,8 @@ var dargC = function () {
 }
 var endC = function () {
     let key = $(this).attr('id').slice(5),
-        x = xnumToDB($('[num=' + key + '1]').attr('cx')),
-        y = ynumToDb($('[num=' + key + '1]').attr('cy')),
+        x = tool.xnumToDB($('[num=' + key + '1]').attr('cx')),
+        y = tool.ynumToDb($('[num=' + key + '1]').attr('cy')),
         width = parseFloat($('#rect' + key).attr('width')),
         height = parseFloat($('#rect' + key).attr('height')),
         buildName = $('#rect' + key).attr('buildname');

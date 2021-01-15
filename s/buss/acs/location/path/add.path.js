@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var createPath = function (id, x, y) {
     for (var i = 1; i <= 4; i++) {
@@ -52,8 +52,8 @@ export var getClosestPoint = function (id, x, y) {
     datas.locations.forEach((e, i) => {
         if (e.id != id) {
             var x1 = e.x, y1 = e.y;
-            x1 = dbToWindow(x1, y1)[0];
-            y1 = dbToWindow(x1, y1)[1];
+            x1 = tool.dbToWindow(x1, y1)[0];
+            y1 = tool.dbToWindow(x1, y1)[1];
             var value = (x - x1) * (x - x1) + (y - y1) * (y - y1);
             arr.push({ "id": e.id, "value": value });
         }
@@ -68,7 +68,7 @@ export var getClosestPoint = function (id, x, y) {
     var point;
     datas.locations.forEach((e, i) => {
         if (e.id == idMin) {
-            let result = dbToWindow(e.x, e.y);
+            let result = tool.dbToWindow(e.x, e.y);
             let x1 = parseFloat(x), y1 = parseFloat(y);
             let x2 = parseFloat(result[0]), y2 = parseFloat(result[1]);
             point = { "x1": x1, "y1": y1, "x2": x2, "y2": y2, "nextid": idMin };

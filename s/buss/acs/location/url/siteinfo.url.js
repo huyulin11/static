@@ -1,9 +1,9 @@
-import { windowToDB } from "/s/buss/acs/location/render/trans.location.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var addLocation = function (id, x, y) {
     var key = parseInt(id);
-    var result = windowToDB(id, x, y);
+    var result = tool.windowToDB(id, x, y);
     gf.doAjax({
         url: `/tasksite/addLocation.shtml`, type: "POST",
         data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
@@ -28,7 +28,7 @@ export var deleteLocation = function (id) {
 
 export var moveLocation = function (id, x, y) {
     var key = parseInt(id);
-    var result = windowToDB(id, x, y);
+    var result = tool.windowToDB(id, x, y);
     gf.doAjax({
         url: `/tasksite/updateLocation.shtml`, type: "POST",
         data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
