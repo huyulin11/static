@@ -1,6 +1,5 @@
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
-import { show, hide } from "/s/buss/acs/location/render/location.button.js";
 import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/render/location.on.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { dbToWindow } from "/s/buss/acs/location/render/trans.location.js";
@@ -16,22 +15,9 @@ confs.push({
     key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%"
 });
 confs.push({
-    key: 'id', click: function () {
-        let flag = $(this).hasClass("close");
-        if (flag) {
-            $(this).removeClass("close").addClass("open");
-            hide();
-            d3.select(".doc-buttons").select("#show").text("显示");
-        } else {
-            $(this).removeClass("open").addClass("close");
-            show();
-            d3.select(".doc-buttons").select("#show").text("隐藏");
-        }
-    }
-});
-confs.push({
     key: 'mouse', click: function () {
         let flag = $(this).hasClass("close");
+        $('.open').attr('class','close hideToggle');
         datas.init();
         if (flag) {
             $(this).removeClass("close").addClass("open");
@@ -61,6 +47,7 @@ confs.push({
 confs.push({
     key: 'build', click: function () {
         let flag = $(this).hasClass("close");
+        $('.open').attr('class','close hideToggle');
         if (flag) {
             $(this).removeClass("close").addClass("open");
             d3.selectAll('rect').style('cursor', 'move');
