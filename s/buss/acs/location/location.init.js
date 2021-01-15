@@ -13,11 +13,13 @@ let confs = [];
 bandBodyClick();
 confs.push({
     init: true, url: "/s/buss/agv/site/cache/h/site.cache.html",
-    key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%"
+    key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%",
+    click: function () { $('.open').attr('class', 'close hideToggle'); }
 });
 confs.push({
     key: 'id', click: function () {
         let flag = $(this).hasClass("close");
+        $('.open').attr('class', 'close hideToggle');
         if (flag) {
             $(this).removeClass("close").addClass("open");
             hide();
@@ -32,6 +34,7 @@ confs.push({
 confs.push({
     key: 'mouse', click: function () {
         let flag = $(this).hasClass("close");
+        $('.open').attr('class', 'close hideToggle');
         datas.init();
         if (flag) {
             $(this).removeClass("close").addClass("open");
@@ -61,6 +64,7 @@ confs.push({
 confs.push({
     key: 'build', click: function () {
         let flag = $(this).hasClass("close");
+        $('.open').attr('class', 'close hideToggle');
         if (flag) {
             $(this).removeClass("close").addClass("open");
             d3.selectAll('rect').style('cursor', 'move');
