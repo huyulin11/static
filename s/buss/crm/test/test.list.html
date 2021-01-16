@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js frame single" lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>凯钒科技—模板示例</title>
+    <link rel="stylesheet" href="/s/c/agv.mgr.css">
+    <link rel="stylesheet" href="/s/c/buss.single.css">
+    <link id="checkboxcss" rel="stylesheet" href="/s/buss/acs/g/c/checkbox.css">
+    <style>
+        #topCtrlContainer {
+            top: auto;
+            bottom: 10px;
+        }
+
+        #loginContainer {
+            top: auto;
+            bottom: 65px;
+        }
+
+        #target div.td div {
+            color: white;
+            background: #fefefe;
+        }
+
+        #target div.td div .chooseflag {
+            color: inherit;
+            background: inherit;
+        }
+
+        #target div.td button {
+            color: inherit;
+            background: inherit;
+            height: auto;
+            min-height: 10px;
+            border: none;
+        }
+
+        #target div.td div.风险 {
+            background: #718B7D;
+        }
+
+        #target div.td div.良好 {
+            background: #CCE0DE;
+            color: #666;
+        }
+
+        #target div.td div.成功 {
+            background: #063D52;
+        }
+
+        #target div.td div.冻结 {
+            background: #e5e5e5;
+            color: gray;
+        }
+
+        #target div.td div.失败 {
+            background: whitesmoke;
+            color: gray;
+        }
+
+        #target div.td div.失败 span {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="doc-buttons">
+    </div>
+    <div id="rootContainer">
+        <div id="ctrl">
+            <div id="chooseflags"></div>
+            <input id="kw" name="wd" class="bigSearch" :value="bigSearchResult" @input="inputFun" maxlength="255"
+                autocomplete="off" placeholder="输入任意内容过滤">
+        </div>
+        <div id="target"></div>
+    </div>
+</body>
+
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/layer/v3.1.3/layer.js"></script>
+
+<script type="module">
+    import "/s/buss/crm/test/test.list.js?f=crmv000002";
+</script>
+
+</html>
