@@ -23,8 +23,12 @@ setInterval(() => {
 }, 3000);
 bandBodyClick();
 confs.push({
+    init: true, url: "/s/buss/sys/conf/h/traffic.area.html",
+    key: 'area', target: 'div#areaContainer', height: "70%", width: "50%"
+});
+confs.push({
     init: true, url: "/s/buss/agv/site/cache/h/site.cache.html",
-    key: 'cache', target: 'div#cacheContainer', height: "90%", width: "90%"
+    key: 'cache', target: 'div#cacheContainer', height: "70%", width: "50%"
 });
 confs.push({
     key: 'mouse', click: function () {
