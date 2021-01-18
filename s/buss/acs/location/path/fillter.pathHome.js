@@ -43,12 +43,12 @@ export var fillMarkerPath = function (id, x, y) {
     datas.init();
     conf.defsHome.selectAll("marker").filter(function (e) { return e && e.from == id; })
         .attr("orient", function (d) {
-            var x2 = tool.xnumToWindow(d.rightXaxis), y2 = ynumToWindow(d.upYaxis);
+            var x2 = tool.xnumToWindow(d.rightXaxis), y2 = tool.ynumToWindow(d.upYaxis);
             return drawArrow(x, x2, y, y2);
         });
     conf.defsHome.selectAll("marker").filter(function (e) { return e && e.to == id; })
         .attr("orient", function (d) {
-            var x1 = tool.xnumToWindow(d.leftXaxis), y1 = ynumToWindow(d.downYaxis);
+            var x1 = tool.xnumToWindow(d.leftXaxis), y1 = tool.ynumToWindow(d.downYaxis);
             return drawArrow(x1, x, y1, y);
         });
 } 
