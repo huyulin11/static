@@ -136,10 +136,6 @@ var dataRect = function (data) {
 }
 
 datas.init = function () {
-    // $(".aspect").remove();
-    // $("defs").remove();
-    // $("image").remove();
-    // $(".clashLine").remove();
     datas.logic = [];
     datas.udfPoints = [];
     datas.locations = [];

@@ -23,5 +23,11 @@ export var drawPointId = function (data) {
 }
 
 var hidePointId = function () {
-    conf.svg.selectAll("text").remove();
+    conf.textHome.selectAll("text").remove();
+}
+
+export var fillPointId = function (id, x, y) {
+    conf.textHome.select("#t" + id)
+        .attr("x", x + 7)
+        .attr("y", y - 7);
 }

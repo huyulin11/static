@@ -1,6 +1,6 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { started, draged, ended, createPoint } from "/s/buss/acs/location/point/point.event.js";
-import { updateID } from "/s/buss/acs/location/point/point.update.js";
+import { updateID } from "/s/buss/acs/location/point/point.event.update.js";
 import { createPath } from "/s/buss/acs/location/path/add.path.js";
 import { dragedPath, endedPath, startedPath } from "/s/buss/acs/location/path/drag.path.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
@@ -10,7 +10,7 @@ import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/locatio
 
 export var mouseEvent = function (flag) {
     dragPoint(flag);
-    dblclickAddPoint(flag);
+    dblclick(flag);
     rightClickPoint(flag);
     dragPath(flag);
     rightClickPath(flag);
@@ -20,6 +20,28 @@ export var bandBodyClick = function () {
     conf.svg.on("contextmenu", function (d, i) {
         d3.event.preventDefault();
     })
+}
+
+export var dragPoint = function (flag) {
+    conf.pointHome.selectAll("circle").call(
+        d3.drag()
+            .on('start', flag ? started : null)
+            .on('end', flag ? ended : null)
+            .on('drag', flag ? draged : null)
+    );
+}
+
+var dblclick = function (flag) {
+    conf.svg.on("dblclick", flag ? createPoint : null);
+}
+
+export var dragPath = function (flag) {
+    conf.svg.selectAll(".clashLine").call(
+        d3.drag()
+            .on('start.a', flag ? startedPath : null)
+            .on('drag.a', flag ? dragedPath : null)
+            .on('end.a', flag ? endedPath : null)
+    );
 }
 
 var rightClickPath = function (flag) {
@@ -51,24 +73,6 @@ var rightClickPath = function (flag) {
             .on("contextmenu", null)
     }
 }
-
-export var dragPath = function (flag) {
-    if (flag) {
-        conf.svg.selectAll(".clashLine").call(
-            d3.drag()
-                .on('start.a', startedPath)
-                .on('drag.a', dragedPath)
-                .on('end.a', endedPath)
-        );
-    } else {
-        conf.svg.selectAll(".clashLine").call(
-            d3.drag()
-                .on('start.a', null)
-                .on('drag.a', null)
-                .on('end.a', null)
-        )
-    }
-};
 
 export var rightClickPoint = function (flag) {
     if (flag) {
@@ -114,37 +118,5 @@ export var rightClickPoint = function (flag) {
     } else {
         conf.svg.selectAll("circle")
             .on("contextmenu", null)
-    }
-}
-
-export var dragPoint = function (flag) {
-    if (flag) {
-        d3.selectAll("circle").call(
-            d3.drag()
-                .on('start', started)
-                .on('end', ended)
-                .on('drag', draged)
-        )
-    } else {
-        d3.selectAll("circle").call(
-            d3.drag()
-                .on('start', null)
-                .on('end', null)
-                .on('drag', null)
-        )
-    }
-}
-
-export var dblclickAddPoint = function (flag) {
-    if (flag) {
-        d3.select("body")
-            .select("#coordinate")
-            .select("svg")
-            .on("dblclick", createPoint);
-    } else {
-        d3.select("body")
-            .select("#coordinate")
-            .select("svg")
-            .on("dblclick", null);
     }
 }

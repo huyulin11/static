@@ -16,8 +16,8 @@ export var updateID = function (circle, id1, x, y) {
             }
             if (flag) {
                 d3.select("#t" + id1).attr("id", "t" + id2).text(id2);
-                var result = tool.windowToDB(id2, x, y);
-                editLocationID(id1, id2, result);
+                var location = tool.windowToDB(id2, x, y);
+                editLocationID(id1, id2, location);
                 circle.attr("id", id2);
                 d3.selectAll("path")
                     .filter(function (e) { return e && e.to == id1; })

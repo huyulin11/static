@@ -1,15 +1,19 @@
-import { tool } from "/s/buss/acs/location/location.tool.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
 import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
-export var addLocation = function (id, x, y) {
+export var addLocation = function (id, location, callback) {
     var key = parseInt(id);
-    var result = tool.windowToDB(id, x, y);
     gf.doAjax({
         url: `/tasksite/addLocation.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
+        data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(location) },
         success: (obj) => {
-            updateTaskSiteLocation(id, result);
-            if (obj.msg) layer.msg("增加失败");
+            updateTaskSiteLocation(id, location);
+            if (obj.msg) {
+                layer.msg("增加失败");
+                return;
+            }
+            datas.init();
+            if (callback) { callback(); }
         }
     });
 }
@@ -26,25 +30,24 @@ export var deleteLocation = function (id) {
     });
 }
 
-export var moveLocation = function (id, x, y) {
+export var moveLocation = function (id, location) {
     var key = parseInt(id);
-    var result = tool.windowToDB(id, x, y);
     gf.doAjax({
         url: `/tasksite/updateLocation.shtml`, type: "POST",
-        data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(result) },
+        data: { table: "TASK_SITE_LOCATION", key: key, value: JSON.stringify(location) },
         success: (obj) => {
-            updateTaskSiteLocation(id, result);
+            updateTaskSiteLocation(id, location);
             if (obj.msg) layer.msg("拖动失败");
         }
     });
 }
 
-export var editLocationID = function (id1, id2, result) {
+export var editLocationID = function (oldID, newID, location) {
     gf.doAjax({
         url: `/tasksite/editLocationID.shtml`, type: "POST",
-        data: { oldID: id1, newID: id2, value: JSON.stringify(result) },
+        data: { oldID: oldID, newID: newID, value: JSON.stringify(location) },
         success: (obj) => {
-            updateTaskSiteLocation(id1, result);
+            updateTaskSiteLocation(oldID, location);
             if (obj.msg) layer.msg("修改失败");
         }
     });

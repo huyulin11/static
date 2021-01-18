@@ -2,7 +2,9 @@ import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
 import { addLocation, moveLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { fillPointId, drawPointId } from "/s/buss/acs/location/point/point.id.draw.js";
 import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
+import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var started = function () { }
 
@@ -12,50 +14,37 @@ export var draged = function () {
     d3.select(this)
         .attr('cx', x)
         .attr('cy', y);
+    fillPointId(id, x, y);
     fillHome1(id, x, y);
     fillHome2(id, x, y);
     fillMarkerPath(id, x, y);
-    conf.svg.select("#t" + id)
-        .attr("x", x + 7)
-        .attr("y", y - 7);
 }
 
 export var ended = function () {
     const { x, y } = d3.event;
     var id = $(this).attr('id');
-    moveLocation(id, x, y);
+    var location = tool.windowToDB(id, x, y);
+    moveLocation(id, location);
 }
 
 export var createPoint = function () {
     var id = getID();
     let x = d3.event.offsetX, y = d3.event.offsetY;
-    conf.svg.append("circle")
-        .attr("id", id)
-        .attr("fill", "blue")
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("r", 5);
-    dragPoint(true);
-    rightClickPoint(true);
-    addLocation(id, x, y);
-    conf.textHome.append("text")
-        .attr("id", function () {
-            return "t" + id;
-        }).attr("x", function (d) {
-            return x + 7;
-        })
-        .attr("y", function (d) {
-            return y - 7;
-        }).attr("stroke", "black")
-        .attr("font-size", "15px")
-        .attr("font-family", "sans-serif")
-        .text(function (d) {
-            return id;
-        })
+    var location = tool.windowToDB(id, x, y);
+    addLocation(id, location, () => {
+        conf.pointHome.append("circle")
+            .attr("id", id)
+            .attr("cx", x)
+            .attr("cy", y)
+            .attr("r", 6.5)
+            .attr("fill", "blue");
+        drawPointId(datas.udfPoints);
+        dragPoint(true);
+        rightClickPoint(true);
+    });
 }
 
 var getID = function () {
-    datas.init();
     var ids = datas.id;
     var id = 1;
     var arr = [];
