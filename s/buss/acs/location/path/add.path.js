@@ -15,7 +15,7 @@ var newPath = function (num, x, y, id) {
         .attr("class", "clashLine")
         .attr("fill", "none")
         .attr("stroke", "#8a8a8a")
-        .attr("stroke-width", "6px")
+        .attr("stroke-width", function () { return localStorage.pathwidth; })
         .attr("style", "marker-end:url(#triangle2);");
     if (num == 1) {
         paths.attr("id", "new" + num)

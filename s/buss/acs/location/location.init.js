@@ -11,11 +11,13 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { doubleDToStrig } from "/s/buss/acs/location/path/double.path.draw.js";
 import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
 import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
+import { changePathSize } from "/s/buss/acs/location/path/path.changesize.js";
 
 let confs = [];
 initData();
 markerDef();
 renderSvg();
+changePathSize();
 dataAgvLocation();
 setInterval(() => {
     dataAgvLocation();

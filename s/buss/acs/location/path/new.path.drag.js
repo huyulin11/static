@@ -54,7 +54,7 @@ export var endedNewPath = function () {
             .attr("class", "clashLine")
             .attr("fill", "none")
             .attr("stroke", "#8a8a8a")
-            .attr("stroke-width", "6.5px")
+            .attr("stroke-width", function () { return localStorage.pathwidth })
             .attr("style", function (d) {
                 return "marker-end:url(#mar" + siteid + nextid + ");"
             });
