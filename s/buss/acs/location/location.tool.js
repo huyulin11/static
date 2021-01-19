@@ -75,27 +75,22 @@ tool.randomColor = function () {
 };
 
 tool.windowToDB = function (id, x, y) {
-    var ids = parseInt(id);
-    var x1 = tool.xnumToDB(x);
-    var y1 = tool.ynumToDb(y);
-    var result = { "id": ids, "x": x1, "y": y1 };
-    console.log(result);
-    return result;
+    var location = { "id": parseInt(id), "x": tool.xnumToDB(x), "y": tool.ynumToDB(y) };
+    console.log(location);
+    return location;
 }
 
 tool.xnumToDB = function (x) {
     return conf.xReScale(x - conf.padding.left);
 }
 
-tool.ynumToDb = function (y) {
+tool.ynumToDB = function (y) {
     return conf.yReScale(conf.height - conf.padding.bottom - y);
 }
 
-tool.dbToWindow = function (x1, y1) {
-    var x = tool.xnumToWindow(x1);
-    var y = tool.ynumToWindow(y1);
-    var result = [x, y];
-    return result;
+tool.dbToWindow = function (x, y) {
+    var coordinate = [tool.xnumToWindow(x), tool.ynumToWindow(y)];
+    return coordinate;
 }
 
 tool.xnumToWindow = function (x) {

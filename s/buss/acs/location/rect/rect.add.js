@@ -17,7 +17,6 @@ export var addRect = function (flag) {
 
 export var setRect = function () {
     var point = [];
-    d3.event.preventDefault();
     var id = getid();
     let x = d3.event.offsetX,
         y = d3.event.offsetY;

@@ -68,7 +68,7 @@ var dargR = function () {
 var endR = function () {
     let id = $(this).attr('id').slice(4),
         x = tool.xnumToDB($(this).attr('x')),
-        y = tool.ynumToDb($(this).attr('y')),
+        y = tool.ynumToDB($(this).attr('y')),
         width = parseFloat($(this).attr('width')),
         height = parseFloat($(this).attr('height')),
         buildName = $(this).attr('buildname');
@@ -128,7 +128,7 @@ var dargC = function () {
 var endC = function () {
     let key = $(this).attr('id').slice(5),
         x = tool.xnumToDB($('[num=' + key + '1]').attr('cx')),
-        y = tool.ynumToDb($('[num=' + key + '1]').attr('cy')),
+        y = tool.ynumToDB($('[num=' + key + '1]').attr('cy')),
         width = parseFloat($('#rect' + key).attr('width')),
         height = parseFloat($('#rect' + key).attr('height')),
         buildName = $('#rect' + key).attr('buildname');

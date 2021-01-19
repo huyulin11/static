@@ -3,7 +3,6 @@ import { getMPoint, getL2Point } from "/s/buss/acs/location/path/render.d.js";
 import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
 import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
-import { datas } from "/s/buss/acs/location/location.data.js";
 
 export var fillHome1 = function (id, x, y) {
     conf.pathHome1.selectAll("path").filter(function (e) { return e && e.from == id; })
@@ -40,7 +39,6 @@ export var fillHome2 = function (id, x, y) {
 }
 
 export var fillMarkerPath = function (id, x, y) {
-    datas.init();
     conf.defsHome.selectAll("marker").filter(function (e) { return e && e.from == id; })
         .attr("orient", function (d) {
             var x2 = tool.xnumToWindow(d.rightXaxis), y2 = tool.ynumToWindow(d.upYaxis);

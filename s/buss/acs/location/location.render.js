@@ -1,7 +1,6 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { tool } from "/s/buss/acs/location/location.tool.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { drawPointId } from "/s/buss/acs/location/point/point.id.draw.js";
+import { drawPoints, drawPointId } from "/s/buss/acs/location/point/point.draw.js";
 import { drawPath } from "/s/buss/acs/location/path/draw.path.js";
 import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 
@@ -26,31 +25,6 @@ function drawAxis() {
 
     //绘制完坐标轴将值域变回去  
     conf.yScale.range([0, conf.yAxisWidth]);
-}
-
-function drawPoints(data) {
-    var circleUpdate = conf.pointHome.selectAll("circle").data(data);
-    var circleEnter = circleUpdate.enter();
-    var circleExit = circleUpdate.exit();
-
-    //update部分的处理方法
-    circleUpdate.transition()//更新数据时启动过渡  
-        .duration(500).attr("r", 6.5);
-
-    circleEnter.append("circle")
-        .transition().duration(800)
-        .attr("id", function (d) {
-            return d[0];
-        }).attr("class", function (d) {
-            return tool.inAgv(d, 1) ? "agv1" : "agv2";
-        }).attr("cx", function (d) {
-            return tool.xnumToWindow(d[1]);
-        }).attr("cy", function (d) {
-            return tool.ynumToWindow(d[2]);
-        }).attr("r", 3)
-        .attr("fill", tool.getPointColor());
-
-    circleExit.transition().duration(500).attr("fill", "white").remove();
 }
 
 var render = function () {

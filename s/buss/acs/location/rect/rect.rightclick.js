@@ -6,11 +6,10 @@ export var rightClickRect = function (flag) {
     if (flag) {
         d3.selectAll("rect")
             .on("contextmenu", function (d, i) {
-                d3.event.preventDefault();
                 if (d3.event.button == 2) {
                     let id = $(this).attr('id'),
                         x = tool.xnumToDB($(this).attr('x')),
-                        y = tool.ynumToDb($(this).attr('y')),
+                        y = tool.ynumToDB($(this).attr('y')),
                         width = $(this).attr('width'),
                         height = $(this).attr('height');
                     var rect = d3.select(this);

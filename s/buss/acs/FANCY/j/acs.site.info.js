@@ -106,18 +106,16 @@ export var updateTaskSiteLocation = function (id, data, bool) {
                 return s;
             }
         });
-    } else {
-        var flag = true;
-        taskSiteLocationData.forEach((e, i) => {
-            if (e.id == id) {
-                flag = false;
-                return taskSiteLocationData[i] = data;
-            }
-        });
-        if (flag) {
-            return taskSiteLocationData.push(data)
-        }
+        return;
     }
+    var flag = true;
+    taskSiteLocationData.forEach((e, i) => {
+        if (e.id == id) {
+            flag = false;
+            return taskSiteLocationData[i] = data;
+        }
+    });
+    if (flag) { taskSiteLocationData.push(data); }
 }
 
 export var updateTaskSiteRect = function (id, data, bool) {
@@ -141,5 +139,4 @@ export var updateTaskSiteRect = function (id, data, bool) {
             return taskSiteRectData.push(data)
         }
     }
-
 }

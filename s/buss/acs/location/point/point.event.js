@@ -1,18 +1,19 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
-import { addLocation, moveLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
-import { fillPointId, drawPointId } from "/s/buss/acs/location/point/point.id.draw.js";
-import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
+import { addLocation, updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { fillPointId, drawNewPoint, drawPointId } from "/s/buss/acs/location/point/point.draw.js";
+import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
 
-export var started = function () { }
+export var event = {};
 
-export var draged = function () {
+event.start = function () { }
+
+event.drag = function () {
     const { x, y } = d3.event;
     var id = $(this).attr('id');
-    d3.select(this)
-        .attr('cx', x)
+    $(this).attr('cx', x)
         .attr('cy', y);
     fillPointId(id, x, y);
     fillHome1(id, x, y);
@@ -20,27 +21,61 @@ export var draged = function () {
     fillMarkerPath(id, x, y);
 }
 
-export var ended = function () {
+event.end = function (d) {
     const { x, y } = d3.event;
     var id = $(this).attr('id');
     var location = tool.windowToDB(id, x, y);
-    moveLocation(id, location);
+    updateLocation(id, location);
 }
 
-export var createPoint = function () {
+event.createPoint = function () {
     var id = getID();
     let x = d3.event.offsetX, y = d3.event.offsetY;
     var location = tool.windowToDB(id, x, y);
-    addLocation(id, location, () => {
-        conf.pointHome.append("circle")
-            .attr("id", id)
-            .attr("cx", x)
-            .attr("cy", y)
-            .attr("r", 6.5)
-            .attr("fill", "blue");
+    addLocation(location, () => {
+        drawNewPoint(id, x, y);
         drawPointId(datas.udfPoints);
         dragPoint(true);
         rightClickPoint(true);
+    });
+}
+
+event.updateID = function (point) {
+    layer.prompt({ title: '输入id', formType: 0 }, function (newid, index) {
+        var oldid = point.attr('id');
+        for (var i of datas.id) {
+            if (newid == i.id) { return layer.msg("存在相同站点，不予修改！"); }
+        }
+        if (oldid == newid) { layer.msg("相同站点，不予修改！"); }
+        layer.close(index);
+        if (window.confirm(`确定将id：${oldid}修改为${newid}？`)) {
+            var location = tool.windowToDB(newid, point.attr('cx'), point.attr('cy'));
+            editLocationID(oldid, location, () => {
+                point.attr("id", newid);
+                conf.textHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
+                d3.selectAll("path")
+                    .filter(function (e) { return e && e.to == oldid; })
+                    .attr("id", function (d) {
+                        return 'p' + d.from + newid;
+                    })
+                    .attr("to", newid);
+                d3.selectAll("path")
+                    .filter(function (e) { return e && e.from == oldid; })
+                    .attr("id", function (d) {
+                        return 'p' + newid + d.to;
+                    })
+                    .attr("from", newid);
+            });
+        }
+    })
+}
+
+event.delPoint = function (point) {
+    var id = point.attr('id');
+    deleteLocation(id, () => {
+        point.remove();
+        conf.textHome.select("#t" + id).remove();
+        conf.svg.selectAll("path").filter(function (e) { return e && (e.from == id || e.to == id); }).remove();
     });
 }
 
