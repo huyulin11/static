@@ -5,21 +5,12 @@ import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
 import { mouseStyle, bankDefaultEvent } from "/s/buss/acs/location/rect/rect.event.js";
 
-export var addRect = function (flag) {
-    if (flag) {
-        d3.select("body").select("#coordinate").select("svg")
-            .on("dblclick", setRect);
-    } else {
-        d3.select("body").select("#coordinate").select("svg")
-            .on("dblclick", null);
-    };
-}
-
-export var setRect = function () {
+export var addRect = function () {
     var point = [];
     var id = getid();
-    let x = d3.event.offsetX,
-        y = d3.event.offsetY;
+    let x = event.offsetX,
+        y = event.offsetY;
+    console.log(x + ',' + y);
     conf.rectHome.append("rect")
         .attr('x', x - 10)
         .attr('y', y - 10)
@@ -37,12 +28,26 @@ export var setRect = function () {
         .attr("font-size", "13px")
         .attr('fill', 'black')
         .style('text-anchor', 'middle')
-        .text('建筑' + id);
+        .text('建筑');
     point.push([1, x - 10, y - 10, id]);
     point.push([2, x + 10, y - 10, id]);
     point.push([3, x - 10, y + 10, id]);
     point.push([4, x + 10, y + 10, id]);
     addPoint(point);
+}
+
+export var dragRect = function (x, y) {
+    var id = getid();
+    d3.select('#rect' + id)
+        .attr('x', x - 10)
+        .attr('y', y - 10);
+    d3.select('#retext' + id)
+        .attr('x', x)
+        .attr('y', y + 30);
+}
+
+export var newRect = function (x, y) {
+    var id = getid();
     crateRect(id, x - 10, y - 10, 20, 20);
     bankDefaultEvent();
     rightClickRect(true);
@@ -53,7 +58,7 @@ export var setRect = function () {
 
 var addPoint = function (point) {
     for (let rect of point) {
-        conf.rectHome.append('circle')
+        conf.rectPointHome.append('circle')
             .attr('class', 'changeCircle')
             .attr('id', 'dashC' + rect[3])
             .attr('num', rect[3] + "" + rect[0])

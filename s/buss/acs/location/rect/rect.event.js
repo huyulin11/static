@@ -1,6 +1,7 @@
 import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
+import { baseCircleMoudle } from "/s/buss/acs/location/location.basepic.js";
 
 export var rectEvent = function (flag) {
     rightClickRect(flag);
@@ -9,6 +10,7 @@ export var rectEvent = function (flag) {
     delBankDash(flag);
     mouseStyle(flag);
     bankDefaultEvent();
+    baseCircleMoudle(flag);
 
 }
 export var bankDefaultEvent = function () {

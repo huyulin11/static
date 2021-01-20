@@ -10,8 +10,8 @@ export var rightClickRect = function (flag) {
                     let id = $(this).attr('id'),
                         x = tool.xnumToDB($(this).attr('x')),
                         y = tool.ynumToDB($(this).attr('y')),
-                        width = $(this).attr('width'),
-                        height = $(this).attr('height');
+                        width = parseFloat($(this).attr('width')),
+                        height = parseFloat($(this).attr('height'));
                     var rect = d3.select(this);
                     var tips = layer.tips('<input type="button" id="btn1" style="width: 76px;height: 30px" value="修改名称"><br><input type="button" id="btn2" style="width: 76px;height: 30px" value="删除建筑"><br><input type="button" id="btn3" style="width: 76px;height: 30px" value="">',
                         '#' + id,
