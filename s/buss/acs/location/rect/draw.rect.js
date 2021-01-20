@@ -54,7 +54,7 @@ export var drawRect = function (rectdata) {
             point.push([3, x, y + rect.height, rect.id]);
             point.push([4, x + rect.width, y + rect.height, rect.id]);
         }
-        conf.rectHome.selectAll("circle").data(point)
+        conf.rectPointHome.selectAll("circle").data(point)
             .enter()
             .append('circle')
             .attr('class', 'changeCircle')

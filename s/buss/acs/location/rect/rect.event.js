@@ -1,11 +1,9 @@
-import { addRect } from "/s/buss/acs/location/rect/rect.add.js";
 import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 
 export var rectEvent = function (flag) {
     rightClickRect(flag);
-    addRect(flag);
     dragDashRect(flag);
     dragDashCircle(flag);
     delBankDash(flag);

@@ -28,6 +28,7 @@ event.end = function (d) {
 }
 
 event.updateID = function (point) {
+    datas.init();
     layer.prompt({ title: '输入id', formType: 0 }, function (newid, index) {
         var oldid = point.attr('id');
         for (var i of datas.id) {

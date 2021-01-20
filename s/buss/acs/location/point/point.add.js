@@ -39,7 +39,18 @@ export var addSite = function (x, y) {
         .text('' + id);
 }
 
-export var createPoint = function (id, x, y) {
+export var dragSite = function (x, y) {
+    var id = getCircleID();
+    d3.select('#nc' + id)
+        .attr('cx', x)
+        .attr('cy', y);
+    d3.select('#nct' + id)
+        .attr('x', x + 7)
+        .attr('y', y - 7);
+}
+
+export var createPoint = function (x, y) {
+    var id = getCircleID();
     var location = tool.windowToDB(id, x, y);
     addLocation(location, () => {
         d3.select('#nct' + id).attr('id', 't' + id);
