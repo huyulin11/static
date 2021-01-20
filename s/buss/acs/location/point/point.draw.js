@@ -36,7 +36,7 @@ export function drawNewPoint(id, x, y) {
 }
 
 export var drawPointId = function (data) {
-    conf.textHome.selectAll("text").data(data)
+    conf.pointTextHome.selectAll("text").data(data)
         .enter().append("text")
         .attr("id", function (d) {
             var id = 't' + d[0];
@@ -59,7 +59,7 @@ var hidePointId = function () {
 }
 
 export var fillPointId = function (id, x, y) {
-    conf.textHome.select("#t" + id)
+    conf.pointTextHome.select("#t" + id)
         .attr("x", x + 7)
         .attr("y", y - 7);
 }

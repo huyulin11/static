@@ -28,18 +28,6 @@ event.end = function (d) {
     updateLocation(id, location);
 }
 
-event.createPoint = function () {
-    var id = getID();
-    let x = d3.event.offsetX, y = d3.event.offsetY;
-    var location = tool.windowToDB(id, x, y);
-    addLocation(location, () => {
-        drawNewPoint(id, x, y);
-        drawPointId(datas.udfPoints);
-        dragPoint(true);
-        rightClickPoint(true);
-    });
-}
-
 event.updateID = function (point) {
     layer.prompt({ title: '输入id', formType: 0 }, function (newid, index) {
         var oldid = point.attr('id');

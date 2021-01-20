@@ -29,10 +29,6 @@ export var dragPoint = function (flag) {
     );
 }
 
-var dblclick = function (flag) {
-    conf.svg.on("dblclick", flag ? pointEvent.createPoint : null);
-}
-
 export var rightClickPoint = function (flag) {
     conf.pointHome.selectAll("circle")
         .on("contextmenu", flag ? rightClickPointHandling : null);
