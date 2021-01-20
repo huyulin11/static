@@ -55,7 +55,7 @@ export var drawPointId = function (data) {
 }
 
 var hidePointId = function () {
-    conf.textHome.selectAll("text").remove();
+    conf.pointTextHome.selectAll("text").remove();
 }
 
 export var fillPointId = function (id, x, y) {

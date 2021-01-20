@@ -62,9 +62,13 @@ function imgDrag() {
 }
 
 function imgEnd() {
+    var name = d3.select(this).attr('shapename');
     var id = getCircleID();
     var x = event.offsetX;
     var y = event.offsetY;
     d3.select('#nrt' + id).remove();
-    createPoint(id, x, y);
+    if (name == "site") {
+        createPoint(id, x, y);
+    } else if (name == "build") {
+    }
 }

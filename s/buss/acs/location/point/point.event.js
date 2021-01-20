@@ -1,9 +1,8 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
-import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
-import { addLocation, updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
-import { fillPointId, drawNewPoint, drawPointId } from "/s/buss/acs/location/point/point.draw.js";
+import { updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { fillPointId } from "/s/buss/acs/location/point/point.draw.js";
 import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
 
 export var event = {};
@@ -40,7 +39,7 @@ event.updateID = function (point) {
             var location = tool.windowToDB(newid, point.attr('cx'), point.attr('cy'));
             editLocationID(oldid, location, () => {
                 point.attr("id", newid);
-                conf.textHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
+                conf.pointTextHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
                 d3.selectAll("path")
                     .filter(function (e) { return e && e.to == oldid; })
                     .attr("id", function (d) {
@@ -62,7 +61,7 @@ event.delPoint = function (point) {
     var id = point.attr('id');
     deleteLocation(id, () => {
         point.remove();
-        conf.textHome.select("#t" + id).remove();
+        conf.pointTextHome.select("#t" + id).remove();
         conf.svg.selectAll("path").filter(function (e) { return e && (e.from == id || e.to == id); }).remove();
     });
 }

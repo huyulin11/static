@@ -7,7 +7,6 @@ import { startedNewPath, dragedNewPath, endedNewPath } from "/s/buss/acs/locatio
 
 export var mouseEvent = function (flag) {
     dragPoint(flag);
-    dblclick(flag);
     rightClickPoint(flag);
     dragPath(flag);
     rightClickPath(flag);
