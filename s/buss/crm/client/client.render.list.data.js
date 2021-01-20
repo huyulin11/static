@@ -15,6 +15,7 @@ export var data = function (callback, condition, manager) {
 
 export var dataFull = function (callback, condition) {
     condition["TABLE_KEY"] = "CRM_CLIENTS";
+    condition["ORDER_BY_KEY"] = "key desc";
     let _condition = {
         url: "/app/conf/findByPage.shtml",
         data: condition,
