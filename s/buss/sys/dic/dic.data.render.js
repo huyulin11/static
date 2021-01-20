@@ -1,7 +1,7 @@
 import "/s/j/vue/vue.min.js";
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
 import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
-import { dicdata } from "/s/buss/sys/dic/j/dic.data.info.js";
+import { dicdata } from "/s/buss/sys/dic/dic.data.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
 var vm = new Vue({
@@ -82,7 +82,7 @@ var vm = new Vue({
                     notnull: true,
                 }, {
                     key: "notnull",
-                    name: "不能为空",
+                    name: "非空",
                     type: "select",
                     dic: "TRUE_OR_FALSE",
                     notnull: true,

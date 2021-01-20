@@ -93,7 +93,7 @@ function mgr(dictype) {
 	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
-		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html?dictype=' + dictype
+		content: '/s/buss/sys/dic/sysDicTypeEditUI.html?dictype=' + dictype
 	});
 }
 
@@ -101,7 +101,7 @@ function detail(dictype) {
 	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
-		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype
+		content: '/s/buss/sys/dic/sysDicDataEditUI.html?dictype=' + dictype
 	});
 }
 
@@ -109,7 +109,7 @@ function view(dictype) {
 	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
-		content: '/s/buss/sys/dic/h/sysDicDataEditUI.html?dictype=' + dictype + '&model=VIEW'
+		content: '/s/buss/sys/dic/sysDicDataEditUI.html?dictype=' + dictype + '&model=VIEW'
 	});
 }
 
@@ -117,7 +117,7 @@ function add() {
 	window.pageii = gflayer.open({
 		title: "新增",
 		type: 2,
-		content: '/s/buss/sys/dic/h/sysDicTypeEditUI.html'
+		content: '/s/buss/sys/dic/sysDicTypeEditUI.html'
 	});
 }
 function del() {

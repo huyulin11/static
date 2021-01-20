@@ -1,7 +1,7 @@
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
-import { dictype } from "/s/buss/sys/dic/j/dic.type.info.js";
+import { dictype } from "/s/buss/sys/dic/dic.type.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
-import "/s/buss/sys/dic/j/dic.type.add.js";
+import "/s/buss/sys/dic/dic.type.add.js";
 
 var _conf = {
     container: "div#rows",
@@ -19,7 +19,7 @@ var _conf = {
         notnull: true,
     }, {
         key: "notnull",
-        name: "不能为空",
+        name: "非空",
         type: "select",
         dic: "TRUE_OR_FALSE",
         notnull: true,
