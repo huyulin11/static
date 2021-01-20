@@ -66,19 +66,3 @@ event.delPoint = function (point) {
         conf.svg.selectAll("path").filter(function (e) { return e && (e.from == id || e.to == id); }).remove();
     });
 }
-
-var getID = function () {
-    var ids = datas.id;
-    var id = 1;
-    var arr = [];
-    ids.forEach((e) => {
-        arr.push(e.id);
-    })
-    arr.sort(function (a, b) { return a - b });
-    for (var i of arr) {
-        if (id == i) {
-            id++;
-        }
-    }
-    return id;
-}
