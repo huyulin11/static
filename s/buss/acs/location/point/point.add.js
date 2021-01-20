@@ -28,7 +28,7 @@ export var addSite = function (x, y) {
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 6.5)
-        .attr("fill", "blue");
+        .attr("fill", "red");
     conf.pointTextHome.append("text")
         .attr("id", 'nct' + id)
         .attr("x", x + 7)

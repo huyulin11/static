@@ -140,3 +140,26 @@ for (let i in datas.color) {
         $("div#msgOfAgv").append("<span style='color:" + datas.color[i] + ";'>" + i + "----" + "</span><br/>");
     }
 }
+
+var leftShape = d3.select('#shape_panel')
+    .attr('style', "top:80px;left:0px;position:fixed;height: 836px; width: 187px;");
+var basePictrue = leftShape.append('div')
+    .attr('id', 'panel_basic')
+    .attr('class', 'content')
+    .style('width', '164px');
+var circle = basePictrue.append('div')
+    .attr('class', 'panel_box')
+    .attr('shapename', 'site')
+    .attr('style', 'top:0px;left:0px;display:inline;')
+    .append('img')
+    .attr('id', 'circleimg')
+    .attr('src', '/s/buss/acs/location/redpoint.png')
+    .attr('style', 'width:40px;height:40px;');
+var rect = basePictrue.append('div')
+    .attr('class', 'panel_box')
+    .attr('shapename', 'build')
+    .attr('style', 'top:0px;left:0px;display:inline;')
+    .append('img')
+    .attr('id', 'rectimg')
+    .attr('src', '/s/buss/acs/location/yellowrect.png')
+    .attr('style', 'width:40px;height:40px;');
