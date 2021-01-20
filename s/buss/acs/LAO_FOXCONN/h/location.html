@@ -15,7 +15,11 @@
     <div id="sysTitle">
         <span>南宁富士康AGV智能调度系统</span>
     </div>
-    <div id="coordinate"></div>
+    <div id="coordinate">
+        <div id="shape_panel" class="layout">
+            <h3 style="text-align:center;color:black">基础图形</h3>
+        </div>
+    </div>
     <div id="rootContainer" class="hidden">
         <div id="agvDetail"></div>
     </div>
@@ -29,6 +33,8 @@
     import { gf } from "/s/buss/g/j/g.f.js";
     import { gp } from "/s/buss/g/j/g.p.js";
     import "/s/buss/acs/location/location.init.js";
+    import { baseCircleMoudle } from "/s/buss/acs/location/location.basepic.js";
+    baseCircleMoudle();
 </script>
 
 </html>
