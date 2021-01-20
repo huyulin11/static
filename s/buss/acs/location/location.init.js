@@ -1,5 +1,5 @@
 import { init as initData, datas } from "/s/buss/acs/location/location.data.js";
-import { markerDef } from "/s/buss/acs/location/path/def.marker.radian.js";
+import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
 import { renderSvg } from "/s/buss/acs/location/location.render.js";
 import { dataAgvLocation } from "/s/buss/acs/location/location.data.js";
 import { drawAgv } from "/s/buss/acs/location/agv/draw.agv.js";
@@ -8,8 +8,7 @@ import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/location.event.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
-import { doubleDToStrig } from "/s/buss/acs/location/path/double.path.draw.js";
-import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
+import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
 import { changePathSize } from "/s/buss/acs/location/path/path.changesize.js";
 
@@ -44,7 +43,7 @@ confs.push({
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
-                return dToStrig(result1[0], result2[0], result1[1], result2[1]);
+                return pathTool.dPath(result1[0], result2[0], result1[1], result2[1]);
             });
         } else {
             $(this).removeClass("open").addClass("close");
@@ -54,9 +53,9 @@ confs.push({
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
                 if (!d.isDouble) {
-                    return dToStrig(result1[0], result2[0], result1[1], result2[1]);
+                    return pathTool.dPath(result1[0], result2[0], result1[1], result2[1]);
                 } else {
-                    return doubleDToStrig(result1[0], result2[0], result1[1], result2[1]);
+                    return pathTool.dDoublePath(result1[0], result2[0], result1[1], result2[1]);
                 }
             });
         }

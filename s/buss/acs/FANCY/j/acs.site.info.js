@@ -6,9 +6,7 @@ let taskSiteRectData = null;
 
 export var taskSiteRect = function (callback) {
     let call = (data) => {
-        if (callback) {
-            callback(data);
-        };
+        if (callback) { callback(data); };
     };
     if (taskSiteRectData) {
         call(taskSiteRectData);
@@ -31,9 +29,7 @@ export var taskSiteRect = function (callback) {
 
 export var taskSiteLogic = function (callback) {
     let call = (data) => {
-        if (callback) {
-            callback(data);
-        };
+        if (callback) { callback(data); };
     };
     if (taskSiteLogicData) {
         call(taskSiteLogicData);
@@ -56,9 +52,7 @@ export var taskSiteLogic = function (callback) {
 
 export var taskSiteLocation = function (callback) {
     let call = (data) => {
-        if (callback) {
-            callback(data);
-        }
+        if (callback) { callback(data); }
     };
     if (taskSiteLocationData.length != 0) {
         call(taskSiteLocationData);
@@ -91,9 +85,7 @@ export var updatetaskSiteLogic = function (siteid, nextid, data, bool) {
                 return taskSiteLogicData[i] = data;
             }
         });
-        if (flag) {
-            return taskSiteLogicData.push(data);
-        }
+        if (flag) { taskSiteLogicData.push(data); }
     }
 }
 
@@ -135,8 +127,6 @@ export var updateTaskSiteRect = function (id, data, bool) {
                 return taskSiteRectData[i] = data;
             }
         });
-        if (flag) {
-            return taskSiteRectData.push(data)
-        }
+        if (flag) { taskSiteRectData.push(data); }
     }
 }

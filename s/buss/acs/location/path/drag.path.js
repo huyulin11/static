@@ -1,9 +1,8 @@
 import { getClosestPoint } from "/s/buss/acs/location/path/add.path.js";
 import { getMPoint } from "/s/buss/acs/location/path/render.d.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
+import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
-import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
 
 export var startedPath = function () {
     datas.init();
@@ -14,15 +13,15 @@ export var dragedPath = function () {
     var mPoint = getMPoint(s);
     d3.select(this)
         .attr("d", function (d) {
-            return dToStrig(mPoint[0], x, mPoint[1], y);
+            return pathTool.dPath(mPoint[0], x, mPoint[1], y);
         });
     d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
         .attr("d", function (d) {
-            return dToStrig(mPoint[0], x, mPoint[1], y);
+            return pathTool.dPath(mPoint[0], x, mPoint[1], y);
         })
     d3.select("#mar" + $(this).attr("from") + $(this).attr("to"))
         .attr("orient", function () {
-            return drawArrow(mPoint[0], x, mPoint[1], y);
+            return pathTool.markerRadian(mPoint[0], x, mPoint[1], y);
         })
 }
 export var endedPath = function () {
@@ -40,30 +39,30 @@ export var endedPath = function () {
             .attr("from", siteid)
             .attr("to", nextid)
             .attr("d", function (d) {
-                return dToStrig(x1, x2, y1, y2);
+                return pathTool.dPath(x1, x2, y1, y2);
             });
         d3.select("#w" + siteid + oldnext)
             .attr("id", "w" + siteid + nextid)
             .attr("d", function (d) {
-                return dToStrig(x1, x2, y1, y2);
+                return pathTool.dPath(x1, x2, y1, y2);
             });
         d3.select("#mar" + siteid + oldnext)
             .attr("orient", function () {
-                return drawArrow(x1, x2, y1, y2);
+                return pathTool.markerRadian(x1, x2, y1, y2);
             })
     } else {
         layer.msg('调整失败，与原路径相同');
         var xOld = parseFloat($('#' + oldnext).attr('cx'));
         var yOld = parseFloat($('#' + oldnext).attr('cy'));
         d3.select(this).attr("class", "clashLine").attr('d', function (d) {
-            return dToStrig(x1, xOld, y1, yOld);
+            return pathTool.dPath(x1, xOld, y1, yOld);
         });
         d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
             .attr("d", function (d) {
-                return dToStrig(x1, xOld, y1, yOld);
+                return pathTool.dPath(x1, xOld, y1, yOld);
             });
         d3.select("#mar" + $(this).attr("from") + $(this).attr("to")).attr("orient", function () {
-            return drawArrow(x1, xOld, y1, yOld);
+            return pathTool.markerRadian(x1, xOld, y1, yOld);
         });
     }
 }

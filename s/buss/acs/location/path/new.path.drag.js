@@ -1,9 +1,8 @@
 import { getClosestPoint } from "/s/buss/acs/location/path/add.path.js";
 import { getMPoint } from "/s/buss/acs/location/path/render.d.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { dToStrig } from "/s/buss/acs/location/path/path.direction.js";
+import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
-import { drawArrow } from "/s/buss/acs/location/path/radian.def.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 
 export var startedNewPath = function () {
@@ -19,7 +18,7 @@ export var dragedNewPath = function () {
     var mPoint = getMPoint(s);
     d3.select(this)
         .attr("d", function (d) {
-            return dToStrig(mPoint[0], x, mPoint[1], y);
+            return pathTool.dPath(mPoint[0], x, mPoint[1], y);
         });
 }
 export var endedNewPath = function () {
@@ -41,7 +40,7 @@ export var endedNewPath = function () {
             .attr("refX", 3)
             .attr("refY", 1)
             .attr("orient", function () {
-                return drawArrow(x1, x2, y1, y2);
+                return pathTool.markerRadian(x1, x2, y1, y2);
             })
         marker.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
         conf.pathHome1.append("path")
@@ -49,7 +48,7 @@ export var endedNewPath = function () {
             .attr("from", siteid)
             .attr("to", nextid)
             .attr("d", function (d) {
-                return dToStrig(x1, x2, y1, y2);
+                return pathTool.dPath(x1, x2, y1, y2);
             })
             .attr("class", "clashLine")
             .attr("fill", "none")

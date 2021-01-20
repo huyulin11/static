@@ -42,7 +42,7 @@ export var editLocationID = function (oldID, location, callback) {
         data: { oldID: oldID, newID: location.id, value: JSON.stringify(location) },
         success: () => {
             if (callback) { callback(); }
-            updateTaskSiteLocation(location.id, location);
+            updateTaskSiteLocation(oldID, location);
             datas.init();
         }
     });
