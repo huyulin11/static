@@ -27,7 +27,7 @@ export var drawRect = function (rectdata) {
             .attr('class', 'classRect')
             .attr('fill', '#e0e053')
             .attr('opacity', 0.5);
-        conf.rectHome.selectAll("text").data(rectdata)
+        conf.rectTextHome.selectAll("text").data(rectdata)
             .enter()
             .append('text')
             .attr('x', function (d) {

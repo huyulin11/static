@@ -30,7 +30,7 @@ export var setRect = function () {
         .attr('fill', '#e0e053')
         .attr('opacity', 0.5)
         .attr('buildname', '建筑');
-    conf.rectHome.append('text')
+    conf.rectTextHome.append('text')
         .attr('x', x)
         .attr('y', y + 30)
         .attr('id', 'retext' + id)

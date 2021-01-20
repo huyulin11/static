@@ -48,9 +48,6 @@ var dargR = function () {
     d3.select(this)
         .attr('x', x)
         .attr('y', y);
-    // d3.select('.dashRect')
-    //     .attr('x', x1 - width / 2)
-    //     .attr('y', y1 - height / 2);
     var point = [];
     point.push([1, x, y]);
     point.push([2, x + width, y]);
