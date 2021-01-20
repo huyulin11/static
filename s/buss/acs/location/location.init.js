@@ -39,6 +39,7 @@ confs.push({
         if (flag) {
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);
+            rectEvent(flag);
             layer.msg('编辑模式');
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
@@ -46,15 +47,14 @@ confs.push({
                 return pathTool.dPath(result1[0], result2[0], result1[1], result2[1]);
             });
             d3.selectAll('rect').style('cursor', 'move');
-            rectEvent(flag);
         } else {
             $(this).removeClass("open").addClass("close");
             mouseEvent(flag);
+            rectEvent(flag);
             layer.msg('查看模式');
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
-                rectEvent(flag);
                 d3.selectAll('rect').style('cursor', 'default');
                 d3.selectAll('.changeCircle').style('display', 'none');
                 if (!d.isDouble) {
