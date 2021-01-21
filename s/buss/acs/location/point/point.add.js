@@ -4,6 +4,7 @@ import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.
 import { addLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { drawPointId } from "/s/buss/acs/location/point/point.draw.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var getCircleID = function () {
     var ids = datas.id;
@@ -54,10 +55,11 @@ export var createPoint = function (x, y) {
     var location = tool.windowToDB(id, x, y);
     addLocation(location, () => {
         d3.select('#nct' + id).attr('id', 't' + id);
-        d3.select('#nc' + id).attr('id', id);
+        d3.select('#nc' + id).attr('id', 'c' + id);
         drawPointId(datas.udfPoints);
         dragPoint(true);
         rightClickPoint(true);
     });
+    undoStack.push({ 'name': 'circleadd', 'id': id, 'x': x, 'y': y })
 }
 

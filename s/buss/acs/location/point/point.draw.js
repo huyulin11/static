@@ -13,7 +13,7 @@ export function drawPoints(data) {
     circleEnter.append("circle")
         .transition().duration(800)
         .attr("id", function (d) {
-            return d[0];
+            return 'c' + d[0];
         }).attr("class", function (d) {
             return tool.inAgv(d, 1) ? "agv1" : "agv2";
         }).attr("cx", function (d) {
@@ -28,7 +28,7 @@ export function drawPoints(data) {
 
 export function drawNewPoint(id, x, y) {
     conf.pointHome.append("circle")
-        .attr("id", id)
+        .attr("id", 'c' + id)
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 6.5)
