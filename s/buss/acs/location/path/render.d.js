@@ -1,17 +1,17 @@
-export var getM = function (s) {
+var getM = function (s) {
     var m = s.indexOf('M');
     var l = s.indexOf('L');
     var M = s.substring(m, l);
     return M;
 };
 
-export var getL1 = function (s) {
+var getL1 = function (s) {
     var l1 = s.indexOf('L');
     var q = s.lastIndexOf('Q');
     return s.substring(l1, q);
 };
 
-export var getL2 = function (s) {
+var getL2 = function (s) {
     var l2 = s.lastIndexOf('L');
     return s.slice(l2);
 }
@@ -22,7 +22,7 @@ export var getMPoint = function (s) {
     var arr = [M.substring(1, num), M.slice(num + 1)];
     var a = parseFloat(arr[0]);
     var b = parseFloat(arr[1]);
-    return [a,b];
+    return [a, b];
 }
 
 export var getL1Point = function (s) {
@@ -31,7 +31,7 @@ export var getL1Point = function (s) {
     var arr = [L1.substring(1, num), L1.slice(num + 1)];
     var a = parseFloat(arr[0]);
     var b = parseFloat(arr[1]);
-    return [a,b];
+    return [a, b];
 }
 
 export var getL2Point = function (s) {
@@ -40,5 +40,5 @@ export var getL2Point = function (s) {
     var arr = [L2.substring(1, num), L2.slice(num + 1)];
     var a = parseFloat(arr[0]);
     var b = parseFloat(arr[1]);
-    return [a,b];
+    return [a, b];
 }

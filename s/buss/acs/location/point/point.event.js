@@ -1,9 +1,9 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
+import { updatePathWhenDragPoint, updatePathWhenUpdateID } from "/s/buss/acs/location/path/path.update.js";
 import { updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
-import { fillPointId } from "/s/buss/acs/location/point/point.draw.js";
-import { fillHome1, fillHome2, fillMarkerPath } from "/s/buss/acs/location/path/fillter.pathHome.js";
 
 export var event = {};
 
@@ -14,10 +14,8 @@ event.drag = function () {
     var id = $(this).attr('id');
     $(this).attr('cx', x)
         .attr('cy', y);
-    fillPointId(id, x, y);
-    fillHome1(id, x, y);
-    fillHome2(id, x, y);
-    fillMarkerPath(id, x, y);
+    updatePointId(id, x, y);
+    updatePathWhenDragPoint(id, x, y);
 }
 
 event.end = function (d) {
@@ -44,20 +42,7 @@ event.updateID = function (point) {
                     return newid
                 });
                 conf.pointTextHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
-                d3.selectAll("path")
-                    .filter(function (e) { return e && e.to == oldid; })
-                    .attr("id", function (d) {
-                        d.to = newid;
-                        return 'p' + d.from + newid;
-                    })
-                    .attr("to", newid);
-                d3.selectAll("path")
-                    .filter(function (e) { return e && e.from == oldid; })
-                    .attr("id", function (d) {
-                        d.from = newid;
-                        return 'p' + newid + d.to;
-                    })
-                    .attr("from", newid);
+                updatePathWhenUpdateID(oldid, newid);
             });
         }
     })

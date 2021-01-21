@@ -31,4 +31,17 @@ export var markerDef = function () {
         .attr("refY", 1)
         .attr("orient", "auto");
     marker2.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
-} 
+}
+
+export var addMarker = function (siteid, nextid, x1, x2, y1, y2) {
+    var marker = conf.defsHome.append("defs")
+        .append("marker")
+        .attr("id", "mar" + siteid + nextid)
+        .attr("markerUnits", "strokeWidth")
+        .attr("markerWidth", 2.5)
+        .attr("markerHeight", 2)
+        .attr("refX", 3)
+        .attr("refY", 1)
+        .attr("orient", pathTool.markerRadian(x1, x2, y1, y2));
+    marker.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
+}

@@ -1,5 +1,21 @@
 export var pathTool = {};
 
+pathTool.getSide = function (x1, x2, y1, y2) {
+    if (x1 < x2) {
+        if (y1 > y2) {
+            return 1;
+        } else if (y1 < y2) {
+            return 2;
+        }
+    } else if (x1 > x2) {
+        if (y1 > y2) {
+            return 2;
+        } else if (y1 < y2) {
+            return 1;
+        }
+    }
+}
+
 pathTool.markerRadian = function (x1, x2, y1, y2) {
     if (x1 >= x2 && y1 >= y2) {
         return arrowLeftUp(x1, x2, y1, y2);

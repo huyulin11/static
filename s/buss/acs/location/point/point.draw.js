@@ -58,7 +58,7 @@ var hidePointId = function () {
     conf.pointTextHome.selectAll("text").remove();
 }
 
-export var fillPointId = function (id, x, y) {
+export var updatePointId = function (id, x, y) {
     conf.pointTextHome.select("#t" + id)
         .attr("x", x + 7)
         .attr("y", y - 7);

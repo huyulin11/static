@@ -1,7 +1,7 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { drawPoints, drawPointId } from "/s/buss/acs/location/point/point.draw.js";
-import { drawPath } from "/s/buss/acs/location/path/draw.path.js";
+import { drawPath } from "/s/buss/acs/location/path/path.draw.js";
 import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 
 //绘制坐标轴  
