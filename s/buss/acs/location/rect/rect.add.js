@@ -10,7 +10,6 @@ export var addRect = function () {
     var id = getid();
     let x = event.offsetX,
         y = event.offsetY;
-    console.log(x + ',' + y);
     conf.rectHome.append("rect")
         .attr('x', x - 10)
         .attr('y', y - 10)
@@ -36,8 +35,10 @@ export var addRect = function () {
     addPoint(point);
 }
 
-export var dragRect = function (x, y) {
+export var dragRect = function () {
     var id = getid();
+    let x = event.offsetX,
+        y = event.offsetY;
     d3.select('#rect' + id)
         .attr('x', x - 10)
         .attr('y', y - 10);

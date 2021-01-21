@@ -15,27 +15,24 @@ var name;
 function imgStart() {
     datas.init();
     name = d3.select(this).attr('shapename');
-    if (name == "site") {
-        addSite();
-    } else if (name == "build") {
-        addRect();
+    switch (name) {
+        case 'site': addSite(); break;
+        case 'build': addRect(); break;
     }
 }
 
 function imgDrag() {
-    if (name == "site") {
-        dragSite();
-    } else if (name == "build") {
-        dragRect();
+    switch (name) {
+        case 'site': dragSite(); break;
+        case 'build': dragRect(); break;
     }
 }
 
 function imgEnd() {
     var x = event.offsetX;
     var y = event.offsetY;
-    if (name == "site") {
-        createPoint(x, y);
-    } else if (name == "build") {
-        newRect(x, y);
+    switch (name) {
+        case 'site': createPoint(x, y); break;
+        case 'build': newRect(x, y); break;
     }
 }
