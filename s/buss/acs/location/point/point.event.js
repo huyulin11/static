@@ -4,10 +4,19 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
 import { updatePathWhenDragPoint, updatePathWhenUpdateID } from "/s/buss/acs/location/path/path.update.js";
 import { updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var event = {};
-
-event.start = function () { }
+var flag = false;
+event.start = function () {
+    if (!flag) {
+        let id = $(this).attr('id'),
+            x = parseFloat($(this).attr('cx')),
+            y = parseFloat($(this).attr('cy'));
+        undoStack.push({ 'name': 'circledrag', 'id': id, 'x': x, 'y': y });
+        flag = true;
+    }
+}
 
 event.drag = function () {
     const { x, y } = d3.event;
@@ -23,6 +32,11 @@ event.end = function (d) {
     var id = $(this).attr('id');
     var location = tool.windowToDB(id, x, y);
     updateLocation(id, location);
+    var pop = undoStack.pop();
+    pop.xx = x;
+    pop.yy = y;
+    undoStack.push(pop);
+    flag = false;
 }
 
 event.updateID = function (point) {
