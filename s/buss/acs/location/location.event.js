@@ -49,7 +49,7 @@ var rightClickPath = function (flag) {
 
 var rightClickPointHandling = function (d, i) {
     if (d3.event.button == 2) {
-        var point = $(this);
+        var point = d3.select(this);
         var id = point.attr('id')
         var tips = layer.tips('<input type="button" id="edit" style="width: 76px;height: 30px" value="修改站点"><br>'
             + '<input type="button" id="addPath" style="width: 76px;height: 30px" value="新增路径"><br>'

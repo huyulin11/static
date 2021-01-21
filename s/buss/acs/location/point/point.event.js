@@ -39,17 +39,22 @@ event.updateID = function (point) {
         if (window.confirm(`确定将id：${oldid}修改为${newid}？`)) {
             var location = tool.windowToDB(newid, point.attr('cx'), point.attr('cy'));
             editLocationID(oldid, location, () => {
-                point.attr("id", newid);
+                point.attr("id", function (d) {
+                    d[0] = parseInt(newid);
+                    return newid
+                });
                 conf.pointTextHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
                 d3.selectAll("path")
                     .filter(function (e) { return e && e.to == oldid; })
                     .attr("id", function (d) {
+                        d.to = newid;
                         return 'p' + d.from + newid;
                     })
                     .attr("to", newid);
                 d3.selectAll("path")
                     .filter(function (e) { return e && e.from == oldid; })
                     .attr("id", function (d) {
+                        d.from = newid;
                         return 'p' + newid + d.to;
                     })
                     .attr("from", newid);
