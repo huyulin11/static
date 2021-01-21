@@ -11,7 +11,7 @@ event.start = function () { }
 
 event.drag = function () {
     const { x, y } = d3.event;
-    var id = $(this).attr('id').slice(1);
+    var id = $(this).attr('id');
     $(this).attr('cx', x)
         .attr('cy', y);
     fillPointId(id, x, y);
@@ -22,7 +22,7 @@ event.drag = function () {
 
 event.end = function (d) {
     const { x, y } = d3.event;
-    var id = $(this).attr('id').slice(1);
+    var id = $(this).attr('id');
     var location = tool.windowToDB(id, x, y);
     updateLocation(id, location);
 }
@@ -30,7 +30,7 @@ event.end = function (d) {
 event.updateID = function (point) {
     datas.init();
     layer.prompt({ title: '输入id', formType: 0 }, function (newid, index) {
-        var oldid = point.attr('id').slice(1);
+        var oldid = point.attr('id');
         for (var i of datas.id) {
             if (newid == i.id) { return layer.msg("存在相同站点，不予修改！"); }
         }
@@ -39,7 +39,7 @@ event.updateID = function (point) {
         if (window.confirm(`确定将id：${oldid}修改为${newid}？`)) {
             var location = tool.windowToDB(newid, point.attr('cx'), point.attr('cy'));
             editLocationID(oldid, location, () => {
-                point.attr("id", 'c' + newid);
+                point.attr("id", newid);
                 conf.pointTextHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
                 d3.selectAll("path")
                     .filter(function (e) { return e && e.to == oldid; })
@@ -59,7 +59,7 @@ event.updateID = function (point) {
 }
 
 event.delPoint = function (point) {
-    var id = point.attr('id').slice(1);
+    var id = point.attr('id');
     deleteLocation(id, () => {
         point.remove();
         conf.pointTextHome.select("#t" + id).remove();
