@@ -15,22 +15,18 @@ var name;
 function imgStart() {
     datas.init();
     name = d3.select(this).attr('shapename');
-    var x = d3.event.x;
-    var y = d3.event.y + 180;
     if (name == "site") {
-        addSite(x, y);
+        addSite();
     } else if (name == "build") {
         addRect();
     }
 }
 
 function imgDrag() {
-    var x = d3.event.x;
-    var y = d3.event.y + 180;
     if (name == "site") {
-        dragSite(x, y);
+        dragSite();
     } else if (name == "build") {
-        dragRect(x, y);
+        dragRect();
     }
 }
 

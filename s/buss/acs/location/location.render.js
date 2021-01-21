@@ -29,7 +29,7 @@ function drawAxis() {
 
 var render = function () {
     drawPoints(datas.udfPoints);
-    setTimeout(() => drawPoints(datas.udfPoints), 3000);
+    // setTimeout(() => drawPoints(datas.udfPoints), 3000);
     drawPointId(datas.udfPoints);
     drawPath(datas.path);
     drawRect(datas.rect);

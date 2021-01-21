@@ -4,6 +4,7 @@ import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.
 import { addLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { drawPointId } from "/s/buss/acs/location/point/point.draw.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var getCircleID = function () {
     var ids = datas.id;
@@ -21,8 +22,10 @@ export var getCircleID = function () {
     return id;
 }
 
-export var addSite = function (x, y) {
+export var addSite = function () {
     var id = getCircleID();
+    var x = event.offsetX;
+    var y = event.offsetY;
     conf.pointHome.append("circle")
         .attr("id", 'nc' + id)
         .attr("cx", x)
@@ -39,8 +42,10 @@ export var addSite = function (x, y) {
         .text('' + id);
 }
 
-export var dragSite = function (x, y) {
+export var dragSite = function () {
     var id = getCircleID();
+    var x = event.offsetX;
+    var y = event.offsetY;
     d3.select('#nc' + id)
         .attr('cx', x)
         .attr('cy', y);
@@ -59,5 +64,6 @@ export var createPoint = function (x, y) {
         dragPoint(true);
         rightClickPoint(true);
     });
+    undoStack.push({ 'name': 'circleadd', 'id': id, 'x': x, 'y': y })
 }
 
