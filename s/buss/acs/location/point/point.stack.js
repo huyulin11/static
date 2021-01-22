@@ -67,6 +67,6 @@ cirFunc.redoCircleAdd = function (pop, callback) {
         drawPointId(datas.udfPoints);
         dragPoint(true);
         rightClickPoint(true);
-        callback();
+        if (callback) { callback() };
     });
 }
