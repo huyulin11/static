@@ -10,7 +10,7 @@ export function drawPoints(data) {
     //     .duration(500).attr("r", 6.5);
 
     circleEnter.append("circle")
-        .transition().duration(1000)
+        // .transition().duration(3000)
         .attr("id", function (d) {
             return d[0];
         }).attr("class", function (d) {

@@ -5,6 +5,7 @@ import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
 import { updatePathWhenDragPoint, updatePathWhenUpdateID } from "/s/buss/acs/location/path/path.update.js";
 import { updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
+import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var event = {};
 var flag = false;
@@ -55,7 +56,7 @@ event.updateID = function (point) {
                     d[0] = parseInt(newid);
                     return newid
                 });
-                conf.pointTextHome.select("#t" + oldid).attr("id", "t" + newid).text(newid);
+                d3.select("#t" + oldid).attr("id", "t" + newid).text(newid);
                 updatePathWhenUpdateID(oldid, newid);
             });
         }
@@ -64,9 +65,20 @@ event.updateID = function (point) {
 
 event.delPoint = function (point) {
     var id = point.attr('id');
+    var x = point.attr('cx');
+    var y = point.attr('cy');
+    var pop = { 'id': id, 'x': x, 'y': y };
+    var path = [];
     deleteLocation(id, () => {
         point.remove();
         conf.pointTextHome.select("#t" + id).remove();
-        conf.svg.selectAll("path").filter(function (e) { return e && (e.from == id || e.to == id); }).remove();
+        var delPath = conf.svg.selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
+        delPath.attr('id', function (d) {
+            updatetaskSiteLogic(d.from, d.to, '', true);
+            path.push({ 'd': d });
+            return d.id;
+        });
+        undoStack.push({ 'name': 'circledel', 'circle': pop, 'path': path });
+        delPath.remove();
     });
 }

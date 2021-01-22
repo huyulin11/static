@@ -76,7 +76,6 @@ tool.randomColor = function () {
 
 tool.windowToDB = function (id, x, y) {
     var location = { "id": parseInt(id), "x": tool.xnumToDB(x), "y": tool.ynumToDB(y) };
-    console.log(location);
     return location;
 }
 

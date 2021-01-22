@@ -1,5 +1,6 @@
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
 
 export var deleteLogic = function (value, bool) {
     gf.doAjax({
@@ -8,11 +9,12 @@ export var deleteLogic = function (value, bool) {
         success: (obj) => {
             updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
             if (obj.msg) layer.msg(obj.msg);
+            datas.init();
         }
     });
 };
 
-export var saveLogic = function (side, siteid, nextid, oldnext) {
+export var saveLogic = function (side, siteid, nextid, oldnext, callback) {
     var json = {
         "TaskSiteLogicFormMap.siteid": siteid,
         "TaskSiteLogicFormMap.nextid": nextid,
@@ -21,7 +23,7 @@ export var saveLogic = function (side, siteid, nextid, oldnext) {
     };
     var json2 = {
         "siteid": parseInt(siteid),
-        "nextid": nextid,
+        "nextid": parseInt(nextid),
         "side": side,
         "distance": 1,
     };
@@ -31,5 +33,7 @@ export var saveLogic = function (side, siteid, nextid, oldnext) {
             var result = { "siteid": parseInt(siteid), "nextid": oldnext };
             deleteLogic(result, true);
         };
+        datas.init();
+        if (callback) { callback() };
     });
 };
