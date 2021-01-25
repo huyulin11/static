@@ -1,3 +1,5 @@
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
+
 export var changePathSize = function () {
     var sysTitle = d3.select('body').append('div')
         .attr('id', 'pbtnWidth')
@@ -21,8 +23,13 @@ export var changePathSize = function () {
         .attr('id', 'addPathWidth')
         .attr('style', 'display:inline;width:30px;height:10px;top:0px;float:right;')
         .text('+');
+    if (!localStorage.pathwidth) {
+        localStorage.pathwidth = 5;
+        d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
+    }
     d3.select('#addPathWidth').on('click', function () {
         if (localStorage.pathwidth < 13) {
+            undoStack.push({ 'size2': parseFloat(localStorage.pathwidth) + 0.5, 'name': 'pathchangesize', 'size': localStorage.pathwidth });
             localStorage.pathwidth = parseFloat(localStorage.pathwidth) + 0.5;
             d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
             d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });
@@ -32,6 +39,7 @@ export var changePathSize = function () {
     })
     d3.select('#delPathWidth').on('click', function () {
         if (localStorage.pathwidth > 1) {
+            undoStack.push({ 'size2': parseFloat(localStorage.pathwidth) - 0.5, 'name': 'pathchangesize', 'size1': localStorage.pathwidth });
             localStorage.pathwidth = parseFloat(localStorage.pathwidth) - 0.5;
             d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
             d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });
@@ -40,6 +48,7 @@ export var changePathSize = function () {
         }
     })
     d3.select('#resPathWidth').on('click', function () {
+        undoStack.push({ 'size2': 5, 'name': 'pathchangesize', 'size': localStorage.pathwidth });
         localStorage.pathwidth = 5;
         d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
         d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });

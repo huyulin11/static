@@ -20,6 +20,7 @@ export var keyFun = function () {
                 case 'circleupdate': cirFunc.undoCircleUpdate(pop); break;
                 case 'pathadd': pathFunc.undoPathAdd(pop.path); break;
                 case 'pathdrag': pathFunc.undoPathDrag(pop); break;
+                case 'pathchangesize': pathFunc.undoPathChangeSize(pop); break;
             };
         } else if (d3.event.ctrlKey == true && d3.event.keyCode == 89 && redoStackLenth > 0) {
             var pop = redoStack.pop();
@@ -31,6 +32,7 @@ export var keyFun = function () {
                 case 'circleupdate': cirFunc.redoCircleUpdate(pop); break;
                 case 'pathadd': pathFunc.redoPathAdd(pop.path); break;
                 case 'pathdrag': pathFunc.redoPathDrag(pop); break;
+                case 'pathchangesize': pathFunc.redoPathChangeSize(pop); break;
             }
         }
     })

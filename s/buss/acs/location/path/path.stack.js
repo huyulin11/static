@@ -13,6 +13,18 @@ import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js
 
 export var pathFunc = {};
 
+pathFunc.undoPathChangeSize = function (pop) {
+    localStorage.pathwidth = pop.size;
+    d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
+    d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });
+}
+
+pathFunc.redoPathChangeSize = function (pop) {
+    localStorage.pathwidth = pop.size2;
+    d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
+    d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });
+}
+
 pathFunc.undoPathDrag = function (pop) {
     let side = pop.path.side2,
         oldnext = pop.path.oldnext,
