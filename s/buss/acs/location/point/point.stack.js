@@ -11,11 +11,35 @@ import { pathFunc } from "/s/buss/acs/location/path/path.stack.js";
 export var cirFunc = {};
 
 cirFunc.undoCircleUpdate = function (pop) {
-
+    let oldid = pop.oldid,
+        newid = pop.value.id,
+        x = pop.value.x,
+        y = pop.value.y,
+        point = pop.point;
+    var location = tool.windowToDB(oldid, x, y);
+    editLocationID(newid, location, () => {
+        point.attr("id", function (d) {
+            d[0] = parseInt(oldid);
+            return oldid;
+        });
+        d3.select("#t" + newid).attr("id", "t" + oldid).text(oldid);
+        updatePathWhenUpdateID(newid, oldid);
+    });
 }
 
-cirFunc.redoCircleUpdate = function (id) {
-
+cirFunc.redoCircleUpdate = function (pop) {
+    let oldid = pop.oldid,
+        newid = pop.value.id,
+        location = pop.value,
+        point = pop.point;
+    editLocationID(oldid, location, () => {
+        point.attr("id", function (d) {
+            d[0] = parseInt(newid);
+            return newid
+        });
+        d3.select("#t" + oldid).attr("id", "t" + newid).text(newid);
+        updatePathWhenUpdateID(oldid, newid);
+    });
 }
 
 cirFunc.undoCircleDel = function (pop) {

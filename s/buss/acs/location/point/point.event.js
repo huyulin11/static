@@ -51,6 +51,7 @@ event.updateID = function (point) {
         layer.close(index);
         if (window.confirm(`确定将id：${oldid}修改为${newid}？`)) {
             var location = tool.windowToDB(newid, point.attr('cx'), point.attr('cy'));
+            undoStack.push({ 'name': 'circleupdate', 'value': location, 'oldid': oldid, 'point': point });
             editLocationID(oldid, location, () => {
                 point.attr("id", function (d) {
                     d[0] = parseInt(newid);
