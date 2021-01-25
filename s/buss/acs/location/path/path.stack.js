@@ -30,9 +30,10 @@ pathFunc.redoPathAdd = function (path) {
         nextid = path.to;
     var side = pathTool.getSide(x1, x2, y1, y2);
     saveLogic(side, siteid, nextid, '', () => {
-        addMarker(siteid, nextid, x1, x2, y1, y2);
+        // addMarker(siteid, nextid, x1, x2, y1, y2);
         drawPath(datas.path);
         dragPath(true);
         rightClickPath(true);
     });
 }
+

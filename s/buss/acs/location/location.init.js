@@ -11,6 +11,7 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
 import { changePathSize } from "/s/buss/acs/location/path/path.changesize.js";
+import { keyFun } from "/s/buss/acs/location/location.stack.js";
 
 let confs = [];
 initData();
@@ -35,7 +36,7 @@ confs.push({
     key: 'mouse', click: function () {
         let flag = $(this).hasClass("close");
         $('.open').attr('class', 'close hideToggle');
-        datas.init();
+        // datas.init();
         if (flag) {
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);
@@ -130,6 +131,7 @@ for (let i in datas.color) {
     }
 }
 
+keyFun();
 var leftShape = d3.select('#shape_panel')
     .attr('style', "top:80px;left:0px;position:fixed;height: 836px; width: 187px;");
 var basePictrue = leftShape.append('div')
