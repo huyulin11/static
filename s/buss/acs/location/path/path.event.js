@@ -3,6 +3,7 @@ import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { getClosestPoint } from "/s/buss/acs/location/path/path.event.add.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var event = {};
 
@@ -35,21 +36,29 @@ event.end = function () {
     if (!flag) {
         var x2 = point.x2, y2 = point.y2;
         var side = pathTool.getSide(x1, x2, y1, y2);
+        var path = { 'side': side, 'siteid': siteid, 'nextid': nextid, 'oldnext': oldnext };
+        undoStack.push({ 'name': 'pathdrag', 'path': path });
         saveLogic(side, siteid, nextid, oldnext);
         d3.select(this)
             .attr("id", "p" + siteid + nextid)
             .attr("from", siteid)
             .attr("to", nextid)
             .attr("d", function (d) {
+                d.to = nextid;
+                d.id = siteid + nextid;
                 return pathTool.dPath(x1, x2, y1, y2);
             });
-        d3.select("#w" + siteid + oldnext)
-            .attr("id", "w" + siteid + nextid)
-            .attr("d", function (d) {
-                return pathTool.dPath(x1, x2, y1, y2);
-            });
+        // d3.select("#w" + siteid + oldnext)
+        //     .attr("id", "w" + siteid + nextid)
+        //     .attr("d", function (d) {
+        //         console.log(22222222222222222222222);
+        //         console.log(d);
+        //         return pathTool.dPath(x1, x2, y1, y2);
+        //     });
         d3.select("#mar" + siteid + oldnext)
-            .attr("orient", function () {
+            .attr("orient", function (d) {
+                d.to = nextid;
+                d.id = siteid + nextid;
                 return pathTool.markerRadian(x1, x2, y1, y2);
             });
     } else {
