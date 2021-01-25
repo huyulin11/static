@@ -34,14 +34,15 @@ var dataLogic = function (data) {
 }
 
 var dataLocation = function (data) {
+    data.sort(function (a, b) { return a.id - b.id });
     for (var val of data) {
         datas.udfPoints.push([val.id, val.x, val.y]);
         datas.locations.push({ "id": val.id, "x": val.x, "y": val.y });
         datas.id.push({ "id": val.id });
         for (var logic of datas.logic) {
-            if (val.id === logic.siteid) {
+            if (val.id == logic.siteid) {
                 for (var next of data) {
-                    if (logic.nextid === next.id) {
+                    if (logic.nextid == next.id) {
                         datas.path.push({
                             "id": val.id + "" + next.id,
                             "from": val.id,

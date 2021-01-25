@@ -63,6 +63,7 @@ cirFunc.undoCircleAdd = function (id) {
 cirFunc.redoCircleAdd = function (pop, callback) {
     var value = tool.windowToDB(pop.id, pop.x, pop.y);
     addLocation(value, () => {
+        d3.select('#pointHome').selectAll('circle').remove();
         drawPoints(datas.udfPoints);
         drawPointId(datas.udfPoints);
         dragPoint(true);
