@@ -32,12 +32,15 @@ event.end = function () {
     const { x, y } = d3.event;
     var point = getClosestPoint(siteid, x, y);
     var nextid = point.nextid;
+    var xOld = parseFloat($('#' + oldnext).attr('cx'));
+    var yOld = parseFloat($('#' + oldnext).attr('cy'));
     var flag = $("#p" + siteid + nextid)[0];
     if (!flag) {
         var x2 = point.x2, y2 = point.y2;
         var side = pathTool.getSide(x1, x2, y1, y2);
-        var path = { 'side': side, 'siteid': siteid, 'nextid': nextid, 'oldnext': oldnext };
-        undoStack.push({ 'name': 'pathdrag', 'path': path });
+        var side2 = pathTool.getSide(x1, xOld, y1, yOld);
+        var path = { 'side2': side2, 'side1': side, 'siteid': siteid, 'nextid': nextid, 'oldnext': oldnext };
+        undoStack.push({ 'name': 'pathdrag', 'path': path, 'x1': x1, 'y1': y1 });
         saveLogic(side, siteid, nextid, oldnext);
         d3.select(this)
             .attr("id", "p" + siteid + nextid)
@@ -48,13 +51,6 @@ event.end = function () {
                 d.id = siteid + nextid;
                 return pathTool.dPath(x1, x2, y1, y2);
             });
-        // d3.select("#w" + siteid + oldnext)
-        //     .attr("id", "w" + siteid + nextid)
-        //     .attr("d", function (d) {
-        //         console.log(22222222222222222222222);
-        //         console.log(d);
-        //         return pathTool.dPath(x1, x2, y1, y2);
-        //     });
         d3.select("#mar" + siteid + oldnext)
             .attr("orient", function (d) {
                 d.to = nextid;
@@ -63,8 +59,6 @@ event.end = function () {
             });
     } else {
         layer.msg('调整失败，与原路径相同');
-        var xOld = parseFloat($('#' + oldnext).attr('cx'));
-        var yOld = parseFloat($('#' + oldnext).attr('cy'));
         d3.select(this).attr('d', function (d) {//应该可以用d优化
             return pathTool.dPath(x1, xOld, y1, yOld);
         });
