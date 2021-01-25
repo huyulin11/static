@@ -21,6 +21,7 @@ export var keyFun = function () {
                 case 'pathadd': pathFunc.undoPathAdd(pop.path); break;
                 case 'pathdrag': pathFunc.undoPathDrag(pop); break;
                 case 'pathchangesize': pathFunc.undoPathChangeSize(pop); break;
+                case 'pathdel': pathFunc.undoPathDel(pop.value); break;
             };
         } else if (d3.event.ctrlKey == true && d3.event.keyCode == 89 && redoStackLenth > 0) {
             var pop = redoStack.pop();
@@ -33,6 +34,7 @@ export var keyFun = function () {
                 case 'pathadd': pathFunc.redoPathAdd(pop.path); break;
                 case 'pathdrag': pathFunc.redoPathDrag(pop); break;
                 case 'pathchangesize': pathFunc.redoPathChangeSize(pop); break;
+                case 'pathdel': pathFunc.redoPathDel(pop.value); break;
             }
         }
     })

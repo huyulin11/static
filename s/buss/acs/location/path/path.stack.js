@@ -13,6 +13,52 @@ import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js
 
 export var pathFunc = {};
 
+pathFunc.undoPathDel = function (pop) {
+    let x1 = $('#' + pop.siteid).attr('cx'), y1 = $('#' + pop.siteid).attr('cy');
+    let x2 = $('#' + pop.nextid).attr('cx'), y2 = $('#' + pop.nextid).attr('cy');
+    var side = pathTool.getSide(x1, x2, y1, y2);
+    saveLogic(side, pop.siteid, pop.nextid, '', () => {
+        markerDef();
+        drawPath(datas.path);
+        dragPath(true);
+        rightClickPath(true);
+    });
+}
+
+pathFunc.redoPathDel = function (value) {
+    d3.select('#p' + value.siteid + value.nextid).remove();
+    d3.select('#w' + value.siteid + value.nextid).remove();
+    d3.select('#mar' + value.siteid + value.nextid).remove();
+    deleteLogic(value, true);
+}
+
+pathFunc.undoPathAdd = function (path) {
+    d3.select('#p' + path.id).remove();
+    d3.select('#w' + path.id).remove();
+    d3.select('#mar' + path.id).remove();
+    var value = { 'siteid': path.from, 'nextid': path.to };
+    deleteLogic(value, true);
+}
+
+pathFunc.redoPathAdd = function (path) {
+    var side = path.side;
+    if (!side) {
+        let x1 = path.leftXaxis,
+            y1 = path.downYaxis,
+            x2 = path.rightXaxis,
+            y2 = path.upYaxis;
+        side = pathTool.getSide(x1, x2, y1, y2);
+    }
+    let siteid = path.from,
+        nextid = path.to;
+    saveLogic(side, siteid, nextid, '', () => {
+        markerDef();
+        drawPath(datas.path);
+        dragPath(true);
+        rightClickPath(true);
+    });
+}
+
 pathFunc.undoPathChangeSize = function (pop) {
     localStorage.pathwidth = pop.size;
     d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
@@ -79,32 +125,5 @@ pathFunc.redoPathDrag = function (pop) {
                 return pathTool.markerRadian(x1, x2, y1, y2);
             });
     })
-}
-
-pathFunc.undoPathAdd = function (path) {
-    d3.select('#p' + path.id).remove();
-    d3.select('#w' + path.id).remove();
-    d3.select('#mar' + path.id).remove();
-    var value = { 'siteid': path.from, 'nextid': path.to };
-    deleteLogic(value, true);
-}
-
-pathFunc.redoPathAdd = function (path) {
-    var side = path.side;
-    if (!side) {
-        let x1 = path.leftXaxis,
-            y1 = path.downYaxis,
-            x2 = path.rightXaxis,
-            y2 = path.upYaxis;
-        side = pathTool.getSide(x1, x2, y1, y2);
-    }
-    let siteid = path.from,
-        nextid = path.to;
-    saveLogic(side, siteid, nextid, '', () => {
-        markerDef();
-        drawPath(datas.path);
-        dragPath(true);
-        rightClickPath(true);
-    });
 }
 

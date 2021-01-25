@@ -79,6 +79,7 @@ event.delPath = function (d, i) {
         var marPath = d3.select("#mar" + $(this).attr("from") + $(this).attr("to"));
         var siteid = $(this).attr('from'), nextid = $(this).attr('to');
         var value = { "siteid": siteid, "nextid": nextid };
+        undoStack.push({ 'name': 'pathdel', 'value': value });
         let ii = layer.confirm('是否删除？', function (index) {
             deleteLogic(value, true);
             path.remove();
