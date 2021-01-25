@@ -4,9 +4,10 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { getMPoint } from "/s/buss/acs/location/path/render.d.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
-import { addMarker } from "/s/buss/acs/location/path/path.marker.js";
-import { addPath } from "/s/buss/acs/location/path/path.draw.js";
+import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
+import { drawPath } from "/s/buss/acs/location/path/path.draw.js";
 import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var createPath = function (point) {
     var id = point.attr('id'), x = point.attr('cx'), y = point.attr('cy');
@@ -57,17 +58,18 @@ var end = function () {
     var nextid = point.nextid;
     var flag = $("#p" + siteid + nextid)[0];
     if (!flag) {
-        var oldnext = $(this).attr("to");
         let s = $(this).attr("d");
         var arr = getMPoint(s);
         var x1 = arr[0], y1 = arr[1];
         var x2 = point.x2, y2 = point.y2;
         var side = pathTool.getSide(x1, x2, y1, y2);
-        saveLogic(side, siteid, nextid, oldnext);
-        addMarker(siteid, nextid, x1, x2, y1, y2);
-        addPath(siteid, nextid, x1, x2, y1, y2);
-        dragPath(true);
-        rightClickPath(true);
+        undoStack.push({ 'name': 'pathadd', 'path': { 'id': siteid + nextid, 'from': siteid, 'to': nextid, 'side': side } });
+        saveLogic(side, siteid, nextid, '', () => {
+            markerDef();
+            drawPath(datas.path);
+            dragPath(true);
+            rightClickPath(true);
+        });
     } else {
         layer.msg('新增失败，该路径已存在！');
     }

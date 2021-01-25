@@ -3,6 +3,7 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 
 export var drawPath = function (data) {
+    conf.pathHome1.selectAll("path").remove();
     conf.pathHome1.selectAll("path").data(data)
         .enter().append("path")
         .attr("id", function (d) {
@@ -52,19 +53,4 @@ export var drawPath = function (data) {
     //     .attr("stroke", "#ffffff")
     //     .style("stroke-dasharray", "10, 7")
     //     .attr("stroke-width", "1px");
-}
-
-export var addPath = function (siteid, nextid, x1, x2, y1, y2) {
-    conf.pathHome1.append("path")
-        .attr("id", "p" + siteid + nextid)
-        .attr("class", "clashLine")
-        .attr("from", siteid)
-        .attr("to", nextid)
-        .attr("d", pathTool.dPath(x1, x2, y1, y2))
-        .attr("fill", "none")
-        .attr("stroke", "#8a8a8a")
-        .attr("stroke-width", function () { return localStorage.pathwidth })
-        .attr("style", function (d) {
-            return "marker-end:url(#mar" + siteid + nextid + ");"
-        });
 }
