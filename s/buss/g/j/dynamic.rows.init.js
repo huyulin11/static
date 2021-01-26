@@ -23,7 +23,7 @@ export var getItem = (data) => {
                     if (data && dic.key == data[item.key]) { value = dic.value; break; }
                 }
             }
-            itemDesc = `${item.name + ':' + value}`;
+            itemDesc = `${item.name + ':' + value}<br>`;
         } else {
             itemDesc += getInput(item, { data: data, value: value, serial: _serial, rtnhtml: true });
         }

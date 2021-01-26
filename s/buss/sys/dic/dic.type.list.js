@@ -1,16 +1,15 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
-import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
 	pagId: 'paging',
 	columns: [{
 		colkey: "dictype",
-		name: "类型",
+		name: "字典类型",
 	}, {
 		colkey: "remark",
-		name: "说明",
+		name: "备注",
 	}, {
 		colkey: "delflag",
 		name: "是否删除",
@@ -18,9 +17,8 @@ window.datagrid = dataGrid({
 			if (data == "1") {
 				$("tr[d-tree='" + rowdata.dtee + "']").css("color", "#dcdcdc");
 				return "已删除";
-			} else {
-				return "正常使用";
 			}
+			return "正常使用";
 		}
 	}, {
 		name: "操作",
@@ -30,7 +28,7 @@ window.datagrid = dataGrid({
 			}
 			var btns = "";
 			btns += `<button type='button' class='btn btn-info marR10 view' 
-						data-dictype='${rowdata.dictype}'>查看</button>`;
+						data-dictype='${rowdata.dictype}'>明细</button>`;
 			btns += "&nbsp;&nbsp;";
 			btns += `<button type='button' class='btn btn-info marR10 detail' 
 						data-dictype='${rowdata.dictype}'>维护数据</button>`;
@@ -64,9 +62,8 @@ $("#searchForm").on("submit", function () {
 	return false;
 });
 
-$("#add").on("click", function () {
-	add();
-});
+$("#add").on("click", function () { add(); });
+$("#del").on("click", function () { del(); });
 
 $("html").undelegate("button.view", "click");
 $("html").delegate("button.view", "click", function () {
@@ -86,30 +83,27 @@ $("html").delegate("button.mgr", "click", function () {
 	mgr(dictype);
 });
 
-$("#del").on("click", function () {
-	del();
-});
-function mgr(dictype) {
-	window.pageii = gflayer.open({
-		title: "明细",
-		type: 2,
-		content: '/s/buss/sys/dic/sysDicTypeEditUI.html?dictype=' + dictype
-	});
-}
-
-function detail(dictype) {
-	window.pageii = gflayer.open({
-		title: "明细",
-		type: 2,
-		content: '/s/buss/sys/dic/sysDicDataEditUI.html?dictype=' + dictype
-	});
-}
-
 function view(dictype) {
 	window.pageii = gflayer.open({
 		title: "明细",
 		type: 2,
 		content: '/s/buss/sys/dic/sysDicDataEditUI.html?dictype=' + dictype + '&model=VIEW'
+	});
+}
+
+function detail(dictype) {
+	window.pageii = gflayer.open({
+		title: "维护数据",
+		type: 2,
+		content: '/s/buss/sys/dic/sysDicDataEditUI.html?dictype=' + dictype
+	});
+}
+
+function mgr(dictype) {
+	window.pageii = gflayer.open({
+		title: "维护类型",
+		type: 2,
+		content: '/s/buss/sys/dic/sysDicTypeEditUI.html?dictype=' + dictype
 	});
 }
 
@@ -120,6 +114,7 @@ function add() {
 		content: '/s/buss/sys/dic/sysDicTypeEditUI.html'
 	});
 }
+
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {

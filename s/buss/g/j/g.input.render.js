@@ -3,6 +3,7 @@ import { gv } from "/s/buss/g/j/g.v.js";
 
 export var getInput = (item, option, datas) => {
     let _data, _defaultValue, _serial, _width, _class;
+    if (item.notnull === "false") { item.notnull = false; }
     if (option) { _data = option.data, _defaultValue = option.value, _serial = option.serial, _width = option.width, _class = option.class; } else { _defaultValue = item.defaultValue; }
     _defaultValue = _defaultValue ? _defaultValue : "";
     let id, name, label = item.name, readonly = item.readonly;
