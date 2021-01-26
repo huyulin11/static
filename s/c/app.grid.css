@@ -1,0 +1,67 @@
+.t_table::-webkit-scrollbar {
+	/*滚动条整体样式*/
+	width: 10px;
+	/*高宽分别对应横竖滚动条的尺寸*/
+	height: 10px;
+}
+
+.t_table::-webkit-scrollbar-thumb {
+	/*滚动条里面小方块*/
+	border-radius: 10px;
+	background-color: skyblue;
+	background-image: -webkit-linear-gradient(45deg,
+			rgba(255, 255, 255, 0.2) 25%,
+			transparent 25%,
+			transparent 50%,
+			rgba(255, 255, 255, 0.2) 50%,
+			rgba(255, 255, 255, 0.2) 75%,
+			transparent 75%,
+			transparent);
+}
+
+.t_table>table::-webkit-scrollbar-track {
+	/*滚动条里面轨道*/
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+	background: #ededed;
+	border-radius: 10px;
+}
+
+.t_table {
+	overflow-y: auto;
+	height: 460px;
+	border: 1px solid #DDDDDD;
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+.t_table>table {
+	overflow-y: auto;
+	max-width: 1900px;
+	min-width: 100%;
+	height: auto;
+	border: 1px solid #DDDDDD;
+}
+
+.t_table td{
+    padding-top: 5px;
+    margin-left: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-align: center;
+    height: 28px;
+    white-space: nowrap;
+}
+
+.t_table th{
+    padding-top: 5px;
+    margin-left: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-align: center;
+    height: 28px;
+    white-space: nowrap;
+}
+
+#table_head th{
+	white-space: nowrap;
+}

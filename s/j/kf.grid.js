@@ -37,7 +37,6 @@ var dataGrid = function (params) {
 
 	var render = function (jsonDatas) {
 		if (!_conf.simple) {
-			renderHead(_container);
 			if (!_conf.fenyeInTail) {
 				renderFenye(_container, jsonDatas);
 			}
@@ -49,35 +48,14 @@ var dataGrid = function (params) {
 			renderBody(_container, jsonDatas);
 		}
 		if (_conf.callback) { _conf.callback(); }
-		fixhead();
-	};
-
-	var renderHead = function (divid) {
-		if (!_conf.isFixed) { return; }
-		var table = tag("table");
-		table.id = "table_head";
-		table.className = "pp-list table table-striped table-bordered";
-		table.setAttribute("style", "margin-bottom: -3px;");
-		divid.appendChild(table);
-		var thead = tag('thead');
-		table.appendChild(thead);
-		var tr = tag('tr');
-		tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-		thead.appendChild(tr);
-		var th = tag('th'); hideNumber(th);
-		tr.appendChild(th);
-		var cth = tag('th'); hideCheckbox(cth);
-		if (!_conf.checkone) {
-			var chkbox = renderAllChkbox();
-			cth.appendChild(chkbox);
+		let scrollHandle = function (e) {
+			var scrollTop = this.scrollTop;
+			var style = this.querySelector('thead').style;
+			style.transform = 'translateY(' + scrollTop + 'px)';
+			if (scrollTop > 0) { style.background = "#f9f9f96b"; } else { style.background = ""; }
 		}
-		tr.appendChild(cth);
-		for (let oneColumn of _columns) {
-			var th = tag('th');
-			th.setAttribute("style", defaultItemCss(oneColumn));
-			th.innerHTML = name(oneColumn);
-			tr.appendChild(th);
-		};
+		$(_container).find(".t_table").on('scroll', scrollHandle);
+		fixhead();
 	};
 
 	var renderBody = function (divid, jsonDatas) {
@@ -98,8 +76,9 @@ var dataGrid = function (params) {
 		} else {
 			h = _conf.height;
 		}
-		tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;');
+		// tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;');
 		tdiv.className = "t_table";
+		tdiv.setAttribute("draggable", 'true');
 		divid.appendChild(tdiv);
 		var table2 = tag("table");
 		table2.id = "mytable";
@@ -112,9 +91,12 @@ var dataGrid = function (params) {
 		var jsonItems = _getValueByName(jsonDatas, _conf.records);
 
 		if (!_conf.isFixed) {
+			var thead = tag('thead');
+			table2.appendChild(thead);
 			var tr = tag('tr');
 			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-			tbody.appendChild(tr);
+			thead.appendChild(tr);
+
 			var th = tag('th'); hideNumber(th);
 			tr.appendChild(th);
 			var cth = tag('th'); hideCheckbox(cth);
