@@ -88,6 +88,7 @@ cirFunc.redoCircleAdd = function (pop, callback) {
     var value = tool.windowToDB(pop.id, pop.x, pop.y);
     addLocation(value, () => {
         d3.select('#pointHome').selectAll('circle').remove();
+        d3.select('#pointTextHome').selectAll("text").remove();
         drawPoints(datas.udfPoints);
         drawPointId(datas.udfPoints);
         dragPoint(true);
