@@ -4,6 +4,8 @@ import { datas } from "/s/buss/acs/location/location.data.js";
 import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
 import { mouseStyle, bankDefaultEvent } from "/s/buss/acs/location/rect/rect.event.js";
+import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var addRect = function () {
     var point = [];
@@ -49,12 +51,16 @@ export var dragRect = function () {
 
 export var newRect = function (x, y) {
     var id = getid();
-    crateRect(id, x - 10, y - 10, 20, 20);
-    bankDefaultEvent();
-    rightClickRect(true);
-    mouseStyle(true)
-    dragDashRect(true);
-    dragDashCircle(true);
+    undoStack.push({ 'name': 'rectadd', 'id': id, 'x': x - 10, 'y': y - 10 });
+    crateRect(id, x - 10, y - 10, 20, 20, () => {
+        drawRect(datas.rect);
+        bankDefaultEvent();
+        rightClickRect(true);
+        mouseStyle(true)
+        dragDashRect(true);
+        dragDashCircle(true);
+
+    });
 }
 
 var addPoint = function (point) {

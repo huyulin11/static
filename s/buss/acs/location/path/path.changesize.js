@@ -38,13 +38,13 @@ export var changePathSize = function () {
         }
     })
     d3.select('#delPathWidth').on('click', function () {
-        if (localStorage.pathwidth > 1) {
+        if (localStorage.pathwidth > 3.5) {
             undoStack.push({ 'size2': parseFloat(localStorage.pathwidth) - 0.5, 'name': 'pathchangesize', 'size1': localStorage.pathwidth });
             localStorage.pathwidth = parseFloat(localStorage.pathwidth) - 0.5;
             d3.select('#numPathWidth').text(localStorage.pathwidth + 'px');
             d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });
         } else {
-            d3.select('#numPathWidth').text('下限1PX');
+            d3.select('#numPathWidth').text('下限3.5PX');
         }
     })
     d3.select('#resPathWidth').on('click', function () {

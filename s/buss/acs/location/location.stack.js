@@ -1,5 +1,6 @@
 import { cirFunc } from "/s/buss/acs/location/point/point.stack.js";
 import { pathFunc } from "/s/buss/acs/location/path/path.stack.js";
+import { rectFunc } from "/s/buss/acs/location/rect/rect.stack.js";
 
 export var undoStack = [];
 export var redoStack = [];
@@ -22,6 +23,9 @@ export var keyFun = function () {
                 case 'pathdrag': pathFunc.undoPathDrag(pop); break;
                 case 'pathchangesize': pathFunc.undoPathChangeSize(pop); break;
                 case 'pathdel': pathFunc.undoPathDel(pop.value); break;
+                case 'rectadd': rectFunc.undoRectAdd(pop); break;
+                case 'rectdel': rectFunc.undoRectDel(pop.rect); break;
+                case 'rectedit': rectFunc.undoRectEdit(pop.rect); break;
             };
         } else if (d3.event.ctrlKey == true && d3.event.keyCode == 89 && redoStackLenth > 0) {
             var pop = redoStack.pop();
@@ -35,6 +39,9 @@ export var keyFun = function () {
                 case 'pathdrag': pathFunc.redoPathDrag(pop); break;
                 case 'pathchangesize': pathFunc.redoPathChangeSize(pop); break;
                 case 'pathdel': pathFunc.redoPathDel(pop.value); break;
+                case 'rectadd': rectFunc.redoRectAdd(pop); break;
+                case 'rectdel': rectFunc.redoRectDel(pop.rect); break;
+                case 'rectedit': rectFunc.redoRectEdit(pop.rect); break;
             }
         }
     })

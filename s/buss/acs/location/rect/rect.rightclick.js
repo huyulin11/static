@@ -1,6 +1,7 @@
 import { delRect, editBuildName } from "/s/buss/acs/location/url/rect.url.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var rightClickRect = function (flag) {
     if (flag) {
@@ -22,23 +23,25 @@ export var rightClickRect = function (flag) {
                     d3.select("body").on("click", function () {
                         return layer.close(tips);
                     });
+                    var key = id.slice(4);
                     d3.select("#btn1").on("click", function () {
-                        var key = id.slice(4);
                         layer.prompt(function (val, index) {
                             layer.msg('建筑名修改为' + val);
-                            d3.select('#retext' + key).text(val);
                             var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': val };
+                            d3.select('#retext' + key).text(val);
+                            undoStack.push({ 'name': 'rectedit', 'rect': value });
                             editBuildName(key, value);
                             layer.close(index);
                             d3.selectAll('.changeCircle').style('display', 'none');
                         });
                     });
                     d3.select("#btn2").on("click", function () {
-                        var key = id.slice(4);
-                        rect.remove();
-                        d3.select("#retext" + key).remove();
-                        delRect(key);
-                        d3.selectAll('#dashC' + key).remove();
+                        undoStack.push({ 'name': 'rectdel', 'rect': rect.data()[0] });
+                        delRect(key, () => {
+                            rect.remove();
+                            d3.select("#retext" + key).remove();
+                            d3.selectAll('#dashC' + key).remove();
+                        });
                     });
                 }
             });
