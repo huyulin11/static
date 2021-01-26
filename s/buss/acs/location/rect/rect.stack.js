@@ -1,29 +1,65 @@
 import { crateRect, delRect, editBuildName } from "/s/buss/acs/location/url/rect.url.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
-import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
-import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
-import { mouseStyle, bankDefaultEvent } from "/s/buss/acs/location/rect/rect.event.js";
 import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export var rectFunc = {};
 
-rectFunc.undoRectEdit = function (rect) {
+rectFunc.undoRectChangeSize = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        drawRect(datas.rect);
+    })
+}
 
+rectFunc.redoRectChangeSize = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        drawRect(datas.rect);
+    })
+}
+
+rectFunc.undoRectChangeLocation = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        drawRect(datas.rect);
+    })
+}
+
+rectFunc.redoRectChangeLocation = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        drawRect(datas.rect);
+    })
+}
+
+rectFunc.undoRectEdit = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        d3.select('#retext' + rect.id).text(rect.buildname);
+        d3.selectAll('.changeCircle').style('display', 'none');
+    })
 }
 
 rectFunc.redoRectEdit = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        d3.select('#retext' + rect.id).text(rect.buildname);
+        d3.selectAll('.changeCircle').style('display', 'none');
+    })
+}
 
+rectFunc.undoRectEdit = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        d3.select('#retext' + rect.id).text(rect.buildname);
+        d3.selectAll('.changeCircle').style('display', 'none');
+    })
+}
+
+rectFunc.redoRectEdit = function (rect) {
+    editBuildName(rect.id, rect, () => {
+        d3.select('#retext' + rect.id).text(rect.buildname);
+        d3.selectAll('.changeCircle').style('display', 'none');
+    })
 }
 
 rectFunc.undoRectDel = function (rect) {
     crateRect(rect.id, tool.xnumToWindow(rect.x), tool.ynumToWindow(rect.y), rect.width, rect.height, () => {
         drawRect(datas.rect);
-        bankDefaultEvent();
-        rightClickRect(true);
-        mouseStyle(true)
-        dragDashRect(true);
-        dragDashCircle(true);
     }, rect.buildname);
 }
 
@@ -46,10 +82,5 @@ rectFunc.undoRectAdd = function (pop) {
 rectFunc.redoRectAdd = function (pop) {
     crateRect(pop.id, pop.x, pop.y, 20, 20, () => {
         drawRect(datas.rect);
-        bankDefaultEvent();
-        rightClickRect(true);
-        mouseStyle(true)
-        dragDashRect(true);
-        dragDashCircle(true);
     });
 }

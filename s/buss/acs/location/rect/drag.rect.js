@@ -2,6 +2,7 @@ import { datas } from "/s/buss/acs/location/location.data.js";
 import { editBuildName } from "/s/buss/acs/location/url/rect.url.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { dragDashPoint1, dragDashPoint2, dragDashPoint3, dragDashPoint4 } from "/s/buss/acs/location/rect/drag.dash.point.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var dragDashRect = function (flag) {
     if (flag) {
@@ -70,7 +71,9 @@ var endR = function () {
         height = parseFloat($(this).attr('height')),
         buildName = $(this).attr('buildname');
     var key = id;
-    var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName }
+    var data = d3.select(this).data()[0];
+    var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName };
+    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': data });
     editBuildName(key, value);
 }
 
@@ -129,7 +132,9 @@ var endC = function () {
         width = parseFloat($('#rect' + key).attr('width')),
         height = parseFloat($('#rect' + key).attr('height')),
         buildName = $('#rect' + key).attr('buildname');
-    var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName }
+    var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName };
+    var data = d3.select('#rect' + key).data()[0];
+    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': data });
     editBuildName(key, value);
     var target = $(this).attr('direction');
     if (target == 1 || target == 4) {

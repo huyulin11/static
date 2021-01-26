@@ -24,19 +24,20 @@ export var rightClickRect = function (flag) {
                         return layer.close(tips);
                     });
                     var key = id.slice(4);
+                    var data = rect.data()[0];
                     d3.select("#btn1").on("click", function () {
                         layer.prompt(function (val, index) {
                             layer.msg('建筑名修改为' + val);
                             var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': val };
+                            undoStack.push({ 'name': 'rectedit', 'newrect': value, 'oldrect': data });
                             d3.select('#retext' + key).text(val);
-                            undoStack.push({ 'name': 'rectedit', 'rect': value });
                             editBuildName(key, value);
                             layer.close(index);
                             d3.selectAll('.changeCircle').style('display', 'none');
                         });
                     });
                     d3.select("#btn2").on("click", function () {
-                        undoStack.push({ 'name': 'rectdel', 'rect': rect.data()[0] });
+                        undoStack.push({ 'name': 'rectdel', 'rect': data });
                         delRect(key, () => {
                             rect.remove();
                             d3.select("#retext" + key).remove();

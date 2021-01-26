@@ -25,7 +25,9 @@ export var keyFun = function () {
                 case 'pathdel': pathFunc.undoPathDel(pop.value); break;
                 case 'rectadd': rectFunc.undoRectAdd(pop); break;
                 case 'rectdel': rectFunc.undoRectDel(pop.rect); break;
-                case 'rectedit': rectFunc.undoRectEdit(pop.rect); break;
+                case 'rectedit': rectFunc.undoRectEdit(pop.oldrect); break;
+                case 'rectchangeloacation': rectFunc.undoRectChangeLocation(pop.oldrect); break;
+                case 'rectchangesize': rectFunc.undoRectChangeSize(pop.oldrect); break;
             };
         } else if (d3.event.ctrlKey == true && d3.event.keyCode == 89 && redoStackLenth > 0) {
             var pop = redoStack.pop();
@@ -41,7 +43,9 @@ export var keyFun = function () {
                 case 'pathdel': pathFunc.redoPathDel(pop.value); break;
                 case 'rectadd': rectFunc.redoRectAdd(pop); break;
                 case 'rectdel': rectFunc.redoRectDel(pop.rect); break;
-                case 'rectedit': rectFunc.redoRectEdit(pop.rect); break;
+                case 'rectedit': rectFunc.redoRectEdit(pop.newrect); break;
+                case 'rectchangeloacation': rectFunc.redoRectChangeLocation(pop.newrect); break;
+                case 'rectchangesize': rectFunc.redoRectChangeSize(pop.newrect); break;
             }
         }
     })
