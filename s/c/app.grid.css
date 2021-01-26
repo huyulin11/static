@@ -8,7 +8,7 @@
 .t_table::-webkit-scrollbar-thumb {
 	/*滚动条里面小方块*/
 	border-radius: 10px;
-	background-color: skyblue;
+	background-color: #2e72ab;
 	background-image: -webkit-linear-gradient(45deg,
 			rgba(255, 255, 255, 0.2) 25%,
 			transparent 25%,
@@ -36,9 +36,9 @@
 
 .t_table>table {
 	overflow-y: auto;
-	max-width: 1900px;
-	min-width: 100%;
-	height: auto;
+	/* max-width: 1900px; */
+	/* min-width: 100%; */
+	/* height: auto; */
 	border: 1px solid #DDDDDD;
 }
 
