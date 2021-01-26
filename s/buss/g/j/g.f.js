@@ -1,8 +1,6 @@
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { globalCss } from "/s/buss/g/j/g.css.js";
 
-globalCss();
-
 var defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
@@ -488,4 +486,7 @@ class GF {
 
 var gf = new GF();
 window.gf = gf;
+
+globalCss();
+
 export { gf };
