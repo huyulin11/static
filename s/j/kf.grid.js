@@ -48,13 +48,15 @@ var dataGrid = function (params) {
 			renderBody(_container, jsonDatas);
 		}
 		if (_conf.callback) { _conf.callback(); }
-		let scrollHandle = function (e) {
-			var scrollTop = this.scrollTop;
-			var style = this.querySelector('thead').style;
-			style.transform = 'translateY(' + scrollTop + 'px)';
-			if (scrollTop > 0) { style.background = "#f9f9f96b"; } else { style.background = ""; }
+		if (_conf.isFixed) {
+			let scrollHandle = function (e) {
+				var scrollTop = this.scrollTop;
+				var style = this.querySelector('thead').style;
+				style.transform = 'translateY(' + scrollTop + 'px)';
+				if (scrollTop > 0) { style.background = "#f9f9f96b"; } else { style.background = ""; }
+			}
+			$(_container).find(".t_table").on('scroll', scrollHandle);
 		}
-		$(_container).find(".t_table").on('scroll', scrollHandle);
 		fixhead();
 	};
 
@@ -63,16 +65,7 @@ var dataGrid = function (params) {
 		var h = '';
 		var xy = "hidden";
 		if (_conf.height == "100%") {
-			if (!_conf.isFixed) {
-				h = "auto";
-			} else {
-				xy = "auto";
-				h = $(window).height() - $("#table_head").offset().top - $('#table_head').find('th:last').eq(0).height();
-				if (_conf.usePage) {
-					h -= 55;
-				}
-				h += "px";
-			}
+			h = "auto";
 		} else {
 			h = _conf.height;
 		}
@@ -89,28 +82,26 @@ var dataGrid = function (params) {
 		table2.appendChild(tbody);
 		var jsonItems = _getValueByName(jsonDatas, _conf.records);
 
-		if (!_conf.isFixed) {
-			var thead = tag('thead');
-			table2.appendChild(thead);
-			var tr = tag('tr');
-			tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
-			thead.appendChild(tr);
+		var thead = tag('thead');
+		table2.appendChild(thead);
+		var tr = tag('tr');
+		tr.setAttribute("style", "line-height:" + _conf.tbodyHeight + ";");
+		thead.appendChild(tr);
 
-			var th = tag('th'); hideNumber(th);
-			tr.appendChild(th);
-			var cth = tag('th'); hideCheckbox(cth);
-			if (!_conf.checkone) {
-				var chkbox = renderAllChkbox();
-				cth.appendChild(chkbox);
-			}
-			tr.appendChild(cth);
-			for (let oneColumn of _columns) {
-				var th = tag('th');
-				th.setAttribute("style", defaultItemCss(oneColumn));
-				th.innerHTML = name(oneColumn);
-				tr.appendChild(th);
-			};
+		var th = tag('th'); hideNumber(th);
+		tr.appendChild(th);
+		var cth = tag('th'); hideCheckbox(cth);
+		if (!_conf.checkone) {
+			var chkbox = renderAllChkbox();
+			cth.appendChild(chkbox);
 		}
+		tr.appendChild(cth);
+		for (let oneColumn of _columns) {
+			var th = tag('th');
+			th.setAttribute("style", defaultItemCss(oneColumn));
+			th.innerHTML = name(oneColumn);
+			tr.appendChild(th);
+		};
 
 		$.each(jsonItems, function (indexNum) {
 			var rowdata = jsonItems[indexNum];

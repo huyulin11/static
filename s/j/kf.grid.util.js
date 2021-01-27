@@ -7,7 +7,7 @@ var _defaultConf = {
     tbodyHeight: '27px',// 表格body的每一行高度
     jsonUrl: '', // 访问后台地址
     jsonColumn: 'json',
-    isFixed: false,//是否固定表头
+    isFixed: true,//是否固定表头
     usePage: true,
     serNumber: false,// 是否显示序号
     records: 'records',// 分页数据
