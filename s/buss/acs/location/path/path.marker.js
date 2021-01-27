@@ -5,8 +5,8 @@ import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 
 export var markerDef = function () {
     conf.defsHome.select('defs').remove();
-    var defs = conf.defsHome.append("defs").attr('id', 'defs1');
-    var marker1 = defs.selectAll("marker").data(datas.path)
+    var defs1 = conf.defsHome.append("defs").attr('id', 'defs1');
+    var marker1 = defs1.selectAll("marker").data(datas.path)
         .enter().append("marker")
         .attr("id", function (d) {
             return "mar" + d.id;
@@ -23,7 +23,8 @@ export var markerDef = function () {
         });
     marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
 
-    var marker2 = defs.append("marker")
+    var defs2 = conf.defsHome.append("defs").attr('id', 'defs2');
+    var marker2 = defs2.append("marker")
         .attr("id", "triangle2")
         .attr("markerUnits", "strokeWidth")
         .attr("markerWidth", 2.5)
