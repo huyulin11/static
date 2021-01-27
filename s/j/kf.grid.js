@@ -78,7 +78,6 @@ var dataGrid = function (params) {
 		}
 		// tdiv.setAttribute("style", 'overflow-y: ' + xy + '; overflow-x: ' + xy + '; height: ' + h + '; border: 1px solid #DDDDDD;');
 		tdiv.className = "t_table";
-		tdiv.setAttribute("draggable", 'true');
 		divid.appendChild(tdiv);
 		var table2 = tag("table");
 		table2.id = "mytable";
