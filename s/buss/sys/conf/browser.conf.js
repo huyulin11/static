@@ -32,7 +32,7 @@ $("#paging").delegate(".edit", "click", function (e) {
     let item = $(this).data("item");
     let fresh = $(this).data("fresh");
     let targetVal = $(this).parents("td").find("input#item").val();
-    if (localStorage[item] == targetVal) { gflayer.parentMsg("名称无修改！"); return; }
+    if (localStorage[item] == targetVal) { gflayer.parentMsg("无修改！"); return; }
     if (window.confirm(`确认修改(确认后页面将全部刷新)？`)) {
         localStorage[item] = targetVal;
         gflayer.parentMsg("修改完成！");
