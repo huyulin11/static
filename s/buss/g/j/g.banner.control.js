@@ -38,11 +38,11 @@ export let renderModel = (confs) => {
 let _initReady = (key, url, position) => {
     let eleContainer = $(`<div id="${key}Container" class="fixed"></div>`);
     $(eleContainer).append(`<iframe id='${key}Frame' class='frameInContainer'></iframe>`);
-    $(eleContainer).css("height", position.height || "50%").css("width", position.width || "80%")
-        .css("top", position.top || "auto")
-        .css("bottom", position.bottom || "auto")
-        .css("left", position.left || "auto")
-        .css("right", position.right || "auto");
+    $(eleContainer).css("height", position.height || "50%").css("width", position.width || "80%");
+    if (position.top) $(eleContainer).css("top", position.top);
+    if (position.bottom) $(eleContainer).css("bottom", position.bottom);
+    if (position.left) $(eleContainer).css("left", position.left);
+    if (position.right) $(eleContainer).css("right", position.right);
     $(eleContainer).find(`iframe#${key}Frame`).attr("src", url).attr("frameborder", "no");
     $("body").append(eleContainer);
 }
