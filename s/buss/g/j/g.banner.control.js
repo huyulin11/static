@@ -49,6 +49,7 @@ let _initReady = (key, url, position) => {
 
 let _doRenderModel = (conf, container) => {
     let { init, whenInit, key, target, click, url, self, type, width, height, position } = conf;
+    if (!position) position = {};
     if (!container) { container = _container(conf); }
     if (type === 'LINK' || type === 'LAYER') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
