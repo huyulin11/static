@@ -11,21 +11,27 @@
     <meta http-equiv="content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="/s/i/ico/calculatedfun.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" href="/s/c/agv.mgr.css">
+    <link type="text/css" rel="stylesheet" href="/s/c/app.all.css" />
+    <script src="/s/j/jquery-1.12.2.min.js"></script>
+    <script src="/s/j/jquery/jquery.form.js"></script>
+    <script src="/s/j/layer/v3.1.3/layer.js"></script>
+    <script src="/s/j/jquery.toJSON.js"></script>
+    <script src="/s/j/jquery.format.js"></script>
+    <style>
+        .t_table {
+            height: auto;
+            overflow-y: hidden;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="rootContainer" class="rf-op">
-        <h2>RF主界面</h2>
+    <div class="doc-buttons">
     </div>
-    <script src="/s/j/jquery-1.12.2.min.js"></script>
-    <script src="/s/j/layer/v3.1.3/layer.js"></script>
-    <script type="module">
-        import { initRf } from "/s/buss/wms/rf/j/rf.main.js";
-        initRf();
-        import "/s/buss/sys/conf/browser.conf.g.js";
-    </script>
+    <div class="table-responsive">
+        <div id="paging" class="pagclass"></div>
+    </div>
 </body>
+<script type="module" src="/s/buss/sys/conf/browser.conf.js"></script>
 
 </html>

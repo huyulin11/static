@@ -1,6 +1,11 @@
 /**只对系统整体样式做控制，细节样式到css文件中定义**/
 export let globalCss = (target) => {
     let csss = [];
+    if (localStorage.gridHeight) {
+        csss.push(
+            { name: ".t_table", content: { "height": localStorage.gridHeight + "px" } },
+        );
+    }
     if (localStorage.projectKey == 'BJJK_HUIRUI') {
         csss.push(
             { name: "body", content: { "color": "#333" } },

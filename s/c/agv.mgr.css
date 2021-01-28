@@ -86,44 +86,6 @@ select {
 	text-align: center;
 }
 
-.hideToggle {
-	cursor: pointer;
-	width: 40px;
-	display: table-cell;
-	height: 48px;
-}
-
-#topCtrlContainer {
-	position: fixed;
-	right: 10px;
-	top: 10px;
-	background: #ffffffb3;
-	border-radius: 10px;
-	box-shadow: #d9d9d9 10px 10px 30px 10px;
-}
-
-#bottomCtrlContainer {
-	position: fixed;
-	left: 10px;
-	bottom: 10px;
-	background: #ffffffb3;
-	border-radius: 10px;
-	box-shadow: #d9d9d9 10px 10px 30px 10px;
-}
-
-.frameInContainer{
-	height:100%;
-	width: 100%;
-	border-radius: 10px;
-}
-
-.close,
-.open {
-	background-size: 75%;
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
 .withBorder {
 	border: 1px dotted #f7f7f7;
 }
@@ -148,20 +110,6 @@ input.bigSearch {
 	font-size: 16px;
 	border: #cac5c5 1px solid;
 	border-radius: 9px;
-}
-
-.fixed {
-	position: fixed;
-	display: none;
-	right: 1%;
-	top: 65px;
-	background: #fff;
-	width: auto;
-	box-shadow: grey 10px 10px 30px 5px;
-	z-index: 1;
-	border-radius: 10px;
-	align-items: center;
-	text-align: center;
 }
 
 #agvDiv.big {

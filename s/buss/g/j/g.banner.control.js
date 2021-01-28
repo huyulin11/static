@@ -1,4 +1,7 @@
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
+import { gf } from "/s/buss/g/j/g.f.js";
+
+gf.quote("/s/c/app.banner.ctrl.css");
 
 let initEventFlag = false;
 
@@ -32,16 +35,20 @@ export let renderModel = (confs) => {
     }
 }
 
-let _initReady = (key, url, width, height) => {
+let _initReady = (key, url, position) => {
     let eleContainer = $(`<div id="${key}Container" class="fixed"></div>`);
     $(eleContainer).append(`<iframe id='${key}Frame' class='frameInContainer'></iframe>`);
-    $(eleContainer).css("height", height || "50%").css("width", width || "80%");
+    $(eleContainer).css("height", position.height || "50%").css("width", position.width || "80%")
+        .css("top", position.top || "auto")
+        .css("bottom", position.bottom || "auto")
+        .css("left", position.left || "auto")
+        .css("right", position.right || "auto");
     $(eleContainer).find(`iframe#${key}Frame`).attr("src", url).attr("frameborder", "no");
     $("body").append(eleContainer);
 }
 
 let _doRenderModel = (conf, container) => {
-    let { init, whenInit, key, target, click, url, self, type, width, height } = conf;
+    let { init, whenInit, key, target, click, url, self, type, width, height, position } = conf;
     if (!container) { container = _container(conf); }
     if (type === 'LINK' || type === 'LAYER') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
@@ -56,7 +63,9 @@ let _doRenderModel = (conf, container) => {
         if (init instanceof Function) {
             init();
         } else {
-            _initReady(key, url, width, height);
+            if (width) { position.width = width; }
+            if (height) { position.height = height; }
+            _initReady(key, url, position);
         }
     }
     let style = $(`<style id='${key}HideDiv_style'></style>`);

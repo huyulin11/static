@@ -180,6 +180,7 @@ var dataGrid = function (params) {
 		var totalRecords = _getValueByName(jsonDatas, _conf.totalRecords);
 		var totalPages = _getValueByName(jsonDatas, _conf.totalPages);
 		var pageNow = _getValueByName(jsonDatas, _conf.pageNow);
+		if (!(totalRecords && totalPages)) { return; }
 		var bdiv = tag("div");
 		bdiv.setAttribute("style", _focusCss);
 

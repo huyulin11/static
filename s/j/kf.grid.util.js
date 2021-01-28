@@ -199,8 +199,18 @@ var checkItem = function (rowdata) {
 }
 
 let _flag = false;
-var jsonRequest = function (conf, callback) {
+var jsonRequest = function (conf, renderDatas) {
     if (_flag) return;
+    let initJsonDatas = conf.jsonDatas;
+    if (initJsonDatas) {
+        if (initJsonDatas instanceof Array) {
+            initJsonDatas = {
+                records: initJsonDatas
+            };
+        }
+        renderDatas(initJsonDatas);
+        return;
+    }
     _flag = true;
     $.ajax({
         type: 'POST',
@@ -209,7 +219,7 @@ var jsonRequest = function (conf, callback) {
         url: conf.jsonUrl,
         dataType: 'json',
         success: function (jsonDatas) {
-            if (jsonDatas) { callback(jsonDatas); }
+            if (jsonDatas) { renderDatas(jsonDatas); }
             _flag = false;
         },
         error: function (msg) {
