@@ -1,6 +1,6 @@
-export var dicdata = (dictypeStr, callback) => {
+export var dicdata = (url, callback) => {
     $.ajax({
-        url: '/sys/dic/data/findByPage.shtml?sysDicDataFormMap.dictype=' + dictypeStr,
+        url: url,
         async: false,
         type: 'GET',
         dataType: 'json',

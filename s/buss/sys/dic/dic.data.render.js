@@ -1,6 +1,6 @@
 import "/s/j/vue/vue.min.js";
 import { initRows } from "/s/buss/g/j/dynamic.rows.init.js";
-import { submitForm } from "/s/buss/g/j/dynamic.rows.add.js";
+import { submitForm, setTableSuffix, table_suffix } from "/s/buss/g/j/dynamic.rows.add.js";
 import { dicdata } from "/s/buss/sys/dic/dic.data.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 
@@ -51,6 +51,7 @@ var vm = new Vue({
             }];
             if (this.dictype.json) {
                 var json = JSON.parse(this.dictype.json);
+                if (json && json.table_suffix) { setTableSuffix(json.table_suffix); }
                 if (json && json.items) {
                     for (let item of json.items) {
                         newData = newData.concat({
@@ -107,7 +108,9 @@ var vm = new Vue({
             }
 
             if (gf.urlParam("dictype")) {
-                dicdata(gf.urlParam("dictype"), doInitRows);
+                let str = table_suffix ? '&sysDicDataFormMap.table_suffix=' + table_suffix : '';
+                let url = '/sys/dic/data/findByPage.shtml?sysDicDataFormMap.dictype=' + gf.urlParam("dictype") + str;
+                dicdata(url, doInitRows);
             }
         }
     },
