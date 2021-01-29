@@ -6,7 +6,7 @@ var _numInLine;
 let shortLength = 20;
 let showPlcstatus = ['CSY_DAJ'].includes(localStorage.projectKey);
 let showAgvbusstype = ['TAIKAI_JY'].includes(localStorage.projectKey);
-let showSiteStatusVal = ['CSY_DAJ', 'CSY_CDBP', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY', 'QDTY_SELF'].includes(localStorage.projectKey);
+let showSiteStatusVal = ['CSY_DAJ', 'CSY_CDBP', 'LAO_FOXCONN', 'TAIKAI_JY', 'LAO_DBWY', 'QDTY_SELF', 'KFKJ_SELF'].includes(localStorage.projectKey);
 let showBattery = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 let showSpeed = !['YZBD_QSKJ', 'YZBD_NRDW'].includes(localStorage.projectKey);
 

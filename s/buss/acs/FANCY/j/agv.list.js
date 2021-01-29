@@ -6,7 +6,7 @@ import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { ws } from "/s/buss/g/j/websocket.js";
 
 export var agvNum = 0;
-let innerAgvDetail = ["CSY_DAJ", "TAIKAI_JY", "QDTY_SELF"].includes(localStorage.projectKey);
+let innerAgvDetail = ["CSY_DAJ", "TAIKAI_JY", "QDTY_SELF", "KFKJ_SELF"].includes(localStorage.projectKey);
 
 var agvDiv = function () {
     if ($("div#agvDiv").length == 0) {

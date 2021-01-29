@@ -17,6 +17,7 @@ switch (localStorage.projectKey) {
 	case "YZBD_QSKJ":
 		_oneTimeLimit = 2; break;
 	case "QDTY_SELF":
+	case "KFKJ_SELF":
 		_oneTimeLimit = 5; _numInLine = 8; if (!gf.isPc()) _numInLine = 4; break;
 	default:
 		break;

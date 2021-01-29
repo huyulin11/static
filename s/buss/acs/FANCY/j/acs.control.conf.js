@@ -59,6 +59,10 @@ export let renderModelConfs = () => {
 		ITEM_TASK.container = "bottomCtrlContainer";
 		ITEM_TASK.width = "35%";
 		confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
+	} else if (localStorage.projectKey == 'KFKJ_SELF') {
+		ITEM_TASK.container = "bottomCtrlContainer";
+		ITEM_TASK.width = "35%";
+		confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
 	}
 	return confs;
 };
