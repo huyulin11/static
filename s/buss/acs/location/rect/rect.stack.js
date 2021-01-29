@@ -43,20 +43,6 @@ rectFunc.redoRectEdit = function (rect) {
     })
 }
 
-rectFunc.undoRectEdit = function (rect) {
-    editBuildName(rect.id, rect, () => {
-        d3.select('#retext' + rect.id).text(rect.buildname);
-        d3.selectAll('.changeCircle').style('display', 'none');
-    })
-}
-
-rectFunc.redoRectEdit = function (rect) {
-    editBuildName(rect.id, rect, () => {
-        d3.select('#retext' + rect.id).text(rect.buildname);
-        d3.selectAll('.changeCircle').style('display', 'none');
-    })
-}
-
 rectFunc.undoRectDel = function (rect) {
     crateRect(rect.id, tool.xnumToWindow(rect.x), tool.ynumToWindow(rect.y), rect.width, rect.height, () => {
         drawRect(datas.rect);

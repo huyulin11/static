@@ -11,8 +11,8 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
 import { changePathSize } from "/s/buss/acs/location/path/path.changesize.js";
-import { keyFun } from "/s/buss/acs/location/location.stack.js";
 import { undoStack, redoStack } from "/s/buss/acs/location/location.stack.js";
+import { bodyKeyDown } from "/s/buss/acs/location/event/event.body.js";
 
 let confs = [];
 initData();
@@ -42,6 +42,7 @@ confs.push({
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);
             rectEvent(flag);
+            bodyKeyDown(flag);
             layer.msg('编辑模式');
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
@@ -53,6 +54,7 @@ confs.push({
             $(this).removeClass("open").addClass("close");
             mouseEvent(flag);
             rectEvent(flag);
+            bodyKeyDown(flag);
             undoStack.splice(0, undoStack.length);
             redoStack.splice(0, redoStack.length);
             layer.msg('查看模式');
@@ -134,7 +136,6 @@ for (let i in datas.color) {
     }
 }
 
-keyFun();
 var leftShape = d3.select('#shape_panel')
     .attr('style', "top:80px;left:0px;position:fixed;height: " + $(window).height() + "px; width: 187px;background-color: rgb(107 86 86 / 20%);");
 var basePictrue = leftShape.append('div')
