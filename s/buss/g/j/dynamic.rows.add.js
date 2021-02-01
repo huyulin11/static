@@ -1,9 +1,3 @@
-export var table_suffix;
-
-export var setTableSuffix = function (suffix) {
-    table_suffix = suffix;
-}
-
 export var submitForm = function () {
     var hasNull = false;
     $("#form").find("input,select").each(function () {
@@ -25,7 +19,7 @@ export var submitForm = function () {
         type: "post",
         dataType: "json",
         timeout: 5000,
-        data: { dictype: $("#dictype").html(), table_suffix: table_suffix },
+        data: { dictype: $("#dictype").html() },
         error: function (data) {
             if (layer) layer.msg("连接错误！" + data);
             else alert("连接错误！" + data);
