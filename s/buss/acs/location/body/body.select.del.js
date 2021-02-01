@@ -15,20 +15,23 @@ export var selectElementMenu = function (stack) {
 
 function delPoints(stack) {
     for (let i of $('#pointHome .selectelement')) {
-        var id = i.id;
-        var point = { 'id': id, 'x': i.cx.animVal.value, 'y': i.cy.animVal.value };
-        var path = [];
         deleteLocation(i.id, () => {
-            var delPath = d3.select('#pathHome1').selectAll(".clashLine").filter(function (e) { return e && (e.from == i.id || e.to == i.id); });
+            var id = i.id;
+            var point = { 'id': id, 'x': i.cx.animVal.value, 'y': i.cy.animVal.value };
+            var path = [];
+            var delPath = d3.select('#pathHome1').selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
             delPath.attr('id', function (d) {
                 updatetaskSiteLogic(d.from, d.to, '', true);
-                path.push({ 'd': d });
+                if (!d.ispush) {
+                    path.push({ 'd': d })
+                    d.ispush = true;
+                };
                 return d.id;
             });
             stack.push({ 'name': 'circledel', 'circle': point, 'path': path });
             d3.select('#pointTextHome').select("#t" + i.id).remove();
             delPath.remove();
-            $('#' + i.id).remove();
+            $('#' + id).remove();
         });
     }
 }
@@ -36,12 +39,20 @@ function delPoints(stack) {
 function delLogics(stack) {
     for (let i of $('#pathHome1 .selectelement')) {
         var id = i.id;
-        var siteid = $('#' + id).attr('from');
-        var nextid = $('#' + id).attr('to');
-        var value = { "siteid": siteid, "nextid": nextid };
-        stack.push({ 'name': 'pathdel', 'value': value });
-        deleteLogic(value, true);
-        $('#' + id).remove();
+        var value = {};
+        var delPath = d3.select('#pathHome1').selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
+        delPath.attr('id', function (d) {
+            if (!d.ispush) {
+                value = { "siteid": d.from, "nextid": d.to };
+                stack.push({ 'name': 'pathdel', 'value': value });
+                d.ispush = true;
+            };
+            return d.id;
+        });
+        if (!value) {
+            deleteLogic(value, true);
+            delPath.remove();
+        }
     }
 }
 

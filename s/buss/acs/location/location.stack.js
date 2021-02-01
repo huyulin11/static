@@ -1,12 +1,12 @@
 import { cirFunc } from "/s/buss/acs/location/point/point.stack.js";
 import { pathFunc } from "/s/buss/acs/location/path/path.stack.js";
 import { rectFunc } from "/s/buss/acs/location/rect/rect.stack.js";
+import { bodyFunc } from "/s/buss/acs/location/body/body.stack.js";
 import { selectElementMenu } from "/s/buss/acs/location/body/body.select.del.js";
 
 export var undoStack = [];
 export var redoStack = [];
 export var func = {};
-var dataStack = [];
 
 export var ctrlZ = function () {
     if (undoStack.length > 0) {
@@ -26,6 +26,7 @@ export var ctrlZ = function () {
             case 'rectedit': rectFunc.undoRectEdit(pop.oldrect); break;
             case 'rectchangeloacation': rectFunc.undoRectChangeLocation(pop.oldrect); break;
             case 'rectchangesize': rectFunc.undoRectChangeSize(pop.oldrect); break;
+            case 'selectordel': bodyFunc.undoSelectorDel(pop.value); break;
         }
     } else return null;
 }
@@ -48,17 +49,17 @@ export var ctrlY = function () {
             case 'rectedit': rectFunc.redoRectEdit(pop.newrect); break;
             case 'rectchangeloacation': rectFunc.redoRectChangeLocation(pop.newrect); break;
             case 'rectchangesize': rectFunc.redoRectChangeSize(pop.newrect); break;
+            case 'selectordel': bodyFunc.redoSelectorDel(pop.value); break;
         }
     } else return null;
 }
 
 export var backspace = function () {
     let ii = layer.confirm('是否删除？', function (index) {
+        var dataStack = [];
+        selectElementMenu(dataStack);
         if (dataStack.length <= 0) {
             layer.msg('未选中数据！！！');
-
-        } else {
-            selectElementMenu(dataStack);
         }
         layer.close(ii);
     });

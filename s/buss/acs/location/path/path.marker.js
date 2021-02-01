@@ -4,7 +4,7 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 
 export var markerDef = function () {
-    conf.defsHome.select('defs').remove();
+    conf.defsHome.selectAll('defs').remove();
     var defs1 = conf.defsHome.append("defs").attr('id', 'defs1');
     var marker1 = defs1.selectAll("marker").data(datas.path)
         .enter().append("marker")
