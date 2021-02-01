@@ -3,6 +3,9 @@ import { dictype } from "/s/buss/sys/dic/dic.type.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import "/s/buss/sys/dic/dic.type.add.js";
 
+let _dictype = gf.urlParam("dictype");
+let _new_table = false;
+
 var _conf = {
     container: "div#rows",
     targetClass: "item-group",
@@ -26,6 +29,12 @@ var _conf = {
     },]
 }
 
+var renderCtrl = function (new_table) {
+    if (!new_table || new_table != "true") { return; }
+    $("#new_table").trigger("click");
+    _new_table = true;
+}
+
 var doInitRows = (dictypeinfo) => {
     $(_conf.addBtn).removeClass("hidden");
     if (dictypeinfo && (!$("#dictype0").val() || !$("#remark0").val())) {
@@ -36,10 +45,19 @@ var doInitRows = (dictypeinfo) => {
         var json = JSON.parse(dictypeinfo.json);
         console.log(json.items);
         initRows(_conf, json.items);
+        renderCtrl(json.new_table);
     } else {
         initRows(_conf);
     }
 }
+
+let checkChangeFun = function (that) {
+    if (!_dictype) { return; }
+    if (_new_table && !that.checked) { that.checked = true; }
+}
+
+if (_dictype) { dictype(_dictype, doInitRows); }
+$("#new_table").click(function (e) { checkChangeFun(this); });
 
 window.addEventListener('ASSOCIATING_VAL_CHOOSED', function (event) {
     console.log('选择操作的类型为：', event.detail.val);
@@ -51,7 +69,3 @@ window.addEventListener('ASSOCIATING_VAL_CHANGED', function (event) {
     $(_conf.addBtn).addClass("hidden");
     initRows(_conf);
 });
-
-if (gf.urlParam("dictype")) {
-    dictype(gf.urlParam("dictype"), doInitRows);
-}
