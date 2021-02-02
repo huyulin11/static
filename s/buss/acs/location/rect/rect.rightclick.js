@@ -24,11 +24,12 @@ export var rightClickRect = function (flag) {
                         return layer.close(tips);
                     });
                     var key = id.slice(4);
-                    var data = rect.data()[0];
+                    var editname = d3.select('#retext' + key).text();
                     d3.select("#btn1").on("click", function () {
                         layer.prompt(function (val, index) {
                             layer.msg('建筑名修改为' + val);
                             var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': val };
+                            var data = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': editname };
                             undoStack.push({ 'name': 'rectedit', 'newrect': value, 'oldrect': data });
                             d3.select('#retext' + key).text(val);
                             editBuildName(key, value);
