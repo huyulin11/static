@@ -32,6 +32,7 @@ export var rightClickRect = function (flag) {
                             var data = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': editname };
                             undoStack.push({ 'name': 'rectedit', 'newrect': value, 'oldrect': data });
                             d3.select('#retext' + key).text(val);
+                            rect.attr('buildname', val);
                             editBuildName(key, value);
                             layer.close(index);
                             d3.selectAll('.changeCircle').style('display', 'none');
