@@ -1,16 +1,4 @@
-
-
-export var coorDrag = function () {
-    d3.select('#coordinate').select('svg').call(
-        d3.drag()
-            .on('start', svgstart)
-            .on('drag', svgdrag)
-            .on('end', svgend)
-    );
-}
-
-
-var svgstart = function () {
+export var svgstart = function () {
     d3.select(this).append('rect')
         .attr('id', 'selection')
         .attr('xx', event.offsetX)
@@ -18,7 +6,7 @@ var svgstart = function () {
         .attr('style', 'fill:rgb(30 178 206 / 34%);stroke:rgb(30 178 206 / 99%);stroke-width:2px;')
 }
 
-var svgdrag = function () {
+export var svgdrag = function () {
     let x1 = parseFloat($('#selection').attr('xx')),
         y1 = parseFloat($('#selection').attr('yy')),
         x2 = event.offsetX, y2 = event.offsetY;
@@ -29,7 +17,7 @@ var svgdrag = function () {
         .attr('height', y1 > y2 ? (y1 - y2) : (y2 - y1))
 }
 
-var svgend = function () {
+export var svgend = function () {
     var x = parseFloat($('#selection').attr('x'));
     var y = parseFloat($('#selection').attr('y'));
     var width = parseFloat($('#selection').attr('width'));

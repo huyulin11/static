@@ -58,7 +58,7 @@ export var backspace = function () {
     let ii = layer.confirm('是否删除？', function (index) {
         var dataStack = [];
         selectElementMenu(dataStack);
-        if (dataStack.length <= 0) {
+        if (dataStack.length < 0) {
             layer.msg('未选中数据！！！');
         }
         layer.close(ii);
