@@ -37,7 +37,6 @@ confs.push({
     key: 'mouse', click: function () {
         let flag = $(this).hasClass("close");
         $('.open').attr('class', 'close hideToggle');
-        // datas.init();
         if (flag) {
             $(this).removeClass("close").addClass("open");
             mouseEvent(flag);

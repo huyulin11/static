@@ -71,7 +71,6 @@ var endR = function () {
         y = tool.ynumToDB($(this).attr('y'));
     var value = { 'id': oldrect1.id, 'x': x, 'y': y, 'width': oldrect1.width, 'height': oldrect1.height, 'buildname': oldrect1.buildname };
     undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': oldrect1 });
-    console.log(undoStack);
     editBuildName(oldrect1.id, value);
 }
 
@@ -93,10 +92,19 @@ export var dragDashCircle = function (flag) {
     }
 }
 
+var oldrect2 = {};
+var value = {};
 var startC = function () {
     datas.init();
     d3.selectAll('.layui-layer-content').remove();
-    var target = $(this).attr('direction');
+    let target = $(this).attr('direction'),
+        key = $(this).attr('id').slice(5),
+        x = tool.xnumToDB($('[num=' + key + '1]').attr('cx')),
+        y = tool.ynumToDB($('[num=' + key + '1]').attr('cy')),
+        width = parseFloat($('#rect' + key).attr('width')),
+        height = parseFloat($('#rect' + key).attr('height')),
+        buildname = $('#rect' + key).attr('buildname');
+    oldrect2 = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildname };
     if (target == 1 || target == 4) {
         d3.select('body').style('cursor', 'nw-resize');
     } else {
@@ -118,22 +126,17 @@ var dargC = function () {
         dragDashPoint3(id, x, y);
     } else if (num == id + 4) {
         dragDashPoint4(id, x, y);
-    }
+    };
+    let x1 = tool.xnumToDB($('[num=' + id + '1]').attr('cx')),
+        y1 = tool.ynumToDB($('[num=' + id + '1]').attr('cy'));
+    value = { 'id': oldrect2.id, 'x': x1, 'y': y1, 'width': width, 'height': height, 'buildname': oldrect2.buildname };
     d3.select('#retext' + id)
         .attr('x', parseFloat($('#rect' + id).attr('x')) + width / 2)
         .attr('y', parseFloat($('#rect' + id).attr('y')) + height + 20);
 }
 var endC = function () {
-    let key = $(this).attr('id').slice(5),
-        x = tool.xnumToDB($('[num=' + key + '1]').attr('cx')),
-        y = tool.ynumToDB($('[num=' + key + '1]').attr('cy')),
-        width = parseFloat($('#rect' + key).attr('width')),
-        height = parseFloat($('#rect' + key).attr('height')),
-        buildName = $('#rect' + key).attr('buildname');
-    var value = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildName };
-    var data = d3.select('#rect' + key).data()[0];
-    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': data });
-    editBuildName(key, value);
+    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': oldrect2 });
+    editBuildName(oldrect2.id, value);
     var target = $(this).attr('direction');
     if (target == 1 || target == 4) {
         d3.select('body').style('cursor', 'default');

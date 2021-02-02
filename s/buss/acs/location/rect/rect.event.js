@@ -32,14 +32,11 @@ export var mouseStyle = function () {
             d3.select(this).style('cursor', 'sw-resize');
         }
     });
+    d3.selectAll('rect').style('cursor', 'move');
 }
 
-var delBankDash = function (flag) {
-    if (flag) {
-        conf.svg.on('click', function () {
-            d3.selectAll('.changeCircle').style('display', 'none');
-        })
-    } else {
-        conf.svg.on('click', null);
-    }
+export var delBankDash = function () {
+    conf.svg.on('click', function () {
+        d3.selectAll('.changeCircle').style('display', 'none');
+    });
 }

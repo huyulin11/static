@@ -2,6 +2,9 @@ import { crateRect, delRect, editBuildName } from "/s/buss/acs/location/url/rect
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
+import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
+import { mouseStyle, delBankDash } from "/s/buss/acs/location/rect/rect.event.js";
 
 export var rectFunc = {};
 
@@ -46,6 +49,11 @@ rectFunc.redoRectEdit = function (rect) {
 rectFunc.undoRectDel = function (rect) {
     crateRect(rect.id, tool.xnumToWindow(rect.x), tool.ynumToWindow(rect.y), rect.width, rect.height, () => {
         drawRect(datas.rect);
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
     }, rect.buildname);
 }
 
@@ -68,5 +76,10 @@ rectFunc.undoRectAdd = function (pop) {
 rectFunc.redoRectAdd = function (pop) {
     crateRect(pop.id, pop.x, pop.y, 20, 20, () => {
         drawRect(datas.rect);
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
     });
 }
