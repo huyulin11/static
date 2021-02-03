@@ -7,7 +7,6 @@ export var bodyEvent = function (flag) {
     bodyMouseMove(flag);
     coorDrag(flag);
 }
-
 export var bodyKeyDown = function (flag) {
     d3.select('body').on('keydown', !flag ? null : function () {
         if (d3.event.ctrlKey == true && d3.event.keyCode == 90) {
@@ -16,7 +15,7 @@ export var bodyKeyDown = function (flag) {
             return ctrlY();
         } else if (d3.event.keyCode == 46 || d3.event.keyCode == 8) {
             return backspace();
-        }
+        };
     })
 }
 
@@ -29,9 +28,9 @@ export var bodyMouseMove = function (flag) {
 
 export var coorDrag = function (flag) {
     d3.select('#coordinate').select('svg').call(
-        flag ? d3.drag()
-            .on('start', svgstart)
-            .on('drag', svgdrag)
-            .on('end', svgend) : null
+        d3.drag()
+            .on('start', flag ? svgstart : null)
+            .on('drag', flag ? svgdrag : null)
+            .on('end', flag ? svgend : null)
     );
 }
