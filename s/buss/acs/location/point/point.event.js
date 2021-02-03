@@ -11,6 +11,7 @@ export var event = {};
 var flag = false;
 event.start = function () {
     if (!flag) {
+        conf.pathHome3.selectAll(".clashLine").remove();
         let id = $(this).attr('id'),
             x = parseFloat($(this).attr('cx')),
             y = parseFloat($(this).attr('cy'));
