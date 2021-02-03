@@ -1,6 +1,7 @@
 import { ctrlZ, ctrlY, backspace } from "/s/buss/acs/location/location.stack.js";
 import { coorMove } from "/s/buss/acs/location/body/body.move.js";
 import { svgstart, svgdrag, svgend } from "/s/buss/acs/location/body/body.drag.select.js";
+import { deselect } from "/s/buss/acs/location/body/body.ctrlclick.js";
 
 export var bodyEvent = function (flag) {
     bodyKeyDown(flag);
@@ -15,6 +16,8 @@ export var bodyKeyDown = function (flag) {
             return ctrlY();
         } else if (d3.event.keyCode == 46 || d3.event.keyCode == 8) {
             return backspace();
+        } else if (d3.event.ctrlKey == true) {
+            deselect();
         };
     })
 }
