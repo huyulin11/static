@@ -1,16 +1,29 @@
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
+
 export var deselect = function () {
     d3.selectAll('circle').on('click', function () {
         d3.event.stopPropagation();
-        $(this).attr('fill', 'red').removeClass('selectelement');
+        if ($(this).hasClass('selectelement')) {
+            $(this).attr('fill', 'red').removeClass('selectelement');
+        } else $(this).addClass('selectelement').attr('fill', 'rgb(30 178 206 )');
     });
     d3.selectAll('rect').on('click', function () {
         d3.event.stopPropagation();
-        $(this).attr('fill', '#e0e053').removeClass('selectelement');
+        if ($(this).hasClass('selectelement')) {
+            $(this).attr('fill', '#e0e053').removeClass('selectelement');
+        } else $(this).addClass('selectelement').attr('fill', 'rgb(30 178 206 )');
     });
     d3.selectAll('path').on('click', function () {
         d3.event.stopPropagation();
-        $(this).attr('stroke', '#8a8a8a').removeClass('selectelement');
-        d3.select('#mar' + $(this).attr('id').slice(1)).select('path').attr('fill', '#8a8a8a')
-        $('#mar' + $(this).attr('id').slice(1)).removeClass('selectelement');
+        var id = $(this).attr('id').slice(1);
+        if ($(this).hasClass('selectelement')) {
+            $(this).attr('stroke', '#8a8a8a').removeClass('selectelement');
+            d3.select('#mar' + $(this).attr('id').slice(1)).select('path').attr('fill', '#8a8a8a')
+            $('#mar' + $(this).attr('id').slice(1)).removeClass('selectelement');
+        } else {
+            $(this).addClass('selectelement').attr('stroke', 'rgb(30 178 206 )');
+            $('#mar' + id).addClass('selectelement');
+            $('#mar' + id + " " + 'path').addClass('selectelement').attr('fill', 'rgb(30 178 206 )');
+        }
     });
 }
