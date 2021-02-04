@@ -5,9 +5,9 @@ import { deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var selectElementMenu = function (stack) {
+    delPoints(stack);
     delLogics(stack);
     delRects(stack);
-    delPoints(stack);
     if (stack) {
         undoStack.push({ 'name': 'selectordel', 'value': stack });
     }
@@ -15,43 +15,42 @@ export var selectElementMenu = function (stack) {
 
 function delPoints(stack) {
     for (let i of $('#pointHome .selectelement')) {
-        deleteLocation(i.id, () => {
-            var id = i.id;
-            var point = { 'id': id, 'x': i.cx.animVal.value, 'y': i.cy.animVal.value };
-            var path = [];
-            var delPath = d3.select('#pathHome1').selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
-            delPath.attr('id', function (d) {
-                updatetaskSiteLogic(d.from, d.to, '', true);
-                if (!d.ispush) {
-                    path.push({ 'd': d })
-                    d.ispush = true;
-                };
-                return d.id;
-            });
-            stack.push({ 'name': 'circledel', 'circle': point, 'path': path });
-            d3.select('#pointTextHome').select("#t" + i.id).remove();
-            delPath.remove();
-            $('#' + id).remove();
+        var id = i.id;
+        var point = { 'id': id, 'x': i.cx.animVal.value, 'y': i.cy.animVal.value };
+        var path = [];
+        var delPath = d3.select('#pathHome1').selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
+        delPath.attr('id', function (d) {
+            updatetaskSiteLogic(d.from, d.to, '', true);
+            if (!d.ispush) {
+                path.push({ 'd': d })
+                d.ispush = true;
+            };
+            return d.id;
         });
+        stack.push({ 'name': 'circledel', 'circle': point, 'path': path });
+        d3.select('#pointTextHome').select("#t" + i.id).remove();
+        delPath.remove();
+        $('#' + id).remove();
+        deleteLocation(i.id);
     }
 }
 
 function delLogics(stack) {
     for (let i of $('#pathHome1 .selectelement')) {
-        var id = i.id;
+        var id = i.id.slice(1);
         var value = {};
-        var delPath = d3.select('#pathHome1').selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
-        delPath.attr('id', function (d) {
+        d3.select('#p' + id).attr('id', function (d) {
             if (!d.ispush) {
                 value = { "siteid": d.from, "nextid": d.to };
                 stack.push({ 'name': 'pathdel', 'value': value });
                 d.ispush = true;
             };
-            return d.id;
-        });
-        if (!value) {
+            return 'p' + id;
+        })
+        if (value) {
             deleteLogic(value, true);
-            delPath.remove();
+            d3.select('#p' + id).remove();
+            d3.select('#mar' + id).remove();
         }
     }
 }

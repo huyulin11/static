@@ -12,19 +12,21 @@ export var coorMove = function () {
         gap.push({ 'id': id, 'distance': opacity });
         gap.sort(function (a, b) { return a.distance - b.distance });
     }
-    var id = gap[0].id;
-    var point = $('#' + id);
-    var minLen = gap[0].distance;
-    if (minLen > 120) {
-        conf.pathHome3.selectAll(".clashLine").remove();
-    } else if (20 <= minLen <= 120) {
-        conf.pathHome3.selectAll(".clashLine").remove();
-        createPath(point);
-        var getFill = (120 - minLen) / 100;
-        conf.pathHome3.selectAll(".clashLine").attr('stroke-opacity', getFill);
-        $('#triangle2').attr('fill-opacity', getFill);
-    } else if (minLen < 20) {
-        conf.pathHome3.selectAll(".clashLine").attr('stroke-opacity', 1);
-        $('#triangle2').attr('fill-opacity', 1);
+    if (gap[0]) {
+        var id = gap[0].id;
+        var point = $('#' + id);
+        var minLen = gap[0].distance;
+        if (minLen > 120) {
+            conf.pathHome3.selectAll(".clashLine").remove();
+        } else if (20 <= minLen <= 120) {
+            conf.pathHome3.selectAll(".clashLine").remove();
+            createPath(point);
+            var getFill = (120 - minLen) / 100;
+            conf.pathHome3.selectAll(".clashLine").attr('stroke-opacity', getFill);
+            $('#triangle2').attr('fill-opacity', getFill);
+        } else if (minLen < 20) {
+            conf.pathHome3.selectAll(".clashLine").attr('stroke-opacity', 1);
+            $('#triangle2').attr('fill-opacity', 1);
+        }
     }
 }
