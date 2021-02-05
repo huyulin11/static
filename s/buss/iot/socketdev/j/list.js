@@ -14,7 +14,7 @@ window.datagrid = dataGrid({
 		name: "设备名称"
 	}, {
 		colkey: "ip",
-		name: "ip地址"
+		name: "IP"
 	}, {
 		colkey: "port",
 		name: "端口"
@@ -37,24 +37,24 @@ let doSearch = function () {
 	});
 }
 
-$("#search").on("click", function () {
-	doSearch();
-});
-
 $("#searchForm").on("submit", function () {
 	doSearch();
 	return false;
 });
 
-$("#add").click("click", function () {
-	add();
-});
-$("#edit").click("click", function () {
-	edit();
-});
-$("#del").click("click", function () {
-	del();
-});
+$("#search").on("click", function () { doSearch(); });
+$("#add").click("click", function () { add(); });
+$("#edit").click("click", function () { edit(); });
+$("#del").click("click", function () { del(); });
+
+function add() {
+	window.pageii = gflayer.open({
+		title: "新增",
+		type: 2,
+		content: '/s/buss/iot/socketdev/h/addSocketdevUI.html'
+	});
+}
+
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -67,13 +67,7 @@ function edit() {
 		content: '/s/buss/iot/socketdev/editUI.html?id=' + cbox
 	});
 }
-function add() {
-	window.pageii = gflayer.open({
-		title: "新增",
-		type: 2,
-		content: '/s/buss/iot/socketdev/h/addSocketdevUI.html'
-	});
-}
+
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
@@ -85,4 +79,3 @@ function del() {
 		gf.ajax(url, { ids: cbox.join(":") }, "json");
 	});
 }
-

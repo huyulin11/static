@@ -16,31 +16,28 @@
         <form class="form-inline" role="form" id="searchForm" name="searchForm">
             <div class="doc-buttons">
                 <label>
-                    <span>IP:</span>
-                    <input id="ip" name="socketdevFormMap.ip">
+                    <span class="font-thin v-middle">IP:</span>
+                    <input id="ip" name="IotClientFormMap.ip">
                 </label>
                 <label>
-                    <span>设备类型:</span>
+                    <span class="font-thin v-middle">设备类型:</span>
                     <select class="input-medium ui-autocomplete-input jsSelect" data-patten="SOCKET_DEV_TYPE"
-                        id="devtype" name="socketdevFormMap.devtype"></select>
+                        id="devtype" name="IotClientFormMap.devtype"></select>
                 </label>
                 <a href="javascript:void(0)" class="btn btn-default" id="search">查询</a>
                 <button type="button" id="add" class="btn btn-primary marR10">新增</button>
                 <button type="button" id="del" class="btn btn-danger marR10">删除</button>
-                </tr>
-                </table>
             </div>
         </form>
     </header>
     <div class="table-responsive">
         <div id="paging" class="pagclass"></div>
     </div>
-
-    <script type="module">
-        import "/s/buss/iot/socketdev/j/list.js";
-        import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
-        renderAll();
-    </script>
 </body>
+<script type="module">
+    import "/s/buss/iot/socketdev/j/list.js";
+    import { renderAll } from "/s/buss/g/j/jquery/jquery.jsSelect.js";
+    renderAll();
+</script>
 
 </html>

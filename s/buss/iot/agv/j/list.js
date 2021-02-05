@@ -1,6 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
-import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 
 window.datagrid = dataGrid({
@@ -10,7 +9,7 @@ window.datagrid = dataGrid({
 		name: "AGV编号",
 	}, {
 		colkey: "ip",
-		name: "ip地址"
+		name: "IP"
 	}, {
 		colkey: "port",
 		name: "端口"
@@ -27,24 +26,24 @@ let doSearch = function () {
 	});
 }
 
-$("#search").on("click", function () {
-	doSearch();
-});
-
 $("#searchForm").on("submit", function () {
 	doSearch();
 	return false;
 });
 
-$("#add").click("click", function () {
-	add();
-});
-$("#edit").click("click", function () {
-	edit();
-});
-$("#del").click("click", function () {
-	del();
-});
+$("#search").on("click", function () { doSearch(); });
+$("#add").click("click", function () { add(); });
+$("#edit").click("click", function () { edit(); });
+$("#del").click("click", function () { del(); });
+
+function add() {
+	window.pageii = gflayer.open({
+		title: "新增",
+		type: 2,
+		content: '/s/buss/iot/agv/h/addAGVUI.html'
+	});
+}
+
 function edit() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
@@ -57,13 +56,7 @@ function edit() {
 		content: '/s/buss/iot/agv/editUI.html?id=' + cbox
 	});
 }
-function add() {
-	window.pageii = gflayer.open({
-		title: "新增",
-		type: 2,
-		content: '/s/buss/iot/agv/h/addAGVUI.html'
-	});
-}
+
 function del() {
 	var cbox = window.datagrid.getSelectedCheckbox();
 	if (cbox == "") {
@@ -75,4 +68,3 @@ function del() {
 		gf.ajax(url, { ids: cbox.join(":") }, "json");
 	});
 }
-

@@ -14,23 +14,18 @@
 <body>
     <header class="panel-heading">
         <form class="form-inline" role="form" id="searchForm" name="searchForm">
-            <div class="form-group">
+            <div class="doc-buttons">
+                <button type="button" id="saveAll" class="btn btn-primary marR10">保存修改</button>
             </div>
         </form>
     </header>
-    <div class="doc-buttons">
-        <button type="button" id="saveAll" class="btn btn-primary marR10">保存修改</button>
-    </div>
     <div class="table-responsive">
-        <form id="formInList">
-            <div id="paging" class="pagclass"></div>
-        </form>
+        <div id="paging" class="pagclass"></div>
     </div>
-
-    <script type="module">
-        import "/s/buss/g/j/g.sd.js";
-        import "/s/buss/iot/relation/j/list.js";
-    </script>
 </body>
+<script type="module">
+    import "/s/buss/g/j/g.sd.js";
+    import "/s/buss/iot/relation/j/list.js";
+</script>
 
 </html>

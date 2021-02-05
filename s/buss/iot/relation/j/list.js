@@ -42,18 +42,13 @@ let doSearch = function () {
 	});
 }
 
-$("#search").on("click", function () {
-	doSearch();
-});
-
 $("#searchForm").on("submit", function () {
 	doSearch();
 	return false;
 });
 
-$("#saveAll").click("click", function () {
-	saveAll();
-});
+$("#search").on("click", function () { doSearch(); });
+$("#saveAll").click("click", function () { saveAll(); });
 
 function saveAll() {
 	layer.confirm('是否确认保存所有数据？', function (index) {
@@ -61,4 +56,3 @@ function saveAll() {
 		gf.ajax(url, $("#formInList").serialize(), "json");
 	});
 }
-
