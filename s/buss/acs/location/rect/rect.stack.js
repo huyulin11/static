@@ -47,11 +47,11 @@ rectFunc.redoRectEdit = function (rect) {
 }
 
 rectFunc.undoRectDel = function (rect) {
-    let x = parseFloat(tool.xnumToWindow(rect.x)),
-        y = parseFloat(tool.ynumToWindow(rect.y)),
-        width = parseFloat(rect.width),
-        height = parseFloat(rect.height);
-    crateRect(rect.id, x, y, x + width, y + height, () => {
+    let x1 = parseFloat(tool.xnumToWindow(rect.x1)),
+        y1 = parseFloat(tool.ynumToWindow(rect.y1)),
+        x2 = parseFloat(tool.xnumToWindow(rect.x2)),
+        y2 = parseFloat(tool.ynumToWindow(rect.y2));
+    crateRect(rect.id, x1, y1, x2, y2, () => {
         drawRect(datas.rect);
         rightClickRect(true);
         dragDashRect(true);
