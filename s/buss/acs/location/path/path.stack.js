@@ -3,7 +3,7 @@ import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
-import { drawPath } from "/s/buss/acs/location/path/path.draw.js";
+import { editDrawPath } from "/s/buss/acs/location/path/path.draw.js";
 import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js";
 
 
@@ -15,7 +15,7 @@ pathFunc.undoPathDel = function (pop) {
     var side = pathTool.getSide(x1, x2, y1, y2);
     saveLogic(side, pop.siteid, pop.nextid, '', () => {
         markerDef();
-        drawPath(datas.path);
+        editDrawPath(datas.path);
         dragPath(true);
         rightClickPath(true);
     });
@@ -49,7 +49,7 @@ pathFunc.redoPathAdd = function (path) {
         nextid = path.to;
     saveLogic(side, siteid, nextid, '', () => {
         markerDef();
-        drawPath(datas.path);
+        editDrawPath(datas.path);
         dragPath(true);
         rightClickPath(true);
     });

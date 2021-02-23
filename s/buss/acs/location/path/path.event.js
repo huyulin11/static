@@ -74,6 +74,8 @@ event.end = function () {
 
 event.delPath = function (d, i) {
     if (d3.event.button == 2) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
         var path = d3.select(this);
         var wPath = d3.select("#w" + $(this).attr("from") + $(this).attr("to"));
         var marPath = d3.select("#mar" + $(this).attr("from") + $(this).attr("to"));

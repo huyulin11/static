@@ -5,7 +5,7 @@ import { getMPoint } from "/s/buss/acs/location/path/render.d.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
-import { drawPath } from "/s/buss/acs/location/path/path.draw.js";
+import { editDrawPath } from "/s/buss/acs/location/path/path.draw.js";
 import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
@@ -66,7 +66,7 @@ var end = function () {
         undoStack.push({ 'name': 'pathadd', 'path': { 'id': siteid + nextid, 'from': siteid, 'to': nextid, 'side': side } });
         saveLogic(side, siteid, nextid, '', () => {
             markerDef();
-            drawPath(datas.path);
+            editDrawPath(datas.path);
             dragPath(true);
             rightClickPath(true);
         });

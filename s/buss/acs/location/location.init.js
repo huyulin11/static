@@ -5,26 +5,24 @@ import { dataAgvLocation } from "/s/buss/acs/location/location.data.js";
 import { drawAgv } from "/s/buss/acs/location/agv/draw.agv.js";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
-import { mouseEvent, bandBodyClick } from "/s/buss/acs/location/location.event.js";
+import { mouseEvent } from "/s/buss/acs/location/location.event.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
-import { changePathSize } from "/s/buss/acs/location/path/path.changesize.js";
 import { undoStack, redoStack } from "/s/buss/acs/location/location.stack.js";
 import { bodyEvent } from "/s/buss/acs/location/event/event.body.js";
+import { rightClickBody } from "/s/buss/acs/location/body/body.rightclick.js";
 
 let confs = [];
 initData();
 markerDef();
 renderSvg();
-changePathSize();
 dataAgvLocation();
 setInterval(() => {
     dataAgvLocation();
     drawAgv();
 }, 3000);
-bandBodyClick();
 confs.push({
     init: true, url: "/s/buss/sys/conf/h/traffic.area.html",
     key: 'area', target: 'div#areaContainer', height: "70%", width: "50%"
@@ -42,6 +40,7 @@ confs.push({
             mouseEvent(flag);
             rectEvent(flag);
             bodyEvent(flag);
+            rightClickBody(flag);
             layer.msg('编辑模式');
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
@@ -54,6 +53,7 @@ confs.push({
             mouseEvent(flag);
             rectEvent(flag);
             bodyEvent(flag);
+            rightClickBody(flag);
             undoStack.splice(0, undoStack.length);
             redoStack.splice(0, redoStack.length);
             layer.msg('查看模式');

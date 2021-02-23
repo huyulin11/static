@@ -8,6 +8,8 @@ export var rightClickRect = function (flag) {
         d3.selectAll("rect")
             .on("contextmenu", function (d, i) {
                 if (d3.event.button == 2) {
+                    d3.event.stopPropagation();
+                    d3.event.preventDefault();
                     let id = $(this).attr('id'),
                         x = tool.xnumToDB($(this).attr('x')),
                         y = tool.ynumToDB($(this).attr('y')),
