@@ -47,7 +47,11 @@ rectFunc.redoRectEdit = function (rect) {
 }
 
 rectFunc.undoRectDel = function (rect) {
-    crateRect(rect.id, tool.xnumToWindow(rect.x), tool.ynumToWindow(rect.y), rect.width, rect.height, () => {
+    let x = parseFloat(tool.xnumToWindow(rect.x)),
+        y = parseFloat(tool.ynumToWindow(rect.y)),
+        width = parseFloat(rect.width),
+        height = parseFloat(rect.height);
+    crateRect(rect.id, x, y, x + width, y + height, () => {
         drawRect(datas.rect);
         rightClickRect(true);
         dragDashRect(true);
@@ -74,7 +78,7 @@ rectFunc.undoRectAdd = function (pop) {
 }
 
 rectFunc.redoRectAdd = function (pop) {
-    crateRect(pop.id, pop.x, pop.y, 20, 20, () => {
+    crateRect(pop.id, pop.x, pop.y, parseFloat(pop.x) + 20, parseFloat(pop.y) + 20, () => {
         drawRect(datas.rect);
         rightClickRect(true);
         dragDashRect(true);

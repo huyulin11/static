@@ -80,11 +80,11 @@ tool.windowToDB = function (id, x, y) {
 }
 
 tool.xnumToDB = function (x) {
-    return conf.xReScale(x - conf.padding.left);
+    return parseFloat(conf.xReScale(x - conf.padding.left));
 }
 
 tool.ynumToDB = function (y) {
-    return conf.yReScale(conf.height - conf.padding.bottom - y);
+    return parseFloat(conf.yReScale(conf.height - conf.padding.bottom - y));
 }
 
 tool.dbToWindow = function (x, y) {
@@ -93,9 +93,9 @@ tool.dbToWindow = function (x, y) {
 }
 
 tool.xnumToWindow = function (x) {
-    return conf.padding.left + conf.xScale(x);
+    return parseFloat(conf.padding.left + conf.xScale(x));
 }
 
 tool.ynumToWindow = function (y) {
-    return conf.height - conf.padding.bottom - conf.yScale(y);
+    return parseFloat(conf.height - conf.padding.bottom - conf.yScale(y));
 }

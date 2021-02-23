@@ -52,7 +52,7 @@ export var dragRect = function () {
 export var newRect = function (x, y) {
     var id = getid();
     undoStack.push({ 'name': 'rectadd', 'id': id, 'x': x - 10, 'y': y - 10 });
-    crateRect(id, x - 10, y - 10, 20, 20, () => {
+    crateRect(id, x - 10, y - 10, x + 10, y + 10, () => {
         drawRect(datas.rect);
         bankDefaultEvent();
         rightClickRect(true);

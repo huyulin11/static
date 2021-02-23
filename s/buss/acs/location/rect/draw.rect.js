@@ -9,19 +9,19 @@ export var drawRect = function (rectdata) {
         .enter()
         .append("rect")
         .attr('x', function (d) {
-            return tool.xnumToWindow(d.x);
+            return tool.xnumToWindow(d.x1);
         })
         .attr('y', function (d) {
-            return tool.ynumToWindow(d.y);
+            return tool.ynumToWindow(d.y1);
         })
         .attr('id', function (d) {
             return 'rect' + d.id;
         })
         .attr('width', function (d) {
-            return d.width;
+            return tool.xnumToWindow(d.x2) - tool.xnumToWindow(d.x1);
         })
         .attr('height', function (d) {
-            return d.height;
+            return tool.ynumToWindow(d.y2) - tool.ynumToWindow(d.y1);
         })
         .attr('buildname', function (d) {
             return d.buildname;
@@ -33,10 +33,10 @@ export var drawRect = function (rectdata) {
         .enter()
         .append('text')
         .attr('x', function (d) {
-            return tool.xnumToWindow(d.x) + d.width / 2;
+            return tool.xnumToWindow(d.x1) + (tool.xnumToWindow(d.x2) - tool.xnumToWindow(d.x1)) / 2;
         })
         .attr('y', function (d) {
-            return tool.ynumToWindow(d.y) + d.height + 20;
+            return tool.ynumToWindow(d.y1) + (tool.ynumToWindow(d.y2) - tool.ynumToWindow(d.y1)) + 20;
         })
         .attr('id', function (d) {
             return 'retext' + d.id;
@@ -49,12 +49,14 @@ export var drawRect = function (rectdata) {
         });
     var point = [];
     for (let rect of rectdata) {
-        let x = tool.xnumToWindow(rect.x),
-            y = tool.ynumToWindow(rect.y);
-        point.push([1, x, y, rect.id]);
-        point.push([2, x + rect.width, y, rect.id]);
-        point.push([3, x, y + rect.height, rect.id]);
-        point.push([4, x + rect.width, y + rect.height, rect.id]);
+        let x1 = tool.xnumToWindow(rect.x1),
+            y1 = tool.ynumToWindow(rect.y1),
+            x2 = tool.xnumToWindow(rect.x2),
+            y2 = tool.ynumToWindow(rect.y2);
+        point.push([1, x1, y1, rect.id]);
+        point.push([2, x2, y1, rect.id]);
+        point.push([3, x1, y2, rect.id]);
+        point.push([4, x2, y2, rect.id]);
     }
     conf.rectPointHome.selectAll("circle").data(point)
         .enter()

@@ -24,6 +24,7 @@ export var dragDashRect = function (flag) {
 
 var rectData = {};
 var oldrect1 = {};
+var rerect = {};
 var startR = function () {
     d3.selectAll('.layui-layer-content').remove();
     d3.selectAll('.changeCircle').style('display', 'none');
@@ -42,6 +43,7 @@ var startR = function () {
     d3.selectAll('#dashC' + id).style('display', 'block');
     rectData = { 'width': width, 'height': height, 'x': x1, 'y': y1 };
     oldrect1 = { 'id': parseInt(id), 'x': x, 'y': y, 'width': width1, 'height': height1, 'buildname': buildname };
+    rerect = { 'id': parseInt(id), 'x1': x, 'y1': y, 'x2': tool.xnumToDB(parseFloat($(this).attr('x')) + width1), 'y2': tool.ynumToDB(parseFloat($(this).attr('y')) + height1), 'buildname': buildname }
 }
 
 var dargR = function () {
@@ -68,9 +70,11 @@ var dargR = function () {
 }
 var endR = function () {
     let x = tool.xnumToDB($(this).attr('x')),
-        y = tool.ynumToDB($(this).attr('y'));
-    var value = { 'id': oldrect1.id, 'x': x, 'y': y, 'width': oldrect1.width, 'height': oldrect1.height, 'buildname': oldrect1.buildname };
-    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': oldrect1 });
+        y = tool.ynumToDB($(this).attr('y')),
+        x2 = tool.xnumToDB(parseFloat(oldrect1.width) + parseFloat($(this).attr('x'))),
+        y2 = tool.ynumToDB(parseFloat(oldrect1.height) + parseFloat($(this).attr('y')));
+    var value = { 'id': oldrect1.id, 'x1': x, 'y1': y, 'x2': x2, 'y2': y2, 'buildname': oldrect1.buildname };
+    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': rerect });
     editBuildName(oldrect1.id, value);
 }
 
@@ -94,6 +98,7 @@ export var dragDashCircle = function (flag) {
 
 var oldrect2 = {};
 var value = {};
+var rerect2 = {};
 var startC = function () {
     datas.init();
     d3.selectAll('.layui-layer-content').remove();
@@ -103,8 +108,11 @@ var startC = function () {
         y = tool.ynumToDB($('[num=' + key + '1]').attr('cy')),
         width = parseFloat($('#rect' + key).attr('width')),
         height = parseFloat($('#rect' + key).attr('height')),
-        buildname = $('#rect' + key).attr('buildname');
+        buildname = $('#rect' + key).attr('buildname'),
+        x2 = parseFloat($('[num=' + key + '1]').attr('cx')) + width,
+        y2 = parseFloat($('[num=' + key + '1]').attr('cy')) + height;
     oldrect2 = { 'id': parseInt(key), 'x': x, 'y': y, 'width': width, 'height': height, 'buildname': buildname };
+    rerect2 = { 'id': parseInt(key), 'x1': x, 'y1': y, 'x2': tool.xnumToDB(x2), 'y2': tool.ynumToDB(y2), 'buildname': buildname };
     if (target == 1 || target == 4) {
         d3.select('body').style('cursor', 'nw-resize');
     } else {
@@ -128,14 +136,16 @@ var dargC = function () {
         dragDashPoint4(id, x, y);
     };
     let x1 = tool.xnumToDB($('[num=' + id + '1]').attr('cx')),
-        y1 = tool.ynumToDB($('[num=' + id + '1]').attr('cy'));
-    value = { 'id': oldrect2.id, 'x': x1, 'y': y1, 'width': width, 'height': height, 'buildname': oldrect2.buildname };
+        y1 = tool.ynumToDB($('[num=' + id + '1]').attr('cy')),
+        x2 = tool.xnumToDB(parseFloat($('[num=' + id + '1]').attr('cx')) + width),
+        y2 = tool.ynumToDB(parseFloat($('[num=' + id + '1]').attr('cy')) + height);
+    value = { 'id': oldrect2.id, 'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2, 'buildname': oldrect2.buildname };
     d3.select('#retext' + id)
         .attr('x', parseFloat($('#rect' + id).attr('x')) + width / 2)
         .attr('y', parseFloat($('#rect' + id).attr('y')) + height + 20);
 }
 var endC = function () {
-    undoStack.push({ 'name': 'rectchangeloacation', 'newrect': value, 'oldrect': oldrect2 });
+    undoStack.push({ 'name': 'rectchangesize', 'newrect': value, 'oldrect': rerect2 });
     editBuildName(oldrect2.id, value);
     var target = $(this).attr('direction');
     if (target == 1 || target == 4) {
