@@ -22,10 +22,10 @@ export var coorMove = function () {
             conf.pathHome3.selectAll(".clashLine").remove();
             createPath(point);
             var getFill = (120 - minLen) / 100;
-            conf.pathHome3.selectAll(".clashLine").attr('stroke-opacity', getFill);
+            conf.pathHome3.selectAll(".clashLine").attr('fill-opacity', getFill);
             $('#triangle2').attr('fill-opacity', getFill);
         } else if (minLen < 20) {
-            conf.pathHome3.selectAll(".clashLine").attr('stroke-opacity', 1);
+            conf.pathHome3.selectAll(".clashLine").attr('fill-opacity', 1);
             $('#triangle2').attr('fill-opacity', 1);
         }
     }

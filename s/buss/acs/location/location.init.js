@@ -43,6 +43,7 @@ confs.push({
             rightClickBody(flag);
             markerDef(!flag);
             layer.msg('编辑模式');
+            d3.select('#shape_panel').style('display', 'block')
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
@@ -59,6 +60,7 @@ confs.push({
             undoStack.splice(0, undoStack.length);
             redoStack.splice(0, redoStack.length);
             layer.msg('查看模式');
+            d3.select('#shape_panel').style('display', 'none');
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
                 var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
@@ -138,7 +140,7 @@ for (let i in datas.color) {
 }
 
 var leftShape = d3.select('#shape_panel')
-    .attr('style', "top:0px;left:0px;position:fixed;height: " + $(window).height() + "px; width: " + $(window).width() * 0.13 + "px;background-color: #ddd;");
+    .attr('style', "top:0px;left:0px;position:fixed;height: " + $(window).height() + "px; width: " + $(window).width() * 0.13 + "px;background-color: #ddd; display:none");
 var basePictrue = leftShape.append('div')
     .attr('id', 'panel_basic')
     .attr('class', 'content')

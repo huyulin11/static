@@ -10,24 +10,39 @@ import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var createPath = function (point) {
-    var id = point.attr('id'), x = point.attr('cx'), y = point.attr('cy');
-    var num = 0;
-    var path = function () {
-        num++;
-        return conf.pathHome3.append("path")
-            .attr("num", num)
-            .attr("id", "new" + num)
-            .attr("class", "clashLine")
-            .attr("from", id)
-            .attr("fill", "none")
-            .attr("stroke", "#8a8a8a")
-            .attr("stroke-width", function () { return localStorage.pathwidth; })
-            .attr("style", "marker-end:url(#triangle2);");
-    }
-    path().attr("d", "M" + x + "," + y + "L" + (parseFloat(x) + 20) + "," + y);
-    path().attr("d", "M" + x + "," + y + "L" + (parseFloat(x) - 20) + "," + y);
-    path().attr("d", "M" + x + "," + y + "L" + x + "," + (parseFloat(y) + 20));
-    path().attr("d", "M" + x + "," + y + "L" + x + "," + (parseFloat(y) - 20));
+    var id = point.attr('id'), x = parseFloat(point.attr('cx')), y = parseFloat(point.attr('cy'));
+    var width = parseFloat(localStorage.pathwidth / 2);
+    var d = "M" + (x + width) + "," + (y - width) +
+        "L" + (x + width) + "," + (y - width - 20) +
+        "L" + (x + 2 * width) + "," + (y - width - 20) +
+        "L" + x + "," + (y - 5 * width - 20) +
+        "L" + (x - 2 * width) + "," + (y - width - 20) +
+        "L" + (x - width) + "," + (y - width - 20) +
+        "L" + (x - width) + "," + (y - width) +
+        "L" + (x - width - 20) + "," + (y - width) +
+        "L" + (x - width - 20) + "," + (y - 2 * width) +
+        "L" + (x - 5 * width - 20) + "," + y +
+        "L" + (x - width - 20) + "," + (y + 2 * width) +
+        "L" + (x - width - 20) + "," + (y + width) +
+        "L" + (x - width) + "," + (y + width) +
+        "L" + (x - width) + "," + (y + width + 20) +
+        "L" + (x - 2 * width) + "," + (y + width + 20) +
+        "L" + x + "," + (y + 5 * width + 20) +
+        "L" + (x + 2 * width) + "," + (y + width + 20) +
+        "L" + (x + width) + "," + (y + width + 20) +
+        "L" + (x + width) + "," + (y + width) +
+        "L" + (x + width + 20) + "," + (y + width) +
+        "L" + (x + width + 20) + "," + (y + 2 * width) +
+        "L" + (x + 5 * width + 20) + "," + y +
+        "L" + (x + width + 20) + "," + (y - 2 * width) +
+        "L" + (x + width + 20) + "," + (y - width);
+
+    conf.pathHome3.append("path")
+        .attr("id", "newpath")
+        .attr("class", "clashLine")
+        .attr("from", id)
+        .attr("fill", "#8a8a8a")
+        .attr("d", d);
 
     conf.pathHome3.selectAll(".clashLine").call(
         d3.drag()
@@ -38,17 +53,17 @@ export var createPath = function (point) {
 }
 
 var start = function () {
-    var num = $(this).attr("num");
-    for (var i = 1; i <= 4; i++) {
-        if (i != num) d3.select("#new" + i).remove();
-    }
 }
 
 var drag = function () {
     const { x, y } = d3.event;
     var s = $(this).attr("d");
     var mPoint = getMPoint(s);
-    $(this).attr("d", pathTool.dPath(mPoint[0], x, mPoint[1], y));
+    $(this).attr("d", pathTool.dPath(mPoint[0], x, mPoint[1], y))
+        .attr("style", "marker-end:url(#triangle2);")
+        .attr("fill", "none")
+        .attr("stroke", "#8a8a8a")
+        .attr("stroke-width", function () { return localStorage.pathwidth; });
 }
 
 var end = function () {
