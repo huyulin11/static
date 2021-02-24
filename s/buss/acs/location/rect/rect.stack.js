@@ -11,29 +11,54 @@ export var rectFunc = {};
 rectFunc.undoRectChangeSize = function (rect) {
     editBuildName(rect.id, rect, () => {
         drawRect(datas.rect);
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
     })
 }
 
 rectFunc.redoRectChangeSize = function (rect) {
     editBuildName(rect.id, rect, () => {
         drawRect(datas.rect);
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
     })
 }
 
 rectFunc.undoRectChangeLocation = function (rect) {
     editBuildName(rect.id, rect, () => {
         drawRect(datas.rect);
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
     })
 }
 
 rectFunc.redoRectChangeLocation = function (rect) {
     editBuildName(rect.id, rect, () => {
         drawRect(datas.rect);
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
     })
 }
 
 rectFunc.undoRectEdit = function (rect) {
     editBuildName(rect.id, rect, () => {
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
         d3.select('#retext' + rect.id).text(rect.buildname);
         d3.selectAll('.changeCircle').style('display', 'none');
     })
@@ -41,6 +66,11 @@ rectFunc.undoRectEdit = function (rect) {
 
 rectFunc.redoRectEdit = function (rect) {
     editBuildName(rect.id, rect, () => {
+        rightClickRect(true);
+        dragDashRect(true);
+        dragDashCircle(true);
+        mouseStyle();
+        delBankDash();
         d3.select('#retext' + rect.id).text(rect.buildname);
         d3.selectAll('.changeCircle').style('display', 'none');
     })
