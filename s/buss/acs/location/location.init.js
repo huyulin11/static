@@ -138,7 +138,7 @@ for (let i in datas.color) {
 }
 
 var leftShape = d3.select('#shape_panel')
-    .attr('style', "top:80px;left:0px;position:fixed;height: " + $(window).height() + "px; width: 187px;background-color: rgb(107 86 86 / 20%);");
+    .attr('style', "top:0px;left:0px;position:fixed;height: " + $(window).height() + "px; width: " + $(window).width() * 0.13 + "px;background-color: #ddd;");
 var basePictrue = leftShape.append('div')
     .attr('id', 'panel_basic')
     .attr('class', 'content')
