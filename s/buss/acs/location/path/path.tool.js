@@ -16,18 +16,6 @@ pathTool.getSide = function (x1, x2, y1, y2) {
     }
 }
 
-pathTool.markerRadian = function (x1, x2, y1, y2) {
-    if (x1 >= x2 && y1 >= y2) {
-        return arrowLeftUp(x1, x2, y1, y2);
-    } else if (x1 >= x2 && y1 < y2) {
-        return arrowLeftDown(x1, x2, y1, y2);
-    } else if (x1 < x2 && y1 >= y2) {
-        return arrowRightUp(x1, x2, y1, y2);
-    } else {
-        return arrowRightDown(x1, x2, y1, y2);
-    }
-}
-
 pathTool.dPath = function (x1, x2, y1, y2) {
     if (y1 >= y2 && x1 >= x2) {
         return leftUpPath(x1, x2, y1, y2);
@@ -50,6 +38,110 @@ pathTool.dDoublePath = function (x1, x2, y1, y2) {
     } else if (y1 <= y2 && x1 <= x2) {
         return downRightPath(x1, x2, y1, y2);
     }
+}
+
+pathTool.markerRadian = function (x1, x2, y1, y2) {
+    if (x1 >= x2 && y1 >= y2) {
+        return arrowLeftUp(x1, x2, y1, y2);
+    } else if (x1 >= x2 && y1 < y2) {
+        return arrowLeftDown(x1, x2, y1, y2);
+    } else if (x1 < x2 && y1 >= y2) {
+        return arrowRightUp(x1, x2, y1, y2);
+    } else {
+        return arrowRightDown(x1, x2, y1, y2);
+    }
+}
+
+pathTool.doubleMarkerRadian = function (x1, x2, y1, y2) {
+    if (x1 >= x2 && y1 >= y2) {
+        return arrowUpLeft(x1, x2, y1, y2);
+    } else if (x1 >= x2 && y1 < y2) {
+        return arrowDownLeft(x1, x2, y1, y2);
+    } else if (x1 < x2 && y1 >= y2) {
+        return arrowUpRight(x1, x2, y1, y2);
+    } else {
+        return arrowDownRight(x1, x2, y1, y2);
+    }
+}
+
+var arrowUpLeft = function (x1, x2, y1, y2) {
+    var yLen = y1 - y2;
+    var xLen = x1 - x2;
+    var yPos = y2 + 6.5;
+    var proportion = 6.5 / yLen;
+    var xPos = x2 + xLen * proportion;
+    var dx = x2 - xPos,
+        dy = yPos - y1,
+        angle = -Math.atan2(dx, dy);
+    if (x1 - x2 <= 50 && x1 - x2 > 40) {
+        return angle + 180;
+    } else if (x1 - x2 <= 40 && x1 - x2 > 20) {
+        return angle + 183.5;
+    } else if (x1 - x2 <= 20 && x1 - x2 > 5) {
+        return angle + 190;
+    } else if (x1 - x2 <= 5 && x1 - x2 >= 0) {
+        return -90;
+    } else return 180;
+}
+
+var arrowDownLeft = function (x1, x2, y1, y2) {
+    var yLen = y1 - y2;
+    var xLen = x1 - x2;
+    var yPos = y2 + 6.5;
+    var proportion = 6.5 / yLen;
+    var xPos = x2 + xLen * proportion;
+    var dx = x2 - xPos,
+        dy = yPos - y1,
+        angle = -Math.atan2(dx, dy);
+    if (x1 - x2 <= 50 && x1 - x2 > 35) {
+        return angle - 185;
+    } else if (x1 - x2 <= 35 && x1 - x2 > 20) {
+        return angle - 187.5;
+    } else if (x1 - x2 <= 20 && x1 - x2 > 5) {
+        return angle - 192.5;
+    } else if (x1 - x2 <= 5 && x1 - x2 >= 0) {
+        return 90;
+    } else return "auto";
+}
+
+var arrowUpRight = function (x1, x2, y1, y2) {
+    var yLen = y1 - y2;
+    var xLen = x1 - x2;
+    var yPos = y2 + 6.5;
+    var proportion = 6.5 / yLen;
+    var xPos = x2 + xLen * proportion;
+    var dx = x2 - xPos,
+        dy = yPos - y1,
+        angle = -Math.atan2(dx, dy);
+    if (x2 - x1 <= 50 && x2 - x1 > 40) {
+        return angle - 2.5;
+    } else if (x2 - x1 <= 40 && x2 - x1 > 20) {
+        return angle - 5;
+    } else if (x2 - x1 <= 20 && x2 - x1 > 5) {
+        return angle - 17.5;
+    } else if (x2 - x1 <= 5 && x2 - x1 >= 0) {
+        return -90;
+    } else return "auto";
+}
+
+var arrowDownRight = function (x1, x2, y1, y2) {
+    var yLen = y1 - y2;
+    var xLen = x1 - x2;
+    var yPos = y2 + 6.5;
+    var proportion = 6.5 / yLen;
+    var xPos = x2 + xLen * proportion;
+    var dx = x2 - xPos,
+        dy = yPos - y1,
+        angle = -Math.atan2(dx, dy);
+    if (x2 - x1 <= 50 && x2 - x1 > 40) {
+        return angle + 4.5;
+    } else if (x2 - x1 <= 40 && x2 - x1 > 20) {
+        return angle + 6.5;
+    } else if (x2 - x1 <= 20 && x2 - x1 > 5) {
+        return angle +18;
+    } else if (x2 - x1 <= 5 && x2 - x1 >= 0) {
+        return 90;
+    } else return "auto";
 }
 
 var arrowLeftUp = function (x1, x2, y1, y2) {

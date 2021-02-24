@@ -65,7 +65,7 @@ var end = function () {
         var side = pathTool.getSide(x1, x2, y1, y2);
         undoStack.push({ 'name': 'pathadd', 'path': { 'id': siteid + nextid, 'from': siteid, 'to': nextid, 'side': side } });
         saveLogic(side, siteid, nextid, '', () => {
-            markerDef();
+            markerDef(false);
             editDrawPath(datas.path);
             dragPath(true);
             rightClickPath(true);

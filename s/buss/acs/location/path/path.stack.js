@@ -14,7 +14,7 @@ pathFunc.undoPathDel = function (pop) {
     let x2 = $('#' + pop.nextid).attr('cx'), y2 = $('#' + pop.nextid).attr('cy');
     var side = pathTool.getSide(x1, x2, y1, y2);
     saveLogic(side, pop.siteid, pop.nextid, '', () => {
-        markerDef();
+        markerDef(false);
         editDrawPath(datas.path);
         dragPath(true);
         rightClickPath(true);
@@ -48,7 +48,7 @@ pathFunc.redoPathAdd = function (path) {
     let siteid = path.from,
         nextid = path.to;
     saveLogic(side, siteid, nextid, '', () => {
-        markerDef();
+        markerDef(false);
         editDrawPath(datas.path);
         dragPath(true);
         rightClickPath(true);

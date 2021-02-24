@@ -16,7 +16,7 @@ import { rightClickBody } from "/s/buss/acs/location/body/body.rightclick.js";
 
 let confs = [];
 initData();
-markerDef();
+markerDef(true);
 renderSvg();
 dataAgvLocation();
 setInterval(() => {
@@ -41,6 +41,7 @@ confs.push({
             rectEvent(flag);
             bodyEvent(flag);
             rightClickBody(flag);
+            markerDef(!flag);
             layer.msg('编辑模式');
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
@@ -54,6 +55,7 @@ confs.push({
             rectEvent(flag);
             bodyEvent(flag);
             rightClickBody(flag);
+            markerDef(!flag);
             undoStack.splice(0, undoStack.length);
             redoStack.splice(0, redoStack.length);
             layer.msg('查看模式');
