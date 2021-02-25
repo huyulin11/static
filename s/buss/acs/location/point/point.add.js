@@ -2,7 +2,7 @@ import { datas } from "/s/buss/acs/location/location.data.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
 import { addLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
-import { drawPointId } from "/s/buss/acs/location/point/point.draw.js";
+import { drawPointId, drawPoints } from "/s/buss/acs/location/point/point.draw.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
@@ -37,6 +37,7 @@ export var addSite = function () {
         .attr("x", x + 7)
         .attr("y", y - 7)
         .attr("stroke", "black")
+        .attr("fill", "black")
         .attr("font-size", "15px")
         .attr("font-family", "sans-serif")
         .text('' + id);
@@ -61,6 +62,7 @@ export var createPoint = function (x, y) {
         d3.select('#nct' + id).attr('id', 't' + id);
         d3.select('#nc' + id).attr('id', id);
         drawPointId(datas.udfPoints);
+        drawPoints(datas.udfPoints);
         dragPoint(true);
         rightClickPoint(true);
     });

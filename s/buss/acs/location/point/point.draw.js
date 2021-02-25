@@ -2,6 +2,7 @@ import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export function drawPoints(data) {
+    conf.pointHome.selectAll("circle").remove();
     var circleUpdate = conf.pointHome.selectAll("circle").data(data);
     var circleEnter = circleUpdate.enter();
 
@@ -44,6 +45,7 @@ export var drawPointId = function (data) {
             return tool.ynumToWindow(d[2]) - 7;
         })
         .attr("stroke", "black")
+        .attr("fill", "black")
         .attr("font-size", "15px")
         .attr("font-family", "sans-serif")
         .text(function (d) {
