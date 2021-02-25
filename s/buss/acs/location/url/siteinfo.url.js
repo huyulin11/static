@@ -3,8 +3,11 @@ import { updateTaskSiteLocation } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
 export var addLocation = function (location, callback) {
     gf.doAjax({
-        url: `/tasksite/addLocation.shtml`, type: "POST",
-        data: { key: location.id, value: JSON.stringify(location) },
+        url: `/tasksite/addEntity.shtml`, type: "POST",
+        data: {
+            "TaskSiteFormMap.id": location.id,
+            "TaskSiteFormMap.location": JSON.stringify(location)
+        },
         success: () => {
             updateTaskSiteLocation(location.id, location);
             datas.init();
