@@ -18,8 +18,8 @@ export var addLocation = function (location, callback) {
 
 export var deleteLocation = function (id, callback) {
     gf.doAjax({
-        url: `/tasksite/deleteLocation.shtml`, type: "POST",
-        data: { key: id },
+        url: `/tasksite/deleteEntity.shtml`, type: "POST",
+        data: { "TaskSiteFormMap.id": id },
         success: () => {
             if (callback) { callback(); }
             updateTaskSiteLocation(id, "", true);
@@ -28,24 +28,16 @@ export var deleteLocation = function (id, callback) {
     });
 }
 
-export var updateLocation = function (id, location) {
+export var editLocation = function (id, location, callback) {
     gf.doAjax({
-        url: `/tasksite/updateLocation.shtml`, type: "POST",
-        data: { key: id, value: JSON.stringify(location) },
-        success: () => {
-            updateTaskSiteLocation(id, location);
-            datas.init();
-        }
-    });
-}
-
-export var editLocationID = function (oldID, location, callback) {
-    gf.doAjax({
-        url: `/tasksite/editLocationID.shtml`, type: "POST",
-        data: { oldID: oldID, newID: location.id, value: JSON.stringify(location) },
+        url: `/tasksite/editEntity.shtml`, type: "POST",
+        data: {
+            "TaskSiteFormMap.id": id,
+            "TaskSiteFormMap.location": JSON.stringify(location)
+        },
         success: () => {
             if (callback) { callback(); }
-            updateTaskSiteLocation(oldID, location);
+            updateTaskSiteLocation(id, location);
             datas.init();
         }
     });

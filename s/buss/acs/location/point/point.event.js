@@ -3,7 +3,7 @@ import { datas } from "/s/buss/acs/location/location.data.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
 import { updatePathWhenDragPoint, updatePathWhenUpdateID } from "/s/buss/acs/location/path/path.update.js";
-import { updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { editLocation, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 
@@ -33,7 +33,7 @@ event.end = function (d) {
     const { x, y } = d3.event;
     var id = $(this).attr('id');
     var location = tool.windowToDB(id, x, y);
-    updateLocation(id, location);
+    editLocation(id, location);
     var pop = undoStack.pop();
     pop.xx = x;
     pop.yy = y;
@@ -53,7 +53,7 @@ event.updateID = function (point) {
         if (window.confirm(`确定将id：${oldid}修改为${newid}？`)) {
             var location = tool.windowToDB(newid, point.attr('cx'), point.attr('cy'));
             undoStack.push({ 'name': 'circleupdate', 'value': location, 'oldid': oldid, 'point': point });
-            editLocationID(oldid, location, () => {
+            editLocation(oldid, location, () => {
                 point.attr("id", function (d) {
                     d[0] = parseInt(newid);
                     return newid

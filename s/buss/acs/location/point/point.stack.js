@@ -1,4 +1,4 @@
-import { updateLocation, editLocationID, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
+import { editLocation, deleteLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { addLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { drawPointId, drawPoints } from "/s/buss/acs/location/point/point.draw.js";
@@ -17,7 +17,7 @@ cirFunc.undoCircleUpdate = function (pop) {
         y = pop.value.y,
         point = pop.point;
     var location = tool.windowToDB(oldid, x, y);
-    editLocationID(newid, location, () => {
+    editLocation(newid, location, () => {
         point.attr("id", function (d) {
             d[0] = parseInt(oldid);
             return oldid;
@@ -32,7 +32,7 @@ cirFunc.redoCircleUpdate = function (pop) {
         newid = pop.value.id,
         location = pop.value,
         point = pop.point;
-    editLocationID(oldid, location, () => {
+    editLocation(oldid, location, () => {
         point.attr("id", function (d) {
             d[0] = parseInt(newid);
             return newid
@@ -65,7 +65,7 @@ cirFunc.redoCircleDel = function (pop) {
 cirFunc.undoCircleDrag = function (pop) {
     $('#' + pop.id).attr('cx', pop.x).attr('cy', pop.y);
     var location = tool.windowToDB(pop.id, pop.x, pop.y);
-    updateLocation(pop.id, location);
+    editLocation(pop.id, location);
     updatePointId(pop.id, pop.x, pop.y);
     updatePathWhenDragPoint(pop.id, pop.x, pop.y);
 }
@@ -73,7 +73,7 @@ cirFunc.undoCircleDrag = function (pop) {
 cirFunc.redoCircleDrag = function (pop) {
     $('#' + pop.id).attr('cx', pop.xx).attr('cy', pop.yy);
     var location = tool.windowToDB(pop.id, pop.xx, pop.yy);
-    updateLocation(pop.id, location);
+    editLocation(pop.id, location);
     updatePointId(pop.id, pop.xx, pop.yy);
     updatePathWhenDragPoint(pop.id, pop.xx, pop.yy);
 }
