@@ -2,18 +2,6 @@ import { updatetaskSiteLogic } from "/s/buss/acs/FANCY/j/acs.site.info.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 
-export var deleteLogic = function (value, bool) {
-    gf.doAjax({
-        url: `/tasksitelogic/deleteEntity.shtml`, type: "POST",
-        dataType: "JSON", data: value,
-        success: (obj) => {
-            updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
-            if (obj.msg) layer.msg(obj.msg);
-            datas.init();
-        }
-    });
-};
-
 export var saveLogic = function (side, siteid, nextid, oldnext, callback) {
     var json = {
         "TaskSiteLogicFormMap.siteid": siteid,
@@ -36,4 +24,19 @@ export var saveLogic = function (side, siteid, nextid, oldnext, callback) {
         datas.init();
         if (callback) { callback() };
     });
-};
+}
+
+export var deleteLogic = function (value, bool) {
+    gf.doAjax({
+        url: `/tasksitelogic/deleteEntity.shtml`, type: "POST", dataType: "JSON",
+        data: {
+            "TaskSiteLogicFormMap.siteid": value.siteid,
+            "TaskSiteLogicFormMap.nextid": value.nextid
+        },
+        success: (obj) => {
+            updatetaskSiteLogic(value.siteid, value.nextid, "", bool);
+            if (obj.msg) layer.msg(obj.msg);
+            datas.init();
+        }
+    });
+}
