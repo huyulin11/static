@@ -74,3 +74,12 @@ var choseR = function (x, y, width, height) {
         }
     }
 }
+
+export var coorDrag = function (flag) {
+    d3.select('#coordinate').select('svg').call(
+        d3.drag()
+            .on('start', flag ? svgstart : null)
+            .on('drag', flag ? svgdrag : null)
+            .on('end', flag ? svgend : null)
+    );
+}

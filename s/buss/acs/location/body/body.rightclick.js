@@ -1,5 +1,5 @@
 import { changePathSize } from "/s/buss/acs/location/path/path.changesize.js";
-import { bodyMouseMove } from "/s/buss/acs/location/event/event.body.js";
+import { bodyMouseMove } from "/s/buss/acs/location/body/body.move.js";
 
 export var rightClickBody = function (flag) {
     d3.select('#coordinate').select('svg').on('contextmenu', !flag ? null : function () {

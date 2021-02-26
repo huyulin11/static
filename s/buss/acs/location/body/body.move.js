@@ -30,3 +30,10 @@ export var coorMove = function () {
         }
     }
 }
+
+export var bodyMouseMove = function (flag) {
+    d3.select('#coordinate').select('svg')
+        .on('mousemove', !flag ? null : function () {
+            coorMove();
+        })
+}
