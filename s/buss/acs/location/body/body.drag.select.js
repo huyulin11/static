@@ -18,10 +18,11 @@ export var svgdrag = function () {
 }
 
 export var svgend = function () {
-    var x = parseFloat($('#selection').attr('x'));
-    var y = parseFloat($('#selection').attr('y'));
-    var width = parseFloat($('#selection').attr('width'));
-    var height = parseFloat($('#selection').attr('height'));
+    var zoom = d3.select('svg').property('__zoom');
+    var x = (parseFloat($('#selection').attr('x')) - zoom.x) / zoom.k;
+    var y = (parseFloat($('#selection').attr('y')) - zoom.y) / zoom.k;
+    var width = parseFloat($('#selection').attr('width')) / zoom.k;
+    var height = parseFloat($('#selection').attr('height')) / zoom.k;
     choseC(x, y, width, height);
     choseR(x, y, width, height);
     choseP(x, y, width, height);
