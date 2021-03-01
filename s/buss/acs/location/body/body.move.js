@@ -4,9 +4,10 @@ import { conf } from "/s/buss/acs/location/location.conf.js";
 export var coorMove = function () {
     var circles = d3.select('svg').select('#pointHome').selectAll('circle').nodes();
     var gap = [];
+    var zoom = d3.select('svg').property('__zoom');
     for (let i of circles) {
-        let dx = d3.event.offsetX - i.cx.animVal.value,
-            dy = d3.event.offsetY - i.cy.animVal.value,
+        let dx = (d3.event.offsetX - zoom.x) / zoom.k - i.cx.animVal.value,
+            dy = (d3.event.offsetY - zoom.y) / zoom.k - i.cy.animVal.value,
             id = i.id;
         var opacity = Math.sqrt(dx * dx + dy * dy);
         gap.push({ 'id': id, 'distance': opacity });
