@@ -34,6 +34,7 @@ export function drawNewPoint(id, x, y) {
 }
 
 export var drawPointId = function (data) {
+    conf.pointTextHome.selectAll("text").remove();
     conf.pointTextHome.selectAll("text").data(data)
         .enter().append("text")
         .attr("id", function (d) {

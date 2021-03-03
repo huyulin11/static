@@ -1,8 +1,11 @@
 var width = $(window).width();
 var height = $(window).height();//width * (domainYVal[1] - domainYVal[0]) / (domainXVal[1] - domainXVal[0]) * 4;
-var svg = d3.select("body").select("#coordinate").append("svg").attr('id','coor_svg_one').attr("width", width).attr("height", height).attr("fill", "white")
+var svg = d3.select("body").select("#coordinate")
+    .append('div').attr('id', 'div_svg')
+    .append("svg").attr('id', 'coor_svg_one').attr("width", width).attr("height", height)
     .call(d3.zoom().on("zoom", function () {
-        svg.attr("transform", d3.event.transform)
+        svg.attr("transform", d3.event.transform);
+        d3.select('svg').attr("transform", 'scale(' + d3.select('svg').property('__zoom').k + ")");
     })).append("g");
 var rectHome = svg.append('g').attr("id", "rectHome");
 var pathHome1 = svg.append('g').attr("id", "pathHome1");

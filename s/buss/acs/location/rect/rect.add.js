@@ -8,45 +8,34 @@ import { drawRect } from "/s/buss/acs/location/rect/draw.rect.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var addRect = function () {
-    var point = [];
     var id = getid();
-    let x = event.offsetX,
-        y = event.offsetY;
     conf.rectHome.append("rect")
+        .attr('id', 'rect' + id)
+    conf.rectTextHome.append('text')
+        .attr('id', 'retext' + id);
+}
+
+export var dragRect = function () {
+    var id = getid();
+    var zoom = d3.select('svg').property('__zoom');
+    var x = (event.offsetX - zoom.x) / zoom.k;
+    var y = (event.offsetY - zoom.y) / zoom.k;
+    d3.select('#rect' + id)
         .attr('x', x - 10)
         .attr('y', y - 10)
-        .attr('id', 'rect' + id)
         .attr('width', 20)
         .attr('height', 20)
         .attr('class', 'classRect')
         .attr('fill', '#e0e053')
         .attr('opacity', 0.5)
-        .attr('buildname', '建筑');
-    conf.rectTextHome.append('text')
+        .attr('buildname', '建筑');;
+    d3.select('#retext' + id)
         .attr('x', x)
         .attr('y', y + 30)
-        .attr('id', 'retext' + id)
         .attr("font-size", "13px")
         .attr('fill', 'black')
         .style('text-anchor', 'middle')
         .text('建筑');
-    point.push([1, x - 10, y - 10, id]);
-    point.push([2, x + 10, y - 10, id]);
-    point.push([3, x - 10, y + 10, id]);
-    point.push([4, x + 10, y + 10, id]);
-    addPoint(point);
-}
-
-export var dragRect = function () {
-    var id = getid();
-    let x = event.offsetX,
-        y = event.offsetY;
-    d3.select('#rect' + id)
-        .attr('x', x - 10)
-        .attr('y', y - 10);
-    d3.select('#retext' + id)
-        .attr('x', x)
-        .attr('y', y + 30);
 }
 
 export var newRect = function (x, y) {

@@ -24,16 +24,23 @@ export var getCircleID = function () {
 
 export var addSite = function () {
     var id = getCircleID();
-    var x = event.offsetX;
-    var y = event.offsetY;
     conf.pointHome.append("circle")
-        .attr("id", 'nc' + id)
+        .attr("id", 'nc' + id);
+    conf.pointTextHome.append("text")
+        .attr("id", 'nct' + id);
+}
+
+export var dragSite = function () {
+    var id = getCircleID();
+    var zoom = d3.select('svg').property('__zoom');
+    var x = (event.offsetX - zoom.x) / zoom.k;
+    var y = (event.offsetY - zoom.y) / zoom.k;
+    d3.select('#nc' + id)
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 6.5)
         .attr("fill", "red");
-    conf.pointTextHome.append("text")
-        .attr("id", 'nct' + id)
+    d3.select('#nct' + id)
         .attr("x", x + 7)
         .attr("y", y - 7)
         .attr("stroke", "black")
@@ -41,18 +48,6 @@ export var addSite = function () {
         .attr("font-size", "15px")
         .attr("font-family", "sans-serif")
         .text('' + id);
-}
-
-export var dragSite = function () {
-    var id = getCircleID();
-    var x = event.offsetX;
-    var y = event.offsetY;
-    d3.select('#nc' + id)
-        .attr('cx', x)
-        .attr('cy', y);
-    d3.select('#nct' + id)
-        .attr('x', x + 7)
-        .attr('y', y - 7);
 }
 
 export var createPoint = function (x, y) {

@@ -20,23 +20,18 @@ function imgStart() {
 }
 
 function imgDrag() {
-    var x = event.offsetX;
-    if (x >= $(window).width() * 0.13) {
-        switch (name) {
-            case 'site': dragSite(); break;
-            case 'build': dragRect(); break;
-        }
+    switch (name) {
+        case 'site': dragSite(); break;
+        case 'build': dragRect(); break;
     }
 }
 
 function imgEnd() {
-    var x = event.offsetX;
-    var y = event.offsetY;
-    if (x >= $(window).width() * 0.13) {
-        switch (name) {
-            case 'site': createPoint(x, y); break;
-            case 'build': newRect(x, y); break;
-        }
-
+    var zoom = d3.select('svg').property('__zoom');
+    var x = (event.offsetX - zoom.x) / zoom.k;
+    var y = (event.offsetY - zoom.y) / zoom.k;
+    switch (name) {
+        case 'site': createPoint(x, y); break;
+        case 'build': newRect(x, y); break;
     }
 }
