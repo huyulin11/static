@@ -1,6 +1,5 @@
 import { gf } from "/s/buss/g/j/g.f.js";
 import { gfbtn } from "/s/buss/g/j/g.f.btn.js";
-import { gv } from "/s/buss/g/j/g.v.js";
 import { dataGrid } from "/s/j/kf.grid.js";
 import "/s/buss/sys/lap/j/lap.info.edit.name.js";
 import { taskexe } from "/s/buss/acs/g/j/agv.taskexe.add.js";
@@ -8,32 +7,18 @@ import { getInput } from "/s/buss/g/j/g.input.render.js";
 
 let _columns = [{
     colkey: "key",
-    name: "key",
-    hide: true,
-}, {
-    colkey: "key",
-    name: "关键字",
-    renderData: function (rowindex, data, rowdata, column) {
-        return data;
-    }
+    name: "关键字"
 }, {
     colkey: "value",
-    name: "内容",
+    name: "交管区域",
     renderData: function (rowindex, data, rowdata, column) {
-        let col;
+        let col = { name: "键值", key: "key", notnull: true, type: "input" };
         try {
             let json = JSON.parse(data);
             if (json instanceof Array || json instanceof Object) {
-                col = {
-                    name: "键值", key: "key", notnull: true, type: "textarea",
-                };
+                col = { name: "键值", key: "key", notnull: true, type: "textarea" };
             }
         } catch (error) {
-        }
-        if (!col) {
-            col = {
-                name: "键值", key: "key", notnull: true, type: "input",
-            };
         }
         let json = { key: rowdata.key };
         let btnStr = `<button type="button" class="edit btn btn-primary marR10" ${gf.jsonToLabelData(json)}>保存</button>`;
@@ -100,7 +85,7 @@ let add = (that) => {
         layer.close(index);
         layer.prompt({ title: '输入内容', formType: 2 }, function (text, index) {
             layer.close(index);
-            if (window.confirm(`确定新增？名称：${key}，内容：${text}`)) {
+            if (window.confirm(`新增成功后需重启服务器方可生效，是否新增？名称：${key}，内容：${text}`)) {
                 gf.doAjax({
                     url: `/app/conf/set.shtml`, type: "POST",
                     data: { table: "AGV_CROSS_LOCK_OBJS", key: key, value: text }
@@ -112,7 +97,7 @@ let add = (that) => {
 let del = (that) => {
     var cbox = gf.checkOnlyOne("key");
     if (!cbox) { return; }
-    layer.confirm(`是否${that.name}${cbox}？`, function (index) {
+    layer.confirm(`${that.name}成功后需重启服务器方可生效，是否${that.name}${cbox}？`, function (index) {
         gf.doAjax({
             url: that.url, type: "POST",
             data: { table: "AGV_CROSS_LOCK_OBJS", key: cbox }
@@ -135,10 +120,10 @@ let btnUpload = {
 };
 let btnsDel = {
     url: `/app/conf/del.shtml`,
-    id: "del", name: "撤销", class: "btn-danger",
+    id: "del", name: "删除", class: "btn-danger",
     bind: function () {
         del(this);
     },
 };
-let tempBtns = [btnAdd, btnUpload, btnsDel];
+let tempBtns = [btnAdd, btnsDel];
 gfbtn.bindByRes("div.doc-buttons", tempBtns);

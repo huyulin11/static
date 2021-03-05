@@ -38,13 +38,15 @@ var vm = new Vue({
                 return;
             }
             let value = JSON.stringify(acts);
-            gf.doAjax({
-                url: `/app/conf/set.shtml`, type: "POST",
-                data: { table: "FANCY_CACHE_CONF", key: path, value: value },
-                whenSuccess: () => {
-                    vm.clear();
-                    parent.datagrid.loadData();
-                }
+            layer.confirm('新增成功后需重启服务器方可生效，是否新增？', function (index) {
+                gf.doAjax({
+                    url: `/app/conf/set.shtml`, type: "POST",
+                    data: { table: "FANCY_CACHE_CONF", key: path, value: value },
+                    whenSuccess: () => {
+                        vm.clear();
+                        parent.datagrid.loadData();
+                    }
+                });
             });
         },
         clear() {

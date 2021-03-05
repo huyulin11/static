@@ -1,5 +1,6 @@
 $("input#occurdate").val(new Date().format("yyyyMMdd"));
 
+var flag = false;
 var demo = $("#form").Validform({
     tiptype: 3,
     label: ".label",
@@ -8,6 +9,17 @@ var demo = $("#form").Validform({
         "zh1-6": /^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
     },
     ajaxPost: true,
+    beforeSubmit: function (curform) {
+        if (flag) {
+            flag = false;
+            return true;
+        }
+        layer.confirm('新增成功后需重启服务器方可生效，是否新增？', function (index) {
+            flag = true;
+            demo.ajaxPost(true);
+        });
+        return false;
+    },
     callback: function (json) {
         if (json.code >= 0) {
             $.Hidemsg();
@@ -32,6 +44,5 @@ var demo = $("#form").Validform({
                 offset: 'auto'
             });
         }
-        ;
     }
 });

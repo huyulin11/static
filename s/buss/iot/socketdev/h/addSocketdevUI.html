@@ -15,6 +15,23 @@
         <section class="panel panel-default">
             <div class="panel-body">
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">设备类型</label>
+                    <div class="col-sm-9">
+                        <select class="form-control jsSelect" data-patten="SOCKET_DEV_TYPE"
+                            name="IotClientFormMap.devtype" datatype="*" errormsg="目标位置不能为空！"
+                            autocomplete="off"></select>
+                    </div>
+                </div>
+                <div class="line line-dashed line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">设备名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control checkacc" placeholder="请输入设备名称"
+                            name="IotClientFormMap.name" id="name" datatype="*" errormsg="不能为空！">
+                    </div>
+                </div>
+                <div class="line line-dashed line-lg pull-in"></div>
+                <div class="form-group">
                     <div class="col-sm-3">
                         <label class="control-label">IP</label>
                     </div>
@@ -29,23 +46,6 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control checkacc" placeholder="请输入端口"
                             name="IotClientFormMap.port" id="port" datatype="*" errormsg="不能为空！">
-                    </div>
-                </div>
-                <div class="line line-dashed line-lg pull-in"></div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">设备名称</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control checkacc" placeholder="请输入设备名称"
-                            name="IotClientFormMap.name" id="name" datatype="*" errormsg="不能为空！">
-                    </div>
-                </div>
-                <div class="line line-dashed line-lg pull-in"></div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">设备类型</label>
-                    <div class="col-sm-9">
-                        <select class="form-control jsSelect" data-patten="SOCKET_DEV_TYPE"
-                            name="IotClientFormMap.devtype" datatype="*" errormsg="目标位置不能为空！"
-                            autocomplete="off"></select>
                     </div>
                 </div>
             </div>

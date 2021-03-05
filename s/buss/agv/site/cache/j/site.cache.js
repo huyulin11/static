@@ -10,7 +10,6 @@ let params = {
 	}, {
 		colkey: "key",
 		name: "站点路径"
-
 	}, {
 		colkey: "value",
 		name: "缓存指令",
@@ -56,7 +55,7 @@ function add() {
 function del() {
 	var cbox = gf.checkOnlyOne("key");
 	if (!cbox) { return; }
-	layer.confirm('是否删除？', function (index) {
+	layer.confirm('删除成功后需重启服务器方可生效，是否删除？', function (index) {
 		var url = '/app/conf/del.shtml';
 		gf.ajax(url, { "table": "FANCY_CACHE_CONF", key: JSON.stringify(cbox) }, "json");
 	});

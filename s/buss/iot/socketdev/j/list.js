@@ -74,7 +74,7 @@ function del() {
 		layer.msg("请选择删除项！！");
 		return;
 	}
-	layer.confirm('是否删除？', function (index) {
+	layer.confirm('删除成功后需重启服务器方可生效，是否删除？', function (index) {
 		var url = '/iotinfo/socketdev/deleteEntity.shtml';
 		gf.ajax(url, { ids: cbox.join(":") }, "json");
 	});
