@@ -1,15 +1,15 @@
 export var taskexe = new Object();
 
 taskexe.addTaskById = function (agvId, tasktype) {
-    _doAddTask(agvId, tasktype, "/json/op/addTaskById.shtml ");
+    _addTask(agvId, tasktype, "/json/op/addTaskById.shtml ");
 }
 
 taskexe.addTask = function (agvId, tasktype) {
-    _doAddTask(agvId, tasktype);
+    _addTask(agvId, tasktype, "/json/op/addTask.shtml");
 }
 
 taskexe.addCtrlTask = function (agvId, tasktype, devId) {
-    _doAddTask(agvId, tasktype, "/json/op/addCtrlTask.shtml", devId);
+    _addTask(agvId, tasktype, "/json/op/addCtrlTask.shtml", devId);
 }
 
 taskexe.addCtrlTaskFromBtn = (that, tips, opType) => {
@@ -39,54 +39,44 @@ taskexe.addTaskToSite = (agvId, task, targetSite) => {
 }
 
 taskexe.addTaskTo = function (agvId, tasktype, to, callback) {
-    addTaskTo(agvId, tasktype, to, callback);
-}
-
-var _doAddTask = function (agvId, tasktype, urlInfo, devId) {
-    _addTask(agvId, tasktype, urlInfo, devId);
+    _addTaskTo(agvId, tasktype, to, callback);
 }
 
 var _addTask = function (agvId, tasktype, urlInfo, devId) {
     jQuery.ajax({
-        url: (urlInfo) ? urlInfo : "/json/op/addTask.shtml",
-        type: "post",
+        url: urlInfo,
+        type: "post", dataType: "json",
+        async: true,
+        timeout: 5000,
         data: {
             tasktype: tasktype,
             taskid: tasktype,
             agvId: agvId,
             devId: devId
         },
-        async: true,
-        dataType: "json",
         success: function (data) {
             layer.msg(data.msg);
         },
         error: function (e) {
             layer.msg("数据中断，请刷新界面或重新登录！");
-        },
-        timeout: 5000
+        }
     });
 }
 
-var addTaskTo = function (agvId, tasktype, to, callback) {
-    _addTaskTo(agvId, tasktype, to, callback);
-}
-
 var _addTaskTo = function (agvId, tasktype, to, callback) {
-    let targetUrl = "/json/op/addTaskTo.shtml ";
     // if (localStorage.projectKey == 'TAIKAI_JY' && (tasktype == "FETCH" || tasktype == "DELIVER")) {
     //     targetUrl = "/json/op/fancy/addTaskTo.shtml";
     // }
     jQuery.ajax({
-        url: targetUrl,
-        type: "post",
+        url: "/json/op/addTaskTo.shtml ",
+        type: "post", dataType: "json",
+        async: true,
+        timeout: 5000,
         data: {
             tasktype: tasktype,
             to: to,
             agvId: agvId
         },
-        async: true,
-        dataType: "json",
         success: function (data) {
             if (callback) {
                 callback(data);
@@ -96,7 +86,6 @@ var _addTaskTo = function (agvId, tasktype, to, callback) {
         },
         error: function (e) {
             layer.msg("数据中断，请刷新界面或重新登录！");
-        },
-        timeout: 5000
+        }
     });
 }
