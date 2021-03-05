@@ -72,7 +72,7 @@ $("#paging").delegate(".edit", "click", function (e) {
     if (!target) {
         target = $(this).parents("td").find("textarea").val();
     }
-    if (window.confirm(`是否要改变${key}的值为${target}？`)) {
+    if (window.confirm(`保存成功后需重启服务器方可生效，是否要保存${key}的值为${target}？`)) {
         gf.doAjax({
             url: `/app/conf/set.shtml`, type: "POST",
             data: { table: "AGV_CROSS_LOCK_OBJS", key: key, value: target }
@@ -81,9 +81,9 @@ $("#paging").delegate(".edit", "click", function (e) {
 });
 
 let add = (that) => {
-    layer.prompt({ title: '输入名称', formType: 0 }, function (key, index) {
+    layer.prompt({ title: '输入关键字', formType: 0 }, function (key, index) {
         layer.close(index);
-        layer.prompt({ title: '输入内容', formType: 2 }, function (text, index) {
+        layer.prompt({ title: '输入交管区域', formType: 2 }, function (text, index) {
             layer.close(index);
             if (window.confirm(`新增成功后需重启服务器方可生效，是否新增？名称：${key}，内容：${text}`)) {
                 gf.doAjax({
@@ -105,7 +105,7 @@ let del = (that) => {
     });
 }
 let btnAdd = {
-    id: "add", name: "增加", class: "btn-primary",
+    id: "add", name: "新增", class: "btn-primary",
     bind: function () {
         add(this);
     },
