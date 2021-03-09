@@ -13,6 +13,7 @@ import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
 import { undoStack, redoStack } from "/s/buss/acs/location/location.stack.js";
 import { bodyEvent } from "/s/buss/acs/location/event/event.body.js";
 import { rightClickBody } from "/s/buss/acs/location/body/body.rightclick.js";
+import { createMap } from "/s/buss/acs/location/body/body.add_map.js";
 
 let confs = [];
 initData();
@@ -42,6 +43,7 @@ confs.push({
             bodyEvent(flag);
             rightClickBody(flag);
             markerDef(!flag);
+            createMap();
             layer.msg('编辑模式');
             d3.select('#shape_panel').style('display', 'block')
             conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
@@ -140,7 +142,7 @@ for (let i in datas.color) {
 }
 
 var leftShape = d3.select('#shape_panel')
-    .attr('style', "top:0px;left:0px;position:fixed;height: " + $(window).height() + "px; width: " + $(window).width() * 0.13 + "px;background-color: #ddd; display:none");
+    .attr('style', "z-index:10;top:0px;left:0px;position:fixed;height:auto; width: " + $(window).width() * 0.13 + "px;background-color: #ddd; display:none");
 var basePictrue = leftShape.append('div')
     .attr('id', 'panel_basic')
     .attr('class', 'content')
@@ -161,3 +163,14 @@ var rect = basePictrue.append('div')
     .attr('id', 'rectimg')
     .attr('src', '/s/buss/acs/location/yellowrect.png')
     .attr('style', 'width:40px;height:40px;');
+
+var addMap = leftShape.append('input')
+    .attr('id', 'map_frame')
+    .attr('class', 'content')
+    .attr('type', 'file')
+    .style('width', '164px');
+var submitMap = leftShape.append('input')
+    .attr('id', 'sub_btn')
+    .attr('class', 'content')
+    .attr('type', 'submit')
+    .style('width', '164px');

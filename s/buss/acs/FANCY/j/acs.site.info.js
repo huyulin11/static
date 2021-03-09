@@ -130,3 +130,12 @@ export var updateTaskSiteRect = function (id, data, bool) {
         if (flag) { taskSiteRectData.push(data); }
     }
 }
+
+export var updateMap = function (data) {
+    if (!taskSiteLocationData) return;
+    taskSiteLocationData.splice(0, taskSiteLocationData.length);
+    taskSiteLogicData.splice(0, taskSiteLogicData.length);
+    data.forEach((e, i) => {
+        taskSiteLocationData.push(e.location);
+    });
+}

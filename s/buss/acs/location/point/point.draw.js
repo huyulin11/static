@@ -20,7 +20,7 @@ export function drawPoints(data) {
             return tool.xnumToWindow(d[1]);
         }).attr("cy", function (d) {
             return tool.ynumToWindow(d[2]);
-        }).attr("r", 6.5)
+        }).attr("r", 3)
         .attr("fill", tool.getPointColor());
 }
 
@@ -45,9 +45,8 @@ export var drawPointId = function (data) {
         }).attr("y", function (d) {
             return tool.ynumToWindow(d[2]) - 7;
         })
-        .attr("stroke", "black")
         .attr("fill", "black")
-        .attr("font-size", "15px")
+        .attr("font-size", "7.5px")
         .attr("font-family", "sans-serif")
         .text(function (d) {
             return d[0];

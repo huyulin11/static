@@ -43,9 +43,8 @@ export var dragSite = function () {
     d3.select('#nct' + id)
         .attr("x", x + 7)
         .attr("y", y - 7)
-        .attr("stroke", "black")
         .attr("fill", "black")
-        .attr("font-size", "15px")
+        .attr("font-size", "7.5px")
         .attr("font-family", "sans-serif")
         .text('' + id);
 }

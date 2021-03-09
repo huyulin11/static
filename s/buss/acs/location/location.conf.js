@@ -2,7 +2,11 @@ var width = $(window).width();
 var height = $(window).height();//width * (domainYVal[1] - domainYVal[0]) / (domainXVal[1] - domainXVal[0]) * 4;
 var svg = d3.select("body").select("#coordinate")
     .append('div').attr('id', 'div_svg')
-    .append("svg").attr('id', 'coor_svg_one').attr("width", width).attr("height", height)
+    .append("svg")
+    .attr('id', 'coor_svg_one')
+    .attr("width", width)
+    .attr("height", height)
+    .style("background-color", "#daf1db59")
     .call(d3.zoom().on("zoom", function () {
         svg.attr("transform", d3.event.transform);
         d3.select('svg').attr("transform", 'scale(' + d3.select('svg').property('__zoom').k + ")");
