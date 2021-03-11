@@ -57,3 +57,15 @@ export var addMap = function (id, location, callback) {
         }
     });
 }
+
+export var clearMap = function (callback) {
+    gf.doAjax({
+        url: `/tasksite/clearMap.shtml`, type: "POST",
+        data: { table: "MAP_DECORATE" },
+        success: () => {
+            updateMap(location,true);
+            datas.init();
+            if (callback) { callback(); }
+        }
+    });
+}

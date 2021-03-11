@@ -131,11 +131,15 @@ export var updateTaskSiteRect = function (id, data, bool) {
     }
 }
 
-export var updateMap = function (data) {
+export var updateMap = function (data, bool) {
     if (!taskSiteLocationData) return;
-    taskSiteLocationData.splice(0, taskSiteLocationData.length);
-    taskSiteLogicData.splice(0, taskSiteLogicData.length);
-    data.forEach((e, i) => {
-        taskSiteLocationData.push(e.location);
-    });
+    if (bool) {
+        taskSiteLocationData.splice(0, taskSiteLocationData.length);
+        taskSiteLogicData.splice(0, taskSiteLogicData.length);
+        taskSiteRectData.splice(0, taskSiteRectData.length);
+    } else {
+        data.forEach((e, i) => {
+            taskSiteLocationData.push(e.location);
+        });
+    }
 }
