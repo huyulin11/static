@@ -354,6 +354,12 @@ button.choosed {
 	background-position: right top;
 }
 
+button.beta {
+    background-image: url(/s/i/icon/beta.png);
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
 .rf-op input {
 }
 
@@ -401,6 +407,10 @@ button.small {
 #rootContainer h2 {
 	font-weight: bold;
 	font-size: 30px;
+}
+
+#controlContainer{
+	width: 200px;
 }
 
 div#btns {

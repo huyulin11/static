@@ -25,7 +25,7 @@ export var initAcsControl = function () {
 	for (var btn of initBtns) {
 		if (!btn.hide) {
 			container().append("<tr><td><div><button id='" + btn.id + "'>" + btn.name + "</button></div></td></tr>");
-			if ("sysLocation" == btn.id) { $("#" + btn.id).append(`<span class='currenttip'>Beta</span>`); }
+			if ("sysLocation" == btn.id) { $("#" + btn.id).addClass(`beta`); }
 		}
 	}
 	delegateEvent();
