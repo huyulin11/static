@@ -19,11 +19,7 @@ export var createMap = function () {
                 };
                 setTimeout(() => {
                     addMap(datas.id, value, () => {
-                        d3.select("#pointHome").selectAll('circle').remove();
-                        d3.select("#pointTextHome").selectAll('text').remove();
-                        d3.select("#pathHome1").selectAll('path').remove();
-                        drawPoints(datas.udfPoints);
-                        drawPointId(datas.udfPoints);
+                        window.location.reload();
                     });
                 }, 300);
             } else return layer.msg("地图不存在，新增失败");

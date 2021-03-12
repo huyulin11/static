@@ -11,7 +11,7 @@ import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var createPath = function (point) {
     var id = point.attr('id'), x = parseFloat(point.attr('cx')), y = parseFloat(point.attr('cy'));
-    var width = parseFloat(localStorage.pathwidth / 2);
+    var width = parseFloat((localStorage.pathwidth ? localStorage.pathwidth : 5) / 2);
     var d = "M" + (x + width) + "," + (y - width) +
         "L" + (x + width) + "," + (y - width - 20) +
         "L" + (x + 2 * width) + "," + (y - width - 20) +

@@ -120,9 +120,10 @@ var startC = function () {
     };
 }
 var dargC = function () {
-    let x = event.offsetX,
-        y = event.offsetY,
-        num = $(this).attr('num'),
+    var zoom = d3.select('svg').property('__zoom');
+    var x = (event.offsetX - zoom.x) / zoom.k;
+    var y = (event.offsetY - zoom.y) / zoom.k;
+    let num = $(this).attr('num'),
         id = $(this).attr('id').slice(5),
         width = parseFloat($('#rect' + id).attr('width')),
         height = parseFloat($('#rect' + id).attr('height'));

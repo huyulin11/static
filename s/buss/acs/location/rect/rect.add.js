@@ -28,7 +28,7 @@ export var dragRect = function () {
         .attr('class', 'classRect')
         .attr('fill', '#e0e053')
         .attr('opacity', 0.5)
-        .attr('buildname', '建筑');;
+        .attr('buildname', '建筑');
     d3.select('#retext' + id)
         .attr('x', x)
         .attr('y', y + 30)
