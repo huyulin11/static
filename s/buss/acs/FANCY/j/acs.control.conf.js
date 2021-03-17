@@ -3,10 +3,10 @@ import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 export const
 	ITEM_MSG = {
-		key: 'msg', target: 'div#msgContainer'
+		key: 'msg', target: 'div#msgContainer', title: "消息"
 	},
 	ITEM_TASK = {
-		key: 'task', target: 'div#taskContainer', url: "/s/buss/sys/conf/h/agv.cache.html", init: true, height: "50%", width: "80%",
+		key: 'task', target: 'div#taskContainer', url: "/s/buss/sys/conf/h/agv.cache.html", init: true, height: "50%", width: "80%", title: "缓存任务",
 	},
 	ITEM_LOGIN = {
 		key: 'login', target: 'div#loginContainer', url: "/s/buss/g/h/loginSuccess.html", init: true, height: "450px", width: "300px", whenInit: () => {
@@ -14,19 +14,19 @@ export const
 				if ($("#loginHideDiv").hasClass("close"))
 					$("#loginHideDiv").trigger("click");
 			}, false);
-		},
+		}, title: "登录",
 	},
 	TEST_FANCY_AGV = {
-		key: 'test', container: "bottomRightCtrlContainer", target: 'div#testContainer', url: "/s/buss/acs/fancy/h/agv.test.html", init: true, height: "50%", width: "80%",
+		key: 'test', container: "bottomRightCtrlContainer", target: 'div#testContainer', url: "/s/buss/acs/fancy/h/agv.test.html", init: true, height: "50%", width: "80%", title: "调试工具",
 	};
 
 export let renderModelConfs = () => {
 	let confs = [];
 	if (localStorage.projectKey != 'LAO_FOXCONN') {
-		confs.push({ key: 'agvs', target: 'div#agvDiv' });
+		confs.push({ key: 'agvs', target: 'div#agvDiv', title: "车辆列表" });
 	}
 	if (![''].includes(localStorage.projectKey))
-		confs.push({ key: 'setup', target: 'div#controlContainer' });
+		confs.push({ key: 'setup', target: 'div#controlContainer', title: "设置" });
 
 	switch (localStorage.projectKey) {
 		case 'LAO_FOXCONN':
@@ -53,16 +53,16 @@ export let renderModelConfs = () => {
 		case 'YZBD_NRDW':
 			// confs.push({key:'tongji',target: 'div#tongjiContainer'});
 			confs.push({ key: 'search', target: 'div#searchContainer' },
-				{ key: 'shipment', target: 'div#shipmentContainer' },
-				{ key: 'receipt', target: 'div#receiptContainer' },
+				{ key: 'shipment', target: 'div#shipmentContainer', title: "出库" },
+				{ key: 'receipt', target: 'div#receiptContainer', title: "入库" },
 				{
 					key: 'POS', target: "none", click: function () {
 						let value = $(this).hasClass("close");
 						gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gflayer.obj().msg((value ? "显示" : "隐藏") + "坐标"); });
-					}
+					}, title: "坐标显隐"
 				},
-				{ key: 'PDA', target: 'div#PDAContainer' },
-				{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
+				{ key: 'PDA', target: 'div#PDAContainer', title: "PDA" },
+				{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true, title: "返回管理界面" });
 			break;
 		case 'YZBD_QSKJ':
 			confs.push(ITEM_TASK, ITEM_LOGIN);

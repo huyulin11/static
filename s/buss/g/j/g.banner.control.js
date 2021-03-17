@@ -48,14 +48,20 @@ let _initReady = (key, url, position) => {
 }
 
 let _doRenderModel = (conf, container) => {
-    let { init, whenInit, key, target, click, url, self, type, width, height, position } = conf;
+    let { init, whenInit, key, target, click, url, self, type, width, height, position, title } = conf;
     if (!position) position = {};
     if (!container) { container = _container(conf); }
+    let hideDivObj = $(`<div id='${key}HideDiv' class='close hideToggle'></div>`);
+    $("#" + container).prepend(hideDivObj);
+
+    if (title) $(hideDivObj).attr("title", title);
     if (type === 'LINK' || type === 'LAYER') {
         let style = $(`<style id='${key}HideDiv_style'></style>`);
         $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}.png);}`);
         $("head").append(style);
-        $("#" + container).prepend(`<div id='${key}HideDiv' class='close hideToggle' data-url='${url}' data-type='${type}' data-self='${self ? self : ""}'></div>`);
+        if (url) $(hideDivObj).data("url", url);
+        if (type) $(hideDivObj).data("type", type);
+        if (self) $(hideDivObj).data("self", self);
         return;
     }
 
@@ -73,10 +79,8 @@ let _doRenderModel = (conf, container) => {
     $(style).append(`#${key}HideDiv.close {background-image: url(/s//i/icon/${key}Close.png);}`)
         .append(`#${key}HideDiv.open {background-image: url(/s//i/icon/${key}Open.png);}`);
     $("head").append(style);
-    let op = $(`<div id='${key}HideDiv' class='close hideToggle'></div>`);
-    if (target) $(op).data("target", target);
-    if (click) $(op).bind("click", click);
-    $("#" + container).prepend(op);
+    if (target) $(hideDivObj).data("target", target);
+    if (click) $(hideDivObj).bind("click", click);
 }
 
 let _initEvent = (container) => {
