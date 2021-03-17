@@ -37,6 +37,15 @@
 	box-shadow: #d9d9d973 10px 10px 30px 10px;
 }
 
+#bottomRightCtrlContainer {
+	position: fixed;
+	right: 10px;
+	bottom: 16px;
+	background: #ffffffb3;
+	border-radius: 10px;
+	box-shadow: #d9d9d973 10px 10px 30px 10px;
+}
+
 .frameInContainer{
 	height:100%;
 	width: 100%;
@@ -49,4 +58,11 @@
 	background-size: 75%;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+#testContainer {
+	top: auto;
+	bottom: 65px;
+	right: 1%;
+	left: auto;
 }

@@ -15,6 +15,9 @@ export const
 					$("#loginHideDiv").trigger("click");
 			}, false);
 		},
+	},
+	TEST_FANCY_AGV = {
+		key: 'test', container: "bottomRightCtrlContainer", target: 'div#testContainer', url: "/s/buss/acs/fancy/h/agv.test.html", init: true, height: "50%", width: "80%",
 	};
 
 export let renderModelConfs = () => {

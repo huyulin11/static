@@ -7,6 +7,8 @@ import { fetchTaskTaikaiJy, deleverTaskTaikaiJy, waitHandler } from '/s/buss/acs
 import { fetchTaskLaoFoxconn, deleverTaskLaoFoxconn } from '/s/buss/acs/FANCY/j/agv/agv.info.laoFoxconn.js';
 import { gotoInitLaoDbwy, deleverInitHandler, deleverStereotypeHandler, deleverPackHandler, gotoStereotypeHandler, gotoPackHandler } from '/s/buss/acs/FANCY/j/agv/agv.info.laoDbwy.js';
 import { initBtns } from '/s/buss/acs/FANCY/j/agv/agv.info.conf.js';
+import { renderModel } from "/s/buss/g/j/g.banner.control.js";
+import { TEST_FANCY_AGV } from "/s/buss/acs/FANCY/j/acs.control.conf.js";
 
 var agvId = currentAgvId;
 var currentTask = new Array();
@@ -178,6 +180,10 @@ export var init = function (target) {
 			$(that).addClass("choosed");
 		}
 	});
+
+	if (sessionStorage.IS_FANCY_PROJECT) {
+		renderModel([TEST_FANCY_AGV]);
+	}
 
 	let items = [
 		{ id: 'TRANSPORT', handler: function () { transportHandler(this); } },

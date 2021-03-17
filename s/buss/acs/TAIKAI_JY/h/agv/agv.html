@@ -13,6 +13,7 @@
     <div id="rootContainer">
         <div id="agvDetail"></div>
     </div>
+    <div id="testContainer"></div>
 </body>
 <script src="/s/j/jquery-1.12.2.min.js"></script>
 <script src="/s/j/layer/v3.1.1/layer.js"></script>
@@ -26,8 +27,8 @@
     import { showTaskexe } from "/s/buss/acs/FANCY/j/agv/agv.taskexe.info.js";
     import { init as initOp } from "/s/buss/acs/FANCY/j/agv/agv.op.js";
     gf.quote("/s/buss/acs/" + localStorage.projectKey + "/h/agv/agv.detail.html", "#agvDetail", function () {
+        sessionStorage.IS_FANCY_PROJECT = true;
         initInfo("#op");
-        initOp("div#tempAgvMgr");
         setInterval(function () { showTaskexe(currentTask); }, 500);
     });
 </script>
