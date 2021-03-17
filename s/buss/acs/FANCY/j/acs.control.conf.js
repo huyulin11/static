@@ -27,45 +27,58 @@ export let renderModelConfs = () => {
 	}
 	if (![''].includes(localStorage.projectKey))
 		confs.push({ key: 'setup', target: 'div#controlContainer' });
-	if (localStorage.projectKey == 'LAO_FOXCONN') {
-		confs.push(ITEM_MSG, ITEM_LOGIN);
-	} else if (localStorage.projectKey == 'TAIKAI_JY') {
-		confs.push(ITEM_MSG);
-	} else if (localStorage.projectKey == 'CSY_DAJ') {
-		confs.push(
-			{ key: 'charge', target: 'div#chargeContainer' },
-			{ key: 'windowCenter', target: 'div#windowCenterContainer' },
-			{ key: 'window', target: 'div#windowContainer' },
-			{ key: 'wms', target: 'div#wmsContainer' },
-			ITEM_MSG
-		);
-	} else if (localStorage.projectKey == 'CSY_CDBP') {
-		confs.push(ITEM_TASK, ITEM_MSG);
-	} else if (localStorage.projectKey == 'HONGFU_ZHENMU') {
-		confs.push(ITEM_MSG);
-	} else if (localStorage.projectKey == 'YZBD_NRDW') {
-		// confs.push({key:'tongji',target: 'div#tongjiContainer'});
-		confs.push({ key: 'search', target: 'div#searchContainer' },
-			{ key: 'shipment', target: 'div#shipmentContainer' },
-			{ key: 'receipt', target: 'div#receiptContainer' },
-			{
-				key: 'POS', target: "none", click: function () {
-					let value = $(this).hasClass("close");
-					gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gflayer.obj().msg((value ? "显示" : "隐藏") + "坐标"); });
-				}
-			},
-			{ key: 'PDA', target: 'div#PDAContainer' },
-			{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
-	} else if (localStorage.projectKey == 'YZBD_QSKJ') {
-		confs.push(ITEM_TASK, ITEM_LOGIN);
-	} else if (localStorage.projectKey == 'QDTY_SELF') {
-		ITEM_TASK.container = "bottomCtrlContainer";
-		ITEM_TASK.width = "35%";
-		confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
-	} else if (localStorage.projectKey == 'KFKJ_SELF') {
-		ITEM_TASK.container = "bottomCtrlContainer";
-		ITEM_TASK.width = "35%";
-		confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
+
+	switch (localStorage.projectKey) {
+		case 'LAO_FOXCONN':
+			confs.push(ITEM_MSG, ITEM_LOGIN);
+			break;
+		case 'TAIKAI_JY':
+			confs.push(ITEM_MSG);
+			break;
+		case 'CSY_DAJ':
+			confs.push(
+				{ key: 'charge', target: 'div#chargeContainer' },
+				{ key: 'windowCenter', target: 'div#windowCenterContainer' },
+				{ key: 'window', target: 'div#windowContainer' },
+				{ key: 'wms', target: 'div#wmsContainer' },
+				ITEM_MSG
+			);
+			break;
+		case 'CSY_CDBP':
+			confs.push(ITEM_TASK, ITEM_MSG);
+			break;
+		case 'HONGFU_ZHENMU':
+			confs.push(ITEM_MSG);
+			break;
+		case 'YZBD_NRDW':
+			// confs.push({key:'tongji',target: 'div#tongjiContainer'});
+			confs.push({ key: 'search', target: 'div#searchContainer' },
+				{ key: 'shipment', target: 'div#shipmentContainer' },
+				{ key: 'receipt', target: 'div#receiptContainer' },
+				{
+					key: 'POS', target: "none", click: function () {
+						let value = $(this).hasClass("close");
+						gf.ajax("/de/acs/toggleCargoPos.shtml", { value: value }, 'json', (data) => { gflayer.obj().msg((value ? "显示" : "隐藏") + "坐标"); });
+					}
+				},
+				{ key: 'PDA', target: 'div#PDAContainer' },
+				{ type: 'LINK', key: 'manager', url: '/s/buss/g/h/manager.html', self: true });
+			break;
+		case 'YZBD_QSKJ':
+			confs.push(ITEM_TASK, ITEM_LOGIN);
+			break;
+		case 'QDTY_SELF':
+			ITEM_TASK.container = "bottomCtrlContainer";
+			ITEM_TASK.width = "35%";
+			confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
+			break;
+		case 'KFKJ_SELF':
+			ITEM_TASK.container = "bottomCtrlContainer";
+			ITEM_TASK.width = "35%";
+			confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
+			break;
+		default:
+			break;
 	}
 	return confs;
 };
