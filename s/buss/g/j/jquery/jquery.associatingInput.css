@@ -1,0 +1,3 @@
+div.associating-input-container {height: auto;box-shadow: grey 10px 10px 30px 5px; position: fixed;display: none;background: #fff;}
+div.associating-input-container a {font-size: 14px;line-height:25px;}
+div.associating-input-container a:hover div {font-size: 13px;background-color: #2e72ab;color:#FFF;cursor:point;}
