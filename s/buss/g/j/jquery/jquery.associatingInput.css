@@ -25,6 +25,9 @@ div.associating-input-container div.associating-input-val:hover div{
 div.associating-input-container div.associating-input-val:hover  {
     cursor:point;
 }
+div.associating-input-container button.associating-input-val {
+    font-size: 14px;
+}
 div.associating-input-container button.associating-input-val:hover {
     background-color: #2e72ab;
     color:#FFF;

@@ -62,7 +62,9 @@ var _init = function () {
     var _focusShowTipsContent = function (that) {
         var t = $(that).offset().top + $(that).height() * 1.6;
         var l = $(that).offset().left;
-        $(_dataarea).css("width", $(that).css("width")).css("top", t).css("left", l).show();
+        var w = $(that).css("width");
+        if (window.outerWidth < 1000) { t = 60; l = 10; w = window.outerWidth - 20; }
+        $(_dataarea).css("width", w).css("top", t).css("left", l).show();
         $(_dataarea).data("bindid", $(that).attr("id"));
         _showTipsContent(that);
     }
