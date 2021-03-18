@@ -1,3 +1,32 @@
-div.associating-input-container {height: auto;box-shadow: grey 10px 10px 30px 5px; position: fixed;display: none;background: #fff;}
-div.associating-input-container a {font-size: 14px;line-height:25px;}
-div.associating-input-container a:hover div {font-size: 13px;background-color: #2e72ab;color:#FFF;cursor:point;}
+div.associating-input-container {
+    height: auto;
+    box-shadow: grey 10px 10px 30px 5px;
+     position: fixed;
+     display: none;
+     background: #fff;
+}
+div.associating-input-container .associating-input-val {
+    font-size: 14px;
+    line-height:25px;
+    width: auto;
+}
+div.associating-input-container .associating-input-val div {
+    border-color: #2e72abb0;
+}
+div.associating-input-container .associating-input-val div.gray {
+     background: rgb(249 249 249);
+}
+div.associating-input-container div.associating-input-val:hover div{
+    font-size: 13px;
+    background-color: #2e72ab;
+    color:#FFF;
+    cursor:point;
+}
+div.associating-input-container div.associating-input-val:hover  {
+    cursor:point;
+}
+div.associating-input-container button.associating-input-val:hover {
+    background-color: #2e72ab;
+    color:#FFF;
+    cursor:point;
+}

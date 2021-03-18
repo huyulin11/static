@@ -38,8 +38,9 @@
                 <tr id="lineTr" class="hidden">
                     <td><label>产线</label></td>
                     <td><input id="line" @keyup.enter="lineEnter" autocomplete="off" class="associating-input"
-                            data-searchurl='/sys/lap/bjjk/huirui/findFirstPage.shtml?lapInfoFormMap.name='
-                            data-showcol='name' data-keycol='name' data-containerofinput="#rootContainer" /></td>
+                            data-searchurl='/sys/lap/bjjk/huirui/findByPage.shtml?lapInfoFormMap.type=PROD_LINE&lapInfoFormMap.name='
+                            data-showcol='name' data-showtype='button' data-keycol='name'
+                            data-containerofinput="#rootContainer" /></td>
                 </tr>
             </tbody>
         </table>

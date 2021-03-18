@@ -3,7 +3,7 @@ import { gf } from "/s/buss/g/j/g.f.js";
 var _div_id = "a-i-container-id";
 var _dataarea = `div#${_div_id}`;
 var _target = "input.associating-input";
-var _target_val = "a.associating-input-val";
+var _target_val = ".associating-input-val";
 
 /**CSY_DAJ项目依赖*/
 var getStatus = function (status) {
@@ -14,7 +14,6 @@ var getStatus = function (status) {
 
 var _init = function () {
     if ($(_dataarea).length > 0) { return; }
-    $("head").append("<style id='associating-input'></style>");
     gf.quote("/s/buss/g/j/jquery/jquery.associatingInput.css");
     $("body").append(`<div id='${_div_id}' class='associating-input-container'></div>`);
 
@@ -51,12 +50,6 @@ var _init = function () {
         if (window.dispatchEvent) { window.dispatchEvent(myEvent); } else { window.fireEvent(myEvent); }
     });
 
-    // $("html").one("focus", _target, function () {
-    //     setTimeout(() => {
-    //         $(this).trigger("click");
-    //     }, 100);
-    // });
-
     var flag = false;
 
     $("html").on("click", _target, function (e) {
@@ -82,6 +75,7 @@ var _init = function () {
             connectsecond = $(that).data("connectsecond"),
             searchUrl = $(that).data("searchurl"),
             showcol = $(that).data("showcol"),
+            showtype = $(that).data("showtype"),
             keycol = $(that).data("keycol");
         clearTimeout(tout);
 
@@ -104,24 +98,24 @@ var _init = function () {
 
         var dealdata = function (datas) {
             var color = 0;
-            var targets = null;
+            var tpDatas = null;
             if (!datas) {
                 return;
             }
             if (!datas.records) {
-                targets = datas;
+                tpDatas = datas;
             } else {
-                targets = datas.records;
+                tpDatas = datas.records;
             }
-            console.log(targets.length);
-            if (targets.length == 0) {
+            console.log(tpDatas.length);
+            if (tpDatas.length == 0) {
                 $(_dataarea).html("<div>未找到匹配关键字数据……</div>");
             }
-            for (var x in targets) {
-                var tpData = targets[x];
+            for (var tpData of tpDatas) {
                 if (typeof tpData == "function") { continue; }
                 var showcolList = showcol.split(",");
                 var showInfo = "";
+                var obj = $(`<div></div>`);
                 $.each(showcolList, function (e, a) {
                     var valShow;
                     if (a.indexOf("(") > 0 && a.indexOf(")") > 0 && a.indexOf(")") > a.indexOf("(")) {
@@ -133,21 +127,26 @@ var _init = function () {
                     }
                     showInfo = showInfo + (!showInfo ? "" : ",") + (valShow ? valShow : "");
                 });
+                $(obj).html(showInfo);
                 if (!keycol) {
                     keycol = showcolList[0];
                 }
                 var keyInfo = "";
                 keyInfo = keyInfo + (!keyInfo ? "" : ",") + tpData[keycol];
-                keyInfo = " data-keyinfo='" + keyInfo + "' ";
+                $(obj).data("keyinfo", showInfo);
 
-                var cols = "";
                 for (var key in tpData) {
-                    cols = cols + " data-" + key + "='" + tpData[key] + "' ";
+                    $(obj).data(key, tpData[key]);
                 }
-
-                $(_dataarea).append("<a class='associating-input-val'><div " + keyInfo
-                    + " class='" + ((color++ % 2) == 0 ? "bg-light" : "bg-white")
-                    + "'" + cols + ">" + showInfo + "</div></a>");
+                var wrapper;
+                if (showtype == "button") {
+                    wrapper = $(`<button class='associating-input-val'></button>`);
+                } else {
+                    $(obj).addClass((color++ % 2) == 0 ? "gray" : "white");
+                    wrapper = $(`<div class='associating-input-val'></div>`);
+                }
+                $(wrapper).append(obj);
+                $(_dataarea).append(wrapper);
             }
         }
 

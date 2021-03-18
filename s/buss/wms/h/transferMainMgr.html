@@ -15,7 +15,9 @@
             </label>
             <label>
                 <span>产线:</span>
-                <input id="name" name="name">
+                <input id="name" name="name" @keyup.enter="lineEnter" autocomplete="off" class="associating-input"
+                    data-searchurl='/sys/lap/bjjk/huirui/findByPage.shtml?lapInfoFormMap.type=PROD_LINE&lapInfoFormMap.name='
+                    data-showcol='name' data-showtype='div' data-keycol='name' data-containerofinput="#info" />
             </label>
             <label>
                 <span>单据状态:</span>
@@ -33,5 +35,6 @@
     <div id="paging" class="pagclass"></div>
 </div>
 <script type="module">
+    import "/s/buss/g/j/jquery/jquery.associatingInput.js";
     import "/s/buss/wms/j/transfer.main.list.js";
 </script>
