@@ -6,6 +6,6 @@ confs.push({
     url: "/s/buss/sys/conf/browser.conf.html",
     key: 'browser', target: '#browserContainer',
     position: { height: gf.isPc() ? "30%" : "60%", width: gf.isPc() ? "30%" : "90%", bottom: "80px", left: "10px", top: "auto" },
-    container: "bottomCtrlContainer", init: true
+    container: "bottomRightCtrlContainer", init: true
 });
 renderModel(confs);

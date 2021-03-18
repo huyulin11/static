@@ -68,12 +68,12 @@ export let renderModelConfs = () => {
 			confs.push(ITEM_TASK, ITEM_LOGIN);
 			break;
 		case 'QDTY_SELF':
-			ITEM_TASK.container = "bottomCtrlContainer";
+			ITEM_TASK.container = "bottomLeftCtrlContainer";
 			ITEM_TASK.width = "35%";
 			confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
 			break;
 		case 'KFKJ_SELF':
-			ITEM_TASK.container = "bottomCtrlContainer";
+			ITEM_TASK.container = "bottomLeftCtrlContainer";
 			ITEM_TASK.width = "35%";
 			confs.push(ITEM_TASK, ITEM_MSG, ITEM_LOGIN);
 			break;
