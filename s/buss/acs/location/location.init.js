@@ -4,6 +4,7 @@ import { renderSvg } from "/s/buss/acs/location/location.render.js";
 import { dataAgvLocation } from "/s/buss/acs/location/location.data.js";
 import { drawAgv } from "/s/buss/acs/location/agv/draw.agv.js";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
+import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { mouseEvent } from "/s/buss/acs/location/location.event.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
@@ -25,15 +26,23 @@ setInterval(() => {
     drawAgv();
 }, 3000);
 confs.push({
-    init: true, url: "/s/buss/sys/conf/h/traffic.area.html",
+    init: true, title: "交管区域设计", url: "/s/buss/sys/conf/h/traffic.area.html",
     key: 'area', target: 'div#areaContainer', height: "70%", width: "50%"
 });
 confs.push({
-    init: true, url: "/s/buss/agv/site/cache/h/site.cache.html",
+    init: true, title: "站点缓存设计", url: "/s/buss/agv/site/cache/h/site.cache.html",
     key: 'cache', target: 'div#cacheContainer', height: "70%", width: "50%"
 });
 confs.push({
-    key: 'mouse', click: function () {
+    key: 'clear', title: "清空缓存", click: function () {
+        if (!confirm('是否确认执行该操作?')) { return; }
+        gf.doAjax({
+            url: `/tasksite/cache/clear.shtml`, type: "POST"
+        });
+    }
+});
+confs.push({
+    key: 'mouse', title: "查看/编辑地图", click: function () {
         let flag = $(this).hasClass("close");
         $('.open').attr('class', 'close hideToggle');
         if (flag) {
