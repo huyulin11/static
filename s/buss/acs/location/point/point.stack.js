@@ -2,11 +2,11 @@ import { editLocation, deleteLocation } from "/s/buss/acs/location/url/siteinfo.
 import { addLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { drawPointId, drawPoints } from "/s/buss/acs/location/point/point.draw.js";
-import { dragPoint, rightClickPoint } from "/s/buss/acs/location/location.event.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
 import { updatePathWhenDragPoint, updatePathWhenUpdateID } from "/s/buss/acs/location/path/path.update.js";
 import { pathFunc } from "/s/buss/acs/location/path/path.stack.js";
+import pointEvent from "/s/buss/acs/location/point/point.event.js";
 
 export var cirFunc = {};
 
@@ -91,8 +91,8 @@ cirFunc.redoCircleAdd = function (pop, callback) {
         d3.select('#pointTextHome').selectAll("text").remove();
         drawPoints(datas.udfPoints);
         drawPointId(datas.udfPoints);
-        dragPoint(true);
-        rightClickPoint(true);
+        pointEvent.dragPoint(true);
+        pointEvent.rightClickPoint(true);
         if (callback) { callback() };
     });
 }

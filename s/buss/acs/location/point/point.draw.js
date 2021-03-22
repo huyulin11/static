@@ -4,9 +4,7 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 export function drawPoints(data) {
     conf.pointHome.selectAll("circle").remove();
     var circleEnter = conf.pointHome.selectAll("circle").data(data).enter();
-
     circleEnter.append("circle")
-        // .transition().duration(3000)
         .attr("id", function (d) {
             return d[0];
         }).attr("class", function (d) {
@@ -17,15 +15,6 @@ export function drawPoints(data) {
             return tool.ynumToWindow(d[2]);
         }).attr("r", 3)
         .attr("fill", tool.getPointColor());
-}
-
-export function drawNewPoint(id, x, y) {
-    conf.pointHome.append("circle")
-        .attr("id", id)
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("r", 6.5)
-        .attr("fill", "blue");
 }
 
 export var drawPointId = function (data) {
@@ -46,10 +35,6 @@ export var drawPointId = function (data) {
         .text(function (d) {
             return d[0];
         });
-}
-
-var hidePointId = function () {
-    conf.pointTextHome.selectAll("text").remove();
 }
 
 export var updatePointId = function (id, x, y) {
