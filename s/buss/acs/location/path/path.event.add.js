@@ -41,7 +41,7 @@ export var createPath = function (point) {
         .attr("id", "newpath")
         .attr("class", "clashLine")
         .attr("from", id)
-        .attr("fill", "#8a8a8a")
+        .attr("fill", "#4896dac2")
         .attr("d", d);
 
     conf.pathHome3.selectAll(".clashLine").call(
@@ -62,7 +62,7 @@ var drag = function () {
     $(this).attr("d", pathTool.dPath(mPoint[0], x, mPoint[1], y))
         .attr("style", "marker-end:url(#triangle2);")
         .attr("fill", "none")
-        .attr("stroke", "#8a8a8a")
+        .attr("stroke", "#4896dac2")
         .attr("stroke-width", function () { return localStorage.pathwidth; });
 }
 

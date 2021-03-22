@@ -3,12 +3,7 @@ import { tool } from "/s/buss/acs/location/location.tool.js";
 
 export function drawPoints(data) {
     conf.pointHome.selectAll("circle").remove();
-    var circleUpdate = conf.pointHome.selectAll("circle").data(data);
-    var circleEnter = circleUpdate.enter();
-
-    // //update部分的处理方法
-    // circleUpdate.transition()//更新数据时启动过渡  
-    //     .duration(500).attr("r", 6.5);
+    var circleEnter = conf.pointHome.selectAll("circle").data(data).enter();
 
     circleEnter.append("circle")
         // .transition().duration(3000)
@@ -41,9 +36,9 @@ export var drawPointId = function (data) {
             var id = 't' + d[0];
             return id;
         }).attr("x", function (d) {
-            return tool.xnumToWindow(d[1]) + 7;
+            return tool.xnumToWindow(d[1]) + 3.5;
         }).attr("y", function (d) {
-            return tool.ynumToWindow(d[2]) - 7;
+            return tool.ynumToWindow(d[2]) - 3.5;
         })
         .attr("fill", "black")
         .attr("font-size", "7.5px")
@@ -59,6 +54,6 @@ var hidePointId = function () {
 
 export var updatePointId = function (id, x, y) {
     conf.pointTextHome.select("#t" + id)
-        .attr("x", x + 7)
-        .attr("y", y - 7);
+        .attr("x", x + 3.5)
+        .attr("y", y - 3.5);
 }

@@ -18,7 +18,7 @@ export var changePathSize = function () {
     })
     d3.select('#delPathWidth').on('click', function () {
         d3.event.stopPropagation();
-        if (localStorage.pathwidth > 3.5) {
+        if (localStorage.pathwidth > 2) {
             undoStack.push({ 'size2': parseFloat(localStorage.pathwidth) - 0.5, 'name': 'pathchangesize', 'size': localStorage.pathwidth });
             localStorage.pathwidth = parseFloat(localStorage.pathwidth) - 0.5;
             d3.selectAll('path').attr('stroke-width', function () { return localStorage.pathwidth });
