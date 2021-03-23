@@ -182,7 +182,7 @@ export var init = function (target) {
 	});
 
 	if (sessionStorage.IS_FANCY_PROJECT) {
-		renderModel([TEST_FANCY_AGV]);
+		renderModel([TEST_FANCY_AGV(currentAgvId)]);
 	}
 
 	let items = [
