@@ -2,8 +2,8 @@ import { getMPoint } from "/s/buss/acs/location/path/render.d.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { getClosestPoint } from "/s/buss/acs/location/path/path.event.add.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
-import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
+import rightclick from "/s/buss/acs/location/path/path.rightclick.js";
 
 export var event = {};
 
@@ -37,9 +37,8 @@ event.end = function () {
     var flag = $("#p" + siteid + nextid)[0];
     if (!flag) {
         var x2 = point.x2, y2 = point.y2;
-        var side = pathTool.getSide(x1, x2, y1, y2);
-        var side2 = pathTool.getSide(x1, xOld, y1, yOld);
-        var path = { 'side2': side2, 'side1': side, 'siteid': siteid, 'nextid': nextid, 'oldnext': oldnext };
+        var side = d3.select(this).data()[0].side;
+        var path = { 'side2': side, 'side1': side, 'siteid': siteid, 'nextid': nextid, 'oldnext': oldnext };
         undoStack.push({ 'name': 'pathdrag', 'path': path, 'x1': x1, 'y1': y1 });
         saveLogic(side, siteid, nextid, oldnext);
         d3.select(this)
@@ -77,17 +76,21 @@ event.delPath = function (d, i) {
         d3.event.stopPropagation();
         d3.event.preventDefault();
         var path = d3.select(this);
-        var wPath = d3.select("#w" + $(this).attr("from") + $(this).attr("to"));
-        var marPath = d3.select("#mar" + $(this).attr("from") + $(this).attr("to"));
-        var siteid = $(this).attr('from'), nextid = $(this).attr('to');
-        var value = { "siteid": siteid, "nextid": nextid };
-        undoStack.push({ 'name': 'pathdel', 'value': value });
-        let ii = layer.confirm('是否删除？', function (index) {
-            deleteLogic(value, true);
-            path.remove();
-            wPath.remove();
-            marPath.remove();
-            layer.close(ii);
-        });
+        var side = d3.select(this).data()[0].side;
+        d3.selectAll('#tipsloc').remove();
+        let x = d3.event.offsetX,
+            y = d3.event.offsetY;
+        d3.select('svg').append('circle')
+            .attr('id', 'tipsloc')
+            .attr('cx', x)
+            .attr('cy', y)
+            .attr('fill', 'none')
+            .attr('r', 4);
+        var tips = layer.tips('<input type="button" id="delpath" style="width: 76px;height: 30px" value="删除路径"><br>'
+            + '<input type="button" id="editderction" style="width: 76px;height: 30px" value="修改方向">',
+            '#tipsloc', { tips: [2, '#e6e6e6'], time: 10000 });
+        d3.select("body").on("click", function () { return layer.close(tips); });
+        d3.select("#delpath").on("click", function () { rightclick.deletePath(path) })
+        d3.select("#editderction").on("click", function () { rightclick.changeDirection(path, side) })
     }
 }

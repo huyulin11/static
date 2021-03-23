@@ -1,0 +1,42 @@
+import { editLogic } from "/s/buss/acs/location/url/logic.url.js";
+import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
+import { undoStack } from "/s/buss/acs/location/location.stack.js";
+
+export default {
+    changeDirection(path, side) {
+        let i = layer.confirm(`当前站点方向为${side == 2 ? "右" : "左"},是否确认更改？`, {
+            btn: ['确认', '取消']
+        }, function () {
+            if (side == 1) { side = 2; }
+            else if (side == 2) side = 1;
+            var data = path.data()[0];
+            data.side = side;
+            var siteid = data.from, nextid = data.to, id = data.id;
+            editLogic(side, siteid, nextid, () => {
+                path.attr("stroke", function (d) {
+                    d.side = side;
+                    return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+                });
+                d3.select("#mar" + id).select("path").attr("fill", function (d) {
+                    d.side = side;
+                    return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+                })
+            });
+            layer.close(i);
+        });
+    },
+    deletePath(path) {
+        let ii = layer.confirm('是否删除？', function (index) {
+            var data = path.data()[0];
+            var marPath = d3.select("#mar" + data.id);
+            var side = data.side;
+            var siteid = data.from, nextid = data.to;
+            var value = { "siteid": siteid, "nextid": nextid, "side": side };
+            undoStack.push({ 'name': 'pathdel', 'value': value });
+            deleteLogic(value, true);
+            path.remove();
+            marPath.remove();
+            layer.close(ii);
+        });
+    }
+}

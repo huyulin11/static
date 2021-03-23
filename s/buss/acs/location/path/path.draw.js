@@ -15,7 +15,9 @@ var getP = function (data) {
             return d.to;
         })
         .attr("fill", "none")
-        .attr("stroke", "#8a8a8a")
+        .attr("stroke", function (d) {
+            return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+        })
         .attr("stroke-width", function () {
             return localStorage.pathwidth;
         }).attr("style", function (d) {

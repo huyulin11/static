@@ -10,9 +10,7 @@ import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js
 export var pathFunc = {};
 
 pathFunc.undoPathDel = function (pop) {
-    let x1 = $('#' + pop.siteid).attr('cx'), y1 = $('#' + pop.siteid).attr('cy');
-    let x2 = $('#' + pop.nextid).attr('cx'), y2 = $('#' + pop.nextid).attr('cy');
-    var side = pathTool.getSide(x1, x2, y1, y2);
+    var side = pop.side;
     saveLogic(side, pop.siteid, pop.nextid, '', () => {
         markerDef(false);
         editDrawPath(datas.path);

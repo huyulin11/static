@@ -14,16 +14,16 @@ export var bodyEvent = function (flag) {
 let flag_key = false;
 var bodyKeyDown = function (flag) {
     d3.select('body').on('keydown', !flag ? null : function () {
-        if (!flag_key) {
-            d3.select('body').on('keydown', null);
-            flag_key = true;
-        };
         if (d3.event.ctrlKey == true && d3.event.keyCode == 90) {
             return ctrlZ();
         } else if (d3.event.ctrlKey == true && d3.event.keyCode == 89) {
             return ctrlY();
         } else if (d3.event.keyCode == 46 || d3.event.keyCode == 8) {
             return backspace();
+        };
+        if (!flag_key) {
+            // d3.select('body').on('keydown', null);
+            flag_key = true;
         };
     })
 }

@@ -40,3 +40,23 @@ export var deleteLogic = function (value, bool) {
         }
     });
 }
+
+export var editLogic = function (side, siteid, nextid, callback) {
+    var json = {
+        "TaskSiteLogicFormMap.siteid": siteid,
+        "TaskSiteLogicFormMap.nextid": nextid,
+        "TaskSiteLogicFormMap.side": side == 2 ? 2 : 1,
+        "TaskSiteLogicFormMap.distance": 1,
+    };
+    var json2 = {
+        "siteid": parseInt(siteid),
+        "nextid": parseInt(nextid),
+        "side": side,
+        "distance": 1,
+    };
+    updatetaskSiteLogic(siteid, "", json2);
+    gf.ajax(`/tasksitelogic/editEntity.shtml`, json, "json", function (data) {
+        datas.init();
+        if (callback) { callback() };
+    });
+}

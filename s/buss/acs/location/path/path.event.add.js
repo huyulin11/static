@@ -77,9 +77,8 @@ var end = function () {
         var arr = getMPoint(s);
         var x1 = arr[0], y1 = arr[1];
         var x2 = point.x2, y2 = point.y2;
-        var side = pathTool.getSide(x1, x2, y1, y2);
-        undoStack.push({ 'name': 'pathadd', 'path': { 'id': siteid + nextid, 'from': siteid, 'to': nextid, 'side': side } });
-        saveLogic(side, siteid, nextid, '', () => {
+        undoStack.push({ 'name': 'pathadd', 'path': { 'id': siteid + nextid, 'from': siteid, 'to': nextid, 'side': 2 } });
+        saveLogic(2, siteid, nextid, '', () => {
             markerDef(false);
             editDrawPath(datas.path);
             dragPath(true);

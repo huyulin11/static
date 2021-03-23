@@ -29,7 +29,7 @@ datas.color = {
 
 var dataLogic = function (data) {
     for (var val of data) {
-        datas.logic.push({ "siteid": val.siteid, "nextid": val.nextid });
+        datas.logic.push({ "side": val.side, "siteid": val.siteid, "nextid": val.nextid });
     }
 }
 
@@ -44,6 +44,7 @@ var dataLocation = function (data) {
                 for (var next of data) {
                     if (logic.nextid == next.id) {
                         datas.path.push({
+                            "side": logic.side,
                             "id": val.id + "" + next.id,
                             "from": val.id,
                             "to": next.id,

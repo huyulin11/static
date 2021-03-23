@@ -2,7 +2,6 @@ import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { globalCss } from "/s/buss/g/j/g.css.js";
 
 var defaultErr = function (XMLHttpRequest, textStatus, errorThrown) {
-    debugger
     let msg = XMLHttpRequest.responseText;
     msg = msg ? msg : "连接超时，请尝试重新登录！";
     gflayer.msg(msg);

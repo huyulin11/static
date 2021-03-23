@@ -25,7 +25,10 @@ export var markerDef = function (flag) {
                 return pathTool.markerRadian(result1[0], result2[0], result1[1], result2[1]);
             };
         });
-    marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z").attr("fill", "#8a8a8a");
+    marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z")
+        .attr("fill", function (d) {
+            return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+        });
 
     var defs2 = conf.defsHome.append("defs").attr('id', 'defs2');
     var marker2 = defs2.append("marker")
