@@ -6,7 +6,7 @@ import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
 import { editDrawPath } from "/s/buss/acs/location/path/path.draw.js";
-import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js";
+import pathEvent from "/s/buss/acs/location/path/path.event.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export var createPath = function (point) {
@@ -75,14 +75,12 @@ var end = function () {
     if (!flag) {
         let s = $(this).attr("d");
         var arr = getMPoint(s);
-        var x1 = arr[0], y1 = arr[1];
-        var x2 = point.x2, y2 = point.y2;
         undoStack.push({ 'name': 'pathadd', 'path': { 'id': siteid + nextid, 'from': siteid, 'to': nextid, 'side': 2 } });
         saveLogic(2, siteid, nextid, '', () => {
             markerDef(false);
             editDrawPath(datas.path);
-            dragPath(true);
-            rightClickPath(true);
+            pathEvent.dragPath(true);
+            pathEvent.rightClickPath(true);
         });
     } else {
         layer.msg('新增失败，该路径已存在！');

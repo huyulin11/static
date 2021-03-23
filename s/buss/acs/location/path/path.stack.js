@@ -4,8 +4,7 @@ import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
 import { editDrawPath } from "/s/buss/acs/location/path/path.draw.js";
-import { dragPath, rightClickPath } from "/s/buss/acs/location/location.event.js";
-
+import pathEvent from "/s/buss/acs/location/path/path.event.js";
 
 export var pathFunc = {};
 
@@ -14,8 +13,8 @@ pathFunc.undoPathDel = function (pop) {
     saveLogic(side, pop.siteid, pop.nextid, '', () => {
         markerDef(false);
         editDrawPath(datas.path);
-        dragPath(true);
-        rightClickPath(true);
+        pathEvent.dragPath(true);
+        pathEvent.rightClickPath(true);
     });
 }
 
@@ -48,8 +47,8 @@ pathFunc.redoPathAdd = function (path) {
     saveLogic(side, siteid, nextid, '', () => {
         markerDef(false);
         editDrawPath(datas.path);
-        dragPath(true);
-        rightClickPath(true);
+        pathEvent.dragPath(true);
+        pathEvent.rightClickPath(true);
     });
 }
 
@@ -69,27 +68,12 @@ pathFunc.undoPathDrag = function (pop) {
     let side = pop.path.side2,
         oldnext = pop.path.oldnext,
         siteid = pop.path.siteid,
-        nextid = pop.path.nextid,
-        x1 = pop.x1,
-        y1 = pop.y1;
-    let x2 = $('#' + oldnext).attr('cx'),
-        y2 = $('#' + oldnext).attr('cy');
+        nextid = pop.path.nextid;
     saveLogic(side, siteid, oldnext, nextid, () => {
-        d3.select('#p' + siteid + nextid)
-            .attr('id', 'p' + siteid + oldnext)
-            .attr('to', oldnext)
-            .attr('d', function (d) {
-                d.to = oldnext;
-                d.id = siteid + oldnext;
-                return pathTool.dPath(x1, x2, y1, y2);
-            })
-        d3.select("#mar" + siteid + nextid)
-            .attr('id', 'p' + siteid + oldnext)
-            .attr("orient", function (d) {
-                d.to = oldnext;
-                d.id = siteid + oldnext;
-                return pathTool.markerRadian(x1, x2, y1, y2);
-            });
+        markerDef(false);
+        editDrawPath(datas.path);
+        pathEvent.dragPath(true);
+        pathEvent.rightClickPath(true);
     })
 }
 
@@ -97,27 +81,12 @@ pathFunc.redoPathDrag = function (pop) {
     let side = pop.path.side1,
         oldnext = pop.path.oldnext,
         siteid = pop.path.siteid,
-        nextid = pop.path.nextid,
-        x1 = pop.x1,
-        y1 = pop.y1;
-    let x2 = $('#' + nextid).attr('cx'),
-        y2 = $('#' + nextid).attr('cy');
+        nextid = pop.path.nextid;
     saveLogic(side, siteid, nextid, oldnext, () => {
-        d3.select('#p' + siteid + oldnext)
-            .attr('id', 'p' + siteid + nextid)
-            .attr('to', nextid)
-            .attr('d', function (d) {
-                d.to = nextid;
-                d.id = siteid + nextid;
-                return pathTool.dPath(x1, x2, y1, y2);
-            })
-        d3.select("#mar" + siteid + nextid)
-            .attr('id', 'p' + siteid + nextid)
-            .attr("orient", function (d) {
-                d.to = nextid;
-                d.id = siteid + nextid;
-                return pathTool.markerRadian(x1, x2, y1, y2);
-            });
+        markerDef(false);
+        editDrawPath(datas.path);
+        pathEvent.dragPath(true);
+        pathEvent.rightClickPath(true);
     })
 }
 
