@@ -7,14 +7,12 @@ import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
 import { mouseEvent } from "/s/buss/acs/location/location.event.js";
-import { conf } from "/s/buss/acs/location/location.conf.js";
-import { tool } from "/s/buss/acs/location/location.tool.js";
-import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { rectEvent } from "/s/buss/acs/location/rect/rect.event.js";
 import { undoStack, redoStack } from "/s/buss/acs/location/location.stack.js";
 import { bodyEvent } from "/s/buss/acs/location/event/event.body.js";
 import { rightClickBody } from "/s/buss/acs/location/body/body.rightclick.js";
 import { createMap } from "/s/buss/acs/location/body/body.add_map.js";
+import { editDrawPath, drawPath } from "/s/buss/acs/location/path/path.draw.js";
 
 let confs = [];
 initData();
@@ -47,6 +45,7 @@ confs.push({
         $('.open').attr('class', 'close hideToggle');
         if (flag) {
             $(this).removeClass("close").addClass("open");
+            editDrawPath(datas.path);
             mouseEvent(flag);
             rectEvent(flag);
             bodyEvent(flag);
@@ -55,11 +54,6 @@ confs.push({
             createMap();
             layer.msg('编辑模式');
             d3.select('#shape_panel').style('display', 'block')
-            conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
-                var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
-                var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
-                return pathTool.dPath(result1[0], result2[0], result1[1], result2[1]);
-            });
             d3.selectAll('rect').style('cursor', 'move');
         } else {
             $(this).removeClass("open").addClass("close");
@@ -72,17 +66,8 @@ confs.push({
             redoStack.splice(0, redoStack.length);
             layer.msg('查看模式');
             d3.select('#shape_panel').style('display', 'none');
-            conf.pathHome1.selectAll("path").data(datas.path).attr("d", function (d) {
-                var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
-                var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
-                d3.selectAll('rect').style('cursor', 'default');
-                d3.selectAll('.changeCircle').style('display', 'none');
-                if (!d.isDouble) {
-                    return pathTool.dPath(result1[0], result2[0], result1[1], result2[1]);
-                } else {
-                    return pathTool.dDoublePath(result1[0], result2[0], result1[1], result2[1]);
-                };
-            });
+            drawPath(datas.path);
+            d3.select("#pathTextHome").selectAll("text").remove();
         }
     }
 });

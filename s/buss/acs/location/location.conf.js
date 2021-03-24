@@ -19,6 +19,7 @@ var defsHome = svg.append('g').attr("id", "defsHome");
 var textHome = svg.append('g').attr("id", "textHome");
 var pointTextHome = textHome.append('g').attr('id', 'pointTextHome');
 var rectTextHome = textHome.append('g').attr('id', 'rectTextHome');
+var pathTextHome = textHome.append('g').attr('id', 'pathTextHome');
 var rectPointHome = rectHome.append('g').attr('id', 'rectPointHome');
 var agvHome = svg.append('g').attr("id", "agvHome");
 var pointHome = svg.append('g').attr("id", "pointHome");
@@ -54,5 +55,6 @@ export var conf = {
     rectTextHome: rectTextHome,
     rectPointHome: rectPointHome,
     agvHome: agvHome,
-    rectHome: rectHome
+    rectHome: rectHome,
+    pathTextHome: pathTextHome
 }

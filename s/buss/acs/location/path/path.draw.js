@@ -1,6 +1,7 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
+import pathtext from "/s/buss/acs/location/path/path.text.js";
 
 var getP = function (data) {
     var p = conf.pathHome1.selectAll("path").data(data)
@@ -16,7 +17,7 @@ var getP = function (data) {
         })
         .attr("fill", "none")
         .attr("stroke", function (d) {
-            return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+            return d.side == 2 ? "#113a7394" : "#1b81d6b3";
         })
         .attr("stroke-width", function () {
             return localStorage.pathwidth;
@@ -34,6 +35,7 @@ export var editDrawPath = function (data) {
         var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
         return pathTool.dPath(result1[0], result2[0], result1[1], result2[1]);
     });
+    pathtext.drawPathTexts(data);
 }
 
 export var drawPath = function (data) {

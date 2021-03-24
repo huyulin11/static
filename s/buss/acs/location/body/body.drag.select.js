@@ -27,10 +27,10 @@ export var svgend = function () {
     choseR(x, y, width, height);
     choseP(x, y, width, height);
     d3.select('#coordinate').on('click', function () {
-        $('#pathHome1 .selectelement').attr('stroke', '#8a8a8a').removeClass('selectelement');
+        $('#pathHome1 .selectelement').attr('stroke', '#113a7394').removeClass('selectelement');
         $('rect.selectelement').attr('fill', '#e0e053').removeClass('selectelement');
         $('circle.selectelement').attr('fill', 'red').removeClass('selectelement');
-        $('#defs1 .selectelement').attr('fill', '#8a8a8a').removeClass('selectelement');
+        $('#defs1 .selectelement').attr('fill', '#113a7394').removeClass('selectelement');
     })
     d3.select('#selection').remove();
 }

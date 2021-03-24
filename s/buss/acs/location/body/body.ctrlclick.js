@@ -17,8 +17,8 @@ export var deselect = function () {
         d3.event.stopPropagation();
         var id = $(this).attr('id').slice(1);
         if ($(this).hasClass('selectelement')) {
-            $(this).attr('stroke', '#8a8a8a').removeClass('selectelement');
-            d3.select('#mar' + $(this).attr('id').slice(1)).select('path').attr('fill', '#8a8a8a')
+            $(this).attr('stroke', '#113a7394').removeClass('selectelement');
+            d3.select('#mar' + $(this).attr('id').slice(1)).select('path').attr('fill', '#113a7394')
             $('#mar' + $(this).attr('id').slice(1)).removeClass('selectelement');
         } else {
             $(this).addClass('selectelement').attr('stroke', 'rgb(30 178 206 )');

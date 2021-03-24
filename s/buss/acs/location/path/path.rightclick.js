@@ -15,11 +15,11 @@ export default {
             editLogic(side, siteid, nextid, () => {
                 path.attr("stroke", function (d) {
                     d.side = side;
-                    return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+                    return d.side == 2 ? "#113a7394" : "#1b81d6b3";
                 });
                 d3.select("#mar" + id).select("path").attr("fill", function (d) {
                     d.side = side;
-                    return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+                    return d.side == 2 ? "#113a7394" : "#1b81d6b3";
                 })
             });
             layer.close(i);

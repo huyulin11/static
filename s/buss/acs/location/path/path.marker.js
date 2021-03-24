@@ -27,7 +27,7 @@ export var markerDef = function (flag) {
         });
     marker1.append("path").attr("d", "M 0 0 L 2.5 1 L 0 2 z")
         .attr("fill", function (d) {
-            return d.side == 2 ? "#8a8a8a" : "rgb(253 49 251 / 43%)";
+            return d.side == 2 ? "#113a7394" : "#1b81d6b3";
         });
 
     var defs2 = conf.defsHome.append("defs").attr('id', 'defs2');
