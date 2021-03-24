@@ -14,13 +14,14 @@ export default {
             var siteid = data.from, nextid = data.to, id = data.id;
             editLogic(side, siteid, nextid, () => {
                 path.attr("stroke", function (d) {
-                    d.side = side;
                     return d.side == 2 ? "#113a7394" : "#1b81d6b3";
                 });
                 d3.select("#mar" + id).select("path").attr("fill", function (d) {
-                    d.side = side;
                     return d.side == 2 ? "#113a7394" : "#1b81d6b3";
-                })
+                });
+                d3.select("#tpath" + id).text(function (d) {
+                    return d.side == 2 ? "右" : "左";
+                });
             });
             layer.close(i);
         });
