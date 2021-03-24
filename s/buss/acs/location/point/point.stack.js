@@ -7,6 +7,7 @@ import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
 import { updatePathWhenDragPoint, updatePathWhenUpdateID } from "/s/buss/acs/location/path/path.update.js";
 import { pathFunc } from "/s/buss/acs/location/path/path.stack.js";
 import pointEvent from "/s/buss/acs/location/point/point.event.js";
+import pathtext from "/s/buss/acs/location/path/path.text.js";
 
 export var cirFunc = {};
 
@@ -68,6 +69,7 @@ cirFunc.undoCircleDrag = function (pop) {
     editLocation(pop.id, location);
     updatePointId(pop.id, pop.x, pop.y);
     updatePathWhenDragPoint(pop.id, pop.x, pop.y);
+    pathtext.updateDragPoint(pop.id, pop.x, pop.y);
 }
 
 cirFunc.redoCircleDrag = function (pop) {
@@ -76,6 +78,7 @@ cirFunc.redoCircleDrag = function (pop) {
     editLocation(pop.id, location);
     updatePointId(pop.id, pop.xx, pop.yy);
     updatePathWhenDragPoint(pop.id, pop.xx, pop.yy);
+    pathtext.updateDragPoint(pop.id, pop.xx, pop.yy);
 }
 
 cirFunc.undoCircleAdd = function (id) {
