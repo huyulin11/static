@@ -3,6 +3,7 @@ import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
 import { getClosestPoint } from "/s/buss/acs/location/path/path.event.add.js";
 import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
+import pathtext from "/s/buss/acs/location/path/path.text.js";
 
 export default {
     start() {
@@ -12,15 +13,14 @@ export default {
         const { x, y } = d3.event;
         var s = $(this).attr("d");
         var mPoint = getMPoint(s);
+        var id;
         $(this).attr("d", pathTool.dPath(mPoint[0], x, mPoint[1], y));
-        d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
-            .attr("d", function (d) {
-                return pathTool.dPath(mPoint[0], x, mPoint[1], y);
-            });
         d3.select("#mar" + $(this).attr("from") + $(this).attr("to"))
-            .attr("orient", function () {
+            .attr("orient", function (d) {
+                id = d.id;
                 return pathTool.markerRadian(mPoint[0], x, mPoint[1], y);
             });
+        pathtext.updateDragPath(id, mPoint[0], x, mPoint[1], y);
     },
     end() {
         var siteid = $(this).attr("from"), oldnext = $(this).attr("to");

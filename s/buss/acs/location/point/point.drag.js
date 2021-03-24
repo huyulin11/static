@@ -4,6 +4,7 @@ import { updatePointId } from "/s/buss/acs/location/point/point.draw.js";
 import { updatePathWhenDragPoint } from "/s/buss/acs/location/path/path.update.js";
 import { editLocation } from "/s/buss/acs/location/url/siteinfo.url.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
+import pathtext from "/s/buss/acs/location/path/path.text.js";
 
 var flag = false;
 export default {
@@ -24,6 +25,7 @@ export default {
             .attr('cy', y);
         updatePointId(id, x, y);
         updatePathWhenDragPoint(id, x, y);
+        pathtext.updateDragPoint(id, x, y);
     },
     end() {
         const { x, y } = d3.event;
