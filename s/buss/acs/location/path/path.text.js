@@ -1,12 +1,10 @@
 import { tool } from "/s/buss/acs/location/location.tool.js";
-import { conf } from "/s/buss/acs/location/location.conf.js";
 
 export default {
     drawPathTexts(datas) {
-        var home = d3.select("#pathTextHome"),
-            text = home.selectAll("text");
-        text.remove();
-        text.data(datas).enter().append("text")
+        d3.select("#pathTextHome").selectAll("text").remove();
+        d3.select("#pathTextHome").selectAll("text").data(datas)
+            .enter().append("text")
             .attr("id", function (d) {
                 return "tpath" + d.id;
             }).attr("x", function (d) {

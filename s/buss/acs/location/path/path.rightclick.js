@@ -34,6 +34,7 @@ export default {
             var value = { "siteid": siteid, "nextid": nextid, "side": side };
             undoStack.push({ 'name': 'pathdel', 'value': value });
             deleteLogic(value, true);
+            d3.select("#tpath" + data.id).remove();
             path.remove();
             marPath.remove();
             layer.close(ii);

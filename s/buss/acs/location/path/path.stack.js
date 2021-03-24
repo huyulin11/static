@@ -21,6 +21,7 @@ pathFunc.redoPathDel = function (value) {
     d3.select('#p' + value.siteid + value.nextid).remove();
     d3.select('#w' + value.siteid + value.nextid).remove();
     d3.select('#mar' + value.siteid + value.nextid).remove();
+    d3.select("#tpath" + value.siteid + value.nextid).remove();
     deleteLogic(value, true);
 }
 
@@ -28,6 +29,7 @@ pathFunc.undoPathAdd = function (path) {
     d3.select('#p' + path.id).remove();
     d3.select('#w' + path.id).remove();
     d3.select('#mar' + path.id).remove();
+    d3.select("#tpath" + path.id).remove();
     var value = { 'siteid': path.from, 'nextid': path.to };
     deleteLogic(value, true);
 }
