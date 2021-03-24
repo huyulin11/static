@@ -57,6 +57,7 @@ confs.push({
             d3.selectAll('rect').style('cursor', 'move');
         } else {
             $(this).removeClass("open").addClass("close");
+            drawPath(datas.path);
             mouseEvent(flag);
             rectEvent(flag);
             bodyEvent(flag);
@@ -65,8 +66,8 @@ confs.push({
             undoStack.splice(0, undoStack.length);
             redoStack.splice(0, redoStack.length);
             layer.msg('查看模式');
+            d3.select("#pathHome3").selectAll("path").remove();
             d3.select('#shape_panel').style('display', 'none');
-            drawPath(datas.path);
             d3.select("#pathTextHome").selectAll("text").remove();
         }
     }

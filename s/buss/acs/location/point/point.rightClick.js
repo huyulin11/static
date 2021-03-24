@@ -41,6 +41,7 @@ export default {
             conf.pointTextHome.select("#t" + id).remove();
             var delPath = conf.svg.selectAll(".clashLine").filter(function (e) { return e && (e.from == id || e.to == id); });
             delPath.attr('id', function (d) {
+                d3.select("#tpath" + d.id).remove();
                 updatetaskSiteLogic(d.from, d.to, '', true);
                 path.push({ 'd': d });
                 return d.id;

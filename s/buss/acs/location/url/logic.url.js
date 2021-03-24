@@ -54,7 +54,7 @@ export var editLogic = function (side, siteid, nextid, callback) {
         "side": side,
         "distance": 1,
     };
-    updatetaskSiteLogic(siteid, "", json2);
+    updatetaskSiteLogic(siteid, nextid, json2);
     gf.ajax(`/tasksitelogic/editEntity.shtml`, json, "json", function (data) {
         datas.init();
         if (callback) { callback() };
