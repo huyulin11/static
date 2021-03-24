@@ -1,6 +1,5 @@
 import { pathTool } from "/s/buss/acs/location/path/path.tool.js";
-import { saveLogic } from "/s/buss/acs/location/url/logic.url.js";
-import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
+import { saveLogic, deleteLogic, editLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { datas } from "/s/buss/acs/location/location.data.js";
 import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
 import { editDrawPath } from "/s/buss/acs/location/path/path.draw.js";
@@ -90,3 +89,18 @@ pathFunc.redoPathDrag = function (pop) {
     })
 }
 
+pathFunc.changeDirection = function (data) {
+    var id = data.id, side = (data.side == 1) ? 2 : 1, siteid = data.from, nextid = data.to;
+    editLogic(side, siteid, nextid, () => {
+        d3.select("#p" + id).attr("stroke", function (d) {
+            d.side = side;
+            return d.side == 2 ? "#113a7394" : "#1b81d6b3";
+        });
+        d3.select("#mar" + id).select("path").attr("fill", function (d) {
+            return d.side == 2 ? "#113a7394" : "#1b81d6b3";
+        });
+        d3.select("#tpath" + id).text(function (d) {
+            return d.side == 2 ? "右" : "左";
+        });
+    });
+}

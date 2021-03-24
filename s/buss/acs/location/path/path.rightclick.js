@@ -1,5 +1,4 @@
-import { editLogic } from "/s/buss/acs/location/url/logic.url.js";
-import { deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
+import { editLogic, deleteLogic } from "/s/buss/acs/location/url/logic.url.js";
 import { undoStack } from "/s/buss/acs/location/location.stack.js";
 
 export default {
@@ -7,8 +6,7 @@ export default {
         let i = layer.confirm(`当前站点方向为${side == 2 ? "右" : "左"},是否确认更改？`, {
             btn: ['确认', '取消']
         }, function () {
-            if (side == 1) { side = 2; }
-            else if (side == 2) side = 1;
+            side = (side == 1) ? 2 : 1;
             var data = path.data()[0];
             data.side = side;
             var siteid = data.from, nextid = data.to, id = data.id;
@@ -22,6 +20,7 @@ export default {
                 d3.select("#tpath" + id).text(function (d) {
                     return d.side == 2 ? "右" : "左";
                 });
+                undoStack.push({ 'name': 'pathchangedirection', 'path': path.data()[0] });
             });
             layer.close(i);
         });

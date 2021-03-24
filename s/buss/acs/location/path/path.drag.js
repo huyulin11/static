@@ -59,10 +59,6 @@ export default {
             d3.select(this).attr('d', function (d) {//应该可以用d优化
                 return pathTool.dPath(x1, xOld, y1, yOld);
             });
-            d3.select("#w" + $(this).attr("from") + $(this).attr("to"))
-                .attr("d", function (d) {
-                    return pathTool.dPath(x1, xOld, y1, yOld);
-                });
             d3.select("#mar" + $(this).attr("from") + $(this).attr("to")).attr("orient", function () {
                 return pathTool.markerRadian(x1, xOld, y1, yOld);
             });

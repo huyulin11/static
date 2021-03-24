@@ -21,6 +21,7 @@ export var ctrlZ = function () {
             case 'pathdrag': pathFunc.undoPathDrag(pop); break;
             case 'pathchangesize': pathFunc.undoPathChangeSize(pop); break;
             case 'pathdel': pathFunc.undoPathDel(pop.value); break;
+            case 'pathchangedirection': pathFunc.changeDirection(pop.path, true); break;
             case 'rectadd': rectFunc.undoRectAdd(pop); break;
             case 'rectdel': rectFunc.undoRectDel(pop.rect); break;
             case 'rectedit': rectFunc.undoRectEdit(pop.oldrect); break;
@@ -44,6 +45,7 @@ export var ctrlY = function () {
             case 'pathdrag': pathFunc.redoPathDrag(pop); break;
             case 'pathchangesize': pathFunc.redoPathChangeSize(pop); break;
             case 'pathdel': pathFunc.redoPathDel(pop.value); break;
+            case 'pathchangedirection': pathFunc.changeDirection(pop.path); break;
             case 'rectadd': rectFunc.redoRectAdd(pop); break;
             case 'rectdel': rectFunc.redoRectDel(pop.rect); break;
             case 'rectedit': rectFunc.redoRectEdit(pop.newrect); break;
