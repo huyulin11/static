@@ -96,6 +96,8 @@ cirFunc.redoCircleAdd = function (pop, callback) {
         drawPointId(datas.udfPoints);
         pointEvent.dragPoint(true);
         pointEvent.rightClickPoint(true);
+        pointEvent.movePoint(true);
+        pointEvent.moveoutPoint(true);
         if (callback) { callback() };
     });
 }

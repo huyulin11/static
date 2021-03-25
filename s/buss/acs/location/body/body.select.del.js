@@ -25,7 +25,7 @@ function delPoints(stack) {
                 path.push({ 'd': d })
                 d.ispush = true;
             };
-            return d.id;
+            return "p" + d.id;
         });
         stack.push({ 'name': 'circledel', 'circle': point, 'path': path });
         d3.select('#pointTextHome').select("#t" + i.id).remove();

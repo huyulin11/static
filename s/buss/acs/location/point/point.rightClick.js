@@ -44,7 +44,7 @@ export default {
                 d3.select("#tpath" + d.id).remove();
                 updatetaskSiteLogic(d.from, d.to, '', true);
                 path.push({ 'd': d });
-                return d.id;
+                return "p" + d.id;
             });
             undoStack.push({ 'name': 'circledel', 'circle': pop, 'path': path });
             delPath.remove();

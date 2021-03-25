@@ -1,6 +1,7 @@
 import { conf } from "/s/buss/acs/location/location.conf.js";
 import pointDrag from "/s/buss/acs/location/point/point.drag.js";
 import pointRightClick from "/s/buss/acs/location/point/point.rightClick.js";
+import pointMove from "/s/buss/acs/location/point/point.move.js";
 
 export default {
     dragPoint(flag) {
@@ -14,6 +15,14 @@ export default {
     rightClickPoint(flag) {
         conf.pointHome.selectAll("circle")
             .on("contextmenu", flag ? rightClickPointHandling : null);
+    },
+    movePoint(flag) {
+        conf.pointHome.selectAll("circle")
+            .on("mouseover", flag ? pointMove.move : null);
+    },
+    moveoutPoint(flag) {
+        conf.pointHome.selectAll("circle")
+            .on("mouseout", flag ? pointMove.out : null);
     }
 }
 

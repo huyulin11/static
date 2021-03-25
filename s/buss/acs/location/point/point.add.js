@@ -58,6 +58,8 @@ export default {
             drawPoints(datas.udfPoints);
             pointEvent.dragPoint(true);
             pointEvent.rightClickPoint(true);
+            pointEvent.movePoint(true);
+            pointEvent.moveoutPoint(true);
         });
         undoStack.push({ 'name': 'circleadd', 'id': id, 'x': x, 'y': y })
     }
