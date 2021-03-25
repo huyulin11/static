@@ -38,7 +38,7 @@ var vm = new Vue({
                 return;
             }
             let value = JSON.stringify(acts);
-            layer.confirm('新增成功后需重启服务器方可生效，是否新增？', function (index) {
+            layer.confirm('确定是否新增？', function (index) {
                 gf.doAjax({
                     url: `/app/conf/set.shtml`, type: "POST",
                     data: { table: "FANCY_CACHE_CONF", key: path, value: value },
