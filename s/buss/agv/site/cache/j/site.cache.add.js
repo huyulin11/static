@@ -22,6 +22,7 @@ var vm = new Vue({
         sub() {
             let path = this.path;
             let acts = this.acts;
+            let key = path;
             if (!path || !acts) {
                 if (!path)
                     $("#path").focus();
@@ -32,16 +33,16 @@ var vm = new Vue({
             };
             try {
                 acts = JSON.parse(acts);
-                $.extend(acts, JSON.parse(path));
+                path = JSON.parse(path);
             } catch (error) {
                 layer.msg("新增失败，格式不正确，请检查格式！");
                 return;
             }
-            let value = JSON.stringify(acts);
+            let value = JSON.stringify({ acts: acts, path: path, });
             layer.confirm('确定是否新增？', function (index) {
                 gf.doAjax({
                     url: `/app/conf/set.shtml`, type: "POST",
-                    data: { table: "FANCY_CACHE_CONF", key: path, value: value },
+                    data: { table: "FANCY_CACHE_CONF", key: key, value: value },
                     whenSuccess: () => {
                         vm.clear();
                         parent.datagrid.loadData();

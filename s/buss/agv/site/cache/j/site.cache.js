@@ -3,20 +3,22 @@ import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 
 let params = {
 	pagId: 'paging',
+	jsonColumn: 'value',
 	columns: [{
 		colkey: "id",
 		name: "id",
 		hide: true
 	}, {
-		colkey: "key",
-		name: "站点路径"
+		colkey: "path",
+		name: "站点路径",
+		renderData: function (rowindex, data, rowdata, column, json) {
+			return JSON.stringify(json.path);
+		}
 	}, {
-		colkey: "value",
+		colkey: "acts",
 		name: "缓存指令",
-		renderData: function (rowindex, data, rowdata, column) {
-			let value = JSON.parse(data).acts;
-			let json = { acts: value };
-			return JSON.stringify(json);
+		renderData: function (rowindex, data, rowdata, column, json) {
+			return JSON.stringify(json.acts);
 		}
 	}, {
 		colkey: "updatetime",
