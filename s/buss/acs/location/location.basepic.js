@@ -10,6 +10,22 @@ export var baseCircleMoudle = function (flag) {
     );
 }
 
+export var baseMoveOver = function (flag) {
+    d3.select("#shape_panel").on("mouseover", flag ? moveon : null)
+}
+
+export var baseMoveOut = function (flag) {
+    d3.select("#shape_panel").on("mouseout", flag ? moveout : null)
+}
+
+function moveon() {
+    d3.select(this).style("opacity", "100%");
+}
+
+function moveout() {
+    d3.select(this).style("opacity", "20%");
+}
+
 var name;
 function imgStart() {
     name = d3.select(this).attr('shapename');

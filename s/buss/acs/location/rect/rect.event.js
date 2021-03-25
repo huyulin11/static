@@ -1,7 +1,7 @@
 import { rightClickRect } from "/s/buss/acs/location/rect/rect.rightclick.js";
 import { dragDashRect, dragDashCircle } from "/s/buss/acs/location/rect/drag.rect.js";
 import { conf } from "/s/buss/acs/location/location.conf.js";
-import { baseCircleMoudle } from "/s/buss/acs/location/location.basepic.js";
+import { baseCircleMoudle, baseMoveOver, baseMoveOut } from "/s/buss/acs/location/location.basepic.js";
 
 export var rectEvent = function (flag) {
     rightClickRect(flag);
@@ -11,7 +11,8 @@ export var rectEvent = function (flag) {
     mouseStyle(flag);
     bankDefaultEvent();
     baseCircleMoudle(flag);
-
+    baseMoveOut(flag);
+    baseMoveOver(flag);
 }
 export var bankDefaultEvent = function () {
     d3.selectAll('rect').on('dblclick', function () {

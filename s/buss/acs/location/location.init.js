@@ -54,6 +54,7 @@ confs.push({
             createMap();
             layer.msg('编辑模式');
             d3.select('#shape_panel').style('display', 'block')
+            d3.select("#shape_panel").style("opacity", "20%");
             d3.selectAll('rect').style('cursor', 'move');
         } else {
             $(this).removeClass("open").addClass("close");
