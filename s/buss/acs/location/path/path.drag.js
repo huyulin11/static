@@ -13,11 +13,10 @@ export default {
         const { x, y } = d3.event;
         var s = $(this).attr("d");
         var mPoint = getMPoint(s);
-        var id;
+        var id = d3.select(this).data()[0].id;
         $(this).attr("d", pathTool.dPath(mPoint[0], x, mPoint[1], y));
         d3.select("#mar" + $(this).attr("from") + $(this).attr("to"))
             .attr("orient", function (d) {
-                id = d.id;
                 return pathTool.markerRadian(mPoint[0], x, mPoint[1], y);
             });
         pathtext.updateDragPath(id, mPoint[0], x, mPoint[1], y);
@@ -54,14 +53,16 @@ export default {
                     d.id = siteid + nextid;
                     return pathTool.markerRadian(x1, x2, y1, y2);
                 });
+            pathtext.updateDragPath(siteid + oldnext, x1, x2, y1, y2, true);
         } else {
             layer.msg('调整失败，与原路径相同');
             d3.select(this).attr('d', function (d) {//应该可以用d优化
                 return pathTool.dPath(x1, xOld, y1, yOld);
             });
-            d3.select("#mar" + $(this).attr("from") + $(this).attr("to")).attr("orient", function () {
+            d3.select("#mar" + siteid + oldnext).attr("orient", function () {
                 return pathTool.markerRadian(x1, xOld, y1, yOld);
             });
+            pathtext.updateDragPath(siteid + oldnext, x1, xOld, y1, yOld);
         }
     }
 }

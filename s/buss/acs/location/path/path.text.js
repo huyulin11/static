@@ -30,6 +30,8 @@ export default {
         d3.select("#pathTextHome").selectAll("text")
             .filter(function (e) { return e && e.from == id; })
             .attr("x", function (d) {
+                var change = tool.windowToDB(id, xx, yy);
+                d.leftXaxis = change.x, d.downYaxis = change.y;
                 var result2 = tool.dbToWindow(d.rightXaxis, d.upYaxis);
                 var arr = getLocation(xx, result2[0], yy, result2[1]);
                 return arr.x;
@@ -42,6 +44,8 @@ export default {
         d3.select("#pathTextHome").selectAll("text")
             .filter(function (e) { return e && e.to == id; })
             .attr("x", function (d) {
+                var change = tool.windowToDB(id, xx, yy);
+                d.rightXaxis = change.x, d.upYaxis = change.y;
                 var result1 = tool.dbToWindow(d.leftXaxis, d.downYaxis);
                 var arr = getLocation(result1[0], xx, result1[1], yy);
                 return arr.x;
@@ -52,10 +56,17 @@ export default {
                 return arr.y;
             })
     },
-    updateDragPath(id, x1, x2, y1, y2) {
+    updateDragPath(id, x1, x2, y1, y2, flag) {
         var arr = getLocation(x1, x2, y1, y2);
-        d3.select("#tpath" + id).attr('x', arr.x).attr('y', arr.y);
-    }
+        d3.select("#tpath" + id)
+            .attr('x', arr.x)
+            .attr('y', arr.y);
+        if (flag) d3.select("#tpath" + id).attr('id', function (d) {
+            var change = tool.windowToDB(id, x2, y2);
+            d.rightXaxis = change.x, d.upYaxis = change.y;
+            return "tpath" + d.id;
+        });
+    },
 }
 
 
