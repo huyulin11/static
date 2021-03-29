@@ -21,6 +21,8 @@ var svg = d3.select("body").select("#coordinate")
     })).append("g").attr("transform", function () {
         if (localStorage.zoom) {
             var local_zoom = JSON.parse(localStorage.zoom);
+            var zoom = d3.select('svg').property('__zoom');
+            zoom.k = local_zoom.k, zoom.x = local_zoom.x, zoom.y = local_zoom.y;
             return "translate(" + local_zoom.x + "," + local_zoom.y + ") scale(" + local_zoom.k + ")";
         };
     });
