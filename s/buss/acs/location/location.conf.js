@@ -9,7 +9,7 @@ var svg = d3.select("body").select("#coordinate")
     .attr("height", height)
     .style("background-color", "#daf1db59")
     .call(d3.zoom().on("zoom", function () {
-        if (!flag) {
+        if (!flag && localStorage.zoom) {
             var local_zoom = JSON.parse(localStorage.zoom);
             var trans = d3.zoomTransform(d3.select('svg').node());
             trans.k = local_zoom.k, trans.x = local_zoom.x, trans.y = local_zoom.y;
