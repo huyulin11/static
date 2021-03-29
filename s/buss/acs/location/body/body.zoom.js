@@ -6,6 +6,7 @@ export var restartZoom = function () {
     var svg = d3.select("body").select("#coordinate").select("svg")
         .call(d3.zoom().on("zoom", function () {
             svg.attr("transform", d3.event.transform);
-            d3.select('svg').attr("transform", 'scale(' + d3.select('svg').property('__zoom').k + ")")
+            var transform = d3.event.transform, k = transform.k, x = transform.x, y = transform.y;
+            localStorage.zoom = JSON.stringify({ "k": k, "x": x, "y": y });
         })).select('g');
 }

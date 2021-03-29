@@ -1,3 +1,4 @@
+let flag = false;
 var width = $(window).width();
 var height = $(window).height();//width * (domainYVal[1] - domainYVal[0]) / (domainXVal[1] - domainXVal[0]) * 4;
 var svg = d3.select("body").select("#coordinate")
@@ -8,9 +9,21 @@ var svg = d3.select("body").select("#coordinate")
     .attr("height", height)
     .style("background-color", "#daf1db59")
     .call(d3.zoom().on("zoom", function () {
+        if (!flag) {
+            var local_zoom = JSON.parse(localStorage.zoom);
+            var trans = d3.zoomTransform(d3.select('svg').node());
+            trans.k = local_zoom.k, trans.x = local_zoom.x, trans.y = local_zoom.y;
+            flag = true;
+        }
         svg.attr("transform", d3.event.transform);
-        d3.select('svg').attr("transform", 'scale(' + d3.select('svg').property('__zoom').k + ")");
-    })).append("g");
+        var transform = d3.event.transform, k = transform.k, x = transform.x, y = transform.y;
+        localStorage.zoom = JSON.stringify({ "k": k, "x": x, "y": y });
+    })).append("g").attr("transform", function () {
+        if (localStorage.zoom) {
+            var local_zoom = JSON.parse(localStorage.zoom);
+            return "translate(" + local_zoom.x + "," + local_zoom.y + ") scale(" + local_zoom.k + ")";
+        };
+    });
 var rectHome = svg.append('g').attr("id", "rectHome");
 var pathHome1 = svg.append('g').attr("id", "pathHome1");
 var pathHome2 = svg.append('g').attr("id", "pathHome2");
