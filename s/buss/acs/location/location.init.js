@@ -1,8 +1,7 @@
 import { init as initData, datas } from "/s/buss/acs/location/location.data.js";
 import { markerDef } from "/s/buss/acs/location/path/path.marker.js";
 import { renderSvg } from "/s/buss/acs/location/location.render.js";
-import { dataAgvLocation } from "/s/buss/acs/location/location.data.js";
-import { drawAgv } from "/s/buss/acs/location/agv/draw.agv.js";
+import { agvLocation, clearAgvLocation } from "/s/buss/acs/location/agv/draw.agv.js";
 import { gflayer } from "/s/buss/g/j/g.f.layer.js";
 import { gf } from "/s/buss/g/j/g.f.js";
 import { renderModel } from "/s/buss/g/j/g.banner.control.js";
@@ -18,11 +17,7 @@ let confs = [];
 initData();
 markerDef(true);
 renderSvg();
-dataAgvLocation();
-setInterval(() => {
-    dataAgvLocation();
-    drawAgv();
-}, 3000);
+agvLocation();
 confs.push({
     init: true, title: "交管区域设计", url: "/s/buss/sys/conf/h/traffic.area.html",
     key: 'area', target: 'div#areaContainer', height: "70%", width: "50%"
@@ -46,23 +41,16 @@ confs.push({
         if (flag) {
             $(this).removeClass("close").addClass("open");
             editDrawPath(datas.path);
-            mouseEvent(flag);
-            rectEvent(flag);
-            bodyEvent(flag);
-            rightClickBody(flag);
             markerDef(!flag);
             createMap();
             layer.msg('编辑模式');
             d3.select('#shape_panel').style('display', 'block')
             d3.select("#shape_panel").style("opacity", "20%");
             d3.selectAll('rect').style('cursor', 'move');
+            clearAgvLocation();
         } else {
             $(this).removeClass("open").addClass("close");
             drawPath(datas.path);
-            mouseEvent(flag);
-            rectEvent(flag);
-            bodyEvent(flag);
-            rightClickBody(flag);
             markerDef(!flag);
             undoStack.splice(0, undoStack.length);
             redoStack.splice(0, redoStack.length);
@@ -70,7 +58,12 @@ confs.push({
             d3.select("#pathHome3").selectAll("path").remove();
             d3.select('#shape_panel').style('display', 'none');
             d3.select("#pathTextHome").selectAll("text").remove();
+            agvLocation();
         }
+        mouseEvent(flag);
+        rectEvent(flag);
+        bodyEvent(flag);
+        rightClickBody(flag);
     }
 });
 renderModel(confs);

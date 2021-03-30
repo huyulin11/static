@@ -1,9 +1,25 @@
-import { datas } from "/s/buss/acs/location/location.data.js";
-import { getPath } from "/s/buss/acs/location/agv/control.agv.run.js";
-import { conf } from "/s/buss/acs/location/location.conf.js";
 import { tool } from "/s/buss/acs/location/location.tool.js";
+import { datas } from "/s/buss/acs/location/location.data.js";
+import { conf } from "/s/buss/acs/location/location.conf.js";
+import { getPath } from "/s/buss/acs/location/agv/control.agv.run.js";
+import { dataAgvLocation } from "/s/buss/acs/location/location.data.js";
 
-export var drawAgv = function () {
+let agvLocationTime;
+
+export var agvLocation = function () {
+    dataAgvLocation();
+    agvLocationTime = setInterval(() => {
+        dataAgvLocation();
+        drawAgv();
+    }, 3000);
+}
+
+export var clearAgvLocation = function () {
+    clearInterval(agvLocationTime);
+    conf.agvHome.selectAll("image").remove();
+}
+
+var drawAgv = function () {
     conf.agvHome.selectAll("image").remove();
     var image = conf.agvHome.selectAll("image").data(datas.agvLocation)
         .enter()
