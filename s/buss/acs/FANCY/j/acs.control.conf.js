@@ -5,6 +5,9 @@ export const
 	ITEM_MSG = {
 		key: 'msg', target: 'div#msgContainer', title: "消息"
 	},
+	ITEM_PAUSE = {
+		key: 'pause', target: 'div#msgContainer', title: "暂停/继续", container: "bottomRightCtrlContainer",
+	},
 	ITEM_TASK = {
 		key: 'task', target: 'div#taskContainer', url: "/s/buss/sys/conf/h/agv.cache.html", init: true, height: "50%", width: "80%", title: "缓存任务",
 	},

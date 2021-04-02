@@ -1,0 +1,22 @@
+<!doctype html>
+<html class="no-js" lang="zh" style="background-color: azure;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>通讯中心</title>
+    <link rel="stylesheet" href="/s/c/agv.mgr.css">
+</head>
+
+<body>
+    <div id="container"></div>
+    <div id="bottomRightCtrlContainer"></div>
+</body>
+<script src="/s/j/jquery-1.12.2.min.js"></script>
+<script src="/s/j/layer/v3.1.1/layer.js"></script>
+<script type="module">
+    import { init as initIotMsg } from "/s/buss/acs/FANCY/j/iot.msg.js";
+    initIotMsg("div#container");
+    gf.resizeTable();
+</script>
