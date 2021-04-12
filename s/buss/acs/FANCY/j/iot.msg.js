@@ -34,10 +34,10 @@ let deal = function (json) {
 
 export var init = function (container) {
     _container = $(container);
-    ws("ws://" + window.document.location.hostname + ":9080" + "/websocket/iotmsg", (event) => {
+    ws("ws://" + window.document.location.hostname + ":9080" + "/websocket/commlogs", (event) => {
         let json = JSON.parse(event.data);
         deal(json);
     }, null, () => {
-        console.log("解析iotmsg异常");
+        console.log("解析commlogs异常");
     });
 }
