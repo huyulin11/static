@@ -55,11 +55,21 @@ var sub = function () {
                 $("#toTr").addClass("hidden");
                 $("#tu").focus();
                 initDatas();
-            } else if (data.code == -100) {
+                return;
+            }
+
+            if (data.code == -100) {
                 $("#toTr").removeClass("hidden");
                 $("#sub").focus();
-                gflayer.msg(data.msg, function () {
-                    $("#to").focus();
+                if (data.object.length > 1) {
+                    $("#chooseTo").html("");
+                    for (let o of data.object) {
+                        $("#chooseTo").append(`<td><button>${o}</button></td>`);
+                    }
+                }
+                layer.tips(data.msg + `请选择对应的TO！`, '#to', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
                 });
             } else {
                 $("#sub").focus();
@@ -221,3 +231,6 @@ var initRf = function () {
 }
 
 initRf();
+$("#chooseTo").delegate("button", "click", function () {
+    $("#to").val($(this).html());
+});

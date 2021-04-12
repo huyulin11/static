@@ -33,7 +33,13 @@
                 </tr>
                 <tr id="toTr" class="hidden">
                     <td><label>TO</label></td>
-                    <td><input id="to" @keyup.enter="toEnter" autocomplete="off" /></td>
+                    <td><input id="to" @keyup.enter="toEnter" autocomplete="off" />
+                        <div>
+                            <table>
+                                <tr id='chooseTo'></tr>
+                            </table>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="lineTr" class="hidden">
                     <td><label>产线</label></td>
