@@ -22,8 +22,8 @@ renderModel(pauseCtrlObj);
 
 let deal = function (json) {
     if (_pause) return;
-    let showMsg = `编号:${json.id}消息:${json.msg}`;
-    let _current = $(`<div id='${json.id}'></div>`);
+    let showMsg = `编号:${json.id}<br/>消息:${json.msg}<br/>时间:${json.time}`;
+    let _current = $(`<div id='${json.id}' class='_block'></div>`);
     $(_current).append(showMsg);
     if ($(_container).find(`div#${json.id}`).length > 0) {
         $(_container).find(`div#${json.id}`).html(showMsg);

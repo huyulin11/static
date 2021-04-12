@@ -462,3 +462,8 @@ span.currentsite {
 	color: #DDD;
 	font-size: 10px;
 }
+
+div._block{
+	background-color: #EFEFEF;
+	border: 1px solid;
+}
