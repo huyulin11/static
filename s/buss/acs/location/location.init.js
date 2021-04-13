@@ -20,11 +20,11 @@ renderSvg();
 agvLocation();
 confs.push({
     init: true, title: "交管区域设计", url: "/s/buss/sys/conf/h/traffic.area.html",
-    key: 'area', target: 'div#areaContainer', height: "70%", width: "50%"
+    key: 'area', target: 'div#areaContainer', height: "90%", width: "50%"
 });
 confs.push({
     init: true, title: "站点缓存设计", url: "/s/buss/agv/site/cache/h/site.cache.html",
-    key: 'cache', target: 'div#cacheContainer', height: "70%", width: "50%"
+    key: 'cache', target: 'div#cacheContainer', height: "90%", width: "50%"
 });
 confs.push({
     key: 'clear', title: "清空缓存", click: function () {
