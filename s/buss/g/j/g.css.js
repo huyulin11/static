@@ -1,7 +1,7 @@
 /**只对系统整体样式做控制，细节样式到css文件中定义**/
 export let globalCss = (target) => {
     let csss = [];
-    if (localStorage.gridHeight) {
+    if (localStorage.gridHeight && Number(localStorage.gridHeight)) {
         csss.push(
             { name: ".t_table", content: { "height": localStorage.gridHeight + "px" } },
         );
